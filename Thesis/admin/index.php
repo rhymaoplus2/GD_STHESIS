@@ -75,17 +75,17 @@ margin-top: -5rem;
               </div>
               <?php } ?>
 
-              
-  <select class="form-select mb-2" disabled
+     <!--         
+  <select type="hidden"class="form-select mb-2" disabled
           
           aria-label="Default select example">
    <option selected name="role"
-           value="admin">ADMIN PANEL</option>
+   type="hidden" value="admin">ADMIN PANEL</option>
  
  
  </select>
 
- 
+              -->
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
     <input type="text" 
