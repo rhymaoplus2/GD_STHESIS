@@ -34,8 +34,12 @@ if (isset($_GET['id'])) {
 	$firstname = validate($_POST['firstname']);
 	$middlename = validate($_POST['middlename']);
         $lastname = validate($_POST['lastname']);
-        //$gender = validate($_POST['gender']);
+        $gender = validate($_POST['gender']);
         $birthplace = validate($_POST['birthplace']);
+        $birthday = validate($_POST['birthday']);
+        $suffix = validate($_POST['suffix']);
+        $address = validate($_POST['address']);
+        $parent = validate($_POST['parent']);
         $id = validate($_POST['id']);
 
 
@@ -56,9 +60,9 @@ if (isset($_GET['id'])) {
 		header("Location: ../update.php?id=$id&error=LRN number is required/Input new data");
 	}
 
-       // else if (empty($gender)) {
-	//	header("Location: ../update.php?id=$id&error=Gender is required/Input new data");
-	//}
+        else if (empty($gender)) {
+		header("Location: ../update.php?id=$id&error=Gender is required/Input new data");
+	}
         
         else if (empty($birthplace)) {
 		header("Location: ../update.php?id=$id&error=Birth Place is required/Input new data");
@@ -68,7 +72,12 @@ if (isset($_GET['id'])) {
         else {
 
        $sql = "UPDATE students
-               SET lrnnumber='$lrnnumber',firstname='$firstname', middlename='$middlename',lastname='$lastname',birthplace='$birthplace'
+               SET lrnnumber='$lrnnumber',firstname='$firstname', middlename='$middlename',
+               lastname='$lastname',birthplace='$birthplace',
+               suffix='$suffix',gender='$gender',
+               birthday='$birthday',address='$address',
+               parent='$parent'
+
                WHERE id=$id ";
        $result = mysqli_query($conn, $sql);
        if ($result) {
