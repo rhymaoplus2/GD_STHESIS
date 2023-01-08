@@ -7,66 +7,17 @@
 <html>
 <head>
 	<title>HOME</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+     crossorigin="anonymous">
+  <link rel="stylesheet"  href="./css/style.css">
     <style>
       body {
 
 }
 
-    
-.nav-item
-{
-
-	color:black;
-
-}
-.subjectlist{
-
-    margin-left: 5rem;
-    margin-top: 5rem;
-}
-
-.studentlist{
-
-margin-left: 20rem;
-margin-top: 5rem;
-}
-
-
-.button{
-
-    margin-left: 5rem;
-    margin-top: 11rem;
-}
-
-
-.button1{
-
-margin-left: 5rem;
-margin-top: 9.5rem;
-}
-
-.title{
-    margin-left: 40rem;
-    margin-top: 1rem;
-    font-size: 3.5rem;
-}
-.text1
-{
-    margin-left: 23rem;
-    margin-top: -20rem;
-    width: 45rem;
-    height: 10rem;
-    
-}
-
-.text2
-{
-    margin-left: 23rem;
-    margin-top: -20rem;
-    width: 45rem;
-    height: 10rem;
-}
+ 
 </style>
 </head>
 <body>
@@ -100,7 +51,12 @@ margin-top: 9.5rem;
 	
   </div>
 </nav>
-<div class="title">MASTERLIST</div>
+
+
+<!--
+
+
+<div class=" mx-auto">MASTERLIST</div>
 <div class="subjectlist">
 
 <img src="../img/students.png" class="img-thumbnail" alt="...  " style="width: 20rem; height:20rem">
@@ -167,8 +123,7 @@ margin-top: 9.5rem;
 
 </button>
 
-
-
+-->
 
 
 

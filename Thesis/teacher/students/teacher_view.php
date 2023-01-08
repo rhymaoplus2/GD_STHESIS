@@ -9,42 +9,13 @@
 <head>
 	<title>HOME</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <link rel="stylesheet"  href="./css/style.css">
+  <link rel="stylesheet"  href="../css/style.css">
 </head>
 <body>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav ">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="../home.php" >Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../masterlist.php">Master List</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../records.php">Records</a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="../reports.php">Reports</a>
-      </li>
-  
-	  <li class="nav-item">
-        <a class="nav-link" href="../users.php">Users</a>
-      </li>
-  
-    </ul>
-
-	
-  </div>
-</nav>
-
-
-
+<div class="header" id="myHeader">
+<?PHP include_once('header.php');?>
+</div>
 
 
 
@@ -57,6 +28,7 @@
         <div class=" container ">
        
         <div class="box">
+        <div class="content">
 			<br>
       
 
@@ -76,10 +48,12 @@
                         class="form-control"
                         placeholder="Search by First Name/Middle Name/Last Name"
                       />
-                      <button type="submit" class="btn btn-warning">
+                      
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-warning">
                         Search
                       </button>
-                    </div>
                     </form>
 <br> <br>
 <br>
@@ -93,6 +67,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Middle Name</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -120,8 +95,18 @@
                     <td><a href="update.php?id=<?=$items['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 
-			      	  <a href="php/delete.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-danger ">Discard</a>
+                   <script type="text/javascript">  
+
+function openulr(newurl) {  
+
+  if (confirm("Are you sure you want to Delete?")) {    
+
+    document.location = newurl;  
+  }}
+    </script>
+<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
+  DISCARD
+</a></strong>
 			      </td>
                   </tr>
                   
@@ -158,7 +143,7 @@
       
       </div>
     </div>
-
+      </div>
  
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

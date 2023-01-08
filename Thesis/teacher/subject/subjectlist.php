@@ -129,26 +129,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 			      	     class="btn btn-success ">Update</a>
 
 
-          <script type="text/javascript">  
-          
-          
-          function openulr(newurl) {  
-            
-            
-            if (confirm("Are you sure you want to Delete?")) {    
-              
-              
-              
-              document.location = newurl;  
-            
-            
-            
-            }}
-              </script>
-              
-            
-            </head>
+        
+          </head>
 
+
+          <!--     DELETE FUNCTION -->
+          <script type="text/javascript">  
+          function openulr(newurl) {  
+          if (confirm("Are you sure you want to Delete?")) {    
+          document.location = newurl;  
+                                                           }
+                                    }
+          </script>
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
   DISCARD
 </a></strong>

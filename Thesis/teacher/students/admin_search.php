@@ -77,6 +77,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Middle Name</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>

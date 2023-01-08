@@ -1,102 +1,29 @@
 
-          
-.container {
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-}
-
-.container form {
-	width: 500px;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}s
-.box {
-	width: 750px;
-}
-.container table {
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.link-right {
-	display: flex;
-	justify-content: flex-end;
-}
-
-
-.link-center {
-	display: flex;
-	justify-content: flex-end;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  .nav-item
-  {
   
-      color:black;
-  
-  }
-  .subjectlist{
-  
-      margin-left: 5rem;
-      margin-top: 5rem;
+
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
   }
   
-  .studentlist{
-  
-  margin-left: 20rem;
-  margin-top: 5rem;
+  .header {
+    padding: 10px 16px;
+    background:#ffbb33;
+    color: #f1f1f1;
   }
   
-  
-  .button{
-  
-      margin-left: 5rem;
-      margin-top: 11rem;
+  .content {
+    padding: 16px;
   }
   
-  
-  .button1{
-  
-  margin-left: 5rem;
-  margin-top: 9.5rem;
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
   
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
+  .sticky + .content {
+    padding-top: 102px;
   }
-  .text1
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
-  
-  .text2
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
+  </style>
