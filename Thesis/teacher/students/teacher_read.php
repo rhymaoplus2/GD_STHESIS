@@ -153,10 +153,10 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["address"]; ?></td>
           <td><?php echo $Row["parent"]; ?></td>
 
-             <td><a href="update.php?id=<?=$rows['id']?>" 
+             <td><a href="update.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 
-			      	  <a href="php/delete.php?id=<?=$rows['id']?>" 
+			      	  <a href="php/delete.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-danger ">Discard</a>
 			      </td>
 			    </tr>
