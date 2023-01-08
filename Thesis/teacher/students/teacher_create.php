@@ -86,7 +86,7 @@
   </div>
 
 
-
+<!--
   <div class="form-group">
     <label for="" class="form-label">Adviser ID</label>
     <input 
@@ -97,6 +97,29 @@
     placeholder="ex: 12913937"
     name="adviser_id">
   </div>
+ -->
+
+
+
+ 
+ <div class="mb-3">
+    <input
+    type="hidden"
+    class="form-control" 
+    id="adviser_id" 
+    placeholder="ex: Science"
+    name="adviser_id"
+    value="<?php echo $_SESSION['id']?>"
+    >
+    
+  </div>
+
+
+
+
+
+
+
 
 
   <div class="form-group">

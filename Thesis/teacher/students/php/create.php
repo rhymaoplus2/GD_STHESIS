@@ -87,7 +87,7 @@ if (isset($_POST['create'])) {
 			   '$address','$parent')";
        $result = mysqli_query($conn, $sql);
        if ($result) {
-		header("Location: ../read.php?success=Added Successfully");
+		header("Location: ../teacher_read.php?success=Added Successfully");
 		
        }else {
           header("Location:../admin_create.php?error=unkown error occured&$user_data");
