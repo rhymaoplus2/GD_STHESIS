@@ -21,63 +21,49 @@
   
 
   <style>
-      #intro {
-        background-image: url("https://mdbootstrap.com/img/new/fluid/city/018.jpg");
-        height: 100vh;
-      }
+     
 
-      /* Height for devices larger than 576px */
-      @media (min-width: 992px) {
-        #intro {
-          margin-top: -58.59px;
-        }
-      }
-
-      .navbar .nav-link {
-        color: #fff !important;
-      }
-      body {
-  background: url('../img/back.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+.top-container {
+  background-color: #ffbb33;
+  padding: 30px;
+  text-align: center;
 }
 
-    
+.header {
+  padding: 10px 16px;
+ 
+  color: #f1f1f1;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+
+.container {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+
+
     </style>
 </head>
 <body>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav ">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="home.php" >Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="masterlist.php">Master List</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="records.php">Records</a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="reports.php">Reports</a>
-      </li>
-  
-	  <li class="nav-item">
-        <a class="nav-link" href="users.php"><?=$_SESSION['name']?></a>
-      </li>
-  
-    </ul>
-
-	
-  </div>
-</nav>
 
 
 
@@ -87,11 +73,27 @@
 
 
 
+<div class="header" id="myHeader">
+<?PHP include_once('header.php');?>
+</div>
 
 
 
 
+<script>
+window.onscroll = function() {myFunction()};
 
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
 
 
   

@@ -13,44 +13,87 @@
      crossorigin="anonymous">
   <link rel="stylesheet"  href="./css/style.css">
     <style>
-      body {
+/* VIDEO */
 
+
+
+
+
+
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
 }
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+
+
+
+.top-container {
+  background-color: #ffbb33;
+  padding: 30px;
+  text-align: center;
+}
+
+.header {
+  padding: 10px 16px;
+ background-color:  black ;
+  color: #f1f1f1;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+
+.container {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
 
  
 </style>
 </head>
 <body>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav ">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="home.php" >Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="masterlist.php">Master List</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="records.php">Records</a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="reports.php">Reports</a>
-      </li>
-  
-	  <li class="nav-item">
-        <a class="nav-link" href="users.php"><?=$_SESSION['name']?></a>
-      </li>
-  
-    </ul>
-
-	
-  </div>
-</nav>
 
 
 <!--
@@ -124,6 +167,117 @@
 </button>
 
 -->
+
+
+
+<div class="header" id="myHeader">
+<?PHP include_once('header.php');?>
+</div>
+
+
+
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+		<div class="box">
+	<br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+      <div class="link-center ">
+      <img src="../img/students.png" class="img-thumbnail" alt="...  " style="width: 20rem; height:20rem">
+          <a class="link-primary"href="students/teacher_read.php" display-40>
+          <button type="button" class="btn btn-dark btn-lg">
+
+      Student List
+
+          </button>
+          </a>
+          </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+          <div class="link-center">
+          <img src="../img/students.png" class="img-thumbnail" alt="...  " style="width: 20rem; height:20rem">
+          <a class="link-primary" href="./subject/subjectlist.php" display-40>
+          <button type="button" class="btn btn-dark btn-lg">
+
+      Subject List
+
+          </button>
+          </a>
+          </div>
+     </div>
+   </div>
+  
+
+
+
+
+
+<!-- BG V -->
+
+
+
+
+<script>
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

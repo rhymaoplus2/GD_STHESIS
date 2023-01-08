@@ -19,37 +19,48 @@
   <header>
 
 </header>
+
+<style>
+  
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .header {
+    padding: 10px 16px;
+    
+    color: #f1f1f1;
+  }
+  s
+  .content {
+    padding: 16px;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .content {
+    padding-top: 102px;
+  }
+
+  </style>
 </head>
 
 <body>
+
+
 <div class="header" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
+<div class="container" >
 		<div class="box">
     <div class="content">
 

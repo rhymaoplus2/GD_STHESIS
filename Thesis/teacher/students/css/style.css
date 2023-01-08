@@ -11,7 +11,7 @@
 
 .header {
   padding: 10px 16px;
-  background: #555;
+
   color: #f1f1f1;
 }
 
@@ -28,7 +28,7 @@
 .sticky + .content {
   padding-top: 102px;
 }
-</style>
+
 .container {
 	min-height: 100vh;
 	display: flex;

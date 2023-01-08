@@ -19,6 +19,48 @@
 }
 
 
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+.text{
+  margin-left: 30rem;
+}
+.bb1{
+  margin-left: 19rem;
+  position: absolute;
+}
+.bb2{
+  margin-left: 42rem;
+  margin-top: ;
+}
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+
 .logo
 {
 margin-left: 18rem;
@@ -49,8 +91,8 @@ margin-top: -5rem;
     background-color: transparent; 
   color: white; 
   border: 2px solid black;
-  width: 25rem;
-  height: 5rem;
+  width: 15rem;
+  height: 4.5rem;
   border-radius: 10rem;
   border-color: aliceblue;
 font-size: 1.5rem;
@@ -62,14 +104,47 @@ font-size: 1.5rem;
 
 <body>
 
-<div class ="sub">
+
+<video autoplay muted loop id="myVideo">
+  <source src="background.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="content">
+ 
+  <div class="text"><p><h3>SELECT USER TYPE</h3></p></div>
+  <div class="bb1">
 <a class="link" href="teacher/index.php">
 <button type="button" class="btn btn-warning" justify-content-center>I AM A TEACHER</button>
 </a>
+  </div>
+  <div class="bb2">
 <a class="link" href="admin/index.php">
 <button type="button" class="btn btn-warning" justify-content-center>I AM AN ADMIN</button>
-</div>
+
 </a>
+</div>
+
+
+<script>
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
+
+
+
+
+
 
 </body> 
 </html>

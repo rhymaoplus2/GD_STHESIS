@@ -9,10 +9,10 @@
   
   .header {
     padding: 10px 16px;
-    background:#ffbb33;
+    
     color: #f1f1f1;
   }
-  
+  s
   .content {
     padding: 16px;
   }
@@ -26,4 +26,3 @@
   .sticky + .content {
     padding-top: 102px;
   }
-  </style>
