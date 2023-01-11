@@ -9,18 +9,23 @@
       <li class="nav-item active">
         <a class="nav-link" href="../home.php" >Home</a>
       </li>
+      <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            MasterList
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="teacher_read.php">Student List</a></li>
+            <li><a class="dropdown-item" href="../subject/subjectlist.php">Subject List</a></li>
+           
+          </ul>
       <li class="nav-item">
-        <a class="nav-link" href="../masterlist.php">Master List</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../records.php">Records</a>
+        <a class="nav-link" href="records.php">Records</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="../reports.php">Reports</a>
+        <a class="nav-link" href="reports.php">Reports</a>
       </li>
   
 	  <li class="nav-item">
-        <a class="nav-link" href="../logout.php">Logout</a>
+        <a class="nav-link" href="logout.php">Logout</a>
       </li>
   
     </ul>

@@ -13,43 +13,168 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <html>
 <head>
 	<title>HOME</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <link rel="stylesheet"  href="./css/style.css">
+  <link  href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <style>
+  
+
+
+  .container {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.container form {
+	width: 600px;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.box {
+	width: 750px;
+}
+.container table {
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.link-right {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+.link-center {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+
+
+
+
+.thead
+{
+font-size: 10px;;
+
+}
+
+
+
+
+
+
+
+
+
+  .nav-item
+  {
+  
+      color:black;
+  
+  }
+  .subjectlist{
+  
+      margin-left: 5rem;
+      margin-top: 5rem;
+  }
+  
+  .studentlist{
+  
+  margin-left: 20rem;
+  margin-top: 5rem;
+  }
+  
+  
+  .button{
+  
+      margin-left: 5rem;
+      margin-top: 11rem;
+  }
+  
+  
+  .button1{
+  
+  margin-left: 5rem;
+  margin-top: 9.5rem;
+  }
+  
+  .title{
+      margin-left: 40rem;
+      margin-top: 1rem;
+      font-size: 3.5rem;
+  }
+  .text1
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
+  }
+  
+  .text2
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
+  }
+
+
+
+
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .header {
+   
+    background-color: white;
+    color: #f1f1f1;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .content {
+    padding-top: 102px;
+  }
+  </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav ">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="../home.php" >Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../masterlist.php">Master List</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../records.php">Records</a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="../reports.php">Reports</a>
-      </li>
-  
-	  <li class="nav-item">
-        <a class="nav-link" href="../users.php">Users</a>
-      </li>
-  
-    </ul>
+<div class="header" id="myHeader">
+<?PHP include_once('header.php');?>
+</div>
 
-	
-  </div>
-</nav>
+<script>
+window.onscroll = function() {myFunction()};
 
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
 
-
-
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
 
 
 <div class="container">
@@ -62,9 +187,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 
       <br>
       <h5>No List? Click the create Button to add Subjects!</h5>
-       <div class="row justify-content-center my-5">
-	   
-
+     
        
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
@@ -125,7 +248,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
           <td><?php echo $Row["subjectname"]; ?></td>
           <td><?php echo $Row["teacherid"]; ?></td>
       
-             <td><a href="update.php?id=<?= $rows['id'] ?>" 
+             <td><a href="update.php?id=<?= $Row['id'] ?>" 
 			      	     class="btn btn-success ">Update</a>
 
 

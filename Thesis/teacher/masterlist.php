@@ -11,75 +11,9 @@
    rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
      crossorigin="anonymous">
-  <link rel="stylesheet"  href="./css/style.css">
+
     <style>
-/* VIDEO */
 
-
-
-
-
-
-
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-}
-
-.content {
-  position: fixed;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: #f1f1f1;
-  width: 100%;
-  padding: 20px;
-}
-
-#myBtn {
-  width: 200px;
-  font-size: 18px;
-  padding: 10px;
-  border: none;
-  background: #000;
-  color: #fff;
-  cursor: pointer;
-}
-
-#myBtn:hover {
-  background: #ddd;
-  color: black;
-}
-
-
-
-.top-container {
-  background-color: #ffbb33;
-  padding: 30px;
-  text-align: center;
-}
-
-.header {
-  padding: 10px 16px;
- background-color:  black ;
-  color: #f1f1f1;
-}
-
-.content {
-  padding: 16px;
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-.sticky + .content {
-  padding-top: 102px;
-}
 
 .container {
 	min-height: 100vh;
@@ -89,6 +23,268 @@
 	flex-direction: column;
 }
 
+.container form {
+	width: 600px;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.box {
+	width: 750px;
+}
+.container table {
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.link-right {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+.link-center {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+
+
+
+
+.thead
+{
+font-size: 10px;;
+
+}
+
+
+
+
+
+
+
+
+
+  .nav-item
+  {
+  
+      color:black;
+  
+  }
+  .subjectlist{
+  
+      margin-left: 5rem;
+      margin-top: 5rem;
+  }
+  
+  .studentlist{
+  
+  margin-left: 20rem;
+  margin-top: 5rem;
+  }
+  
+  
+  .button{
+  
+      margin-left: 5rem;
+      margin-top: 11rem;
+  }
+  
+  
+  .button1{
+  
+  margin-left: 5rem;
+  margin-top: 9.5rem;
+  }
+  
+  .title{
+      margin-left: 40rem;
+      margin-top: 1rem;
+      font-size: 3.5rem;
+  }
+  .text1
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
+  }
+  
+  .text2
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
+  }
+
+
+
+
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .header {
+   
+    background-color: white;
+    color: #f1f1f1;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .content {
+    padding-top: 102px;
+  }
+
+
+.container {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.container form {
+	width: 600px;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.box {
+	width: 750px;
+}
+.container table {
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.link-right {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+.link-center {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+
+
+
+
+.thead
+{
+font-size: 10px;;
+
+}
+
+
+
+
+
+
+
+
+
+  .nav-item
+  {
+  
+      color:black;
+  
+  }
+  .subjectlist{
+  
+      margin-left: 5rem;
+      margin-top: 5rem;
+  }
+  
+  .studentlist{
+  
+  margin-left: 20rem;
+  margin-top: 5rem;
+  }
+  
+  
+  .button{
+  
+      margin-left: 5rem;
+      margin-top: 11rem;
+  }
+  
+  
+  .button1{
+  
+  margin-left: 5rem;
+  margin-top: 9.5rem;
+  }
+  
+  .title{
+      margin-left: 40rem;
+      margin-top: 1rem;
+      font-size: 3.5rem;
+  }
+  .text1
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
+  }
+  
+  .text2
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
+  }
+
+
+
+
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .header {
+   
+    background-color: white;
+    color: #f1f1f1;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .content {
+    padding-top: 102px;
+  }
 
  
 </style>
@@ -206,7 +402,9 @@ function myFunction() {
 
 
 <div class="container">
+
 		<div class="box">
+   
 	<br>
   <br>
   <br>
@@ -241,30 +439,8 @@ function myFunction() {
      </div>
    </div>
   
+</div>
 
-
-
-
-
-<!-- BG V -->
-
-
-
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 
 
 

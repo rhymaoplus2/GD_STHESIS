@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     if (mysqli_num_rows($result) > 0) {
     	$row = mysqli_fetch_assoc($result);
     }else {
-    	header("Location:../read.php");
+    	header("Location:../subjectlist.php");
     }
 
 
@@ -40,21 +40,21 @@ if (isset($_GET['id'])) {
 
 	if (empty($subjectid))
 	 {
-		header ("Location:../update.php?error=Subject ID is required&$user_data");
+		header ("Location:subjectlist/update.php?error=Subject ID is required&$user_data");
 	}
 
 
 
 	
 	else if (empty($subjectname)) {
-		header ("Location:../update.php?error=Subject Name is required&$user_data");
+		header ("Location:subjectlist/update.php?error=Subject Name is required&$user_data");
 	}
 
 	else if (empty($teacherid)) {
-		header ("Location: ../update.php?error=Subject Teacher ID NOT FOUND&$user_data");
+		header ("Location: subjectlistupdate.php?error=Subject Teacher ID NOT FOUND&$user_data");
 	}
         else if (empty($subjectgrouphead)) {
-		header ("Location: ../update.php?error=Subject Teacher ID NOT FOUND&$user_data");
+		header ("Location: subjectlist/update.php?error=Subject Teacher ID NOT FOUND&$user_data");
 	}
   
         else {
