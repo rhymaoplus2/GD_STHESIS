@@ -1,4 +1,4 @@
-<?php 
+s<?php 
 
 if (isset($_POST['create'])) {
 	include "db_conn.php";
@@ -21,12 +21,14 @@ if (isset($_POST['create'])) {
 	$address = validate($_POST['address']);
 	$parent = validate($_POST['parent']);
 	$schoolyear = validate($_POST['schoolyear']);
+	$section = validate($_POST['section']);
 	$user_data =
 	'lrnnumber='.$lrnnumber.
 	'&adviser_id='.$adviser_id.
 	'firstname='.$firstname.
 	'middlename='.$middlename. 
     'lastname='.$lastname.
+	'&suffix='.$suffix.
 	'&gender='.$gender.
     '&birthplace='.$birthplace.
 	'&birthday='.$birthday.
@@ -34,8 +36,8 @@ if (isset($_POST['create'])) {
     '&address='.$address.
 	'&parent='.$parent.
 	'&schoolyear='.$schoolyear.
-
-    '&suffix='.$suffix;
+	'&section='.$section
+    ;
 
 	if (empty($lrnnumber))
 	 {
@@ -76,16 +78,20 @@ if (isset($_POST['create'])) {
 	else if (empty($schoolyear)) {
 		header ("Location: ../teacher_create.php?error=School Year is required&$user_data");
 	}
+	else if (empty($section)) {
+		header ("Location: ../teacher_create.php?error=Section Name is required&$user_data");
+	}
+
 
 	
 	
 	else {
 
        $sql = "INSERT INTO students(lrnnumber,adviser_id,firstname, middlename,lastname,gender,suffix,
-	   birthplace,birthday,age,parent,address,schoolyear)
+	   birthplace,birthday,age,parent,address,schoolyear,section)
                VALUES('$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname',	'$gender','$suffix',
-			   '$birthplace','$birthday','$age','$schoolyear',
-			   '$address','$parent')";
+			   '$birthplace','$birthday','$age',
+			   '$address','$parent','$schoolyear','$section')";
        $result = mysqli_query($conn, $sql);
        if ($result) {
 		header("Location: ../teacher_read.php?success=Added Successfully");

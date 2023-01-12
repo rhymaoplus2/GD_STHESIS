@@ -170,7 +170,7 @@ font-size: 10px;;
 </div>
 
 
-
+<br> <br>
 <div class="container" >
 		<div class="box">
     <div class="content">
@@ -221,10 +221,10 @@ font-size: 10px;;
 
               <thead class="thead">
                   <tr>
-                  <th scope="col">LRN No. </th>
+                  <th scope="col">Last Name </th>
                   <th scope="col">First Name </th>
                   <th scope="col">Middle Name </th>
-                  <th scope="col">Last Name </th>
+                  <th scope="col">LRN No. </th>
                  <!--
                   
                  <th scope="col">Suffix</th>
@@ -260,10 +260,10 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-          <td><?php echo $Row["lrnnumber"]; ?></td>
+           <td><?php echo $Row["lastname"]; ?></td>
           <td><?php echo $Row["firstname"]; ?></td>
           <td><?php echo $Row["middlename"]; ?></td>
-          <td><?php echo $Row["lastname"]; ?></td>
+          <td><?php echo $Row["lrnnumber"]; ?></td>
           <!-- <td><?php echo $Row["suffix"]; ?></td>
           <td><?php echo $Row["gender"]; ?></td>
           <td><?php echo $Row["birthplace"]; ?></td>
@@ -372,10 +372,12 @@ function openulr(newurl) {
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>LRN no.</th>
+                  <th>Last Name</th>
+                  
                     <th>First Name</th>
-                    <th>Last Name</th>
+                   
                     <th>Middle Name</th>
+                    <th>LRN no.</th>
                     <th colspan="2">Actions</th>
                   </tr>
                 </thead>
@@ -397,10 +399,10 @@ function openulr(newurl) {
         if (mysqli_num_rows($query_run) >
                   0) { foreach ($query_run as $items) { ?>
                   <tr>
-                   <td><?= $items['lrnnumber']; ?></td>
+                  <td><?= $items['lastname']; ?></td>
                     <td><?= $items['firstname']; ?></td>
                     <td><?= $items['middlename']; ?></td>
-                    <td><?= $items['lastname']; ?></td>
+                    <td><?= $items['lrnnumber']; ?></td>
                     <td><a href="update.php?id=<?=$items['id']?>" 
 			      	     class="btn btn-success ">Update</a>
                   </td>

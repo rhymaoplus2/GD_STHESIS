@@ -359,6 +359,18 @@ font-size: 10px;;
     name="schoolyear">
   </div>
 
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Section Name</label>
+    <input 
+    type="" 
+    class="form-control" s
+    id="section" 
+    placeholder="ex: 2022-2023"
+    name="section">
+  </div>
+
+
+
 
 
 

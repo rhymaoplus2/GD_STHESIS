@@ -391,6 +391,18 @@ font-size: 10px;;
 
   </div>
 
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Section Name</label>
+    <input 
+	value="<?=$row['section'] ?>" 
+    type="" 
+    class="form-control" 
+    id="section" 
+    placeholder="ex: 2022-2023"
+    name="section">
+
+  </div>
+
 
 
 
