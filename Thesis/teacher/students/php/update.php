@@ -42,6 +42,7 @@ if (isset($_GET['id'])) {
         $parent = validate($_POST['parent']);
         $id = validate($_POST['id']);
         $age = validate($_POST['age']);
+        $schoolyear = validate($_POST['schoolyear']);
 
 
 
@@ -77,7 +78,7 @@ if (isset($_GET['id'])) {
                SET lrnnumber='$lrnnumber',firstname='$firstname', middlename='$middlename',
                lastname='$lastname',birthplace='$birthplace',
                suffix='$suffix',gender='$gender',
-               birthday='$birthday',address='$address',
+               birthday='$birthday',address='$address',schoolyear='$schoolyear',
                parent='$parent',age='$age'
 
                WHERE id=$id ";

@@ -20,7 +20,7 @@ if (isset($_POST['create'])) {
 	$age = validate($_POST['age']);
 	$address = validate($_POST['address']);
 	$parent = validate($_POST['parent']);
-
+	$schoolyear = validate($_POST['schoolyear']);
 	$user_data =
 	'lrnnumber='.$lrnnumber.
 	'&adviser_id='.$adviser_id.
@@ -33,57 +33,58 @@ if (isset($_POST['create'])) {
 	'&age='.$age.
     '&address='.$address.
 	'&parent='.$parent.
-
+	'&schoolyear='.$schoolyear.
 
     '&suffix='.$suffix;
 
 	if (empty($lrnnumber))
 	 {
-		header ("Location: ../admin_create.php?error=LRN number is required&$user_data");
+		header ("Location: ../teacher_create.php?error=LRN number is required&$user_data");
 	}
 
 
 
 	
 	else if (empty($middlename)) {
-		header ("Location: ../admin_create.php?error=Middle Name is required&$user_data");
+		header ("Location: ../teacher_create.php?error=Middle Name is required&$user_data");
 	}
 
 	else if (empty($firstname)) {
-		header ("Location: ../admin_create.php?error=First Name is required&$user_data");
+		header ("Location: ../teacher_create.php?error=First Name is required&$user_data");
 	}
 
 	else if (empty($lastname)) {
-		header ("Location: ../admin_create.php?error=Last Name is required&$user_data");
+		header ("Location: ../teacher_create.php?error=Last Name is required&$user_data");
 	}
 
-	else if (empty($suffix)) {
-		header ("Location: ../admin_create.php?error=Suffix is required&$user_data");
-	}
 
 	else if (empty($birthplace)) {
-		header ("Location: ../admin_create.php?error=Birth Place is required&$user_data");
+		header ("Location:../teacher_create.php?error=Birth Place is required&$user_data");
 	}
 
 	else if (empty($birthday)) {
-		header ("Location: ../admin_create.php?error=Birth Day is required&$user_data");
+		header ("Location: ../teacher_create.php?error=Birth Day is required&$user_data");
 	}
 
 	else if (empty($address)) {
-		header ("Location: ../admin_create.php?error=Address is required&$user_data");
+		header ("Location: ../teacher_create.php?error=Address is required&$user_data");
 	}
 
 	else if (empty($gender)) {
-		header ("Location: ../admin_create.php?error=Gender is required&$user_data");
+		header ("Location: ../teacher_create.php?error=Gender is required&$user_data");
+	}
+	else if (empty($schoolyear)) {
+		header ("Location: ../teacher_create.php?error=School Year is required&$user_data");
 	}
 
+	
 	
 	else {
 
        $sql = "INSERT INTO students(lrnnumber,adviser_id,firstname, middlename,lastname,gender,suffix,
-	   birthplace,birthday,age,parent,address)
+	   birthplace,birthday,age,parent,address,schoolyear)
                VALUES('$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname',	'$gender','$suffix',
-			   '$birthplace','$birthday','$age',
+			   '$birthplace','$birthday','$age','$schoolyear',
 			   '$address','$parent')";
        $result = mysqli_query($conn, $sql);
        if ($result) {

@@ -176,7 +176,7 @@ font-size: 10px;;
 
 
  <?php if (isset($_GET['error'])) { 
-  include "../male/php/db_conn.php";
+  include "./php/db_conn.php";
   ?>
   
 
@@ -348,6 +348,16 @@ font-size: 10px;;
 
   </div>
 
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">School Year</label>
+    <input 
+    type="" 
+    class="form-control" 
+    id="schoolyear" 
+    placeholder="ex: 2022-2023"
+    name="schoolyear">
+  </div>
 
 
 

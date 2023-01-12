@@ -379,6 +379,18 @@ font-size: 10px;;
 
   </div>
 
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">School Year</label>
+    <input 
+	value="<?=$row['schoolyear'] ?>" 
+    type="" 
+    class="form-control" 
+    id="schoolyear" 
+    placeholder="ex: 2022-2023"
+    name="schoolyear">
+
+  </div>
+
 
 
 
