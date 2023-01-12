@@ -215,11 +215,11 @@ font-size: 10px;;
              
 			  	 ?> 
            
+        
 
+           <table class="table table-bordered">
 
-
-
-              <thead class="thead">
+              <thead>
                   <tr>
                   <th scope="col">Last Name </th>
                   <th scope="col">First Name </th>
@@ -236,7 +236,7 @@ font-size: 10px;;
                   <th scope="col">Parent/Guardian</th>
              -->
                   
-                  <th scope="col" colspan="2">Action </th>
+                  <th scope="col" colspan="3">Action </th>
                 </tr>
               </thead>
         <tbody>    
@@ -272,6 +272,10 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["address"]; ?></td>
           <td><?php echo $Row["parent"]; ?></td>
      -->
+     <td><a href="view.php?id=<?=$Row['id']?>" 
+			      	     class="btn btn-dark ">View</a>
+                   
+                  </td>
              <td><a href="update.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-success ">Update</a>
      </td>
@@ -378,7 +382,7 @@ function openulr(newurl) {
                    
                     <th>Middle Name</th>
                     <th>LRN no.</th>
-                    <th colspan="2">Actions</th>
+                    <th colspan="3">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -401,10 +405,15 @@ function openulr(newurl) {
                   <tr>
                   <td><?= $items['lastname']; ?></td>
                     <td><?= $items['firstname']; ?></td>
-                    <td><?= $items['middlename']; ?></td>
+                    <td><?= $items['middlename']; ?></td> 
                     <td><?= $items['lrnnumber']; ?></td>
+                    <td><a href="view.php?id=<?=$items['id']?>" 
+			      	     class="btn btn-dark ">View</a>
+                   
+                  </td>
                     <td><a href="update.php?id=<?=$items['id']?>" 
 			      	     class="btn btn-success ">Update</a>
+                   
                   </td>
                   <td>
                    <script type="text/javascript">  
@@ -421,6 +430,8 @@ function openulr(newurl) {
 </a></strong>
 			      </td>
 
+
+      
 
                   </tr>
                   

@@ -21,6 +21,7 @@ if (isset($_POST['create'])) {
 	$address = validate($_POST['address']);
 	$parent = validate($_POST['parent']);
 	$schoolyear = validate($_POST['schoolyear']);
+	$grade = validate($_POST['grade']);
 	$section = validate($_POST['section']);
 	$user_data =
 	'lrnnumber='.$lrnnumber.
@@ -36,6 +37,7 @@ if (isset($_POST['create'])) {
     '&address='.$address.
 	'&parent='.$parent.
 	'&schoolyear='.$schoolyear.
+	'&grade='.$grade.
 	'&section='.$section
     ;
 
@@ -78,6 +80,8 @@ if (isset($_POST['create'])) {
 	else if (empty($schoolyear)) {
 		header ("Location: ../teacher_create.php?error=School Year is required&$user_data");
 	}
+
+
 	else if (empty($section)) {
 		header ("Location: ../teacher_create.php?error=Section Name is required&$user_data");
 	}
@@ -88,10 +92,10 @@ if (isset($_POST['create'])) {
 	else {
 
        $sql = "INSERT INTO students(lrnnumber,adviser_id,firstname, middlename,lastname,gender,suffix,
-	   birthplace,birthday,age,parent,address,schoolyear,section)
+	   birthplace,birthday,age,parent,address,schoolyear,grade,section)
                VALUES('$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname',	'$gender','$suffix',
 			   '$birthplace','$birthday','$age',
-			   '$address','$parent','$schoolyear','$section')";
+			   '$address','$parent','$schoolyear','$grade','$section')";
        $result = mysqli_query($conn, $sql);
        if ($result) {
 		header("Location: ../teacher_read.php?success=Added Successfully");

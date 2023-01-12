@@ -44,6 +44,7 @@ if (isset($_GET['id'])) {
     
   
         $schoolyear = validate($_POST['schoolyear']);
+        $grade = validate($_POST['grade']);
         $section = validate($_POST['section']);
 
         $id = validate($_POST['id']);
@@ -99,7 +100,7 @@ if (isset($_GET['id'])) {
                lastname='$lastname',birthplace='$birthplace',
                suffix='$suffix',gender='$gender',
                birthday='$birthday',age='$age',
-               address='$address',parent='$parent',schoolyear='$schoolyear',section='$section'
+               address='$address',parent='$parent',schoolyear='$schoolyear',grade='$grade',section='$section'
 
                WHERE id=$id ";
        $result = mysqli_query($conn, $sql);

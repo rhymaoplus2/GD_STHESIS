@@ -359,6 +359,22 @@ font-size: 10px;;
     name="schoolyear">
   </div>
 
+
+
+  <div class="from-group mb-3">
+                                <label for="">Year Level</label>
+                                <select name="grade" id="grade" class="form-control">
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </div>
+
+
+
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Section Name</label>
     <input 
