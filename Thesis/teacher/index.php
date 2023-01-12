@@ -10,14 +10,7 @@
     <script src="bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <style>
-      body {
-  background: url('../img/back.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
-
+    
 .logo
 {
 margin-left: 18rem;
