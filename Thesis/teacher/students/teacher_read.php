@@ -178,18 +178,19 @@ font-size: 10px;;
 
 			<h1 class="display-10 text-center"> These are your Students 
       <?=$_SESSION['name']?></h1>
-      <h5>No List? Click the create Button to add Your Students! </h5>
+      <h5>No List? Click the "Create" Button to add Your Students! </h5>
      <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
-          <a class="link-warning" href="teacher_view.php" display-40>
+         
+     <!--<a class="link-warning" href="teacher_view.php" display-40>
           <button type="button-center" class="btn btn-warning">
 
       Search Students
 
           </button>
           </a>
-
+-->
 
 
        </div>
@@ -271,7 +272,7 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["address"]; ?></td>
           <td><?php echo $Row["parent"]; ?></td>
      -->
-             <td><a href="update.php?id=<?=$rows['id']?>" 
+             <td><a href="update.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-success ">Update</a>
      </td>
      <td>
@@ -321,9 +322,20 @@ function openulr(newurl) {
 
 
 
+
+
+
          </tbody>
       </table>
-      <div class="link-center">
+
+
+      
+     
+
+
+</form>
+
+<div class="center">
           <a class="link-primary" href="teacher_create.php" display-40>
           <button type="button" class="btn btn-dark">
 
@@ -332,7 +344,114 @@ function openulr(newurl) {
           </button>
           </a>
           </div>
-     </div>
+ 
+<br>
+<br>
+
+<form action="" method="GET">
+                    <div class="input-group ">
+                      <input
+                        type="text"
+                        name="search"
+                        required
+                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                        class="form-control"
+                        placeholder="Search by First Name/Middle Name/Last Name"
+                      />
+                      
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-warning">
+                        Search
+                      </button>
+                 
+
+<br>
+<br>
+                   
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>LRN no.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Middle Name</th>
+                    <th colspan="2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+           
+
+
+
+
+    <?php
+    $con = mysqli_connect("localhost", "root", "", "my_db");
+    if (isset($_GET['search'])) {
+        $adviser_id = ($_SESSION["id"]);
+        $filtervalues = $_GET['search'];
+        $query = "SELECT * FROM students WHERE adviser_id = '$adviser_id' AND CONCAT(lrnnumber,firstname,lastname,middlename)LIKE '%$filtervalues%' ";
+        $query_run = mysqli_query($con, $query);
+
+        if (mysqli_num_rows($query_run) >
+                  0) { foreach ($query_run as $items) { ?>
+                  <tr>
+                   <td><?= $items['lrnnumber']; ?></td>
+                    <td><?= $items['firstname']; ?></td>
+                    <td><?= $items['middlename']; ?></td>
+                    <td><?= $items['lastname']; ?></td>
+                    <td><a href="update.php?id=<?=$items['id']?>" 
+			      	     class="btn btn-success ">Update</a>
+                  </td>
+                  <td>
+                   <script type="text/javascript">  
+
+function openulr(newurl) {  
+
+  if (confirm("Are you sure you want to Delete?")) {    
+
+    document.location = newurl;  
+  }}
+    </script>
+<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
+  DISCARD
+</a></strong>
+			      </td>
+
+
+                  </tr>
+                  
+
+                  <?php
+            }
+        } else {
+                                                ?>
+                  <tr>
+                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
+                  <h5>
+                    
+                  </h5> </td>
+                  </tr>
+                  <?php
+        }
+    }
+       }
+       ?>
+
+      </form>
+      </div>
+      </div>
+      </div>
+
+<!-- Search Area -->
+
+
+
+
+
+
+</div>
    </div>
   </div>
 
@@ -340,6 +459,12 @@ function openulr(newurl) {
 
 
 </div>
+
+
+
+
+
+
 
 
 <script>
@@ -358,21 +483,14 @@ function myFunction() {
 </script>
 
 
+
+
+
+
   
 </body>
 </html>
 <?php 
 
-}
-
-
-
-
-
-
-
-
-else{
-	header("Location: teacher_read.php");
-} ?>
+  
 

@@ -41,6 +41,8 @@ if (isset($_GET['id'])) {
         $address = validate($_POST['address']);
         $parent = validate($_POST['parent']);
         $id = validate($_POST['id']);
+        $age = validate($_POST['age']);
+
 
 
         
@@ -76,7 +78,7 @@ if (isset($_GET['id'])) {
                lastname='$lastname',birthplace='$birthplace',
                suffix='$suffix',gender='$gender',
                birthday='$birthday',address='$address',
-               parent='$parent'
+               parent='$parent',age='$age'
 
                WHERE id=$id ";
        $result = mysqli_query($conn, $sql);

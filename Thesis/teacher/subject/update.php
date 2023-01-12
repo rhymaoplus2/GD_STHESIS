@@ -14,11 +14,11 @@
 	<title>Update</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <style>
-  
+
+<style>
 
 
-  .container {
+.container {
 	min-height: 100vh;
 	display: flex;
 	justify-content: center;
@@ -152,9 +152,12 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+
   </style>
+
 </head>
 <body>
+
 
 
 <div class="header" id="myHeader">
@@ -165,7 +168,8 @@ font-size: 10px;;
 
 
 
-
+<br>
+<br>
 	<div class="container">
 		<form action="n-update.php" 
 		      method="post">
@@ -178,64 +182,52 @@ font-size: 10px;;
 		   <?php } ?>
 
 
-<div class="form-group">
+<div class="form-group mb-3">
+    <label for="" class="form-label">Change The Subject Name</label>
+    <input 
+    value="<?=$row['subjectname']?>"
+	  type="text"
+    class="form-control"
+    id="subjectname" 
+    name="subjectname">
+    </div>
+
+
+    
+<div class="form-group mb-3">
     <label for="" class="form-label">Subject ID</label>
     <input 
-	value="<?=$row['subjectid'] ?>" 
-
-    type="text" 
-    class="form-control" 
+    value="<?=$row['subjectid']?>"
+	  disabled="disabled"
+    class="form-control"
     id="subjectid" 
-    placeholder="ex: 12913937"
-    name="subjectid">
-  </div>
-
-
-
-  <div class="form-group">
- 
-
-    <label for="" class="form-label">Subject Name</label>
-    <input 
-	value="<?=$row['subjectname'] ?>" 
-    type="text" 
-    class="form-control" 
-    id="subjectname" 
-    placeholder="ex: 12913937"
     name="subjectname">
-  </div>
+    </div>
 
+    <div class="form-group mb-3">
+    <label for="" class="form-label">Subject Teacher Username</label>
+    <input 
+    value="<?=$row['teacherid']?>"
+	  disabled="disabled"
+    class="form-control"
+    id="teacherid" 
+    name="subjectname">
+    </div>
 
-  <br>
-<label for="" class="form-label">Choose Subject Teacher UserName</label>
- <select name="teacherid" id="teacherid" class="form-control">
-  
-    <?php 
-    $query ="SELECT username FROM teacher";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['username'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($username) && $id== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
     
-</select>
+    <div class="form-group mb-3">
+    <label for="" class="form-label">Subject Group Head Username</label>
+    <input 
+    value="<?=$row['subjectgrouphead']?>"
+	  disabled="disabled"
+    class="form-control"
+    id="subjectgrouphead" 
+    name="subjectname">
+    </div>
 
-  <br>
-		   
-  <input type="text" 
+
+
+	         <input type="text" 
 		          name="id"
 		          value="<?=$row['id']?>"
 		          hidden >
@@ -253,16 +245,27 @@ continue;
           </button>
 
 
-
-
-
-
-		   
-	
-
-
 	
 	    </form>
 	</div>
+<br>
+<br>
+  <script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
+  
+  
+
 </body>
 </html>

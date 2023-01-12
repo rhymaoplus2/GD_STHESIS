@@ -1,25 +1,23 @@
 <?php 
-   include "./php/read.php";
+
    session_start();
-   include "./php/db_conn.php";
-
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
-
-
-
-
-
+   include "../php/db_conn.php";
+   include "../php/read.php";
+   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>HOME</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <style>
-  
 
 
-  .container {
+
+  <style>
+    
+
+
+.container {
 	min-height: 100vh;
 	display: flex;
 	justify-content: center;
@@ -153,13 +151,16 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
-  </style>
+
+
+    </style>
 </head>
 <body>
 
 <div class="header" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
+
 
 <script>
 window.onscroll = function() {myFunction()};
@@ -177,104 +178,120 @@ function myFunction() {
 </script>
 
 
-<div class="container">
-		<div class="box">
+<!-- TITLE HERE -->
+
+
+
+
+        <div class=" container ">
+       
+        <div class="box">
+        <div class="content">
 			<br>
       
 
-			<h1 class="display-10 text-center"> 
-      <?= $_SESSION['name'] ?> Subjects</h1>
 
-      <br>
-      <h5>No List? Click the create Button to add Subjects!</h5>
-     
-       
+
+      <div class="container" >
+		<div class="box">
+    <div class="content">
+
+
+			<h1 class="display-10 text-center"> These are your Subject List
+      </h1>
+      Dear : <?=$_SESSION['name']?> 
+      <br>Please Click the create Button to add Subjects!
+     <div class="row justify-content-center my-5">
+                                                      
+	   <div class="row justify-content-right  my-3">
+       </div>
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
-            <table class="table table-bordered">
+            <table class="table table-bordered ">
 
-
-
-
-
-
-
-            <?php
-            $i = 0;
-            while ($rows = mysqli_fetch_assoc($result)) {
-              $i++;
-
-              ?> 
+            <?php 
+			  	   $i = 0;
+			  	   while($rows = mysqli_fetch_assoc($result)){
+			  	   $i++;
+             
+			  	 ?> 
            
 
 
 
 
-              <thead class="thead">
+              <thead >
                   <tr>
-                  <th scope="col">ID </th>
                   <th scope="col">Subject ID </th>
                   <th scope="col">Subject Name </th>
-                  <th scope="col">Subject Teacher Username </th>
+                  <th scope="col">Subject Teacher Username</th>
                   
-                  <th scope="col">Action </th>
+                  <th scope="col" colspan="2">Actions </th>
                 </tr>
               </thead>
         <tbody>    
           
+       
         
 
-        
-        <?php
- require "db_conn.php";
- $subjectgrouphead = $_SESSION["id"];
- $query = "SELECT * FROM subjects WHERE subjectgrouphead= '$subjectgrouphead';";
- $result = mysqli_query($conn, $query);
- if (mysqli_num_rows($result) > 0) {
 
-          if (mysqli_num_rows($result) > 0) {
+<?php
+ require "./php/db_conn.php";
+ $subjectgrouphead = $_SESSION["id"] ;
+ $query = "SELECT * FROM subjects WHERE  subjectgrouphead= '$subjectgrouphead'";
+$result = mysqli_query($conn, $query);
+ if (mysqli_num_rows($result) > 0) 
 
-            while ($Row = mysqli_fetch_assoc($result)) {
+ {
 
-              ?>
-           
+     while ($Row = mysqli_fetch_assoc($result)) 
+     
+     {
+      
+      ?>
            <tr>
-           <td><?php echo $Row["id"]; ?></td>
           <td><?php echo $Row["subjectid"]; ?></td>
           <td><?php echo $Row["subjectname"]; ?></td>
           <td><?php echo $Row["teacherid"]; ?></td>
-      
-             <td><a href="update.php?id=<?= $Row['id'] ?>" 
+          <td><a href="update.php? id=<?=$Row['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 
+     <td>
+                   <script type="text/javascript">  
 
-        
-          </head>
+function openulr(newurl) {  
 
+  if (confirm("Are you sure you want to Delete?")) {    
 
-          <!--     DELETE FUNCTION -->
-          <script type="text/javascript">  
-          function openulr(newurl) {  
-          if (confirm("Are you sure you want to Delete?")) {    
-          document.location = newurl;  
-                                                           }
-                                    }
-          </script>
-<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
+    document.location = newurl;  
+  }}
+    </script>
+<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
   DISCARD
-</a></strong>
+</a>
 
 			      </td>
-   
 			    </tr>
      
+
+
+
+
+
+
+
+
+
+
+
+
        
             <?php }
-          }
+ }
 
 
 
@@ -283,45 +300,133 @@ function myFunction() {
 
 
 
-        }
+}
 
-            }
-            ?>
+}
+ ?>
 
 
 
          </tbody>
       </table>
       <div class="link-center">
-          <a class="link-primary" href="create.php" display-40>
+          <a class="link-primary" href="teacher_create.php" display-40>
           <button type="button" class="btn btn-dark">
 
       CREATE
 
           </button>
           </a>
-          </div>
+<br>
+<br>
+<br>
+
+			</div>
+      <form action="" method="GET">
+
+                    <div class="input-group ">
+                      <input
+                        type="text"
+                        name="search"
+                        required
+                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                        class="form-control"
+                        placeholder="Search by Subject ID / Name / Subject Teacher Username"
+                      />
+                      
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-warning">
+                        Search
+                      </button>
+    
+<br> <br>
+<br>
+
+
+                   
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Subject ID</th>
+                    <th>Subject Name</th>
+                    <th>Subject Teacher Username</th>
+                    <th colspan="2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+    <?php
+    $con = mysqli_connect("localhost", "root", "", "my_db");
+    if (isset($_GET['search'])) {
+        $subjectgrouphead = ($_SESSION["id"]);
+        $filtervalues = $_GET['search'];
+        $query = "SELECT * FROM subjects WHERE subjectgrouphead = '$subjectgrouphead' AND CONCAT(subjectid,subjectname,teacherid)LIKE '%$filtervalues%' ";
+        $query_run = mysqli_query($con, $query);
+
+        if (mysqli_num_rows($query_run) >
+                  0) { foreach ($query_run as $items) { ?>
+                  <tr>
+                   <td><?= $items['subjectid']; ?></td>
+                    <td><?= $items['subjectname']; ?></td>
+                    <td><?= $items['teacherid']; ?></td>
+                    <td><a href="update.php? id=<?=$items['id']?>" 
+			      	     class="btn btn-success ">Update</a>
+
+
+                  </td>
+                  <td>
+
+                   <script type="text/javascript">  
+
+function openulr(newurl) {  
+
+if (confirm("Are you sure you want to Delete?")) {    
+
+    document.location = newurl;  
+  }}
+    </script>
+<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
+  DISCARD
+</a></strong>
+			      </td>
+                  </tr>
+                  
+
+                  <?php
+            }
+        } else {
+                                                ?>
+                  <tr>
+                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
+                  <h5>
+                    
+                  </h5> </td>
+                  </tr>
+                  <?php
+        }
+    }
+       }
+       ?>
+                </tbody>
+                
+              </table>
+              </div>
      </div>
    </div>
   </div>
 
 
+          
+            </div>
+      
+      </div>
+    </div>
+      </div>
+ 
+      </form>
 
 
-
-
-
-  
-</body>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
-
-<?php } else {
-        header("Location: subjectlist.php");
-      }
-}
-
-?>
-
-
-
-

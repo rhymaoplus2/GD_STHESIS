@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     if (mysqli_num_rows($result) > 0) {
     	$row = mysqli_fetch_assoc($result);
     }else {
-    	header("Location:../subjectlist.php");
+    	header("Location:subjectlist.php");
     }
 
 
@@ -30,48 +30,33 @@ if (isset($_GET['id'])) {
         $data = htmlspecialchars($data);
         return $data;
 	}
-        $subjectid = validate($_POST['subjectid']);
+   
 	$subjectname = validate($_POST['subjectname']);
-	$teacherid = validate($_POST['teacherid']);
-        $subjectgrouphead = validate($_POST['subjectgrouphead']);
 	$id = validate($_POST['id']);
 
         
 
-	if (empty($subjectid))
+	if (empty($subjectname))
 	 {
-		header ("Location:update.php?error=Subject ID is required&$user_data");
+		
 	}
 
 
 
-	
-	else if (empty($subjectname)) {
-		header ("Location:update.php?error=Subject Name is required&$user_data");
-	}
-
-	else if (empty($teacherid)) {
-		header ("Location:update.php?error=Subject Teacher ID NOT FOUND&$user_data");
-	}
-        else if (empty($subjectgrouphead)) {
-		header ("Location: update.php?error=Subject Teacher ID NOT FOUND&$user_data");
-	}
+	 
         else {
 
        $sql = "UPDATE subjects
-               SET subjectid='$subjectid',subjectname='$subjectname', teacherid='$teacherid',
-               subjectgrouphead='$subjectgrouphead'
+               SET subjectname='$subjectname'
                WHERE id='$id'";
        $result = mysqli_query($conn, $sql);
        if ($result) {
-       	  header("Location: ../subjectlist.php?id=$id&success=successfully updated");
+       	  header("Location: subjectlist.php?id=$id&success=successfully updated");
           
        }
        
        else {
-          header("Location: ../subjectlist.php?id=$id&error=unknown error occurred&$user_data");
+          header("Location: subjectlist.php?id=$id&error=unknown error occurred&$user_data");
        }
 	}
-}else {
-	header("Location: subjectlist.php");
 }
