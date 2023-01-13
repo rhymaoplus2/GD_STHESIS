@@ -30,7 +30,6 @@ if (isset($_GET['id'])) {
         $data = htmlspecialchars($data);
         return $data;
 	}
-        $id = validate($_POST['id']);
         $lrnnumber = validate($_POST['lrnnumber']);
 	$firstname = validate($_POST['firstname']);
 	$middlename = validate($_POST['middlename']);
@@ -48,11 +47,9 @@ if (isset($_GET['id'])) {
         $grade = validate($_POST['grade']);
         $section = validate($_POST['section']);
 
+        $id = validate($_POST['id']);
 
-
-        if (empty($id)) {
-		header("Location: ../update.php?id=$id&error=ID is required/Input new data");
-	}
+        
 
 	if (empty($firstname)) {
 		header("Location: ../update.php?id=$id&error=First Name is required/Input new data");
@@ -99,13 +96,13 @@ if (isset($_GET['id'])) {
         else {
 
        $sql = "UPDATE students
-               SET id='$id',lrnnumber='$lrnnumber',firstname='$firstname', middlename='$middlename',
+               SET lrnnumber='$lrnnumber',firstname='$firstname', middlename='$middlename',
                lastname='$lastname',birthplace='$birthplace',
                suffix='$suffix',gender='$gender',
                birthday='$birthday',age='$age',
                address='$address',parent='$parent',schoolyear='$schoolyear',grade='$grade',section='$section'
 
-            ";
+               WHERE id=$id ";
        $result = mysqli_query($conn, $sql);
        if ($result) {
        	  header("Location: ../teacher_read.php?id=$id&success=successfully updated");

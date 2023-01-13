@@ -10,15 +10,14 @@ if (isset($_POST['create'])) {
 	}
 
 	$subjectname = validate($_POST['subjectname']);
-	$studentid = validate($_POST['studentid']);
+	$studentname = validate($_POST['studentname']);
 	$grade = validate($_POST['grade']);
-	$studentid = $_POST['studentid'];
 	$teacher = $_POST['teacher'];
-	$duplicate=mysqli_query($conn,"select * from grade where studentid='$studentid'");
+	$duplicate=mysqli_query($conn,"select * from grade where studentname='$studentname'");
 	$user_data =
 
 	'subjectname='.$subjectname.
-	'studentid='.$studentid.
+	'studentname='.$studentname.
 	'grade='.$grade;
 	'teacher='.$teacher;
 
@@ -37,8 +36,8 @@ if (isset($_POST['create'])) {
 	
 	else {
 
-       $sql = "INSERT INTO grade(subjectname,studentid,grade,teacher)
-               VALUES('$subjectname','$studentid','$grade','$teacher')";
+       $sql = "INSERT INTO grade(subjectname,studentname,grade,teacher)
+               VALUES('$subjectname','$studentname','$grade','$teacher')";
 
        $result = mysqli_query($conn, $sql);
 

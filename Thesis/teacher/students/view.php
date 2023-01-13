@@ -171,16 +171,28 @@ font-size: 10px;;
 <br>
 <br>
 	<div class="container">
-		<form action="php/update.php" 
+		<form action="php/view.php" 
 		      method="post">
             
-		   <h4 class="display-10 text-center"> <?=$row['lastname'] ?> <?=$row['firstname'] ?> Information</h4><hr><br>
+		   <h4 class="display-10 text-center"> <?=$row['fullname'] ?> Information</h4><hr><br>
 		   <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
 		    </div>
 		   <?php } ?>
            
+
+
+       
+       <div class="form-group">
+
+<p class="fw-bold">ID No.</p>
+
+<?=$row['id'] ?>
+
+
+       </div>
+
            <div class="form-group">
 
     <p class="fw-bold">Lrn. No.</p>

@@ -181,7 +181,7 @@ font-size: 10px;;
       <br>
       Dear : <?=$_SESSION['name']?>
       <br>
-      Click the "Create" Button to add Your Students! 
+      Click the "ADD" Button to add Your Students! 
 <!-- <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
@@ -337,7 +337,7 @@ function openulr(newurl) {
           <a class="link-primary" href="teacher_create.php" display-40>
           <button type="button" class="btn btn-dark">
 
-      CREATE
+      ADD
 
           </button>
           </a>

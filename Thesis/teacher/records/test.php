@@ -2,12 +2,12 @@
 
    session_start();
    include "../php/db_conn.php";
-   include "../php/read.php";
+   include "php/test.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOME</title>
+	<title>RECORDS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -197,10 +197,10 @@ function myFunction() {
     <div class="content">
 
 
-			<h1 class="display-10 text-center"> These are your Subject List
+			<h1 class="display-10 text-center"> Student Grades
       </h1>
       Dear : <?=$_SESSION['name']?> 
-      <br>Please Click the create Button to add Subjects!
+      <br>Please Click the ADD Button to Add Grades!
      <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
@@ -226,9 +226,9 @@ function myFunction() {
 
               <thead >
                   <tr>
-                  <th scope="col">Subject ID </th>
-                  <th scope="col">Subject Name </th>
-                  <th scope="col">Subject Teacher Username</th>
+                  <th scope="col">Last Name </th>
+                  <th scope="col">Middle Name </th>
+                  <th scope="col">First Name</th>
                   
                   <th scope="col" colspan="2">Actions </th>
                 </tr>
@@ -240,9 +240,9 @@ function myFunction() {
 
 
 <?php
- require "./php/db_conn.php";
- $subjectgrouphead = $_SESSION["id"] ;
- $query = "SELECT * FROM subjects WHERE  subjectgrouphead= '$subjectgrouphead'";
+ require "php/db_conn.php";
+ $teacher = $_SESSION["id"] ;
+ $query = "SELECT * FROM students  WHERE  teacher = '$teacher'";
 $result = mysqli_query($conn, $query);
  if (mysqli_num_rows($result) > 0) 
 
@@ -254,9 +254,9 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-          <td><?php echo $Row["subjectid"]; ?></td>
-          <td><?php echo $Row["subjectname"]; ?></td>
-          <td><?php echo $Row["teacherid"]; ?></td>
+          <td><?php echo $Row["lastname"]; ?></td>
+          <td><?php echo $Row["middlename"]; ?></td>
+          <td><?php echo $Row["lastname"]; ?></td>
           <td><a href="update.php? id=<?=$Row['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 
@@ -309,17 +309,22 @@ function openulr(newurl) {
 
          </tbody>
       </table>
-      <div class="link-center">
-          <a class="link-primary" href="create.php" display-40>
+      <br>
+      <div class=" mb-1">
+          <a class="link-primary" href="add.php" display-40>
           <button type="button" class="btn btn-dark">
 
-      CREATE
+     ADD
 
           </button>
           </a>
+<br>
+<br>
+
 
 
 			</div>
+          
       <form action="" method="GET">
 
                     <div class="input-group ">
@@ -346,9 +351,9 @@ function openulr(newurl) {
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Subject ID</th>
                     <th>Subject Name</th>
-                    <th>Subject Teacher Username</th>
+                    <th>Grade</th>
+                    <th>Student ID</th>
                     <th colspan="2">Actions</th>
                   </tr>
                 </thead>
@@ -356,17 +361,18 @@ function openulr(newurl) {
     <?php
     $con = mysqli_connect("localhost", "root", "", "my_db");
     if (isset($_GET['search'])) {
-        $subjectgrouphead = ($_SESSION["id"]);
+        $teacher = ($_SESSION["id"]);
         $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM subjects WHERE subjectgrouphead = '$subjectgrouphead' AND CONCAT(subjectid,subjectname,teacherid)LIKE '%$filtervalues%' ";
+        $query = "SELECT * FROM grade WHERE teacher = '$teacher' AND CONCAT(subjectname,grade,studentid,teacher)LIKE '%$filtervalues%' ";
         $query_run = mysqli_query($con, $query);
 
         if (mysqli_num_rows($query_run) >
                   0) { foreach ($query_run as $items) { ?>
                   <tr>
-                   <td><?= $items['subjectid']; ?></td>
-                    <td><?= $items['subjectname']; ?></td>
-                    <td><?= $items['teacherid']; ?></td>
+                   <td><?= $items['subjectname']; ?></td>
+                    <td><?= $items['grade']; ?></td>
+                    <td><?= $items['studentid']; ?></td>
+                    <td type="hidden"><?= $items['id']; ?></td>
                     <td><a href="update.php? id=<?=$items['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 

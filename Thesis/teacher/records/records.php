@@ -199,10 +199,13 @@ function myFunction() {
 
 			<h1 class="display-10 text-center"> Student Grades
       </h1>
+   
       Dear : <?=$_SESSION['name']?> 
       <br>Please Click the ADD Button to Add Grades!
+      <br>
+      You can Sort By Student Name or Subject Name by using the Search Button Below!  
      <div class="row justify-content-center my-5">
-                                                      
+                                          
 	   <div class="row justify-content-right  my-3">
        </div>
        <?php if (isset($_GET['success'])) { ?>
@@ -226,9 +229,10 @@ function myFunction() {
 
               <thead >
                   <tr>
+                  <th scope="col">Student Name</th>
                   <th scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
-                  <th scope="col">Student ID</th>
+              
                   
                   <th scope="col" colspan="2">Actions </th>
                 </tr>
@@ -254,9 +258,10 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
+           <td><?php echo $Row["studentname"]; ?></td>
           <td><?php echo $Row["subjectname"]; ?></td>
           <td><?php echo $Row["grade"]; ?></td>
-          <td><?php echo $Row["studentid"]; ?></td>
+       
           <td><a href="update.php? id=<?=$Row['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 
@@ -334,12 +339,12 @@ function openulr(newurl) {
                         required
                         value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
                         class="form-control"
-                        placeholder="Search by Subject ID / Name / Subject Teacher Username"
+                        placeholder="Search by Subject Name/ Grade / Student Name"
                       />
                       
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning">
+                    <button href="#down" type="submit" class="btn btn-warning">
                         Search
                       </button>
     
@@ -351,9 +356,10 @@ function openulr(newurl) {
               <table class="table table-bordered">
                 <thead>
                   <tr>
+                  <th>Student Name</th>
+
                     <th>Subject Name</th>
                     <th>Grade</th>
-                    <th>Student ID</th>
                     <th colspan="2">Actions</th>
                   </tr>
                 </thead>
@@ -369,10 +375,11 @@ function openulr(newurl) {
         if (mysqli_num_rows($query_run) >
                   0) { foreach ($query_run as $items) { ?>
                   <tr>
+                  <td><?= $items['studentname']; ?></td>
                    <td><?= $items['subjectname']; ?></td>
                     <td><?= $items['grade']; ?></td>
-                    <td><?= $items['studentid']; ?></td>
-                    <td type="hidden"><?= $items['id']; ?></td>
+                 
+                 
                     <td><a href="update.php? id=<?=$items['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 

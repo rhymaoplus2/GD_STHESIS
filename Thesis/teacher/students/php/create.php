@@ -8,11 +8,13 @@ if (isset($_POST['create'])) {
         $data = htmlspecialchars($data);
         return $data;
 	}
+	$id = validate($_POST['id']);
 	$lrnnumber = validate($_POST['lrnnumber']);
 	$adviser_id = validate($_POST['adviser_id']);
 	$firstname = validate($_POST['firstname']);
 	$middlename = validate($_POST['middlename']);
 	$lastname = validate($_POST['lastname']);
+	$fullname = validate($_POST['fullname']);
 	$gender = validate($_POST['gender']);
 	$suffix = validate($_POST['suffix']);
 	$birthplace = validate($_POST['birthplace']);
@@ -24,11 +26,13 @@ if (isset($_POST['create'])) {
 	$grade = validate($_POST['grade']);
 	$section = validate($_POST['section']);
 	$user_data =
+	'id='.$id.
 	'lrnnumber='.$lrnnumber.
 	'&adviser_id='.$adviser_id.
 	'firstname='.$firstname.
 	'middlename='.$middlename. 
     'lastname='.$lastname.
+	'fullname='.$fullname.
 	'&suffix='.$suffix.
 	'&gender='.$gender.
     '&birthplace='.$birthplace.
@@ -51,6 +55,9 @@ if (isset($_POST['create'])) {
 	
 	else if (empty($middlename)) {
 		header ("Location: ../teacher_create.php?error=Middle Name is required&$user_data");
+	}
+	else if (empty($id)) {
+		header ("Location: ../teacher_create.php?error=ID is required&$user_data");
 	}
 
 	else if (empty($firstname)) {
@@ -86,14 +93,18 @@ if (isset($_POST['create'])) {
 		header ("Location: ../teacher_create.php?error=Section Name is required&$user_data");
 	}
 
+	else if (empty($fullname)) {
+		header ("Location: ../teacher_create.php?error=Section Name is required&$user_data");
+	}
+
 
 	
 	
 	else {
 
-       $sql = "INSERT INTO students(lrnnumber,adviser_id,firstname, middlename,lastname,gender,suffix,
+       $sql = "INSERT INTO students(id,lrnnumber,adviser_id,firstname, middlename,lastname,fullname,gender,suffix,
 	   birthplace,birthday,age,parent,address,schoolyear,grade,section)
-               VALUES('$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname',	'$gender','$suffix',
+               VALUES('$id','$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname','$fullname',	'$gender','$suffix',
 			   '$birthplace','$birthday','$age',
 			   '$address','$parent','$schoolyear','$grade','$section')";
        $result = mysqli_query($conn, $sql);

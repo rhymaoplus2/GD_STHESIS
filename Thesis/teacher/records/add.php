@@ -194,11 +194,12 @@ font-size: 10px;;
 
 
 <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Subject Name</label>
+ <label for="exampleInputEmail1" class="form-label">Your Subject Name</label>
  <select name="subjectname" id="subjectname" class="form-control">
  <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
     <?php 
-    $query ="SELECT subjectname FROM subjects";
+ $teacherid = $_SESSION["id"] ;
+ $query = "SELECT * FROM subjects  WHERE  teacherid = '$teacherid'";
   
     $result = $conn->query($query);
  
@@ -230,19 +231,16 @@ continue;
 <br>
 
 <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Student ID </label>
- <select name="studentid" id="studentid" class="form-control">
-  
+ <label for="exampleInputEmail1" class="form-label">Student Name</label>
+ <select name="studentname" id="studentname" class="form-control">
     <?php 
-   //$duplicate = "SELECT * FROM grade";    
-   //$dp = mysqli_query($conn,$duplicate);
-   $query ="SELECT id FROM students";
+   $query ="SELECT fullname FROM students";
    $result = $conn->query($query);
-    $d = $studentid;
+    $d = $studentname;
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
        
-            $option =$optionData['id'];
+            $option =$optionData['fullname'];
 
     ?>
     <?php
@@ -258,20 +256,59 @@ continue;
    <?php
     }}
     ?>
+    
+  
+</select>
+<br>
+<div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Section Name</label>
+ <select name="section" id="section" class="form-control">
+    <?php 
+   $query ="SELECT section FROM students";
+   $result = $conn->query($query);
+    $d = $section;
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+       
+            $option =$optionData['section'];
+
+    ?>
+    <?php
+    //selected option
+    if(!empty($id) && $id== $option){
+    // selected option
+    ?>  
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+    
+  
+  </select>
 </select>
 
 
 <br>
 
-<div class="form-group">
-    <label for="exampleInputEmail1" class="form-label">Grade</label>
-    <input 
-    type="text" 
-    class="form-control" 
-    id="grade" 
-    placeholder="ex:92"
-    name="grade">
-  </div>
+
+<div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Grade</label>
+                    
+                                <select name="suffix" id="suffix" class="form-control">
+                                <?php
+    for ($i=50; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+                                </select>
+                            </div>
 
   <div class="mb-3">
     <input

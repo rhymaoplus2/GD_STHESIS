@@ -1,7 +1,7 @@
 
 
 
-<?php include './php/admin_update.php'; ?>
+<?php include 'php/update.php'; ?>
 
 
 
@@ -181,6 +181,18 @@ font-size: 10px;;
 		    </div>
 		   <?php } ?>
 
+
+       <div class="form-group">
+    <label for="" class="form-label">ID no.</label>
+    <input 
+	value="<?=$row['id'] ?>" 
+
+    type="input" 
+    class="form-control" 
+    id="id" 
+    placeholder="ex: 12913937"
+    name="id">
+  </div>
 
 <div class="form-group">
     <label for="" class="form-label">LRN no.</label>
@@ -427,12 +439,6 @@ font-size: 10px;;
 		   
 	
 
-
-		   
-		   <input type="text" 
-		          name="id"
-		          value="<?=$row['id']?>"
-		          hidden >
 		
 		   <button type="submit" 
 		           class="btn btn-primary"

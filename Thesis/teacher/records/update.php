@@ -174,7 +174,9 @@ font-size: 10px;;
 		<form action="php/update.php" 
 		      method="post">
             
-		   <h4 class="display-4 text-center">Update</h4><hr><br>
+		 
+           <h4 class="fs-6 ">Student Name: </h4> <?=$row['studentname']?><br><br>
+           <h4 class="fs-6 ">Subject: </h4> <?=$row['subjectname']?><hr><br>
 		   <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
@@ -182,23 +184,26 @@ font-size: 10px;;
 		   <?php } ?>
 
 
-<div class="form-group mb-3">
-    <label for="" class="form-label">Change The Grade</label>
-    <input 
-    value="<?=$row['grade']?>"
-	  type="text"
-    class="form-control"
-    id="grade" 
-    name="grade">
-    </div>
 
+           <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Grade</label>
+                    
+                                <select name="suffix" id="suffix" class="form-control">
+                                <?php
+    for ($i=50; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
 
 
 	         <input type="text" 
 		          name="id"
 		          value="<?=$row['id']?>"
 		          hidden >
-		
+                  <br>
 		   <button type="submit" 
 		           class="btn btn-primary"
 		           name="update">Update</button>

@@ -185,6 +185,15 @@ font-size: 10px;;
 </div>
 <?php } ?>
 
+<div class="form-group">
+    <label for="" class="form-label warning" >ID no.</label>
+    <input 
+    type="text" 
+    class="form-control" 
+    id="id" 
+    placeholder="ex: 12913937"
+    name="id">
+  </div>
 
 <div class="form-group">
     <label for="" class="form-label warning" >LRN no.</label>
@@ -264,6 +273,18 @@ font-size: 10px;;
     id="lastname" 
     placeholder="ex: Milmao"
     name="lastname">
+
+  </div>
+
+  <div class="mb-3">
+    <h6 class="text-danger">Provide the Full Name for better experience purposes</h6>
+    <label for="exampleInputEmail1" class="form-label">FuLL Name</label>
+    <input 
+    type="fullname" 
+    class="form-control" 
+    id="fullname" 
+    placeholder="ex: Milmao Reyris Perolino"
+    name="fullname">
 
   </div>
 
@@ -393,7 +414,7 @@ font-size: 10px;;
  
   <button type="submit" 
           class="btn btn-primary"
-          name="create">Create</button>
+          name="create">ADD</button>
 
           <a class="link-primary" href="teacher_read.php">
           <button type="button" class="btn btn-dark">
