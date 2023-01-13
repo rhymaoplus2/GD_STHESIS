@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Update</title>
+	<title>View</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -163,7 +163,8 @@ font-size: 10px;;
 <div class="header" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
-
+ <br>
+ <br>
 
 
 
@@ -174,7 +175,8 @@ font-size: 10px;;
 		<form action="php/view.php" 
 		      method="post">
             
-		   <h4 class="display-10 text-center"> <?=$row['fullname'] ?> Information</h4><hr><br>
+		   <h4 class="display-10 text-center"> <?=$row['fullname'] ?> Information</h4><hr>
+       <br>
 		   <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
@@ -192,7 +194,7 @@ font-size: 10px;;
 
 
        </div>
-
+       <br>
            <div class="form-group">
 
     <p class="fw-bold">Lrn. No.</p>
@@ -201,6 +203,7 @@ font-size: 10px;;
   
 
            </div>
+           
 <!--
   <div class="form-group">
  
