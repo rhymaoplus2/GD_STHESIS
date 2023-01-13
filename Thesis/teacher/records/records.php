@@ -156,15 +156,26 @@ font-size: 10px;;
 <?PHP include_once('header.php');?>
 </div>
 
-
+</div>
+<div class="container">
+      
 
 <!--  CRUD AREA -->
 <br>
 <br>
 
-<div class="container">
+
+  
 <form action="./php/records.php"
       method="post">
+
+      <?php if (isset($_GET['success'])) { ?>
+           <div class="alert alert-success" role="alert">
+			  <?php echo $_GET['success']; ?>
+		    </div>
+		    <?php } ?>
+
+      
   <h4 class="display-10 text-center" >Add Records</h4>
 
 
@@ -188,10 +199,16 @@ font-size: 10px;;
  <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
     <?php 
     $query ="SELECT subjectname FROM subjects";
+  
     $result = $conn->query($query);
+ 
+   
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
+        
+           
+          $option = $optionData['subjectname'];
+        
     ?>
     <?php
     //selected option
@@ -217,11 +234,16 @@ continue;
  <select name="studentid" id="studentid" class="form-control">
   
     <?php 
-    $query ="SELECT id FROM students";
-    $result = $conn->query($query);
+   //$duplicate = "SELECT * FROM grade";    
+   //$dp = mysqli_query($conn,$duplicate);
+   $query ="SELECT id FROM students";
+   $result = $conn->query($query);
+    $d = $studentid;
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
-        $option =$optionData['id'];
+       
+            $option =$optionData['id'];
+
     ?>
     <?php
     //selected option
