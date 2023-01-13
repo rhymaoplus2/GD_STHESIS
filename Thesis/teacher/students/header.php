@@ -18,10 +18,10 @@
            
           </ul>
       <li class="nav-item">
-        <a class="nav-link" href="records.php">Records</a>
+        <a class="nav-link" href="../records/records.php">Records</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="reports.php">Reports</a>
+        <a class="nav-link" href="../reports/reports.php">Reports</a>
       </li>
   
 	  <li class="nav-item">

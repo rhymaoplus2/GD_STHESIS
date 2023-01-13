@@ -200,7 +200,7 @@ function myFunction() {
 			<h1 class="display-10 text-center"> These are your Subject List
       </h1>
       Dear : <?=$_SESSION['name']?> 
-      <br>Please click the "Create" Button to add Subjects!
+      <br>Please Click the create Button to add Subjects!
      <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
@@ -317,9 +317,7 @@ function openulr(newurl) {
 
           </button>
           </a>
-<br>
-<br>
-<br>
+
 
 			</div>
       <form action="" method="GET">

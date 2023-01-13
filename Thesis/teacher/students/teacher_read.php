@@ -176,22 +176,16 @@ font-size: 10px;;
     <div class="content">
 
 
-			<h1 class="display-10 text-center"> These are your Students 
-      <?=$_SESSION['name']?></h1>
-      <h5>No List? Click the "Create" Button to add Your Students! </h5>
-     <div class="row justify-content-center my-5">
+			<h1 class="display-10 text-center"> Student List
+      </h1>
+      <br>
+      Dear : <?=$_SESSION['name']?>
+      <br>
+      Click the "Create" Button to add Your Students! 
+<!-- <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
-         
-     <!--<a class="link-warning" href="teacher_view.php" display-40>
-          <button type="button-center" class="btn btn-warning">
-
-      Search Students
-
-          </button>
-          </a>
--->
-
+-->       
 
        </div>
        <?php if (isset($_GET['success'])) { ?>

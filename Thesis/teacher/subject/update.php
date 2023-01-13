@@ -195,8 +195,9 @@ font-size: 10px;;
 
     
 <div class="form-group mb-3">
-    <label for="" class="form-label">Subject ID</label>
+    
     <input 
+    type="hidden"
     value="<?=$row['subjectid']?>"
 	  disabled="disabled"
     class="form-control"
@@ -205,10 +206,11 @@ font-size: 10px;;
     </div>
 
     <div class="form-group mb-3">
-    <label for="" class="form-label">Subject Teacher Username</label>
+ 
     <input 
     value="<?=$row['teacherid']?>"
 	  disabled="disabled"
+    type="hidden"
     class="form-control"
     id="teacherid" 
     name="subjectname">
@@ -216,8 +218,9 @@ font-size: 10px;;
 
     
     <div class="form-group mb-3">
-    <label for="" class="form-label">Subject Group Head Username</label>
+  
     <input 
+    type="hidden"
     value="<?=$row['subjectgrouphead']?>"
 	  disabled="disabled"
     class="form-control"

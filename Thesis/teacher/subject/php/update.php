@@ -1,6 +1,6 @@
 <?php 
 
-if (isset($_GET['id'])) {
+if (isset($_GET['subjectid'])) {
 	include "db_conn.php";
 
 	function validate($data){
@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
         return $data;
 	}
 
-	$id = validate($_GET['id']);
+	$subjectid = validate($_GET['subjectid']);
 
 	$sql = "SELECT * FROM subjects WHERE id=$id";
     $result = mysqli_query($conn, $sql);
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
 	$subjectname = validate($_POST['subjectname']);
 	$teacherid = validate($_POST['teacherid']);
         $subjectgrouphead = validate($_POST['subjectgrouphead']);
-	$id = validate($_POST['id']);
+	$subjectid = validate($_POST['subjectid']);
 
         
 
