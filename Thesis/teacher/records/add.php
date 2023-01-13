@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Update</title>
+	<title>Add Grade</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <style>
@@ -309,9 +309,9 @@ continue;
 
   <button type="submit" 
           class="btn btn-primary"
-          name="create">Create</button>
+          name="create">ADD</button>
 
-          <a class="link-primary" href="subjectlist.php">
+          <a class="link-primary" href="records.php">
           <button type="button" class="btn btn-dark">
 
       

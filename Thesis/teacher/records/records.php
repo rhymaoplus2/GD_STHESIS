@@ -197,7 +197,7 @@ function myFunction() {
     <div class="content">
 
 
-			<h1 class="display-10 text-center"> These are your Subject List
+			<h1 class="display-10 text-center"> Student Grades
       </h1>
       Dear : <?=$_SESSION['name']?> 
       <br>Please Click the ADD Button to Add Grades!
@@ -363,7 +363,7 @@ function openulr(newurl) {
     if (isset($_GET['search'])) {
         $teacher = ($_SESSION["id"]);
         $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM grade WHERE teacher = '$teacher' AND CONCAT(subjectname,grade,studentid,teacherid)LIKE '%$filtervalues%' ";
+        $query = "SELECT * FROM grade WHERE teacher = '$teacher' AND CONCAT(subjectname,grade,studentid,teacher)LIKE '%$filtervalues%' ";
         $query_run = mysqli_query($con, $query);
 
         if (mysqli_num_rows($query_run) >
@@ -372,6 +372,7 @@ function openulr(newurl) {
                    <td><?= $items['subjectname']; ?></td>
                     <td><?= $items['grade']; ?></td>
                     <td><?= $items['studentid']; ?></td>
+                    <td type="hidden"><?= $items['id']; ?></td>
                     <td><a href="update.php? id=<?=$items['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 
