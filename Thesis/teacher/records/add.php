@@ -273,8 +273,20 @@ continue;
     name="grade">
   </div>
 
+  <div class="mb-3">
+    <input
+    type="hidden"
+    class="form-control" 
+    id="teacher" 
+    placeholder="ex: Science"
+    name="teacher"
+    value="<?php echo $_SESSION['username']?>"
+    >
 
-<br>
+    
+  </div>
+
+  <br>
 
 
 
