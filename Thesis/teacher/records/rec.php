@@ -3,7 +3,7 @@
    session_start();
    include "../php/db_conn.php";
    include "php/rec.php";
-   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+   if (isset($_SESSION['username']) && isset($_SESSION['id'])&& isset($_SESSION['name'])) {   ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,8 @@
 
 
   <style>
-    input {border:0;outline:0;}
+    .no {border:0;outline:0;}
+
 
 
 .container {
@@ -180,6 +181,7 @@ function myFunction() {
 
 <!-- TITLE HERE -->
 
+
 <form action="./php/create.php"
       method="post">
 
@@ -197,15 +199,51 @@ function myFunction() {
       <div class="container" >
 		<div class="box">
     <div class="content">
+    <?php if (isset($_GET['error'])) { 
+  include "./php/db_conn.php";
+  ?>
+  
+
+  <div class="alert alert-danger" role="alert">
+  <?php echo $_GET['error']; ?>
+</div>
+<?php } ?>
 
 
-			<h1 class="display-10 text-center"> Student Grades
+
+<!--- DISPLAYING SUBJECT NAME -->
+
+
+
+
+
+
+
+           
+          
+    
+          
+          
+          
+          
+
+
+
+
+
+			<h1 class="display-10 text-center">    
+               
+       Grades
       </h1>
    
-      Dear : <?=$_SESSION['name']?> 
+      Dear : <?= $_SESSION['name'] ?> 
+      
       <br>Please Click the ADD Button to Add Grades!
       <br>
-      You can Sort By Student Name or Subject Name by using the Search Button Below!  
+     Enter Correctly The Grades Of The Student!
+     
+     - Reyris (Developer)
+     
      <div class="row justify-content-center my-5">
                                           
 	   <div class="row justify-content-right  my-3">
@@ -218,12 +256,12 @@ function myFunction() {
 			<?php if (mysqli_num_rows($result)) { ?>
             <table class="table table-bordered ">
 
-            <?php 
-			  	   $i = 0;
-			  	   while($rows = mysqli_fetch_assoc($result)){
-			  	   $i++;
-             
-			  	 ?> 
+            <?php
+            $i = 0;
+            while ($rows = mysqli_fetch_assoc($result)) {
+              $i++;
+
+              ?> 
            
 
 
@@ -232,80 +270,74 @@ function myFunction() {
               <thead >
                   <tr>
                   <th scope="col">Student Name</th>
-                  <th scope="col">Subject Name </th>
+                  <th  scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
               
                   
-                  <th scope="col" colspan="2">Actions </th>
+                  <th scope="col">Actions </th>
                 </tr>
               </thead>
         <tbody>    
           
-       
-        
-
-
-<?php
- require "php/db_conn.php";
- $adviser_id = $_SESSION["id"] ;
- $query = "SELECT * FROM students   WHERE  adviser_id = '$adviser_id'";
-$result = mysqli_query($conn, $query);
- if (mysqli_num_rows($result) > 0) 
-
- {
-
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
-           <tr>
-           <td><input id="studentname" name="studentname" value="<?= $Row['fullname']; ?>"></input></td>
-          <td>
-
-
-
-
-
-
-
-          <select name="subjectname" id="subjectname" class="form-control">
- <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
-    <?php 
- $teacherid = $_SESSION["id"] ;
- $query = "SELECT * FROM subjects  WHERE  teacherid = '$teacherid'";
-  
-    $result = $conn->query($query);
- 
-   
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        
+        <tr>
            
-          $option = $optionData['subjectname'];
+
+
+
         
-    ?>
-    <?php
-    //selected option
-    if(!empty($id) && $id== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
 
 
 
+
+         
+<?php
+                    require "php/db_conn.php";
+                    $teacherid = $_SESSION["id"];
+                    $subt1 = $_SESSION["id"];
+                    $query =
+                      "SELECT a.adviser_id, a.fullname,a.section, a.subject1,b.st1,b.sub1,a.id,
+                      c.subjectgrouphead, c.subjectname,c.teacherid, c.section,c.teacherid
+                     FROM students a, users b , subjects c where 
+                      b.st1=c.subjectname    AND a.subt1=b.id AND a.subject1=b.st1 AND a.adviser_id=b.sgh1
+                      AND b.sgh1=c.subjectgrouphead
+
+                    ";
+                    // $query = "SELECT students.fullname,students.adviser_id,students.firstname
+                    //FROM students 
+                    //INNER JOIN subjects   ON subjects.subjectgrouphead = adviser_id";
+                    $result = mysqli_query($conn, $query);
+                    if (mysqli_num_rows($result) > 0) {
+
+                      while ($Row = mysqli_fetch_assoc($result)) {
+
+                        ?>
+         
+<td>
+<input class="no" id="studentname" name="studentname" value="<?= $Row['fullname']; ?>">
+</input>
+</td>
+
+           
+
+           
+<td >
+            <input class="no" id="subjectname" name="subjectname" value="<?= $Row['subjectname']; ?>">
+          </input></td>
           
-          </td>
+          
+          
+          
+          
+          
+         
+        
+
+        
+
+
+   
           <td><input id="grade" name="grade"></td>
-       
+          <td hidden><input value=" <?= $_SESSION['name'] ?> " id="teacher" name="teacher"></td>
           <td>
 
 <button type="submit" 
@@ -313,20 +345,7 @@ continue;
         name="submit">ADD</button>
 
      <td>
-                   <script type="text/javascript">  
 
-function openulr(newurl) {  
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
-  DISCARD
-</a>
-
-			      </td>
 			    </tr>
      
 
@@ -341,19 +360,14 @@ function openulr(newurl) {
 
        
             <?php }
- }
+                    }
 
 
+            }
 
-
-
-
-
-
-}
-
-}
- ?>
+      }
+      }
+      ?>
 
 
 
@@ -377,114 +391,9 @@ function openulr(newurl) {
 
 
 			</div>
-          
-      <form action="" method="GET">
-
-                    <div class="input-group ">
-                      <input
-                        type="text"
-                        name="search"
-                        required
-                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control"
-                        placeholder="Search by Subject Name/ Grade / Student Name"
-                      />
-                      
-                    </div>
-                    <br>
-                    <button href="#down" type="submit" class="btn btn-warning">
-                        Search
-                      </button>
-    
-<br> <br>
-<br>
 
 
-                   
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                  <th>Student Name</th>
-
-                    <th>Subject Name</th>
-                    <th>Grade</th>
-                    <th colspan="2">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-    <?php
-    $con = mysqli_connect("localhost", "root", "", "my_db");
-    if (isset($_GET['search'])) {
-        $teacher = ($_SESSION["id"]);
-        $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM grade WHERE teacher = '$teacher' AND CONCAT(subjectname,grade,studentid,teacher)LIKE '%$filtervalues%' ";
-        $query_run = mysqli_query($con, $query);
-
-        if (mysqli_num_rows($query_run) >
-                  0) { foreach ($query_run as $items) { ?>
-                  <tr>
-                  <td><?= $items['studentname']; ?></td>
-                   <td><?= $items['subjectname']; ?></td>
-                    <td><?= $items['grade']; ?></td>
-                 
-                 
-                    <td><a href="update.php? id=<?=$items['id']?>" 
-			      	     class="btn btn-success ">Update</a>
-
-
-                  </td>
-                  <td>
-
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  DISCARD
-</a></strong>
-			      </td>
-                  </tr>
-                  
-
-                  <?php
-            }
-        } else {
-                                                ?>
-                  <tr>
-                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
-                  <h5>
-                    
-                  </h5> </td>
-                  </tr>
-                  <?php
-        }
-    }
-       }
-       ?>
-                </tbody>
-                
-              </table>
-              </div>
-     </div>
-   </div>
-  </div>
-
-
-          
-            </div>
       
-      </div>
-    </div>
-      </div>
- 
-      </form>
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>

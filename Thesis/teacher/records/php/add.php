@@ -13,7 +13,7 @@ if (isset($_POST['create'])) {
 	$studentname = validate($_POST['studentname']);
 	$grade = validate($_POST['grade']);
 	$teacher = $_POST['teacher'];
-	$duplicate=mysqli_query($conn,"select * from grade where studentname='$studentname'");
+	$duplicate=mysqli_query($conn,"select * from grade where studentname='$studentname' ");
 	$user_data =
 
 	'subjectname='.$subjectname.
