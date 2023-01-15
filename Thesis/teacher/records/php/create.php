@@ -1,8 +1,8 @@
-
-<?php 
-
-if (isset($_POST['submit'])) {
-	include "db_conn.php";
+<?php
+session_start();
+include "db_conn.php";
+if(isset($_POST['submit']))
+{
 	function validate($data){
         $data = trim($data);
         $data = stripslashes($data);
@@ -10,45 +10,47 @@ if (isset($_POST['submit'])) {
         return $data;
 	}
 
-	$subjectname = validate($_POST['subjectname']);
-	$studentname = validate($_POST['studentname']);
-	$grade = validate($_POST['grade']);
+    $studentname = $_POST['studentname'];
+	$subjectname = $_POST['subjectname'];
+    $grade = $_POST['grade'];
 	$teacher = $_POST['teacher'];
-	$duplicate=mysqli_query($conn,"select * from grade where studentname='$studentname'");
-	$user_data =
+	$duplicate=mysqli_query($conn,
+		"select * from grade where studentname='$studentname' ");
+   
+  
+	 foreach($studentname as $index => $studentnames)
+    {
+        $s_studentname = $studentnames;
+		$s_subjectname = $subjectname[$index];
+        $s_grade = $grade[$index];
+		$s_teacher = $teacher[$index];
 
-	'subjectname='.$subjectname.
-	'studentname='.$studentname.
-	'grade='.$grade;
-	'teacher='.$teacher;
+        // $s_otherfiled = $empid[$index];
 
-
-	if (empty($grade))
-	 {
-		header ("Location:../rec.php?error=grade is required&$user_data");
+        $query = "INSERT INTO grade(studentname,subjectname,grade,teacher) 
+		VALUES ('$s_studentname','$s_subjectname','$s_grade','$s_teacher')";
+        $query_run = mysqli_query($conn, $query);
+		
 	}
 
 
-	
-	if (mysqli_num_rows($duplicate)>0)
+   
+
+   
+   if($query_run)
+   {
+	   header("Location: ../rec.php?success=Added Successfully");
+   }
+     
+	if (empty($s_grade))
 	{
-		header ("Location:../rec.php?error=Student Already Got a Grade&$user_data");
-	}
-	
-	else {
-
-       $sql = "INSERT INTO grade(subjectname,studentname,grade,teacher)
-               VALUES('$subjectname','$studentname','$grade','$teacher')";
-
-       $result = mysqli_query($conn, $sql);
-
-       if ($result) {
-		header("Location: ../rec.php?success=Added Successfully");
-		 
-       }
-	 
-	}
-
-
-
+	   header ("Location:../rec.php?error=All Grades for each Students is required&$user_data");
+   }
+  
+   if (mysqli_num_rows($duplicate)>0)
+   {
+	   header ("Location:../rec.php?error=All Students or Some of Them Already Got thier Grades <br> 
+	   Click The Update Button To Update Students Grades &$user_data");
+   }
 }
+?>

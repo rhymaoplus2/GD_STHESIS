@@ -24,6 +24,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+  margin-top: -10rem;
 }
 
 .container form {
@@ -31,6 +32,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
 }
 .box {
 	width: 750px;
@@ -187,18 +189,6 @@ function myFunction() {
 
 
 
-        <div class=" container ">
-       
-        <div class="box">
-        <div class="content">
-			<br>
-      
-
-
-
-      <div class="container" >
-		<div class="box">
-    <div class="content">
     <?php if (isset($_GET['error'])) { 
   include "./php/db_conn.php";
   ?>
@@ -218,11 +208,8 @@ function myFunction() {
 
 
 
-
            
-          
-    
-          
+ 
           
           
           
@@ -231,30 +218,14 @@ function myFunction() {
 
 
 
-			<h1 class="display-10 text-center">    
-               
-       Grades
-      </h1>
-   
-      Dear : <?= $_SESSION['name'] ?> 
-      
-      <br>Please Click the ADD Button to Add Grades!
-      <br>
-     Enter Correctly The Grades Of The Student!
-     
-     - Reyris (Developer)
-     
-     <div class="row justify-content-center my-5">
-                                          
-	   <div class="row justify-content-right  my-3">
-       </div>
+
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
-            <table class="table table-bordered ">
+           
 
             <?php
             $i = 0;
@@ -263,18 +234,53 @@ function myFunction() {
 
               ?> 
            
+<!--
+         
+           <?php
+                    require "php/db_conn.php";
+                    
+                    $id = $_SESSION["id"];
+                    $query =
+                      "SELECT * FROM users WHERE id='$id';
+                    ";
+                    // $query = "SELECT students.fullname,students.adviser_id,students.firstname
+                    //FROM students 
+                    //INNER JOIN subjects   ON subjects.subjectgrouphead = adviser_id";
+                    $result = mysqli_query($conn, $query);
+                    if (mysqli_num_rows($result) > 0) {
+
+      while ($Row = mysqli_fetch_assoc($result)) {
+
+        ?>
+   
+   <br>
+   <br>
+   <br>
+
+    <h1 class="text-center">       
+ 
+  <?= $Row['st1'] ?>   GRADES 
+   
+      </h1>
+ 		
+      -->
 
 
+     <div class="container" >
 
-
+   <div class="content">
+               
+  
+      <table class="table table-bordered ">
               <thead >
                   <tr>
+                  
+                  <th scope="col">Student ID</th>
+          
                   <th scope="col">Student Name</th>
                   <th  scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
-              
-                  
-                  <th scope="col">Actions </th>
+          
                 </tr>
               </thead>
         <tbody>    
@@ -295,11 +301,11 @@ function myFunction() {
                     $teacherid = $_SESSION["id"];
                     $subt1 = $_SESSION["id"];
                     $query =
-                      "SELECT a.adviser_id, a.fullname,a.section, a.subject1,b.st1,b.sub1,a.id,
+                      "SELECT a.firstname, a.middlename, a.lastname, a.adviser_id,a.lrnnumber, a.fullname,a.section, a.subject1,b.st1,b.sub1,a.id,
                       c.subjectgrouphead, c.subjectname,c.teacherid, c.section,c.teacherid
                      FROM students a, users b , subjects c where 
                       b.st1=c.subjectname    AND a.subt1=b.id AND a.subject1=b.st1 AND a.adviser_id=b.sgh1
-                      AND b.sgh1=c.subjectgrouphead
+                      AND b.sgh1=c.subjectgrouphead  ORDER BY lastname ASC
 
                     ";
                     // $query = "SELECT students.fullname,students.adviser_id,students.firstname
@@ -311,18 +317,36 @@ function myFunction() {
                       while ($Row = mysqli_fetch_assoc($result)) {
 
                         ?>
-         
+   
+
+ 
+            
 <td>
-<input class="no" id="studentname" name="studentname" value="<?= $Row['fullname']; ?>">
+<input disabled class="no" value="<?= $Row['id']; ?>">
+</input>
+</td>
+                     
+<td hidden colspan="">
+<input class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
 </input>
 </td>
 
+<td>
+
+<?= $Row['lastname'] ?> &nbsp
+<?= $Row['firstname'] ?> &nbsp
+<?= $Row['middlename'] ?>
+
+</td>
            
 
            
 <td >
-            <input class="no" id="subjectname" name="subjectname" value="<?= $Row['subjectname']; ?>">
-          </input></td>
+            <input hidden class="no" id="subjectname" name="subjectname[]" 
+            value="<?= $Row['subjectname'] ?>">
+          </input>
+          <b class="text-danger"><?= $Row['subjectname'] ?></b>
+        </td>
           
           
           
@@ -336,16 +360,21 @@ function myFunction() {
 
 
    
-          <td><input id="grade" name="grade"></td>
-          <td hidden><input value=" <?= $_SESSION['name'] ?> " id="teacher" name="teacher"></td>
-          <td>
+          <td><input id="grade" name="grade[]">
+         </td>
 
-<button type="submit" 
-        class="btn btn-primary"
-        name="submit">ADD</button>
+          <td hidden><input value=" <?= $_SESSION['name'] ?> " id="teacher" name="teacher[]">
+       
 
-     <td>
 
+
+
+          
+
+
+
+  
+        </td>
 			    </tr>
      
 
@@ -362,8 +391,10 @@ function myFunction() {
             <?php }
                     }
 
-
             }
+      }
+            }
+    
 
       }
       }
@@ -373,24 +404,13 @@ function myFunction() {
 
          </tbody>
       </table>
-      
+      <button type="submit" ]
+        class="btn btn-primary"
+        name="submit">ADD</button>
 </form>
 
       <br>
-      <div class=" mb-1">
-          <a class="link-primary" href="add.php" display-40>
-          <button type="button" class="btn btn-dark">
 
-     ADD
-
-          </button>
-          </a>
-<br>
-<br>
-
-
-
-			</div>
 
 
       
