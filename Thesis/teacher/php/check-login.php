@@ -31,7 +31,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         	// the user name must be unique
         	$row = mysqli_fetch_assoc($result);
         	if ($row['password'] === $password ) {
-        		$_SESSION['name'] = $row['name'];
         		$_SESSION['id'] = $row['id'];
         		$_SESSION['username'] = $row['username'];
 			

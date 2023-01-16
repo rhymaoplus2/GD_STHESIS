@@ -39,7 +39,7 @@ if(isset($_POST['submit']))
    
    if($query_run)
    {
-	   header("Location: ../rec.php?success=Added Successfully");
+	   header("Location: ../records.php?success=GRADES ADDED Successfully");
    }
      
 	if (empty($s_grade))

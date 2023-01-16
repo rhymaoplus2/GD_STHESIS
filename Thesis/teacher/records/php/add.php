@@ -26,6 +26,11 @@ if (isset($_POST['create'])) {
 	 {
 		header ("Location:../add.php?error=grade is required&$user_data");
 	}
+	if (empty($grade)==0)
+	 {
+		header ("Location:../add.php?error=grade is required&$user_data");
+	}
+
 
 
 	

@@ -3,7 +3,7 @@
    session_start();
    include "../php/db_conn.php";
    include "php/rec.php";
-   if (isset($_SESSION['username']) && isset($_SESSION['id'])&& isset($_SESSION['name'])) {   ?>
+   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,7 +185,7 @@ function myFunction() {
 
 
 <form action="./php/create.php"
-      method="post">
+      method="post" >
 
 
 
@@ -206,7 +206,7 @@ function myFunction() {
 
 
 
-
+<h1><?= $_SESSION['username'] ?> </h1>
 
            
  
@@ -275,7 +275,7 @@ function myFunction() {
               <thead >
                   <tr>
                   
-                  <th scope="col">Student ID</th>
+                  <th hidden scope="col">Student ID</th>
           
                   <th scope="col">Student Name</th>
                   <th  scope="col">Subject Name </th>
@@ -298,16 +298,14 @@ function myFunction() {
          
 <?php
                     require "php/db_conn.php";
-                    $teacherid = $_SESSION["id"];
-                    $subt1 = $_SESSION["id"];
+                 
                     $query =
-                      "SELECT a.firstname, a.middlename, a.lastname, a.adviser_id,a.lrnnumber, a.fullname,a.section, a.subject1,b.st1,b.sub1,a.id,
-                      c.subjectgrouphead, c.subjectname,c.teacherid, c.section,c.teacherid
-                     FROM students a, users b , subjects c where 
-                      b.st1=c.subjectname    AND a.subt1=b.id AND a.subject1=b.st1 AND a.adviser_id=b.sgh1
-                      AND b.sgh1=c.subjectgrouphead  ORDER BY lastname ASC
-
-                    ";
+                    "SELECT a.adviser_id, a.fullname,a.section, a.subject1,b.st1,b.sec1,b.sub1,a.id,
+                    c.subjectgrouphead, c.subjectname,c.teacherid, c.section,c.teacherid
+                   FROM students a, users b , subjects c where 
+                    b.st1=c.subjectname    AND a.subt1=b.id AND a.subject1=b.st1 AND a.adviser_id=b.sgh1
+                    AND b.sgh1=c.subjectgrouphead AND b.sec1=c.section
+                  ";
                     // $query = "SELECT students.fullname,students.adviser_id,students.firstname
                     //FROM students 
                     //INNER JOIN subjects   ON subjects.subjectgrouphead = adviser_id";
@@ -318,19 +316,17 @@ function myFunction() {
 
                         ?>
    
-
- 
-            
+<!--
 <td>
-<input disabled class="no" value="<?= $Row['id']; ?>">
+<input disabled class="no"name="id[]" value="<?= $Row['lrnnumber']; ?>">
 </input>
 </td>
-                     
-<td hidden colspan="">
+                      -->                 
+<td  colspan="">
 <input class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
 </input>
 </td>
-
+<!--
 <td>
 
 <?= $Row['lastname'] ?> &nbsp
@@ -339,7 +335,7 @@ function myFunction() {
 
 </td>
            
-
+                      -->
            
 <td >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
@@ -363,7 +359,7 @@ function myFunction() {
           <td><input id="grade" name="grade[]">
          </td>
 
-          <td hidden><input value=" <?= $_SESSION['name'] ?> " id="teacher" name="teacher[]">
+          <td hidden><input value=" <?= $_SESSION['id'] ?> " id="teacher" name="teacher[]">
        
 
 
@@ -407,6 +403,9 @@ function myFunction() {
       <button type="submit" ]
         class="btn btn-primary"
         name="submit">ADD</button>
+
+
+    
 </form>
 
       <br>
