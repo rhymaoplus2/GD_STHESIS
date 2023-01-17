@@ -5,7 +5,7 @@
       
    session_start();
    include "../php/db_conn.php";
-   include "php/rec.php";
+   include "php/subject1.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
@@ -273,7 +273,7 @@ function myFunction() {
                   <th hidden scope="col">Student Name</th>
                   <th  scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
-          <th></th>
+      
                 </tr>
               </thead>
         <tbody>    
@@ -297,26 +297,27 @@ function myFunction() {
                  
                     $query =
                     "SELECT 
-                    a.fullname,a.subjectteacher1,
+                    a.fullname,a.subjectteacher1,a.subject2,
                     b.username,b.sub1,b.sub2,b.sec1,
                     c.teacherid,c.subjectname
-                    FROM students a, users b , subjects c 
-                   /* VERIFIED */
-                   Where 
+                    FROM 
+                    students a,
+                    users b,
+                    subjects c 
+            
+                
+                  Where 
                    c.teacherid=b.username
                   AND 
                   c.subjectname=b.sub1
                  
-                  AND  
-                  c.section=b.sec1
+               AND  c.section=b.sec1
                   AND
                   a.subjectteacher1=b.username
-                  AND
-                  a.subject1=b.sub1
-                  xor
-                  c.subjectname=b.sub2
-                  xor
-                  a.subject1=b.sub1
+                 AND
+                  (b.sub1 = a.subject1 OR b.sub1 = a.subject2)
+                 
+              
                   /*          */
                 
               
