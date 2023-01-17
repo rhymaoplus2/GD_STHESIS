@@ -14,6 +14,8 @@ if(isset($_POST['submit']))
 	$subjectname = $_POST['subjectname'];
     $grade = $_POST['grade'];
 	$teacher = $_POST['teacher'];
+    $section = $_POST['section'];
+    $adviser = $_POST['adviser'];
 	$duplicate=mysqli_query($conn,
 		"select * from grade where studentname='$studentname' ");
    
@@ -24,11 +26,13 @@ if(isset($_POST['submit']))
 		$s_subjectname = $subjectname[$index];
         $s_grade = $grade[$index];
 		$s_teacher = $teacher[$index];
+        $s_section = $section[$index];
+        $s_adviser = $adviser[$index];
 
         // $s_otherfiled = $empid[$index];
 
-        $query = "INSERT INTO grade(studentname,subjectname,grade,teacher) 
-		VALUES ('$s_studentname','$s_subjectname','$s_grade','$s_teacher')";
+        $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser) 
+		VALUES ('$s_studentname','$s_subjectname','$s_grade','$s_teacher','$s_section','$s_adviser')";
         $query_run = mysqli_query($conn, $query);
 		
 	}
@@ -39,7 +43,7 @@ if(isset($_POST['submit']))
    
    if($query_run)
    {
-	   header("Location: ../records.php?success=GRADES ADDED Successfully");
+	   header("Location: ../subject1view.php?success=GRADES ADDED Successfully");
    }
      
 	if (empty($s_grade))

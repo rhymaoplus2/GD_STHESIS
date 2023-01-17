@@ -187,7 +187,7 @@ function myFunction() {
 <!-- TITLE HERE -->
 
 
-<form action="./php/create.php"
+<form action="./php/subject1create.php"
       method="post" >
 
 
@@ -209,7 +209,6 @@ function myFunction() {
 
 
 
-<h1><?= $_SESSION['username'] ?> </h1>
 
 
        <?php if (isset($_GET['success'])) { ?>
@@ -297,7 +296,7 @@ function myFunction() {
                  
                     $query =
                     "SELECT 
-                    a.fullname,a.subjectteacher1,a.subject2,
+                    a.fullname,a.subjectteacher1,a.subject2,a.section,a.adviser_id,
                     b.username,b.sub1,b.sub2,b.sec1,
                     c.teacherid,c.subjectname
                     FROM 
@@ -360,10 +359,10 @@ function myFunction() {
            
                       -->
            
-<td >
+            <td >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
             value="<?= $Row['subjectname'] ?>">
-          </input>
+             </input>
           <b class="text-danger"><?= $Row['subjectname'] ?></b>
         </td>
           
@@ -382,7 +381,7 @@ function myFunction() {
           <td><input id="grade" name="grade[]">
          </td>
 
-          <td hidden><input value=" <?= $_SESSION['username'] ?> " id="teacher" name="teacher[]">
+          <td hidden><input value="<?= $_SESSION['username']?>" id="teacher"name="teacher[]">
        
 
 
@@ -394,7 +393,17 @@ function myFunction() {
 
   
         </td>
-   
+        <td hidden>
+        <input hidden class="no" id="section" name="section[]" 
+            value="<?= $Row['section'] ?>">
+        </td>
+        <td hidden>          
+
+        </input> 
+          <input hidden class="no" id="adviser" name="adviser[]" 
+            value="<?= $Row['adviser_id'] ?>">
+          </input> 
+                      </td> 
 			    </tr>
      
 
