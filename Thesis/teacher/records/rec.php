@@ -1,5 +1,9 @@
 <?php 
 
+
+echo md5("user3");
+
+      
    session_start();
    include "../php/db_conn.php";
    include "php/rec.php";
@@ -209,11 +213,6 @@ function myFunction() {
 <h1><?= $_SESSION['username'] ?> </h1>
 
            
- 
-          
-          
-          
-
 
 
 
@@ -275,9 +274,9 @@ function myFunction() {
               <thead >
                   <tr>
                   
-                  <th hidden scope="col">Student ID</th>
+                  <th scope="col">Student ID</th>
           
-                  <th scope="col">Student Name</th>
+                  <th hidden scope="col">Student Name</th>
                   <th  scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
           
@@ -293,6 +292,9 @@ function myFunction() {
         
 
 
+          
+       
+
 
 
          
@@ -300,11 +302,32 @@ function myFunction() {
                     require "php/db_conn.php";
                  
                     $query =
-                    "SELECT a.adviser_id, a.fullname,a.section, a.subject1,b.st1,b.sec1,b.sub1,a.id,
-                    c.subjectgrouphead, c.subjectname,c.teacherid, c.section,c.teacherid
-                   FROM students a, users b , subjects c where 
-                    b.st1=c.subjectname    AND a.subt1=b.id AND a.subject1=b.st1 AND a.adviser_id=b.sgh1
-                    AND b.sgh1=c.subjectgrouphead AND b.sec1=c.section
+                    "SELECT 
+                    a.fullname,a.subjectteacher1,
+                    b.username,b.sub1,b.sec1,
+                    c.teacherid,c.subjectname
+                    FROM students a, users b , subjects c 
+                   /* VERIFIED */
+                   Where 
+                   c.teacherid=b.username
+                  AND 
+                  c.subjectname=b.sub1
+                  AND  
+                  c.section=b.sec1
+                  AND
+                  a.subjectteacher1=b.username
+                  AND
+                  a.subject1=b.sub1
+                  /*          */
+                
+              
+                    /*
+                    AND b.sgh1=c.subjectgrouphead
+                        AND a.subject1=b.sub1 
+                              AND c.teacherid=b.name
+                               AND a.subjectteacher1=b.name 
+                    */
+                  
                   ";
                     // $query = "SELECT students.fullname,students.adviser_id,students.firstname
                     //FROM students 
@@ -322,7 +345,7 @@ function myFunction() {
 </input>
 </td>
                       -->                 
-<td  colspan="">
+<td   colspan="">
 <input class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
 </input>
 </td>
@@ -359,7 +382,7 @@ function myFunction() {
           <td><input id="grade" name="grade[]">
          </td>
 
-          <td hidden><input value=" <?= $_SESSION['id'] ?> " id="teacher" name="teacher[]">
+          <td hidden><input value=" <?= $_SESSION['username'] ?> " id="teacher" name="teacher[]">
        
 
 
