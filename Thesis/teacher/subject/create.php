@@ -220,7 +220,7 @@ font-size: 10px;;
  <select name="teacherid" id="teacherid" class="form-control">
   
     <?php 
-    $query ="SELECT username FROM teacher";
+    $query ="SELECT username FROM users";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){

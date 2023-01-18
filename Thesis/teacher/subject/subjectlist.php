@@ -199,7 +199,7 @@ function myFunction() {
 
 			<h1 class="display-10 text-center"> These are your Subject List
       </h1>
-      Dear : <?=$_SESSION['name']?> 
+      Dear : <?=$_SESSION['username']?> 
       <br>Please Click the create Button to add Subjects!
      <div class="row justify-content-center my-5">
                                                       

@@ -378,7 +378,23 @@ function myFunction() {
 
 
    
-          <td><input id="grade" name="grade[]">
+          <td>
+            
+          
+          
+       <select name="suffix" id="grade" name="grade[]" class="form-control">
+                                <?php
+    for ($i=50; $i<=100; $i++)
+    {
+        ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+        <?php
+    }
+?>
+                                </select>
+
+
+
          </td>
 
           <td hidden><input value="<?= $_SESSION['username']?>" id="teacher"name="teacher[]">
