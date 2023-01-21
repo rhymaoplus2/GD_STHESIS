@@ -267,9 +267,9 @@ function myFunction() {
               <thead >
                   <tr>
                   
-                  <th scope="col">Student ID</th>
+              
           
-                  <th hidden scope="col">Student Name</th>
+                  <th scope="col">Student Name</th>
                   <th  scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
       

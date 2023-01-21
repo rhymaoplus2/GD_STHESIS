@@ -272,7 +272,7 @@ function myFunction() {
                     $id = $_SESSION['username'];
 
                     $query = "SELECT a.subjectname ,a.teacherid,a.section,a.subjectgrouphead, b.sub2,b.id,b.sgh2,b.sec2 FROM subjects a, users b
-                        WHERE a.teacherid=b.id AND a.subjectname=b.sub2 AND a.subjectgrouphead=b.sgh2 
+                        WHERE a.teacherid=b.id  AND a.subjectgrouphead=b.sgh2 
                         AND a.section = b.sec2
  ";
                     $result = mysqli_query($conn, $query);

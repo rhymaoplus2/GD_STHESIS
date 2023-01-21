@@ -14,20 +14,16 @@ if (isset($_POST['create'])) {
 	$subjectgrouphead = validate($_POST['subjectgrouphead']);
 
 	$user_data =
-	'subjectid='.$subjectid.
+	
 	'subjectname='.$subjectname.
 	'teacherid='.$teacherid.
 	'subjectgrouphead='.$subjectgrouphead;
 
-	if (empty($subjectid))
-	 {
-		header ("Location:../create.php?error=Subject ID is required&$user_data");
-	}
 
 
 
 	
-	else if (empty($subjectname)) {
+	 if (empty($subjectname)) {
 		header ("Location:../create.php?error=Subject Name is required&$user_data");
 	}
 
@@ -37,8 +33,8 @@ if (isset($_POST['create'])) {
 	
 	else {
 
-       $sql = "INSERT INTO subjects(subjectid,subjectname,teacherid,subjectgrouphead)
-               VALUES('$subjectid','$subjectname','$teacherid','$subjectgrouphead')";
+       $sql = "INSERT INTO subjects(subjectname,teacherid,subjectgrouphead)
+               VALUES('$subjectname','$teacherid','$subjectgrouphead')";
        $result = mysqli_query($conn, $sql);
        if ($result) {
 		header("Location: ../subjectlist.php?success=Added Successfully");
