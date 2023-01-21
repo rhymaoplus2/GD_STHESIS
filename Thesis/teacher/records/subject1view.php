@@ -152,6 +152,10 @@ font-size: 10px;;
     padding-top: 102px;
   }
 
+  .addbutton
+  {
+    margin-left:80%;
+  }
 
     </style>
 </head>
@@ -197,10 +201,33 @@ function myFunction() {
     <div class="content">
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
 			<h1 class="display-10 text-center"> These are your Students Grades
       </h1>
+      -->
       Dear : <?=$_SESSION['username']?> 
       <br>Please Click the create Button to add Subjects!
+
      <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
@@ -211,6 +238,23 @@ function myFunction() {
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
+
+<!--
+
+        <div class="link-center">
+          <a class="link-primary" href="subject1.php" display-40>
+          <button type="button" class="btn btn-dark">
+
+      ADD GRADES
+
+          </button>
+          </a>
+
+
+			</div>
+      <br>
+      <br>
+      -->
             <table class="table table-bordered ">
 
             <?php 
@@ -266,7 +310,7 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["grade"]; ?></td>
           <td><a href="update.php? id=<?=$Row['id']?>" 
 			      	     class="btn btn-success ">Update</a>
-
+ 
      <td>
                    <script type="text/javascript">  
 
@@ -282,6 +326,7 @@ function openulr(newurl) {
 </a>
 
 			      </td>
+
 			    </tr>
      
 
@@ -316,7 +361,7 @@ function openulr(newurl) {
 
          </tbody>
       </table>
-      <div class="link-center">
+      <div class="addbutton mb-3">
           <a class="link-primary" href="subject1.php" display-40>
           <button type="button" class="btn btn-dark">
 
@@ -330,6 +375,7 @@ function openulr(newurl) {
 <BR>
 <BR>
 <BR>
+
       <form action="" method="GET">
 
                     <div class="input-group ">
@@ -368,7 +414,7 @@ function openulr(newurl) {
     if (isset($_GET['search'])) {
         $subjectgrouphead = ($_SESSION["id"]);
         $filtervalues = $_GET['search'];
-
+        $teacher=($_SESSION["id"]);
         $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
  a.username,a.sub1 ,a.username,a.sec1, a.sgh1
  FROM grade b, users a WHERE  b.subjectname = a.sub1  

@@ -382,7 +382,7 @@ function myFunction() {
             
           
           
-       <select name="suffix" id="grade" name="grade[]" class="form-control">
+       <select id="grade" name="grade[]" class="form-control">
                                 <?php
     for ($i=50; $i<=100; $i++)
     {
@@ -449,9 +449,20 @@ function myFunction() {
 
          </tbody>
       </table>
-      <button type="submit" ]
+      <button type="submit"
         class="btn btn-primary"
         name="submit">ADD</button>
+      
+          <a class="link-primary" href="subject1view.php" display-40>
+          <button type="button" class="btn btn-dark">
+
+      BACK
+
+          </button>
+          </a>
+
+
+
 
 
     

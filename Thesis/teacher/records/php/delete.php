@@ -16,11 +16,11 @@ if(isset($_GET['id'])){
            
    $result = mysqli_query($conn, $sql);
    if ($result) {
-   	  header("Location: ../records.php?success=successfully deleted");
+   	  header("Location:../subject1view.php?success=successfully deleted");
    }else {
-      header("Location: ../records.php?error=unknown error occurred&$user_data");
+      header("Location:../subject1view.php?error=unknown error occurred&$user_data");
    }
 
 }else {
-	header("Location: ../records.php");
+	header("Location:../subject1view.php");
 }

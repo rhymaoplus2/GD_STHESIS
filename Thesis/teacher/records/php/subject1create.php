@@ -19,7 +19,13 @@ if(isset($_POST['submit']))
 	$duplicate=mysqli_query($conn,
 		"select * from grade where studentname='$studentname' ");
    
-  
+          $user_data =
+    
+        'subjectname='.$subjectname.
+        'studentname='.$studentname.
+        'grade='.$grade;
+        'teacher='.$teacher;
+    
 	 foreach($studentname as $index => $studentnames)
     {
         $s_studentname = $studentnames;
@@ -48,12 +54,12 @@ if(isset($_POST['submit']))
      
 	if (empty($s_grade))
 	{
-	   header ("Location:../rec.php?error=All Grades for each Students is required&$user_data");
+	   header ("Location:../subject1.php?error=All Grades for each Students is required&$user_data");
    }
   
    if (mysqli_num_rows($duplicate)>0)
    {
-	   header ("Location:../rec.php?error=All Students or Some of Them Already Got thier Grades <br> 
+	   header ("Location:../subject1.php?error=All Students or Some of Them Already Got thier Grades <br> 
 	   Click The Update Button To Update Students Grades &$user_data");
    }
 }

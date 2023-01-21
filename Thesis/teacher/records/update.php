@@ -188,7 +188,7 @@ font-size: 10px;;
            <div class="mb-3">
  <label for="exampleInputEmail1" class="form-label">Grade</label>
                     
-                                <select name="suffix" id="suffix" class="form-control">
+                                <select name="grade" id="grade" class="form-control">
                                 <?php
     for ($i=50; $i<=100; $i++)
     {
