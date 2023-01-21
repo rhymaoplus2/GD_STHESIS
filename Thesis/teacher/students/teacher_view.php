@@ -195,6 +195,7 @@ function myFunction() {
 
 
 			</div>
+      
 <form action="" method="GET">
                     <div class="input-group ">
                       <input

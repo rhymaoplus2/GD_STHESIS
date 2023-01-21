@@ -193,13 +193,22 @@ font-size: 10px;;
 
 
 
+
+
+
+
+
+
+
+
+
 <div class="mb-3">
  <label for="exampleInputEmail1" class="form-label">Your Subject Name</label>
  <select name="subjectname" id="subjectname" class="form-control">
  <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
     <?php 
  $teacherid = $_SESSION["id"] ;
- $query = "SELECT * FROM subjects  WHERE  teacherid = '$teacherid'";
+ $query = "SELECT * FROM user  WHERE  teacherid = '$teacherid'";
   
     $result = $conn->query($query);
  
@@ -226,6 +235,64 @@ continue;
     ?>
 </select>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Your Subject Name</label>
+ <select name="subjectname" id="subjectname" class="form-control">
+ <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
+    <?php 
+ $teacherid = $_SESSION["id"] ;
+ $query = "SELECT * FROM user  WHERE  teacherid = '$teacherid'";
+  
+    $result = $conn->query($query);
+ 
+   
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        
+           
+          $option = $optionData['subjectname'];
+        
+    ?>
+    <?php
+    //selected option
+    if(!empty($id) && $id== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+  -->
 
 
 <br>

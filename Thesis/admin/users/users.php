@@ -2,12 +2,12 @@
 
    session_start();
    include "../php/db_conn.php";
-   include "php/test.php";
+   include "../php/read.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>RECORDS</title>
+	<title>Users</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -196,11 +196,13 @@ function myFunction() {
 		<div class="box">
     <div class="content">
 
-
-			<h1 class="display-10 text-center"> Student Grades
+<!--
+			<h1 class="display-10 text-center"> These are your Subject List
       </h1>
-      Dear : <?=$_SESSION['name']?> 
-      <br>Please Click the ADD Button to Add Grades!
+      Dear : <?=$_SESSION['username']?> 
+      <br>Please Click the create Button to add Subjects!
+
+-->
      <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
@@ -211,7 +213,7 @@ function myFunction() {
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
-            <table class="table table-bordered ">
+            <table class="table table-bordered mb-3">
 
             <?php 
 			  	   $i = 0;
@@ -226,9 +228,9 @@ function myFunction() {
 
               <thead >
                   <tr>
-                  <th scope="col">Last Name </th>
-                  <th scope="col">Middle Name </th>
-                  <th scope="col">First Name</th>
+                  <th scope="col">Role </th>
+              
+                  <th scope="col">Name</th>
                   
                   <th scope="col" colspan="2">Actions </th>
                 </tr>
@@ -240,9 +242,9 @@ function myFunction() {
 
 
 <?php
- require "php/db_conn.php";
- $seection = $_SESSION["section"] ;
- $query = "SELECT * FROM students  WHERE  section = '$section'";
+ require "./php/db_conn.php";
+ $subjectgrouphead = $_SESSION["id"] ;
+ $query = "SELECT * FROM users";
 $result = mysqli_query($conn, $query);
  if (mysqli_num_rows($result) > 0) 
 
@@ -254,14 +256,20 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-          <td><?php echo $Row["lastname"]; ?></td>
-          <td><?php echo $Row["middlename"]; ?></td>
-          <td><?php echo $Row["lastname"]; ?></td>
-          <td><a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-success ">Update</a>
+          <td class="text-warning"><?php echo $Row["role"]; ?></td>
+    
+          <td><?php echo $Row["name"]; ?></td>
+		  <td><?php echo $Row["id"]; ?></td>
+          <td>
+		  <a href="view.php?id=<?=$Row['id']?>" 
+			      	     class="btn btn-dark ">View Information</a>
 
-     <td>
-                   <script type="text/javascript">  
+   
+		  <a href="update.php? id=<?=$Row['id']?>" 
+			      	     class="btn btn-primary ">Update Data</a>
+
+   
+        <script type="text/javascript">  
 
 function openulr(newurl) {  
 
@@ -271,7 +279,7 @@ function openulr(newurl) {
   }}
     </script>
 <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
-  DISCARD
+  Delete User
 </a>
 
 			      </td>
@@ -309,22 +317,24 @@ function openulr(newurl) {
 
          </tbody>
       </table>
-      <br>
-      <div class=" mb-1">
-          <a class="link-primary" href="add.php" display-40>
+	  
+      <div class="link-center">
+		
+          <a class="link-primary" href="create.php" display-40>
           <button type="button" class="btn btn-dark">
 
-     ADD
+      Add Users
 
           </button>
           </a>
-<br>
-<br>
-
+		  <br>
+		  <br>
+		  <br>
+		  <br>
+		  <br>
 
 
 			</div>
-          
       <form action="" method="GET">
 
                     <div class="input-group ">
@@ -351,9 +361,9 @@ function openulr(newurl) {
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Subject Name</th>
-                    <th>Grade</th>
-                    <th>Student ID</th>
+                    <th>Role</th>
+                    <th>User Name</th>
+                    <th>Name</th>
                     <th colspan="2">Actions</th>
                   </tr>
                 </thead>
@@ -361,18 +371,17 @@ function openulr(newurl) {
     <?php
     $con = mysqli_connect("localhost", "root", "", "my_db");
     if (isset($_GET['search'])) {
-        $teacher = ($_SESSION["id"]);
+
         $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM grade WHERE teacher = '$teacher' AND CONCAT(subjectname,grade,studentid,teacher)LIKE '%$filtervalues%' ";
+        $query = "SELECT * FROM users Where  CONCAT(username,name)LIKE'%$filtervalues%' ";
         $query_run = mysqli_query($con, $query);
 
         if (mysqli_num_rows($query_run) >
                   0) { foreach ($query_run as $items) { ?>
                   <tr>
-                   <td><?= $items['subjectname']; ?></td>
-                    <td><?= $items['grade']; ?></td>
-                    <td><?= $items['studentid']; ?></td>
-                    <td type="hidden"><?= $items['id']; ?></td>
+                   <td><?= $items['role']; ?></td>
+                    <td><?= $items['username']; ?></td>
+                    <td><?= $items['name']; ?></td>
                     <td><a href="update.php? id=<?=$items['id']?>" 
 			      	     class="btn btn-success ">Update</a>
 

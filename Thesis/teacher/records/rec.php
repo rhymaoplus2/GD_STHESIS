@@ -273,7 +273,7 @@ function myFunction() {
                   <th hidden scope="col">Student Name</th>
                   <th  scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
-          <th></th>
+          
                 </tr>
               </thead>
         <tbody>    
@@ -313,10 +313,7 @@ function myFunction() {
                   a.subjectteacher1=b.username
                   AND
                   a.subject1=b.sub1
-                  xor
-                  c.subjectname=b.sub2
-                  xor
-                  a.subject1=b.sub1
+                
                   /*          */
                 
               
@@ -393,7 +390,6 @@ function myFunction() {
 
   
         </td>
-   
 			    </tr>
      
 

@@ -1,5 +1,5 @@
 <?php
 include "db_conn.php";
 
-$sql = "SELECT * FROM grade ORDER BY studentname ASC  ";    
+$sql = "SELECT * FROM users ORDER BY username DESC";
 $result = mysqli_query($conn,$sql);
