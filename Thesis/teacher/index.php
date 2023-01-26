@@ -134,6 +134,9 @@ function myFunction() {
 }
 </script>
 
+<audio controls autoplay  hidden>
+<source src="index.mp3" type="audio/mpeg">
+</audio>
 
 </body> 
 </html>
