@@ -13,11 +13,15 @@
 
 
 #myVideo {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
   position: fixed;
+  left: 0;
   right: 0;
+  top: 0;
   bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
+  z-index: -1;
 }
 
 .content {
@@ -104,7 +108,7 @@ font-size: 1.5rem;
 
 
 <video autoplay muted loop id="myVideo">
-  <source src="video2.mp4" type="video/mp4">
+  <source src="bgv.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 

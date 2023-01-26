@@ -29,10 +29,49 @@ margin-top: -5rem;
 margin-left: 34rem;
 margin-top: -5rem;
 }
+
+#myVideo {
+
+width: 100vw;
+height: 100vh;
+object-fit: cover;
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+z-index: -1;
+
+}
+
 </style>
 </head>
 
 <body>
+
+
+<video autoplay muted loop id="myVideo">
+  <source src="../bgv.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<script>
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
+
+
+<div class="content">
 
     <div class ="container d-flex justify-content-center
     align-items-center "
@@ -83,7 +122,7 @@ margin-top: -5rem;
 
 
   <button type="submit" class="btn btn-primary">Submit</button>
-  <a class="link-primary" href="../.php" display-40>
+  <a class="link-primary" href="../admin.php" display-40>
           <button type="button" class="btn btn-dark">
 
       Cancel
@@ -92,9 +131,7 @@ margin-top: -5rem;
 
           
 </form>
-
-
-
+              </div>
 
 
 

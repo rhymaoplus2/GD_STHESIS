@@ -13,18 +13,22 @@
 
 
 #myVideo {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
   position: fixed;
+  left: 0;
   right: 0;
+  top: 0;
   bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
+  z-index: -1;
 }
 
 .content {
   position: fixed;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  color: #f1f1f1;
+  color: #99b3ff;
   width: 100%;
   padding: 20px;
 }
@@ -100,7 +104,7 @@ font-size: 1.5rem;
 
 
 <video autoplay muted loop id="myVideo">
-  <source src="video.mp4" type="video/mp4">
+  <source src="bgv.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
@@ -109,17 +113,23 @@ font-size: 1.5rem;
   <div class="text"><p><h3>SELECT USER TYPE</h3></p></div>
   <div class="bb1">
 <a class="link" href="teacher/index.php">
-<button type="button" class="btn btn-primary" justify-content-center>Adviser</button>
+<button type="button" class="btn btn-warning" justify-content-center>Adviser</button>
 </a>
   </div>
   <div class="bb2">
 <a class="link" href="teacher/index.php">
-<button type="button" class="btn btn-primary" justify-content-center>Subject Teacher</button>
+<button type="button" class="btn btn-warning" justify-content-center>Subject Teacher</button>
 
 </a>
 </div>
 
 <a class="link" href="admin.php"> Login as Administrator</a>
+
+
+<audio controls autoplay  hidden>
+<source src="welcome.mp3" type="audio/mpeg">
+</audio>
+
 
 <script>
 var video = document.getElementById("myVideo");
