@@ -244,69 +244,67 @@ continue;
 
 
  </div>
+
  <div class="mb-3">
-    <input
-    type="hidden"
-    class="form-control" 
-    id="subjectgrouphead" 
-    placeholder="ex: Science"
-    name="subjectgrouphead"
-    value="<?php echo $_SESSION['username']?>"
-    >
-  </div>
+ <label for="exampleInputEmail1" class="form-label">Subject Group Head Username</label>
+ <select name="subjectgrouphead" id="subjectgrouphead" class="form-control">
+  
+    <?php 
+    $query ="SELECT username FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['username'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($username) && $username== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
 
 
 
+ </div>
 
 
-  <div class="mb-3">   
-          
-       
-        
-
-
-<?php
- require "./php/db_conn.php";
- $id= $_SESSION["id"] ;
- $query = "SELECT * FROM users  WHERE  id = '$id'";
-$result = mysqli_query($conn, $query);
- if (mysqli_num_rows($result) > 0) 
-
- {
-
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
-
-
-    <input
-    type="hidden"
-    class="form-control" 
-    id="section" 
-    placeholder="ex: Science"
-    name="section"
-    value="<?php echo $Row["advisory"];?>"
-    >
-
-    <?php }
- }
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Section</label>
+ <select name="section" id="section" class="form-control">
+  
+    <?php 
+    $query ="SELECT section FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['section'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
 
 
 
-
-
-
-
-
-
-
- ?>
-
-
-
-  </div>
+ </div>
 
 
 

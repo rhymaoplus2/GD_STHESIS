@@ -243,7 +243,7 @@ function myFunction() {
  require "./php/db_conn.php";
             $teacherid = $_SESSION['username'];
  $subjectgrouphead = $_SESSION["id"] ;
- $query = "SELECT * FROM subjects WHERE  subjectgrouphead= '$subjectgrouphead' AND teacherid='$teacherid'";
+ $query = "SELECT * FROM subjects";
 $result = mysqli_query($conn, $query);
  if (mysqli_num_rows($result) > 0) 
 
@@ -359,7 +359,7 @@ function openulr(newurl) {
     if (isset($_GET['search'])) {
         $subjectgrouphead = ($_SESSION["id"]);
         $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM subjects WHERE subjectgrouphead = '$subjectgrouphead' AND CONCAT(subjectid,subjectname,teacherid)LIKE '%$filtervalues%' ";
+        $query = "SELECT * FROM subjects WHERE  CONCAT(subjectid,subjectname,teacherid)LIKE '%$filtervalues%' ";
         $query_run = mysqli_query($con, $query);
 
         if (mysqli_num_rows($query_run) >
