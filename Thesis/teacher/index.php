@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thesis</title>
+    <title>Adviser</title>
     <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -45,24 +45,25 @@ margin-top: -5rem;
         <br>
         <br>
         <br>
+        
       
               <div class="logintext"><h1 class="text-center p-3">LOGIN</h1>
 
       
               </div>
+       
+
               
               <div class = "logo"><img src="./img/msu.png" class="rounded mx-auto d-block" alt="..." style="width: 5rem;">
   
               </div>
               <br>
              
-              <?php if (isset($_GET['error'])) {?>
-         
-
-            
-              <?php }
-             
-               ?>
+              <?php if (isset($_GET['error'])) { ?>
+		   <div class="alert alert-danger" role="alert">
+			  <?php echo $_GET['error']; ?>
+		    </div>
+		   <?php } ?>
                
   <div class="mb-3">
     <label for="username" class="form-label">username</label>

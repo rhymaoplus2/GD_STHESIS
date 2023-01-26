@@ -53,6 +53,10 @@
   background: #ddd;
   color: black;
 }
+#link:hover {
+  background: #ddd;
+  color: black;
+}
 
 .logo
 {
@@ -100,7 +104,7 @@ font-size: 1.5rem;
 
 
 <video autoplay muted loop id="myVideo">
-  <source src="video.mp4" type="video/mp4">
+  <source src="video2.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
@@ -109,17 +113,17 @@ font-size: 1.5rem;
   <div class="text"><p><h3>SELECT USER TYPE</h3></p></div>
   <div class="bb1">
 <a class="link" href="teacher/index.php">
-<button type="button" class="btn btn-primary" justify-content-center>Adviser</button>
+<button type="button" class="btn btn-warning" justify-content-center>Admin</button>
 </a>
   </div>
   <div class="bb2">
 <a class="link" href="admin/index.php">
-<button type="button" class="btn btn-primary" justify-content-center>Subject Teacher</button>
+<button type="button" class="btn btn-warning" justify-content-center>Registrar</button>
 
 </a>
 </div>
+<a class="link" href="index.php"> Login as a Teacher</a>
 
-<a class="link" href="admin.php"> Login as Administrator</a>
 
 <script>
 var video = document.getElementById("myVideo");

@@ -256,7 +256,7 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-          <td class="text-warning"><?php echo $Row["role"]; ?></td>
+          <td class="text-danger"><?php echo $Row["role"]; ?></td>
     
           <td><?php echo $Row["name"]; ?></td>
 		  <td><?php echo $Row["id"]; ?></td>

@@ -16,9 +16,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$name = test_input($_POST['name']);
 
 	if (empty($username)) {
-		header("Location:../index.php?error=User Name is Required");
+		header("Location: ../index.php?error=User Name is Required");
 	}else if (empty($password)) {
-		header("Location:../index.php?error=Password is Required");
+		header("Location: ../index.php?error=Password is Required");
 	}else {
 
 		// Hashing the password
@@ -38,17 +38,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 			
         
 
-        		header("Location:home.php");
+        		header("Location: ../home.php");
 
         	}else {
-        		header("Location:../index.php?error=Incorect Username or password");
+        		header("Location: ../index.php?error=Incorect Username or password");
         	}
         }else {
-        	header("Location:../index.php?error=Incorect User name or password");
+        	header("Location: ../index.php?error=Incorect User name or password");
         }
 
 	}
 	
 }else {
-	header("Location: ./index.php");
+	header("Location: ../index.php");
 }
