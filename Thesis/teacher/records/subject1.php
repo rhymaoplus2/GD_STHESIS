@@ -226,36 +226,7 @@ function myFunction() {
 
               ?> 
            
-<!--
-         
-           <?php
-                    require "php/db_conn.php";
-                    
-                    $id = $_SESSION["id"];
-                    $query =
-                      "SELECT * FROM users WHERE id='$id';
-                    ";
-                    // $query = "SELECT students.fullname,students.adviser_id,students.firstname
-                    //FROM students 
-                    //INNER JOIN subjects   ON subjects.subjectgrouphead = adviser_id";
-                    $result = mysqli_query($conn, $query);
-                    if (mysqli_num_rows($result) > 0) {
 
-      while ($Row = mysqli_fetch_assoc($result)) {
-
-        ?>
-   
-   <br>
-   <br>
-   <br>
-
-    <h1 class="text-center">       
- 
-  <?= $Row['st1'] ?>   GRADES 
-   
-      </h1>
- 		
-      -->
 
 
      <div class="container" >
@@ -293,12 +264,12 @@ function myFunction() {
          
 <?php
                     require "php/db_conn.php";
-                 
+            $username = $_SESSION["username"];
                     $query =
                     "SELECT 
                     a.fullname,a.subjectteacher1,a.subject2,a.section,a.adviser_id,
-                    b.username,b.sub1,b.sub2,b.sec1,
-                    c.teacherid,c.subjectname
+                    b.username,b.sub1,b.sub2,b.sec1,b.sgh1,b.sgh2,
+                    c.teacherid,c.subjectname,c.section
                     FROM 
                     students a,
                     users b,
@@ -307,16 +278,21 @@ function myFunction() {
                 
                   Where 
                    c.teacherid=b.username
+                   AND a.section = b.sec1
                   AND 
-                  c.subjectname=b.sub1
+                 b.sub1= c.subjectname
                  
-               AND  c.section=b.sec1
+                  AND  c.section=b.sec1
                   AND
                   a.subjectteacher1=b.username
                  AND
                   (b.sub1 = a.subject1 OR b.sub1 = a.subject2)
-                 
-              
+                  AND
+                  (b.sgh1 = a.adviser_id OR b.sgh2 = a.adviser_id)
+                  AND c.section = a.section
+                  AND c.subjectgrouphead = b.sgh1
+                 AND username='$username';
+
                   /*          */
                 
               
@@ -361,9 +337,9 @@ function myFunction() {
            
             <td >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
-            value="<?= $Row['subjectname'] ?>">
+            value="<?= $Row['sub1'] ?>">
              </input>
-          <b class="text-danger"><?= $Row['subjectname'] ?></b>
+          <b class="text-danger"><?= $Row['sub1'] ?></b>
         </td>
           
           
@@ -441,8 +417,7 @@ function myFunction() {
             }
     
 
-      }
-      }
+  
       ?>
 
 

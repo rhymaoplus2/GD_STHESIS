@@ -1,7 +1,11 @@
-<?php 
-   session_start();
-   include "../php/db_conn.php";
-   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+
+
+
+<?php include 'php/update.php'; ?>
+
+
+
+
 
 
 <!DOCTYPE html>
@@ -11,9 +15,7 @@
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-    <style>
-
-
+<style>
 
 
 .container {
@@ -151,8 +153,8 @@ font-size: 10px;;
     padding-top: 102px;
   }
 
-      
-      </style>
+  </style>
+
 </head>
 <body>
 
@@ -164,31 +166,28 @@ font-size: 10px;;
 
 
 
-<!--  CRUD AREA -->
+
+
 <br>
 <br>
+	<div class="container">
+		<form action="php/update.php" 
+		      method="post">
+            
+		   <h4 class="display-4 text-center">Update</h4><hr><br>
+		   <?php if (isset($_GET['error'])) { ?>
+		   <div class="alert alert-danger" role="alert">
+			  <?php echo $_GET['error']; ?>
+		    </div>
+		   <?php } ?>
 
-<div class="container">
-<div class="content">
-<form action="./php/create.php"
-      method="post">
-  <h4 class="display-10 text-center" >Add New Student</h4>
 
-
- <?php if (isset($_GET['error'])) { 
-  include "./php/db_conn.php";
-  ?>
-  
-
-  <div class="alert alert-danger" role="alert">
-  <?php echo $_GET['error']; ?>
-</div>
-<?php } ?>
-
-<div class="form-group">
-    <label for="" class="form-label warning" >ID no.</label>
+       <div class="form-group">
+    <label for="" class="form-label">ID no.</label>
     <input 
-    type="text" 
+	value="<?=$row['id'] ?>" 
+
+    type="input" 
     class="form-control" 
     id="id" 
     placeholder="ex: 12913937"
@@ -196,8 +195,10 @@ font-size: 10px;;
   </div>
 
 <div class="form-group">
-    <label for="" class="form-label warning" >LRN no.</label>
+    <label for="" class="form-label">LRN no.</label>
     <input 
+	value="<?=$row['lrnnumber'] ?>" 
+
     type="text" 
     class="form-control" 
     id="lrnnumber" 
@@ -208,21 +209,28 @@ font-size: 10px;;
 
 <!--
   <div class="form-group">
+ 
+
     <label for="" class="form-label">Adviser ID</label>
     <input 
-    
+	value="<?=$row['adviser_id'] ?>" 
     type="text" 
     class="form-control" 
     id="adviser_id" 
     placeholder="ex: 12913937"
     name="adviser_id">
   </div>
- -->
+       -->
+
+
+
+
+
 
 
 
  
- <div class="mb-3">
+       <div class="mb-3">
     <input
     type="hidden"
     class="form-control" 
@@ -233,6 +241,14 @@ font-size: 10px;;
     >
     
   </div>
+
+       
+
+
+
+
+
+
 
 
 
@@ -245,6 +261,8 @@ font-size: 10px;;
   <div class="form-group">
     <label for="exampleInputEmail1" class="form-label">First Name</label>
     <input 
+	value="<?=$row['firstname'] ?>" 
+
     type="text" 
     class="form-control" 
     id="firstname" 
@@ -256,6 +274,8 @@ font-size: 10px;;
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Middle Name</label>
     <input 
+	value="<?=$row['middlename'] ?>" 
+
     type="middlename" 
     class="form-control" 
     id="middlename" 
@@ -267,7 +287,9 @@ font-size: 10px;;
   
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Last Name</label>
-    <input 
+    <input
+	value="<?=$row['lastname'] ?>" 
+	
     type="lastname" 
     class="form-control" 
     id="lastname" 
@@ -276,23 +298,13 @@ font-size: 10px;;
 
   </div>
 
-  <div class="mb-3">
-    <h6 class="text-danger">Provide the Full Name for better experience purposes</h6>
-    <label for="exampleInputEmail1" class="form-label">FuLL Name</label>
-    <input 
-    type="fullname" 
-    class="form-control" 
-    id="fullname" 
-    placeholder="ex: Milmao Reyris Perolino"
-    name="fullname">
-
-  </div>
-
 
 
   <div class="from-group mb-3">
                                 <label for="">Suffix</label>
-                                <select name="suffix" id="suffix" class="form-control">
+                                <select name="suffix" id="suffix" class="form-control"
+	value="<?=$row['suffix'] ?>" 
+								>
                                     <option value=" ">None</option>
                                     <option value="Jr.">Jr.</option>
                                     <option value="Sr.">Sr.</option>
@@ -303,7 +315,9 @@ font-size: 10px;;
 
                        <div class="from-group mb-3">
                                 <label for="">Gender</label>
-                                <select name="gender" id="gender" class="form-control">
+                                <select name="gender" id="gender" class="form-control" 
+	value="<?=$row['gender'] ?>" 
+								>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
@@ -314,6 +328,8 @@ font-size: 10px;;
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Birth Place</label>
     <input 
+	value="<?=$row['birthplace'] ?>" 
+
     type="text" 
     class="form-control" 
     id="birthplace" 
@@ -325,6 +341,8 @@ font-size: 10px;;
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Birth Date</label>
     <input 
+	value="<?=$row['birthday'] ?>" 
+
     type="date" 
     class="form-control" 
     id="birthday" 
@@ -336,6 +354,8 @@ font-size: 10px;;
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Age</label>
     <input 
+	value="<?=$row['age'] ?>" 
+
     type="age" 
     class="form-control" 
     id="age" 
@@ -348,6 +368,7 @@ font-size: 10px;;
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Address</label>
     <input 
+	value="<?=$row['address'] ?>" 
     type="address" 
     class="form-control" 
     id="address" 
@@ -361,6 +382,7 @@ font-size: 10px;;
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Parent/Guardian</label>
     <input 
+	value="<?=$row['parent'] ?>" 
     type="parent" 
     class="form-control" 
     id="parent" 
@@ -369,23 +391,26 @@ font-size: 10px;;
 
   </div>
 
-
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">School Year</label>
     <input 
+	value="<?=$row['schoolyear'] ?>" 
     type="" 
     class="form-control" 
     id="schoolyear" 
     placeholder="ex: 2022-2023"
     name="schoolyear">
+
   </div>
 
 
-
+  
   <div class="from-group mb-3">
                                 <label for="">Year Level</label>
-                                <select name="grade" id="grade" class="form-control">
-                                    <option value="7">7</option>
+                                <select name="grade" id="grade" class="form-control" 
+	value="<?=$row['grade'] ?>" 
+								>
+                <option value="7">7</option>
                                     <option value="8">8</option>
                                     <option value="9">9</option>
                                     <option value="10">10</option>
@@ -395,69 +420,45 @@ font-size: 10px;;
                             </div>
 
 
-
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Section Name</label>
     <input 
+	value="<?=$row['section'] ?>" 
     type="" 
-    class="form-control" s
+    class="form-control" 
     id="section" 
     placeholder="ex: 2022-2023"
     name="section">
-  </div>
 
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Subject Teacher 1</label>
-    <input 
-    type="" 
-    class="form-control"
-    id="subjectteacher1" 
-    placeholder="Haziel"
-    name="subjectteacher1">
-<br>
-    <label for="exampleInputEmail1" class="form-label">Subject Name</label>
-    <input 
-    type="" 
-    class="form-control"
-    id="subject1" 
-    placeholder="Haziel"
-    name="subject1">
   </div>
 
 
 
 
 
+		   
+	
+
+		
+		   <button type="submit" 
+		           class="btn btn-primary"
+		           name="update">Update</button>
 
 
-
-
-
-
-
- 
-  <button type="submit" 
-          class="btn btn-primary"
-          name="create">ADD</button>
-
-          <a class="link-primary" href="teacher_read.php">
+				   <a class="link-primary" href="teacher_read.php" display-40>
           <button type="button" class="btn btn-dark">
 
-      
-          Cancel
+      Cancel
 
           </button>
-          </a>
-</form>
-</div>
 
 
-
-</div>
-
-
-
-<script>
+	
+	    </form>
+	</div>
+<br>
+<br>
+  <script>
 window.onscroll = function() {myFunction()};
 
 var header = document.getElementById("myHeader");
@@ -471,14 +472,8 @@ function myFunction() {
   }
 }
 </script>
-
-
-
-
-
+  
+  
 
 </body>
 </html>
-<?php }else{
-	header("Location: admin_create.php");
-} ?>

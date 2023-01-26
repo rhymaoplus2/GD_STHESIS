@@ -241,8 +241,9 @@ function myFunction() {
 
 <?php
  require "./php/db_conn.php";
+            $teacherid = $_SESSION['username'];
  $subjectgrouphead = $_SESSION["id"] ;
- $query = "SELECT * FROM subjects WHERE  subjectgrouphead= '$subjectgrouphead'";
+ $query = "SELECT * FROM subjects WHERE  subjectgrouphead= '$subjectgrouphead' AND teacherid='$teacherid'";
 $result = mysqli_query($conn, $query);
  if (mysqli_num_rows($result) > 0) 
 

@@ -113,7 +113,7 @@ font-size: 1.5rem;
 </a>
   </div>
   <div class="bb2">
-<a class="link" href="admin/index.php">
+<a class="link" href="teacher/index.php">
 <button type="button" class="btn btn-primary" justify-content-center>Subject Teacher</button>
 
 </a>

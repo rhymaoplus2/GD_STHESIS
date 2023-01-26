@@ -241,12 +241,12 @@ function myFunction() {
 
 <?php
                         require "./php/db_conn.php";
-                        $id = $_SESSION['username'];
+                        $username = $_SESSION['username'];
 
                         $query = "SELECT a.subjectname ,a.teacherid,a.subjectgrouphead, a.section,
                          b.sub1,b.id,b.sgh1,b.sec1 FROM subjects a, users b
-                        WHERE a.teacherid=b.id AND a.subjectname=b.sub1 AND a.subjectgrouphead=b.sgh1 
-                        AND a.section = b.sec1
+                        WHERE a.teacherid=b.username AND b.sub1=a.subjectname AND a.subjectgrouphead=b.sgh1 
+                        AND a.section = b.sec1 AND username='$username'
  ";
 
                         $result = mysqli_query($conn, $query);
@@ -256,7 +256,7 @@ function myFunction() {
 
                 ?>
            <tr>
-           <td><?php echo $Row["subjectname"]; ?></td>
+           <td><?php echo $Row["sub1"]; ?></td>
           <td><?php echo $Row["sgh1"]; ?></td>
           <td><?php echo $Row["sec1"]; ?></td>
         

@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 
 	$id = validate($_GET['id']);
 
-	$sql = "SELECT * FROM students WHERE id='$id'";
+	$sql = "SELECT * FROM students WHERE id=$id";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -30,16 +30,29 @@ if (isset($_GET['id'])) {
         $data = htmlspecialchars($data);
         return $data;
 	}
-        $username = validate($_POST['username']);
-	    $password = validate($_POST['password']);
-	    $role = validate($_POST['role']);
-
-  
-
-
         $id = validate($_POST['id']);
+        $lrnnumber = validate($_POST['lrnnumber']);
+	$firstname = validate($_POST['firstname']);
+	$middlename = validate($_POST['middlename']);
+        $lastname = validate($_POST['lastname']);
+        $gender = validate($_POST['gender']);
+        $birthplace = validate($_POST['birthplace']);
+        $birthday = validate($_POST['birthday']);
+        $suffix = validate($_POST['suffix']);
+        $age = validate($_POST['age']);
+        $address = validate($_POST['address']);
+        $parent = validate($_POST['parent']);
+    
+  
+        $schoolyear = validate($_POST['schoolyear']);
+        $grade = validate($_POST['grade']);
+        $section = validate($_POST['section']);
 
-        
+
+
+        if (empty($id)) {
+		header("Location: ../update.php?id=$id&error=ID is required/Input new data");
+	}
 
 	if (empty($firstname)) {
 		header("Location: ../update.php?id=$id&error=First Name is required/Input new data");
@@ -85,11 +98,14 @@ if (isset($_GET['id'])) {
         
         else {
 
-       $sql = "UPDATE users
-               SET username='$username',password='$password', role='$role'
-             
-            
-               WHERE id=$id ";
+       $sql = "UPDATE students
+               SET id='$id',lrnnumber='$lrnnumber',firstname='$firstname', middlename='$middlename',
+               lastname='$lastname',birthplace='$birthplace',
+               suffix='$suffix',gender='$gender',
+               birthday='$birthday',age='$age',
+               address='$address',parent='$parent',schoolyear='$schoolyear',grade='$grade',section='$section'
+
+            ";
        $result = mysqli_query($conn, $sql);
        if ($result) {
        	  header("Location: ../teacher_read.php?id=$id&success=successfully updated");

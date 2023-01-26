@@ -112,7 +112,7 @@ font-size: 1.5rem;
  
   <div class="text"><p><h3>SELECT USER TYPE</h3></p></div>
   <div class="bb1">
-<a class="link" href="teacher/index.php">
+<a class="link" href="admin/index.php">
 <button type="button" class="btn btn-warning" justify-content-center>Admin</button>
 </a>
   </div>

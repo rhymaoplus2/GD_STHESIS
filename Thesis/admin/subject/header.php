@@ -14,7 +14,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" href="../students/teacher_read.php">Student List</a></li>
-           <li><a class="dropdown-item" href="subjectlist.php">Subject List</a></li>
+            <li><a class="dropdown-item" href="subjectlist.php">Subject List</a></li>
            
           </ul>
       <li class="nav-item">
