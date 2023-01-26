@@ -232,6 +232,8 @@ function myFunction() {
               
                   <th scope="col">Name</th>
                   
+                  <th scope="col">Username</th>
+                  
                   <th scope="col" colspan="2">Actions </th>
                 </tr>
               </thead>
@@ -259,7 +261,7 @@ $result = mysqli_query($conn, $query);
           <td class="text-danger"><?php echo $Row["role"]; ?></td>
     
           <td><?php echo $Row["name"]; ?></td>
-		  <td><?php echo $Row["id"]; ?></td>
+		  <td><?php echo $Row["username"]; ?></td>
           <td>
 		  <a href="view.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-dark ">View Information</a>

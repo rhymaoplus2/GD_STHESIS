@@ -170,7 +170,7 @@ font-size: 10px;;
 
 <div class="container">
 <div class="content">
-<form action="./php/create.php"
+<form action="php/create.php"
       method="post">
   <h4 class="display-10 text-center" >Add New User</h4>
 
@@ -190,19 +190,19 @@ font-size: 10px;;
     <input 
     type="text" 
     class="form-control" 
-    id="id" 
+    id="username" 
     placeholder="Reyris"
-    name="id">
+    name="username">
   </div>
 
 <div class="form-group">
     <label for="" class="form-label warning" >Password</label>
     <input 
-    type="text" 
+    type="password" 
     class="form-control" 
-    id="lrnnumber" 
+    id="password" 
     placeholder="12913937"
-    name="lrnnumber">
+    name="password">
   </div>
 
 
@@ -221,18 +221,6 @@ font-size: 10px;;
 
 
 
- 
- <div class="mb-3">
-    <input
-    type="hidden"
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: Science"
-    name="adviser_id"
-    value="<?php echo $_SESSION['id']?>"
-    >
-    
-  </div>
 
 
 
@@ -247,10 +235,79 @@ font-size: 10px;;
     <input 
     type="text" 
     class="form-control" 
-    id="firstname" 
+    id="name" 
     placeholder="reyris milmao"
-    name="firstname">
+    name="name">
   </div>
+
+
+  <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Section</label>
+ <select name="section" id="section" class="form-control">
+  
+    <?php 
+    $query ="SELECT section FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['section'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+
+ </div>
+
+
+
+
+
+
+
+
+
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Teacher 1</label>
+ <select name="st1" id="st1" class="form-control">
+  
+    <?php 
+    $query ="SELECT username FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['username'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($username) && $username== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+
+ </div>
 
 
 
@@ -264,7 +321,7 @@ font-size: 10px;;
           class="btn btn-primary"
           name="create">ADD</button>
 
-          <a class="link-primary" href="teacher_read.php">
+          <a class="link-primary" href="users.php">
           <button type="button" class="btn btn-dark">
 
       

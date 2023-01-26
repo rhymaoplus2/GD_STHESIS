@@ -205,6 +205,17 @@ font-size: 10px;;
     </div>
 
     <div class="form-group mb-3">
+    <label for="" class="form-label">Password</label>
+    <input 
+    value="<?=$row['password']?>"
+	  type="text"
+    class="form-control"
+    id="password" 
+    name="password">
+           </input>
+    </div>
+
+    <div class="form-group mb-3">
     <label for="" class="form-label">Role</label>
     <select name="role" id="role" class="form-control">
                                     <option value="admin">admin</option>
@@ -212,6 +223,76 @@ font-size: 10px;;
                                     <option value="adviser">adviser</option>
                                 </select>
     </div>
+
+
+    <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Section</label>
+ <select name="advisory" id="advisory" class="form-control">
+  
+    <?php 
+    $query ="SELECT section FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['section'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+
+ </div>
+
+
+
+
+
+
+
+
+
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Teacher 1</label>
+ <select name="st1" id="st1" class="form-control">
+  
+    <?php 
+    $query ="SELECT username FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['username'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($username) && $username== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+
+ </div>
+
 
 
 

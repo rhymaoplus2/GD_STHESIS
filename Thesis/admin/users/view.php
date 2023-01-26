@@ -1,7 +1,7 @@
 
 
 
-<?php include './php/view.php'; ?>
+<?php include 'n-update.php'; ?>
 
 
 
@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>View</title>
+	<title>Update</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -153,6 +153,10 @@ font-size: 10px;;
     padding-top: 102px;
   }
 
+  input{
+    border-color: transparent;
+    background-color: transparent;
+  }
   </style>
 
 </head>
@@ -164,64 +168,82 @@ font-size: 10px;;
 <?PHP include_once('header.php');?>
 </div>
 
+
+
+
+
+<br>
+<br>
 	<div class="container">
-		<form action="php/view.php" 
+		<form action="n-view.php" 
 		      method="post">
             
-		   <h4 class="display-10 text-center"> <?=$row['name'] ?> Information</h4><hr>
-       <br>
+		   <h4 class=" text-center"> <?=$row['name']?> Information</h4><hr><br>
 		   <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
 		    </div>
 		   <?php } ?>
-           
 
 
-           <div class="mb-3">
-  <p class="fw-bold">Name</p>
-   <?=$row['name'] ?>
-  </div>
-
-  
-  <div class="mb-3">
-  <p class="fw-bold">Username</p>
-   <?=$row['username'] ?>
-  </div>
-
-  <div class="mb-3">
-  <p class="fw-bold">Password</p>
-    <?=$row['password'] ?>
-
-  </div>
+       <div class="form-group mb-3">
+    <label for="" class="form-label"><h6>Role</h6></label>
+    <br>
+    <?=$row['role']?>
+    </div>
 
 
-  
- 
-  <div class="mb-3">
-  <p class="fw-bold">Role</p>
-    <?=$row['role'] ?>
 
-  </div>
-
-	
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><h6>Name</h6></label>
+    <br>
+    <?=$row['name']?>
+    </div>
 
 
-		   
-		   <input type="text" 
+    
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><h6>Password</h6></label>
+    <br>
+    <?=$row['password']?>
+    </div>
+
+
+    
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><h6>Advisory</h6></label>
+    <br>
+    <?=$row['role']?>
+    </div>
+
+
+    
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><h6>Subject Teachers</h6></label>
+    <br>
+    <?=$row['role']?>
+    </div>
+
+
+	         <input type="text" 
 		          name="id"
 		          value="<?=$row['id']?>"
 		          hidden >
-				   
+		
+		
+
+
+			
 
 
 	
 	    </form>
-        <br>
-        <a class="link-primary" href="users.php" display-40>
+      <br>
+      <a class="link-primary" href="users.php" display-40>
           <button type="button" class="btn btn-dark">
 
-     Back
+      BACK
+
           </button>
 	</div>
 <br>

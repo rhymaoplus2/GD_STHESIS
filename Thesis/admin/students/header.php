@@ -23,7 +23,9 @@
 	  <li class="nav-item">
         <a class="nav-link" href="../reports/reports.php">Reports</a>
       </li>
-  
+      <li class="nav-item">
+        <a class="nav-link" href="../users/users.php">Users</a>
+      </li>
 	  <li class="nav-item">
         <a class="nav-link" href="logout.php">Logout</a>
       </li>

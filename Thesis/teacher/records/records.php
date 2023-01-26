@@ -197,7 +197,7 @@ function myFunction() {
     <div class="content">
 
 
-			<h1 class="display-10 text-center"> These are your SUBJECTS
+			<h1 class="display-10 text-center"> RECORDS
       </h1>
       Dear : <?= $_SESSION['username'] ?> 
       <br>Please Click the ADD Button to add GRADES for Students!
