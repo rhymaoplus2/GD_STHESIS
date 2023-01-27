@@ -51,7 +51,7 @@ margin-top: -5rem;
   
 
 <video autoplay muted loop id="myVideo">
-  <source src="../bgv.mp4" type="video/mp4">
+  <source src="../bg.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 <div class="content">

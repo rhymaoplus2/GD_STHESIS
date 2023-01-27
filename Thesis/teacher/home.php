@@ -169,10 +169,14 @@ right: 0;
 top: 0;
 bottom: 0;
 z-index: -1;
-
+  }
+.carousel-inner img {
+  margin: auto;
 }
-
-
+.poster img
+{
+  margin: auto;
+}
   </style>
 </head>
 
@@ -183,7 +187,7 @@ z-index: -1;
 <?PHP include_once('header.php'); ?>
 </div>
 <video autoplay muted loop id="myVideo">
-  <source src="home.mp4" type="video/mp4">
+  <source src="bg/video.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
@@ -207,25 +211,32 @@ function myFunction() {
 
 
 
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleSlidesOnly" class="carousel  slide start-middle" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/1.gif" class="d-block w-50" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="img/2.gif" class="d-block w-50" alt="...">
+      <img src="img/1.gif" class="d-block w-50 align-items-sm-center " alt="...">
     </div>
     <div class="carousel-item">
       <img src="img/3.gif" class="d-block w-50" alt="...">
     </div>
+    <!--
+    <img src=
+"img/poster.gif"
+            class="img-responsive" alt="Responsive image"
+            width="307" height="240"/>
+-->
   </div>
+  <!--
+  <div class="round">
+  <img src="img/poster.gif" class="rounded float-end " alt="...">
+  </div>
+-->
+
 </div>
 
 
 
-
-
-
+    </div>
 
 </div>
 

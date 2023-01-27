@@ -38,6 +38,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #f1f1f1;
 }
 
 .link-right {
@@ -151,7 +152,18 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  #myVideo {
 
+width: 100vw;
+height: 100vh;
+object-fit: cover;
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+z-index: -1;
+  }
 
     </style>
 </head>
@@ -160,6 +172,42 @@ font-size: 10px;;
 <div class="header" id="myHeader">
 <?PHP include_once('header.php'); ?>
 </div>
+
+
+<div class="header" id="myHeader">
+<?PHP include_once('header.php'); ?>
+</div>
+<video autoplay muted loop id="myVideo">
+  <source src="../bg/video.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<script>
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -338,7 +386,7 @@ function myFunction() {
  
       </form>
 
-
+          
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>

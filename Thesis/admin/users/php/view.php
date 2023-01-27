@@ -32,7 +32,10 @@ if (isset($_GET['id'])) {
 	}
         $username = validate($_POST['username']);
 	    $password = validate($_POST['password']);
-	    $role = validate($_POST['role']);
+            $role = validate($_POST['role']);
+	    $advisory = validate($_POST['advisory']);
+            $st1 = validate($_POST['advisory']);
+
 
   
 
@@ -41,46 +44,10 @@ if (isset($_GET['id'])) {
 
         
 
-	if (empty($firstname)) {
+	if (($firstname)) {
 		header("Location: ../update.php?id=$id&error=First Name is required/Input new data");
 	}
-        
-        else if (empty($middlename)) {
-		header("Location: ../update.php?id=$id&error=Middle Name is required/Input new data");
-	}
-        else if (empty($lastname)) {
-		header("Location: ../update.php?id=$id&error=LRN number is required/Input new data");
-	}
-        
-        else if (empty($lrnnumber)) {
-		header("Location: ../update.php?id=$id&error=LRN number is required/Input new data");
-	}
-
-        else if (empty($gender)) {
-		header("Location: ../update.php?id=$id&error=Gender is required/Input new data");
-	}
-        
-        else if (empty($birthplace)) {
-		header("Location: ../update.php?id=$id&error=Birth Place is required/Input new data");
-	}
-        else if (empty($address)) {
-		header("Location: ../update.php?id=$id&error=Birth Place is required/Input new data");
-	}
-        else if (empty($parent)) {
-		header("Location: ../update.php?id=$id&error=Birth Place is required/Input new data");
-	}
-        
-        else if (empty($age)) {
-		header("Location: ../update.php?id=$id&error=Birth Place is required/Input new data");
-	}
-        else if (empty($schoolyear)) {
-		header("Location: ../update.php?id=$id&error=Birth Place is required/Input new data");
-	}
-        
-        else if (empty($section)) {
-		header("Location: ../update.php?id=$id&error=Birth Place is required/Input new data");
-	}
-
+       
         
         
         else {
