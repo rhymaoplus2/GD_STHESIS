@@ -121,8 +121,7 @@ font-size: 1.5rem;
 <button type="button" class="btn btn-warning" justify-content-center>Subject Teacher</button>
 
 </a>
-</div>
-
+  </div>
 <a class="link" href="admin.php"> Login as Administrator</a>
 
 
