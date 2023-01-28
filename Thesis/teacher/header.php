@@ -14,8 +14,8 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-danger">
             <li><a class="dropdown-item" href="students/teacher_read.php">Student List</a></li>
-            <li><a class="dropdown-item" href="subject/subjectlist.php">Subject List</a></li>
-           
+           <!-- <li><a class="dropdown-item" href="subject/subjectlist.php">Subject List</a></li>
+-->
           </ul>
       <li class="nav-item">
         <a class="nav-link" href="records/records.php">Records</a>

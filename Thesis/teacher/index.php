@@ -84,6 +84,11 @@ margin-top: -5rem;
              
               <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
+        
+<audio controls autoplay  hidden>
+<source src="voice/incorrect.mp3" type="audio/mpeg">
+</audio>
+
 			  <?php echo $_GET['error']; ?>
 		    </div>
 		   <?php } ?>
@@ -133,10 +138,6 @@ function myFunction() {
   }
 }
 </script>
-
-<audio controls autoplay  hidden>
-<source src="index.mp3" type="audio/mpeg">
-</audio>
 
 </body> 
 </html>

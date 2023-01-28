@@ -209,15 +209,17 @@ function myFunction() {
 
 
 
-
+<br>
+<br>
 
 <div id="carouselExampleSlidesOnly" class="carousel  slide start-middle" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/1.gif" class="d-block w-50 align-items-sm-center " alt="...">
+      <img src="img/poster1.gif" class="d-block w-25 lign-items-sm-center " alt="...">
     </div>
+    
     <div class="carousel-item">
-      <img src="img/3.gif" class="d-block w-50" alt="...">
+      <img src="img/poster2.gif" class="d-block w-25" alt="...">
     </div>
     <!--
     <img src=
