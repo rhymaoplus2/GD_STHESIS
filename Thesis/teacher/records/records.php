@@ -178,7 +178,7 @@ z-index: -1;
 <?PHP include_once('header.php'); ?>
 </div>
 <video autoplay muted loop id="myVideo">
-  <source src="../bg/video.mp4" type="video/mp4">
+  <source src="../bg/records.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
@@ -244,11 +244,12 @@ function myFunction() {
 		<div class="box">
     <div class="content">
 
-
+<!--
 			<h1 class="display-10 text-center"> RECORDS
       </h1>
       Dear : <?= $_SESSION['username'] ?> 
       <br>Please Click the ADD Button to add GRADES for Students!
+-->
      <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">

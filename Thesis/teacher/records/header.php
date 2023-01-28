@@ -1,3 +1,4 @@
+
 <div class="position-">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger ">
@@ -18,7 +19,7 @@
            
           </ul>
       <li class="nav-item">
-        <a class="nav-link" href="../records/records.php">Records</a>
+        <a class="nav-link" href="../records/records.php">Records</b></a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="../reports/reports.php">Reports</a>
@@ -32,5 +33,6 @@
 
 	
   </div>
+
 </nav>
 </div>

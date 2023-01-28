@@ -23,6 +23,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+  border-color: #f1f1f1;
 }
 
 .container form {
@@ -30,6 +31,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #f1f1f1;
 }
 .box {
 	width: 750px;
@@ -38,6 +40,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #f1f1f1;
 }
 
 .link-right {
@@ -156,6 +159,18 @@ font-size: 10px;;
   {
     margin-left:80%;
   }
+  #myVideo {
+
+width: 100vw;
+height: 100vh;
+object-fit: cover;
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+z-index: -1;
+  }
 
     </style>
 </head>
@@ -165,6 +180,28 @@ font-size: 10px;;
 <?PHP include_once('header.php');?>
 </div>
 
+
+
+
+<video autoplay muted loop id="myVideo">
+  <source src="../bg/records.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<script>
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
 
 <script>
 window.onscroll = function() {myFunction()};
@@ -180,6 +217,15 @@ function myFunction() {
   }
 }
 </script>
+
+
+
+
+
+
+
+
+
 
 
 <!-- TITLE HERE    -->
