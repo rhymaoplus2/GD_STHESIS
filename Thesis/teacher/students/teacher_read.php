@@ -458,9 +458,7 @@ function openulr(newurl) {
   }}
     </script>
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  DISCARD   <audio controls autoplay  hidden>
-<source src="../voice/warning.mp3" type="audio/mpeg">
-</audio>
+  DISCARD 
 </a> </strong>
 			      </td>
 

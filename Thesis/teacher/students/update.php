@@ -179,7 +179,7 @@ z-index: -1;
 </div>
 
 <video autoplay muted loop id="myVideo">
-  <source src="../bg/students.mp4" type="video/mp4">
+  <source src="../bg/bg.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
@@ -214,7 +214,6 @@ function myFunction() {
 		    </div>
 		   <?php } ?>
 
-
        <div class="form-group">
     <label for="" class="form-label">ID no.</label>
     <input 
@@ -227,7 +226,7 @@ function myFunction() {
     name="id">
   </div>
 
-<div class="form-group">
+  <div class="form-group">
     <label for="" class="form-label">LRN no.</label>
     <input 
 	value="<?=$row['lrnnumber'] ?>" 
@@ -238,42 +237,13 @@ function myFunction() {
     placeholder="ex: 12913937"
     name="lrnnumber">
   </div>
-
-
-<!--
-  <div class="form-group">
- 
-
-    <label for="" class="form-label">Adviser ID</label>
-    <input 
-	value="<?=$row['adviser_id'] ?>" 
-    type="text" 
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: 12913937"
-    name="adviser_id">
-  </div>
-       -->
+     
 
 
 
 
 
 
-
-
- 
-       <div class="mb-3">
-    <input
-    type="hidden"
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: Science"
-    name="adviser_id"
-    value="<?php echo $_SESSION['id']?>"
-    >
-    
-  </div>
 
        
 

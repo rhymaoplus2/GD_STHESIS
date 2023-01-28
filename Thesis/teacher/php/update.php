@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 
 	$id = validate($_GET['id']);
 
-	$sql = "SELECT * FROM students WHERE id=$id";
+	$sql = "SELECT * FROM students WHERE id='$id'";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -30,16 +30,19 @@ if (isset($_GET['id'])) {
         $data = htmlspecialchars($data);
         return $data;
 	}
+        $id = validate($_POST['id']);
+
         $lrnnumber = validate($_POST['lrnnumber']);
 	$firstname = validate($_POST['firstname']);
 	$middlename = validate($_POST['middlename']);
         $lastname = validate($_POST['lastname']);
         //$gender = validate($_POST['gender']);
         $birthplace = validate($_POST['birthplace']);
-        $id = validate($_POST['id']);
+      
 
-
-        
+        if (empty($id)) {
+		header("Location: ../update.php?id=$id&error=First Name is required/Input new data");
+	}
 
 	if (empty($firstname)) {
 		header("Location: ../update.php?id=$id&error=First Name is required/Input new data");
