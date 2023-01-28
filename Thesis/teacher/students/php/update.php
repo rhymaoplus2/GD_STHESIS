@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 
 	$id = validate($_GET['id']);
 
-	$sql = "SELECT * FROM students WHERE id='$id'";
+	$sql = "SELECT * FROM students WHERE id='$id' ";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
