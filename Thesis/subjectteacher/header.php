@@ -5,7 +5,15 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse " id="navbarNav ">
+  <ul></ul>
+  <ul class="navbar-nav">
+   
+  <div class = "logo">   <a class="nav-link text-white" href="home.php" ><img src="msu.gif" class="rounded mx-auto d-block" alt="..." style="width: 2.5rem;">
+  </a>
+  </div>
+</ul>
     <ul class="navbar-nav">
+      
       <li class="nav-item active">
         <a class="nav-link text-dark" href="home.php" >Home</a>
       </li>
@@ -32,7 +40,13 @@
   
     </ul>
 
-	
+	  <div class="mx-auto">
+      <h3 class="text-dark">
+     Mabuhay
+    <?=$_SESSION['username']?>!
+
+</h3>
+    </div>
   </div>
 </nav>
 </div>

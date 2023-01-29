@@ -13,7 +13,7 @@
     
 .logo
 {
-margin-left: 18rem;
+margin-left: 1rem;
 margin-top: -5rem;
 
 
@@ -21,7 +21,7 @@ margin-top: -5rem;
 
 .logintext
 {
-  margin-left: -17rem;
+  margin-left: -19rem;
   margin-top: -5rem;
 }
 .msutext
@@ -68,16 +68,16 @@ margin-top: -5rem;
         <br>
         <br>
         <br>
-        
+        <!--
       
               <div class="logintext"><h1 class="text-center p-3">LOGIN</h1>
 
       
               </div>
-       
+-->
 
               
-              <div class = "logo"><img src="./img/msu.png" class="rounded mx-auto d-block" alt="..." style="width: 5rem;">
+              <div class = "logo"><img src="msu1.gif" class="rounded mx-auto d-block" alt="..." style="width: 5rem;">
   
               </div>
               <br>
@@ -94,7 +94,7 @@ margin-top: -5rem;
 		   <?php } ?>
                
   <div class="mb-3">
-    <label for="username" class="form-label">username</label>
+    <label for="username" class="form-label"><b>username</b></label>
     <input type="text" 
     placeholder="ex : reyris"
            class="form-control" 
@@ -103,7 +103,7 @@ margin-top: -5rem;
   </div>
 
   <div class="mb-3">
-    <label for="password" class="form-label">password</label>
+    <label for="password" class="form-label"><b>password</b></label>
     <input type="password" 
            placeholder=" ex : 123password"
            class="form-control" 
@@ -113,11 +113,11 @@ margin-top: -5rem;
 
 
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary"><b>Login</b></button>
   <a class="link-primary" href="../index.php" display-40>
           <button type="button" class="btn btn-dark">
 
-      Cancel
+      <b>Cancel</b>
 
           </button>
 </form>

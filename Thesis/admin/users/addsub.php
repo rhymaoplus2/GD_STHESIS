@@ -1,9 +1,8 @@
-<?php 
-   include "./php/read.php";
-   session_start();
-   include "./php/db_conn.php";
 
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
+
+
+<?php include 'n-addsub.php'; ?>
+
 
 
 
@@ -12,19 +11,14 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Students</title>
+	<title>Update</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-  <header>
-
-</header>
-
 <style>
-  
 
 
-  .container {
+.container {
 	min-height: 100vh;
 	display: flex;
 	justify-content: center;
@@ -158,60 +152,109 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
-  #myVideo {
 
-width: 100vw;
-height: 100vh;
-object-fit: cover;
-position: fixed;
-left: 0;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: -1;
-  }
-.carousel-inner img {
-  margin: auto;
-}
-.poster img
-{
-  margin: auto;
-}
   </style>
-</head>
 
+</head>
 <body>
 
 
+
 <div class="header" id="myHeader">
-<?PHP include_once('header.php'); ?>
+<?PHP include_once('header.php');?>
 </div>
 
-<video autoplay muted loop id="myVideo">
-  <source src="bg/admin.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
 
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
+
+
+
+<br>
+<br>
+	<div class="container">
+		<form action="n-addsub.php" 
+		      method="post">
+            
+		   <h4 class="display-4 text-center">ADD Handled Section</h4><hr><br>
+		   <?php if (isset($_GET['error'])) { ?>
+		   <div class="alert alert-danger" role="alert">
+			  <?php echo $_GET['error']; ?>
+		    </div>
+		   <?php } ?>
+
+
+
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Handled Section</label>
+ <select name="sec1" id="sec1" class="form-control">
+  
+    <?php 
+    $query ="SELECT section FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['section'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+
+ </div>
+
+
+
+
+	         <input type="text" 
+		          name="id"
+		          value="<?=$row['id']?>"
+		          hidden >
+		
+		   <button type="submit" 
+		           class="btn btn-primary"
+		           name="update">Update</button>
+
+
+				   <a class="link-primary" href="users.php" display-40>
+          <button type="button" class="btn btn-dark">
+
+      Cancel
+
+          </button>
+
+
+	
+	    </form>
+	</div>
+<br>
+<br>
+  <script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
 
 function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
   } else {
-    video.pause();
-    btn.innerHTML = "Play";
+    header.classList.remove("sticky");
   }
 }
 </script>
-
   
+  
+
 </body>
 </html>
-<?php
-
-}
-
-

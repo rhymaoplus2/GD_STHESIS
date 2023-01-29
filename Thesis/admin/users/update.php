@@ -214,7 +214,7 @@ font-size: 10px;;
     name="password">
            </input>
     </div>
-
+<!--
     <div class="form-group mb-3">
     <label for="" class="form-label">Role</label>
     <select name="role" id="role" class="form-control">
@@ -223,7 +223,7 @@ font-size: 10px;;
                                     <option value="adviser">adviser</option>
                                 </select>
     </div>
-
+       -->
 
     <div class="mb-3">
  <label for="exampleInputEmail1" class="form-label">Section</label>
@@ -261,7 +261,7 @@ continue;
 
 
 
-
+<!--
 
  <div class="mb-3">
  <label for="exampleInputEmail1" class="form-label">Subject Teacher 1</label>
@@ -292,7 +292,7 @@ continue;
 
 
  </div>
-
+  -->
 
 
 

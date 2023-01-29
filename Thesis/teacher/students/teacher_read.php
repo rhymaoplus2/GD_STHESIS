@@ -211,19 +211,20 @@ function myFunction() {
 		<div class="box">
     <div class="content">
 
-
+<!--
 			<h1 class="display-10 text-center"> Student List
       </h1>
       <br>
       Dear : <?=$_SESSION['id']?>
       <br>
       Click the "ADD" Button to add Your Students! 
-<!-- <div class="row justify-content-center my-5">
+ <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
--->       
+    
 
        </div>
+-->
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>

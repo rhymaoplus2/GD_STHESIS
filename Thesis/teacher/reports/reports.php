@@ -183,9 +183,6 @@ z-index: -1;
 <body>
 
 
-<div class="header" id="myHeader">
-<?PHP include_once('header.php'); ?>
-</div>
 <video autoplay muted loop id="myVideo">
   <source src="../bg/bg.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
@@ -221,18 +218,6 @@ function myFunction() {
     <div class="carousel-item">
       <img src="img/3.gif" class="d-block w-50" alt="...">
     </div>
-    <!--
-    <img src=
-"img/poster.gif"
-            class="img-responsive" alt="Responsive image"
-            width="307" height="240"/>
--->
-  </div>
-  <!--
-  <div class="round">
-  <img src="img/poster.gif" class="rounded float-end " alt="...">
-  </div>
--->
 
 </div>
 

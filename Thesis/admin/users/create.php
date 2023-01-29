@@ -172,7 +172,7 @@ font-size: 10px;;
 <div class="content">
 <form action="php/create.php"
       method="post">
-  <h4 class="display-10 text-center" >Add New User</h4>
+  <h4 class="display-10 text-center" >Add New Teacher</h4>
 
 
  <?php if (isset($_GET['error'])) { 
@@ -242,7 +242,7 @@ font-size: 10px;;
 
 
   <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Section</label>
+ <label for="exampleInputEmail1" class="form-label">Advisory</label>
  <select name="section" id="section" class="form-control">
   
     <?php 
@@ -276,11 +276,11 @@ continue;
 
 
 
-
+<!--
 
 
  <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Subject Teacher 1</label>
+ <label for="exampleInputEmail1" class="form-label">Subject Teachers</label>
  <select name="st1" id="st1" class="form-control">
   
     <?php 
@@ -308,7 +308,7 @@ continue;
 
 
  </div>
-
+  -->
 
 
 

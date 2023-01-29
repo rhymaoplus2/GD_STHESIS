@@ -197,7 +197,7 @@ function myFunction() {
     <div class="content">
 
 
-			<h1 class="display-10 text-center"> These are all of the Subject List
+			<h1 class="display-10 text-center">Subject List
       </h1>
       Dear : <?=$_SESSION['username']?> 
       <br>Please Click the create Button to add Subjects!

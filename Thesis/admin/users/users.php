@@ -162,6 +162,14 @@ font-size: 10px;;
 </div>
 
 
+
+
+
+
+
+
+
+
 <script>
 window.onscroll = function() {myFunction()};
 
@@ -228,13 +236,13 @@ function myFunction() {
 
               <thead >
                   <tr>
-                  <th scope="col">Role </th>
+                  <th hidden scope="col">Role </th>
               
                   <th scope="col">Name</th>
                   
-                  <th scope="col">Username</th>
+                 <!-- <th scope="col">Username</th>-->
                   
-                  <th scope="col" colspan="2">Actions </th>
+                  <th scope="col" colspan="4" class="text-center">Actions </th>
                 </tr>
               </thead>
         <tbody>    
@@ -258,19 +266,27 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-          <td class="text-danger"><?php echo $Row["role"]; ?></td>
+<!--<td class=" text-danger"><?php echo $Row["role"]; ?></td>-->
     
           <td><?php echo $Row["name"]; ?></td>
-		  <td><?php echo $Row["username"]; ?></td>
+		  <!--<td><?php echo $Row["username"]; ?></td>-->
           <td>
 		  <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark ">View Information</a>
-
+			      	     class="btn btn-dark ">View</a>
+          </td>
+          <td>
+                   <a href="update.php? id=<?=$Row['id']?>" 
+			      	     class="btn btn-success ">Update</a>
+                   <br>
+     </td>
    
-		  <a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary ">Update Data</a>
+   <td>
+		 
 
-   
+                   <a href="addsub.php? id=<?=$Row['id']?>" 
+			      	     class="btn btn-primary ">Add Subjects</a>
+   </td>
+   <td>
         <script type="text/javascript">  
 
 function openulr(newurl) {  
