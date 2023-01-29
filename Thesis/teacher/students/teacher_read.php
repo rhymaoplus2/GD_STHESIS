@@ -227,6 +227,9 @@ function myFunction() {
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>
+        <audio controls autoplay  hidden>
+<source src="../voice/success.mp3" type="audio/mpeg">
+</audio>
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
@@ -255,6 +258,7 @@ function myFunction() {
                   <th scope="col">First Name </th>
                   <th scope="col">Middle Name </th>
                   <th scope="col">LRN No. </th>
+                  <th scope="col">ID No. </th>
                  <!--
                   
                  <th scope="col">Suffix</th>
@@ -294,6 +298,7 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["firstname"]; ?></td>
           <td><?php echo $Row["middlename"]; ?></td>
           <td><?php echo $Row["lrnnumber"]; ?></td>
+          <td><?php echo $Row["idnumber"]; ?></td>
           <!-- <td><?php echo $Row["suffix"]; ?></td>
           <td><?php echo $Row["gender"]; ?></td>
           <td><?php echo $Row["birthplace"]; ?></td>
