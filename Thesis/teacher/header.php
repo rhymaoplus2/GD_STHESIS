@@ -14,11 +14,11 @@
 </ul>
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link btn-primary  text-white" href="home.php" >Home</a>
+        <a class="nav-link btn-primary  text-warning-emphasis " href="home.php" ><b>Home</b></a>
       
       </li>
       <li class="nav-item active">
-        <a class="nav-link btn-primary  text-white" href="students/teacher_read.php" >MasterList</a>
+        <a class="nav-link btn-primary  text-white" href="students/teacher_read.php" ><b>MasterList</b></a>
       
       </li>
         <!--
@@ -32,14 +32,14 @@
           </ul>
           -->
       <li class="nav-item">
-        <a class="nav-link btn-primary  text-white" href="records/records.php">Records</a>
+        <a class="nav-link btn-primary  text-white" href="records/records.php"><b>Records</b></a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link btn-primary text-white" href="reports/reports.php">Reports</a>
+        <a class="nav-link btn-primary text-white" href="reports/reports.php"><b>Reports</b></a>
       </li>
   
 	  <li class="nav-item ">
-        <a class="nav-link btn-primary text-white  " href="logout.php">Logout</a>
+        <a class="nav-link btn-primary text-white  " href="logout.php"><b>Logout</b></a>
       </li>
   
     </ul>

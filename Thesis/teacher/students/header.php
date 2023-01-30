@@ -6,7 +6,7 @@
   </button>
   <div class="collapse navbar-collapse " id="navbarNav ">
     <ul></ul>
-  <ul class="navbar-nav">
+  <ul class="navbar-nav"> 
    
   <div class = "logo">   <a class="nav-link text-white" href="../home.php" ><img src="msu.gif" class="rounded mx-auto d-block" alt="..." style="width: 2.5rem;">
   </a>
@@ -14,11 +14,11 @@
 </ul>
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link btn-primary  text-white" href="../home.php" >Home</a>
+        <a class="nav-link btn-primary  text-white" href="../home.php" ><b>Home</b></a>
       
       </li>
       <li class="nav-item active">
-        <a class="nav-link btn-primary  text-white" href="teacher_read.php" >MasterList</a>
+        <a class="nav-link btn-primary  text-warning-emphasis" href="teacher_read.php" ><b>MasterList</b></a>
       
       </li>
         <!--
@@ -32,14 +32,14 @@
           </ul>
           -->
       <li class="nav-item">
-        <a class="nav-link btn-primary  text-white" href="../records/records.php">Records</a>
+        <a class="nav-link btn-primary  text-white" href="../records/records.php"><b>Records</b></a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link btn-primary text-white" href="../reports/reports.php">Reports</a>
+        <a class="nav-link btn-primary text-white" href="../reports/reports.php"><b>Reports</b></a>
       </li>
   
 	  <li class="nav-item ">
-        <a class="nav-link btn-primary text-white  " href="../php/logout.php">Logout</a>
+        <a class="nav-link btn-primary text-white  " href="../php/logout.php"><b>Logout</b></a>
       </li>
   
     </ul>

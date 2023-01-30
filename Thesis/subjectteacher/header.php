@@ -15,7 +15,7 @@
     <ul class="navbar-nav">
       
       <li class="nav-item active">
-        <a class="nav-link text-dark" href="home.php" >Home</a>
+        <a class="nav-link text-primary" href="home.php" ><b>Home</b></a>
       </li>
       <!--
       <button class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,23 +28,23 @@
           </ul>
 -->
       <li class="nav-item">
-        <a class="nav-link text-dark" href="records/records.php">Records</a>
+        <a class="nav-link text-dark" href="records/records.php"><b>Records</b></a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link text-dark" href="reports/reports.php">Reports</a>
+        <a class="nav-link text-dark" href="reports/reports.php"><b>Reports</b></a>
       </li>
   
 	  <li class="nav-item ">
-        <a class="nav-link text-dark" href="logout.php">Logout</a>
+        <a class="nav-link text-dark" href="logout.php"><b>Logout</b></a>
       </li>
   
     </ul>
 
 	  <div class="mx-auto">
       <h3 class="text-dark">
-     Mabuhay
+     <b>Mabuhay
     <?=$_SESSION['username']?>!
-
+</b>
 </h3>
     </div>
   </div>

@@ -35,20 +35,28 @@
 }
 
 .container form {
-	width: 600px;
+	width: 1020px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
 }
 .box {
-	width: 750px;
+	width: 1050px;
 }
 .container table {
+	padding: 30px;
+	border-radius: 10px;
+  
+  background-color: white;
+  border:10px;
+}
+.border {
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
+  border:10px;
 }
 
 .link-right {
@@ -176,6 +184,7 @@ bottom: 0;
 z-index: -1;
   }
 
+ 
   </style>
 </head>
 
@@ -234,6 +243,7 @@ function myFunction() {
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
+        <div class="border">
             <table class="table table-bordered ">
 
 
@@ -251,15 +261,14 @@ function myFunction() {
            
         
 
-           <table class="table table-bordered">
 
               <thead>
                   <tr>
-                  <th scope="col">Last Name </th>
-                  <th scope="col">First Name </th>
-                  <th scope="col">Middle Name </th>
-                  <th scope="col">LRN No. </th>
-                  <th scope="col">ID No. </th>
+                  <th scope="col"><h3 class="text-primary">Last Name</h3> </th>
+                  <th scope="col"><h3 class="text-primary">First Name</h3>  </th>
+                  <th scope="col"><h3 class="text-primary">Middle Name</h3>  </th>
+                  <th scope="col"><h3 class="text-primary">LRN No.</h3>  </th>
+                  <th scope="col"><h3 class="text-primary">ID No.</h3>  </th>
                  <!--
                   
                  <th scope="col">Suffix</th>
@@ -271,7 +280,7 @@ function myFunction() {
                   <th scope="col">Parent/Guardian</th>
              -->
                   
-                  <th scope="col" colspan="3">Action </th>
+                  <th scope="col" colspan="3"><h3 class="text-success text-center">Actions</h3> </th>
                 </tr>
               </thead>
         <tbody>    
@@ -295,11 +304,11 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-           <td><?php echo $Row["lastname"]; ?></td>
-          <td><?php echo $Row["firstname"]; ?></td>
-          <td><?php echo $Row["middlename"]; ?></td>
-          <td><?php echo $Row["lrnnumber"]; ?></td>
-          <td><?php echo $Row["idnumber"]; ?></td>
+           <td><b><?php echo $Row["lastname"]; ?></b></td>
+          <td><b><?php echo $Row["firstname"]; ?></b></td>
+          <td><b><?php echo $Row["middlename"]; ?></b></td>
+          <td><b><?php echo $Row["lrnnumber"]; ?></b></td>
+          <td><b><?php echo $Row["idnumber"]; ?></b></td>
           <!-- <td><?php echo $Row["suffix"]; ?></td>
           <td><?php echo $Row["gender"]; ?></td>
           <td><?php echo $Row["birthplace"]; ?></td>
@@ -309,13 +318,11 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["parent"]; ?></td>
      -->
      <td><a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark ">View</a>
+			      	     class="btn btn-dark "><b>VIEW</b></a>
                    
-                  </td>
-             <td><a href="update.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-success ">Update</a>
-     </td>
-     <td>
+               <a href="update.php?id=<?=$Row['id']?>" 
+			      	     class="btn btn-primary "><b>UPDATE</b></a>
+   
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -326,7 +333,7 @@ function openulr(newurl) {
   }}
     </script>
 <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
-  DISCARD
+  <b>DELETE</b>
 </a>
 
 			      </td>
@@ -368,41 +375,42 @@ function openulr(newurl) {
          </tbody>
       </table>
 
-
-      
      
-
-
-</form>
-
-<div class="center">
+      <div class="center">
           <a class="link-primary" href="teacher_create.php" display-40>
           <button type="button" class="btn btn-dark">
 
-      ADD
+      <b>ADD NEW STUDENT</b>  
 
           </button>
           </a>
           </div>
+
+
+</div>
+
+      
+
+
  
 <br>
 <br>
 
-<form action="" method="GET">
+<form class="search" action="" method="GET">
                     <div class="input-group ">
                       <input
                         type="text"
                         name="search"
                         required
                         value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control"
+                        class="form-control border-dark"
                         placeholder="Search by First Name/Middle Name/Last Name"
                       />
                       
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning">
-                        Search
+                    <button type="submit" class="btn btn-dark">
+                       <b> SEARCH</b>
                       </button>
                  
 
@@ -412,13 +420,14 @@ function openulr(newurl) {
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                  <th>Last Name</th>
+                    
+                  <th><h3 class="text-primary">Last Name</h3></th>
                   
-                    <th>First Name</th>
+                    <th><h3 class="text-primary">First Name</h3></th>
                    
-                    <th>Middle Name</th>
-                    <th>LRN no.</th>
-                    <th colspan="3">Actions</th>
+                    <th><h3 class="text-primary">Middle Name</h3></th>
+                    <th><h3 class="text-primary">LRN no.</h3></th>
+                    <th colspan="3"><h3 class="text-success text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -439,19 +448,17 @@ function openulr(newurl) {
         if (mysqli_num_rows($query_run) >
                   0) { foreach ($query_run as $items) { ?>
                   <tr>
-                  <td><?= $items['lastname']; ?></td>
-                    <td><?= $items['firstname']; ?></td>
-                    <td><?= $items['middlename']; ?></td> 
-                    <td><?= $items['lrnnumber']; ?></td>
-                    <td><a href="view.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-dark ">View</a>
+                  <td><b><?= $items['lastname']; ?></b></td>
+                    <td><b><?= $items['firstname']; ?></b></td>
+                    <td><b><?= $items['middlename']; ?></b></td> 
+                    <td><b><?= $items['lrnnumber']; ?></b></td>
+                    <td><b><a href="view.php?id=<?=$items['id']?>" 
+			      	     class="btn btn-dark "><b>View</b></a>
                    
-                  </td>
-                    <td><a href="update.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-success ">Update</a>
+                <a href="update.php?id=<?=$items['id']?>" 
+			      	     class="btn btn-success "><b>Update</b></a>
                    
-                  </td>
-                  <td>
+              
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -464,7 +471,7 @@ function openulr(newurl) {
   }}
     </script>
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  DISCARD 
+  <b>DELETE</b>
 </a> </strong>
 			      </td>
 
@@ -479,8 +486,8 @@ function openulr(newurl) {
         } else {
                                                 ?>
                   <tr>
-                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
-                  <h5>
+                  <td colspan="6  "><h1 style = "color:red"> No Data Found   </h1> 
+                  <h1>
                     
                   </h5> </td>
                   </tr>

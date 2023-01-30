@@ -209,8 +209,8 @@ function myFunction() {
 <div class="content">
 <form action="./php/create.php"
       method="post">
-  <h4 class="display-10 text-center" >Add New Student</h4>
-
+  <h4 class="display-10 text-center text-primary" ><b>Add New Student</b></h4>
+<br>
 
  <?php if (isset($_GET['error'])) { 
   include "./php/db_conn.php";
@@ -226,16 +226,16 @@ function myFunction() {
 <?php } ?>
 
 <div class="form-group">
-    <label for="" class="form-label warning" >ID no.</label>
+    <label for="" class="form-label warning" ><b>ID no.</b></label>
     <input 
     type="text" 
-    class="form-control" 
+    class="form-control mb-3" 
     id="idnumber" 
     placeholder="ex: 12913937"
     name="idnumber">
   </div>
 <div class="form-group">
-    <label for="" class="form-label warning" >Re-Enter ID no.</label>
+    <label for="" class="form-label warning" ><b>Re-Enter ID no.</b></label>
     <input 
     type="text" 
     class="form-control" 
@@ -246,7 +246,7 @@ function myFunction() {
 <br>
 
 <div class="form-group">
-    <label for="" class="form-label warning" >LRN no.</label>
+    <label for="" class="form-label warning" ><b>LRN no.</b></label>
     <input 
     type="text" 
     class="form-control" 
@@ -293,7 +293,7 @@ function myFunction() {
 
 
   <div class="form-group">
-    <label for="exampleInputEmail1" class="form-label">First Name</label>
+    <label for="exampleInputEmail1" class="form-label"><b>First Name</b></label>
     <input 
     type="text" 
     class="form-control" 
@@ -304,7 +304,7 @@ function myFunction() {
 
 
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Middle Name</label>
+    <label for="exampleInputEmail1" class="form-label"><b>Middle Name</b></label>
     <input 
     type="middlename" 
     class="form-control" 
@@ -316,7 +316,7 @@ function myFunction() {
 
   
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Last Name</label>
+    <label for="exampleInputEmail1" class="form-label"><b>Last Name</b></label>
     <input 
     type="lastname" 
     class="form-control" 
@@ -327,8 +327,7 @@ function myFunction() {
   </div>
 
   <div class="mb-3">
-    <h6 class="text-danger">Provide the Full Name for better experience purposes</h6>
-    <label for="exampleInputEmail1" class="form-label">FuLL Name</label>
+    <label for="exampleInputEmail1" class="form-label"><b>Full Name<b></label>
     <input 
     type="fullname" 
     class="form-control" 
@@ -341,39 +340,39 @@ function myFunction() {
 
 
   <div class="from-group mb-3">
-                                <label for="">Suffix</label>
+                                <label for=""><b>Suffix</b></label>
                                 <select name="suffix" id="suffix" class="form-control">
-                                    <option value=" ">None</option>
-                                    <option value="Jr.">Jr.</option>
-                                    <option value="Sr.">Sr.</option>
+                                    <option value=" "><b>None</b></option>
+                                    <option value="Jr."><b>Jr.</b></option>
+                                    <option value="Sr."><b>Sr.</b></option>
                                 </select>
                             </div>
 
 
 
                        <div class="from-group mb-3">
-                                <label for="">Gender</label>
+                                <label for=""><b>Gender</b></label>
                                 <select name="gender" id="gender" class="form-control">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="Male"><b>Male</b></option>
+                                    <option value="Female"><b>Female</b></option>
                                 </select>
                             </div>
 
 
 
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Birth Place</label>
+    <label for="exampleInputEmail1" class="form-label"><b>Birth Place </b></label>
     <input 
     type="text" 
     class="form-control" 
-    id="birthplace" 
+    id="birthplace"
     placeholder="ex: Sto. Nino, Kolambugan Lanao del Norte"
     name="birthplace">
 
   </div>
   
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Birth Date</label>
+    <label for="exampleInputEmail1" class="form-label"><b>Birth Date</b></label>
     <input 
     type="date" 
     class="form-control" 
@@ -418,7 +417,7 @@ function myFunction() {
     name="parent">
 
   </div>
-
+ 
 
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">School Year</label>
@@ -433,7 +432,8 @@ function myFunction() {
 
 
   <div class="from-group mb-3">
-                                <label for="">Year Level</label>
+                                <label class="mb-2" for="">Year Level</label>
+                                
                                 <select name="grade" id="grade" class="form-control">
                                     <option value="7">7</option>
                                     <option value="8">8</option>
@@ -457,7 +457,7 @@ function myFunction() {
   </div>
 
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Subject Teacher 1</label>
+    <label for="exampleInputEmail1" class="form-label">Subject Teachers</label>
     <input 
     type="" 
     class="form-control"
@@ -465,7 +465,7 @@ function myFunction() {
     placeholder="Haziel Merto"
     name="subjectteacher1">
 <br>
-    <label for="exampleInputEmail1" class="form-label">Subject Name</label>
+    <label for="exampleInputEmail1" class="form-label">Subject Names</label>
     <input 
     type="" 
     class="form-control"
@@ -488,13 +488,13 @@ function myFunction() {
  
   <button type="submit" 
           class="btn btn-primary"
-          name="create">ADD</button>
+          name="create"><b>ADD</B></button>
 
           <a class="link-primary" href="teacher_read.php">
           <button type="button" class="btn btn-dark">
 
       
-          Cancel
+          <b>CANCEL</b>
 
           </button>
           </a>

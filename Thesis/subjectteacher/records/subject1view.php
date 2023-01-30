@@ -27,11 +27,11 @@
 }
 
 .container form {
-	width: 600px;
+	width: 800px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #f1f1f1;
+  background-color: white;
 }
 .box {
 	width: 750px;
@@ -39,8 +39,17 @@
 .container table {
 	padding: 20px;
 	border-radius: 10px;
+   
+  background-color:white;
+  border: 10px;
+}
+.border {
+	padding: 15px;
+	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #f1f1f1;
+  background-color:white;
+ 
+  border: 10px;
 }
 
 .link-right {
@@ -130,7 +139,7 @@ font-size: 10px;;
 
 
 .top-container {
-    background-color: #f1f1f1;
+    background-color: white;
     padding: 30px;
     text-align: center;
   }
@@ -270,10 +279,10 @@ function myFunction() {
 
 			<h1 class="display-10 text-center"> These are your Students Grades
       </h1>
-      -->
+      --><!--
       Dear : <?=$_SESSION['username']?> 
       <br>Please Click the create Button to add Subjects!
-
+-->
      <div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
@@ -304,6 +313,7 @@ function myFunction() {
       <br>
       <br>
       -->
+        <div class="border">
             <table class="table table-bordered ">
 
             <?php 
@@ -319,11 +329,11 @@ function myFunction() {
 
               <thead >
                   <tr>
-                  <th scope="col">Student Name </th>
-                  <th scope="col">Subject Name</th>
-                  <th scope="col">Grade</th>
+                  <th scope="col"><h3 class="text-primary"><b>Student Name</h3> </th>
+                  <th scope="col"><h3 class="text-primary"><b>Subject Name</h3></b></th>
+                  <th scope="col"><h3 class="text-primary"><b>Grade</b></h3></th>
                   
-                  <th scope="col" colspan="2">Actions </th>
+                  <th scope="col" colspan="2"><h3 class="text-success text-center"> <b>Actions</b> </th>
                 </tr>
               </thead>
         <tbody>    
@@ -353,14 +363,14 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-           <td hidden><?php echo $Row["username"]; ?></td>
-          <td><?php echo $Row["studentname"]; ?></td>
-          <td><?php echo $Row["subjectname"]; ?></td>
-          <td><?php echo $Row["grade"]; ?></td>
-          <td><a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-success ">Update</a>
+           <td hidden><b><?php echo $Row["username"]; ?></b></td>
+          <td><b><?php echo $Row["studentname"]; ?></b></td>
+          <td><b><?php echo $Row["subjectname"]; ?></b></td>
+          <td><b><?php echo $Row["grade"]; ?></b></td>
+          <td ><b><a href="update.php? id=<?=$Row['id']?>" 
+			      	     class="btn btn-primary "><b>Update</b></a>
  
-     <td>
+  
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -371,7 +381,7 @@ function openulr(newurl) {
   }}
     </script>
 <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
-  DISCARD
+  <b>DELETE</b>
 </a>
 
 			      </td>
@@ -410,11 +420,14 @@ function openulr(newurl) {
 
          </tbody>
       </table>
+</div>
+
       <div class="addbutton mb-3">
           <a class="link-primary" href="subject1.php" display-40>
+          <br>
           <button type="button" class="btn btn-dark">
 
-      ADD GRADES
+      <b>ADD GRADES</b>
 
           </button>
           </a>
@@ -425,6 +438,7 @@ function openulr(newurl) {
 <BR>
 <BR>
 
+
       <form action="" method="GET">
 
                     <div class="input-group ">
@@ -433,14 +447,14 @@ function openulr(newurl) {
                         name="search"
                         required
                         value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control"
-                        placeholder="Search by Subject ID / Name / Subject Teacher Username"
+                        class="form-control border-dark "
+                        placeholder="Search by Student Name . Subject Name . Grade"
                       />
                       
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning">
-                        Search
+                    <button type="submit" class="btn text-white btn-dark">
+                        <b>Search</b>
                       </button>
     
 <br> <br>
@@ -451,10 +465,10 @@ function openulr(newurl) {
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Student Name</th>
-                    <th>Subject Name</th>
-                    <th>GRADE</th>
-                    <th colspan="2">Actions</th>
+                    <th><h3 class="text-primary"><b>Student Name</h3></b></th>
+                    <th><h3 class="text-primary"><b>Subject Name</h3></b></th>
+                    <th><h3 class="text-primary"><b>Grade</h3></b></th>
+                    <th colspan="2"><h3 class="text-success text-center"><b>Actions</h3></b></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -469,6 +483,13 @@ function openulr(newurl) {
  FROM grade b, users a WHERE  b.subjectname = a.sub1  
  AND b.section = a.sec1 AND a.username = b.teacher AND b.adviser = a.sgh1 
  AND teacher = '$teacher'
+
+ AND CONCAT(studentname,subjectname)LIKE '%$filtervalues%'
+  
+
+
+
+
  ";
    $query_run = mysqli_query($con, $query);
 
@@ -479,12 +500,10 @@ function openulr(newurl) {
                     <td><?= $items['subjectname']; ?></td>
                     <td><?= $items['grade']; ?></td>
                     <td><a href="update.php? id=<?=$items['id']?>" 
-			      	     class="btn btn-success ">Update</a>
+			      	     class="btn btn-primary "><b>UPDATE</b></a>
 
 
-                  </td>
-                  <td>
-
+                 
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -495,7 +514,7 @@ if (confirm("Are you sure you want to Delete?")) {
   }}
     </script>
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  DISCARD
+<b>DELETE</b>
 </a></strong>
 			      </td>
                   </tr>

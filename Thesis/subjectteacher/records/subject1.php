@@ -44,9 +44,18 @@
 .container table {
 	padding: 20px;
 	border-radius: 10px;
+  background-color: white;
+  border: 10px;
+
+}
+.border {
+	padding: 20px;
+	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
+
 }
+
 
 .link-right {
 	display: flex;
@@ -272,7 +281,17 @@ function myFunction() {
 
    <div class="content">
                
-  
+   <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="border">
+            
       <table class="table table-bordered ">
               <thead >
                   <tr>
@@ -462,18 +481,22 @@ function myFunction() {
 
 
          </tbody>
+         
       </table>
       <button type="submit"
         class="btn btn-primary"
-        name="submit">ADD</button>
+        name="submit"><b>SUBMIT<b></button>
       
           <a class="link-primary" href="subject1view.php" display-40>
           <button type="button" class="btn btn-dark">
 
-      BACK
+      <b>CANCEL</b>
 
           </button>
           </a>
+          </div>
+          <br>
+    
 
 
 

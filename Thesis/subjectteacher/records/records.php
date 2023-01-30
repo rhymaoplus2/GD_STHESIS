@@ -30,17 +30,25 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ 
 }
 .box {
-	width: 750px;
+	width: 800px;
+  
 }
 .container table {
 	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #f1f1f1;
+	
+	
+  background-color: white;
+  border:10px;
 }
+.border {
+	padding: 15px;
 
+  background-color: white;
+border-radius: 20px;
+}
 .link-right {
 	display: flex;
 	justify-content: flex-end;
@@ -231,29 +239,13 @@ function myFunction() {
 
 
 
-        <div class=" container ">
-       
-        <div class="box">
-        <div class="content">
-			<br>
-      
-
 
 
       <div class="container" >
 		<div class="box">
     <div class="content">
 
-<!--
-			<h1 class="display-10 text-center"> RECORDS
-      </h1>
-      Dear : <?= $_SESSION['username'] ?> 
-      <br>Please Click the ADD Button to add GRADES for Students!
--->
-     <div class="row justify-content-center my-5">
-                                                      
-	   <div class="row justify-content-right  my-3">
-       </div>
+
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
            <audio controls autoplay  hidden>
@@ -263,6 +255,7 @@ function myFunction() {
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
+        <div class="border">
             <table class="table table-bordered ">
 
             <?php
@@ -286,10 +279,6 @@ function myFunction() {
                 </tr>
               </thead>
         <tbody>    
-          
-       
-        
-
 
 <?php
                         require "./php/db_conn.php";
@@ -313,7 +302,7 @@ function myFunction() {
           <td><?php echo $Row["sec1"]; ?></td>
         
           <td><a href="subject1view.php" 
-			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
+			      	     class="btn btn-dark "><b>VIEW / ADD GRADES</b></a>
 
 			    </tr>
            
@@ -379,7 +368,7 @@ function myFunction() {
      </div>
    </div>
   </div>
-
+          </div>
 
           
             </div>

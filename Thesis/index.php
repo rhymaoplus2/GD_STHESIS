@@ -34,6 +34,7 @@
 }
 .text{
   margin-left: 30rem;
+  color: white;
 }
 .bb1{
   margin-left: 19rem;
@@ -110,15 +111,15 @@ font-size: 1.5rem;
 
 <div class="content">
  
-  <div class="text"><p><h3>SELECT USER TYPE</h3></p></div>
+  <div class="text"><p><h3><b>SELECT USER TYPE</b></h3></p></div>
   <div class="bb1">
 <a class="link" href="teacher/index.php">
-<button type="button" class="btn btn-primary" justify-content-center>Adviser</button>
+<button type="button" class="btn btn-primary" justify-content-center><b>Adviser</b></button>
 </a>
   </div>
   <div class="bb2">
 <a class="link" href="subjectteacher/index.php">
-<button type="button" class="btn btn-light" justify-content-center>Subject Teacher</button>
+<button type="button" class="btn btn-light" justify-content-center><b>Subject Teacher</b></button>
 
 </a>
   </div>

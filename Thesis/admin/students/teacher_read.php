@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Students</title>
+	<title>Student List</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -34,9 +34,9 @@
 }
 
 .container form {
-	width: 600px;
+	width: 750px;
 	padding: 20px;
-	border-radius: 10px;
+	border-radius: 30px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box {
@@ -45,8 +45,18 @@
 .container table {
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
+  border:10px;
+  background-color: white;
 }
+.border {
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border:10px;
+  border-radius: 30px;
+}
+
 
 .link-right {
 	display: flex;
@@ -175,7 +185,7 @@ font-size: 10px;;
 		<div class="box">
     <div class="content">
 
-
+<!--
 			<h1 class="display-10 text-center"> Student List of MSU-MSAT 
         <br>
         Junior and Senior High School
@@ -184,7 +194,7 @@ font-size: 10px;;
       Dear : <?=$_SESSION['id']?>
       <br>
       Click the "ADD" Button Students! 
-<!-- <div class="row justify-content-center my-5">
+<div class="row justify-content-center my-5">
                                                       
 	   <div class="row justify-content-right  my-3">
 -->       
@@ -196,6 +206,7 @@ font-size: 10px;;
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
+        <div class="border">
             <table class="table table-bordered ">
 
 
@@ -213,8 +224,7 @@ font-size: 10px;;
            
         
 
-           <table class="table table-bordered">
-
+          
               <thead>
                   <tr>
                   <th scope="col">Last Name </th>
@@ -232,7 +242,7 @@ font-size: 10px;;
                   <th scope="col">Parent/Guardian</th>
              -->
                   
-                  <th scope="col" colspan="3">Action </th>
+                  <th scope="col" colspan="3" class="text-center" >Actions</th>
                 </tr>
               </thead>
         <tbody>    
@@ -269,13 +279,11 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["parent"]; ?></td>
      -->
      <td><a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark ">View</a>
+			      	     class="btn btn-dark "><b>VIEW</b></a>
                    
-                  </td>
-             <td><a href="update.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-success ">Update</a>
-     </td>
-     <td>
+              <a href="update.php?id=<?=$Row['id']?>" 
+			      	     class="btn btn-primary "><b>UPDATE</b></a>
+     
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -286,7 +294,7 @@ function openulr(newurl) {
   }}
     </script>
 <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
-  DISCARD
+  <b>DELETE</b>
 </a>
 
 			      </td>
@@ -331,22 +339,21 @@ function openulr(newurl) {
 
       
      
-
-
-</form>
-
-<div class="center">
+      <div class="center">
           <a class="link-primary" href="teacher_create.php" display-40>
           <button type="button" class="btn btn-dark">
 
-      ADD
+      <b>ADD NEW STUDENT</b>
 
           </button>
           </a>
           </div>
- 
+
+</form>
+</div>
 <br>
 <br>
+
 
 <form action="" method="GET">
                     <div class="input-group ">
@@ -361,8 +368,8 @@ function openulr(newurl) {
                       
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning">
-                        Search
+                    <button type="submit" class="btn btn-dark">
+                        <b>SEARCH </b>
                       </button>
                  
 
@@ -471,7 +478,8 @@ function openulr(newurl) {
 
 
 
-
+<br>
+<br>
 
 
 

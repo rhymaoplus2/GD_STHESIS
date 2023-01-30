@@ -26,7 +26,7 @@
 }
 
 .container form {
-	width: 600px;
+	width: 730px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -37,7 +37,14 @@
 .container table {
 	padding: 20px;
 	border-radius: 10px;
+	
+  border:30px;
+}
+.border{
+	padding: 20px;
+	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border:30px;
 }
 
 .link-right {
@@ -221,7 +228,8 @@ function myFunction() {
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
-            <table class="table table-bordered mb-3">
+        <div class="border">
+            <table class="table table-bordered mb-25">
 
             <?php 
 			  	   $i = 0;
@@ -272,11 +280,11 @@ $result = mysqli_query($conn, $query);
 		  <!--<td><?php echo $Row["username"]; ?></td>-->
           <td>
 		  <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark ">View</a>
+			      	     class="btn btn-dark "><b>VIEW</b></a>
           </td>
           <td>
                    <a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-success ">Update</a>
+			      	     class="btn btn-primary "><b>UPDATE</B></a>
                    <br>
      </td>
    
@@ -284,7 +292,7 @@ $result = mysqli_query($conn, $query);
 		 
 
                    <a href="addsub.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary ">Add Subjects</a>
+			      	     class="btn btn-primary "><b>+ SUBJECT</b></a>
    </td>
    <td>
         <script type="text/javascript">  
@@ -297,7 +305,7 @@ function openulr(newurl) {
   }}
     </script>
 <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
-  Delete User
+  <b>DELETE</b>
 </a>
 
 			      </td>
@@ -334,25 +342,24 @@ function openulr(newurl) {
 
 
          </tbody>
+
       </table>
-	  
-      <div class="link-center">
+      <div class="link">
 		
-          <a class="link-primary" href="create.php" display-40>
-          <button type="button" class="btn btn-dark">
+    <a class="link-primary" href="create.php" display-40>
+    <button type="button" class="btn btn-dark ">
 
-      Add Users
+<b>ADD USERS </b>
 
-          </button>
-          </a>
-		  <br>
-		  <br>
-		  <br>
-		  <br>
-		  <br>
+    </button>
+    </a>
+</form>
 
+</div>
+</div>
+</div>
 
-			</div>
+     
       <form action="" method="GET">
 
                     <div class="input-group ">
@@ -367,8 +374,8 @@ function openulr(newurl) {
                       
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-warning">
-                        Search
+                    <button type="submit" class="btn btn-dark">
+                        <b>SEARCH</b>
                       </button>
     
 <br> <br>
@@ -401,7 +408,7 @@ function openulr(newurl) {
                     <td><?= $items['username']; ?></td>
                     <td><?= $items['name']; ?></td>
                     <td><a href="update.php? id=<?=$items['id']?>" 
-			      	     class="btn btn-success ">Update</a>
+			      	     class="btn btn-success "><b>UPDATE</b></a>
 
 
                   </td>
@@ -417,7 +424,7 @@ if (confirm("Are you sure you want to Delete?")) {
   }}
     </script>
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  DISCARD
+  <b>DELETE</b>
 </a></strong>
 			      </td>
                   </tr>

@@ -26,6 +26,8 @@ if (isset($_POST['create'])) {
 	$schoolyear = validate($_POST['schoolyear']);
 	$grade = validate($_POST['grade']);
 	$section = validate($_POST['section']);
+	$subjectteacher1 = validate($_POST['subjectteacher1']);
+	$subject1 = validate($_POST['subject1']);
 	$user_data =
 	'id='.$id.
 	'idnumber='.$idnumber.
@@ -44,7 +46,9 @@ if (isset($_POST['create'])) {
 	'&parent='.$parent.
 	'&schoolyear='.$schoolyear.
 	'&grade='.$grade.
-	'&section='.$section
+	'&section='.$section.
+	'&subjectteacher1='.$subjectteacher1.
+	'&subject1='.$subject1
     ;
 
 	if (empty($lrnnumber))
@@ -105,10 +109,12 @@ if (isset($_POST['create'])) {
 	else {
 
        $sql = "INSERT INTO students(id,idnumber,lrnnumber,adviser_id,firstname, middlename,lastname,fullname,gender,suffix,
-	   birthplace,birthday,age,parent,address,schoolyear,grade,section)
+	   birthplace,birthday,age,parent,address,schoolyear,grade,section,subjectteacher1,subject1)
                VALUES('$id','$idnumber','$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname','$fullname',	'$gender','$suffix',
 			   '$birthplace','$birthday','$age',
-			   '$address','$parent','$schoolyear','$grade','$section')";
+			   '$address','$parent','$schoolyear','$grade','$section'
+			   ,'$subjectteacher1','$subject1'
+			   )";
        $result = mysqli_query($conn, $sql);
        if ($result) {
 		header("Location: ../teacher_read.php?success=Added Successfully");
