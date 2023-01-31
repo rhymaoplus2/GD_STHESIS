@@ -33,6 +33,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         	if ($row['password'] === $password ) {
         		$_SESSION['id'] = $row['id'];
         		$_SESSION['username'] = $row['username'];
+				$_SESSION['name'] = $row['name'];
 	
         
 

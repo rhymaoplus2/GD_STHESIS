@@ -317,9 +317,10 @@ $result = mysqli_query($conn, $query);
           <td><?php echo $Row["address"]; ?></td>
           <td><?php echo $Row["parent"]; ?></td>
      -->
-     <td><a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark "><b>VIEW</b></a>
-                   
+     <td>
+     <a href="view.php?id=<?=$Row['id']?>" 
+			      	     class="btn btn-dark text-center"><b>FULL DETAILS</b></a>
+                <!--    
                <a href="update.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-primary "><b>UPDATE</b></a>
    
@@ -335,7 +336,7 @@ function openulr(newurl) {
 <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
   <b>DELETE</b>
 </a>
-
+-->
 			      </td>
 			    </tr>
      
@@ -375,7 +376,7 @@ function openulr(newurl) {
          </tbody>
       </table>
 
-     
+     <!--
       <div class="center">
           <a class="link-primary" href="teacher_create.php" display-40>
           <button type="button" class="btn btn-dark">
@@ -385,7 +386,7 @@ function openulr(newurl) {
           </button>
           </a>
           </div>
-
+-->
 
 </div>
 
@@ -453,8 +454,8 @@ function openulr(newurl) {
                     <td><b><?= $items['middlename']; ?></b></td> 
                     <td><b><?= $items['lrnnumber']; ?></b></td>
                     <td><b><a href="view.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-dark "><b>View</b></a>
-                   
+			      	     class="btn btn-dark "><b>FULL DETAILS</b></a>
+                   <!--
                 <a href="update.php?id=<?=$items['id']?>" 
 			      	     class="btn btn-success "><b>Update</b></a>
                    
@@ -473,6 +474,7 @@ function openulr(newurl) {
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
   <b>DELETE</b>
 </a> </strong>
+-->
 			      </td>
 
 

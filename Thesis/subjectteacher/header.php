@@ -43,7 +43,7 @@
 	  <div class="mx-auto">
       <h3 class="text-dark">
      <b>Mabuhay
-    <?=$_SESSION['username']?>!
+    <?=$_SESSION['name']?>!
 </b>
 </h3>
     </div>
