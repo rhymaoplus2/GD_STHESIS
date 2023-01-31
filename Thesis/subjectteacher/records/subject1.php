@@ -299,7 +299,7 @@ function myFunction() {
               
           
                   <th scope="col">Student Name</th>
-                  <th  scope="col">Subject Name </th>
+                  <th hidden  scope="col">Subject Name </th>
                   <th scope="col">Grade </th>
       
                 </tr>
@@ -393,7 +393,7 @@ function myFunction() {
            
                       -->
            
-            <td >
+            <td hidden >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
             value="<?= $Row['sub1'] ?>">
              </input>

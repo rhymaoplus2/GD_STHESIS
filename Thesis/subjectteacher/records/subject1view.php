@@ -330,7 +330,7 @@ function myFunction() {
               <thead >
                   <tr>
                   <th scope="col"><h3 class="text-primary"><b>Student Name</h3> </th>
-                  <th scope="col"><h3 class="text-primary"><b>Subject Name</h3></b></th>
+                  <th hidden scope="col"><h3 class="text-primary"><b>Subject Name</h3></b></th>
                   <th scope="col"><h3 class="text-primary"><b>Grade</b></h3></th>
                   
                   <th scope="col" colspan="2"><h3 class="text-success text-center"> <b>Actions</b> </th>
@@ -365,7 +365,7 @@ $result = mysqli_query($conn, $query);
            <tr>
            <td hidden><b><?php echo $Row["username"]; ?></b></td>
           <td><b><?php echo $Row["studentname"]; ?></b></td>
-          <td><b><?php echo $Row["subjectname"]; ?></b></td>
+          <td hidden><b><?php echo $Row["subjectname"]; ?></b></td>
           <td><b><?php echo $Row["grade"]; ?></b></td>
           <td ><b><a href="update.php? id=<?=$Row['id']?>" 
 			      	     class="btn btn-primary "><b>Update</b></a>
@@ -466,7 +466,7 @@ function openulr(newurl) {
                 <thead>
                   <tr>
                     <th><h3 class="text-primary"><b>Student Name</h3></b></th>
-                    <th><h3 class="text-primary"><b>Subject Name</h3></b></th>
+                    <th hidden><h3 class="text-primary"><b>Subject Name</h3></b></th>
                     <th><h3 class="text-primary"><b>Grade</h3></b></th>
                     <th colspan="2"><h3 class="text-success text-center"><b>Actions</h3></b></th>
                   </tr>
@@ -497,7 +497,7 @@ function openulr(newurl) {
                   0) { foreach ($query_run as $items) { ?>
                   <tr>
                    <td><?= $items['studentname']; ?></td>
-                    <td><?= $items['subjectname']; ?></td>
+                    <td hidden><?= $items['subjectname']; ?></td>
                     <td><?= $items['grade']; ?></td>
                     <td><a href="update.php? id=<?=$items['id']?>" 
 			      	     class="btn btn-primary "><b>UPDATE</b></a>
