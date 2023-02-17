@@ -34,7 +34,7 @@
 }
 
 .container form {
-	width: 750px;
+	width: auto;
 	padding: 20px;
 	border-radius: 30px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -79,7 +79,6 @@
 font-size: 10px;;
 
 }
-
 
 
 
@@ -205,7 +204,7 @@ font-size: 10px;;
     <option value="middlename">Middle Name</option>
     <option value="lrnnumber">LRN No.</option>
   </select>
-  <button type="submit" name="submit">Sort</button>
+  <button class="btn btn-dark" type="submit" name="submit">OK</button>
 </form>
 
             <table class="table table-bordered ">
@@ -306,20 +305,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
               <a href="update.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-primary "><b>UPDATE</b></a>
               
-			       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $Row['id']; ?>">Delete</button>
+			       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $Row['id']; ?>"><b>DELETE</b></button>
              <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>">Delete Student</h5>
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>"><div class="text text-danger">WARNING! You are about to Delete a Student</div></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
-            <p>Are you sure you want to delete this student?</p>
-            <form action="delete_student.php" method="POST">
+            <p> <b>Actions cannot be undone! </b>
+                <br>All data will be lost.
+               <br> Are you sure you want to delete this student?
+
+            </p>
+            <form class="delete" action="delete_student.php" method="POST">
                <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
+                  <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
                   <input type="password" class="form-control" id="password" name="password" required>
                </div>
                <button type="submit" class="btn btn-danger" name="delete">Delete</button>

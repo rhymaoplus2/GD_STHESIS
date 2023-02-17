@@ -1,26 +1,26 @@
-<?php
-   include "./php/db_conn.php";
-   session_start();
-   
-   if (isset($_POST['delete'])) {
-      $id = $_POST['id'];
-      $password = $_POST['password'];
-      
-      // Verify password
-      $username = $_SESSION['username'];
-      $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-      $result = mysqli_query($conn, $query);
-      
-      if (mysqli_num_rows($result) == 1) {
-         // Delete student
-         $query = "DELETE FROM students WHERE id='$id'";
-         mysqli_query($conn, $query);
-         
-         header("Location: index.php?success=Student deleted successfully");
-         exit();
-      } else {
-         header("Location: index.php?error=Incorrect password");
-         exit();
-      }
+<?php  
+
+if(isset($_GET['id'])){
+   include "db_conn.php";
+    function validate($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+	}
+
+	$id = validate($_GET['id']);
+
+	$sql = "DELETE FROM students
+	        WHERE id=$id";
+           
+   $result = mysqli_query($conn, $sql);
+   if ($result) {
+   	  header("Location: teacher_read.php?success=successfully deleted");
+   }else {
+      header("Location: teacher_read.php?error=unknown error occurred&$user_data");
    }
-?>
+
+}else {
+	header("Location:teacher_read.php");
+}

@@ -1,10 +1,12 @@
 
 
 
-<?php include 'n-addsub.php'; ?>
+<?php include 'n-addsub.php'; 
 
-
-
+session_start();
+   include "../php/db_conn.php";
+   include "../php/read.php";
+   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 
 
 
@@ -174,25 +176,26 @@ font-size: 10px;;
 		<form action="n-addsub.php" 
 		      method="post">
             
-		   <h4 class="display-4 text-center">ADD Handled Section</h4><hr><br>
+		   <h4 class="display-4 text-center">Subject Advisory</h4><hr><br>
 		   <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
 		    </div>
 		   <?php } ?>
 
+      
 
 
  <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Handled Section</label>
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 1</label>
  <select name="sec1" id="sec1" class="form-control">
   
     <?php 
-    $query ="SELECT section FROM section";
+    $query ="SELECT name FROM section ORDER BY id ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
-        $option =$optionData['section'];
+        $option =$optionData['name'];
     ?>
     <?php
     //selected option
@@ -206,11 +209,270 @@ continue;
     <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
    <?php
     }}
+  }
     ?>
 </select>
+ </div>
+
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 2</label>
+ <select name="sec2" id="sec2" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
+
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 3</label>
+ <select name="sec3" id="sec3" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
+
+ 
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 4</label>
+ <select name="sec4" id="sec4" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
+
+ 
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 5</label>
+ <select name="sec5" id="sec5" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
 
 
+ 
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 6</label>
+ <select name="sec6" id="sec6" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
 
+ 
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 7</label>
+ <select name="sec7" id="sec7" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
+
+ 
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 8</label>
+ <select name="sec8" id="sec8" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
+
+ 
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 9</label>
+ <select name="sec9" id="sec9" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
+ </div>
+
+
+ 
+ <div class="mb-3">
+ <label for="exampleInputEmail1" class="form-label">Subject Advisory 10</label>
+ <select name="sec10" id="sec10" class="form-control">
+  
+    <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($section) && $section== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+  
+    ?>
+</select>
  </div>
 
 
@@ -223,7 +485,7 @@ continue;
 		
 		   <button type="submit" 
 		           class="btn btn-primary"
-		           name="update">Update</button>
+		           name="update">ADD</button>
 
 
 				   <a class="link-primary" href="users.php" display-40>
@@ -254,7 +516,7 @@ function myFunction() {
 }
 </script>
   
-  
+
 
 </body>
 </html>

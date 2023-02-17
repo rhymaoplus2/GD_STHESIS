@@ -294,7 +294,9 @@ $result = mysqli_query($conn, $query);
                    <a href="addsub.php? id=<?=$Row['id']?>" 
 			      	     class="btn btn-primary "><b>+ SUBJECT</b></a>
    </td>
+       <!--
    <td>
+
         <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -308,7 +310,9 @@ function openulr(newurl) {
   <b>DELETE</b>
 </a>
 
+
 			      </td>
+            -->
 			    </tr>
      
 
@@ -413,7 +417,7 @@ function openulr(newurl) {
 
                   </td>
                   <td>
-
+<!--
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -426,6 +430,7 @@ if (confirm("Are you sure you want to Delete?")) {
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
   <b>DELETE</b>
 </a></strong>
+-->
 			      </td>
                   </tr>
                   
