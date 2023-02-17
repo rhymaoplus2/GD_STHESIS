@@ -91,6 +91,7 @@
 
               <thead class="thead">
                   <tr>
+                    
                   <th scope="col">LRN No. </th>
                   <th scope="col">First Name </th>
                   <th scope="col">Middle Name </th>
@@ -142,8 +143,6 @@
 			      </td>
 			    </tr>
      
-
-
 
 
 

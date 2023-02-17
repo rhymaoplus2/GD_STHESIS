@@ -40,7 +40,7 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box {
-	width: 750px;
+	width: 900px;
 }
 .container table {
 	padding: 20px;
@@ -179,26 +179,15 @@ font-size: 10px;;
 <?PHP include_once('header.php');?>
 </div>
 
-
-<br> <br>
 <div class="container" >
 		<div class="box">
     <div class="content">
 
-<!--
-			<h1 class="display-10 text-center"> Student List of MSU-MSAT 
-        <br>
-        Junior and Senior High School
-      </h1>
-      <br>
-      Dear : <?=$_SESSION['id']?>
-      <br>
-      Click the "ADD" Button Students! 
-<div class="row justify-content-center my-5">
-                                                      
-	   <div class="row justify-content-right  my-3">
--->       
-
+    <?php if (isset($_GET['error'])) { ?>
+		   <div class="alert alert-danger" role="alert">
+			  <?php echo $_GET['error']; ?>
+		    </div>
+		   <?php } ?>
        </div>
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
@@ -206,7 +195,19 @@ font-size: 10px;;
 		    </div>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
+        
         <div class="border">
+        <form method="post">
+  <label for="sort">Sort By:</label>
+  <select id="sort" name="sort">
+    <option value="lastname">Last Name</option>
+    <option value="firstname">First Name</option>
+    <option value="middlename">Middle Name</option>
+    <option value="lrnnumber">LRN No.</option>
+  </select>
+  <button type="submit" name="submit">Sort</button>
+</form>
+
             <table class="table table-bordered ">
 
 
@@ -231,6 +232,7 @@ font-size: 10px;;
                   <th scope="col">First Name </th>
                   <th scope="col">Middle Name </th>
                   <th scope="col">LRN No. </th>
+                  <th scope="col">Section</th>
                  <!--
                   
                  <th scope="col">Suffix</th>
@@ -256,6 +258,31 @@ font-size: 10px;;
 
  $query = "SELECT * FROM students";
 $result = mysqli_query($conn, $query);
+
+
+
+
+
+
+
+
+
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
+  if (isset($_POST['submit'])) {
+    $sort_by = $_POST['sort'];
+
+    // Modify your SQL query to include ORDER BY clause
+    $query = "SELECT * FROM students ORDER BY $sort_by";
+
+    $result = mysqli_query($conn, $query);
+  } else {
+    $query = "SELECT * FROM students";
+    $result = mysqli_query($conn, $query);
+  }
+
+  // rest of your code
+}
+
  if (mysqli_num_rows($result) > 0) 
 
  {
@@ -266,38 +293,42 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
+           <td hidden><?php echo $Row["id"]; ?></td>
            <td><?php echo $Row["lastname"]; ?></td>
           <td><?php echo $Row["firstname"]; ?></td>
           <td><?php echo $Row["middlename"]; ?></td>
           <td><?php echo $Row["lrnnumber"]; ?></td>
-          <!-- <td><?php echo $Row["suffix"]; ?></td>
-          <td><?php echo $Row["gender"]; ?></td>
-          <td><?php echo $Row["birthplace"]; ?></td>
-          <td><?php echo $Row["birthday"]; ?></td>
-          <td><?php echo $Row["age"]; ?></td>
-          <td><?php echo $Row["address"]; ?></td>
-          <td><?php echo $Row["parent"]; ?></td>
-     -->
+          <td><?php echo $Row["section"]; ?></td>
+  
      <td><a href="view.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-dark "><b>VIEW</b></a>
                    
               <a href="update.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-primary "><b>UPDATE</b></a>
-     
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
-  <b>DELETE</b>
-</a>
-
-			      </td>
+              
+			       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $Row['id']; ?>">Delete</button>
+             <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>">Delete Student</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <p>Are you sure you want to delete this student?</p>
+            <form action="delete_student.php" method="POST">
+               <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
+               <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" required>
+               </div>
+               <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+     </td>
 			    </tr>
      
 
@@ -334,138 +365,6 @@ function openulr(newurl) {
 
 
          </tbody>
-      </table>
-
-
-      
-     
-      <div class="center">
-          <a class="link-primary" href="teacher_create.php" display-40>
-          <button type="button" class="btn btn-dark">
-
-      <b>ADD NEW STUDENT</b>
-
-          </button>
-          </a>
-          </div>
-
-</form>
-</div>
-<br>
-<br>
-
-
-<form action="" method="GET">
-                    <div class="input-group ">
-                      <input
-                        type="text"
-                        name="search"
-                        required
-                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control"
-                        placeholder="Search by First Name/Middle Name/Last Name"
-                      />
-                      
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-dark">
-                        <b>SEARCH </b>
-                      </button>
-                 
-
-<br>
-<br>
-                   
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                  <th>Last Name</th>
-                  
-                    <th>First Name</th>
-                   
-                    <th>Middle Name</th>
-                    <th>LRN no.</th>
-                    <th colspan="3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-           
-
-
-
-
-    <?php
-    $con = mysqli_connect("localhost", "root", "", "my_db");
-    if (isset($_GET['search'])) {
-        $adviser_id = ($_SESSION["id"]);
-        $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM students WHERE CONCAT(lrnnumber,firstname,lastname,middlename)LIKE '%$filtervalues%' ";
-        $query_run = mysqli_query($con, $query);
-
-        if (mysqli_num_rows($query_run) >
-                  0) { foreach ($query_run as $items) { ?>
-                  <tr>
-                  <td><?= $items['lastname']; ?></td>
-                    <td><?= $items['firstname']; ?></td>
-                    <td><?= $items['middlename']; ?></td> 
-                    <td><?= $items['lrnnumber']; ?></td>
-                    <td><a href="view.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-dark ">View</a>
-                   
-                  </td>
-                    <td><a href="update.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-success ">Update</a>
-                   
-                  </td>
-                  <td>
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  DISCARD
-</a></strong>
-			      </td>
-
-
-      
-
-                  </tr>
-                  
-
-                  <?php
-            }
-        } else {
-                                                ?>
-                  <tr>
-                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
-                  <h5>
-                    
-                  </h5> </td>
-                  </tr>
-                  <?php
-        }
-    }
-       }
-       ?>
-
-      </form>
-      </div>
-      </div>
-      </div>
-
-<!-- Search Area -->
-
-
-
-
-
 
 </div>
    </div>
@@ -499,15 +398,10 @@ function myFunction() {
 }
 </script>
 
-
-
-
-
-
-  
+</script>
 </body>
 </html>
 <?php 
 
   
-
+                                                          }
