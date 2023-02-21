@@ -226,9 +226,9 @@ function myFunction() {
 
               <thead >
                   <tr>
-                  <th scope="col">Subject ID </th>
+                  <th hidden scope="col">Subject ID </th>
                   <th scope="col">Subject Name </th>
-                  <th scope="col">Subject Teacher Username</th>
+                  <th hidden scope="col">Subject Teacher Username</th>
                   
                   <th scope="col" colspan="2">Actions </th>
                 </tr>
@@ -255,13 +255,12 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-          <td><?php echo $Row["subjectid"]; ?></td>
+          <td hidden><?php echo $Row["subjectid"]; ?></td>
           <td><?php echo $Row["subjectname"]; ?></td>
-          <td><?php echo $Row["teacherid"]; ?></td>
-          <td><a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-success ">Update</a>
-
-     <td>
+          <td hidden><?php echo $Row["teacherid"]; ?></td>
+          <td ><a href="update.php? id=<?=$Row['id']?>" 
+			      	     class="btn btn-dark ">+</a>
+  
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -347,9 +346,9 @@ function openulr(newurl) {
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Subject ID</th>
-                    <th>Subject Name</th>
-                    <th>Subject Teacher Username</th>
+                    <th hidden>Subject ID</th>
+                    <th hidden>Subject Name</th>
+                    <th hidden>Subject Teacher Username</th>
                     <th colspan="2">Actions</th>
                   </tr>
                 </thead>

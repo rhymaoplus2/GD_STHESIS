@@ -166,6 +166,7 @@ top: 0;
 bottom: 0;
 z-index: -1;
   }
+
   </style>
 
 </head>
@@ -218,7 +219,7 @@ function myFunction() {
 
 
        <div class="form-group mb-3">
-    <label for="" hidden class="form-label">ID Number</label>
+    <label for="" hidden class="form-label"><b>ID Number</b></label>
     <input 
     hidden
     value="<?=$row['id']?>"
@@ -229,7 +230,7 @@ function myFunction() {
     </div>
 
     <div class="form-group mb-3">
-    <label for="" class="form-label">LRN No.</label>
+    <label for="" class="form-label"><b>LRN No.</b></label>
     <input 
     value="<?=$row['lrnnumber']?>"
 	  type="text"
@@ -241,7 +242,7 @@ function myFunction() {
 
     
     <div class="form-group mb-3">
-    <label for=""class="form-label">ID Number</label>
+    <label for=""class="form-label"><b>ID Number</b></label>
     <input 
 
     value="<?=$row['idnumber']?>"
@@ -254,7 +255,7 @@ function myFunction() {
 
 
 <div class="form-group mb-3">
-    <label for="" class="form-label">First Name</label>
+    <label for="" class="form-label"><b>First Name</b></label>
     <input 
     value="<?=$row['firstname']?>"
 	  type="text"
@@ -265,7 +266,7 @@ function myFunction() {
 
 
     <div class="form-group mb-3">
-    <label for="" class="form-label">Middle Name</label>
+    <label for="" class="form-label"><b>Middle Name</b></label>
     <input 
     value="<?=$row['middlename']?>"
 	  type="text"
@@ -278,7 +279,7 @@ function myFunction() {
 
     
     <div class="form-group mb-3">
-    <label for="" class="form-label">Last Name</label>
+    <label for="" class="form-label"><b>Last Name</b></label>
     <input 
     value="<?=$row['lastname']?>"
 	  type="text"
@@ -289,12 +290,137 @@ function myFunction() {
 
  
 
-    
-    
-    
+        
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Full Name</b></label>
+    <input 
+    value="<?=$row['fullname']?>"
+	  type="text"
+    class="form-control"
+    id="fullname" 
+    name="fullname">
+    </div>
+
+ 
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Suffix</b></label>
+<br>
+<select name="suffix" id="suffix" >
+  <option  value="Jr.">Jr.</option>
+  <option value="Sr.">Sr.</option>
+  <option value="">None</option>
+</select>
+    </div>
 
 
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Gender</b></label>
+<br>
+<select name="gender" id="gender" >
+  <option  value="">Select</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+</select>
+    </div>
 	        
+
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Birth Place</b></label>
+    <input 
+    value="<?=$row['birthplace']?>"
+	  type="text"
+    class="form-control"
+    id="birthplace" 
+    name="birthplace">
+    </div>
+
+ 
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Birth Date</b></label>
+    <input 
+    value="<?=$row['birthday']?>"
+	  type="date"
+    class="form-control"
+    id="birthday" 
+    name="birthday">
+    </div>
+
+    
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Age</b></label>
+    <input 
+    value="<?=$row['age']?>"
+	  type="text"
+    class="form-control"
+    id="age" 
+    name="age">
+    </div>
+
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Address</b></label>
+    <input 
+    value="<?=$row['address']?>"
+	  type="text"
+    class="form-control"
+    id="address" 
+    name="address">
+    </div>
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Parent</b></label>
+    <input 
+    value="<?=$row['parent']?>"
+	  type="text"
+    class="form-control"
+    id="parent" 
+    name="parent">
+    </div>
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>School Year</b></label>
+    <br>
+    <select name="schoolyear" id="schoolyear" >
+  <option  value="2020-2021">2020-2021</option>
+  <option value="2021-2022">2021-2022</option>
+  <option value="2021-2022">2021-2022</option>
+</select>
+    </div>
+
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Grade Level</b></label>
+    <br>
+    <select name="grade" id="grade" >
+  <option  value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option  value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+    </div>
+
+
+
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>Section</b></label>
+    <br>
+    <select name="section" id="section" >
+  <option  value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option  value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+    </div>
+
+
+
 		
 		   <button type="submit" 
 		           class="btn btn-primary"

@@ -376,7 +376,7 @@ function openulr(newurl) {
          </tbody>
       </table>
 
-     <!--
+
       <div class="center">
           <a class="link-primary" href="teacher_create.php" display-40>
           <button type="button" class="btn btn-dark">
@@ -386,7 +386,6 @@ function openulr(newurl) {
           </button>
           </a>
           </div>
--->
 
 </div>
 

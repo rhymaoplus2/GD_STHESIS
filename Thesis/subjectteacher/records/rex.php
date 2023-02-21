@@ -268,43 +268,41 @@ function myFunction() {
 
 
 
-           <thead>
-    <tr>
-        <th scope="col">Subject Name</th>
-        <th scope="col">Adviser User Name</th>
-        <th scope="col">Section</th>
-        <th scope="col">Subject Group Head</th>
-        <th scope="col" colspan="2">Actions</th>
-    </tr>
-</thead>
-<tbody>    
-    <?php
-    require "./php/db_conn.php";
-    $name = $_SESSION['name'];
 
-    $query = "SELECT u.name, s.teacher1, s.teacher2, s.teacher3, s.teacher4, s.teacher5, s.teacher6, s.teacher7, s.teacher8, s.teacher9, s.teacher10, u.sec1, s.subjectname, s.subjectgrouphead
-              FROM users u
-              JOIN subjects s
-              ON u.sub1 = s.subjectname
-              AND (s.teacher1 = '$name' OR s.teacher2 = '$name' OR s.teacher3 = '$name' OR s.teacher4 = '$name' OR s.teacher5 = '$name' OR s.teacher6 = '$name' OR s.teacher7 = '$name' OR s.teacher8 = '$name' OR s.teacher9 = '$name' OR s.teacher10 = '$name')
-              AND s.section = u.sec1
-              AND s.subjectgrouphead = u.sgh1;";
+              <thead >
+                  <tr>
+                  <th scope="col">Subject Name </th>
+                  <th scope="col">Adviser Name</th>
+                  <th scope="col">Section</th>
+                  
+                  <th scope="col" colspan="2">Actions </th>
+                </tr>
+              </thead>
+        <tbody>    
 
-    $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) > 0) {
-        while ($Row = mysqli_fetch_assoc($result)) {
-            ?>
-            <tr>
-                <td><?php echo $Row["subjectname"]; ?></td>
-                <td><?php echo $Row["name"]; ?></td>
-                <td><?php echo $Row["sec1"]; ?></td>
-                <td><?php echo $Row["subjectgrouphead"]; ?></td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
+<?php
+                        require "./php/db_conn.php";
+                        $name = $_SESSION['name'];
 
-</tbody>
+                        $query = "SELECT a.subjectname ,a.teacher1,a.subjectgrouphead, a.section,
+                         b.sub1,b.id,b.sgh1,b.sec1 FROM subjects a, users b
+                        WHERE a.teacher1=b.name  AND name='$name'
+ ";
 
+                        $result = mysqli_query($conn, $query);
+            if (mysqli_num_rows($result) > 0) {
+
+              while ($Row = mysqli_fetch_assoc($result)) {
+
+                ?>
+           <tr>
+           <td><?php echo $Row["subjectname"]; ?></td>
+           <td><?php echo $Row["sgh1"]; ?></td>
+          <td><?php echo $Row["sec1"]; ?></td>
+          <td><a href="subject1view.php" 
+			      	     class="btn btn-dark "><b>VIEW / ADD GRADES</b></a>
+
+			    </tr>
            
 
 
@@ -312,47 +310,9 @@ function myFunction() {
                     require "./php/db_conn.php";
                     $name = $_SESSION['name'];
 
-                    $query = "SELECT a.subjectname ,a.teacher1,
-                    a.section,
-                    a.section2,
-                    a.section3,
-                    a.section4,
-                    a.section5,
-                    a.subjectgrouphead, b.sub2,b.id,b.sgh2,b.sec2 FROM subjects a, users b
-                    WHERE 
-                        ((a.teacher1=b.name)
-                        OR
-                        (a.teacher2=b.name) 
-                        OR
-                        (a.teacher3=b.name)
-                        OR
-                        (a.teacher4=b.name) 
-                        OR
-                        (a.teacher5=b.name)
-                        OR
-                        (a.teacher6=b.name)
-                        OR
-                        (a.teacher7=b.name)
-                        OR
-                        (a.teacher8=b.name)
-                        OR
-                        (a.teacher9=b.name)
-                        OR
-                        (a.teacher10=b.name ))
-                        
-                        
-                        
-                        
-                        
-                        
-                        AND a.subjectname - b.sub2
-                        AND a.subjectgrouphead=b.sgh2 
+                    $query = "SELECT a.subjectname ,a.teacher1,a.section,a.subjectgrouphead, b.sub2,b.id,b.sgh2,b.sec2 FROM subjects a, users b
+                        WHERE a.teacher1=b.name  AND a.subjectgrouphead=b.sgh2 
                         AND a.section = b.sec2
-                        AND a.section2 = b.sec2
-                        AND a.section3 = b.sec2
-                        AND a.section4 = b.sec2
-                        AND a.section5 = b.sec2
-      
  ";
                     $result = mysqli_query($conn, $query);
                     if (mysqli_num_rows($result) > 0) {
@@ -361,7 +321,7 @@ function myFunction() {
 
                         ?>
            <tr>
-           <td><?php echo $Row["sub1"]; ?></td>
+           <td><?php echo $Row["subjectname"]; ?></td>
           <td><?php echo $Row["sgh2"]; ?></td>
           <td><?php echo $Row["sec2"]; ?></td>
         

@@ -183,7 +183,7 @@ font-size: 10px;;
 
 
 <div class="form-group mb-3">
-    <label for="" class="form-label">Change The Subject Name</label>
+    <label for="" class="form-label"><b>Subject Name</b></label>
     <input 
     value="<?=$row['subjectname']?>"
 	  type="text"
@@ -193,7 +193,9 @@ font-size: 10px;;
     </div>
 
 
-    
+    <br>
+<!-- SUBJECT TEACHERS -->
+
 <div class="form-group mb-3">
     
     <input 
@@ -204,29 +206,520 @@ font-size: 10px;;
     id="subjectid" 
     name="subjectname">
     </div>
-
-    <div class="form-group mb-3">
- 
-    <input 
-    value="<?=$row['teacherid']?>"
-	  disabled="disabled"
-    type="hidden"
-    class="form-control"
-    id="teacherid" 
-    name="subjectname">
-    </div>
-
-    
+    <b>--------------------------------------------------------------------------------------</b>
+    <p class="text-start"><b>Subject Teachers</b></p>
     <div class="form-group mb-3">
   
-    <input 
-    type="hidden"
-    value="<?=$row['subjectgrouphead']?>"
-	  disabled="disabled"
-    class="form-control"
-    id="subjectgrouphead" 
-    name="subjectname">
+  <select name="teacher1"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher1']?>"><?=$row['teacher1']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
     </div>
+
+
+
+
+
+    
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher2" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher2']?>"> <?=$row['teacher2']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher3" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher3']?>"><?=$row['teacher3']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher4" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher4']?>"><?=$row['teacher4']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher5" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher5']?>"><?=$row['teacher5']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher6" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher6']?>"><?=$row['teacher6']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher7" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher7']?>"><?=$row['teacher7']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher8" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher8']?>"><?=$row['teacher8']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher9" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher9']?>"><?=$row['teacher9']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="teacher10" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher10']?>"><?=$row['teacher10']?></option>
+    <?php 
+    $query ="SELECT name FROM users";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+<br>
+
+    <b>--------------------------------------------------------------------------------------</b>
+    <p class="text-start"><b>For Section:</b></p>
+    <div class="form-group mb-3">
+  
+  <select name="section"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section']?>"><?=$row['section']?></option>
+  <option value=""></option>
+   <?php 
+    $query ="SELECT name FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="form-group mb-3">
+  
+  <select name="section2"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section2']?>"><?=$row['section2']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+    <div class="form-group mb-3">
+  
+  <select name="section3"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section3']?>"><?=$row['section3']?></option>
+  <option value=""></option>
+   <?php 
+    $query ="SELECT name FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+    <div class="form-group mb-3">
+  
+  <select name="section4"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section4']?>"><?=$row['section4']?></option>
+  <option value=""></option>
+   <?php 
+    $query ="SELECT name FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+    <div class="form-group mb-3">
+  
+  <select name="section5"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+     <option value="<?=$row['section5']?>"><?=$row['section5']?></option>
+     <option value=""></option>
+    <?php 
+    $query ="SELECT name FROM section";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+        $option =$optionData['name'];
+    ?>
+    <?php
+    //selected option
+    if(!empty($name) && $name== $option){
+    // selected option
+    ?>
+    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+    <?php 
+continue;
+   }?>
+    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+   <?php
+    }}
+    ?>
+</select>
+
+
+    </div>
+
+
+
+
+
 
 
 
@@ -235,6 +728,8 @@ font-size: 10px;;
 		          value="<?=$row['id']?>"
 		          hidden >
 		
+<br>
+
 		   <button type="submit" 
 		           class="btn btn-primary"
 		           name="update">Update</button>
@@ -246,7 +741,6 @@ font-size: 10px;;
       Cancel
 
           </button>
-
 
 	
 	    </form>
