@@ -271,7 +271,6 @@ function myFunction() {
            <thead>
     <tr>
         <th scope="col">Subject Name</th>
-        <th scope="col">Adviser User Name</th>
         <th scope="col">Section</th>
         <th scope="col">Subject Group Head</th>
         <th scope="col" colspan="2">Actions</th>
@@ -282,13 +281,21 @@ function myFunction() {
     require "./php/db_conn.php";
     $name = $_SESSION['name'];
 
-    $query = "SELECT u.name, s.teacher1, s.teacher2, s.teacher3, s.teacher4, s.teacher5, s.teacher6, s.teacher7, s.teacher8, s.teacher9, s.teacher10, u.sec1, s.subjectname, s.subjectgrouphead
+    $query = "SELECT u.name, s.teacher1, s.teacher2, s.teacher3, s.teacher4, s.teacher5, s.teacher6, s.teacher7, s.teacher8, s.teacher9, s.teacher10, 
+              u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, 
+              s.subjectname, s.subjectgrouphead, s.subjectgrouphead2, s.subjectgrouphead3, s.subjectgrouphead4, s.subjectgrouphead5
               FROM users u
               JOIN subjects s
+             
               ON u.sub1 = s.subjectname
-              AND (s.teacher1 = '$name' OR s.teacher2 = '$name' OR s.teacher3 = '$name' OR s.teacher4 = '$name' OR s.teacher5 = '$name' OR s.teacher6 = '$name' OR s.teacher7 = '$name' OR s.teacher8 = '$name' OR s.teacher9 = '$name' OR s.teacher10 = '$name')
-              AND s.section = u.sec1
-              AND s.subjectgrouphead = u.sgh1;";
+              AND (
+                    s.teacher1 = '$name' OR s.teacher2 = '$name' OR s.teacher3 = '$name' OR s.teacher4 = '$name' OR s.teacher5 = '$name' OR 
+                    s.teacher6 = '$name' OR s.teacher7 = '$name' OR s.teacher8 = '$name' OR s.teacher9 = '$name' OR s.teacher10 = '$name'
+                  )
+              AND (
+                    s.section = u.sec1 OR s.section2 = u.sec2 OR s.section3 = u.sec3 OR s.section4 = u.sec4 OR s.section5 = u.sec5 OR
+                    s.subjectgrouphead = u.sgh1 OR s.subjectgrouphead2 = u.sgh2 OR s.subjectgrouphead3 = u.sgh3 OR s.subjectgrouphead4 = u.sgh4 OR s.subjectgrouphead5 = u.sgh5
+                  );";
 
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
@@ -296,16 +303,72 @@ function myFunction() {
             ?>
             <tr>
                 <td><?php echo $Row["subjectname"]; ?></td>
-                <td><?php echo $Row["name"]; ?></td>
+      
                 <td><?php echo $Row["sec1"]; ?></td>
                 <td><?php echo $Row["subjectgrouphead"]; ?></td>
-                <td>...</td>
-                <td>...</td>
+             
+          <td><a href="subject1view.php" 
+			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
+                      </td>
+    
             </tr>
 
 </tbody>
 
            
+<?php
+    require "./php/db_conn.php";
+    $name = $_SESSION['name'];
+
+    $query = "SELECT u.name, s.teacher1, s.teacher2, s.teacher3, s.teacher4, s.teacher5, s.teacher6, s.teacher7, s.teacher8, s.teacher9, s.teacher10, 
+              u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, 
+              s.subjectname, s.subjectgrouphead, s.subjectgrouphead2, s.subjectgrouphead3, s.subjectgrouphead4, s.subjectgrouphead5
+              FROM users u
+              JOIN subjects s
+              ON u.sub2 = s.subjectname
+              AND (
+                    s.teacher1 = '$name' OR s.teacher2 = '$name' OR s.teacher3 = '$name' OR s.teacher4 = '$name' OR s.teacher5 = '$name' OR 
+                    s.teacher6 = '$name' OR s.teacher7 = '$name' OR s.teacher8 = '$name' OR s.teacher9 = '$name' OR s.teacher10 = '$name'
+                  )
+              AND (
+                    s.section = u.sec1 OR s.section2 = u.sec2 OR s.section3 = u.sec3 OR s.section4 = u.sec4 OR s.section5 = u.sec5 OR
+                    s.subjectgrouphead = u.sgh1 OR s.subjectgrouphead2 = u.sgh2 OR s.subjectgrouphead3 = u.sgh3 OR s.subjectgrouphead4 = u.sgh4 OR s.subjectgrouphead5 = u.sgh5
+                  );";
+
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($Row = mysqli_fetch_assoc($result)) {
+            ?>
+            <tr>
+                <td><?php echo $Row["subjectname"]; ?></td>
+      
+                <td><?php echo $Row["sec2"]; ?></td>
+                <td><?php echo $Row["subjectgrouphead"]; ?></td>
+             
+          <td><a href="subject1view.php" 
+			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
+                      </td>
+    
+            </tr>
+
+</tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <?php
@@ -361,13 +424,13 @@ function myFunction() {
 
                         ?>
            <tr>
-           <td><?php echo $Row["sub1"]; ?></td>
+           <td><?php echo $Row["sub2"]; ?></td>
           <td><?php echo $Row["sgh2"]; ?></td>
           <td><?php echo $Row["sec2"]; ?></td>
         
           <td><a href="subject1view.php" 
 			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
-
+                      </td>
     
 			    </tr>
      
@@ -391,7 +454,8 @@ function myFunction() {
             }
 
 
-
+          }
+        }
 
             }
 
