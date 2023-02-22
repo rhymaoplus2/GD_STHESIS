@@ -411,6 +411,7 @@ function myFunction() {
           
           
        <select id="grade" name="grade[]" class="form-control">
+       <option value=" "> </option>
                                 <?php
     for ($i=50; $i<=100; $i++)
     {

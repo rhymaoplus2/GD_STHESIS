@@ -243,12 +243,6 @@ function myFunction() {
 
 
 
-        <div class=" container ">
-       
-        <div class="box">
-        <div class="content">
-			<br>
-      
 
 
 
@@ -314,7 +308,9 @@ function myFunction() {
       <br>
       <br>
       -->
-        <div class="border">
+ 
+  <div class="border">
+    
             <table class="table table-bordered ">
 
             <?php 
@@ -334,7 +330,7 @@ function myFunction() {
                   <th hidden scope="col"><h3 class="text-primary"><b>Subject Name</h3></b></th>
                   <th scope="col"><h3 class="text-primary"><b>Grade</b></h3></th>
                   
-                  <th scope="col" colspan="2"><h3 class="text-success text-center"> <b>Actions</b> </th>
+                  <th scope="col" colspan="2"><h3 class="text-success text-center"> <b>Action</b> </th>
                 </tr>
               </thead>
         <tbody>    
@@ -368,10 +364,10 @@ $result = mysqli_query($conn, $query);
           <td><b><?php echo $Row["studentname"]; ?></b></td>
           <td hidden><b><?php echo $Row["subjectname"]; ?></b></td>
           <td><b><?php echo $Row["grade"]; ?></b></td>
-          <td ><b><a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary "><b>Update</b></a>
+          <td class="text-center" ><b><a href="update.php? id=<?=$Row['id']?>" 
+			      	     class="btn btn-primary "><b>Update GRADE</b></a>
  
-  
+
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -423,27 +419,33 @@ function openulr(newurl) {
       </table>
 </div>
 
-      <div class="addbutton mb-3">
-          <a class="link-primary" href="subject1.php" display-40>
-          <br>
-          <button type="button" class="btn btn-dark">
-
-      <b>ADD GRADES</b>
-
-          </button>
-          </a>
+  
+<div>
           <script>
 		function printPage() {
 			window.open("printsubject1.php", "_blank");
 		}
 	</script>
 <bR>
-<bR>
-      	<button type="button" class="btn btn-dark" onclick="printPage()"><b>PRINT X DATA</B></button>
+
+<div>
+          <a class="link-primary " href="subject1.php" display-40>
+      
+          <button type="button" class="btn btn-dark ">
+
+      <b>+</b>
+
+          </button>
+          </a>
+          <br>
+<br>
+      
+</div>
+      	<button type="button" class="btn btn-dark" onclick="printPage()"><b>PRINT</B></button>
+        <BR>
+<BR>
+
 			</div>
-<BR>
-<BR>
-<BR>
 
 
       <form action="" method="GET">
@@ -475,7 +477,7 @@ function openulr(newurl) {
                     <th><h3 class="text-primary"><b>Student Name</h3></b></th>
                     <th hidden><h3 class="text-primary"><b>Subject Name</h3></b></th>
                     <th><h3 class="text-primary"><b>Grade</h3></b></th>
-                    <th colspan="2"><h3 class="text-success text-center"><b>Actions</h3></b></th>
+                    <th colspan="2"><h3 class="text-success text-center"><b>Action</h3></b></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -506,11 +508,11 @@ function openulr(newurl) {
                    <td><?= $items['studentname']; ?></td>
                     <td hidden><?= $items['subjectname']; ?></td>
                     <td><?= $items['grade']; ?></td>
-                    <td><a href="update.php? id=<?=$items['id']?>" 
-			      	     class="btn btn-primary "><b>UPDATE</b></a>
+                    <td class="text-center"><a href="update.php? id=<?=$items['id']?>" 
+			      	     class="btn btn-primary "><b>UPDATE GRADE</b></a>
 
 
-                 
+        
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -523,6 +525,7 @@ if (confirm("Are you sure you want to Delete?")) {
 <strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
 <b>DELETE</b>
 </a></strong>
+
 			      </td>
                   </tr>
                   
