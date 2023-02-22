@@ -11,6 +11,12 @@
 <html>
 <head>
 	<title>RECORDS</title>
+  <script>
+		function printPage() {
+			window.location.href = "printsubject1.php";
+		}
+	</script>
+
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -322,46 +328,21 @@ function myFunction() {
          
 <?php
                     require "php/db_conn.php";
-            $username = $_SESSION["username"];
+            $name = $_SESSION["name"];
                     $query =
-                    "SELECT 
-                    a.fullname,a.subjectteacher1,a.subject2,a.section,a.adviser_id,
-                    b.username,b.sub1,b.sub2,b.sec1,b.sgh1,b.sgh2,
-                    c.teacherid,c.subjectname,c.section
-                    FROM 
-                    students a,
-                    users b,
-                    subjects c 
-            
-                
-                  Where 
-                   c.teacherid=b.username
-                   AND a.section = b.sec1
-                  AND 
-                 b.sub1= c.subjectname
-                 
-                  AND  c.section=b.sec1
-                  AND
-                  a.subjectteacher1=b.username
-                 AND
-                  (b.sub1 = a.subject1 OR b.sub1 = a.subject2)
-                  AND
-                  (b.sgh1 = a.adviser_id OR b.sgh2 = a.adviser_id)
-                  AND c.section = a.section
-                  AND c.subjectgrouphead = b.sgh1
-                 AND username='$username';
-
-                  /*          */
-                
-              
-                    /*
-                    AND b.sgh1=c.subjectgrouphead
-                        AND a.subject1=b.sub1 
-                              AND c.teacherid=b.name
-                               AND a.subjectteacher1=b.name 
-                    */
+                    "SELECT students.fullname, students.adviser_id, users.sub1, subjects.subjectname ,
+                    students.section, students.firstname,students.middlename,students.lastname,students.gender
+                    FROM students
+                    JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
+                    JOIN subjects ON subjects.subjectname = users.sub1 AND users.sec1 = students.section AND (subjects.teacher1 = '".$_SESSION["name"]."' OR subjects.teacher2 = '".$_SESSION["name"]."' 
+                    OR subjects.teacher3 = '".$_SESSION["name"]."' OR subjects.teacher4 = '".$_SESSION["name"]."'
+                     OR subjects.teacher5 = '".$_SESSION["name"]."' OR subjects.teacher6 = '".$_SESSION["name"]."' 
+                     OR subjects.teacher7 = '".$_SESSION["name"]."' OR subjects.teacher8 = '".$_SESSION["name"]."' 
+                     OR subjects.teacher9 = '".$_SESSION["name"]."' OR subjects.teacher10 = '".$_SESSION["name"]."')
+                    WHERE (students.subject1 = users.sub1 OR students.subject2 = users.sub1 OR students.subject3 = users.sub1 OR students.subject4 = users.sub1 OR students.subject5 = users.sub1 OR students.subject6 = users.sub1 OR students.subject7 = users.sub1 OR students.subject8 = users.sub1 OR students.subject9 = users.sub1 OR students.subject10 = users.sub1)
+                    
+                    ";
                   
-                  ";
                     // $query = "SELECT students.fullname,students.adviser_id,students.firstname
                     //FROM students 
                     //INNER JOIN subjects   ON subjects.subjectgrouphead = adviser_id";
@@ -372,26 +353,39 @@ function myFunction() {
 
                         ?>
    
-<!--
-<td>
-<input disabled class="no"name="id[]" value="<?= $Row['lrnnumber']; ?>">
-</input>
-</td>
-                      -->                 
+               
 <td   colspan="">
 <input class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
 </input>
 </td>
-<!--
-<td>
 
-<?= $Row['lastname'] ?> &nbsp
-<?= $Row['firstname'] ?> &nbsp
-<?= $Row['middlename'] ?>
-
+<td  hidden colspan="">
+<input class="no" id="firstname" name="firstname[]" value="<?= $Row['firstname'] ?>">
+</input>
 </td>
+
+
+<td  hidden colspan="">
+<input class="no" id="middlename" name="middlename[]" value="<?= $Row['middlename'] ?>">
+</input>
+</td>
+
+<td  hidden colspan="">
+<input class="no" id="lastname" name="lastname[]" value="<?= $Row['lastname'] ?>">
+</input>
+</td>
+
+
+<td  hidden colspan="">
+<input class="no" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
+</input>
+</td>
+
+
+
+
            
-                      -->
+               
            
             <td hidden >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
@@ -431,7 +425,7 @@ function myFunction() {
 
          </td>
 
-          <td hidden><input value="<?= $_SESSION['username']?>" id="teacher"name="teacher[]">
+          <td hidden><input value="<?= $_SESSION['name']?>" id="teacher"name="teacher[]">
        
 
 
@@ -485,7 +479,7 @@ function myFunction() {
       </table>
       <button type="submit"
         class="btn btn-primary"
-        name="submit"><b>SUBMIT<b></button>
+        name="submit"><b>ADD<b></button>
       
           <a class="link-primary" href="subject1view.php" display-40>
           <button type="button" class="btn btn-dark">
@@ -494,10 +488,10 @@ function myFunction() {
 
           </button>
           </a>
+          
           </div>
           <br>
     
-
 
 
 

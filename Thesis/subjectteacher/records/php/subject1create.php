@@ -16,6 +16,10 @@ if(isset($_POST['submit']))
 	$teacher = $_POST['teacher'];
     $section = $_POST['section'];
     $adviser = $_POST['adviser'];
+    $firstname = $_POST['firstname'];
+    $middlename = $_POST['middlename'];
+    $lastname = $_POST['lastname'];
+    $gender = $_POST['gender'];
 	$duplicate=mysqli_query($conn,
 		"select * from grade where studentname='$studentname' ");
    
@@ -34,11 +38,16 @@ if(isset($_POST['submit']))
 		$s_teacher = $teacher[$index];
         $s_section = $section[$index];
         $s_adviser = $adviser[$index];
+        $s_firstname = $firstname[$index];
+        $s_middlename = $middlename[$index];
+        $s_lastname = $lastname[$index];
+        $s_gender = $gender[$index];
 
         // $s_otherfiled = $empid[$index];
 
-        $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser) 
-		VALUES ('$s_studentname','$s_subjectname','$s_grade','$s_teacher','$s_section','$s_adviser')";
+        $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser,firstname,middlename,lastname,gender) 
+		VALUES ('$s_studentname','$s_subjectname','$s_grade','$s_teacher','$s_section','$s_adviser'
+        ,'$s_firstname','$s_middlename','$s_lastname','$s_gender')";
         $query_run = mysqli_query($conn, $query);
 		
 	}

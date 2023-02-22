@@ -8,6 +8,7 @@
 <html>
 <head>
 	<title>HOME</title>
+
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -344,12 +345,12 @@ function myFunction() {
 
 <?php
  require "./php/db_conn.php";
-                        $teacher = $_SESSION['username'];
+                        $teacher = $_SESSION['name'];
                        
  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.username,a.sub1 ,a.username,a.sec1, a.sgh1
+ a.name,a.sub1 ,a.name,a.sec1, a.sgh1
  FROM grade b, users a WHERE  b.subjectname = a.sub1  
- AND b.section = a.sec1 AND a.username = b.teacher AND b.adviser = a.sgh1 
+ AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
  AND teacher = '$teacher'
  ";
 $result = mysqli_query($conn, $query);
@@ -363,7 +364,7 @@ $result = mysqli_query($conn, $query);
       
       ?>
            <tr>
-           <td hidden><b><?php echo $Row["username"]; ?></b></td>
+           <td hidden><b><?php echo $Row["name"]; ?></b></td>
           <td><b><?php echo $Row["studentname"]; ?></b></td>
           <td hidden><b><?php echo $Row["subjectname"]; ?></b></td>
           <td><b><?php echo $Row["grade"]; ?></b></td>
@@ -431,8 +432,14 @@ function openulr(newurl) {
 
           </button>
           </a>
-
-
+          <script>
+		function printPage() {
+			window.open("printsubject1.php", "_blank");
+		}
+	</script>
+<bR>
+<bR>
+      	<button type="button" class="btn btn-dark" onclick="printPage()"><b>PRINT X DATA</B></button>
 			</div>
 <BR>
 <BR>
@@ -477,11 +484,11 @@ function openulr(newurl) {
     if (isset($_GET['search'])) {
         $subjectgrouphead = ($_SESSION["id"]);
         $filtervalues = $_GET['search'];
-        $teacher=($_SESSION["id"]);
+        $teacher=($_SESSION["name"]);
         $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.username,a.sub1 ,a.username,a.sec1, a.sgh1
+ a.name,a.sub1 ,a.name,a.sec1, a.sgh1
  FROM grade b, users a WHERE  b.subjectname = a.sub1  
- AND b.section = a.sec1 AND a.username = b.teacher AND b.adviser = a.sgh1 
+ AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
  AND teacher = '$teacher'
 
  AND CONCAT(studentname,subjectname)LIKE '%$filtervalues%'
