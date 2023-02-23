@@ -220,17 +220,21 @@ function myFunction() {
 
 
            <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Grade</label>
-                    
-                                <select name="grade" id="grade" class="form-control">
-                                <?php
-    for ($i=50; $i<=100; $i++)
-    {
-        ?>
-            <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php
+           <label for="exampleInputEmail1" class="form-label">Grade</label>
+<select name="grade" id="grade" class="form-control">
+    <?php
+    for ($i=50; $i<=100; $i++) {
+        if (isset($row['grade']) && $row['grade'] == $i) {
+            // If grade value is already set, select it in the dropdown
+            echo '<option value="'.$i.'" selected>'.$i.'</option>';
+        } else {
+            // Otherwise, display the grade option
+            echo '<option value="'.$i.'">'.$i.'</option>';
+        }
     }
-?>
+    ?>
+</select>
+
 
 
 	         <input type="text" 

@@ -50,6 +50,14 @@
 }
 
 
+td {
+  border: 1px solid black;
+}
+
+.failed {
+  color: red;
+  border-right-color: white; /* set border color to white */
+}
 
 .wrapper{
   font-size: 11px;
@@ -64,10 +72,11 @@
 }
 hr {
   border: none;
-  border: 1px solid black;
+  border: 1px solid;
   width: 120%;
- 
+  background-color: black;
 }
+
 
 .container form {
 	width: 800px;
@@ -270,12 +279,48 @@ font-size: 10px;;
            <p>
            Track & Strand :
 
+
+
+
+
+
+
+
+           <?php
+
+$teacher = $_SESSION['name'];
+
+$query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.adviser,
+b.firstname,b.middlename,b.lastname,b.remarks,c.pname,d.crname
+FROM grade b, users a , principal c , cr d WHERE  b.subjectname = a.sub1  
+AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
+AND teacher = '$teacher' AND b.gender = 'MALE'
+";
+$result = mysqli_query($conn, $query);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $sub1 = $row['sub1'];
+    $pname = $row['pname'];
+    $crname = $row['crname'];
+    $name = $row['name'];
+    $adviser = $row['adviser'];
+} else {
+    // handle error
+}
+?>
+
+
+
+
+
+
            <br>
            Year & Section : <b><?=$_SESSION['sec1']?> </b>
            <br>
            Adviser :<b>
                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   <?=$_SESSION['name']?> </b> 
+                   <?php echo $adviser; ?> </b> 
            </p>
           </div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -284,7 +329,38 @@ font-size: 10px;;
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div class=" ms-auto justify-content-right" style="display:inline-block;">
            <p>
-           Subject :
+       
+
+
+
+
+
+           <?php
+
+$teacher = $_SESSION['name'];
+
+$query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,
+b.firstname,b.middlename,b.lastname,b.remarks,c.pname,d.crname
+FROM grade b, users a , principal c , cr d WHERE  b.subjectname = a.sub1  
+AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
+AND teacher = '$teacher' AND b.gender = 'MALE'
+";
+$result = mysqli_query($conn, $query);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $sub1 = $row['sub1'];
+    $pname = $row['pname'];
+    $crname = $row['crname'];
+    $name = $row['name'];
+} else {
+    // handle error
+}
+?>
+
+
+
+Subject: <b><?php echo $sub1; ?></b>
 
            <br>
            Quarter : <b>  </b>
@@ -324,7 +400,7 @@ font-size: 10px;;
                        
  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
  a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,
- b.firstname,b.middlename,b.lastname
+ b.firstname,b.middlename,b.lastname,b.remarks
  FROM grade b, users a WHERE  b.subjectname = a.sub1  
  AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
  AND teacher = '$teacher' AND b.gender = 'MALE'
@@ -347,7 +423,9 @@ $result = mysqli_query($conn, $query);
           <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
           
           <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
-          <td class="text text-center " ></td>
+          <td class="text-center" <?php if ($Row['remarks'] == 'FAILED') { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
 
 			      </td>
 
@@ -366,7 +444,7 @@ $result = mysqli_query($conn, $query);
                        
  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
  a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,
- b.firstname,b.middlename,b.lastname
+ b.firstname,b.middlename,b.lastname,b.remarks
  FROM grade b, users a WHERE  b.subjectname = a.sub1  
  AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
  AND teacher = '$teacher' AND b.gender = 'FEMALE'
@@ -389,11 +467,14 @@ $result = mysqli_query($conn, $query);
           <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
           
           <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
-          <td class="text text-center " ></td>
-          
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
      
 
-
+     </tr>
 
 
 
@@ -439,7 +520,10 @@ $result = mysqli_query($conn, $query);
     Prepared by
     <br>
     <br>
-    <hr class="my-1">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <b><?php echo $name; ?></b>
+    <hr class="my-1 " style="background-color:black;">
+ 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <i>Subject Teacher</i>
@@ -448,7 +532,10 @@ $result = mysqli_query($conn, $query);
     Noted by
     <br>
     <br>
-    <hr class="my-1">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <b><?php echo $pname; ?></b>
+    <hr class="my-1 " style="background-color:black;">
+
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <i>Principal</i>
@@ -498,8 +585,10 @@ $result = mysqli_query($conn, $query);
     Approved by
     <br>
     <br>
-    
-    <hr class="my-1">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <b><?php echo $crname; ?></b>
+    <hr class="my-1 " style="background-color:black;">
+  
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <i>Campus Registrar</i>

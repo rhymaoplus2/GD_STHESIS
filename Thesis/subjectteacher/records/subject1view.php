@@ -329,6 +329,7 @@ function myFunction() {
                   <th scope="col"><h3 class="text-primary"><b>Student Name</h3> </th>
                   <th hidden scope="col"><h3 class="text-primary"><b>Subject Name</h3></b></th>
                   <th scope="col"><h3 class="text-primary"><b>Grade</b></h3></th>
+                  <th scope="col"><h3 class="text-primary"><b>Remarks</b></h3></th>
                   
                   <th scope="col" colspan="2"><h3 class="text-success text-center"> <b>Action</b> </th>
                 </tr>
@@ -344,7 +345,7 @@ function myFunction() {
                         $teacher = $_SESSION['name'];
                        
  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.name,a.sub1 ,a.name,a.sec1, a.sgh1
+ a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks
  FROM grade b, users a WHERE  b.subjectname = a.sub1  
  AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
  AND teacher = '$teacher'
@@ -363,7 +364,11 @@ $result = mysqli_query($conn, $query);
            <td hidden><b><?php echo $Row["name"]; ?></b></td>
           <td><b><?php echo $Row["studentname"]; ?></b></td>
           <td hidden><b><?php echo $Row["subjectname"]; ?></b></td>
-          <td><b><?php echo $Row["grade"]; ?></b></td>
+          <td class="text-center"><b><?php echo $Row["grade"]; ?></b></td>
+          <td class="text-center" <?php if ($Row['remarks'] == 'FAILED') { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
           <td class="text-center" ><b><a href="update.php? id=<?=$Row['id']?>" 
 			      	     class="btn btn-primary "><b>Update GRADE</b></a>
  
@@ -428,24 +433,18 @@ function openulr(newurl) {
 	</script>
 <bR>
 
-<div>
-          <a class="link-primary " href="subject1.php" display-40>
-      
-          <button type="button" class="btn btn-dark ">
-
+<div class="text-center">
+  <a class="link-primary" href="subject1.php">
+    <button type="button" class="btn btn-dark">
       <b>+</b>
-
-          </button>
-          </a>
-          <br>
-<br>
-      
+    </button>
+  </a>
+  <br><br>
+  <button type="button" class="btn btn-dark" onclick="printPage()">
+    <b>PRINT</b>
+  </button>
+  <br><br>
 </div>
-      	<button type="button" class="btn btn-dark" onclick="printPage()"><b>PRINT</B></button>
-        <BR>
-<BR>
-
-			</div>
 
 
       <form action="" method="GET">
@@ -477,6 +476,7 @@ function openulr(newurl) {
                     <th><h3 class="text-primary"><b>Student Name</h3></b></th>
                     <th hidden><h3 class="text-primary"><b>Subject Name</h3></b></th>
                     <th><h3 class="text-primary"><b>Grade</h3></b></th>
+                    <th><h3 class="text-primary"><b>Remarks</h3></b></th>
                     <th colspan="2"><h3 class="text-success text-center"><b>Action</h3></b></th>
                   </tr>
                 </thead>
@@ -488,7 +488,7 @@ function openulr(newurl) {
         $filtervalues = $_GET['search'];
         $teacher=($_SESSION["name"]);
         $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.name,a.sub1 ,a.name,a.sec1, a.sgh1
+ a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks
  FROM grade b, users a WHERE  b.subjectname = a.sub1  
  AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
  AND teacher = '$teacher'
@@ -505,10 +505,14 @@ function openulr(newurl) {
         if (mysqli_num_rows($query_run) >
                   0) { foreach ($query_run as $items) { ?>
                   <tr>
-                   <td><?= $items['studentname']; ?></td>
-                    <td hidden><?= $items['subjectname']; ?></td>
-                    <td><?= $items['grade']; ?></td>
-                    <td class="text-center"><a href="update.php? id=<?=$items['id']?>" 
+                   <td><B><?= $items['studentname']; ?></td>
+                    <td hidden><B><?= $items['subjectname']; ?></td>
+                    <td class="text-center"><B><?= $items['grade']; ?></td>
+                    <td class="text-center" 
+                    <?php if ($items['remarks'] == 'FAILED') { ?> style="color: red;" <?php } ?>>
+                    <B><?= $items['remarks']; ?>
+                    </td>
+                    <td class="text-center"><B><a href="update.php? id=<?=$items['id']?>" 
 			      	     class="btn btn-primary "><b>UPDATE GRADE</b></a>
 
 
