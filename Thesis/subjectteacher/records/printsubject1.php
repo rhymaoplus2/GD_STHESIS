@@ -15,11 +15,22 @@
 
 
   <style>
-@media print {
+@@media print {
   /* Set the page size to A4 */
   @page {
     size: A4;
     margin: 0;
+  }
+
+  /* Set the footer to be at the bottom of the page */
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
   }
 
   /* Set the page break after two pages */
@@ -37,6 +48,13 @@
   .wrapper {
     counter-increment: page;
   }
+
+  /* Add margin to the top of the second page */
+  .wrapper:nth-of-type(n+3) {
+    margin-top: 100px;
+  }
+
+  /* Add page number to the last page */
   .wrapper:after {
     content: counter(page);
     display: block;
@@ -48,7 +66,6 @@
     content: "";
   }
 }
-
 
 td {
   border: 1px solid black;
@@ -326,7 +343,9 @@ if ($result && mysqli_num_rows($result) > 0) {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         
           <div class=" ms-auto justify-content-right" style="display:inline-block;">
            <p>
        
@@ -360,12 +379,12 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 
 
-Subject: <b><?php echo $sub1; ?></b>
+Subject:&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $sub1; ?></b>
 
            <br>
            Quarter : <b>  </b>
            <br>
-           Semester :<b>
+           Semester :<b> 
                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </b> 
            </p>
@@ -475,6 +494,486 @@ $result = mysqli_query($conn, $query);
      
 
      </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
+     <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+</td>
+
+     
+
+     </tr>
 
 
 
@@ -544,22 +1043,30 @@ $result = mysqli_query($conn, $query);
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
    <div class=" ms-auto justify-content-right" style="display:inline-block;">
     <br>
     <br>
-    <br>
-    <br>
+    
+    &nbsp;&nbsp;<b> <span id="currentDate"></B></span>
+
+    <script>
+  // Get the current date
+  var currentDate = new Date();
+
+  // Format the date as desired (e.g. "02/23/2023")
+  var formattedDate = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
+
+  // Update the HTML element with the current date
+  document.getElementById('currentDate').textContent = formattedDate;
+</script>
     <hr class="my-1">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;
     <i>Date</i>&nbsp;&nbsp;&nbsp;
     <br>
    
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
     <hr class="my-1">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;
@@ -574,6 +1081,7 @@ $result = mysqli_query($conn, $query);
 &nbsp;
 <div class="mb-3 " style="display:inline-block;">
     Checked by
+    <br>
     <br>
     <br>
     <hr class="my-1">
@@ -612,7 +1120,7 @@ $result = mysqli_query($conn, $query);
     <br>
     <br>
      
-    <br>
+    <br><br>   
     <br>
     <hr class="my-1">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
