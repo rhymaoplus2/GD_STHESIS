@@ -15,12 +15,16 @@
 
 
   <style>
-@@media print {
+@media print {
   /* Set the page size to A4 */
   @page {
     size: A4;
     margin: 0;
   }
+  .btn-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
   /* Set the footer to be at the bottom of the page */
   .print-footer {
@@ -65,6 +69,12 @@
   .wrapper:last-of-type:after {
     content: "";
   }
+  .container-fluid.p-0 {
+  display: none;
+}
+
+
+  
 }
 
 td {
@@ -143,9 +153,6 @@ font-family: calibri;
 font-size: 10px;;
 
 }
-
-
-
 
 
 
@@ -237,24 +244,91 @@ font-size: 10px;;
 
     </style>
 </head>
-<body onload="window.print()"  >
+<body >
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Hello,
+
+
+
+        <?=$_SESSION['name']?>!
+
+
+        
+        </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+      <div class="text-center">
+  <img src="img/printer.gif" alt="Your Image" class="img-fluid w-50">
+</div>
+
+        <p><b>To display the grades of the students,
+          <br>
+          select semester and quarter and click the submit button </b></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
 
+<script>
+  window.onload = function() {
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+      keyboard: false
+    });
+    myModal.show();
+  };
+</script>
 
 
+<div class="container-fluid p-0" style="background-color: black;">
+  <div class="row mx-0 justify-content-center align-items-center pt-4">
+    <div class="col-md-6">
+      <form method="POST" action="" class="d-flex">
+        <div class="mb-3 flex-row d-inline-flex">
+          <label for="quarter" class="form-label me-3 text-white">Quarter:</label>
+          <select class="form-select form-control me-3" id="quarter" name="quarter">
+            <option value="FIRST">FIRST</option>
+            <option value="SECOND">SECOND</option>
+            <option value="THIRD">THIRD</option>
+            <option value="FOURTH">FOURTH</option>
+          </select>
+          <label for="semester" class="form-label me-3 text-white">Semester:</label>
+          <select class="form-select form-control me-3" id="semester" name="semester">
+            <option value="FIRST">FIRST</option>
+            <option value="SECOND">SECOND</option>
+            <option value="THIRD">THIRD</option>
+            <option value="FOURTH">FOURTH</option>
+          </select>
+          <input type="submit" value="Submit" class="btn btn-light form-control" >
+         
+          <div class="fixed-bottom text-center py-3">
+          <button class="btn  bg-transparent btn-transparent" onclick="window.print()"
+  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Print now!">
+  <span class="btn-icon">
+    <img src="img/printer.gif" alt="Print icon" style="width: auto; height: 100px;">
+  </span>
 
+</button>
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+</script>
 
-
-
-
-      
-
-
-
-
-
+</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 
@@ -400,37 +474,22 @@ echo $semester . "<br>";
         
 
 
-
-             <thead tyle="height: 10px;">
-  <tr >
-    <th class="text-center align-middle " style="width: 2%; ">NO.</th>
-    <th class="text-center align-middle " style="width: 10%;">LASTNAME</th>
-    <th class="text-center align-middle " style="width: 10%;">FIRSTNAME</th>
-    <th class="text-center align-middle " style="width: 3%;">M.I.</th>
-    <th class="text-center align-middle " style="width: 5%;">FIRST<br>QUARTER</th>
-    <th class="text-center align-middle " style="width: 5%;">REMARKS</th>
-  </tr>
-</thead>
-              <thead >
-      <th colspan="6"class="text text-left" ><b><div class="text text-primary">MALE</div></b></th>
-              </thead>
-        <tbody>    
-          
-       
-        
-
-
-<?php
+             <?php
  require "./php/db_conn.php";
                         $teacher = $_SESSION['name'];
-                       
- $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,
- b.firstname,b.middlename,b.lastname,b.remarks
- FROM grade b, users a WHERE  b.subjectname = a.sub1  
- AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
- AND teacher = '$teacher' AND b.gender = 'MALE'
- ";
+                        if (isset($_POST['semester']) && isset($_POST['quarter'])) {
+                          $semester = $_POST['semester'];
+                          $quarter = $_POST['quarter'];
+                          $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+                           a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
+                           b.firstname,b.middlename,b.lastname,b.remarks
+                           FROM grade b, users a WHERE  b.subjectname = a.sub1  
+                           AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
+                           AND teacher = '$teacher' AND b.gender = 'MALE' AND b.semester='$semester' AND b.quarter='$quarter'";
+                         ;
+                         $result = mysqli_query($conn, $query);
+                          // process the query result as needed
+                        }
 $result = mysqli_query($conn, $query);
  if (mysqli_num_rows($result) > 0) 
  $rowNum = 1;
@@ -441,6 +500,25 @@ $result = mysqli_query($conn, $query);
      {
       
       ?>
+             <thead tyle="height: 10px;">
+  <tr >
+    <th class="text-center align-middle " style="width: 2%; ">NO.</th>
+    <th class="text-center align-middle " style="width: 10%;">LASTNAME</th>
+    <th class="text-center align-middle " style="width: 10%;">FIRSTNAME</th>
+    <th class="text-center align-middle " style="width: 3%;">M.I.</th>
+ 
+
+    <th class="text-center align-middle " style="width: 5%;"><?php echo $Row["quarter"]; ?><br>QUARTER</th>
+    <th class="text-center align-middle " style="width: 5%;">REMARKS</th>
+  </tr>
+</thead>
+              <thead >
+      <th colspan="6"class="text text-left" ><b><div class="text text-primary">MALE</div></b></th>
+              </thead>
+        
+          
+       
+
      
            <tr>
            <td class="text text-center" ><?php echo  $rowNum ?></td>
@@ -453,7 +531,7 @@ $result = mysqli_query($conn, $query);
   <b><?php echo $Row["remarks"]; ?></b>
 </td>
 
-			      </td>
+			   
 
 			    </tr>
      
@@ -463,18 +541,22 @@ $result = mysqli_query($conn, $query);
 
 
 
-
-                <?php
+              <?php
  require "./php/db_conn.php";
                         $teacher = $_SESSION['name'];
-                       
- $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,
- b.firstname,b.middlename,b.lastname,b.remarks
- FROM grade b, users a WHERE  b.subjectname = a.sub1  
- AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
- AND teacher = '$teacher' AND b.gender = 'FEMALE'
- ";
+                        if (isset($_POST['semester']) && isset($_POST['quarter'])) {
+                          $semester = $_POST['semester'];
+                          $quarter = $_POST['quarter'];
+                          $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+                           a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,
+                           b.firstname,b.middlename,b.lastname,b.remarks
+                           FROM grade b, users a WHERE  b.subjectname = a.sub1  
+                           AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
+                           AND teacher = '$teacher' AND b.gender = 'FEMALE' AND b.semester='$semester' AND b.quarter='$quarter'";
+                         ;
+                         $result = mysqli_query($conn, $query);
+                          // process the query result as needed
+                        }
 $result = mysqli_query($conn, $query);
  if (mysqli_num_rows($result) > 0) 
  $rowNum = 1;
@@ -496,12 +578,13 @@ $result = mysqli_query($conn, $query);
   
           <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
   <b><?php echo $Row["remarks"]; ?></b>
+ 
 </td>
 
      
 
 
-
+     </tr>
 
        
             <?php }
