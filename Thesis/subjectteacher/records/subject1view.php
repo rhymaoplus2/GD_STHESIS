@@ -334,11 +334,8 @@ function myFunction() {
                   <th scope="col" colspan="2"><h3 class="text-success text-center"> <b>Action</b> </th>
                 </tr>
               </thead>
-        <tbody>    
-          
-       
-        
-
+              <thead >
+      
 
 <?php
  require "./php/db_conn.php";
@@ -408,14 +405,15 @@ function openulr(newurl) {
 
 
 
-
+     }
+    }
 
 
 
 
 }
 
-}
+
  ?>
 
 
@@ -547,7 +545,7 @@ if (confirm("Are you sure you want to Delete?")) {
                   <?php
         }
     }
-       }
+       
        ?>
                 </tbody>
                 

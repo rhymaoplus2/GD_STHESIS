@@ -299,6 +299,29 @@ function myFunction() {
       <div class="border">
             
       <table class="table table-bordered ">
+      <div class="row">
+  <div class="col-md-6">
+    <label for="semester" class="form-label text-center"><b>Semester</b></label>
+    <select class="form-select" id="semester" name="semester">
+    <option value="">NONE</option>
+      <option value="First">FIRST</option>
+      <option value="Second">SECOND</option>
+      <option value="Third">THIRD</option>
+      <option value="Fourth">FOURTH</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="quarter" class="form-label text-center"><b>Quarter</b></label>
+    <select class="form-select" id="quarter" name="quarter">
+    <option value="">NONE</option>
+      <option value="First">FIRST</option>
+      <option value="Second">SECOND</option>
+      <option value="Third">THIRD</option>
+      <option value="Fourth">FOURTH</option>
+    </select>
+  </div>
+</div>
+<br>
               <thead >
                   <tr>
                   
@@ -310,6 +333,7 @@ function myFunction() {
       
                 </tr>
               </thead>
+          
         <tbody>    
           
         <tr>

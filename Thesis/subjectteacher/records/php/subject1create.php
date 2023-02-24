@@ -10,7 +10,8 @@ if(isset($_POST['submit']))
         $data = htmlspecialchars($data);
         return $data;
 	}
-
+    $semester = $_POST['semester'];
+    $quarter = $_POST['quarter'];
 	// Loop through each student's grades and insert them into the database
     foreach ($_POST['studentname'] as $index => $studentname)
     {
@@ -41,8 +42,8 @@ if(isset($_POST['submit']))
             exit();
         } else {
             // The record doesn't exist, insert it into the database
-            $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser,firstname,middlename,lastname,gender,remarks) 
-		              VALUES ('$studentname','$subjectname','$grade','$teacher','$section','$adviser','$firstname','$middlename','$lastname','$gender','$remarks')";
+            $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser,firstname,middlename,lastname,gender,remarks,semester,quarter) 
+		              VALUES ('$studentname','$subjectname','$grade','$teacher','$section','$adviser','$firstname','$middlename','$lastname','$gender','$remarks','$semester','$quarter')";
             $query_run = mysqli_query($conn, $query);
 
             if (!$query_run)
