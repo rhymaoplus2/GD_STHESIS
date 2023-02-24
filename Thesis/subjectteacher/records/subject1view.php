@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
 	<title>HOME</title>
 
   <link  href="css/bootstrap.min.css" rel="stylesheet">
@@ -33,9 +34,10 @@
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
+  margin: 0 auto;
 }
 .box {
-	width: 750px;
+	width: auto;
 }
 .container table {
 	padding: 20px;
@@ -135,9 +137,19 @@ font-size: 10px;;
       width: 45rem;
       height: 10rem;
   }
+  .red-text {
+  color: red;
+}
+
+.cell-border {
+  border: 1px solid black;
+}
 
 
-
+  td.disabled {
+  pointer-events: none;
+  color: black; /* Change color to something other than red */
+}
 
 .top-container {
     background-color: white;
@@ -160,7 +172,18 @@ font-size: 10px;;
     top: 0;
     width: 100%;
   }
-  
+  .text-center {
+  text-align: center;
+ /* default border color */
+}
+
+.failed {
+  color: red;
+}
+
+.failed + .text-center {
+  border-color: black; /* override border color for cells with red text */
+}
   .sticky + .content {
     padding-top: 102px;
   }
@@ -181,7 +204,15 @@ top: 0;
 bottom: 0;
 z-index: -1;
   }
-
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0062cc;
+    border-color: #005cbf;
+  }
     </style>
 </head>
 <body>
@@ -239,8 +270,6 @@ function myFunction() {
 
 
 <!-- TITLE HERE    -->
-
-
 
 
 
@@ -310,8 +339,45 @@ function myFunction() {
       -->
  
   <div class="border">
-    
+
+
+
             <table class="table table-bordered ">
+            <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+  <div class="row">
+    <div class="col-md-4">
+        
+      <select class="form-select" id="semester" name="semester">
+        <option value="">Select Semester</option>
+        <option value="FIRST">First</option>
+        <option value="SECOND">Second</option>
+        <option value="THIRD">Third</option>
+        <option value="FOURTH">Fourth</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+ 
+      <select class="form-select" id="quarter" name="quarter">
+        <option value="">Select Quarter</option>
+        <option value="FIRST">First</option>
+        <option value="SECOND">Second</option>
+        <option value="THIRD">Third</option>
+        <option value="FOURTH">Fourth</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+   
+      <select class="form-select" id="gender" name="gender">
+        <option value="">Select Gender</option>
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+      </select>
+    </div>
+  </div>
+  <div class="text-center">
+  <button type="submit" class="btn btn-dark mt-3 mb-3 ">Show Results</button>
+      </div>
+</form>
 
             <?php 
 			  	   $i = 0;
@@ -330,46 +396,62 @@ function myFunction() {
                   <th hidden scope="col"><h3 class="text-primary"><b>Subject Name</h3></b></th>
                   <th scope="col"><h3 class="text-primary"><b>Grade</b></h3></th>
                   <th scope="col"><h3 class="text-primary"><b>Remarks</b></h3></th>
+                  <th scope="col"><h3 class="text-primary"><b>Quarter</b></h3></th>
+                  <th scope="col"><h3 class="text-primary"><b>Semester</b></h3></th>
+                  <th scope="col"><h3 class="text-success center text-center"><b>Actions</b></h3></th>
                   
-                  <th scope="col" colspan="2"><h3 class="text-success text-center"> <b>Action</b> </th>
                 </tr>
               </thead>
-              <thead >
-      
+              <?php 
+  require "./php/db_conn.php";
+  $teacher = $_SESSION['name'];
 
-<?php
- require "./php/db_conn.php";
-                        $teacher = $_SESSION['name'];
-                       
- $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks
- FROM grade b, users a WHERE  b.subjectname = a.sub1  
- AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
- AND teacher = '$teacher'
- ";
-$result = mysqli_query($conn, $query);
- if (mysqli_num_rows($result) > 0) 
+  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+    a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks,b.quarter,b.semester,b.gender
+    FROM grade b, users a WHERE  b.subjectname = a.sub1  
+    AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
+    AND teacher = '$teacher'";
 
- {
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $semester = $_POST["semester"];
+    $quarter = $_POST["quarter"];
+    $gender = $_POST["gender"];
 
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
-           <tr>
-           <td hidden><b><?php echo $Row["name"]; ?></b></td>
-          <td><b><?php echo $Row["studentname"]; ?></b></td>
-          <td hidden><b><?php echo $Row["subjectname"]; ?></b></td>
-          <td class="text-center"><b><?php echo $Row["grade"]; ?></b></td>
-          <td class="text-center" <?php if ($Row['remarks'] == 'FAILED') { ?> style="color: red;" <?php } ?>>
-  <b><?php echo $Row["remarks"]; ?></b>
+    if (!empty($semester)) {
+      $query .= " AND semester = '$semester'";
+    }
+    if (!empty($quarter)) {
+      $query .= " AND quarter = '$quarter'";
+    }
+    if (!empty($gender)) {
+      $query .= " AND gender = '$gender'";
+    }
+  }
+
+  $result = mysqli_query($conn, $query);
+?>
+
+
+    <?php 
+      $i = 0;
+      while($rows = mysqli_fetch_assoc($result)) {
+        $i++;
+    ?>
+    <tr>
+      <td><b><?php echo $rows["studentname"]; ?></b></td>
+      <td hidden><b><?php echo $rows["subjectname"]; ?></b></td>
+      <td class="text-center"><b><?php echo $rows["grade"]; ?></b></td>
+      <td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
+  <b><?php echo $rows["remarks"]; ?></b>
 </td>
 
-          <td class="text-center" ><b><a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary "><b>Update GRADE</b></a>
- 
-
+      <td class="text-center"><b><?php echo $rows["quarter"]; ?></b></td>
+      <td class="text-center"><b><?php echo $rows["semester"]; ?></b></td>
+      <td class="text-center">
+        <b>
+          <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary"><b>Update GRADE</b></a>
+          
+   
                    <script type="text/javascript">  
 
 function openulr(newurl) {  
@@ -379,7 +461,7 @@ function openulr(newurl) {
     document.location = newurl;  
   }}
     </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
+<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
   <b>DELETE</b>
 </a>
 
@@ -406,12 +488,6 @@ function openulr(newurl) {
 
 
      }
-    }
-
-
-
-
-}
 
 
  ?>
@@ -445,7 +521,9 @@ function openulr(newurl) {
 </div>
 
 
-      <form action="" method="GET">
+
+
+      <form action="" method="GET" class="text-center">
 
                     <div class="input-group ">
                       <input
@@ -545,6 +623,7 @@ if (confirm("Are you sure you want to Delete?")) {
                   <?php
         }
     }
+  }
        
        ?>
                 </tbody>
