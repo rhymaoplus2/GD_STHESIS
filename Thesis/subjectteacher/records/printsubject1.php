@@ -188,7 +188,10 @@ font-size: 10px;;
       margin-left: 5rem;
       margin-top: 11rem;
   }
-  
+  .form-label, .form-select {
+      font-size: inherit;
+    }
+
   
   .button1{
   
@@ -246,7 +249,9 @@ font-size: 10px;;
   {
     margin-left:80%;
   }
-
+  .btn-bold {
+  font-weight: bold;
+}
     </style>
 </head>
 <body >
@@ -317,21 +322,22 @@ font-size: 10px;;
     <div class="col-md-6">
       <form method="POST" action="" class="d-flex">
         <div class="mb-3 flex-row d-inline-flex">
-          <label for="quarter" class="form-label me-3 text-white">Quarter:</label>
-          <select class="form-select form-control me-3" id="quarter" name="quarter">
-            <option value="FIRST">FIRST</option>
-            <option value="SECOND">SECOND</option>
-            <option value="THIRD">THIRD</option>
-            <option value="FOURTH">FOURTH</option>
-          </select>
-          <label for="semester" class="form-label me-3 text-white">Semester:</label>
-          <select class="form-select form-control me-3" id="semester" name="semester">
-            <option value="FIRST">FIRST</option>
-            <option value="SECOND">SECOND</option>
-            <option value="THIRD">THIRD</option>
-            <option value="FOURTH">FOURTH</option>
-          </select>
-          <input type="submit" value="Submit" class="btn btn-light form-control" >
+        <label for="quarter" class="form-label me-3 text-white"><b>Quarter:</b></label>
+  <select class="form-select form-control me-3" id="quarter" name="quarter">
+    <option value="FIRST">FIRST</option>
+    <option value="SECOND">SECOND</option>
+    <option value="THIRD">THIRD</option>
+    <option value="FOURTH">FOURTH</option>
+  </select>
+  <label for="semester" class="form-label me-3 text-white"><b>Semester:</b></label>
+  <select class="form-select form-control me-3" id="semester" name="semester">
+    <option value="FIRST">FIRST</option>
+    <option value="SECOND">SECOND</option>
+    <option value="THIRD">THIRD</option>
+    <option value="FOURTH">FOURTH</option>
+  </select>
+  <input type="submit" value="SHOW" class="btn btn-light form-control   ">
+
          
           <div class="fixed-bottom text-center py-3">
           <button class="btn  bg-transparent btn-transparent" onclick="window.print()"

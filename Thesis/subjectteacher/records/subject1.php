@@ -299,6 +299,9 @@ function myFunction() {
       <div class="border">
             
       <table class="table table-bordered ">
+      <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
+    <b class="fs-2"><?=$_SESSION['sub1']?> - <?=$_SESSION['sec1']?></b>
+</div>
       <div class="row">
   <div class="col-md-6">
     <label for="semester" class="form-label text-center"><b>Semester</b></label>

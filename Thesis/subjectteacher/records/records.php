@@ -345,7 +345,7 @@ function myFunction() {
                 <td><?php echo $Row["sec2"]; ?></td>
                 <td><?php echo $Row["subjectgrouphead"]; ?></td>
              
-          <td><a href="subject1view.php" 
+          <td><a href="subject2view.php" 
 			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
                       </td>
     

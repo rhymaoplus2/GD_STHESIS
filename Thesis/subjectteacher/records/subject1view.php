@@ -308,16 +308,7 @@ function myFunction() {
 
             <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
   <div class="row">
-    <div class="col-md-4">
-        
-      <select class="form-select" id="semester" name="semester">
-        <option value="">Select Semester</option>
-        <option value="FIRST">First</option>
-        <option value="SECOND">Second</option>
-        <option value="THIRD">Third</option>
-        <option value="FOURTH">Fourth</option>
-      </select>
-    </div>
+ 
     <div class="col-md-4">
  
       <select class="form-select" id="quarter" name="quarter">
@@ -328,6 +319,17 @@ function myFunction() {
         <option value="FOURTH">Fourth</option>
       </select>
     </div>
+
+    <div class="col-md-4">
+        
+        <select class="form-select" id="semester" name="semester">
+          <option value="">Select Semester</option>
+          <option value="FIRST">First</option>
+          <option value="SECOND">Second</option>
+          <option value="THIRD">Third</option>
+          <option value="FOURTH">Fourth</option>
+        </select>
+      </div>
     <div class="col-md-4">
    
       <select class="form-select" id="gender" name="gender">
