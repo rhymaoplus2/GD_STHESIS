@@ -9,6 +9,7 @@ if (isset($_POST['create'])) {
         return $data;
 	}
 	$id = validate($_POST['id']);
+	$idnumber = validate($_POST['idnumber']);
 	$lrnnumber = validate($_POST['lrnnumber']);
 	$adviser_id = validate($_POST['adviser_id']);
 	$firstname = validate($_POST['firstname']);
@@ -25,8 +26,31 @@ if (isset($_POST['create'])) {
 	$schoolyear = validate($_POST['schoolyear']);
 	$grade = validate($_POST['grade']);
 	$section = validate($_POST['section']);
+	$subjectteacher1 = validate($_POST['subjectteacher1']);
+	$subjectteacher2 = validate($_POST['subjectteacher2']);
+	$subjectteacher3 = validate($_POST['subjectteacher3']);
+	$subjectteacher4 = validate($_POST['subjectteacher4']);
+	$subjectteacher5 = validate($_POST['subjectteacher5']);
+	$subjectteacher6 = validate($_POST['subjectteacher6']);
+	$subjectteacher7 = validate($_POST['subjectteacher7']);
+	$subjectteacher8 = validate($_POST['subjectteacher8']);
+	$subjectteacher9 = validate($_POST['subjectteacher9']);
+	$subjectteacher10 = validate($_POST['subjectteacher10']);
+
+	$subject1 = validate($_POST['subject1']);
+	$subject2 = validate($_POST['subject2']);
+	$subject3 = validate($_POST['subject3']);
+	$subject4 = validate($_POST['subject4']);
+	$subject5 = validate($_POST['subject5']);
+	$subject6 = validate($_POST['subject6']);
+	$subject7 = validate($_POST['subject7']);
+	$subject8 = validate($_POST['subject8']);
+	$subject9 = validate($_POST['subject9']);
+	$subject10 = validate($_POST['subject10']);
+
 	$user_data =
 	'id='.$id.
+	'idnumber='.$idnumber.
 	'lrnnumber='.$lrnnumber.
 	'&adviser_id='.$adviser_id.
 	'firstname='.$firstname.
@@ -42,7 +66,29 @@ if (isset($_POST['create'])) {
 	'&parent='.$parent.
 	'&schoolyear='.$schoolyear.
 	'&grade='.$grade.
-	'&section='.$section
+	'&section='.$section.
+	'&subjectteacher1='.$subjectteacher1.
+	'&subjectteacher2='.$subjectteacher2.
+	'&subjectteacher3='.$subjectteacher3.
+	'&subjectteacher4='.$subjectteacher4.
+	'&subjectteacher5='.$subjectteacher5.
+	'&subjectteacher6='.$subjectteacher6.
+	'&subjectteacher7='.$subjectteacher7.
+	'&subjectteacher8='.$subjectteacher8.
+	'&subjectteacher9='.$subjectteacher9.
+	'&subjectteacher10='.$subjectteacher10.
+
+	'&subject1='.$subject1.
+	'&subject2='.$subject2.
+	'&subject3='.$subject3.
+	'&subject4='.$subject4.
+	'&subject5='.$subject5.
+	'&subject6='.$subject6.
+	'&subject7='.$subject7.
+	'&subject8='.$subject8.
+	'&subject9='.$subject9.
+	'&subject10='.$subject10
+	
     ;
 
 	if (empty($lrnnumber))
@@ -56,7 +102,7 @@ if (isset($_POST['create'])) {
 	else if (empty($middlename)) {
 		header ("Location: ../teacher_create.php?error=Middle Name is required&$user_data");
 	}
-	else if (empty($id)) {
+	else if (empty($idnumber)) {
 		header ("Location: ../teacher_create.php?error=ID is required&$user_data");
 	}
 
@@ -102,11 +148,62 @@ if (isset($_POST['create'])) {
 	
 	else {
 
-       $sql = "INSERT INTO students(id,lrnnumber,adviser_id,firstname, middlename,lastname,fullname,gender,suffix,
-	   birthplace,birthday,age,parent,address,schoolyear,grade,section)
-               VALUES('$id','$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname','$fullname',	'$gender','$suffix',
+       $sql = "INSERT INTO students(id,idnumber,lrnnumber,adviser_id,firstname, middlename,lastname,fullname,gender,suffix,
+	   birthplace,birthday,age,parent,address,schoolyear,grade,section,
+	   subjectteacher1,
+	   subjectteacher2,
+	   subjectteacher3,
+	   subjectteacher4,
+	   subjectteacher5,
+	   subjectteacher6,
+	   subjectteacher7,
+	   subjectteacher8,
+	   subjectteacher9,
+	   subjectteacher10,
+	   
+	   subject1,
+	   subject2,
+	   subject3,
+	   subject4,
+	   subject5,
+	   subject6,
+	   subject7,
+	   subject8,
+	   subject9,
+	   subject10
+
+	   
+	   
+	   )
+               VALUES('$id','$idnumber','$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname','$fullname',	'$gender','$suffix',
 			   '$birthplace','$birthday','$age',
-			   '$address','$parent','$schoolyear','$grade','$section')";
+			   '$address','$parent','$schoolyear','$grade','$section'
+			   ,'$subjectteacher1',
+			   '$subjectteacher2',
+			   '$subjectteacher3',
+			   '$subjectteacher4',
+			   '$subjectteacher5',
+			   '$subjectteacher6',
+			   '$subjectteacher7',
+			   '$subjectteacher8',
+			   '$subjectteacher9',
+			   '$subjectteacher10',
+			
+
+			   
+			   
+			   
+			   '$subject1',
+			   '$subject2',
+			   '$subject3',
+			   '$subject4',
+			   '$subject5',
+			   '$subject6',
+			   '$subject7',
+			   '$subject8',
+			   '$subject9',
+			   '$subject10'
+			   )";
        $result = mysqli_query($conn, $sql);
        if ($result) {
 		header("Location: ../teacher_read.php?success=Added Successfully");

@@ -196,6 +196,13 @@ font-size: 10px;;
 			<?php if (mysqli_num_rows($result)) { ?>
         
         <div class="border">
+       
+
+
+        <div class="d-flex justify-content-center">
+  <a href="teacher_create.php" class="btn btn-dark mb-3"><b>ADD NEW </b></a>
+</div>
+
         <form method="post">
   <label for="sort">Sort By:</label>
   <select id="sort" name="sort">

@@ -189,6 +189,19 @@ function myFunction() {
         <div class="content">
 			<br>
       
+      <h1 class="display-10 text-center">
+    Students Information</h1>
+
+<?php
+  include "../php/db_conn.php";
+   
+    $query = "SELECT COUNT(*) as total FROM students ";
+    $query_run = mysqli_query($con, $query);
+    $result = mysqli_fetch_assoc($query_run);
+    $total_students = $result['total'];
+?>
+
+<p class="text-center">Total number of students: <?= $total_students ?></p>
 
 			<h1 class="display-10 text-center">
  Students Information</h1>
