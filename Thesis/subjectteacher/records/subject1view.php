@@ -274,7 +274,6 @@ function myFunction() {
 
 
 
-
       <div class="container" >
 		<div class="box">
     <div class="content">
@@ -283,6 +282,10 @@ function myFunction() {
 
 
 
+    <div class="text-center mb-3">
+  <a class="link-primary" href="subject1.php"><button type="button" class="btn btn-dark"><b>ADD GRADES</b></button></a>
+  <button type="button" class="btn btn-dark" onclick="printPage()"><b>PRINTABLE DATA</b></button>
+</div>
 
 
 
@@ -293,56 +296,16 @@ function myFunction() {
 
 
 
-
-
-
-
-
-
-<!--
-
-			<h1 class="display-10 text-center"> These are your Students Grades
-      </h1>
-      --><!--
-      Dear : <?=$_SESSION['username']?> 
-      <br>Please Click the create Button to add Subjects!
--->
-     <div class="row justify-content-center my-5">
-                                                      
-	   <div class="row justify-content-right  my-3">
-       </div>
-       <?php if (isset($_GET['success'])) { ?>
-           <div class="alert alert-success" role="alert">
-           <audio controls autoplay  hidden>
-<source src="../voice/success.mp3" type="audio/mpeg">
-</audio>
-			  <?php echo $_GET['success']; ?>
-		    </div>
-		    <?php } ?>
-			<?php if (mysqli_num_rows($result)) { ?>
-
-<!--
-
-        <div class="link-center">
-          <a class="link-primary" href="subject1.php" display-40>
-          <button type="button" class="btn btn-dark">
-
-      ADD GRADES
-
-          </button>
-          </a>
-
-
-			</div>
-      <br>
-      <br>
-      -->
  
   <div class="border">
 
+  <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
+    <b class="fs-2"><?=$_SESSION['sub1']?> - <?=$_SESSION['sec1']?></b>
+</div>
+
+  <table class="table table-bordered" id="grade-table">
 
 
-            <table class="table table-bordered ">
             <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
   <div class="row">
     <div class="col-md-4">
@@ -375,8 +338,9 @@ function myFunction() {
     </div>
   </div>
   <div class="text-center">
-  <button type="submit" class="btn btn-dark mt-3 mb-3 ">Show Results</button>
+  <button type="submit" class="btn btn-dark mt-3 mb-3 "><b>Show Results</b></button>
       </div>
+        <input class="mb-3"type="text" id="search-input" placeholder="Search..." oninput="filterTable()">
 </form>
 
             <?php 
@@ -392,16 +356,19 @@ function myFunction() {
 
               <thead >
                   <tr>
-                  <th scope="col"><h3 class="text-primary"><b>Student Name</h3> </th>
-                  <th hidden scope="col"><h3 class="text-primary"><b>Subject Name</h3></b></th>
-                  <th scope="col"><h3 class="text-primary"><b>Grade</b></h3></th>
-                  <th scope="col"><h3 class="text-primary"><b>Remarks</b></h3></th>
-                  <th scope="col"><h3 class="text-primary"><b>Quarter</b></h3></th>
-                  <th scope="col"><h3 class="text-primary"><b>Semester</b></h3></th>
-                  <th scope="col"><h3 class="text-success center text-center"><b>Actions</b></h3></th>
+                  <th scope="col" class="w-50"><h3 class="text-primary text-center"><b>StudentName</h3> </th>
+                  <th hidden scope="col"><h3 class="text-primary text-center"><b>Subject Name</h3></b></th>
+                  <th scope="col"><h3 class="text-primary text-center"><b>Grade</b></h3></th>
+                  <th scope="col"><h3 class="text-primary text-center"><b>Remarks</b></h3></th>
+                  <th scope="col"><h3 class="text-primary text-center"><b>Quarter</b></h3></th>
+                  <th scope="col"><h3 class="text-primary text-center"><b>Semester</b></h3></th>
+                  <th colspan="2" scope="col" class="w-50">
+        <h3 class="text-success center text-center"><b>Actions</b></h3>
+      </th>
                   
                 </tr>
               </thead>
+              <tbody>
               <?php 
   require "./php/db_conn.php";
   $teacher = $_SESSION['name'];
@@ -437,6 +404,30 @@ function myFunction() {
       while($rows = mysqli_fetch_assoc($result)) {
         $i++;
     ?>
+
+
+<script>
+function filterTable() {
+  var input = document.getElementById("search-input").value.toUpperCase();
+  var table = document.getElementById("grade-table");
+  var tbody = table.getElementsByTagName("tbody")[0];
+  var rows = tbody.getElementsByTagName("tr");
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].getElementsByTagName("td");
+    var match = false;
+    for (var j = 0; j < cells.length; j++) {
+      var cellText = cells[j].textContent.toUpperCase();
+      if (cellText.indexOf(input) > -1) {
+        match = true;
+        break;
+      }
+    }
+    rows[i].style.display = match ? "" : "none";
+  }
+}
+
+
+</script>
     <tr>
       <td><b><?php echo $rows["studentname"]; ?></b></td>
       <td hidden><b><?php echo $rows["subjectname"]; ?></b></td>
@@ -449,8 +440,9 @@ function myFunction() {
       <td class="text-center"><b><?php echo $rows["semester"]; ?></b></td>
       <td class="text-center">
         <b>
-          <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary"><b>Update GRADE</b></a>
-          
+          <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary"><b>Update</b></a>
+</td>
+<td>
    
                    <script type="text/javascript">  
 
@@ -507,126 +499,11 @@ function openulr(newurl) {
 	</script>
 <bR>
 
-<div class="text-center">
-  <a class="link-primary" href="subject1.php">
-    <button type="button" class="btn btn-dark">
-      <b>+</b>
-    </button>
-  </a>
-  <br><br>
-  <button type="button" class="btn btn-dark" onclick="printPage()">
-    <b>PRINT</b>
-  </button>
-  <br><br>
-</div>
 
 
 
 
-      <form action="" method="GET" class="text-center">
-
-                    <div class="input-group ">
-                      <input
-                        type="text"
-                        name="search"
-                        required
-                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control border-dark "
-                        placeholder="Search by Student Name . Subject Name . Grade"
-                      />
-                      
-                    </div>
-                    <br>
-                    <button type="submit" class="btn text-white btn-dark">
-                        <b>Search</b>
-                      </button>
-    
-<br> <br>
-<br>
-
-
-                   
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th><h3 class="text-primary"><b>Student Name</h3></b></th>
-                    <th hidden><h3 class="text-primary"><b>Subject Name</h3></b></th>
-                    <th><h3 class="text-primary"><b>Grade</h3></b></th>
-                    <th><h3 class="text-primary"><b>Remarks</h3></b></th>
-                    <th colspan="2"><h3 class="text-success text-center"><b>Action</h3></b></th>
-                  </tr>
-                </thead>
-                <tbody>
-    <?php
-    $con = mysqli_connect("localhost", "root", "", "my_db");
-    if (isset($_GET['search'])) {
-        $subjectgrouphead = ($_SESSION["id"]);
-        $filtervalues = $_GET['search'];
-        $teacher=($_SESSION["name"]);
-        $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
- a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks
- FROM grade b, users a WHERE  b.subjectname = a.sub1  
- AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
- AND teacher = '$teacher'
-
- AND CONCAT(studentname,subjectname)LIKE '%$filtervalues%'
-  
-
-
-
-
- ";
-   $query_run = mysqli_query($con, $query);
-
-        if (mysqli_num_rows($query_run) >
-                  0) { foreach ($query_run as $items) { ?>
-                  <tr>
-                   <td><B><?= $items['studentname']; ?></td>
-                    <td hidden><B><?= $items['subjectname']; ?></td>
-                    <td class="text-center"><B><?= $items['grade']; ?></td>
-                    <td class="text-center" 
-                    <?php if ($items['remarks'] == 'FAILED') { ?> style="color: red;" <?php } ?>>
-                    <B><?= $items['remarks']; ?>
-                    </td>
-                    <td class="text-center"><B><a href="update.php? id=<?=$items['id']?>" 
-			      	     class="btn btn-primary "><b>UPDATE GRADE</b></a>
-
-
-        
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-<b>DELETE</b>
-</a></strong>
-
-			      </td>
-                  </tr>
-                  
-
-                  <?php
-            }
-        } else {
-                                                ?>
-                  <tr>
-                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
-                  <h5>
-                    
-                  </h5> </td>
-                  </tr>
-                  <?php
-        }
-    }
-  }
-       
-       ?>
-                </tbody>
+      </tbody>
                 
               </table>
               </div>

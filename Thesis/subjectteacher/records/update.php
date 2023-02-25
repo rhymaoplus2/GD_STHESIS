@@ -246,11 +246,10 @@ function myFunction() {
 		           class="btn btn-primary"
 		           name="update">Update</button>
 
-               <a class="link-primary" href="javascript:history.go(-1);" display-40>
-    <button type="button" class="btn btn-dark">
-        Cancel
-    </button>
-</a>
+               <button type="button" class="btn btn-dark" onclick="history.go(-1);">
+    Cancel
+</button>
+
 
 
 	

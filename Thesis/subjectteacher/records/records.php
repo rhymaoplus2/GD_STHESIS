@@ -272,7 +272,7 @@ function myFunction() {
     <tr>
         <th scope="col">Subject Name</th>
         <th scope="col">Section</th>
-        <th scope="col">Subject Group Head</th>
+        <th scope="col">Adviser</th>
         <th scope="col" colspan="2">Actions</th>
     </tr>
 </thead>

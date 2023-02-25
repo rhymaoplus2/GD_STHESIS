@@ -15,7 +15,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$password = test_input($_POST['password']);
 	$name = test_input($_POST['name']);
 	$sec1 = test_input($_POST['sec1']);
-
+	$sub11 = test_input($_POST['sub1']);
 	if (empty($username)) {
 		header("Location: ../index.php?error=User Name is Required");
 	}else if (empty($password)) {
@@ -36,7 +36,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         		$_SESSION['username'] = $row['username'];
 				$_SESSION['name'] = $row['name'];
 				$_SESSION['sec1'] = $row['sec1'];
-	
+				$_SESSION['sub1'] = $row['sub1'];
         
 
         		header("Location: ../home.php");

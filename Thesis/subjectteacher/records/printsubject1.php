@@ -26,6 +26,9 @@
   height: 1.5rem;
 }
 
+   .print-hidden {
+      display: none;
+    }
   /* Set the footer to be at the bottom of the page */
   .print-footer {
     position: fixed;
@@ -72,7 +75,9 @@
   .container-fluid.p-0 {
   display: none;
 }
-
+.tooltip {
+  display: none !important;
+}
 
   
 }
@@ -276,14 +281,34 @@ font-size: 10px;;
 
 
 
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="text-center">
+          <img src="img/printer.gif" alt="Your Image" class="img-fluid w-50">
+        </div>
+        <p><b>To display the grades of the students, select semester and quarter and click the submit button.</b></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-  window.onload = function() {
+  // Check if the modal has already been shown
+  if (!localStorage.getItem('modalShown')) {
+    // If not, show the modal
     var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
       keyboard: false
     });
     myModal.show();
-  };
+    // Set the flag to indicate that the modal has been shown
+    localStorage.setItem('modalShown', true);
+  }
 </script>
 
 
