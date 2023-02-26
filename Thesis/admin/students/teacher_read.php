@@ -285,7 +285,7 @@ $result = mysqli_query($conn, $query);
   ?>
 <a href="teacher_create.php" class="btn btn-transparent p-0 mb-3">
   <b></b>
-  <img id="refresh-img" src="img/add.gif" alt="Image" title="Add New Student" width="30" height="auto">
+  <img src="img/add.gif" alt="Image" title="Add New Student" width="30" height="auto">
 </a>
 
 
@@ -331,8 +331,10 @@ $result = mysqli_query($conn, $query);
   </select>
   &nbsp;&nbsp;&nbsp;  
 
-  <button class="btn btn-transparent p-0" type="submit" name="submit" title="Sort">
-    <img id="refresh-img" src="img/refresh.png" alt="Image" width="50" height="50">
+  <button class="btn btn-transparent p-0 mb-3" type="submit" name="submit" title="Sort">
+  <img id="refresh-img" src="img/refresh.png" alt="Image" title="Add New Student" width="30" height="auto">
+</a>
+
   </button>
 
   <script>
@@ -426,12 +428,14 @@ $result = mysqli_query($conn, $query);
      <td class="text-center">
       
      <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark "><b>VIEW</b></a>
+			      	     class="btn btn-dark "><b>VIEW</b>
+                   
+                  </a>
                    
               <a href="update.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-primary "><b>UPDATE</b></a>
               
-			       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $Row['id']; ?>"><b>DELETE</b></button>
+			       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $Row['id']; ?>"><b>DELETE </b></button>
              <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">

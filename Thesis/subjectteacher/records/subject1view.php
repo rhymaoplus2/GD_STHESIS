@@ -213,6 +213,45 @@ z-index: -1;
     background-color: #0062cc;
     border-color: #005cbf;
   }
+  #rotate-btn:hover img {
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;
+}
+.btn-transparent:active {
+  outline: none;
+  border: none;
+}
+.btn-transparent:focus, 
+.btn-transparent:hover {
+  box-shadow: none;
+  border: none;
+}
+#rotate-btn {
+  transition: transform 0.5s;
+}
+
+#rotate-btn.clicked {
+  transform: rotate(360deg);
+}
+/* CSS */
+#rotate-btn {
+  position: relative;
+}
+
+#rotate-btn:active img {
+  animation: rotate .3s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
     </style>
 </head>
 <body>
@@ -340,7 +379,24 @@ function myFunction() {
     </div>
   </div>
   <div class="text-center">
-  <button type="submit" class="btn btn-dark mt-3 mb-3 "><b>Show Results</b></button>
+  <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
+  <img src="img/show.png" alt="Image" title="Add New Student" width="40" height="auto">
+  <b></b>
+</button>
+
+
+<script>
+ const rotateBtn = document.getElementById("rotate-btn");
+const rotateImg = document.getElementById("rotate-img");
+
+rotateBtn.addEventListener("click", () => {
+  rotateImg.classList.add("rotate");
+  setTimeout(() => rotateImg.classList.remove("rotate"), 1000);
+});
+
+</script>
+
+
       </div>
         <input class="mb-3"type="text" id="search-input" placeholder="Search..." oninput="filterTable()">
 </form>
