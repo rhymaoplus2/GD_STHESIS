@@ -168,6 +168,34 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  .btn-transparent {
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-transparent:hover {
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-transparent:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .btn img {
+    width: 20px;
+    height: 20px;
+  }
+  #refresh-img {
+  transition: all 0.2s;
+}
+
+#refresh-img:hover {
+  transform: scale(1.2);
+}
+
   </style>
 </head>
 
@@ -202,111 +230,144 @@ font-size: 10px;;
         <div class="d-flex justify-content-center">
   <a href="teacher_create.php" class="btn btn-dark mb-3"><b>ADD NEW </b></a>
 </div>
+<?php
+  require "./php/db_conn.php";
 
-        <form method="post">
-  <label for="sort">Sort By:</label>
+  $comment = "";
+  if(isset($_POST['submit'])) {
+    $section = $_POST['section'];
+    $grade = $_POST['grade'];
+    $comment = "Showing results for ";
+
+    if(!empty($section) && !empty($grade)) {
+      $comment .= "Grade $grade - Section $section";
+    } elseif(!empty($section)) {
+      $comment .= "Section $section";
+    } elseif(!empty($grade)) {
+      $comment .= "Grade $grade";
+    } else {
+      $comment .= "All";
+    }
+  }
+?>
+<form method="post" class="text-center">
+<?php
+    if(!empty($comment)) {
+      echo "<p><b>$comment</b>  </p>";
+    }
+  ?>
+  <!--<label for="sort">Sort By:</label>
   <select id="sort" name="sort">
     <option value="lastname">Last Name</option>
     <option value="firstname">First Name</option>
     <option value="middlename">Middle Name</option>
     <option value="lrnnumber">LRN No.</option>
   </select>
-  <button class="btn btn-dark" type="submit" name="submit">OK</button>
+  &nbsp;&nbsp;&nbsp; 
+      --> 
+  <label for="section">Section:</label>
+  <select id="section" name="section">
+    <option value="">All</option>
+    <?php
+      require "./php/db_conn.php";
+      $query = "SELECT DISTINCT section FROM students";
+      $result = mysqli_query($conn, $query);
+
+      while($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
+      }
+    ?>
+  </select>
+  &nbsp;&nbsp;&nbsp;  
+  <label for="grade">Grade:</label>
+  <select id="grade" name="grade">
+    <option value="">All</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+  </select>
+  &nbsp;&nbsp;&nbsp;  
+  <button class="btn btn-transparent p-0" type="submit" name="submit" >
+  <img id="refresh-img" src="img/refresh.png" alt="Image" width="50" height="50">
+</button>
+<script>
+var refreshImg = document.getElementById("refresh-img");
+
+refreshImg.addEventListener("click", function() {
+  refreshImg.style.transform = "scale(1.2) rotate(360deg)";
+  setTimeout(function() {
+    refreshImg.style.transform = "";
+  }, 2000);
+});
+
+  </script>
+
 </form>
 
-            <table class="table table-bordered ">
 
 
-
-
-
-
-
-            <?php 
-			  	   $i = 0;
-			  	   while($rows = mysqli_fetch_assoc($result)){
-			  	   $i++;
-             
-			  	 ?> 
-           
-        
-
-          
-              <thead>
-                  <tr>
-                  <th scope="col">Last Name </th>
-                  <th scope="col">First Name </th>
-                  <th scope="col">Middle Name </th>
-                  <th scope="col">LRN No. </th>
-                  <th scope="col">Section</th>
-                 <!--
-                  
-                 <th scope="col">Suffix</th>
-                  <th scope="col">Gender</th>
-                  <th scope="col">Birth Place</th>
-                  <th scope="col">Birth Day</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Parent/Guardian</th>
-             -->
-                  
-                  <th scope="col" colspan="3" class="text-center" >Actions</th>
-                </tr>
-              </thead>
-        <tbody>    
-          
-       
-        
-
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Last Name</th>
+      <th scope="col">First Name</th>
+      <th class="text-center" scope="col">M.I.</th>
+      <th class="text-center" scope="col">LRN No.</th>
+      <th class="text-center" scope="col">Section</th>
+      <th scope="col" colspan="3" class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
 
 <?php
  require "./php/db_conn.php";
 
  $query = "SELECT * FROM students";
-$result = mysqli_query($conn, $query);
+ $result = mysqli_query($conn, $query);
 
+ if (mysqli_num_rows($result) > 0) {
+   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
+     $sort_by = isset($_POST['sort']) ? $_POST['sort'] : 'lastname';
+     $section = isset($_POST['section']) ? $_POST['section'] : '';
+     $grade = isset($_POST['grade']) ? $_POST['grade'] : '';
 
+     $where_clause = '';
+     if (!empty($section)) {
+       $where_clause .= "section = '$section'";
+     }
+     if (!empty($grade)) {
+       if (!empty($where_clause)) {
+         $where_clause .= ' AND ';
+       }
+       $where_clause .= "grade = '$grade'";
+     }
 
+     if (!empty($where_clause)) {
+       $where_clause = "WHERE $where_clause";
+     }
 
+     $query = "SELECT * FROM students $where_clause ORDER BY $sort_by";
+     $result = mysqli_query($conn, $query);
+   }
 
-
-
-
-
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
-  if (isset($_POST['submit'])) {
-    $sort_by = $_POST['sort'];
-
-    // Modify your SQL query to include ORDER BY clause
-    $query = "SELECT * FROM students ORDER BY $sort_by";
-
-    $result = mysqli_query($conn, $query);
-  } else {
-    $query = "SELECT * FROM students";
-    $result = mysqli_query($conn, $query);
-  }
-
-  // rest of your code
-}
-
- if (mysqli_num_rows($result) > 0) 
-
- {
-
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
+   while ($Row = mysqli_fetch_assoc($result)) {
+?>
       
-      ?>
+     
            <tr>
            <td hidden><?php echo $Row["id"]; ?></td>
            <td><?php echo $Row["lastname"]; ?></td>
           <td><?php echo $Row["firstname"]; ?></td>
-          <td><?php echo $Row["middlename"]; ?></td>
-          <td><?php echo $Row["lrnnumber"]; ?></td>
-          <td><?php echo $Row["section"]; ?></td>
+          <td class="text-center"><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          <td class="text-center"><?php echo $Row["lrnnumber"]; ?></td>
+          <td class="text-center"><?php echo $Row["section"]; ?></td>
+          <td hidden><?php echo $Row["grade"]; ?></td>
+         
   
-     <td><a href="view.php?id=<?=$Row['id']?>" 
+     <td class="text-center"><a href="view.php?id=<?=$Row['id']?>" 
 			      	     class="btn btn-dark "><b>VIEW</b></a>
                    
               <a href="update.php?id=<?=$Row['id']?>" 
@@ -414,4 +475,4 @@ function myFunction() {
 <?php 
 
   
-                                                          }
+                                                          
