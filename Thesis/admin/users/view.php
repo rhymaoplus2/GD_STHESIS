@@ -205,8 +205,9 @@ font-size: 10px;;
     <div class="form-group mb-3">
     <label for="" class="form-label"><h6>Password</h6></label>
     <br>
-    <?=$row['password']?>
-    </div>
+    <?=($row['password'])?>
+
+</div>
 
 
     

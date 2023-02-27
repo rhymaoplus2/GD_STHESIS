@@ -33,7 +33,8 @@ if (isset($_GET['id'])) {
    
 	$name = validate($_POST['name']);
     $username = validate($_POST['username']);
-    $password = validate($_POST['password']);
+    $password = md5(validate($_POST['password']));
+
     $role = validate($_POST['role']);
     $advisory = validate($_POST['advisory']);
     $st1 = validate($_POST['st1']);

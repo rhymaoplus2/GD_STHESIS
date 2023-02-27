@@ -31,7 +31,9 @@ if (isset($_GET['id'])) {
         return $data;
 	}
         $username = validate($_POST['username']);
-	    $password = validate($_POST['password']);
+	$password = validate($_POST['password']);
+$password_md5 = md5($password);
+
             $role = validate($_POST['role']);
 	    $advisory = validate($_POST['advisory']);
             $st1 = validate($_POST['advisory']);
@@ -51,12 +53,10 @@ if (isset($_GET['id'])) {
         
         
         else {
-
-       $sql = "UPDATE users
-               SET username='$username',password='$password', role='$role'
-             
-            
-               WHERE id=$id ";
+                $sql = "UPDATE users
+                SET username='$username',password='$password_md5', role='$role'
+                WHERE id=$id ";
+        
        $result = mysqli_query($conn, $sql);
        if ($result) {
        	  header("Location: ../teacher_read.php?id=$id&success=successfully updated");

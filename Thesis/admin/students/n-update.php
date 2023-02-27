@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
         $age = validate($_POST['age']);
         $address = validate($_POST['address']);
         $parent = validate($_POST['parent']);
-        $schoolyear = validate($_POST['schoolyear']);
+        $syear = validate($_POST['syear']);
         $section = validate($_POST['section']);
 
 
@@ -87,7 +87,7 @@ else if (empty($address)) {
 else if (empty($parent)) {
         header("Location: update.php?id=$id&error=Parent is Required&$user_data");
 }
-else if (empty($schoolyear)) {
+else if (empty($syear)) {
         header("Location: update.php?id=$id&error=School Year is Required&$user_data");
 }
 else if (empty($section)) {
@@ -125,7 +125,7 @@ else if (empty($section)) {
                SET firstname='$firstname',middlename='$middlename',lastname='$lastname',
                lrnnumber='$lrnnumber', fullname='$fullname',suffix='$suffix',gender='$gender',
                idnumber ='$idnumber',birthplace ='$birthplace',birthday ='$birthday',
-               age='$age',address='$address',parent='$parent',schoolyear='$schoolyear'
+               age='$age',address='$address',parent='$parent',syear='$syear'
                ,section='$section'
                WHERE id='$id'";
        $result = mysqli_query($conn, $sql);

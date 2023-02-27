@@ -382,7 +382,7 @@ function myFunction() {
     <div class="form-group mb-3">
     <label for="" class="form-label"><b>School Year</b></label>
     <br>
-    <select name="schoolyear" id="schoolyear" >
+    <select name="syear" id="syear" >
   <option  value="2020-2021">2020-2021</option>
   <option value="2021-2022">2021-2022</option>
   <option value="2021-2022">2021-2022</option>

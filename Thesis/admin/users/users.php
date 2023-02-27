@@ -198,30 +198,23 @@ function myFunction() {
 
 
 
-        <div class=" container ">
-       
-        <div class="box">
-        <div class="content">
-			<br>
-      
-
 
 
       <div class="container" >
 		<div class="box">
-    <div class="content">
+      <br>
+    <div class="link text-center">
+		
+    <a  class="link-primary" href="creates.php" display-40>
+    <button disabled type="button" class="btn btn-dark ">
 
-<!--
-			<h1 class="display-10 text-center"> These are your Subject List
-      </h1>
-      Dear : <?=$_SESSION['username']?> 
-      <br>Please Click the create Button to add Subjects!
+<b>ADD USERS </b>
 
--->
-     <div class="row justify-content-center my-5">
-                                                      
-	   <div class="row justify-content-right  my-3">
-       </div>
+    </button>
+    </a>
+    
+</div>
+<br>  
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>
@@ -229,7 +222,7 @@ function myFunction() {
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
         <div class="border">
-            <table class="table table-bordered mb-25">
+     
 
             <?php 
 			  	   $i = 0;
@@ -237,238 +230,82 @@ function myFunction() {
 			  	   $i++;
              
 			  	 ?> 
-           
+ <?php
+require "./php/db_conn.php";
 
-
-
-
-              <thead >
-                  <tr>
-                  <th hidden scope="col">Role </th>
-              
-                  <th scope="col">Name</th>
-                  
-                 <!-- <th scope="col">Username</th>-->
-                  
-                  <th scope="col" colspan="4" class="text-center">Actions </th>
-                </tr>
-              </thead>
-        <tbody>    
-          
-       
-        
-
-
-<?php
- require "./php/db_conn.php";
- $subjectgrouphead = $_SESSION["id"] ;
- $query = "SELECT * FROM users";
+$query = "SELECT * FROM users";
 $result = mysqli_query($conn, $query);
- if (mysqli_num_rows($result) > 0) 
+?>
 
- {
-
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
-           <tr>
-<!--<td class=" text-danger"><?php echo $Row["role"]; ?></td>-->
-    
-          <td><?php echo $Row["name"]; ?></td>
-		  <!--<td><?php echo $Row["username"]; ?></td>-->
-          <td>
-		  <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark "><b>VIEW</b></a>
+<div>
+  <input type="text" id="search" placeholder="Search/Sort">
+</div>
+<br>
+<table class="table table-bordered mb-25">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Role</th>
+      <th colspan="4" class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody id="table-body">
+    <?php
+    if (mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <td><?php echo $row["name"]; ?></td>
+          <td><?php echo $row["username"]; ?></td>
+          <td><?php echo $row["role"]; ?></td>
+          <td class="text-center">
+            <a href="view.php?id=<?php echo $row['id'] ?>" class="btn btn-dark"><b>VIEW</b></a>
+            <a href="update.php?id=<?php echo $row['id'] ?>" class="btn btn-primary"><b>UPDATE</b></a>
+            <a href="addsub.php?id=<?php echo $row['id'] ?>" class="btn btn-primary"><b>+ SUBJECT</b></a>
           </td>
-          <td>
-                   <a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary "><b>UPDATE</B></a>
-                   <br>
-     </td>
-   
-   <td>
-		 
-
-                   <a href="addsub.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary "><b>+ SUBJECT</b></a>
-   </td>
-       <!--
-   <td>
-
-        <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
-  <b>DELETE</b>
-</a>
-
-
-			      </td>
-            -->
-			    </tr>
-     
-
-
-
-
-
-
-
-
-
-
-
-
-       
-            <?php }
- }
-
-
-
-
-
-
-
-
+        </tr>
+    <?php
+      }
+    } else {
+    ?>
+      <tr>
+        <td colspan="4" class="text-center">No records found</td>
+      </tr>
+    <?php
+    }
+  }
 }
+   }
+    ?>
+  </tbody>
+</table>
 
-}
- ?>
+<script>
+  const searchInput = document.querySelector('#search');
+  const tableBody = document.querySelector('#table-body');
+  const rows = tableBody.getElementsByTagName('tr');
+
+  searchInput.addEventListener('keyup', function(event) {
+    const searchTerm = event.target.value.toLowerCase();
+
+    for (let i = 0; i < rows.length; i++) {
+      const name = rows[i].getElementsByTagName('td')[0].innerText.toLowerCase();
+      const username = rows[i].getElementsByTagName('td')[1].innerText.toLowerCase();
+      const role = rows[i].getElementsByTagName('td')[2].innerText.toLowerCase();
+      const match = name.includes(searchTerm) || username.includes(searchTerm) || role.includes(searchTerm);
+      rows[i].style.display = match ? '' : 'none';
+    }
+  });
+</script>
 
 
-
-         </tbody>
-
-      </table>
-      <div class="link">
-		
-    <a class="link-primary" href="create.php" display-40>
-    <button type="button" class="btn btn-dark ">
-
-<b>ADD USERS </b>
-
-    </button>
-    </a>
 </form>
 
 </div>
 </div>
-</div>
 
      
-      <form action="" method="GET">
-
-                    <div class="input-group ">
-                      <input
-                        type="text"
-                        name="search"
-                        required
-                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control"
-                        placeholder="Search by Subject ID / Name / Subject Teacher Username"
-                      />
-                      
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-dark">
-                        <b>SEARCH</b>
-                      </button>
-    
-<br> <br>
-<br>
-
-
-                   
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Role</th>
-                    <th>User Name</th>
-                    <th>Name</th>
-                    <th colspan="2">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-    <?php
-    $con = mysqli_connect("localhost", "root", "", "my_db");
-    if (isset($_GET['search'])) {
-
-        $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM users Where  CONCAT(username,name)LIKE'%$filtervalues%' ";
-        $query_run = mysqli_query($con, $query);
-
-        if (mysqli_num_rows($query_run) >
-                  0) { foreach ($query_run as $items) { ?>
-                  <tr>
-                   <td><?= $items['role']; ?></td>
-                    <td><?= $items['username']; ?></td>
-                    <td><?= $items['name']; ?></td>
-                    <td><a href="update.php? id=<?=$items['id']?>" 
-			      	     class="btn btn-success "><b>UPDATE</b></a>
-
-
-                  </td>
-                  <td>
-<!--
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  <b>DELETE</b>
-</a></strong>
--->
-			      </td>
-                  </tr>
-                  
-
-                  <?php
-            }
-        } else {
-                                                ?>
-                  <tr>
-                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
-                  <h5>
-                    
-                  </h5> </td>
-                  </tr>
-                  <?php
-        }
-    }
-       }
-       ?>
-                </tbody>
-                
-              </table>
-              </div>
-     </div>
-   </div>
-  </div>
-
-
-          
-            </div>
-      
-      </div>
-    </div>
-      </div>
- 
-      </form>
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>

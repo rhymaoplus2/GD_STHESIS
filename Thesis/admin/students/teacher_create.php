@@ -209,7 +209,7 @@ function myFunction() {
 <div class="content">
 <form action="./php/create.php"
       method="post">
-  <h4 class="display-10 text-center text-primary" ><b>Add New Student</b></h4>
+  <h4 class="display-10 text-center text-dark" ><b>Add New Student</b></h4>
 <br>
 
  <?php if (isset($_GET['error'])) { 
@@ -453,9 +453,9 @@ idInput.addEventListener('input', checkIdNumber);
     <input 
     type="" 
     class="form-control" 
-    id="schoolyear" 
+    id="syear" 
     placeholder="ex: 2022-2023"
-    name="schoolyear">
+    name="syear">
   </div>
 
 

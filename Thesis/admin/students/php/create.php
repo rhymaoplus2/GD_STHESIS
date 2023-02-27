@@ -23,7 +23,7 @@ if (isset($_POST['create'])) {
 	$age = validate($_POST['age']);
 	$address = validate($_POST['address']);
 	$parent = validate($_POST['parent']);
-	$schoolyear = validate($_POST['schoolyear']);
+	$syear = validate($_POST['syear']);
 	$grade = validate($_POST['grade']);
 	$section = validate($_POST['section']);
 	$subjectteacher1 = validate($_POST['subjectteacher1']);
@@ -64,7 +64,7 @@ if (isset($_POST['create'])) {
 	'&age='.$age.
     '&address='.$address.
 	'&parent='.$parent.
-	'&schoolyear='.$schoolyear.
+	'&syear='.$syear.
 	'&grade='.$grade.
 	'&section='.$section.
 	'&subjectteacher1='.$subjectteacher1.
@@ -130,7 +130,7 @@ if (isset($_POST['create'])) {
 	else if (empty($gender)) {
 		header ("Location: ../teacher_create.php?error=Gender is required&$user_data");
 	}
-	else if (empty($schoolyear)) {
+	else if (empty($syear)) {
 		header ("Location: ../teacher_create.php?error=School Year is required&$user_data");
 	}
 
@@ -149,7 +149,7 @@ if (isset($_POST['create'])) {
 	else {
 
        $sql = "INSERT INTO students(id,idnumber,lrnnumber,adviser_id,firstname, middlename,lastname,fullname,gender,suffix,
-	   birthplace,birthday,age,parent,address,schoolyear,grade,section,
+	   birthplace,birthday,age,parent,address,syear,grade,section,
 	   subjectteacher1,
 	   subjectteacher2,
 	   subjectteacher3,
@@ -177,7 +177,7 @@ if (isset($_POST['create'])) {
 	   )
                VALUES('$id','$idnumber','$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname','$fullname',	'$gender','$suffix',
 			   '$birthplace','$birthday','$age',
-			   '$address','$parent','$schoolyear','$grade','$section'
+			   '$address','$parent','$syear','$grade','$section'
 			   ,'$subjectteacher1',
 			   '$subjectteacher2',
 			   '$subjectteacher3',

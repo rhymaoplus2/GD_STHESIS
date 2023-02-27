@@ -243,32 +243,38 @@ if(isset($_POST['submit'])) {
   $section = $_POST['section'];
   $grade = $_POST['grade'];
   $trackstrand = $_POST['trackstrand'];
+  $syear = $_POST['syear'];
   $comment = "Showing results for ";
-
-  if(!empty($section) && !empty($grade) && !empty($trackstrand)) {
-    $comment .= "Grade $grade - Section $section - Track/Strand $trackstrand";
-    $where_clause = "section = '$section' AND grade = '$grade' AND trackstrand = '$trackstrand'";
-  } elseif(!empty($section) && !empty($grade)) {
-    $comment .= "Grade $grade - Section $section";
-    $where_clause = "section = '$section' AND grade = '$grade'";
-  } elseif(!empty($section) && !empty($trackstrand)) {
-    $comment .= "Section $section - Track/Strand $trackstrand";
-    $where_clause = "section = '$section' AND trackstrand = '$trackstrand'";
-  } elseif(!empty($grade) && !empty($trackstrand)) {
-    $comment .= "Grade $grade - Track/Strand $trackstrand";
-    $where_clause = "grade = '$grade' AND trackstrand = '$trackstrand'";
-  } elseif(!empty($section)) {
-    $comment .= "Section $section";
-    $where_clause = "section = '$section'";
-  } elseif(!empty($grade)) {
-    $comment .= "Grade $grade";
-    $where_clause = "grade = '$grade'";
-  } elseif(!empty($trackstrand)) {
-    $comment .= "Track/Strand $trackstrand";
-    $where_clause = "trackstrand = '$trackstrand'";
+  if(empty($section) && empty($grade) && empty($trackstrand) && empty($syear)) {
+    $comment = "Showing results for All";
+  }
+  if(!empty($section) && !empty($grade) && !empty($trackstrand) && !empty($syear)) {
+    $comment .= "Grade $grade - Section $section - Track/Strand $trackstrand - School Year $syear";
+    $where_clause = "section = '$section' AND grade = '$grade' AND trackstrand = '$trackstrand' AND syear = '$syear'";
   } else {
-    $comment .= "All";
-    $where_clause = "1";
+    if(!empty($section)) {
+      $comment .= "Section $section";
+      $where_clause .= " AND section = '$section'";
+    }
+    if(!empty($grade)) {
+      $comment .= !empty($comment) ? " - " : "";
+      $comment .= "Grade $grade";
+      $where_clause .= " AND grade = '$grade'";
+    }
+    if(!empty($trackstrand)) {
+      $comment .= !empty($comment) ? " - " : "";
+      $comment .= "Track/Strand $trackstrand";
+      $where_clause .= " AND trackstrand = '$trackstrand'";
+    }
+    if(!empty($syear)) {
+      $comment .= !empty($comment) ? " - " : "";
+      $comment .= "School Year $syear";
+      $where_clause .= " AND syear = '$syear'";
+    }
+    if(empty($comment)) {
+      $comment .= "All";
+    }
+
   }
 }
 
@@ -276,6 +282,8 @@ if(isset($_POST['submit'])) {
 $query = "SELECT * FROM students WHERE $where_clause";
 $result = mysqli_query($conn, $query);
 ?>
+
+
 
 <form method="post" class="text-center">
   <?php
@@ -330,7 +338,21 @@ $result = mysqli_query($conn, $query);
     ?>
   </select>
   &nbsp;&nbsp;&nbsp;  
+  <label for="syear">Year:</label>
+<select id="syear" name="syear">
+  <option value="">All</option>
+  <?php
+require "./php/db_conn.php";
+$query = "SELECT syear FROM year ORDER BY syear";
+$result = mysqli_query($conn, $query);
 
+while($row = mysqli_fetch_array($result)) {
+  echo "<option value='" . $row['syear'] . "'>" . $row['syear'] . "</option>";
+}
+
+  ?>
+</select>
+&nbsp;&nbsp;&nbsp;
   <button class="btn btn-transparent p-0 mb-3" type="submit" name="submit" title="Sort">
   <img id="refresh-img" src="img/refresh.png" alt="Image" title="Add New Student" width="30" height="auto">
 </a>
@@ -379,6 +401,7 @@ $result = mysqli_query($conn, $query);
   $grade = isset($_POST['grade']) ? $_POST['grade'] : '';
   $trackstrand = isset($_POST['trackstrand']) ? $_POST['trackstrand'] : '';
   $search = isset($_POST['search']) ? $_POST['search'] : '';
+  $syear = isset($_POST['syear']) ? $_POST['syear'] : '';
   
   $where_clause = '';
   if (!empty($section)) {
@@ -396,6 +419,13 @@ $result = mysqli_query($conn, $query);
       $where_clause .= ' AND ';
     }
     $where_clause .= "trackstrand = '$trackstrand'";
+  }
+
+  if (!empty($syear)) {
+    if (!empty($where_clause)) {
+      $where_clause .= ' AND ';
+    }
+    $where_clause .= "syear = '$syear'";
   }
 
   if (!empty($search)) {

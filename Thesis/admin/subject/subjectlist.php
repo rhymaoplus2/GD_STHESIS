@@ -18,7 +18,7 @@
 
 
 .container {
-	min-height: 100vh;
+	min-height: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -26,18 +26,29 @@
 }
 
 .container form {
-	width: 600px;
+	width:auto;
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  
 }
 .box {
-	width: 750px;
+  width:auto;
+
+}
+.box2 {
+  width:500px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  border-radius: 10px;
+  height: 6 0px; 
+  margin: 20px 0;
 }
 .container table {
+  width:500px;
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border:10px;  
+
 }
 
 .link-right {
@@ -151,9 +162,50 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  .btn-icon {
+  width: 2rem; /* or whatever size you want */
+  height: auto; /* or whatever size you want */
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 0.5rem; /* or whatever margin you want */
+}
 
+#search-button {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
 
-    </style>
+#search-button:hover img {
+  transform: scale(1.2);
+}
+
+#search-button img {
+  transition: transform 0.2s ease-in-out;
+}
+
+#create-button {
+  background-color: transparent;
+  color: #343a40;
+  font-weight: bold;
+  transition: transform 0.2s ease-in-out;
+}
+
+#create-button:hover {
+  background-color: transparent;
+  color: #007bff;
+  transform: scale(1.05);
+}
+
+#create-button .btn-icon {
+  max-height: 5rem;
+  vertical-align: middle;
+  transition: transform 0.2s ease-in-out;
+}
+
+#create-button:hover .btn-icon {
+  transform: scale(1.2);
+}</style>
 </head>
 <body>
 
@@ -185,33 +237,16 @@ function myFunction() {
 
         <div class=" container ">
        
-        <div class="box">
-        <div class="content">
-			<br>
       
+      <div class=" text-center mb-3">
+     
 
+			</div>
 
+<form>
 
-      <div class="container" >
-		<div class="box">
-    <div class="content">
-
-
-			<h1 class="display-10 text-center">Subject List
-      </h1>
-      Dear : <?=$_SESSION['username']?> 
-      <br>Please Click the create Button to add Subjects!
-     <div class="row justify-content-center my-5">
-                                                      
-	   <div class="row justify-content-right  my-3">
-       </div>
-       <?php if (isset($_GET['success'])) { ?>
-           <div class="alert alert-success" role="alert">
-			  <?php echo $_GET['success']; ?>
-		    </div>
-		    <?php } ?>
-			<?php if (mysqli_num_rows($result)) { ?>
-            <table class="table table-bordered ">
+<?php if (mysqli_num_rows($result)) { ?>
+          
 
             <?php 
 			  	   $i = 0;
@@ -222,15 +257,37 @@ function myFunction() {
            
 
 
+           <div class="container mt-4">
+           <div class="box2">
+           <div class="container text-center">
+  <form class="" method="get">
+  <br>
+    <div class="input-group mb-3 form text-center">
+   
+      <a class="link-primary" href="create.php" display-40>
+     
+        <button type="button" class="btn btn-outline-secondary border-0 p-0 text-center" id="create-button">
+          <img src="img/add.gif" alt="search-icon" class="btn-icon">
+        </button>
+      </a>
+      <input type="text" class="form-control" name="search" placeholder="Search subjects...">
+      <button class="btn btn-outline-secondary border-0 p-0" type="submit" id="search-button text-center">
+        <img src="img/search.gif" alt="search-icon" class="btn-icon">
+      </button>
+    </div>
+  </form>
+</div>
 
 
+           </div>
+  <table class="table table-bordered ">
               <thead >
                   <tr>
                   <th hidden scope="col">Subject ID </th>
                   <th scope="col">Subject Name </th>
                   <th hidden scope="col">Subject Teacher Username</th>
                   
-                  <th scope="col" colspan="2">Actions </th>
+                  <th class="text-center"scope="col" colspan="2">Actions </th>
                 </tr>
               </thead>
         <tbody>    
@@ -238,51 +295,34 @@ function myFunction() {
        
         
 
-
-<?php
- require "./php/db_conn.php";
-            $teacherid = $_SESSION['username'];
- $subjectgrouphead = $_SESSION["id"] ;
- $query = "SELECT * FROM subjects";
+        <?php
+require "./php/db_conn.php";
+$teacherid = $_SESSION['username'];
+$subjectgrouphead = $_SESSION["id"];
+$search_keyword = isset($_GET['search']) ? $_GET['search'] : '';
+$query = "SELECT * FROM subjects";
+if (!empty($search_keyword)) {
+  $query .= " WHERE subjectname LIKE '%" . mysqli_real_escape_string($conn, $search_keyword) . "%'";
+}
 $result = mysqli_query($conn, $query);
- if (mysqli_num_rows($result) > 0) 
-
- {
-
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
-           <tr>
-          <td hidden><?php echo $Row["subjectid"]; ?></td>
-          <td><?php echo $Row["subjectname"]; ?></td>
-          <td hidden><?php echo $Row["teacherid"]; ?></td>
-          <td ><a href="update.php? id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark ">+</a>
-  
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $Row['id'] ?>');">
-  DISCARD
-</a>
-
-			      </td>
-			    </tr>
-     
-
-
-
-
-
-
+if (mysqli_num_rows($result) > 0) {
+  while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+    <tr>
+      <td hidden><?php echo $Row["subjectid"]; ?></td>
+      <td><?php echo $Row["subjectname"]; ?></td>
+      <td hidden><?php echo $Row["teacherid"]; ?></td>
+      <td class="text-center">
+        <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn btn-dark">+</a>
+        <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?php echo $Row['id']; ?>');">DISCARD</a>
+      </td>
+    </tr>
+    <?php
+  }
+} else {
+  echo "<tr><td colspan='4'>No subjects found</td></tr>";
+}
+?>
 
 
 
@@ -294,134 +334,14 @@ function openulr(newurl) {
  }
 
 
+             }
 
-
-
-
-
-
-}
-
-}
  ?>
 
 
 
          </tbody>
       </table>
-      <div class="link-center">
-          <a class="link-primary" href="create.php" display-40>
-          <button type="button" class="btn btn-dark">
-
-      CREATE
-
-          </button>
-          </a>
-
-
-			</div>
-      <form action="" method="GET">
-
-                    <div class="input-group ">
-                      <input
-                        type="text"
-                        name="search"
-                        required
-                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control"
-                        placeholder="Search by Subject ID / Name / Subject Teacher Username"
-                      />
-                      
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-warning">
-                        Search
-                      </button>
-    
-<br> <br>
-<br>
-
-
-                   
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th hidden>Subject ID</th>
-                    <th hidden>Subject Name</th>
-                    <th hidden>Subject Teacher Username</th>
-                    <th colspan="2">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-    <?php
-    $con = mysqli_connect("localhost", "root", "", "my_db");
-    if (isset($_GET['search'])) {
-        $subjectgrouphead = ($_SESSION["id"]);
-        $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM subjects WHERE  CONCAT(subjectid,subjectname,teacherid)LIKE '%$filtervalues%' ";
-        $query_run = mysqli_query($con, $query);
-
-        if (mysqli_num_rows($query_run) >
-                  0) { foreach ($query_run as $items) { ?>
-                  <tr>
-                   <td><?= $items['subjectid']; ?></td>
-                    <td><?= $items['subjectname']; ?></td>
-                    <td><?= $items['teacherid']; ?></td>
-                    <td><a href="update.php? id=<?=$items['id']?>" 
-			      	     class="btn btn-success ">Update</a>
-
-
-                  </td>
-                  <td>
-
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  DISCARD
-</a></strong>
-			      </td>
-                  </tr>
-                  
-
-                  <?php
-            }
-        } else {
-                                                ?>
-                  <tr>
-                  <td colspan="4"><h1 style = "color:red"> No Data Found   </h1> 
-                  <h5>
-                    
-                  </h5> </td>
-                  </tr>
-                  <?php
-        }
-    }
-       }
-       ?>
-                </tbody>
-                
-              </table>
-              </div>
-     </div>
-   </div>
-  </div>
-
-
-          
-            </div>
-      
-      </div>
-    </div>
-      </div>
- 
-      </form>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

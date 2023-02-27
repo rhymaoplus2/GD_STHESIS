@@ -328,7 +328,7 @@ font-size: 10px;;
 
   <div class="mb-3">
   <p class="fw-bold">School Year</p>
-    <?=$row['schoolyear'] ?>
+    <?=$row['syear'] ?>
 
   </div>
 
