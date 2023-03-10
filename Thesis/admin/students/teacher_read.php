@@ -81,7 +81,12 @@ font-size: 10px;;
 }
 
 
-
+.modal
+{
+ border: 100px;
+ background-color: ;
+ 
+}
 
 
 
@@ -338,7 +343,7 @@ $result = mysqli_query($conn, $query);
     ?>
   </select>
   &nbsp;&nbsp;&nbsp;  
-  <label for="syear">Year:</label>
+  <label for="syear">School Years:</label>
 <select id="syear" name="syear">
   <option value="">All</option>
   <?php
@@ -354,7 +359,7 @@ while($row = mysqli_fetch_array($result)) {
 </select>
 &nbsp;&nbsp;&nbsp;
   <button class="btn btn-transparent p-0 mb-3" type="submit" name="submit" title="Sort">
-  <img id="refresh-img" src="img/refresh.png" alt="Image" title="Add New Student" width="30" height="auto">
+  <img id="refresh-img" src="img/eye2.gif" alt="Image" title="Add New Student" width="30" height="auto">
 </a>
 
   </button>
