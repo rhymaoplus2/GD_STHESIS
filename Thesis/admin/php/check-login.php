@@ -23,7 +23,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	}else {
 
 	
-		$password = md5($password);
+		//$password = md5($password);
         
         $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
         $result = mysqli_query($conn, $sql);

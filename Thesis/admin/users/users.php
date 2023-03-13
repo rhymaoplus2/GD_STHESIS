@@ -230,17 +230,20 @@ function myFunction() {
 			  	   $i++;
              
 			  	 ?> 
- <?php
+<?php
 require "./php/db_conn.php";
 
 $query = "SELECT * FROM users";
 $result = mysqli_query($conn, $query);
 ?>
 
-<div>
+<div class="text text-center">
   <input type="text" id="search" placeholder="Search/Sort">
 </div>
 <br>
+<div class="text text-center"id="result-text"></div>
+<br>
+<div id="search-term"></div>
 <table class="table table-bordered mb-25">
   <thead>
     <tr>
@@ -285,16 +288,28 @@ $result = mysqli_query($conn, $query);
   const searchInput = document.querySelector('#search');
   const tableBody = document.querySelector('#table-body');
   const rows = tableBody.getElementsByTagName('tr');
+  const resultText = document.querySelector('#result-text');
 
   searchInput.addEventListener('keyup', function(event) {
     const searchTerm = event.target.value.toLowerCase();
+    let count = 0;
 
     for (let i = 0; i < rows.length; i++) {
       const name = rows[i].getElementsByTagName('td')[0].innerText.toLowerCase();
       const username = rows[i].getElementsByTagName('td')[1].innerText.toLowerCase();
       const role = rows[i].getElementsByTagName('td')[2].innerText.toLowerCase();
       const match = name.includes(searchTerm) || username.includes(searchTerm) || role.includes(searchTerm);
-      rows[i].style.display = match ? '' : 'none';
+      rows[i].style.display = match || searchTerm === '' ? '' : 'none';
+      
+      if (match) {
+        count++;
+      }
+    }
+
+    if (searchTerm === '') {
+      resultText.innerText = '';
+    } else {
+      resultText.innerHTML = '<strong>Showing Results for:</strong> ' + searchTerm + ' (' + count + ' results)';
     }
   });
 </script>
