@@ -182,6 +182,16 @@ font-size: 10px;;
     border: none;
     box-shadow: none;
   }
+  .pagination .page-link {
+  color: #fff !important;
+  background-color: #333 !important;
+  border-color: #333 !important;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #000 !important;
+  border-color: #000 !important;
+}
 
   .btn img {
     width: 30px;
@@ -209,38 +219,68 @@ font-size: 10px;;
 </div>
 
 <div class="container" >
+  
 		<div class="box">
-    <div class="content">
-
     <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
 		    </div>
 		   <?php } ?>
        </div>
-       <?php if (isset($_GET['success'])) { ?>
-           <div class="alert alert-success" role="alert">
-			  <?php echo $_GET['success']; ?>
-		    </div>
-		    <?php } ?>
-			<?php if (mysqli_num_rows($result)) { ?>
-        
-        <div class="border">
+    
+  
+ 
+    <?php if (isset($_GET['success'])) { ?>
+      <div class="alert alert-success" role="alert">
+        <?php echo $_GET['success']; ?>
+      </div>
+    <?php } ?>
+    <?php if (mysqli_num_rows($result)) { ?>
+    <div class="content">
+
+  
+ 
+      <div class="border">
+        <div class="d-flex justify-content-center">
+          
+   
+          <table class="table table-bordered">
+            
        
 
+            <?php
+require "./php/db_conn.php";
 
-        <div class="d-flex justify-content-center">
+// Number of results to show per page
+$results_per_page = 5;
 
+// Query to get total number of results
+$query = "SELECT COUNT(*) AS total_results FROM section";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+$total_results = $row['total_results'];
 
+// Calculate total number of pages
+$total_pages = ceil($total_results / $results_per_page);
 
+// Check if current page is set, otherwise set it to the first page
+if (!isset($_GET['page'])) {
+  $current_page = 1;
+} else {
+  $current_page = $_GET['page'];
+}
 
+// Calculate the starting and ending indices of the results to display on the current page
+$start_index = ($current_page - 1) * $results_per_page;
+$end_index = $start_index + $results_per_page;
 
+// Query to get results for the current page
+$query = "SELECT name FROM section LIMIT $start_index, $results_per_page";
+$result = mysqli_query($conn, $query);
 
-
-
-
-
-        <table class="table table-bordered">
+// Display results in table
+?>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -248,54 +288,93 @@ font-size: 10px;;
     </tr>
   </thead>
   <tbody>
-
-  <?php
-    require "./php/db_conn.php";
-
-    $query = "SELECT name FROM section";
-    $result = mysqli_query($conn, $query);
-
-    while ($Row = mysqli_fetch_assoc($result)) {
-  ?>
-
+    <?php
+    while ($row = mysqli_fetch_assoc($result)) {
+      ?>
       <tr>
-        <td><?php echo $Row["name"]; ?></td>
+        <td><?php echo $row["name"]; ?></td>
         <td>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="assignToDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              Assign To
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="assignToDropdown">
-              <?php
-                $query2 = "SELECT name FROM users";
-                $result2 = mysqli_query($conn, $query2);
+        <button type="button" class="btn btn-dark text-truncate" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $row['name']; ?>">
+  Assign To
+</button>
 
-                while ($Row2 = mysqli_fetch_assoc($result2)) {
-              ?>
-                  <li><a class="dropdown-item" href="assign_section.php?section_name=<?php echo $Row['name']; ?>&user_name=<?php echo $Row2['name']; ?>"><?php echo $Row2["name"]; ?></a></li>
-              <?php
-                }
-              ?>
-            </ul>
+
+          <div class="modal fade" id="assignModal-<?php echo $row['name']; ?>" tabindex="-1" aria-labelledby="assignModalLabel-<?php echo $row['name']; ?>" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="assignModalLabel-<?php echo $row['name']; ?>">Assign To - <?php echo $row["name"]; ?></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-group">
+                    <?php
+                    $query2 = "SELECT name FROM users";
+                    $result2 = mysqli_query($conn, $query2);
+
+                    while ($row2 = mysqli_fetch_assoc($result2)) {
+                      ?>
+                      <li class="list-group-item">
+                        <a href="assign_section.php?section_name=<?php echo $row['name']; ?>&user_name=<?php echo $row2['name']; ?>"><?php echo $row2["name"]; ?></a>
+                      </li>
+                    <?php
+                    }
+                    ?>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </td>
       </tr>
-
-  <?php
+    <?php
     }
   }
 }
-  ?>
 
+    ?>
   </tbody>
+  
 </table>
+
 
 
 
 </div>
 
+<div class="d-flex justify-content-center mt-3">
+  &nbsp;
+  &nbsp;&nbsp;
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <?php if ($current_page > 1): ?>
+        <li class="page-item">
+          <a class="page-link btn-dark" href="?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      <?php endif; ?>
 
+      <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+        <?php if ($i == $current_page): ?>
+          <li class="page-item active" aria-current="page">
+            <span class="page-link"><?php echo $i; ?><span class="visually-hidden">(current)</span></span>
+          </li>
+        <?php else: ?>
+          <li class="page-item"><a class="page-link btn-dark" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+        <?php endif; ?>
+      <?php endfor; ?>
 
+      <?php if ($current_page < $total_pages): ?>
+        <li class="page-item">
+          <a class="page-link btn-dark" href="?page=<?php echo $current_page + 1; ?>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      <?php endif; ?>
+    </ul>
+  </nav>
+</div>
 
 
 </div>

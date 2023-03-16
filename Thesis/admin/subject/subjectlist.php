@@ -280,6 +280,8 @@ function myFunction() {
 
 
            </div>
+           <!--
+        
   <table class="table table-bordered ">
               <thead >
                   <tr>
@@ -291,7 +293,7 @@ function myFunction() {
                 </tr>
               </thead>
         <tbody>    
-          
+             -->
        
         
 
@@ -306,42 +308,110 @@ if (!empty($search_keyword)) {
 }
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
-  while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-    <tr>
-      <td hidden><?php echo $Row["subjectid"]; ?></td>
-      <td><?php echo $Row["subjectname"]; ?></td>
-      <td hidden><?php echo $Row["teacherid"]; ?></td>
-      <td class="text-center">
-        <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn btn-dark">+</a>
-        <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?php echo $Row['id']; ?>');">DISCARD</a>
-      </td>
-    </tr>
-    <?php
+  $results_per_page = 5;
+  $total_results = mysqli_num_rows($result);
+  $total_pages = ceil($total_results / $results_per_page);
+
+  $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+  if ($current_page < 1 || $current_page > $total_pages) {
+    $current_page = 1;
+  }
+
+  $offset = ($current_page - 1) * $results_per_page;
+  $query .= " LIMIT $offset, $results_per_page";
+  $result = mysqli_query($conn, $query);
+
+  // Display the table
+  ?>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th hidden scope="col">Subject ID</th>
+          <th scope="col">Subject Name</th>
+          <th hidden scope="col">Subject Teacher Username</th>
+          <th class="text-center" scope="col" colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        while ($Row = mysqli_fetch_assoc($result)) {
+        ?>
+          <tr>
+            <td hidden><?php echo $Row["subjectid"]; ?></td>
+            <td><?php echo $Row["subjectname"]; ?></td>
+            <td hidden><?php echo $Row["teacherid"]; ?></td>
+            <td class="text-center">
+              <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn btn-dark">+</a>
+              <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?php echo $Row['id']; ?>');">DISCARD</a>
+            </td>
+          </tr>
+        <?php
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
+
+  <?php
+  // Add the page buttons for all the available pages
+  if ($total_pages > 1) {
+  ?>
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+
+          <?php
+          $pages_to_show = 5;
+          $pages_start = max($current_page - floor($pages_to_show / 2), 1);
+          $pages_end = min($pages_start + $pages_to_show - 1, $total_pages);
+
+          if ($current_page > 1) {
+          ?>
+            <li class="page-item">
+              <a class="page-link" href="?page=<?php echo ($current_page - 1); ?>&search=<?php echo $search_keyword; ?>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+          <?php
+          }
+
+          for ($i = $pages_start; $i <= $pages_end; $i++) {
+          ?>
+            <li class="page-item <?php echo ($i ==$current_page) ? 'active' : ''; ?>">
+<a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo $search_keyword; ?>"><?php echo $i; ?></a>
+</li>
+<?php
+}
+if ($current_page < $total_pages) {
+  ?>
+    <li class="page-item">
+      <a class="page-link" href="?page=<?php echo ($current_page + 1); ?>&search=<?php echo $search_keyword; ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  <?php
+  }
+  ?>
+</ul>
+</nav>
+</div>
+<?php
   }
 } else {
-  echo "<tr><td colspan='4'>No subjects found</td></tr>";
+  echo "<p>No subjects found</p>";
 }
+             }
+            }
+          }
 ?>
 
 
 
 
 
-
-       
-            <?php }
- }
-
-
-             }
-
- ?>
-
-
-
-         </tbody>
-      </table>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

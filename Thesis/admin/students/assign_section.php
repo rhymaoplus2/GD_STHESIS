@@ -19,7 +19,7 @@ $Row3 = mysqli_fetch_assoc($result);
 
 if ($Row || $Row2 || $Row3) {
   // User is already assigned to the section in one of the tables
-  header("Location:sections.php?id=$id&error=User is already assigned to the section in one of the tables.");
+  header("Location:sections.php?id=$id&error=User is already assigned to the section in one of the tables. Update it Manually");
 
 } else {
   // Assign the section to the user
@@ -30,30 +30,37 @@ if ($Row || $Row2 || $Row3) {
     $Row = mysqli_fetch_assoc($result);
 
     if ($Row["t$i"] == "") {
-      $query = "UPDATE section SET t$i='$user_name' WHERE name='$section_name'";
+      $query = "SELECT * FROM users WHERE name='$user_name' AND (sec$i='')";
       $result = mysqli_query($conn, $query);
-      
-      // Store the section name to the user's column
-      $sec_column_name = "sec$i";
-      $query = "UPDATE users SET $sec_column_name='$section_name' WHERE name='$user_name'";
-      $result = mysqli_query($conn, $query);
+      $Row2 = mysqli_fetch_assoc($result);
 
-      // Update the students table
-      $query = "UPDATE students SET subjectteacher$i='$user_name' WHERE section='$section_name'";
-      $result = mysqli_query($conn, $query);
+      if($Row2) {
+        $query = "UPDATE section SET t$i='$user_name' WHERE name='$section_name'";
+        $result = mysqli_query($conn, $query);
 
-      $assigned = true;
-      break;
+        // Store the section name to the user's column
+        $sec_column_name = "sec$i";
+        $query = "UPDATE users SET $sec_column_name='$section_name' WHERE name='$user_name'";
+        $result = mysqli_query($conn, $query);
+
+        // Update the students table
+        $query = "UPDATE students SET subjectteacher$i='$user_name' WHERE section='$section_name'";
+        $result = mysqli_query($conn, $query);
+
+        $assigned = true;
+        break;
+      }
     }
   }
   if ($assigned) {
     header("Location:sections.php?id=$id&success=Section assigned to $user_name");
- 
-  } else {
-    header("Location:sections.php?id=$id&error=All slots are occupied.");
 
+  } else {
+    header("Location:sections.php?id=$id&error=All slots are occupied or user has already assigned to a section in all tables.");
   }
+  
 }
 
 mysqli_close($conn);
+
 ?>

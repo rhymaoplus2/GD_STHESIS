@@ -1,0 +1,27 @@
+<?php
+require "./db_conn.php";
+
+$search_keyword = isset($_GET['search']) ? $_GET['search'] : '';
+$query = "SELECT * FROM subjects";
+if (!empty($search_keyword)) {
+  $query .= " WHERE subjectname LIKE '%" . mysqli_real_escape_string($conn, $search_keyword) . "%'";
+}
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+  while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+    <tr>
+      <td hidden><?php echo $Row["subjectid"]; ?></td>
+      <td><?php echo $Row["subjectname"]; ?></td>
+      <td hidden><?php echo $Row["teacherid"]; ?></td>
+      <td class="text-center">
+        <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn btn-dark">+</a>
+        <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?php echo $Row['id']; ?>');">DISCARD</a>
+      </td>
+    </tr>
+    <?php
+  }
+} else {
+  echo "<tr><td colspan='4'>No subjects found</td></tr>";
+}
+?>
