@@ -3,15 +3,15 @@ session_start();
 include "db_conn.php";
 if(isset($_POST['submit']))
 {
-	function validate($data){
+    function validate($data){
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
-	}
+    }
     $semester = $_POST['semester'];
     $quarter = $_POST['quarter'];
-	// Loop through each student's grades and insert them into the database
+    // Loop through each student's grades and insert them into the database
     foreach ($_POST['studentname'] as $index => $studentname)
     {
         $subjectname = $_POST['subjectname'][$index];
@@ -23,6 +23,11 @@ if(isset($_POST['submit']))
         $middlename = $_POST['middlename'][$index];
         $lastname = $_POST['lastname'][$index];
         $gender = $_POST['gender'][$index];
+
+        // Skip inserting the record if the grade is 0
+        if ($grade == 0) {
+            continue;
+        }
 
         // Determine the value of the remarks field based on the grade
         if ($grade >= 75) {
@@ -42,7 +47,7 @@ if(isset($_POST['submit']))
         } else {
             // The record doesn't exist, insert it into the database
             $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser,firstname,middlename,lastname,gender,remarks,semester,quarter) 
-		              VALUES ('$studentname','$subjectname','$grade','$teacher','$section','$adviser','$firstname','$middlename','$lastname','$gender','$remarks','$semester','$quarter')";
+                      VALUES ('$studentname','$subjectname','$grade','$teacher','$section','$adviser','$firstname','$middlename','$lastname','$gender','$remarks','$semester','$quarter')";
             $query_run = mysqli_query($conn, $query);
 
             if (!$query_run)
@@ -55,5 +60,6 @@ if(isset($_POST['submit']))
 
     header("Location: ../subject1view.php?success=Grades added successfully");
 }
+
 
 ?>

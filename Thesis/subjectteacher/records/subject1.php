@@ -34,10 +34,12 @@
 	align-items: center;
 	flex-direction: column;
   margin-top: -10rem;
+  width:1000px;
+
 }
 
 .container form {
-	width: 600px;
+	width:600px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -52,6 +54,7 @@
 	border-radius: 10px;
   background-color: white;
   border: 10px;
+  width:600px;
 
 }
 .border {
@@ -258,13 +261,6 @@ function myFunction() {
 
 
 
-<!--- DISPLAYING SUBJECT NAME -->
-
-
-
-
-
-
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>
@@ -280,12 +276,12 @@ function myFunction() {
 
               ?> 
            
-
+           <div class="content">
 
 
      <div class="container" >
 
-   <div class="content">
+ 
                
    <br>
       <br>
@@ -294,9 +290,9 @@ function myFunction() {
       <br>
       <br>
       <br>
-      <br>
-      <br>
+
       <div class="border">
+        <!--
       <?php
     require "php/db_conn.php";
     $name = $_SESSION["name"];
@@ -318,14 +314,68 @@ function myFunction() {
         $row = mysqli_fetch_assoc($result);
         // Do something with the row
 ?>
+-->
    
-    <table class="table table-bordered">
+   <table class="table table-bordered" id="grades-table">
+
         <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
-            <b class="fs-2"><?=$_SESSION['sub1']?> - <?= $row['section'] ?></b>
+            <b class="fs-2"><?=$_SESSION['sub1']?></b>
         </div>
                    <?php }
                    ?>   
 
+
+<div class="form-floating mb-3">
+  <select class="form-select" id="section-filter" onchange="filterTable()">
+    <option value="">All Sections</option>
+    <?php
+    $query = "SELECT DISTINCT section FROM students ORDER BY section ASC";
+    $result = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+      echo '<option value="' . $row['section'] . '">' . $row['section'] . '</option>';
+    }
+    ?>
+  </select>
+  <label for="section-filter"><b>Filter by Section</b></label>
+</div>
+<hr>
+
+<script>
+function filterTable() {
+  var section = document.getElementById("section-filter").value.toUpperCase();
+  var table = document.getElementById("grades-table");
+  var rows = table.getElementsByTagName("tr");
+  for (var i = 1; i < rows.length; i++) {
+    var rowSection = rows[i].querySelector(".section").getElementsByTagName("input")[0].value.toUpperCase();
+    var skipRow = false;
+    if (section != "" && rowSection != section) {
+      skipRow = true;
+    }
+    rows[i].setAttribute("data-skip-row", skipRow);
+    rows[i].style.display = skipRow ? "none" : "";
+  }
+}
+
+
+</script>
+
+<script>
+  function submit() {
+  var form = document.getElementById("grades-form");
+  var table = document.getElementById("grades-table");
+  var rows = table.getElementsByTagName("tr");
+  for (var i = 1; i < rows.length; i++) {
+    var skipRow = rows[i].getAttribute("data-skip-row");
+    if (skipRow === "true") {
+      continue;
+    }
+    var inputs = rows[i].getElementsByTagName("input");
+    // insert the data into the database
+  }
+  form.submit();
+}
+
+</script>
       <div class="row">
   <div class="col-md-6">
     <label for="semester" class="form-label text-center"><b>Semester</b></label>
@@ -368,7 +418,7 @@ function myFunction() {
 
 
 
-        
+
 
 
           
@@ -403,6 +453,10 @@ function myFunction() {
 
                         ?>
    
+
+
+
+   
                
 <td   colspan="">
 <input class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
@@ -431,12 +485,7 @@ function myFunction() {
 </input>
 </td>
 
-
-
-
-           
-               
-           
+ 
             <td hidden >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
             value="<?= $Row['sub1'] ?>">
@@ -444,24 +493,14 @@ function myFunction() {
           <b class="text-danger"><?= $Row['sub1'] ?></b>
         </td>
           
-          
-          
-          
-          
-          
-         
-        
 
-        
-
-
-   
           <td>
             
           
           
        <select id="grade" name="grade[]" class="form-control">
-       <option value=" "> </option>
+       <option value="0">Skip</option>
+       <option value="1" class="text-danger"><b>INC</b></option>
                                 <?php
     for ($i=50; $i<=100; $i++)
     {
@@ -477,23 +516,12 @@ function myFunction() {
 
 
          </td>
-
+    
           <td hidden><input value="<?= $_SESSION['name']?>" id="teacher"name="teacher[]">
-       
 
-
-
-
-          
-
-
-
-  
         </td>
-        <td hidden>
-        <input hidden class="no" id="section" name="section[]" 
-            value="<?= $Row['section'] ?>">
-        </td>
+        <td class="section" hidden><input hidden class="no" id="section" name="section[]" value="<?= $Row['section'] ?>"></td>
+
         <td hidden>          
 
         </input> 
@@ -502,15 +530,6 @@ function myFunction() {
           </input> 
                       </td> 
 			    </tr>
-     
-
-
-
-
-
-
-
-
 
 
        
@@ -533,7 +552,7 @@ function myFunction() {
       </table>
       <button type="submit"
         class="btn btn-primary"
-        name="submit"><b>ADD<b></button>
+        name="submit" id="submit"><b>ADD<b></button>
       
           <a class="link-primary" href="subject1view.php" display-40>
           <button type="button" class="btn btn-dark">
