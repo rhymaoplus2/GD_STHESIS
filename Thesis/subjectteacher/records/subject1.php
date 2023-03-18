@@ -297,16 +297,40 @@ function myFunction() {
       <br>
       <br>
       <div class="border">
-            
-      <table class="table table-bordered ">
-      <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
-    <b class="fs-2"><?=$_SESSION['sub1']?> - <?=$_SESSION['sec1']?></b>
-</div>
+      <?php
+    require "php/db_conn.php";
+    $name = $_SESSION["name"];
+    $query = "SELECT students.fullname, students.adviser_id, users.sub1,
+            students.section, students.firstname,students.middlename,
+            students.lastname,students.gender
+            FROM students
+            JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
+            WHERE (students.subject1 = users.sub1 OR students.subject2 = users.sub1 OR students.subject3 = users.sub1 OR students.subject4 = users.sub1 OR students.subject5 = users.sub1 OR students.subject6 = users.sub1 OR students.subject7 = users.sub1 OR students.subject8 = users.sub1 OR students.subject9 = users.sub1 OR students.subject10 = users.sub1)
+            AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
+            AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
+            OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
+            OR students.subjectteacher10 = '".$_SESSION["name"]."')
+            LIMIT 1";
+    
+    $result = mysqli_query($conn, $query);
+    
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        // Do something with the row
+?>
+   
+    <table class="table table-bordered">
+        <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
+            <b class="fs-2"><?=$_SESSION['sub1']?> - <?= $row['section'] ?></b>
+        </div>
+                   <?php }
+                   ?>   
+
       <div class="row">
   <div class="col-md-6">
     <label for="semester" class="form-label text-center"><b>Semester</b></label>
     <select class="form-select" id="semester" name="semester">
-    <option value="">NONE</option>
+
       <option value="First">FIRST</option>
       <option value="Second">SECOND</option>
       <option value="Third">THIRD</option>
@@ -316,7 +340,7 @@ function myFunction() {
   <div class="col-md-6">
     <label for="quarter" class="form-label text-center"><b>Quarter</b></label>
     <select class="form-select" id="quarter" name="quarter">
-    <option value="">NONE</option>
+
       <option value="First">FIRST</option>
       <option value="Second">SECOND</option>
       <option value="Third">THIRD</option>
@@ -357,18 +381,17 @@ function myFunction() {
                     require "php/db_conn.php";
             $name = $_SESSION["name"];
                     $query =
-                    "SELECT students.fullname, students.adviser_id, users.sub1, subjects.subjectname ,
-                    students.section, students.firstname,students.middlename,students.lastname,students.gender
-                    FROM students
-                    JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-                    JOIN subjects ON subjects.subjectname = users.sub1 AND users.sec1 = students.section AND (subjects.teacher1 = '".$_SESSION["name"]."' OR subjects.teacher2 = '".$_SESSION["name"]."' 
-                    OR subjects.teacher3 = '".$_SESSION["name"]."' OR subjects.teacher4 = '".$_SESSION["name"]."'
-                     OR subjects.teacher5 = '".$_SESSION["name"]."' OR subjects.teacher6 = '".$_SESSION["name"]."' 
-                     OR subjects.teacher7 = '".$_SESSION["name"]."' OR subjects.teacher8 = '".$_SESSION["name"]."' 
-                     OR subjects.teacher9 = '".$_SESSION["name"]."' OR subjects.teacher10 = '".$_SESSION["name"]."')
-                    WHERE (students.subject1 = users.sub1 OR students.subject2 = users.sub1 OR students.subject3 = users.sub1 OR students.subject4 = users.sub1 OR students.subject5 = users.sub1 OR students.subject6 = users.sub1 OR students.subject7 = users.sub1 OR students.subject8 = users.sub1 OR students.subject9 = users.sub1 OR students.subject10 = users.sub1)
-                    
-                    ";
+                    $query = "SELECT students.fullname, students.adviser_id, users.sub1,
+                    students.section, students.firstname,students.middlename,
+                    students.lastname,students.gender
+              FROM students
+              JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
+              WHERE (students.subject1 = users.sub1 OR students.subject2 = users.sub1 OR students.subject3 = users.sub1 OR students.subject4 = users.sub1 OR students.subject5 = users.sub1 OR students.subject6 = users.sub1 OR students.subject7 = users.sub1 OR students.subject8 = users.sub1 OR students.subject9 = users.sub1 OR students.subject10 = users.sub1)
+              AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
+              AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
+              OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
+              OR students.subjectteacher10 = '".$_SESSION["name"]."')";
+    
                   
                     // $query = "SELECT students.fullname,students.adviser_id,students.firstname
                     //FROM students 
@@ -446,6 +469,8 @@ function myFunction() {
             <option value="<?php echo $i;?>"><?php echo $i;?></option>
         <?php
     }
+  
+
 ?>
                                 </select>
 
@@ -495,7 +520,8 @@ function myFunction() {
             }
       }
             }
-    
+          
+        
 
   
       ?>

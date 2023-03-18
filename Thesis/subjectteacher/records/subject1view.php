@@ -338,9 +338,34 @@ function myFunction() {
  
   <div class="border">
 
-  <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
-    <b class="fs-2"><?=$_SESSION['sub1']?> - <?=$_SESSION['sec1']?></b>
-</div>
+
+  <?php
+    require "php/db_conn.php";
+    $teacher = $_SESSION['name'];
+
+    $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+        a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks,b.quarter,b.semester,b.gender
+        FROM grade b, users a WHERE  b.subjectname = a.sub1  
+        AND a.name = b.teacher AND b.adviser = a.sgh1 
+        AND teacher = '$teacher'";
+  
+    
+    $result = mysqli_query($conn, $query);
+    
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        // Do something with the row
+?>
+        
+  
+            <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
+                <b class="fs-2"><?=$_SESSION['sub1']?> - <?=$row['section']?></b>
+            </div>
+           
+            <?php }
+                   ?>  
+    
+
 
   <table class="table table-bordered" id="grade-table">
 
@@ -432,10 +457,11 @@ rotateBtn.addEventListener("click", () => {
   $teacher = $_SESSION['name'];
 
   $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
-    a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks,b.quarter,b.semester,b.gender
-    FROM grade b, users a WHERE  b.subjectname = a.sub1  
-    AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
-    AND teacher = '$teacher'";
+      a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks,b.quarter,b.semester,b.gender
+      FROM grade b, users a WHERE  b.subjectname = a.sub1  
+      AND a.name = b.teacher AND b.adviser = a.sgh1 
+      AND teacher = '$teacher'";
+
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $semester = $_POST["semester"];
