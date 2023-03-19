@@ -254,7 +254,7 @@ font-size: 10px;;
 }
     </style>
 </head>
-<body >
+<body onload="window.print()">
 
 <div class="modal" id="myModal">
   <div class="modal-dialog">
@@ -315,52 +315,6 @@ font-size: 10px;;
     localStorage.setItem('modalShown', true);
   }
 </script>
-
-
-<div class="container-fluid p-0" style="background-color: black;">
-  <div class="row mx-0 justify-content-center align-items-center pt-4">
-    <div class="col-md-6">
-      <form method="POST" action="" class="d-flex">
-        <div class="mb-3 flex-row d-inline-flex">
-        <label for="quarter" class="form-label me-3 text-white"><b>Quarter:</b></label>
-  <select class="form-select form-control me-3" id="quarter" name="quarter">
-    <option value="FIRST">FIRST</option>
-    <option value="SECOND">SECOND</option>
-    <option value="THIRD">THIRD</option>
-    <option value="FOURTH">FOURTH</option>
-  </select>
-  <label for="semester" class="form-label me-3 text-white"><b>Semester:</b></label>
-  <select class="form-select form-control me-3" id="semester" name="semester">
-    <option value="FIRST">FIRST</option>
-    <option value="SECOND">SECOND</option>
-    <option value="THIRD">THIRD</option>
-    <option value="FOURTH">FOURTH</option>
-  </select>
-  <input type="submit" value="SHOW" class="btn btn-light form-control   ">
-
-         
-          <div class="fixed-bottom text-center py-3">
-          <button class="btn  bg-transparent btn-transparent" onclick="window.print()"
-  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Print now!">
-  <span class="btn-icon">
-    <img src="img/printer.gif" alt="Print icon" style="width: auto; height: 100px;">
-  </span>
-
-</button>
-<script>
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  })
-</script>
-
-</div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 
 
 
@@ -441,7 +395,7 @@ if ($result && mysqli_num_rows($result) > 0) {
            Year & Section : <b><?=$_SESSION['sec1']?> </b>
            <br>
            Adviser :<b>
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    <?php echo $adviser; ?> </b> 
            </p>
           </div>
@@ -511,17 +465,20 @@ echo $semester . "<br>";
                         if (isset($_POST['semester']) && isset($_POST['quarter'])) {
                           $semester = $_POST['semester'];
                           $quarter = $_POST['quarter'];
-                          $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
-                           a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
-                           b.firstname,b.middlename,b.lastname,b.remarks
-                           FROM grade b, users a WHERE  b.subjectname = a.sub1  
-                           AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
-                           AND teacher = '$teacher' AND b.gender = 'MALE' AND b.semester='$semester' AND b.quarter='$quarter'";
-                         ;
-                         $result = mysqli_query($conn, $query);
-                          // process the query result as needed
-                        }
-$result = mysqli_query($conn, $query);
+                          $query = $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+                          a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
+                          b.firstname,b.middlename,b.lastname,b.remarks
+                          FROM grade b, users a 
+                          WHERE b.subjectname = a.sub1  
+                          AND b.section = a.sec1 
+                          AND a.name = b.teacher 
+                          AND b.adviser = a.sgh1 
+                          AND teacher = '$teacher' 
+                          AND b.gender = 'MALE' 
+                          AND b.semester='$semester' 
+                          AND b.quarter='$quarter'
+                          AND b.quarter='first'"; 
+               
  if (mysqli_num_rows($result) > 0) 
  $rowNum = 1;
  {
@@ -540,6 +497,8 @@ $result = mysqli_query($conn, $query);
  
 
     <th class="text-center align-middle " style="width: 5%;"><?php echo $Row["quarter"]; ?><br>QUARTER</th>
+    <th hidden class="text-center align-middle " style="width: 5%;"><?php echo $Row["semester"]; ?><br>QUARTER</th>
+ 
     <th class="text-center align-middle " style="width: 5%;">REMARKS</th>
   </tr>
 </thead>
@@ -578,17 +537,20 @@ $result = mysqli_query($conn, $query);
                         if (isset($_POST['semester']) && isset($_POST['quarter'])) {
                           $semester = $_POST['semester'];
                           $quarter = $_POST['quarter'];
-                          $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
-                           a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,
-                           b.firstname,b.middlename,b.lastname,b.remarks
-                           FROM grade b, users a WHERE  b.subjectname = a.sub1  
-                           AND b.section = a.sec1 AND a.name = b.teacher AND b.adviser = a.sgh1 
-                           AND teacher = '$teacher' AND b.gender = 'FEMALE' AND b.semester='$semester' AND b.quarter='$quarter'";
-                         ;
-                         $result = mysqli_query($conn, $query);
-                          // process the query result as needed
-                        }
-$result = mysqli_query($conn, $query);
+                          $query = $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+                          a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
+                          b.firstname,b.middlename,b.lastname,b.remarks
+                          FROM grade b, users a 
+                          WHERE b.subjectname = a.sub1  
+                          AND b.section = a.sec1 
+                          AND a.name = b.teacher 
+                          AND b.adviser = a.sgh1 
+                          AND teacher = '$teacher' 
+                          AND b.gender = 'FEMALE' 
+                          AND b.semester='$semester' 
+                          AND b.quarter='$quarter'
+                          AND b.quarter='first'"; 
+               
  if (mysqli_num_rows($result) > 0) 
  $rowNum = 1;
  {
@@ -627,9 +589,9 @@ $result = mysqli_query($conn, $query);
     }
     }
 
-
+  }
 }
-
+   }
 
  ?>
 
@@ -659,7 +621,8 @@ $result = mysqli_query($conn, $query);
     <br>
     <br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <b><?php echo $name; ?></b>
+    <b><?php echo strtoupper($name); ?></b>
+
     <hr class="my-1 " style="background-color:black;">
  
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

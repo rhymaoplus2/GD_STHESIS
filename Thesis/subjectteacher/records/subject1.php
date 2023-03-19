@@ -190,6 +190,44 @@ bottom: 0;
 z-index: -1;
   }
 
+  select option {
+  font-weight: bold;
+}
+
+select option:checked {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+select option[value="0"] {
+  font-weight: bold;
+}
+
+
+/* Make the selected text bold */
+select option::selection,
+select option::-moz-selection,
+select option::-webkit-selection {
+  font-weight: bold;
+}
+td.text-bold {
+  font-weight: bold;
+}
+.blue-border {
+  border-color: blue;
+  border-width: 3px;
+}
+
+.red-border {
+  border-color: red;
+  border-width: 3px;
+}
+.form-select-sm {
+    height: 30px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
     </style>
 </head>
 <body>
@@ -318,15 +356,15 @@ function myFunction() {
    
    <table class="table table-bordered" id="grades-table">
 
-        <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
-            <b class="fs-2"><?=$_SESSION['sub1']?></b>
-        </div>
+   <div class="text-center bg-danger text-white rounded-pill mb-3">
+   ADDING GRADES FOR SUBJECT :  <b> <?=$_SESSION['sub1']?></b>
+</div>
+
                    <?php }
                    ?>   
 
-
 <div class="form-floating mb-3">
-  <select class="form-select" id="section-filter" onchange="filterTable()">
+  <select class="form-select form-select-sm" id="section-filter" onchange="filterTable()">
     <option value="">All Sections</option>
     <?php
     $query = "SELECT DISTINCT section FROM students ORDER BY section ASC";
@@ -336,7 +374,7 @@ function myFunction() {
     }
     ?>
   </select>
-  <label for="section-filter"><b>Filter by Section</b></label>
+  <label for="section-filter"><small>Filter by Section</small></label>
 </div>
 <hr>
 
@@ -406,7 +444,7 @@ function filterTable() {
           
                   <th scope="col">Student Name</th>
                   <th hidden  scope="col">Subject Name </th>
-                  <th scope="col">Grade </th>
+                  <th scope="col" class="text-center">Grade </th>
       
                 </tr>
               </thead>
@@ -493,29 +531,22 @@ function filterTable() {
           <b class="text-danger"><?= $Row['sub1'] ?></b>
         </td>
           
-
-          <td>
-            
-          
-          
-       <select id="grade" name="grade[]" class="form-control">
-       <option value="0">Skip</option>
-       <option value="1" class="text-danger"><b>INC</b></option>
-                                <?php
-    for ($i=50; $i<=100; $i++)
-    {
-        ?>
-            <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php
-    }
-  
-
-?>
-                                </select>
-/
+        <td>
+      <select id="grade-<?php echo $i; ?>" name="grade[]" class="form-control text-center grade-select">
+        <option value="0" class="">ADD GRADE</option>
+        <option value="1" class="text-danger"><b>INC</b></option>
+        <?php for ($j = 50; $j <= 100; $j++) { ?>
+          <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+        <?php } ?>
+      </select>
+    </td>
 
 
-         </td>
+
+
+
+
+
     
           <td hidden><input value="<?= $_SESSION['name']?>" id="teacher"name="teacher[]">
 
