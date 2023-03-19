@@ -254,73 +254,7 @@ font-size: 10px;;
 }
     </style>
 </head>
-<body onload="window.print()">
-
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Hello,
-
-
-
-        <?=$_SESSION['name']?>!
-
-
-        
-        </h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center">
-      <div class="text-center">
-  <img src="img/printer.gif" alt="Your Image" class="img-fluid w-50">
-</div>
-
-        <p><b>To display the grades of the students,
-          <br>
-          select semester and quarter and click the submit button </b></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center">
-        <div class="text-center">
-          <img src="img/printer.gif" alt="Your Image" class="img-fluid w-50">
-        </div>
-        <p><b>To display the grades of the students, select semester and quarter and click the submit button.</b></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Check if the modal has already been shown
-  if (!localStorage.getItem('modalShown')) {
-    // If not, show the modal
-    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
-      keyboard: false
-    });
-    myModal.show();
-    // Set the flag to indicate that the modal has been shown
-    localStorage.setItem('modalShown', true);
-  }
-</script>
-
-
-
-
-
-
+<body >
 
 
 
@@ -344,23 +278,11 @@ font-size: 10px;;
 
             <table class="table table-bordered small table-sm" >
 
-            <?php 
-			  	   $i = 0;
-			  	   while($rows = mysqli_fetch_assoc($result)){
-			  	   $i++;
-             
-			  	 ?> 
+      
            
            <div class="mb-3 " style="display:inline-block;">
            <p>
            Track & Strand :
-
-
-
-
-
-
-
 
            <?php
 
@@ -385,17 +307,11 @@ if ($result && mysqli_num_rows($result) > 0) {
     // handle error
 }
 ?>
-
-
-
-
-
-
            <br>
            Year & Section : <b><?=$_SESSION['sec1']?> </b>
            <br>
            Adviser :<b>
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    <?php echo $adviser; ?> </b> 
            </p>
           </div>
@@ -408,11 +324,6 @@ if ($result && mysqli_num_rows($result) > 0) {
           <div class=" ms-auto justify-content-right" style="display:inline-block;">
            <p>
        
-
-
-
-
-
            <?php
 
 $teacher = $_SESSION['name'];
@@ -435,8 +346,6 @@ if ($result && mysqli_num_rows($result) > 0) {
   // handle error
 }
 ?>
-
-
 <?php
 $sub1 = "<b>$sub1</b>";
 $quarter = "<b>$quarter</b>";
@@ -451,8 +360,6 @@ echo $quarter . "<br>";
 echo $semester . "<br>";
 ?>
 
-
-
            </p>
              </div>
         
@@ -460,34 +367,31 @@ echo $semester . "<br>";
 
 
              <?php
- require "./php/db_conn.php";
-                        $teacher = $_SESSION['name'];
-                        if (isset($_POST['semester']) && isset($_POST['quarter'])) {
-                          $semester = $_POST['semester'];
-                          $quarter = $_POST['quarter'];
-                          $query = $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
-                          a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
-                          b.firstname,b.middlename,b.lastname,b.remarks
-                          FROM grade b, users a 
-                          WHERE b.subjectname = a.sub1  
-                          AND b.section = a.sec1 
-                          AND a.name = b.teacher 
-                          AND b.adviser = a.sgh1 
-                          AND teacher = '$teacher' 
-                          AND b.gender = 'MALE' 
-                          AND b.semester='$semester' 
-                          AND b.quarter='$quarter'
-                          AND b.quarter='first'"; 
-               
- if (mysqli_num_rows($result) > 0) 
- $rowNum = 1;
- {
+require "./php/db_conn.php";
+$teacher = $_SESSION['name'];
+$rowNum = 0; // initialize rowNum to 0
 
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
+if (isset($_POST['semester']) && isset($_POST['quarter'])) {
+  $semester = $_POST['semester'];
+  $quarter = $_POST['quarter'];
+  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+            a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
+            b.firstname,b.middlename,b.lastname,b.remarks
+            FROM grade b, users a 
+            WHERE b.subjectname = a.sub1 AND b.section = a.sec1 
+            AND a.name = b.teacher AND b.adviser = a.sgh1 
+            AND teacher = '$teacher' AND b.gender = 'MALE' 
+            AND b.semester='$semester' AND b.quarter='FIRST'"; 
+
+  $result = mysqli_query($conn, $query);
+  
+  // process the query result as needed
+}
+
+while ($Row = mysqli_fetch_assoc($result)) {
+  $rowNum++; // increment rowNum
+?>
+
              <thead tyle="height: 10px;">
   <tr >
     <th class="text-center align-middle " style="width: 2%; ">NO.</th>
@@ -497,8 +401,6 @@ echo $semester . "<br>";
  
 
     <th class="text-center align-middle " style="width: 5%;"><?php echo $Row["quarter"]; ?><br>QUARTER</th>
-    <th hidden class="text-center align-middle " style="width: 5%;"><?php echo $Row["semester"]; ?><br>QUARTER</th>
- 
     <th class="text-center align-middle " style="width: 5%;">REMARKS</th>
   </tr>
 </thead>
@@ -530,36 +432,31 @@ echo $semester . "<br>";
               </thead>
 
 
-
               <?php
- require "./php/db_conn.php";
-                        $teacher = $_SESSION['name'];
-                        if (isset($_POST['semester']) && isset($_POST['quarter'])) {
-                          $semester = $_POST['semester'];
-                          $quarter = $_POST['quarter'];
-                          $query = $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
-                          a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
-                          b.firstname,b.middlename,b.lastname,b.remarks
-                          FROM grade b, users a 
-                          WHERE b.subjectname = a.sub1  
-                          AND b.section = a.sec1 
-                          AND a.name = b.teacher 
-                          AND b.adviser = a.sgh1 
-                          AND teacher = '$teacher' 
-                          AND b.gender = 'FEMALE' 
-                          AND b.semester='$semester' 
-                          AND b.quarter='$quarter'
-                          AND b.quarter='first'"; 
-               
- if (mysqli_num_rows($result) > 0) 
- $rowNum = 1;
- {
+require "./php/db_conn.php";
+$teacher = $_SESSION['name'];
+$rowNum = 0; // initialize rowNum to 0
 
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
+if (isset($_POST['semester']) && isset($_POST['quarter'])) {
+  $semester = $_POST['semester'];
+  $quarter = $_POST['quarter'];
+  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
+            a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.gender,b.quarter,
+            b.firstname,b.middlename,b.lastname,b.remarks
+            FROM grade b, users a 
+            WHERE b.subjectname = a.sub1 AND b.section = a.sec1 
+            AND a.name = b.teacher AND b.adviser = a.sgh1 
+            AND teacher = '$teacher' AND b.gender = 'FEMALE' 
+            AND b.semester='$semester' AND b.quarter='FIRST'"; 
+
+  $result = mysqli_query($conn, $query);
+  
+  // process the query result as needed
+}
+
+while ($Row = mysqli_fetch_assoc($result)) {
+  $rowNum++; // increment rowNum
+?>
      <br>
            <tr>
            <td class="text text-center" ><?php echo  $rowNum ?></td>
@@ -586,12 +483,11 @@ echo $semester . "<br>";
 
      }
 
-    }
-    }
+    
 
-  }
-}
-   }
+
+
+
 
  ?>
 
@@ -621,8 +517,7 @@ echo $semester . "<br>";
     <br>
     <br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <b><?php echo strtoupper($name); ?></b>
-
+    <b><?php echo $name; ?></b>
     <hr class="my-1 " style="background-color:black;">
  
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
