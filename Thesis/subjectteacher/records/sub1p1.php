@@ -1,0 +1,521 @@
+<?php 
+
+   session_start();
+   include "../php/db_conn.php";
+   include "./php/subject1view.php";
+   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PRINTABLE DATA</title>
+  
+  <link  href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+
+
+  <style>
+@media print {
+  /* Set the page size to A4 */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .btn-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+   .print-hidden {
+      display: none;
+    }
+  /* Set the footer to be at the bottom of the page */
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+
+  /* Set the page break after two pages */
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* Hide the file name and other description */
+  .print-header,
+  .print-footer {
+    display: none;
+  }
+
+  /* Only display content in the last page */
+  .wrapper {
+    counter-increment: page;
+  }
+
+  /* Add margin to the top of the second page */
+  .wrapper:nth-of-type(n+3) {
+    margin-top: 100px;
+  }
+
+  /* Add page number to the last page */
+  .wrapper:after {
+    content: counter(page);
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    page-break-after: always;
+  }
+  .wrapper:last-of-type:after {
+    content: "";
+  }
+  .container-fluid.p-0 {
+  display: none;
+}
+.tooltip {
+  display: none !important;
+}
+
+  
+}
+
+td {
+  border: 1px solid black;
+}
+
+.failed {
+  color: red;
+  border-right-color: white; /* set border color to white */
+}
+
+.wrapper{
+  font-size: 11px;
+}
+.container {
+
+	display: flex;
+	justify-content: ;
+	align-items: center;
+	flex-direction: column;
+
+}
+hr {
+  border: none;
+  border: 1px solid;
+  width: 120%;
+  background-color: black;
+}
+
+
+.container form {
+	width: 800px;
+	padding: 20px;
+
+
+}
+.box {
+	width: 750px;
+}
+
+.container table {
+	padding: 5px;
+
+  font-size: 11px;
+font-family: calibri;
+  border: 10px;
+}
+.container text{
+
+
+}
+.border {
+	padding: 15px;
+	
+
+}
+
+.link-right {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+.link-center {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+
+
+
+
+.thead
+{
+font-size: 10px;;
+
+}
+
+
+
+
+
+
+  .nav-item
+  {
+  
+      color:black;
+  
+  }
+  .subjectlist{
+  
+      margin-left: 5rem;
+      margin-top: 5rem;
+  }
+  
+  .studentlist{
+  
+  margin-left: 20rem;
+  margin-top: 5rem;
+  }
+  
+  
+  .button{
+  
+      margin-left: 5rem;
+      margin-top: 11rem;
+  }
+  .form-label, .form-select {
+      font-size: inherit;
+    }
+
+  
+  .button1{
+  
+  margin-left: 5rem;
+  margin-top: 9.5rem;
+  }
+  
+  .title{
+      margin-left: 40rem;
+      margin-top: 1rem;
+      font-size: 3.5rem;
+  }
+  .text{
+
+  }
+
+  .text2
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
+  }
+
+
+
+
+.top-container {
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .header {
+   
+    background-color: white;
+    color: #f1f1f1;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .content {
+    padding-top: 102px;
+  }
+
+  .addbutton
+  {
+    margin-left:80%;
+  }
+  .btn-bold {
+  font-weight: bold;
+}
+#left {
+  float: left;
+  width: 50%;
+  font-size: 13px
+}
+
+#right {
+  float: right;
+  width: 50%;
+  font-size: 13px
+}
+#left, #right {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+    </style>
+</head>
+<body >
+
+
+
+    <div class="d-flex justify-content-center align-items-center position-relative">
+
+    <img src="header.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
+
+
+</div>
+
+
+
+
+
+
+
+<div class="container " >
+		<div class="box">
+    <div class="content">
+
+
+            <table class="table table-bordered small table-sm" >
+
+            <?php
+require "./php/db_conn.php";
+$teacher = $_SESSION['name'];
+$query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
+a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,b.semester,
+b.firstname, b.middlename, b.lastname, b.remarks,b.year
+FROM grade b
+INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
+WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND b.gender = 'FEMALE' AND a.name = '$teacher'
+ORDER BY b.studentname ASC LIMIT 1;";
+
+$result = mysqli_query($conn, $query);
+if ($Row = mysqli_fetch_assoc($result)) {
+  $output_left = "<div id='left'>";
+  $output_left .= "<p>";
+  $output_left .= "Track & Strands:&nbsp;<br>"; 
+  $output_left .= "Year & Section:&nbsp;<strong>" . $Row['section'] . $Row['year'] . "</strong><br>";
+  $output_left .= "Adviser:&nbsp;<strong>" . $Row['adviser'] . "</strong><br>";
+  $output_left .= "</p>";
+  $output_left .= "</div>";
+  
+  $output_right = "<div id='right'>";
+  $output_right .= "<p>";
+  $output_right .= "Subject:&nbsp;<br>";
+  $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
+  $output_right .= "Semester:&nbsp;<strong>" . $Row['semester'] . "</strong><br>";
+  $output_right .= "</p>";
+  $output_right .= "</div>";
+  
+  
+  
+  echo $output_left;
+  echo $output_right;
+} else {
+  echo "No results found";
+}
+
+mysqli_close($conn);
+?>
+
+
+
+<thead>
+
+
+
+
+
+
+<tr style="text-align:center;">
+  <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
+  <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
+  <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
+  <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
+  <th class="text-center" style="width:90px; vertical-align: middle;">FIRST<br>QUARTER</th>
+  <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
+</tr>
+
+
+</thed>
+
+        
+             <thead>
+    <th colspan="6" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></th>
+</thead>
+
+<?php
+require "./php/db_conn.php";
+$teacher = $_SESSION['name'];
+$rowNum = 0; 
+$sql = "SELECT * FROM grade ORDER BY studentname ASC  ";   
+$query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
+a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
+b.firstname, b.middlename, b.lastname, b.remarks
+FROM grade b
+INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
+WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND b.gender = 'MALE' AND a.name = '$teacher'
+ORDER BY b.studentname ASC;
+";
+
+
+$result = mysqli_query($conn, $query);
+
+while ($Row = mysqli_fetch_assoc($result)) {
+  $rowNum++; // increment rowNum
+?>
+  <br>
+  <tr>
+    <td class="text text-center"><?php echo  $rowNum ?></td>
+    <td class="text"><?php echo $Row["lastname"]; ?></td>
+    <td class="text"><?php echo $Row["firstname"]; ?></td>
+    <td class="text text-center"><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+    <td class="text text-center"><?php echo $Row["grade"]; ?></td>
+    <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+      <b><?php echo $Row["remarks"]; ?></b>
+    </td>
+  </tr>
+<?php } ?>
+
+</tbody>
+
+</div>     
+                <thead >
+      <th colspan="6"class="text text-left" ><b><div class="text text-danger"><b>FEMALE</b></div></b></th>
+              </thead>
+
+
+              <?php
+require "./php/db_conn.php";
+$teacher = $_SESSION['name'];
+$rowNum = 0; 
+$sql = "SELECT * FROM grade ORDER BY studentname ASC  ";   
+$query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
+a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
+b.firstname, b.middlename, b.lastname, b.remarks
+FROM grade b
+INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
+WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND b.gender = 'FEMALE' AND a.name = '$teacher'
+ORDER BY b.studentname ASC;
+";
+
+
+  $result = mysqli_query($conn, $query);
+  
+  // process the query result as needed
+}
+
+while ($Row = mysqli_fetch_assoc($result)) {
+  $rowNum++; // increment rowNum
+?>
+     <br>
+           <tr>
+           <td class="text text-center" ><?php echo  $rowNum ?></td>
+          <td class="text "><?php echo $Row["lastname"]; ?></td>
+          <td class="text " ><?php echo $Row["firstname"]; ?></td>
+          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
+          
+          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
+  
+          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
+  <b><?php echo $Row["remarks"]; ?></b>
+ 
+</td>
+     </tr>
+            <?php }
+ ?>
+         </tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+      </table>
+
+
+
+
+      <?php
+require "./php/db_conn.php";
+$query = "SELECT pname, crname, name
+          FROM principal, cr, users
+          WHERE users.name = '" . $_SESSION['name'] . "'";
+
+
+
+
+$result = mysqli_query($conn, $query);
+if ($Row = mysqli_fetch_assoc($result)) {
+  $output_left = "<div id='left'>";
+  $output_left .= "<p>";
+  $output_left .= "Prepared by";
+  $output_left .= "<br><hr style='width:50%;'>";
+  $output_left .= "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <b><i>Subject Teacher</i></b><br>";
+  $output_left .= "<br>Noted by";
+  $output_left .= "<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b style='border-bottom: 2px solid #000;'>". $Row['pname'] . "</b>";
+
+  $output_left .= "<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <b><i>Principal</i></b><br>";
+  
+  $output_left .= "</p>";
+  $output_left .= "</div>";
+  
+  $output_right = "<div id='right'>";
+  $output_right .= "<p>";
+  $output_right .= "Subject:&nbsp;<br>";
+  $output_right .= "Quarter:&nbsp;<strong>" . "</strong><br>";
+  $output_right .= "</p>";
+  $output_right .= "</div>";
+  
+  echo $output_left;
+  echo $output_right;
+  
+} else {
+  echo "No results found";
+}
+
+mysqli_close($conn);
+?>
+
+
+</div>
+                  <?php
+       ?>
+
+
+      
+<script>
+  var wrappers = document.querySelectorAll('.wrapper');
+  wrappers[wrappers.length - 1].classList.add('last-page');
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -323,10 +323,38 @@ function myFunction() {
 
     <div class="text-center mb-3">
   <a class="link-primary" href="subject1.php"><button type="button" class="btn btn-dark"><b>ADD GRADES</b></button></a>
-  <button type="button" class="btn btn-dark" onclick="printPage()"><b>PRINTABLE DATA</b></button>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Open Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Print Grades From</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3> Semester 1 - Quarter : </h3>
+      
+        <button type="button" class="btn btn-primary" onclick="window.open('sub1p1.php', '_blank')">1</button>
+        <button type="button" class="btn btn-secondary" onclick="window.open('sub1p2.php', '_blank')">2</button>
+        <br>
+        <h3> Semester 2 - Quarter : </h3>
+       
+        <button type="button" class="btn btn-success" onclick="window.open('sub1p3.php', '_blank')">1</button>
+        <button type="button" class="btn btn-danger" onclick="window.open('sub1p4.php', '_blank')">2</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
+</div>
 
 
 
