@@ -26,13 +26,13 @@
 }
 
 .container form {
-	width: 730px;
+	width: 1030px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box {
-	width: 750px;
+	width: auto;
 }
 .container table {
 	padding: 20px;
@@ -205,8 +205,8 @@ function myFunction() {
       <br>
     <div class="link text-center">
 		
-    <a  class="link-primary" href="creates.php" display-40>
-    <button disabled type="button" class="btn btn-dark ">
+    <a  class="link-primary" href="create.php" display-40>
+    <button type="button" class="btn btn-dark ">
 
 <b>ADD USERS </b>
 

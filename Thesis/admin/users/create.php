@@ -162,9 +162,6 @@ font-size: 10px;;
 <?PHP include_once('header.php');?>
 </div>
 
-
-
-<!--  CRUD AREA -->
 <br>
 <br>
 
@@ -186,52 +183,29 @@ font-size: 10px;;
 <?php } ?>
 
 <div class="form-group">
-    <label for="" class="form-label warning" >Username</label>
+    <label for="" class="form-label warning" ><b>Username</b></label>
     <input 
     type="text" 
-    class="form-control" 
+    class="form-control mb-3" 
     id="username" 
     placeholder="Reyris"
     name="username">
   </div>
 
 <div class="form-group">
-    <label for="" class="form-label warning" >Password</label>
+    <label for="" class="form-label warning" ><b>Password</b></label>
     <input 
     type="password" 
-    class="form-control" 
+    class="form-control mb-3" 
     id="password" 
     placeholder="12913937"
     name="password">
   </div>
 
 
-<!--
-  <div class="form-group">
-    <label for="" class="form-label">Adviser ID</label>
-    <input 
-    
-    type="text" 
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: 12913937"
-    name="adviser_id">
-  </div>
- -->
-
-
-
-
-
-
-
-
-
-
-
 
   <div class="form-group">
-    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <label for="exampleInputEmail1" class="form-label "><b>Name</b></label>
     <input 
     type="text" 
     class="form-control" 
@@ -241,76 +215,31 @@ font-size: 10px;;
   </div>
 
 
-  <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Advisory</label>
- <select name="section" id="section" class="form-control">
+
+  <div class="form-group">
   
-    <?php 
-    $query ="SELECT section FROM section";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['section'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($section) && $section== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
+    <br>
+    <hr>   
+    <label for="exampleInputEmail1" class="form-label text-danger"><b>Roles</b></label>
+    <br>
+    <input 
+    
+	  type="text"
+    class="form-control"
+    id="role" 
+    name="role">
+           </input>
 
 
+           <input 
 
- </div>
+	  type="text"
+    class="form-control"
+    id="role2" 
+    name="role2">
+           </input>
 
-
-
-
-
-
-<!--
-
-
- <div class="mb-3">
- <label for="exampleInputEmail1" class="form-label">Subject Teachers</label>
- <select name="st1" id="st1" class="form-control">
-  
-    <?php 
-    $query ="SELECT username FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['username'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($username) && $username== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-
- </div>
-  -->
-
-
+  </div>
 
 
 <br>

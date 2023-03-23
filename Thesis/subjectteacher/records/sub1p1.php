@@ -25,7 +25,9 @@
   width: 1.5rem;
   height: 1.5rem;
 }
-
+@page {
+    margin-top: 50px;
+  }
    .print-hidden {
       display: none;
     }
@@ -260,7 +262,7 @@ font-size: 10px;;
 
 #right {
   float: right;
-  width: 50%;
+  width: 34%;
   font-size: 13px
 }
 #left, #right {
@@ -270,8 +272,7 @@ font-size: 10px;;
 
     </style>
 </head>
-<body >
-
+<body onload="window.print()">
 
 
     <div class="d-flex justify-content-center align-items-center position-relative">
@@ -310,14 +311,15 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_left = "<div id='left'>";
   $output_left .= "<p>";
   $output_left .= "Track & Strands:&nbsp;<br>"; 
-  $output_left .= "Year & Section:&nbsp;<strong>" . $Row['section'] . $Row['year'] . "</strong><br>";
-  $output_left .= "Adviser:&nbsp;<strong>" . $Row['adviser'] . "</strong><br>";
+  $output_left .= "Year & Section:&nbsp; &nbsp;&nbsp;<strong>" . $Row['section'] . $Row['year'] . "</strong><br>";
+  $output_left .= "Adviser:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>" . $Row['adviser'] . "</strong><br>";
   $output_left .= "</p>";
   $output_left .= "</div>";
   
   $output_right = "<div id='right'>";
   $output_right .= "<p>";
-  $output_right .= "Subject:&nbsp;<br>";
+  $output_right .= "Subject:&nbsp;<b>" .$Row['sub1'] ."</b><br>";
   $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
   $output_right .= "Semester:&nbsp;<strong>" . $Row['semester'] . "</strong><br>";
   $output_right .= "</p>";
@@ -391,6 +393,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
       <b><?php echo $Row["remarks"]; ?></b>
     </td>
   </tr>
+
 <?php } ?>
 
 </tbody>
@@ -443,70 +446,235 @@ while ($Row = mysqli_fetch_assoc($result)) {
          </tbody>
 
 
-
-
-
-
-
-
-
-
-
-
-
-         
       </table>
 
 
 
 
-      <?php
-require "./php/db_conn.php";
-$query = "SELECT pname, crname, name
-          FROM principal, cr, users
-          WHERE users.name = '" . $_SESSION['name'] . "'";
-
-
-
-
-$result = mysqli_query($conn, $query);
-if ($Row = mysqli_fetch_assoc($result)) {
-  $output_left = "<div id='left'>";
-  $output_left .= "<p>";
-  $output_left .= "Prepared by";
-  $output_left .= "<br><hr style='width:50%;'>";
-  $output_left .= "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <b><i>Subject Teacher</i></b><br>";
-  $output_left .= "<br>Noted by";
-  $output_left .= "<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b style='border-bottom: 2px solid #000;'>". $Row['pname'] . "</b>";
-
-  $output_left .= "<br><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <b><i>Principal</i></b><br>";
+      <table style="font-size: 16px; width:720px;">
+  <thead>
+    <tr>
   
-  $output_left .= "</p>";
-  $output_left .= "</div>";
-  
-  $output_right = "<div id='right'>";
-  $output_right .= "<p>";
-  $output_right .= "Subject:&nbsp;<br>";
-  $output_right .= "Quarter:&nbsp;<strong>" . "</strong><br>";
-  $output_right .= "</p>";
-  $output_right .= "</div>";
-  
-  echo $output_left;
-  echo $output_right;
-  
-} else {
-  echo "No results found";
-}
-
-mysqli_close($conn);
-?>
 
 
-</div>
-                  <?php
-       ?>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+      require "./php/db_conn.php";
+      $query = "SELECT pname, crname, name
+                FROM principal, cr, users
+                WHERE users.name = '" . $_SESSION['name'] . "'";
+      $result = mysqli_query($conn, $query);
+      if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "<tr>";
+        
+          echo "<td style='border: none;'>";
+
+          echo "
+          Prepared by
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          Checked by
+          
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          
+          <b><u>". strtoupper($row['name']). 
+          "</b></u>&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <u><b>"
+          . date("Y-m-d") . 
+          "</u></b>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+         
+          <u>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          </u>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;
+          <u>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </u>
+
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;
+          &nbsp;
+          <i>Subject Teacher</i>
+          &nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <i>Date</i>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          <i>Subject Group Head</i>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;
+      
+          <i>Date</i>
+      
+
+
+          <br>
+          <br>
+          Noted by
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+       
+          Approved by
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <br>
+          <b>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <u>"
+          . $row['pname'] ."</b></u>
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;
+          <u>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          </u>
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+        
+          
+          
+          
+          
+          <u>
+          <b>
+          "
+          . $row['crname'] .
+          
+          
+          "</b></u>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;
+          <u>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </u>
+          
+          
+          
+          
+          
+          
+          
+          
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;
+          <i>Principal</i>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          <i>Date</i>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp; 
+          <i>Campus Registrar</i>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp; 
+          <i>Date</i>
+          </td>";
+
+          
+
+
+
+
+
+          
+          echo "</tr>";
+        }
+      } else {
+        echo "<tr><td colspan='4'>No results found</td></tr>";
+      }
+      mysqli_close($conn);
+    ?>
+  </tbody>
+</table>
 
 
       
