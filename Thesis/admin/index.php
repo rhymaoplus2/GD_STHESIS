@@ -122,7 +122,7 @@ function myFunction() {
 
 
   <button type="submit" class="btn btn-primary">Submit</button>
-  <a class="link-primary" href="../admin.php" display-40>
+  <a class="link-primary" href="../index.php" display-40>
           <button type="button" class="btn btn-dark">
 
       Cancel
