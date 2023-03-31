@@ -89,9 +89,7 @@
 </div>
 </div>
     
-    <audio controls autoplay hidden>
-        <source src="welcome.mp3" type="audio/mpeg">
-    </audio>
+   
     <script>
 var video = document.getElementById("myVideo");
 var btn = document.getElementById("myBtn");

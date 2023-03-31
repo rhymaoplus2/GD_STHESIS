@@ -343,7 +343,7 @@ idInput.addEventListener('input', checkIdNumber);
     name="fullname"
     oninput="checkFullName()"
   >
-  <small id="name-comment" class="text-danger d-none">Please input the same value</small>
+  <small id="name-comment" class="text-danger d-none">Please input the same Name</small>
 </div>
 
 <script>
@@ -485,7 +485,8 @@ idInput.addEventListener('input', checkIdNumber);
     name="section">
   </div>
 <hr>
-  <div class="mb-3">
+<div class="mb-3">
+<!--  
   <div class="mb-3 text-center">
   <label for="subjectteacher1" class="form-label text-danger mb-3"><b>Subject Teachers</b></label>
 </div>
@@ -634,7 +635,7 @@ idInput.addEventListener('input', checkIdNumber);
 
   <br>
 
-
+    -->
 
 <hr>
   <div class="mb-3 text-center">

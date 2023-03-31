@@ -115,17 +115,7 @@ if (isset($_POST['create'])) {
 	}
 
 
-	else if (empty($birthplace)) {
-		header ("Location:../teacher_create.php?error=Birth Place is required&$user_data");
-	}
 
-	else if (empty($birthday)) {
-		header ("Location: ../teacher_create.php?error=Birth Day is required&$user_data");
-	}
-
-	else if (empty($address)) {
-		header ("Location: ../teacher_create.php?error=Address is required&$user_data");
-	}
 
 	else if (empty($gender)) {
 		header ("Location: ../teacher_create.php?error=Gender is required&$user_data");

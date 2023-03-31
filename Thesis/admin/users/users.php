@@ -158,6 +158,15 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  .btn-group-custom {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-group-custom button {
+  /* optional styles for the buttons inside the group */
+}
 
 
     </style>
@@ -217,7 +226,8 @@ function myFunction() {
 <?php
 require "./php/db_conn.php";
 
-$query = "SELECT * FROM users ";
+$query = "SELECT * FROM users ORDER BY name";
+
 $result = mysqli_query($conn, $query);
 ?>
 <div class="text text-center">
@@ -229,8 +239,9 @@ $result = mysqli_query($conn, $query);
     <tr>
       <th>Name</th>
       <th>Username</th>
-      <th hidden>Role</th>
-      <th colspan="4" class="text-center">Actions</th>
+
+      <th colspan="" class="text-center">Actions</th>
+      <th >Status</th>
     </tr>
   </thead>
   <tbody id="table-body">
@@ -247,6 +258,47 @@ $result = mysqli_query($conn, $query);
             <a href="view.php?id=<?php echo $row['id'] ?>" class="btn btn-dark"><b>VIEW</b></a>
             <a href="update.php?id=<?php echo $row['id'] ?>" class="btn btn-primary"><b>UPDATE</b></a>
             <a href="addsub.php?id=<?php echo $row['id'] ?>" class="btn btn-primary"><b>+ SUBJECT</b></a>
+      </td>
+            <td class="text-center">
+      
+            <?php
+// Assume that $row is an associative array that contains a 'status' and an 'id' key
+$status = $row['status'];
+$color = ($status == 1) ? 'success' : 'danger';
+$id = $row['id'];
+?>
+
+<button type="button" class="btn btn-<?php echo $color ?> rounded-pill" data-bs-toggle="modal" data-bs-target="#statusModal<?php echo $id ?>">
+
+</button>
+<!-- Add this modal at the end of the page -->
+<div class="modal fade" id="statusModal<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="statusModalLabel<?php echo $row['id'] ?>" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-lighttext-white">
+        <h5 class="modal-title" id="statusModalLabel<?php echo $row['id'] ?>">Status Update</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="card">
+        <div class="card-header bg-light">
+          Set status for : <b><?php echo $row['name'] ?> </b>
+        </div>
+
+        <form method="post" action="update_status.php">
+          <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+          <div class="btn-group btn-group-custom" role="group" aria-label="Status">
+            <button type="submit" name="status" value="1" class="btn btn-outline-success">Activate</button>
+            <button type="submit" name="status" value="0" class="btn btn-outline-danger">Deactivate</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
           </td>
         </tr>
     <?php
