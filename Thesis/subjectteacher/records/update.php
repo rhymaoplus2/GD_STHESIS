@@ -246,13 +246,13 @@ function myFunction() {
 		           class="btn btn-primary"
 		           name="update">Update</button>
 
-               <button type="button" class="btn btn-dark" onclick="history.go(-1);">
+               <a class="link-primary" href="subject1view.php" display-40>
+               <button type="button" class="btn btn-dark">
     Cancel
 </button>
 
 
 
-	
 	    </form>
 	</div>
 <br>

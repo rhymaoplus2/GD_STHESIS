@@ -71,19 +71,18 @@
             <br>
             <h2 class="text-left" style="font-family: Tahoma;">Select User Type</h2>
        
-
-
-        
-                <br>
-                <button class="btn text-center"><a href="teacher/index.php" style="color: black; text-decoration: none;"><img src="img/adviser.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Continue as Adviser</b></button>
-<br><br>
-                <button class="btn text-center" ><a href="subjectteacher/index.php" style="color: black; text-decoration: none;"><img src="img/sub.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Continue as Subject Teacher</b></button>
-<br><br>
-<button class="btn"><a href="" style="color: black; text-decoration: none;"><img src="img/registrar.png" alt="Registrar Icon" style="float:left;width:30px;"><b>Continue as Registrar Staff</b></button>
-<br><br>
-<button class="btn"><a href="admin/index.php" style="color: black; text-decoration: none;"><img src="img/admin.png" alt="Admin Icon" style="float:left;width:30px;"><b>Continue as Administrator</b></a></button>
-
 <br>
+<button class="btn text-center" onclick="window.location.href='teacher/index.php'" style="color: black; text-decoration: none;"><img src="img/adviser.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Continue as Adviser</b></button>
+<br>
+<br>
+<button class="btn text-center" onclick="window.location.href='subjectteacher/index.php'" style="color: black; text-decoration: none;"><img src="img/sub.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Continue as Subject Teacher</b></button>
+<br>
+<br>
+<button class="btn" onclick="window.location.href=''" style="color: black; text-decoration: none;"><img src="img/registrar.png" alt="Registrar Icon" style="float:left;width:30px;"><b>Continue as Registrar Staff</b></button>
+<br>
+<br>    
+<button class="btn" onclick="window.location.href='admin/index.php'" style="color: black; text-decoration: none;"><img src="img/admin.png" alt="Admin Icon" style="float:left;width:30px;"><b>Continue as Administrator</b></button>
+
             </div>
         </div>
     </div>

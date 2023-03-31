@@ -33,7 +33,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
  
 }
 .box {
-	width: 800px;
+	width: 700px;
   
 }
 .container table {
@@ -267,90 +267,68 @@ function myFunction() {
            
 
 
-
-           <thead>
+           <thead class="text-center">
     <tr>
         <th scope="col">Subject Name</th>
-        <th scope="col">Section</th>
-        <th scope="col">Adviser</th>
+        <th hidden scope="col">Section</th>
+        <th hidden scope="col">Adviser</th>
         <th scope="col" colspan="2">Actions</th>
     </tr>
 </thead>
 <tbody>    
     <?php
-    require "./php/db_conn.php";
-    $name = $_SESSION['name'];
-
-    $query = "SELECT u.name, s.teacher1, s.teacher2, s.teacher3, s.teacher4, s.teacher5, s.teacher6, s.teacher7, s.teacher8, s.teacher9, s.teacher10, 
-              u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, 
-              s.subjectname, s.subjectgrouphead, s.subjectgrouphead2, s.subjectgrouphead3, s.subjectgrouphead4, s.subjectgrouphead5
-              FROM users u
-              JOIN subjects s
+        require "./php/db_conn.php";
+        $name = $_SESSION['name'];
+       
+        $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5 ,u.sub1
+                  FROM users u
+                  WHERE u.name = '$name';";
+       
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+                <tr>
+                    <td class="text-center"><b> <?php echo $Row["sub1"]; ?> </b></td>
+                    <td class="text-center">
+                        <a href="subject1view.php" class="btn btn-dark">VIEW / ADD GRADES</a>
+                    </td>
              
-              ON u.sub1 = s.subjectname
-              AND (
-                    s.teacher1 = '$name' OR s.teacher2 = '$name' OR s.teacher3 = '$name' OR s.teacher4 = '$name' OR s.teacher5 = '$name' OR 
-                    s.teacher6 = '$name' OR s.teacher7 = '$name' OR s.teacher8 = '$name' OR s.teacher9 = '$name' OR s.teacher10 = '$name'
-                  )
-              AND (
-                    s.section = u.sec1 OR s.section2 = u.sec2 OR s.section3 = u.sec3 OR s.section4 = u.sec4 OR s.section5 = u.sec5 OR
-                    s.subjectgrouphead = u.sgh1 OR s.subjectgrouphead2 = u.sgh2 OR s.subjectgrouphead3 = u.sgh3 OR s.subjectgrouphead4 = u.sgh4 OR s.subjectgrouphead5 = u.sgh5
-                  );";
-
-    $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) > 0) {
-        while ($Row = mysqli_fetch_assoc($result)) {
-            ?>
-            <tr>
-                <td><?php echo $Row["subjectname"]; ?></td>
-      
-                <td><?php echo $Row["sec1"]; ?></td>
-                <td><?php echo $Row["subjectgrouphead"]; ?></td>
-             
-          <td><a href="subject1view.php" 
-			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
-                      </td>
-    
-            </tr>
-
+                </tr>
+    <?php
+            }
+        }
+    ?>
 </tbody>
-
-           
-<?php
-    require "./php/db_conn.php";
-    $name = $_SESSION['name'];
-
-    $query = "SELECT u.name, s.teacher1, s.teacher2, s.teacher3, s.teacher4, s.teacher5, s.teacher6, s.teacher7, s.teacher8, s.teacher9, s.teacher10, 
-              u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, 
-              s.subjectname, s.subjectgrouphead, s.subjectgrouphead2, s.subjectgrouphead3, s.subjectgrouphead4, s.subjectgrouphead5
-              FROM users u
-              JOIN subjects s
-              ON u.sub2 = s.subjectname
-              AND (
-                    s.teacher1 = '$name' OR s.teacher2 = '$name' OR s.teacher3 = '$name' OR s.teacher4 = '$name' OR s.teacher5 = '$name' OR 
-                    s.teacher6 = '$name' OR s.teacher7 = '$name' OR s.teacher8 = '$name' OR s.teacher9 = '$name' OR s.teacher10 = '$name'
-                  )
-              AND (
-                    s.section = u.sec1 OR s.section2 = u.sec2 OR s.section3 = u.sec3 OR s.section4 = u.sec4 OR s.section5 = u.sec5 OR
-                    s.subjectgrouphead = u.sgh1 OR s.subjectgrouphead2 = u.sgh2 OR s.subjectgrouphead3 = u.sgh3 OR s.subjectgrouphead4 = u.sgh4 OR s.subjectgrouphead5 = u.sgh5
-                  );";
-
-    $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) > 0) {
-        while ($Row = mysqli_fetch_assoc($result)) {
-            ?>
-            <tr>
-                <td><?php echo $Row["subjectname"]; ?></td>
-      
-                <td><?php echo $Row["sec2"]; ?></td>
-                <td><?php echo $Row["subjectgrouphead"]; ?></td>
-             
-          <td><a href="subject2view.php" 
-			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
-                      </td>
-    
-            </tr>
-
+<tr class="">
+        <th scope="col"></th>
+        <th hidden scope="col"></th>
+        <th hidden scope="col"></th>
+        <th scope="col" colspan="2"></th>
+    </tr>
+<tbody>    
+    <?php
+        require "./php/db_conn.php";
+        $name = $_SESSION['name'];
+       
+        $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5 ,u.sub2
+                  FROM users u
+                  WHERE u.name = '$name';";
+       
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+                <tr>
+                    <td class="text-center"><b> <?php echo $Row["sub2"]; ?> </b> </td>
+                    <td class="text-center">
+                        <a href="subject1view.php" class="btn btn-dark">VIEW / ADD GRADES</a>
+                    </td>
+                </tr>
+    <?php
+            }
+        }
+    ?>
 </tbody>
 
 
@@ -362,78 +340,6 @@ function myFunction() {
 
 
 
-
-
-
-
-
-
-
-
-
-<?php
-                    require "./php/db_conn.php";
-                    $name = $_SESSION['name'];
-
-                    $query = "SELECT a.subjectname ,a.teacher1,
-                    a.section,
-                    a.section2,
-                    a.section3,
-                    a.section4,
-                    a.section5,
-                    a.subjectgrouphead, b.sub2,b.id,b.sgh2,b.sec2 FROM subjects a, users b
-                    WHERE 
-                        ((a.teacher1=b.name)
-                        OR
-                        (a.teacher2=b.name) 
-                        OR
-                        (a.teacher3=b.name)
-                        OR
-                        (a.teacher4=b.name) 
-                        OR
-                        (a.teacher5=b.name)
-                        OR
-                        (a.teacher6=b.name)
-                        OR
-                        (a.teacher7=b.name)
-                        OR
-                        (a.teacher8=b.name)
-                        OR
-                        (a.teacher9=b.name)
-                        OR
-                        (a.teacher10=b.name ))
-                        
-                        
-                        
-                        
-                        
-                        
-                        AND a.subjectname - b.sub2
-                        AND a.subjectgrouphead=b.sgh2 
-                        AND a.section = b.sec2
-                        AND a.section2 = b.sec2
-                        AND a.section3 = b.sec2
-                        AND a.section4 = b.sec2
-                        AND a.section5 = b.sec2
-      
- ";
-                    $result = mysqli_query($conn, $query);
-                    if (mysqli_num_rows($result) > 0) {
-
-                      while ($Row = mysqli_fetch_assoc($result)) {
-
-                        ?>
-           <tr>
-           <td><?php echo $Row["sub2"]; ?></td>
-          <td><?php echo $Row["sgh2"]; ?></td>
-          <td><?php echo $Row["sec2"]; ?></td>
-        
-          <td><a href="subject1view.php" 
-			      	     class="btn btn-dark ">VIEW / ADD GRADES</a>
-                      </td>
-    
-			    </tr>
-     
 
 
 
@@ -448,17 +354,7 @@ function myFunction() {
                     }
 
               }
-            }
-
-              }
-            }
-
-
-          }
-        }
-
-            }
-
+ 
  ?>
 
 

@@ -33,7 +33,7 @@
 }
 
 .container form {
-	width: auto;
+	width:auto;
 	padding: 20px;
 	border-radius: 30px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -44,9 +44,9 @@
 .container table {
 	padding: 20px;
 	border-radius: 10px;
-	
   border:10px;
   background-color: white;
+  width : auto;
 }
 .border {
 	padding: 20px;
@@ -208,6 +208,7 @@ font-size: 10px;;
   border-width: 2px;
 }
 
+
   </style>
 </head>
 
@@ -221,6 +222,7 @@ font-size: 10px;;
 <div class="container" >
   
 		<div class="box">
+      
     <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
@@ -240,7 +242,12 @@ font-size: 10px;;
 
   
  
-      <div class="border">
+      <div class="border text-center">
+      <div class="head text-center" style="box-shadow: 2px 2px 4px  width: 105%;">
+  <b>Assign a subject teacher for each <br> "Section"</b>
+</div>
+
+<br>
         <div class="d-flex justify-content-center">
           
    
@@ -280,10 +287,13 @@ $result = mysqli_query($conn, $query);
 
 // Display results in table
 ?>
+
 <table class="table table-bordered">
+
   <thead>
     <tr>
-      <th scope="col">Name</th>
+
+      <th scope="col">Section Name</th>
       <th scope="col">Assign To</th>
     </tr>
   </thead>
@@ -292,7 +302,7 @@ $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($result)) {
       ?>
       <tr>
-        <td><?php echo $row["name"]; ?></td>
+        <td class="text-center"><b><?php echo $row["name"]; ?></b></td>
         <td>
         <button type="button" class="btn btn-dark text-truncate" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $row['name']; ?>">
   Assign To
@@ -303,7 +313,7 @@ $result = mysqli_query($conn, $query);
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="assignModalLabel-<?php echo $row['name']; ?>">Assign To - <?php echo $row["name"]; ?></h5>
+                  <h5 class="modal-title" id="assignModalLabel-<?php echo $row['name']; ?>">Assign a Subject Teacher to - <?php echo $row["name"]; ?></h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

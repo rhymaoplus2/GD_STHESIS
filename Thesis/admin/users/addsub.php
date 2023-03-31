@@ -291,7 +291,7 @@ continue;
 
 <label for="" class="form-label"><i><b>Section</b></i></label>
 <select name="sec2" id="sec2" class="form-control">
-<option value="<?=$row['sec1']?>"><?=$row['sec2']?></option>
+<option value="<?=$row['sec2']?>"><?=$row['sec2']?></option>
 <option value=""?></option>
    <?php 
    $query ="SELECT name FROM section ORDER BY id ASC";
@@ -353,9 +353,6 @@ continue;
       Cancel
 
           </button>
-
-
-	
 	    </form>
 	</div>
 <br>

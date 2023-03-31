@@ -183,7 +183,44 @@ top: 0;
 bottom: 0;
 z-index: -1;
   }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
 
+  label {
+    margin-bottom: 10px;
+  }
+
+  select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    width: 200px;
+    font-size: 16px;
+  }
+
+  button[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
  
   </style>
 </head>
@@ -213,28 +250,10 @@ function myFunction() {
   }
 }
 </script>
-
-
-<br> <br>
 <div class="container" >
 		<div class="box">
     <div class="content">
-
-<!--
-			<h1 class="display-10 text-center"> Student List
-      </h1>
-      <br>
-      Dear : <?=$_SESSION['id']?>
-      <br>
-      Click the "ADD" Button to add Your Students! 
- <div class="row justify-content-center my-5">
-                                                      
-	   <div class="row justify-content-right  my-3">
-    
-
-       </div>
--->
-       <?php if (isset($_GET['success'])) { ?>
+   <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>
         <audio controls autoplay  hidden>
@@ -245,13 +264,6 @@ function myFunction() {
 			<?php if (mysqli_num_rows($result)) { ?>
         <div class="border">
             <table class="table table-bordered ">
-
-
-
-
-
-
-
             <?php 
 			  	   $i = 0;
 			  	   while($rows = mysqli_fetch_assoc($result)){
@@ -260,250 +272,68 @@ function myFunction() {
 			  	 ?> 
            
         
+    <form method="get" id="my-form">
 
+  <select name="gender" id="gender">
+    <option value="">FILTER BY GENDER</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+</form>
 
-              <thead>
-                  <tr>
-                  <th scope="col"><h3 class="text-primary">Last Name</h3> </th>
-                  <th scope="col"><h3 class="text-primary">First Name</h3>  </th>
-                  <th scope="col"><h3 class="text-primary">Middle Name</h3>  </th>
-                  <th scope="col"><h3 class="text-primary">LRN No.</h3>  </th>
-                  <th scope="col"><h3 class="text-primary">ID No.</h3>  </th>
-                 <!--
-                  
-                 <th scope="col">Suffix</th>
-                  <th scope="col">Gender</th>
-                  <th scope="col">Birth Place</th>
-                  <th scope="col">Birth Day</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Parent/Guardian</th>
-             -->
-                  
-                  <th scope="col" colspan="3"><h3 class="text-success text-center">Actions</h3> </th>
-                </tr>
-              </thead>
-        <tbody>    
-          
-       
-        
+<script>
+  document.getElementById('gender').addEventListener('change', function() {
+    document.getElementById('my-form').submit();
+  });
+</script>
 
-
-<?php
- require "./php/db_conn.php";
- $adviser_id = $_SESSION["id"] ;
- $query = "SELECT * FROM students  WHERE  adviser_id = '$adviser_id'";
-$result = mysqli_query($conn, $query);
- if (mysqli_num_rows($result) > 0) 
-
- {
-
-     while ($Row = mysqli_fetch_assoc($result)) 
-     
-     {
-      
-      ?>
-           <tr>
-           <td><b><?php echo $Row["lastname"]; ?></b></td>
-          <td><b><?php echo $Row["firstname"]; ?></b></td>
-          <td><b><?php echo $Row["middlename"]; ?></b></td>
-          <td><b><?php echo $Row["lrnnumber"]; ?></b></td>
-          <td><b><?php echo $Row["idnumber"]; ?></b></td>
-          <!-- <td><?php echo $Row["suffix"]; ?></td>
-          <td><?php echo $Row["gender"]; ?></td>
-          <td><?php echo $Row["birthplace"]; ?></td>
-          <td><?php echo $Row["birthday"]; ?></td>
-          <td><?php echo $Row["age"]; ?></td>
-          <td><?php echo $Row["address"]; ?></td>
-          <td><?php echo $Row["parent"]; ?></td>
-     -->
-     <td>
-     <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark text-center"><b>FULL DETAILS</b></a>
-                <!--    
-               <a href="update.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary "><b>UPDATE</b></a>
-   
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
-  <b>DELETE</b>
-</a>
--->
-			      </td>
-			    </tr>
-     
-
-
-
-
-
-
-
-
-
-
-
-
-       
-            <?php }
- }
-
-
-
-
-
-
-
-
-}
-
-}
- ?>
-
-
-
-
-
-
-         </tbody>
-      </table>
-
-
-      <div class="center">
-          <a class="link-primary" href="teacher_create.php" display-40>
-          <button type="button" class="btn btn-dark">
-
-      <b>ADD NEW STUDENT</b>  
-
-          </button>
-          </a>
-          </div>
-
-</div>
-
-      
-
-
- 
-<br>
-<br>
-
-<form class="search" action="" method="GET">
-                    <div class="input-group ">
-                      <input
-                        type="text"
-                        name="search"
-                        required
-                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
-                        class="form-control border-dark"
-                        placeholder="Search by First Name/Middle Name/Last Name"
-                      />
-                      
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-dark">
-                       <b> SEARCH</b>
-                      </button>
-                 
-
-<br>
-<br>
-                   
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    
-                  <th><h3 class="text-primary">Last Name</h3></th>
-                  
-                    <th><h3 class="text-primary">First Name</h3></th>
-                   
-                    <th><h3 class="text-primary">Middle Name</h3></th>
-                    <th><h3 class="text-primary">LRN no.</h3></th>
-                    <th colspan="3"><h3 class="text-success text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-           
-
-
-
-
+  <thead>
+    <tr>
+      <th scope="col"><h3 class="text-primary">Last Name</h3></th>
+      <th scope="col"><h3 class="text-primary">First Name</h3></th>
+      <th scope="col"><h3 class="text-primary">Middle Name</h3></th>
+      <th scope="col"><h3 class="text-primary">LRN No.</h3></th>
+      <th scope="col"><h3 class="text-primary">ID No.</h3></th>
+      <th scope="col"><h3 class="text-primary">Gender</h3></th>
+      <th scope="col" colspan="3"><h3 class="text-success text-center">Actions</h3></th>
+    </tr>
+  </thead>
+  <tbody>
     <?php
-    $con = mysqli_connect("localhost", "root", "", "my_db");
-    if (isset($_GET['search'])) {
-        $adviser_id = ($_SESSION["id"]);
-        $filtervalues = $_GET['search'];
-        $query = "SELECT * FROM students WHERE adviser_id = '$adviser_id' AND CONCAT(lrnnumber,firstname,lastname,middlename)LIKE '%$filtervalues%' ";
-        $query_run = mysqli_query($con, $query);
-
-        if (mysqli_num_rows($query_run) >
-                  0) { foreach ($query_run as $items) { ?>
-                  <tr>
-                  <td><b><?= $items['lastname']; ?></b></td>
-                    <td><b><?= $items['firstname']; ?></b></td>
-                    <td><b><?= $items['middlename']; ?></b></td> 
-                    <td><b><?= $items['lrnnumber']; ?></b></td>
-                    <td><b><a href="view.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-dark "><b>FULL DETAILS</b></a>
-                   <!--
-                <a href="update.php?id=<?=$items['id']?>" 
-			      	     class="btn btn-success "><b>Update</b></a>
-                   
-              
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-  
-
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<strong><a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $items['id'] ?>');">
-  <b>DELETE</b>
-</a> </strong>
--->
-			      </td>
-
-
-      
-
-                  </tr>
-                  
-
-                  <?php
-            }
-        } else {
-                                                ?>
-                  <tr>
-                  <td colspan="6  "><h1 style = "color:red"> No Data Found   </h1> 
-                  <h1>
-                    
-                  </h5> </td>
-                  </tr>
-                  <?php
+      require "./php/db_conn.php";
+      $name = $_SESSION["name"];
+      $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
+      $query = "SELECT * FROM students WHERE adviser_id = '$name'";
+      if ($gender) {
+        $query .= " AND gender = '$gender'";
+      }
+      $result = mysqli_query($conn, $query);
+      if (mysqli_num_rows($result) > 0) {
+        while ($Row = mysqli_fetch_assoc($result)) {
+          ?>
+          <tr>
+            <td><b><?php echo $Row["lastname"]; ?></b></td>
+            <td><b><?php echo $Row["firstname"]; ?></b></td>
+            <td><b><?php echo $Row["middlename"]; ?></b></td>
+            <td><b><?php echo $Row["lrnnumber"]; ?></b></td>
+            <td><b><?php echo $Row["idnumber"]; ?></b></td>
+            <td><b><?php echo $Row["gender"]; ?></b></td>
+            <td>
+              <a href="view.php?id=<?=$Row['id']?>" class="btn btn-dark text-center"><b>FULL DETAILS</b></a>
+            </td>
+          </tr>
+          <?php
         }
+      }
     }
-       }
-       ?>
+  }
+}
 
-      </form>
-      </div>
-      </div>
-      </div>
+    ?>
+  </tbody>
+</table>
 
-<!-- Search Area -->
+
 
 
 

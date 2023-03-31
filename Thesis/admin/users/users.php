@@ -169,14 +169,6 @@ font-size: 10px;;
 </div>
 
 
-
-
-
-
-
-
-
-
 <script>
 window.onscroll = function() {myFunction()};
 
@@ -194,11 +186,6 @@ function myFunction() {
 
 
 <!-- TITLE HERE -->
-
-
-
-
-
 
       <div class="container" >
 		<div class="box">
@@ -222,34 +209,27 @@ function myFunction() {
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
         <div class="border">
-     
-
             <?php 
 			  	   $i = 0;
 			  	   while($rows = mysqli_fetch_assoc($result)){
-			  	   $i++;
-             
+			  	   $i++;           
 			  	 ?> 
 <?php
 require "./php/db_conn.php";
 
-$query = "SELECT * FROM users";
+$query = "SELECT * FROM users ";
 $result = mysqli_query($conn, $query);
 ?>
-
 <div class="text text-center">
   <input type="text" id="search" placeholder="Search/Sort">
 </div>
 <br>
-<div class="text text-center"id="result-text"></div>
-<br>
-<div id="search-term"></div>
 <table class="table table-bordered mb-25">
   <thead>
     <tr>
       <th>Name</th>
       <th>Username</th>
-      <th>Role</th>
+      <th hidden>Role</th>
       <th colspan="4" class="text-center">Actions</th>
     </tr>
   </thead>
@@ -261,7 +241,8 @@ $result = mysqli_query($conn, $query);
         <tr>
           <td><?php echo $row["name"]; ?></td>
           <td><?php echo $row["username"]; ?></td>
-          <td><?php echo $row["role"]; ?></td>
+          <td hidden><?php echo $row["role"]; ?></td>
+          <td hidden><?php echo $row["role2"]; ?></td>
           <td class="text-center">
             <a href="view.php?id=<?php echo $row['id'] ?>" class="btn btn-dark"><b>VIEW</b></a>
             <a href="update.php?id=<?php echo $row['id'] ?>" class="btn btn-primary"><b>UPDATE</b></a>
@@ -298,7 +279,9 @@ $result = mysqli_query($conn, $query);
       const name = rows[i].getElementsByTagName('td')[0].innerText.toLowerCase();
       const username = rows[i].getElementsByTagName('td')[1].innerText.toLowerCase();
       const role = rows[i].getElementsByTagName('td')[2].innerText.toLowerCase();
-      const match = name.includes(searchTerm) || username.includes(searchTerm) || role.includes(searchTerm);
+const role2 = rows[i].getElementsByTagName('td')[3].innerText.toLowerCase();
+const match = name.includes(searchTerm) || username.includes(searchTerm) || role.includes(searchTerm) || role2.includes(searchTerm);
+
       rows[i].style.display = match || searchTerm === '' ? '' : 'none';
       
       if (match) {

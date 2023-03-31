@@ -471,7 +471,7 @@ function filterTable() {
                     $query =
                     $query = "SELECT students.fullname, students.adviser_id, users.sub1,
                     students.section, students.firstname,students.middlename,
-                    students.lastname,students.gender
+                    students.lastname,students.gender,students.syear,students.grade
               FROM students
               JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
               WHERE (students.subject1 = users.sub1 OR students.subject2 = users.sub1 OR students.subject3 = users.sub1 OR students.subject4 = users.sub1 OR students.subject5 = users.sub1 OR students.subject6 = users.sub1 OR students.subject7 = users.sub1 OR students.subject8 = users.sub1 OR students.subject9 = users.sub1 OR students.subject10 = users.sub1)
@@ -500,9 +500,20 @@ function filterTable() {
 <input class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
 </input>
 </td>
-
+               
 <td  hidden colspan="">
 <input class="no" id="firstname" name="firstname[]" value="<?= $Row['firstname'] ?>">
+</input>
+</td>
+
+<td  hidden colspan="">
+<input class="no" id="year" name="year[]" value="<?= $Row['grade'] ?>">
+</input>
+</td>
+
+
+<td  hidden colspan="">
+<input class="no" id="sy" name="sy[]" value="<?= $Row['syear'] ?>">
 </input>
 </td>
 
@@ -522,6 +533,7 @@ function filterTable() {
 <input class="no" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
+
 
  
             <td hidden >

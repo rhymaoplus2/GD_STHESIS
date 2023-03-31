@@ -29,7 +29,12 @@ margin-top: -5rem;
 margin-left: 34rem;
 margin-top: -5rem;
 }
-
+.link-primary
+{
+  color: black;
+  text-decoration: none;
+  font-size: 30px;
+}
 #myVideo {
 
   width: 100vw;
@@ -42,6 +47,17 @@ margin-top: -5rem;
   bottom: 0;
   z-index: -1;
 
+}
+.container {
+    width: 350px; 
+
+  }
+  
+  .link-primary {
+    float: left;
+  }
+  .rounded {
+  border-radius: 60px;
 }
 
 </style>
@@ -59,15 +75,26 @@ margin-top: -5rem;
 
     <div class ="container d-flex justify-content-center
     align-items-center "
-    style="min-height: 100vh" >
+    style="min-height: 100vh " >
+    
         <form class="border shadow p-3 rounded bg-white"
         action="php/check-login.php"
         method="post"      
         style="width: 450px;"> 
-        <br>
-        <br>
-        <br>
-        <br>
+
+  <a class="link-primary" href="../index.php" display-40>
+    <b>
+   
+      <img src="img/back.png" class="rounded mx-auto d-block text-center" alt="..." style="display: inline-block; width: 30px; height:30px; display: inline-block;"> 
+    </b>
+  </a>
+ 
+  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">&nbsp;<b>Logging in as an<br>&nbsp;Subject Teacher</b></span>
+ <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
+  <br>Never share your password<br>with anyone. </span>
+</div>
+
+
         <!--
       
               <div class="logintext"><h1 class="text-center p-3">LOGIN</h1>
@@ -76,12 +103,12 @@ margin-top: -5rem;
               </div>
 -->
 
-              
-              <div class = "logo"><img src="msu.gif" class="rounded mx-auto d-block" alt="..." style="width: 5rem;">
+              <!--
+              <div class = "logo"><img src="msu1.gif" class="rounded mx-auto d-block" alt="..." style="width: 5rem;">
   
               </div>
-              <br>
-             
+-->
+       
               <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
         
@@ -94,32 +121,30 @@ margin-top: -5rem;
 		   <?php } ?>
                
   <div class="mb-3">
-    <label for="username" class="form-label"><b>username</b></label>
+  <label for="username" class="form-label" style="display: inline-block; font-size: 12px; font-family: Tahoma;">username</label>
     <input type="text" 
-    placeholder="ex : reyris"
+    placeholder="kentvergel2023"
            class="form-control" 
            id="username"
            name="username">
   </div>
 
   <div class="mb-3">
+    <!--
+  <label for="username" class="form-label"><b>username</b></label>
     <label for="password" class="form-label"><b>password</b></label>
+              -->
+              <label for="username" class="form-label" style="display: inline-block; font-size: 12px; font-family: Tahoma;">password</label>
     <input type="password" 
-           placeholder=" ex : 123password"
+           placeholder="kentvergel@subjectteacher"
            class="form-control" 
            id="password"
            name="password">
   </div>
 
 
+  <button type="submit" class="btn btn-primary" style="width: 300px;"><b>Continue</b></button>
 
-  <button type="submit" class="btn btn-primary"><b>Login</b></button>
-  <a class="link-primary" href="../index.php" display-40>
-          <button type="button" class="btn btn-dark">
-
-      <b>Cancel</b>
-
-          </button>
 </form>
 
     </div>

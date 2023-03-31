@@ -251,6 +251,14 @@ z-index: -1;
   }
 }
 
+input::placeholder {
+  color: gray;
+  font-style: italic;
+}
+.ff {
+
+  max-width: 100%;
+}
 
     </style>
 </head>
@@ -369,22 +377,23 @@ function myFunction() {
 
 
             <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
-                <b class="fs-2"><?=$_SESSION['sub1']?></b>
-            </div>
-           
-    
+  <b class="fs-2" style="white-space: nowrap;"><?=$_SESSION['sub1']?> </b>
+  
+</div>
+
+<p class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" id="input-text" style="font-size: 30px; width:100px;"></p>
 
 
   <table class="table table-bordered" id="grade-table">
 
 
             <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-  <div class="row">
+  <div class="row text-center">
  
     <div class="col-md-4">
  
       <select class="form-select" id="quarter" name="quarter">
-        <option value="">Select Quarter</option>
+        <option value=""><b>Select Quarter</b></option>
         <option value="FIRST">First</option>
         <option value="SECOND">Second</option>
         <option value="THIRD">Third</option>
@@ -394,22 +403,40 @@ function myFunction() {
 
     <div class="col-md-4">
         
-        <select class="form-select" id="semester" name="semester">
-          <option value="">Select Semester</option>
+        <select class="form-select w-20" id="semester" name="semester">
+          <option value=""><b>Select Semester</b></option>
           <option value="FIRST">First</option>
           <option value="SECOND">Second</option>
-          <option value="THIRD">Third</option>
-          <option value="FOURTH">Fourth</option>
         </select>
       </div>
     <div class="col-md-4">
    
       <select class="form-select" id="gender" name="gender">
-        <option value="">Select Gender</option>
+        <option value=""><b>Select Gender</b></option>
         <option value="MALE">Male</option>
         <option value="FEMALE">Female</option>
       </select>
     </div>
+  
+    <div class="text-center">
+      <br>
+  <select class="form-select text-center" id="sy" name="sy">
+    <option value=""><b>Select Academic Year</b></option>
+    <option value="2019-2020">2019-2020</option>
+    <option value="2020-2021">2020-2021</option>
+    <option value="2021-2022">2021-2022</option>
+    <option value="2022-2023">2022-2023</option>
+    <option value="2023-2024">2023-2024</option>
+    <option value="2024-2025">2024-2025</option>
+    <option value="2025-2026">2025-2026</option>
+    <option value="2026-2027">2026-2027</option>
+    <option value="2027-2028">2027-2028</option>
+    <option value="2028-2029">2028-2029</option>
+    <option value="2029-2030">2029-2030</option>
+
+  </select>
+</div>
+
   </div>
   <div class="text-center">
   <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
@@ -428,10 +455,40 @@ rotateBtn.addEventListener("click", () => {
 });
 
 </script>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="search-input" placeholder="Type section name or student name" oninput="filterTable()">
+</div>
+
+<p id="input-text"></p>
 
 
-      </div>
-        <input class="mb-3"type="text" id="search-input" placeholder="Search..." oninput="filterTable()">
+<script>
+  function filterTable() {
+    const input = document.getElementById("search-input").value;
+    const inputText = document.getElementById("input-text");
+    inputText.textContent = "You typed: " + input;
+
+    // your existing code to filter the table goes here...
+    const table = document.getElementById("table");
+    const rows = table.getElementsByTagName("tr");
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].getElementsByTagName("td");
+      let match = false;
+      for (let j = 0; j < cells.length; j++) {
+        if (cells[j].textContent.toLowerCase().includes(input.toLowerCase())) {
+          match = true;
+          break;
+        }
+      }
+      rows[i].style.display = match ? "" : "none";
+    }
+  }
+</script>
+
+
+
+
+
 </form>
 
             <?php 
@@ -451,8 +508,8 @@ rotateBtn.addEventListener("click", () => {
                   <th hidden scope="col"><h3 class="text-primary text-center"><b>Subject Name</h3></b></th>
                   <th scope="col"><h3 class="text-primary text-center"><b>Grade</b></h3></th>
                   <th scope="col"><h3 class="text-primary text-center"><b>Remarks</b></h3></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Quarter</b></h3></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Semester</b></h3></th>
+                  <th scope="col"><h3 class="text-primary text-center"><b>Section</b></h3></th>
+                <!--  <th scope="col"><h3 class="text-primary text-center"><b>Semester</b></h3></th> -->
                   <th colspan="2" scope="col" class="w-50">
         <h3 class="text-success center text-center"><b>Actions</b></h3>
       </th>
@@ -464,17 +521,26 @@ rotateBtn.addEventListener("click", () => {
   require "./php/db_conn.php";
   $teacher = $_SESSION['name'];
 
-  $query = "SELECT b.id, b.studentname,b.subjectname,b.grade,b.teacher,b.section,b.adviser,
-      a.name,a.sub1 ,a.name,a.sec1, a.sgh1,b.remarks,b.quarter,b.semester,b.gender
-      FROM grade b, users a WHERE  b.subjectname = a.sub1  
-      AND a.name = b.teacher AND b.adviser = a.sgh1 
+  // Add the section column to the SELECT statement
+  $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
+      a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
+      FROM grade b, users a
+      WHERE b.subjectname = a.sub1  
+      AND a.name = b.teacher
+      AND ( b.adviser = a.sgh1 
+        OR b.adviser = a.sgh2
+        OR b.adviser = a.sgh3
+        OR b.adviser = a.sgh4
+        OR b.adviser = a.sgh5
+      )
       AND teacher = '$teacher'";
-
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $semester = $_POST["semester"];
     $quarter = $_POST["quarter"];
     $gender = $_POST["gender"];
+    $sy = $_POST["sy"];
+
 
     if (!empty($semester)) {
       $query .= " AND semester = '$semester'";
@@ -485,6 +551,11 @@ rotateBtn.addEventListener("click", () => {
     if (!empty($gender)) {
       $query .= " AND gender = '$gender'";
     }
+    if (!empty($sy)) {
+      $query .= " AND sy = '$sy'";
+    }
+
+ 
   }
 
   $result = mysqli_query($conn, $query);
@@ -523,13 +594,14 @@ function filterTable() {
     <tr>
       <td><b><?php echo $rows["studentname"]; ?></b></td>
       <td hidden><b><?php echo $rows["subjectname"]; ?></b></td>
+      <td hidden><b><?php echo $rows["sy"]; ?></b></td>
+      <td hidden><b><?php echo $rows["section"]; ?></b></td>
       <td class="text-center"><b><?php echo $rows["grade"]; ?></b></td>
       <td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
   <b><?php echo $rows["remarks"]; ?></b>
 </td>
-
-      <td class="text-center"><b><?php echo $rows["quarter"]; ?></b></td>
-      <td class="text-center"><b><?php echo $rows["semester"]; ?></b></td>
+      <td class="text-center"><b><?php echo $rows["section"]; ?></b></td>
+      <td hidden class="text-center"><b><?php echo $rows["semester"]; ?></b></td>
       <td class="text-center">
         <b>
           <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary"><b>Update</b></a>
