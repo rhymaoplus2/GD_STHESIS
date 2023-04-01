@@ -33,8 +33,7 @@ if (isset($_GET['id'])) {
    
 	$id = validate($_POST['id']);
 	$name = validate($_POST['name']);
-    $username = validate($_POST['username']);
-    $password = (validate($_POST['password']));
+ 
 
     $role = validate($_POST['role']);
     $role2 = validate($_POST['role2']);
@@ -52,8 +51,8 @@ if (isset($_GET['id'])) {
         else {
 
        $sql = "UPDATE users
-               SET name='$name',username='$username',
-               password='$password',role='$role',role2='$role2'
+               SET name='$name',
+              role='$role',role2='$role2'
                WHERE id='$id'";
        $result = mysqli_query($conn, $sql);
        if ($result) {

@@ -31,19 +31,16 @@ if (isset($_GET['id'])) {
         return $data;
 	}
    
-	$name = validate($_POST['name']);
-    $username = validate($_POST['username']);
-    $password = validate($_POST['password']);
-    $role = validate($_POST['role']);
-    $role2 = validate($_POST['role2']);
-    $role3 = validate($_POST['role3']);
-    $advisory = validate($_POST['advisory']);
-    $st1 = validate($_POST['st1']);
-    $id = validate($_POST['id']);
+	$id = validate($_POST['id']);
 
+    $username = validate($_POST['username']);
+    $password = (validate($_POST['password']));
+
+
+ 
         
 
-	if (empty($name))
+	if (($name))
 	 {
         header("Location: update.php?id=$id&Name Required &$user_data");
 	}
@@ -54,9 +51,8 @@ if (isset($_GET['id'])) {
         else {
 
        $sql = "UPDATE users
-               SET name='$name',username='$username',
-               password='$password',role='$role',role2='$role2',role3='$role3'
-               ,advisory='$advisory',st1='$st1'
+               SET username='$username',
+               password='$password'
                WHERE id='$id'";
        $result = mysqli_query($conn, $sql);
        if ($result) {

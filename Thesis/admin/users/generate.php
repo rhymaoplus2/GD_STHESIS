@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Update</title>
+	<title>Generate</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -171,10 +171,10 @@ font-size: 10px;;
 <br>
 <br>
 	<div class="container">
-		<form action="n-update.php" 
+		<form action="gen.php" 
 		      method="post">
             
-		   <h4 class="display-4 text-center">Update</h4><hr><br>
+		   <p class="display-10 text-center">Generate Username and Password <br> for : <b><?=$row['name']?> </b></p><hr><br>
 		   <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
@@ -182,45 +182,60 @@ font-size: 10px;;
 		   <?php } ?>
 
 
-<div class="form-group mb-3">
-    <label for="" class="form-label">Name</label>
+    <div class="form-group mb-3">
+    <label for="username" class="form-label">Username</label>
+    <div class="input-group">
+      <input 
+        value="<?= isset($username) ? $username : generateRandomString() ?>"
+        type="text"
+        class="form-control"
+        id="username" 
+        name="username"
+      >
+      <button 
+        type="button"
+        class="btn btn-outline-secondary"
+        onclick="document.getElementById('username').value = '<?= generateRandomString() ?>'; document.getElementById('password').value = '<?= generateRandomString() ?>';"
+      >
+        Generate Account
+      </button>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <label for="password" class="form-label">Password</label>
     <input 
-    value="<?=$row['name']?>"
-	  type="text"
-    class="form-control"
-    id="name" 
-    name="name">
-           </input>
-</div>
+      value="<?= isset($password) ? $password : generateRandomString() ?>"
+      type="text"
+      class="form-control"
+      id="password" 
+      name="password"
+    >
+  </div>
 
-    <div class="form-group">
-  
-  <br>
-  <hr>   
-  <label for="exampleInputEmail1" class="form-label text-danger"><b>Roles</b></label>
-  <br>
-<!-- HTML code for the select elements -->
-<input 
-    value="<?=$row['role']?>"
-	  type="text"
-    class="form-control"
-    id="role" 
-    name="role">
-           </input>
+    <?php
 
+function generateRandomString($length = 8) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+    $index = rand(0, strlen($characters) - 1);
+    $randomString .= $characters[$index];
+  }
+  return $randomString;
+}
 
-           <input 
-    value="<?=$row['role2']?>"
-	  type="text"
-    class="form-control"
-    id="role2" 
-    name="role2">
-           </input>
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Get the submitted username and password values
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
+  // Handle form submission
+  // ...
+}
 
-</div>
-<br>
-<hr>
+?>
+
 	         <input type="text" 
 		          name="id"
 		          value="<?=$row['id']?>"

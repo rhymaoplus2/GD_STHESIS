@@ -157,6 +157,9 @@ font-size: 10px;;
     border-color: transparent;
     background-color: transparent;
   }
+  .uppercase {
+    text-transform: uppercase;
+  }
   </style>
 
 </head>
@@ -185,14 +188,16 @@ font-size: 10px;;
 		    </div>
 		   <?php } ?>
 
-
        <div class="form-group mb-3">
-    <label for="" class="form-label"><h6>Role</h6></label>
-    <br>
-    <?=$row['role']?>
+    <label for="" class="form-label"><h6>Roles</h6></label>
+
+    <div class="uppercase"><?=$row['role']?></div>
+<div class="uppercase"><?=$row['role2']?></div>
+<div class="uppercase"><?=$row['role3']?></div>
     </div>
 
 
+    <hr>
 
     <div class="form-group mb-3">
     <label for="" class="form-label"><h6>Name</h6></label>
@@ -200,30 +205,10 @@ font-size: 10px;;
     <?=$row['name']?>
     </div>
 
-
-    
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><h6>Password</h6></label>
-    <br>
-    <?=($row['password'])?>
-
-</div>
+    <hr>
 
 
     
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><h6>Advisory</h6></label>
-    <br>
-    <?=$row['role']?>
-    </div>
-
-
-    
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><h6>Subject Teachers</h6></label>
-    <br>
-    <?=$row['role']?>
-    </div>
 
 
 	         <input type="text" 
@@ -246,6 +231,7 @@ font-size: 10px;;
       BACK
 
           </button>
+       </a>
 	</div>
 <br>
 <br>

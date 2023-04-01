@@ -16,36 +16,50 @@
   <style>
     
 
+    body {
+  background-image: url('img/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
-.container {
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+    .container {
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 .container form {
 	width: 1030px;
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 .box {
 	width: auto;
+  height: 700px;
+
 }
 .container table {
 	padding: 20px;
 	border-radius: 10px;
-	
+	background-color: white;
   border:30px;
 }
 .border{
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border:30px;
+  background-color: white;
+  max-width:60%;
+  margin: 0 auto;
+
 }
+
+
 
 .link-right {
 	display: flex;
@@ -159,7 +173,7 @@ font-size: 10px;;
     padding-top: 102px;
   }
   .btn-group-custom {
-  width: 45%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -168,6 +182,54 @@ font-size: 10px;;
   /* optional styles for the buttons inside the group */
 }
 
+.link-primary:hover img {
+  transform: scale(1.1);
+}
+.tooltip {
+  background-color: #000;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.tooltip-arrow {
+  border-bottom-color: #000;
+}
+a.btn {
+  border: none !important;
+  box-shadow: none !important;
+  text-decoration: none;
+}
+
+.btn img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn:hover img {
+    transform: scale(1.2);
+}
+button.btn-link:focus,
+a.btn-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+button.btn-link:hover img,
+a.btn-link:hover img {
+    transform: scale(1.2);
+}
+input:focus,
+input:active {
+    border-color: #333;
+    box-shadow: none;
+}
+
+.btn:active {
+  outline: none;
+}
+.left-align {
+  text-align: left;
+}
 
     </style>
 </head>
@@ -196,52 +258,129 @@ function myFunction() {
 
 <!-- TITLE HERE -->
 
-      <div class="container" >
-		<div class="box">
-      <br>
-    <div class="link text-center">
-		
-    <a  class="link-primary" href="create.php" display-40>
-    <button type="button" class="btn btn-dark ">
 
-<b>ADD USERS </b>
-
-    </button>
-    </a>
-    
-</div>
-<br>  
-       <?php if (isset($_GET['success'])) { ?>
-           <div class="alert alert-success" role="alert">
-			  <?php echo $_GET['success']; ?>
-		    </div>
+<br>
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
-        <div class="border">
+        <div class="border text-center">
+
+
+
+        <div class="link text-center">
+
+</div>
+
+
+
             <?php 
 			  	   $i = 0;
 			  	   while($rows = mysqli_fetch_assoc($result)){
-			  	   $i++;           
-			  	 ?> 
-<?php
+			  	   $i++;  
+             ?>      
+             <div class="text text-center">
+              
+
+</div>   <?php
 require "./php/db_conn.php";
 
-$query = "SELECT * FROM users ORDER BY name";
+// Define number of results per page
+$results_per_page = 5;
+
+// Determine current page number
+if (!isset($_GET['page'])) {
+  $page = 1;
+} else {
+  $page = $_GET['page'];
+}
+
+// Calculate the starting row number for the current page
+$start_row = ($page - 1) * $results_per_page;
+
+// Construct the WHERE clause for the search query
+$where_clause = "";
+if (isset($_GET['submit']) && !empty($_GET['search_query'])) {
+  $search_query = $_GET['search_query'];
+  $where_clause = "WHERE name LIKE '%$search_query%' OR username LIKE '%$search_query%'";
+}
+
+// Query to retrieve the total number of rows
+$count_query = "SELECT COUNT(*) FROM users $where_clause";
+$count_result = mysqli_query($conn, $count_query);
+$count_row = mysqli_fetch_row($count_result);
+$total_results = $count_row[0];
+
+// Query to retrieve the results for the current page
+$query = "SELECT * FROM users $where_clause ORDER BY status DESC, name ASC LIMIT $start_row, $results_per_page";
 
 $result = mysqli_query($conn, $query);
+
+// Calculate total number of pages
+$total_pages = ceil($total_results / $results_per_page);
 ?>
 <div class="text text-center">
-  <input type="text" id="search" placeholder="Search/Sort">
+  
+<?php if (isset($_GET['success'])) { ?>
+  <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <?php echo $_GET['success']; ?>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'), {
+      keyboard: false
+    });
+    successModal.show();
+  </script>
+<?php } ?>
+
+<div class="d-flex">
+  
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="w-100" id="search-form">
+<a class="link-primary" href="create.php" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add new user" style="display: inline-block; margin-right: 10px;">
+  <img src="img/add.png" alt="Description of image" style="width: 40px;" class="img-fluid">
+</a>
+<script>
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+tooltipTriggerList.map((tooltipTriggerEl) => {
+  new bootstrap.Tooltip(tooltipTriggerEl, {
+    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+    delay: { show: 100, hide: 100 }
+  })
+})
+
+</script>
+<input type="text" name="search_query" id="search_query" placeholder="Search User Name" class=" form-control-sm bg-white text-black border-1" style="display: inline-block; width: 200px; outline: none;" onfocus="this.style.boxShadow='0 0 0 0.25rem rgba(255, 255, 255, 0.25)';" onblur="this.style.boxShadow='none';">
+
+<button type="submit" name="submit" class="btn btn-link">
+  <img src="img/search.gif" alt="Description of image" style="width: 25px;" class="img-fluid">
+</button>
+
+</form>
+
+</div>
+
 </div>
 <br>
 <table class="table table-bordered mb-25">
+  
   <thead>
     <tr>
       <th>Name</th>
-      <th>Username</th>
+      <th hidden>Username</th>
 
-      <th colspan="" class="text-center">Actions</th>
-      <th >Status</th>
+      <th colspan="" class="">Actions</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody id="table-body">
@@ -250,16 +389,61 @@ $result = mysqli_query($conn, $query);
       while ($row = mysqli_fetch_assoc($result)) {
     ?>
         <tr>
-          <td><?php echo $row["name"]; ?></td>
-          <td><?php echo $row["username"]; ?></td>
-          <td hidden><?php echo $row["role"]; ?></td>
-          <td hidden><?php echo $row["role2"]; ?></td>
-          <td class="text-center">
-            <a href="view.php?id=<?php echo $row['id'] ?>" class="btn btn-dark"><b>VIEW</b></a>
-            <a href="update.php?id=<?php echo $row['id'] ?>" class="btn btn-primary"><b>UPDATE</b></a>
-            <a href="addsub.php?id=<?php echo $row['id'] ?>" class="btn btn-primary"><b>+ SUBJECT</b></a>
+        <td class="left-align"><?php echo $row["name"]; ?></td>
+<td hidden class=""><?php echo $row["username"]; ?></td>
+
+
+          <td class="text-center" style="background-color: ;">
+          <a href="view.php?id=<?php echo $row['id'] ?>" class="btn">
+    <b>
+        <img style="width:30px;" src="img/show.png" class="img-fluid" alt="Description of image">
+    </b>
+</a>
+
+
+            <a href="update.php?id=<?php echo $row['id'] ?>" class="btn"><b>
+               <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+              </b></a>
+              <a href="generate.php?id=<?php echo $row['id'] ?>" class="btn"><b>
+               <img style="width:30px;" src="img/generate.png" class="img-fluid" alt="Description of image">
+              </b></a>
+            <a href="addsub.php?id=<?php echo $row['id'] ?>" class="btn"><b>
+            <img style="width:35px;" src="img/connect.png" class="img-fluid" alt="Description of image">
+            </b></a>
+  
+            <a type="button" class="btn" data-bs-toggle="modal" 
+  data-bs-target="#deleteModal<?php echo $row['id']; ?>"
+  style="border: none; background-color:transparent; outline: none;">
+
+            <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+      </a>
+             <div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $row['id']; ?>"><div class="text text-center text-danger">WARNING! Actions cannot be undone! </div></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <p> <b></b>
+             
+               <br> Are you sure you want to delete <br> <b> <?php echo $row['name']; ?> Account</b>
+
+            </p>
+            <form class="delete" action="delete_user.php" method="POST">
+               <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+               <div class="mb-3">
+                  <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+                  <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+               </div>
+               <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
       </td>
-            <td class="text-center">
+      <td style="text-align: center; vertical-align: middle;">
       
             <?php
 // Assume that $row is an associative array that contains a 'status' and an 'id' key
@@ -268,21 +452,20 @@ $color = ($status == 1) ? 'success' : 'danger';
 $id = $row['id'];
 ?>
 
-<button type="button" class="btn btn-<?php echo $color ?> rounded-pill" data-bs-toggle="modal" data-bs-target="#statusModal<?php echo $id ?>">
+<button type="button" class="btn text-center btn-<?php echo $color ?> rounded-pill" data-bs-toggle="modal" data-bs-target="#statusModal<?php echo $id ?>" style="border-radius: 50%; width: 20px; height: 25px;"></button>
 
-</button>
 <!-- Add this modal at the end of the page -->
 <div class="modal fade" id="statusModal<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="statusModalLabel<?php echo $row['id'] ?>" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header bg-lighttext-white">
-        <h5 class="modal-title" id="statusModalLabel<?php echo $row['id'] ?>">Status Update</h5>
+      <div class="modal-header bg-light text-black">
+        <h5 class="modal-title text-center" id="statusModalLabel<?php echo $row['id'] ?>">Status Update</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="card">
         <div class="card-header bg-light">
-          Set status for : <b><?php echo $row['name'] ?> </b>
+          Set status for: <b><?php echo $row['name'] ?></b>
         </div>
 
         <form method="post" action="update_status.php">
@@ -290,6 +473,7 @@ $id = $row['id'];
           <div class="btn-group btn-group-custom" role="group" aria-label="Status">
             <button type="submit" name="status" value="1" class="btn btn-outline-success">Activate</button>
             <button type="submit" name="status" value="0" class="btn btn-outline-danger">Deactivate</button>
+            <p><br></p>
           </div>
         </form>
       </div>
@@ -312,49 +496,45 @@ $id = $row['id'];
     }
   }
 }
-   }
+
     ?>
   </tbody>
 </table>
 
-<script>
-  const searchInput = document.querySelector('#search');
-  const tableBody = document.querySelector('#table-body');
-  const rows = tableBody.getElementsByTagName('tr');
-  const resultText = document.querySelector('#result-text');
+<div class="text-center">
+  <?php
+  // Add "Previous" button if not on the first page
+  if ($page > 1) {
+    $prev_page = $page - 1;
+    echo "<a href='?page=$prev_page' class='btn'>Previous</a>";
+  }
 
-  searchInput.addEventListener('keyup', function(event) {
-    const searchTerm = event.target.value.toLowerCase();
-    let count = 0;
-
-    for (let i = 0; i < rows.length; i++) {
-      const name = rows[i].getElementsByTagName('td')[0].innerText.toLowerCase();
-      const username = rows[i].getElementsByTagName('td')[1].innerText.toLowerCase();
-      const role = rows[i].getElementsByTagName('td')[2].innerText.toLowerCase();
-const role2 = rows[i].getElementsByTagName('td')[3].innerText.toLowerCase();
-const match = name.includes(searchTerm) || username.includes(searchTerm) || role.includes(searchTerm) || role2.includes(searchTerm);
-
-      rows[i].style.display = match || searchTerm === '' ? '' : 'none';
-      
-      if (match) {
-        count++;
-      }
-    }
-
-    if (searchTerm === '') {
-      resultText.innerText = '';
+  // Add page numbers
+  for ($i = 1; $i <= $total_pages; $i++) {
+    if ($i == $page) {
+      echo "<a href='?page=$i' class='btn'>$i</a>";
     } else {
-      resultText.innerHTML = '<strong>Showing Results for:</strong> ' + searchTerm + ' (' + count + ' results)';
+      echo "<a href='?page=$i' class='btn'>$i</a>";
     }
-  });
-</script>
+  }
+
+  // Add "Next" button if not on the last page
+  if ($page < $total_pages) {
+    $next_page = $page + 1;
+    echo "<a href='?page=$next_page' class='btn'>Next</a>";
+  }
+  ?>
+</div>
+
+
 
 
 </form>
 
 </div>
 </div>
-
+<br>
+<br>
      
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
