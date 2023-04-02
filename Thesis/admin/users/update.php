@@ -16,21 +16,41 @@
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <style>
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+body {
+  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 .container {
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* other styles */
 }
+
 
 .container form {
 	width: 600px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
 }
 .box {
 	width: 750px;
@@ -152,14 +172,15 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  .btn-primary:hover img {
+  transform: scale(1.2);
+}
 
   </style>
 
 </head>
-<body>
 
-
-
+<body >
 <div class="header" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
@@ -167,81 +188,75 @@ font-size: 10px;;
 
 
 
+<div class="fade-in">
 
-<br>
-<br>
 	<div class="container">
-		<form action="n-update.php" 
-		      method="post">
-            
-		   <h4 class="display-4 text-center">Update</h4><hr><br>
-		   <?php if (isset($_GET['error'])) { ?>
-		   <div class="alert alert-danger" role="alert">
-			  <?php echo $_GET['error']; ?>
-		    </div>
-		   <?php } ?>
 
 
-<div class="form-group mb-3">
-    <label for="" class="form-label">Name</label>
-    <input 
-    value="<?=$row['name']?>"
-	  type="text"
-    class="form-control"
-    id="name" 
-    name="name">
-           </input>
-</div>
+	<form action="n-update.php" method="post">
+  <header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+    <b>
+        <?php if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        } else {
+            echo 'Update';
+        } ?>
+    </b>
+</header>
+
+    <hr>
+ 
+ 
+        <label for="" class="form-label">Name</label>
+        <input value="<?=$row['name']?>" type="text" class="form-control" id="name" name="name">
+    
 
     <div class="form-group">
-  
-  <br>
-  <hr>   
-  <label for="exampleInputEmail1" class="form-label text-danger"><b>Roles</b></label>
-  <br>
-<!-- HTML code for the select elements -->
-<input 
-    value="<?=$row['role']?>"
-	  type="text"
-    class="form-control"
-    id="role" 
-    name="role">
-           </input>
+   
+        <hr>   
+        <label for="exampleInputEmail1" class="form-label text-danger"><b>Roles</b></label>
+        <br>
+        <!-- HTML code for the select elements -->
+        <select class="form-select mb-3" id="role" name="role">
+  <option value="none" <?= $row['role'] === 'none' ? 'selected' : '' ?>>None</option>
+  <option value="subject teacher" <?= $row['role'] === 'subject teacher' ? 'selected' : '' ?>>Subject Teacher</option>
+  <option value="adviser" <?= $row['role'] === 'adviser' ? 'selected' : '' ?>>Adviser</option>
+  <option value="registrar staff" <?= $row['role'] === 'registrar staff' ? 'selected' : '' ?>>Registrar Staff</option>
+</select>
 
 
-           <input 
-    value="<?=$row['role2']?>"
-	  type="text"
-    class="form-control"
-    id="role2" 
-    name="role2">
-           </input>
+<select class="form-select mb-3" id="role2" name="role2">
+<option value="none" <?= $row['role2'] === 'none' ? 'selected' : '' ?>>None</option>
+  <option value="subject teacher" <?= $row['role2'] === 'subject teacher' ? 'selected' : '' ?>>Subject Teacher</option>
+  <option value="adviser" <?= $row['role2'] === 'adviser' ? 'selected' : '' ?>>Adviser</option>
+  <option value="registrar staff" <?= $row['role2'] === 'registrar staff' ? 'selected' : '' ?>>Registrar Staff</option>
+</select>
+<select class="form-select mb-3" id="role3" name="role3">
+<option value="none" <?= $row['role3'] === 'none' ? 'selected' : '' ?>>None</option>
+  <option value="subject teacher" <?= $row['role3'] === 'subject teacher' ? 'selected' : '' ?>>Subject Teacher</option>
+  <option value="adviser" <?= $row['role3'] === 'adviser' ? 'selected' : '' ?>>Adviser</option>
+  <option value="registrar staff" <?= $row['role3'] === 'registrar staff' ? 'selected' : '' ?>>Registrar Staff</option>
+</select>
 
+    </div>
 
-</div>
-<br>
-<hr>
-	         <input type="text" 
-		          name="id"
-		          value="<?=$row['id']?>"
-		          hidden >
+    <hr>
+
+    <input type="text" name="id" value="<?=$row['id']?>" hidden >
 		
-		   <button type="submit" 
-		           class="btn btn-primary"
-		           name="update">Update</button>
+    <button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
+    <a class="link-primary" href="users.php" display-40>
+  <button type="button" class="btn btn-danger " style="background-color: transparent;
+  border: none; border-radius:100%; width:90px;">
+<img style="width:30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
+</a>
 
-				   <a class="link-primary" href="users.php" display-40>
-          <button type="button" class="btn btn-dark">
+</form>
 
-      Cancel
-
-          </button>
-
-
-	
-	    </form>
 	</div>
+  </div>
 <br>
 <br>
   <script>
