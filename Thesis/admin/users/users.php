@@ -410,14 +410,13 @@ $total_pages = ceil($total_results / $results_per_page);
 ?>
 
 <div class="text text-center">
-  
 <?php if (isset($_GET['success'])) { ?>
   <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header" style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+        <div class="modal-header" style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
           <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
         </div>
         <div class="modal-body">
           <?php echo $_GET['success'];?>
@@ -425,6 +424,10 @@ $total_pages = ceil($total_results / $results_per_page);
        
       </div>
     </div>
+  </div>
+<?php ?>
+
+
   </div>
   <script>
     var successModal = new bootstrap.Modal(document.getElementById('successModal'), {

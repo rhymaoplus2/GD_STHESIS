@@ -13,7 +13,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Update</title>
+	<title>ADD SUBJECT</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -237,63 +237,337 @@ body {
     </b>
 </header>
 <br>
+<br>
+<hr>
 <label for="" class="form-label text-center"><strong>Subjects</strong></label>
 <br>  
 <br>  
 
 <div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;">
 
-
 <select name="sub1" id="sub1" class="form-control text-center mb-3">
- <option value="<?=$row['sub1']?>"><?=$row['sub1']?><br></br></option>
- <option value=""?></option>
+    <?php
+    // Add blank option if sub1 has no value
+    if(empty($row['sub1'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub1'].'" selected>'.$row['sub1'].'</option>';
+    }
+    ?>
+    <option value=""></option>
     <?php 
     $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($section) && $section== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-  
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub1']) && $row['sub1']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
     ?>
 </select>
 
-<select name="sub2" id="sub2" class="form-control text-center">
-<option value="<?=$row['sub2']?>"><?=$row['sub2']?></option>
-<option value=""?></option>
-   <?php 
-   $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-   $result = $conn->query($query);
-   if($result->num_rows> 0){
-       while($optionData=$result->fetch_assoc()){
-       $option =$optionData['subjectname'];
-   ?>
-   <?php
-   //selected option
-   if(!empty($section) && $section== $option){
-   // selected option
-   ?>
-   <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-   <?php 
-continue;
-  }?>
-   <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-  <?php
-   }}
- 
-   ?>
+<select name="sub2" id="sub2" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub1 has no value
+    if(empty($row['sub2'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub2'].'" selected>'.$row['sub2'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub2']) && $row['sub2']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="sub2" id="sub3" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub1 has no value
+    if(empty($row['sub3'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub3'].'" selected>'.$row['sub2'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub3']) && $row['sub3']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+
+<select name="sub4" id="sub4" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub4 has no value
+    if(empty($row['sub4'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub4'].'" selected>'.$row['sub4'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub4']) && $row['sub4']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="sub5" id="sub5" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub5 has no value
+    if(empty($row['sub5'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub5'].'" selected>'.$row['sub5'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub5']) && $row['sub5']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="sub6" id="sub6" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub6 has no value
+    if(empty($row['sub6'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub6'].'" selected>'.$row['sub6'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub6']) && $row['sub6']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+
+<select name="sub7" id="sub7" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub7 has no value
+    if(empty($row['sub7'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub7'].'" selected>'.$row['sub7'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub7']) && $row['sub7']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+
+<select name="sub8" id="sub8" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub8 has no value
+    if(empty($row['sub8'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub8'].'" selected>'.$row['sub8'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub8']) && $row['sub8']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="sub9" id="sub9" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub9 has no value
+    if(empty($row['sub9'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub9'].'" selected>'.$row['sub9'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub9']) && $row['sub9']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="sub10" id="sub10" class="form-control text-center mb-3">
+    <?php
+    // Add blank option if sub10 has no value
+    if(empty($row['sub10'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['sub10'].'" selected>'.$row['sub10'].'</option>';
+    }
+    ?>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['sub10']) && $row['sub10']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
 </select>
 
 
@@ -334,7 +608,7 @@ continue;
 
 
 
-<select name="sec2" id="sec2" class="form-control text-center">
+<select name="sec2" id="sec2" class="form-control text-center mb-3">
 <option value="<?=$row['sec2']?>"><?=$row['sec2']?></option>
 <option value=""?></option>
    <?php 
@@ -360,9 +634,211 @@ continue;
    ?>
 </select>
 
-<br>
 
 
+<select name="sec3" id="sec3" class="form-control text-center mb-3">
+  <option value="<?=$row['sec3']?>"><?=$row['sec3']?></option>
+  <option value=""?></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
+<select name="sec4" id="sec4" class="form-control text-center mb-3">
+  <option value="<?=$row['sec4']?>"><?=$row['sec4']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
+<select name="sec5" id="sec5" class="form-control text-center mb-3">
+  <option value="<?=$row['sec5']?>"><?=$row['sec5']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
+<select name="sec6" id="sec6" class="form-control text-center mb-3">
+  <option value="<?=$row['sec6']?>"><?=$row['sec6']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
+<select name="sec7" id="sec7" class="form-control text-center mb-3">
+  <option value="<?=$row['sec7']?>"><?=$row['sec7']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
+
+<!-- Repeat the above code with "sec8", "sec9", and "sec10" -->
+<select name="sec8" id="sec8" class="form-control text-center mb-3">
+  <option value="<?=$row['sec8']?>"><?=$row['sec8']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
+
+<select name="sec9" id="sec9" class="form-control text-center mb-3">
+  <option value="<?=$row['sec9']?>"><?=$row['sec9']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
+<select name="sec10" id="sec10" class="form-control text-center mb-3">
+  <option value="<?=$row['sec10']?>"><?=$row['sec10']?></option>
+  <option value=""></option>
+  <?php 
+    $query ="SELECT name FROM section ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows > 0){
+      while($optionData = $result->fetch_assoc()){
+        $option = $optionData['name'];
+        ?>
+        <?php
+        //selected option
+        if(!empty($section) && $section == $option){
+        // selected option
+        ?>
+          <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+        <?php 
+          continue;
+        }?>
+        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+        <?php
+      }
+    }
+  ?>
+</select>
 
 
 
