@@ -51,6 +51,7 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
+  
 }
 .box {
 	width: 750px;
@@ -172,10 +173,14 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
-  .btn-primary:hover img {
+  .btn-primary:hover {
   transform: scale(1.2);
+  transition: transform 0.5s ease;
 }
-
+.btn-danger:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
   </style>
 
 </head>
@@ -205,16 +210,26 @@ font-size: 10px;;
 </header>
 
     <hr>
+ <script>
+  if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+  });
+} else {
+  console.log("Geolocation is not supported by this browser.");
+}
+</script>
  
- 
-        <label for="" class="form-label">Name</label>
+        <label for="" class="form-label"><strong>Name</strong></label>
         <input value="<?=$row['name']?>" type="text" class="form-control" id="name" name="name">
     
 
     <div class="form-group">
    
         <hr>   
-        <label for="exampleInputEmail1" class="form-label text-danger"><b>Roles</b></label>
+        <label for="exampleInputEmail1" class="form-label text-dark"><b>Roles</b></label>
         <br>
         <!-- HTML code for the select elements -->
         <select class="form-select mb-3" id="role" name="role">
@@ -244,14 +259,12 @@ font-size: 10px;;
 
     <input type="text" name="id" value="<?=$row['id']?>" hidden >
 		
-    <button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
+    <button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
-    <a class="link-primary" href="users.php" display-40>
-  <button type="button" class="btn btn-danger " style="background-color: transparent;
-  border: none; border-radius:100%; width:90px;">
-<img style="width:30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+    <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='users.php'">
+  <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
-</a>
+
 
 </form>
 

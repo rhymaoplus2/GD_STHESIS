@@ -3,15 +3,10 @@
 
 <?php include 'n-update.php'; ?>
 
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Generate</title>
+	<title>Login Pass for <?=$row['name']?></title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -19,11 +14,12 @@
 
 
 .container {
-	min-height: 100vh;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+
 }
 
 .container form {
@@ -31,6 +27,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
 }
 .box {
 	width: 750px;
@@ -152,7 +149,34 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  html, body {
+  height: 100%;
+}
 
+body {
+  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+  background-repeat: no-repeat;
+}
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.btn-primary:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+.btn-danger:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
   </style>
 
 </head>
@@ -171,19 +195,30 @@ font-size: 10px;;
 <br>
 <br>
 	<div class="container">
+  <div class="fade-in">
+
 		<form action="gen.php" 
 		      method="post">
-            
-		   <p class="display-10 text-center">Generate Username and Password <br> for : <b><?=$row['name']?> </b></p><hr><br>
-		   <?php if (isset($_GET['error'])) { ?>
-		   <div class="alert alert-danger" role="alert">
-			  <?php echo $_GET['error']; ?>
-		    </div>
-		   <?php } ?>
+          <header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+    <b>
+        <?php if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        } else {
+            echo 'Genarate';
+        } ?>
+    </b>
+</header>
+<div class="text-center ">
+  <br>  
+   <span>For:   </span> <b> <i> <?=$row['name']?> </i> </b>
+</div>
 
+
+  
+<br>
 
     <div class="form-group mb-3">
-    <label for="username" class="form-label">Username</label>
+    <label for="username" class="form-label"><strong>Username</strong></label>
     <div class="input-group">
       <input 
         value="<?= isset($username) ? $username : generateRandomString() ?>"
@@ -193,16 +228,18 @@ font-size: 10px;;
         name="username"
       >
       <button 
-        type="button"
-        class="btn btn-outline-secondary"
-        onclick="document.getElementById('username').value = '<?= generateRandomString() ?>'; document.getElementById('password').value = '<?= generateRandomString() ?>';"
-      >
-        Generate Account
-      </button>
+  type="button"
+  class="btn btn-outline-primary text-white"
+  onclick="document.getElementById('username').value = '<?= generateRandomString() ?>'; document.getElementById('password').value = '<?= generateRandomString() ?>';"
+  style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); "
+>
+  Generate Account
+</button>
+
     </div>
   </div>
   <div class="form-group mb-3">
-    <label for="password" class="form-label">Password</label>
+    <label for="password" class="form-label"><strong>Password</strong></label>
     <input 
       value="<?= isset($password) ? $password : generateRandomString() ?>"
       type="text"
@@ -241,21 +278,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		          value="<?=$row['id']?>"
 		          hidden >
 		
-		   <button type="submit" 
-		           class="btn btn-primary"
-		           name="update">Update</button>
+              <button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
+<button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='users.php'">
+<img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
 
-				   <a class="link-primary" href="users.php" display-40>
-          <button type="button" class="btn btn-dark">
-
-      Cancel
-
-          </button>
 
 
 	
 	    </form>
+</div>
 	</div>
 <br>
 <br>
@@ -273,8 +306,5 @@ function myFunction() {
   }
 }
 </script>
-  
-  
-
 </body>
 </html>

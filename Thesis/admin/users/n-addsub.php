@@ -17,12 +17,10 @@ if (isset($_GET['id'])) {
 
     if (mysqli_num_rows($result) > 0) {
     	$row = mysqli_fetch_assoc($result);
-    }else {
+    } else {
     	header("Location:users.php");
     }
-
-
-}else if(isset($_POST['update'])){
+} else if(isset($_POST['update'])){
     include "db_conn.php";
     function validate($data){
         $data = trim($data);
@@ -30,38 +28,17 @@ if (isset($_GET['id'])) {
         $data = htmlspecialchars($data);
         return $data;
 	}
-   
+    $sub1 = validate($_POST['sub1']);
+    $sub2 = validate($_POST['sub2']);
 	$sec1 = validate($_POST['sec1']);
-        $sec2 = validate($_POST['sec2']);
-      
-    
-     
+    $sec2 = validate($_POST['sec2']);
     $id = validate($_POST['id']);
-  
 
-        
-
-	if (empty($sec1))
-	 {
-     
-	}
-
-
-
-	 
-        else {
-
-       $sql = "UPDATE users
-               SET sec1='$sec1',sec2='$sec2'
-               WHERE id='$id'";
-       $result = mysqli_query($conn, $sql);
-       if ($result) {
-       	  header("Location: users.php?id=$id&success=successfully updated");
-          
-       }
-       
-       else {
-          header("Location: addsub.php?id=$id&error=unknown error occurred&$user_data");
-       }
-	}
+    $sql = "UPDATE users SET sub2='$sub2',sec1='$sec1',sec2='$sec2',sub1='$sub1' WHERE id='$id'";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        header("Location: users.php?id=$id&success=successfully updated");
+    } else {
+        header("Location: addsub.php?id=$id&error=unknown error occurred&$user_data");
+    }
 }

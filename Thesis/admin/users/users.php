@@ -15,7 +15,7 @@
 
   <style>
 html, body {
-  height: 100%;
+  height:100%;
 }
 
 body {
@@ -291,8 +291,29 @@ td.left-align a:hover {
     opacity: 1;
   }
 }
+.status {
+  background: transparent;
+  border: none;
+  transition: font-size 0.3s ease-in-out;
+}
 
+.status:hover {
+  font-size: 1.2em; /* Change to the desired larger text size */
+}
 
+.btn-transparent {
+  background-color: transparent;
+  border-color: transparent;
+  opacity: 0.8;
+  color: black;
+}
+
+.btn-transparent:hover {
+  color: white;
+}
+input[type="text"]:hover {
+    border-width: 2px;
+  }
     </style>
 </head>
 <body>
@@ -345,7 +366,7 @@ function myFunction() {
              <div class="text text-center">
               
 
-</div>   <?php
+</div>  <?php
 require "./php/db_conn.php";
 
 // Define number of results per page
@@ -374,30 +395,34 @@ $count_result = mysqli_query($conn, $count_query);
 $count_row = mysqli_fetch_row($count_result);
 $total_results = $count_row[0];
 
-// Query to retrieve the results for the current page
-$query = "SELECT * FROM users $where_clause ORDER BY status DESC, name ASC LIMIT $start_row, $results_per_page";
+// Query to retrieve the results for the current page with custom sorting by "status" field
+$query = "SELECT * FROM users $where_clause ORDER BY CASE 
+                                          WHEN status = 1 THEN 0 
+                                          WHEN status = 0 THEN 1 
+                                          WHEN status = 2 THEN 2 
+                                          ELSE 3 
+                                        END, name ASC LIMIT $start_row, $results_per_page";
 
 $result = mysqli_query($conn, $query);
 
 // Calculate total number of pages
 $total_pages = ceil($total_results / $results_per_page);
 ?>
+
 <div class="text text-center">
   
 <?php if (isset($_GET['success'])) { ?>
   <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="successModalLabel">Success!</h5>
+        <div class="modal-header" style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+          <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <?php echo $_GET['success']; ?>
+          <?php echo $_GET['success'];?>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+       
       </div>
     </div>
   </div>
@@ -413,7 +438,7 @@ $total_pages = ceil($total_results / $results_per_page);
   
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="w-100" id="search-form">
 <a class="link-primary" href="create.php" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add new user" style="display: inline-block; margin-right: 10px;">
-  <img src="img/user.png" alt="Description of image" style="width: 25px;" class="img-fluid">
+  <img src="img/new.png" alt="Description of image" style="width: 45px;" class="img-fluid">
 </a>
 <script>
 const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -425,30 +450,113 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
 })
 
 </script>
+<input type="text" name="search_query" id="search_query" placeholder="Search User Name" class="form-control-sm bg-white text-black border-1" style="display: inline-block; width: 200px; outline: none; border-image: linear-gradient(to right, #0099ff 0%, #9933ff 100%) 1;" onfocus="this.style.boxShadow='0 0 0 0.25rem rgba(255, 255, 255, 0.25)';" onblur="this.style.boxShadow='none';">
 
-<input type="text" name="search_query" id="search_query" placeholder="Search User Name" class=" form-control-sm bg-white text-black border-1" style="display: inline-block; width: 200px; outline: none;" onfocus="this.style.boxShadow='0 0 0 0.25rem rgba(255, 255, 255, 0.25)';" onblur="this.style.boxShadow='none';">
+<script>
+  const searchInput = document.getElementById("search_query");
+
+  // Add event listener to input field
+  searchInput.addEventListener("input", function() {
+    // Save input value to local storage
+    localStorage.setItem("searchValue", searchInput.value);
+  });
+
+  // Retrieve value from local storage and set input field value
+  const savedValue = localStorage.getItem("searchValue");
+  if (savedValue) {
+    searchInput.value = savedValue;
+  }
+</script>
 <button type="submit" name="submit" class="btn btn-link">
-<img src="img/find.png" alt="Description of image" style="width: 30px;" class="img-fluid">
+<img src="img/search.png" alt="Description of image" style="width: 40px;" class="img-fluid">
 </button>
 
 </form>
-<img style="width:50px;" src="img/msu.png" class="img-fluid rotate-on-hover" alt="MSU-MSAT LOGO">
+<img style="height:75px;" src="img/msu.png" class="img-fluid rotate-on-hover" alt="MSU-MSAT LOGO">
 
 &nbsp;&nbsp;
 
 </div>
-<br>
+
+<hr>
 <table class="table table-bordered mb-25">
   
   <thead >
-  <tr class="  text-white" style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+  <tr class="  text-white" style=" background: linear-gradient(to right,  #9933ff 0%,#0099ff 100%);">
 
 
       <th hidden>Username</th>
 
       <th colspan="" class=""></th>
       <th class="text-center">Name(s)</th>
-      <th>Status</th>
+      <th>
+      <button type="button" class="status text-white" data-bs-toggle="modal" data-bs-target="#activatePauseAllModal">
+  <b>Status</b>
+</button>
+
+<!-- Activate/Pause All Modal -->
+<div class="modal fade" id="activatePauseAllModal" tabindex="-1" role="dialog" aria-labelledby="activatePauseAllModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+        <h5 class="modal-title" id="activatePauseAllModalLabel">Status update</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        
+        <p>
+        <h4>Do you want to allow or disallow all users to use the system?</h4>
+          <br>
+         
+          Reminder: Blocked users still cannot  use the system.
+          <br>
+          To allow, just set the status of each disabled user to be set in the table.   
+
+        </p>
+      </div>
+      <div class="modal-footer justify-content-center">
+  <button type="button" class="btn btn-primary btn-transparent" id="activateAllBtn">Allow All</button>
+  <button type="button" class="btn btn-secondary btn-transparent" id="pauseAllBtn">Disallow All</button>
+</div>
+
+  </div>
+</div>
+
+<script>
+// Add event listeners for Activate All and Pause All buttons
+document.getElementById('activateAllBtn').addEventListener('click', function() {
+  updateStatusOfAllUsers(1); // Update status of all users to 1 (activated)
+});
+
+document.getElementById('pauseAllBtn').addEventListener('click', function() {
+  updateStatusOfAllUsers(0); // Update status of all users to 0 (paused)
+});
+
+// Function to update status of all users in the database
+// Function to update status of all users in the database
+function updateStatusOfAllUsers(status) {
+  // Make an AJAX request to update the status of all users
+  $.ajax({
+    url: 'statusall.php', // Replace with your server-side script URL
+    method: 'POST',
+    data: {status: status},
+    success: function(response) {
+      // Handle success response
+      window.location.href = "users.php?success=Status updated successfully!";
+    },
+    error: function(error) {
+      // Handle error response
+      console.error('Error updating status: ', error);
+    }
+  });
+}
+
+</script>
+
+
+      </th>
+
+    
     </tr>
   </thead>
   <tbody id="table-body">
@@ -461,7 +569,7 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
 <td hidden class=""><?php echo $row["username"]; ?></td>
 
 
-          <td class="" style="background-color: ;">
+          <td class="" style="     background: #f2f2f2" >
 
   <!-- VIEW
   <a type="button" class="btn" data-bs-toggle="modal" 
@@ -545,14 +653,14 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
              <div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel<?php echo $row['id']; ?>"><div class="text text-center text-danger">WARNING! Actions cannot be undone! </div></h5>
+         <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
             <p> <b></b>
              
-               <br> Are you sure you want to delete <br> <b> <?php echo $row['name']; ?> Account</b>
+               <br> Are you sure you want to delete <br> <b> <?php echo $row['name']; ?> Account?</b>
 
             </p>
             <form class="delete" action="delete_user.php" method="POST">
@@ -561,7 +669,12 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
                   <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
                   <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
                </div>
-               <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+               <button type="submit" class="btn" name="delete">
+               <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
+
+
+
+               </button>
             </form>
          </div>
       </div>
@@ -573,21 +686,29 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
 
 
 
-      <td class="left-align " style="width: 60%;">      <a type="button" class="btn" data-bs-toggle="modal" 
+      <td class="left-align " style="width: 60%; background: #f2f2f2;">      <a type="button" class="btn" data-bs-toggle="modal" 
      data-bs-target="#exampleModal<?php echo $row['id']; ?>"
      style="border: none; background-color:transparent; outline: none;" title="View Info">
 <?php echo $row["name"]; ?>  </a></td>
     
-      <td style="text-align: center; vertical-align: middle;">
-      
-            <?php
-// Assume that $row is an associative array that contains a 'status' and an 'id' key
-$status = $row['status'];
-$color = ($status == 1) ? 'primary' : 'dark';
 
+      <td style="text-align: center; vertical-align: middle; background: #f2f2f2;">
+    <?php
+    // Assume that $row is an associative array that contains a 'status' and an 'id' key
+    $status = $row['status'];
+    if ($status == 0) {
+        $color = 'secondary';
+    } elseif ($status == 1) {
+        $color = 'primary';
+    } elseif ($status == 2) {
+        $color = 'danger';
+    } else {
+        // If status is none of the expected values, set default color to 'dark'
+        $color = 'dark';
+    }
 
-$id = $row['id'];
-?>
+    $id = $row['id'];
+    ?>
 
 <button type="button" class="btn btn-sm text-center btn-<?php echo $color ?> rounded-pill" data-bs-toggle="modal" data-bs-target="#statusModal<?php echo $id ?>" style="border-radius: 100%; width: 5px; height: 18px;"></button>
 
@@ -595,7 +716,7 @@ $id = $row['id'];
 <div class="modal fade" id="statusModal<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="statusModalLabel<?php echo $row['id'] ?>" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header bg-light text-black">
+      <div class="modal-header bg-light text-white" style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
         <h5 class="modal-title text-center" id="statusModalLabel<?php echo $row['id'] ?>">Status Update</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -604,15 +725,18 @@ $id = $row['id'];
         <div class="card-header bg-light">
           Set status for: <b><?php echo $row['name'] ?></b>
         </div>
-
         <form method="post" action="update_status.php">
-          <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-          <div class="btn-group btn-group-custom" role="group" aria-label="Status">
-            <button type="submit" name="status" value="1" class="btn btn-outline-success">Activate</button>
-            <button type="submit" name="status" value="0" class="btn btn-outline-secondary">Deactivate</button>
-            <p><br></p>
-          </div>
-        </form>
+  <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+  <br>
+  <div class="btn-group btn-group-custom" role="group" aria-label="Status">
+    <button type="submit" name="status" value="1" class="btn btn-outline-primary">Allow</button>
+   <button type="submit" name="status" value="0" class="btn btn-outline-secondary">Disallow</button> <!-- Added "Pause" button with value 0 -->
+   <button type="submit" name="status" value="2" class="btn btn-outline-danger">Block</button> 
+   <p><br></p>
+  </div>
+  <br>
+</form>
+
       </div>
     </div>
   </div>
@@ -652,7 +776,9 @@ If none of this works, contact the developer at: <b>reyrismilmao@gmail.com </b><
 
     ?>
   </tbody>
+  
 </table>
+<hr>
 <div class="text-center">
   <?php
   // Add "Previous" button if not on the first page
@@ -687,6 +813,7 @@ If none of this works, contact the developer at: <b>reyrismilmao@gmail.com </b><
 <br>
 <br>
 </div>
+
      
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

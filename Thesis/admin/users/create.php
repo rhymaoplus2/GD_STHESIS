@@ -14,10 +14,20 @@
     <style>
 
 
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .container {
-	min-height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -29,6 +39,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
 }
 .box {
 	width: 750px;
@@ -37,6 +48,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;;
 }
 
 .link-right {
@@ -122,9 +134,6 @@ font-size: 10px;;
       height: 10rem;
   }
 
-
-
-
 .top-container {
     background-color: #f1f1f1;
     padding: 30px;
@@ -151,7 +160,15 @@ font-size: 10px;;
     padding-top: 102px;
   }
 
-      
+  html, body {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+  background-repeat: no-repeat;
+}
+
       </style>
 </head>
 <body>
@@ -165,42 +182,27 @@ font-size: 10px;;
 <br>
 <br>
 
+<div class="fade-in">
 <div class="container">
 <div class="content">
 <form action="php/create.php"
       method="post">
-  <h4 class="display-10 text-center" >Add New Teacher</h4>
-
-
+      <header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+    <b>
+        <?php if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        } else {
+            echo 'ADD NEW USER';
+        } ?>
+    </b>
+</header>
+<br>  
+<hr>
  <?php if (isset($_GET['error'])) { 
   include "./php/db_conn.php";
+ }  
   ?>
   
-
-  <div class="alert alert-danger" role="alert">
-  <?php echo $_GET['error']; ?>
-</div>
-<?php } ?>
-
-<div class="form-group">
-    <label for="" class="form-label warning" ><b>Username</b></label>
-    <input 
-    type="text" 
-    class="form-control mb-3" 
-    id="username" 
-    placeholder="Reyris"
-    name="username">
-  </div>
-
-<div class="form-group">
-    <label for="" class="form-label warning" ><b>Password</b></label>
-    <input 
-    type="password" 
-    class="form-control mb-3" 
-    id="password" 
-    placeholder="12913937"
-    name="password">
-  </div>
 
 
 
@@ -216,48 +218,19 @@ font-size: 10px;;
 
 
 
-  <div class="form-group">
-  
-    <br>
-    <hr>   
-    <label for="exampleInputEmail1" class="form-label text-danger"><b>Roles</b></label>
-    <br>
-    <input 
-    
-	  type="text"
-    class="form-control"
-    id="role" 
-    name="role">
-           </input>
-
-
-           <input 
-
-	  type="text"
-    class="form-control"
-    id="role2" 
-    name="role2">
-           </input>
-
-  </div>
-
-
 <br>
 
 
- 
-  <button type="submit" 
-          class="btn btn-primary"
-          name="create">ADD</button>
+		
+<button type="submit" class="btn btn-primary" name="create" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
-          <a class="link-primary" href="users.php">
-          <button type="button" class="btn btn-dark">
+<button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='users.php'">
+<img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
 
-      
-          Cancel
 
-          </button>
-          </a>
+
+
 </form>
 </div>
 
@@ -284,7 +257,7 @@ function myFunction() {
 
 
 
-
+</div>
 
 
 </body>
