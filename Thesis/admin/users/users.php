@@ -264,7 +264,7 @@ td.left-align a:hover {
 
 
 .fade-in {
-  animation: fadeIn 0.20s ease-in-out;
+ 
 }
 
 @keyframes fadeIn {
@@ -276,7 +276,7 @@ td.left-align a:hover {
   }
 }
 .slide-in {
-  animation: slideIn 1s ease-in-out;
+  animation: slideIn 0.6s ease-in-out;
   animation-fill-mode: forwards;
   animation-play-state: running;
 }
@@ -493,9 +493,11 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
       <th colspan="" class=""></th>
       <th class="text-center">Name(s)</th>
       <th>
-      <button type="button" class="status text-white" data-bs-toggle="modal" data-bs-target="#activatePauseAllModal">
-  <b>Status</b>
-</button>
+     <!--  <button type="button" class="statu text-white" data-bs-toggle="modal" data-bs-target="#activatePauseAllModal" disabled>
+  </button>
+-->
+  Status
+
 
 <!-- Activate/Pause All Modal -->
 <div class="modal fade" id="activatePauseAllModal" tabindex="-1" role="dialog" aria-labelledby="activatePauseAllModalLabel" aria-hidden="true">
@@ -511,15 +513,17 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
         <h4>Do you want to allow or disallow all users to use the system?</h4>
           <br>
          
-          Reminder: Blocked users still cannot  use the system.
-          <br>
-          To allow, just set the status of each disabled user to be set in the table.   
+    
 
         </p>
       </div>
       <div class="modal-footer justify-content-center">
-  <button type="button" class="btn btn-primary btn-transparent" id="activateAllBtn">Allow All</button>
-  <button type="button" class="btn btn-secondary btn-transparent" id="pauseAllBtn">Disallow All</button>
+<!-- HTML button elements -->
+<button type="button" class="btn btn-primary btn-transparent" id="activateAllBtn">Allow All</button>
+<button type="button" class="btn btn-secondary btn-transparent" id="pauseAllBtn">Disallow All</button>
+
+
+
 </div>
 
   </div>
@@ -732,9 +736,8 @@ function updateStatusOfAllUsers(status) {
   <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
   <br>
   <div class="btn-group btn-group-custom" role="group" aria-label="Status">
-    <button type="submit" name="status" value="1" class="btn btn-outline-primary">Allow</button>
-   <button type="submit" name="status" value="0" class="btn btn-outline-secondary">Disallow</button> <!-- Added "Pause" button with value 0 -->
-   <button type="submit" name="status" value="2" class="btn btn-outline-danger">Block</button> 
+    <button type="submit" name="status" value="1" class="btn btn-outline-primary">Activate</button>
+   <button type="submit" name="status" value="0" class="btn btn-outline-secondary">Deactivate</button>
    <p><br></p>
   </div>
   <br>

@@ -177,6 +177,23 @@ body {
   transform: scale(1.2);
   transition: transform 0.5s ease;
 }
+@media print {
+  body {
+    font-size: 12pt;
+    margin: 0;
+  }
+  h1 {
+    font-size: 18pt;
+    margin: 0 0 0.5em;
+  }
+  p {
+    margin: 0;
+  }
+  @page {
+    size: letter;
+  }
+}
+
   </style>
 
 </head>
@@ -208,9 +225,13 @@ body {
         } ?>
     </b>
 </header>
+
+<br>
+<hr>
 <div class="text-center ">
-  <br>  
-   <span>For:   </span> <b> <i> <?=$row['name']?> </i> </b>
+  <br>  <span >For: <b><i><?=$row['name']?></i></b></span>
+  <span hidden id="name"><b><i><?=$row['name']?></i></b></span>
+
 </div>
 
 
@@ -277,14 +298,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		          name="id"
 		          value="<?=$row['id']?>"
 		          hidden >
-		
-              <button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
+             <button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;" onclick="validateInputs()"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
 <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='users.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
+<!--
+<button type="button" class="btn btn-dark" style="background-color: transparent; border: none; border-radius: 100%; width: 60px; height: 50px;" onclick="printForm()">
+  <img style="width:50px;" src="img/prix.gif" class="img-fluid" alt="Description of image">
+</button>
+-->
+<script>
+function validateInputs() {
+  let username = document.getElementById('username').value;
+  let password = document.getElementById('password').value;
+  
+  if (username === "" || password === "") {
+    // inputs are empty, do nothing
+    return;
+  } else {
+    printForm();
+  }
+}
 
+function printForm() {
+  let name = document.getElementById('name').innerText;
+  let username = document.getElementById('username').value;
+  let password = document.getElementById('password').value;
 
+  let printContents = `<h1>${name}</h1><p><strong>Username:</strong> ${username}</p><p><strong>Password:</strong> ${password}</p>`;
+
+  let printWindow = window.open('', '', 'width=800,height=600');
+  printWindow.document.write(`<html><head><title>Print</title></head><body>${printContents}</body></html>`);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+  printWindow.close();
+}
+</script>
 
 	
 	    </form>

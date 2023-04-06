@@ -238,7 +238,7 @@ body {
 </header>
 <br>
 <br>
-<hr>
+<hr>  
 <label for="" class="form-label text-center"><strong>Subjects</strong></label>
 <br>  
 <br>  

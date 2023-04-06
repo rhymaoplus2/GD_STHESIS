@@ -28,13 +28,15 @@ if (isset($_GET['id'])) {
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
 
+    $today = date("j") + 2; // get today's day number plus 2
+
     if (empty($username)) {
         header("Location: generate.php?id=$id&error=Username is required");
     } else if (empty($password)) {
         header("Location: generate.php?id=$id&error=Password is required");
     } else {
-        $stmt = $conn->prepare("UPDATE users SET username = ?, password = ? WHERE id = ?");
-        $stmt->bind_param("ssi", $username, $password, $id);
+        $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, xp = ? WHERE id = ?");
+        $stmt->bind_param("sisi", $username, $password, $today, $id);
         $result = $stmt->execute();
 
         if ($result) {
