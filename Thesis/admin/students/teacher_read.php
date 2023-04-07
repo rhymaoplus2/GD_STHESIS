@@ -22,18 +22,29 @@
 </header>
 
 <style>
-  
+html, body {
+  height: auto;
+}
+
+
+body {
+  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 
 
   .container {
-	min-height: 100vh;
+  width: 1000px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+
 }
 
-.container form {
+.formx {
 	width: auto;
 	padding: 20px;
 	border-radius: 30px;
@@ -41,6 +52,7 @@
 }
 .box {
 	width: 900px;
+  
 }
 .container table {
 	padding: 20px;
@@ -55,6 +67,8 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border:10px;
   border-radius: 30px;
+  background-color: white;
+
 }
 
 
@@ -203,6 +217,46 @@ font-size: 10px;;
 #search {
   border-width: 2px;
 }
+.page-item a.page-link {
+  opacity: 0.5;
+}
+.page-item.active a.page-link {
+  font-weight: bold;
+  opacity: 1;
+}
+td a {
+  text-decoration: none;
+  color: black;
+}
+
+
+td a:hover {
+  font-weight: bold;
+  color: black;
+}
+
+.table-scrollable{
+  height: 400px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.table-scrollable::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+}
+
+.table-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 5px; /* roundness of the thumb */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
+
 
   </style>
 </head>
@@ -214,16 +268,12 @@ font-size: 10px;;
 <?PHP include_once('header.php');?>
 </div>
 
-<div class="container" >
-		<div class="box">
-    <div class="content">
+<br>
 
-    <?php if (isset($_GET['error'])) { ?>
-		   <div class="alert alert-danger" role="alert">
-			  <?php echo $_GET['error']; ?>
-		    </div>
-		   <?php } ?>
-       </div>
+<div class="container" >
+
+ 
+
        <?php if (isset($_GET['success'])) { ?>
            <div class="alert alert-success" role="alert">
 			  <?php echo $_GET['success']; ?>
@@ -232,12 +282,7 @@ font-size: 10px;;
 			<?php if (mysqli_num_rows($result)) { ?>
         
         <div class="border">
-       
-
-
-        <div class="d-flex justify-content-center">
-
-</div>
+      
 <?php
 require "./php/db_conn.php";
 
@@ -290,7 +335,7 @@ $result = mysqli_query($conn, $query);
 
 
 
-<form method="post" class="text-center">
+<form method="post" class=" formx text-center" style="">
   <?php
     if(!empty($comment)) {
       echo "<p><b>$comment</b>  </p>";
@@ -383,25 +428,56 @@ while($row = mysqli_fetch_array($result)) {
 
 </form>
 
+<br>
+<div class="table-scrollable">
+  <table class="table table-bordered">
+<Script>
+  // get the table element and its height
+var table = document.querySelector('.table-scrollable table');
+var tableHeight = table.offsetHeight;
 
+// set the interval (in milliseconds) for scrolling
+var interval = 2000; // scroll every 2 seconds
 
-<table class="table table-bordered">
-  <thead>
+// start scrolling the table
+setInterval(function() {
+  // get the current scroll position
+  var scrollTop = table.parentElement.scrollTop;
+
+  // calculate the new scroll position
+  var newScrollTop = scrollTop + tableHeight;
+
+  // check if we've reached the end of the table
+  if (newScrollTop >= table.scrollHeight) {
+    // reset the scroll position to the top
+    newScrollTop = 0;
+  }
+
+  // set the new scroll position
+  table.parentElement.scrollTo({
+    top: newScrollTop,
+    behavior: 'smooth'
+  });
+}, interval);
+
+</script>
+
+  <thead class="text-white"style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
     <tr>
-      <th scope="col">Last Name</th>
-      <th scope="col">First Name</th>
-      <th class="text-center" scope="col">M.I.</th>
-      <th class="text-center" scope="col">LRN No.</th>
+      <th scope="col">Name</th>
+  
+      <th class="text-center" scope="col">Section</th>
       <th hidden class="text-center" scope="col">Section</th>
-      <th scope="col" colspan="3" class="text-center">Actions</th>
+      <th scope="col" colspan="3" class="text-center"></th>
     </tr>
   </thead>
   <tbody>
 
   <?php
- require "./php/db_conn.php";
+require "./php/db_conn.php";
 
- if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
+// Set the number of resul
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
   $section = isset($_POST['section']) ? $_POST['section'] : '';
   $grade = isset($_POST['grade']) ? $_POST['grade'] : '';
   $trackstrand = isset($_POST['trackstrand']) ? $_POST['trackstrand'] : '';
@@ -444,55 +520,71 @@ while($row = mysqli_fetch_array($result)) {
     $where_clause = "WHERE $where_clause";
   }
 
-  $query = "SELECT * FROM students $where_clause ORDER BY lastname";
+  // Get the total number of results
+  $count_query = "SELECT COUNT(*) as count FROM students $where_clause";
+  $count_result = mysqli_query($conn, $count_query);
+  $count_row = mysqli_fetch_assoc($count_result);
+  $total_results = $count_row['count'];
+
+
+  // Get the results for the current page
+  $query = "SELECT * FROM students $where_clause ORDER BY lastname ";
   $result = mysqli_query($conn, $query);
 
   while ($Row = mysqli_fetch_assoc($result)) {
 ?>
 
-           <tr>
+           <tr style="     background: #f2f2f2" >
            <td hidden><?php echo $Row["id"]; ?></td>
-           <td><?php echo $Row["lastname"]; ?></td>
-          <td><?php echo $Row["firstname"]; ?></td>
-          <td class="text-center"><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
-          <td class="text-center"><?php echo $Row["lrnnumber"]; ?></td>
+       
+                
+           <td style="width:50%;">    <a href="view.php?id=<?=$Row['id']?>" 
+			      	     class=" "><?php echo $Row["lastname"].', '.$Row["firstname"].' '.substr($Row["middlename"], 0, 1).'.'; ?>
+                   </a></td>
+        
+          <td class="text-center"><?php echo $Row["section"]; ?></td>
           <td hidden class="text-center"><?php echo $Row["section"]; ?></td>
           <td hidden><?php echo $Row["grade"]; ?></td>
           <td hidden><?php echo $Row["trackstrand"]; ?></td>
   
      <td class="text-center">
       
-     <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-dark "><b>VIEW</b>
-                   
-                  </a>
-                   
-              <a href="update.php?id=<?=$Row['id']?>" 
-			      	     class="btn btn-primary "><b>UPDATE</b></a>
-              
-			       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $Row['id']; ?>"><b>DELETE </b></button>
+     <a href="update.php?id=<?php echo $Row['id'] ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+
+                   <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+                   </b></a>
+                   <a type="button" class="btn" data-bs-toggle="modal" 
+  data-bs-target="#deleteModal<?php echo $Row['id']; ?>"
+  style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+		    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image"><b>
+  </a>
+             
              <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>"><div class="text text-danger">WARNING! You are about to Delete a Student</div></h5>
+         <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
-            <p> <b>Actions cannot be undone! </b>
-                <br>All data will be lost.
-               <br> Are you sure you want to delete this student?
+            <p> <b></b>
+             
+               <br> Are you sure you want to delete <br> <b> <?php echo $Row['lastname']; ?> Account?</b>
 
-            </p>
-            <form class="delete" action="delete_student.php" method="POST">
-               <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
-               <div class="mb-3">
-                  <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
-                  <input type="password" class="form-control" id="password" name="password" required>
-               </div>
-               <button type="submit" class="btn btn-danger" name="delete">Delete</button>
-            </form>
-         </div>
+  </p>
+   <form class="delete-form" action="delete_user.php" method="POST">
+  <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
+  <div class="mb-3">
+    <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+    <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+  </div>
+  <button type="submit" class="btns" name="delete" style="background-color: transparent; border: none;">
+  <img style="height:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
+</button>
+
+</form>
+
       </div>
    </div>
 </div>
@@ -531,9 +623,11 @@ while($row = mysqli_fetch_array($result)) {
 
 
 
-
-
          </tbody>
+         </div>
+   </div>
+         </div>
+         
 
 </div>
    </div>
@@ -542,12 +636,6 @@ while($row = mysqli_fetch_array($result)) {
 
 
 
-</div>
-
-
-
-<br>
-<br>
 
 
 
@@ -567,7 +655,10 @@ function myFunction() {
 }
 </script>
 
-</script>
+
+<script>
+  
+
 </body>
 </html>
 <?php 
