@@ -227,7 +227,7 @@ body {
 <form class="mb-3 " action="n-addsub.php" 
 		      method="post">
             
-<header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+<header class="text-center text-white mb-3" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
     <b>
         <?php if (isset($_GET['error'])) {
             echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
@@ -236,16 +236,39 @@ body {
         } ?>
     </b>
 </header>
-<br>
-<br>
+
 <hr>  
-<label for="" class="form-label text-center"><strong>Subjects</strong></label>
-<br>  
-<br>  
+<label for="" class="form-label text-center mb-3"><strong>Subjects</strong></label>
+ 
+<div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
+ 
+ <script>
+const scrollableElement = document.getElementById("scrollable");
+let scrollAmount = 0;
+const scrollStep = 1;
+const scrollDelay = 20; // In milliseconds
 
-<div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;">
+function autoScroll() {
+  scrollAmount += scrollStep;
+  if (scrollAmount >= scrollableElement.scrollHeight - scrollableElement.clientHeight) {
+    scrollAmount = 0;
+  }
+  scrollableElement.scrollTop = scrollAmount;
+}
 
-<select name="sub1" id="sub1" class="form-control text-center mb-3">
+let scrollInterval = setInterval(autoScroll, scrollDelay);
+
+scrollableElement.addEventListener("mouseenter", () => {
+  clearInterval(scrollInterval);
+});
+
+scrollableElement.addEventListener("mouseleave", () => {
+  scrollInterval = setInterval(autoScroll, scrollDelay);
+});
+
+</script>
+
+  <select name="sub1" id="sub1" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub1 has no value
     if(empty($row['sub1'])){
@@ -310,6 +333,7 @@ body {
     }
     ?>
 </select>
+
 <select name="sub2" id="sub3" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub1 has no value
@@ -375,6 +399,7 @@ body {
     }
     ?>
 </select>
+
 <select name="sub5" id="sub5" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub5 has no value
@@ -407,6 +432,7 @@ body {
     }
     ?>
 </select>
+
 <select name="sub6" id="sub6" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub6 has no value
@@ -505,6 +531,7 @@ body {
     }
     ?>
 </select>
+
 <select name="sub9" id="sub9" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub9 has no value
@@ -537,6 +564,7 @@ body {
     }
     ?>
 </select>
+
 <select name="sub10" id="sub10" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub10 has no value
@@ -572,12 +600,48 @@ body {
 
 
   </div>
+    
+  <hr>
   <label for="" class="form-label text-center"><strong>Sections</strong></label>
-<br>
-  <div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;">
+<br> 
+<div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;" id="scroll">
+  <!-- content here -->
 
 
-<div class="mb-3">
+
+<script>
+var scrollDiv = document.getElementById("scroll");
+var scrollInterval1, scrollInterval2;
+
+scrollInterval1 = setInterval(function() {
+  if (scrollDiv.scrollTop + scrollDiv.clientHeight >= scrollDiv.scrollHeight) {
+    scrollDiv.scrollTop = 0;
+  } else {
+    scrollDiv.scrollTop += 1;
+  }
+}, 21);
+
+scrollDiv.addEventListener("mouseenter", function() {
+  clearInterval(scrollInterval1);
+  clearInterval(scrollInterval2);
+});
+
+scrollDiv.addEventListener("mouseleave", function() {
+  scrollInterval1 = setInterval(function() {
+    if (scrollDiv.scrollTop + scrollDiv.clientHeight >= scrollDiv.scrollHeight) {
+      scrollDiv.scrollTop = 0;
+    } else {
+      scrollDiv.scrollTop += 1;
+    }
+  }, 50);
+});
+
+
+</script>
+
+ 
+
+
 
 
 <select name="sec1" id="sec1" class="form-control text-center mb-3">
@@ -635,7 +699,6 @@ continue;
 </select>
 
 
-
 <select name="sec3" id="sec3" class="form-control text-center mb-3">
   <option value="<?=$row['sec3']?>"><?=$row['sec3']?></option>
   <option value=""?></option>
@@ -661,6 +724,7 @@ continue;
     }
   ?>
 </select>
+
 <select name="sec4" id="sec4" class="form-control text-center mb-3">
   <option value="<?=$row['sec4']?>"><?=$row['sec4']?></option>
   <option value=""></option>
@@ -686,6 +750,7 @@ continue;
     }
   ?>
 </select>
+
 <select name="sec5" id="sec5" class="form-control text-center mb-3">
   <option value="<?=$row['sec5']?>"><?=$row['sec5']?></option>
   <option value=""></option>
@@ -711,6 +776,7 @@ continue;
     }
   ?>
 </select>
+
 <select name="sec6" id="sec6" class="form-control text-center mb-3">
   <option value="<?=$row['sec6']?>"><?=$row['sec6']?></option>
   <option value=""></option>
@@ -736,6 +802,7 @@ continue;
     }
   ?>
 </select>
+
 <select name="sec7" id="sec7" class="form-control text-center mb-3">
   <option value="<?=$row['sec7']?>"><?=$row['sec7']?></option>
   <option value=""></option>
@@ -814,6 +881,7 @@ continue;
     }
   ?>
 </select>
+
 <select name="sec10" id="sec10" class="form-control text-center mb-3">
   <option value="<?=$row['sec10']?>"><?=$row['sec10']?></option>
   <option value=""></option>
@@ -842,8 +910,6 @@ continue;
 
 
 
-</div>
-
 
 
 
@@ -864,6 +930,7 @@ continue;
           </div>
 
 
+          <hr>
 
 	
           <button type="submit" class="btn btn-primary " name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>

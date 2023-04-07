@@ -477,7 +477,7 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
 </form>
 <img style="height:75px;" src="img/msu.png" class="img-fluid rotate-on-hover" alt="MSU-MSAT LOGO">
 
-&nbsp;&nbsp;
+
 
 </div>
 
