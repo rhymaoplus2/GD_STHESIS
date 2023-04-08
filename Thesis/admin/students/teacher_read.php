@@ -23,13 +23,12 @@
 
 <style>
 html, body {
-  height: auto;
+  height: 100%;
 }
 
 
 body {
-  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
-  background-size: cover;
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
   background-repeat: no-repeat;
 }
 
@@ -462,7 +461,7 @@ setInterval(function() {
 
 </script>
 
-  <thead class="text-white"style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+  <thead class="text-white"style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);;">
     <tr>
       <th scope="col">Name</th>
   
@@ -573,7 +572,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
                <br> Are you sure you want to delete <br> <b> <?php echo $Row['lastname']; ?> Account?</b>
 
   </p>
-   <form class="delete-form" action="delete_user.php" method="POST">
+   <form class="delete-form" action="delete.php" method="POST">
   <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
   <div class="mb-3">
     <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>

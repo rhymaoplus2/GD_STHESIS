@@ -14,10 +14,19 @@
     <style>
 
 
+html, body {
+  height: 100%;
+}
+
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+}
 
 
 .container {
-	min-height: 100vh;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -165,7 +174,57 @@ bottom: 0;
 z-index: -1;
   }
 
-      
+  .skrol {
+  height: 300px;
+  overflow-y: auto;
+  padding-right: 20px; /* Add padding to the right side of the element */
+}
+
+/* For webkit-based browsers */
+.skrol::-webkit-scrollbar {
+  width: 10px;
+}
+
+.skrol::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.skrol::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+/* For other browsers */
+.skrol {
+  scrollbar-width: thin;
+}
+
+.skrol::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.skrol::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+.btn-primary:hover img,
+.btn-danger:hover img {
+    transform: scale(1.2);
+    transition: transform 0.5s ease;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
       </style>
 </head>
 <body>
@@ -199,71 +258,54 @@ function myFunction() {
 </script>
 
 
-
-
-<!--  CRUD AREA -->
 <br>
-<br>
-
-<div class="container">
-<div class="content">
-<form action="./php/create.php"
-      method="post">
-  <h4 class="display-10 text-center text-dark" ><b>Add New Student</b></h4>
-<br>
-
- <?php if (isset($_GET['error'])) { 
-  include "./php/db_conn.php";
-  ?>
+<div class="fade-in">
+<div class="container mb-3">
   
-
-  <div class="alert alert-danger" role="alert">
-  <audio controls autoplay  hidden>
-<source src="../voice/please.mp3" type="audio/mpeg">
-</audio>
-  <?php echo $_GET['error']; ?>
+    <form action="./php/create.php" method="post" >
+   
+    <div class="text-center text-white p-2 mb-4" style="font-size:24px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-radius: 10px;">
+  <label class="mb-0"><?php echo isset($_GET['error']) ? 'RETRY' : 'ADD NEW STUDENT'; ?></label>
 </div>
+
+
+<?php if (isset($_GET['error'])) { ?>
+  <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#errorModal">
+    Open Error Modal
+  </button>
+
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-modal="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="background-image: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="errorModalLabel">Oops!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  <div class="text-white alert alert-danger bg-transparent" role="alert">
+    <?php echo $_GET['error']; ?>!
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+      errorModal.show();
+    });
+  </script>
 <?php } ?>
 
 
+<hr>
 
-<div class="form-group">
-  <hr>
-  <div class="mb-3 text-center">
-  <label for="subjectteacher1" class="form-label text-danger mb-3"><b><b>Personal Details</b></b></label>
-</div>
-
+<div class="skrol"style="height: 150px; overflow-y: auto;">
   <label for="" class="form-label warning"><b>ID no.</b></label>
   <input type="text" class="form-control mb-3" id="idnumber" placeholder="ex: 12913937" name="idnumber">
-</div>
 
-<div class="form-group">
-  <label for="" class="form-label warning"><b>Re-Enter ID no.</b></label>
-  <input type="text" class="form-control" id="id" placeholder="ex: 12913937" name="id">
-  <div class="invalid-feedback"><b>Please input the same value.</b></div>
-</div>
-
-
-<script>
-  const idNumberInput = document.querySelector('#idnumber');
-const idInput = document.querySelector('#id');
-const invalidFeedback = document.querySelector('.invalid-feedback');
-
-function checkIdNumber() {
-  if (idNumberInput.value !== idInput.value) {
-    invalidFeedback.style.display = 'block';
-  } else {
-    invalidFeedback.style.display = 'none';
-  }
-}
-
-idNumberInput.addEventListener('input', checkIdNumber);
-idInput.addEventListener('input', checkIdNumber);
-
-</script>
-<br>
-
-<div class="form-group">
+<div class="form-group mb-3">
     <label for="" class="form-label warning" ><b>LRN no.</b></label>
     <input 
     type="text" 
@@ -275,7 +317,7 @@ idInput.addEventListener('input', checkIdNumber);
 
 
 
-  <br>
+
   <div class="mb-3">
   <label for="adviser_id" class="form-label warning"><b>ADVISER</b></label>
   <select class="form-select" id="adviser_id" name="adviser_id">
@@ -369,7 +411,7 @@ idInput.addEventListener('input', checkIdNumber);
 
 
   <div class="from-group mb-3">
-                                <label for=""><b>Suffix</b></label>
+                                <label class=" mb-3"for=""><b>Suffix</b></label>
                                 <select name="suffix" id="suffix" class="form-control">
                                     <option value=" "><b>None</b></option>
                                     <option value="Jr."><b>Jr.</b></option>
@@ -380,7 +422,7 @@ idInput.addEventListener('input', checkIdNumber);
 
 
                        <div class="from-group mb-3">
-                                <label for=""><b>Gender</b></label>
+                                <label class=" mb-3" for=""><b>Gender</b></label>
                                 <select name="gender" id="gender" class="form-control">
                                     <option value="Male"><b>Male</b></option>
                                     <option value="Female"><b>Female</b></option>
@@ -484,8 +526,65 @@ idInput.addEventListener('input', checkIdNumber);
     placeholder="ex: Lilac"
     name="section">
   </div>
-<hr>
-<div class="mb-3">
+
+  <script>
+  // Get the input elements
+  const idnumberInput = document.getElementById("idnumber");
+  const lrnnumberInput = document.getElementById("lrnnumber");
+  const adviserIdInput = document.getElementById("adviser_id");
+  const firstnameInput = document.getElementById("firstname");
+  const middlenameInput = document.getElementById("middlename");
+  const lastnameInput = document.getElementById("lastname");
+  const suffixInput = document.getElementById("suffix");
+  const genderInput = document.getElementById("gender");
+  const birthplaceInput = document.getElementById("birthplace");
+  const birthdayInput = document.getElementById("birthday");
+
+  // Load the saved values from Local Storage if they exist
+  idnumberInput.value = localStorage.getItem("idnumber") || "";
+  lrnnumberInput.value = localStorage.getItem("lrnnumber") || "";
+  adviserIdInput.value = localStorage.getItem("adviser_id") || "";
+  firstnameInput.value = localStorage.getItem("firstname") || "";
+  middlenameInput.value = localStorage.getItem("middlename") || "";
+  lastnameInput.value = localStorage.getItem("lastname") || "";
+  suffixInput.value = localStorage.getItem("suffix") || "";
+  genderInput.value = localStorage.getItem("gender") || "";
+  birthplaceInput.value = localStorage.getItem("birthplace") || "";
+  birthdayInput.value = localStorage.getItem("birthday") || "";
+
+  // Save the input values to Local Storage when they change
+  idnumberInput.addEventListener("input", () => {
+    localStorage.setItem("idnumber", idnumberInput.value);
+  });
+  lrnnumberInput.addEventListener("input", () => {
+    localStorage.setItem("lrnnumber", lrnnumberInput.value);
+  });
+  adviserIdInput.addEventListener("change", () => {
+    localStorage.setItem("adviser_id", adviserIdInput.value);
+  });
+  firstnameInput.addEventListener("input", () => {
+    localStorage.setItem("firstname", firstnameInput.value);
+  });
+  middlenameInput.addEventListener("input", () => {
+    localStorage.setItem("middlename", middlenameInput.value);
+  });
+  lastnameInput.addEventListener("input", () => {
+    localStorage.setItem("lastname", lastnameInput.value);
+  });
+  suffixInput.addEventListener("change", () => {
+    localStorage.setItem("suffix", suffixInput.value);
+  });
+  genderInput.addEventListener("change", () => {
+    localStorage.setItem("gender", genderInput.value);
+  });
+  birthplaceInput.addEventListener("input", () => {
+    localStorage.setItem("birthplace", birthplaceInput.value);
+  });
+  birthdayInput.addEventListener("input", () => {
+    localStorage.setItem("birthday", birthdayInput.value);
+  });
+</script>
+
 <!--  
   <div class="mb-3 text-center">
   <label for="subjectteacher1" class="form-label text-danger mb-3"><b>Subject Teachers</b></label>
@@ -621,26 +720,17 @@ idInput.addEventListener('input', checkIdNumber);
   <br>
 
 
-  <select class="form-control" id="subjectteacher10" name="subjectteacher10">
-  <option value="">Select Subject Teacher</option>
-    <?php
-      // Assuming you have a database connection
-      require "./php/db_conn.php";
-      $result = mysqli_query($conn, "SELECT name FROM users WHERE role = 'subject teacher' OR role2 = 'subject teacher'");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
-      }
-    ?>
-  </select>
-
-  <br>
-
+      
     -->
-
-<hr>
-  <div class="mb-3 text-center">
-  <label for="subjectteacher1" class="form-label text-danger mb-3"><b>Subjects</b></label>
+    </div>
+    <hr>
+    <div class="mb-2 text-center">
+  <label for="subjectteacher1" class="form-label text-dark mb-3"><i>Subjects</i></label>
 </div>
+<hr>
+    <div class="skrol"style="height: 100px; overflow-y: auto;">
+
+
   <select class="form-control" id="subject1" name="subject1">
   <option value="">Select Subject</option>
     <?php
@@ -752,10 +842,31 @@ idInput.addEventListener('input', checkIdNumber);
       }
     ?>
   </select>
+  <script>
+  // Get all select elements
+  const selectElements = document.querySelectorAll('select.form-control');
 
+  // Restore selected options from local storage on page load
+  window.addEventListener('load', () => {
+    selectElements.forEach(select => {
+      const selectedOption = localStorage.getItem(select.id);
+      if (selectedOption) {
+        select.value = selectedOption;
+      }
+    });
+  });
+
+  // Save selected option to local storage on change
+  selectElements.forEach(select => {
+    select.addEventListener('change', () => {
+      localStorage.setItem(select.id, select.value);
+    });
+  });
+</script>
 
 
 </div>
+
 
 
 <hr>
@@ -767,20 +878,20 @@ idInput.addEventListener('input', checkIdNumber);
 
 
 
+<button type="submit" class="btn btn-primary" 
+name="create" style="background-color: transparent; 
+border: none; border-radius:100%; width:50px; height: 50px;">
+<img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
 
  
-  <button type="submit" 
-          class="btn btn-primary"
-          name="create"><b>ADD</B></button>
 
-          <a class="link-primary" href="teacher_read.php">
-          <button type="button" class="btn btn-dark">
+          <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
+          onclick="location.href='teacher_read.php'">
+<img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
 
-      
-          <b>CANCEL</b>
 
-          </button>
-          </a>
 </form>
 </div>
 
@@ -789,7 +900,7 @@ idInput.addEventListener('input', checkIdNumber);
 </div>
 
 
-
+</div>
 <script>
 window.onscroll = function() {myFunction()};
 

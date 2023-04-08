@@ -46,7 +46,17 @@ if (isset($_GET['id'])) {
         $parent = validate($_POST['parent']);
         $syear = validate($_POST['syear']);
         $section = validate($_POST['section']);
-
+        $subject1 = validate($_POST['subject1']);
+        $subject2 = validate($_POST['subject2']);
+        $subject3 = validate($_POST['subject3']);
+        $subject4 = validate($_POST['subject4']);
+        $subject5 = validate($_POST['subject5']);
+        $subject6 = validate($_POST['subject6']);
+        $subject7 = validate($_POST['subject7']);
+        $subject8 = validate($_POST['subject8']);
+        $subject9 = validate($_POST['subject9']);
+        $subject10 = validate($_POST['subject10']);
+        
 
       if (empty($firstname)) {
                 header("Location: update.php?id=$id&error=First Name is Required&$user_data");
@@ -66,9 +76,7 @@ if (isset($_GET['id'])) {
     else if (empty($fullname)) {
         header("Location: update.php?id=$id&error=Full Name is Required&$user_data");
 }
-else if (empty($suffix)) {
-        header("Location: update.php?id=$id&error=Suffix is Required&$user_data");
-}
+
 else if (empty($gender)) {
         header("Location: update.php?id=$id&error=Gender is Required&$user_data");
 }
@@ -120,14 +128,16 @@ else if (empty($section)) {
 
 	 
         else {
-
-       $sql = "UPDATE students
-               SET firstname='$firstname',middlename='$middlename',lastname='$lastname',
-               lrnnumber='$lrnnumber', fullname='$fullname',suffix='$suffix',gender='$gender',
-               idnumber ='$idnumber',birthplace ='$birthplace',birthday ='$birthday',
-               age='$age',address='$address',parent='$parent',syear='$syear'
-               ,section='$section'
-               WHERE id='$id'";
+                $sql = "UPDATE students
+                SET firstname='$firstname',middlename='$middlename',lastname='$lastname',
+                lrnnumber='$lrnnumber', fullname='$fullname',suffix='$suffix',gender='$gender',
+                idnumber ='$idnumber',birthplace ='$birthplace',birthday ='$birthday',
+                age='$age',address='$address',parent='$parent',syear='$syear',
+                section='$section', subject1='$subject1', subject2='$subject2', subject3='$subject3', 
+                subject4='$subject4', subject5='$subject5', subject6='$subject6', subject7='$subject7', 
+                subject8='$subject8', subject9='$subject9', subject10='$subject10'
+                WHERE id='$id'";
+     
        $result = mysqli_query($conn, $sql);
        if ($result) {
        	  header("Location: teacher_read.php?id=$id&success=successfully updated");
