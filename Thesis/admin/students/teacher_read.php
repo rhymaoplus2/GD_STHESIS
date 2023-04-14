@@ -256,7 +256,18 @@ td a:hover {
   background: #555; /* color of the thumb on hover */
 }
 
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
   </style>
 </head>
 
@@ -268,6 +279,7 @@ td a:hover {
 </div>
 
 <br>
+
 
 <div class="container" >
 
@@ -428,6 +440,7 @@ while($row = mysqli_fetch_array($result)) {
 </form>
 
 <br>
+<div class="fade-in">
 <div class="table-scrollable">
   <table class="table table-bordered">
 <Script>
@@ -623,6 +636,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 
 
          </tbody>
+  </table>
+    </div>
+
          </div>
    </div>
          </div>
@@ -631,7 +647,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 </div>
    </div>
   </div>
-
 
 
 

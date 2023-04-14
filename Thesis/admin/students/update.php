@@ -269,7 +269,11 @@ function myFunction() {
 		      method="post">
       
     <div class="text-center text-white p-2 mb-4" style="font-size:24px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-radius: 10px;">
-  <label class="mb-0"><?php echo isset($_GET['error']) ? 'RETRY' : 'ADD NEW STUDENT'; ?></label>
+    <label class="mb-0">
+  <?php echo isset($_GET['error']) ? 'RETRY' : 'UPDATE: ' . $row['fullname']; ?>
+</label>
+
+
 </div>
 
 

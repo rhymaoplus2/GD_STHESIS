@@ -17,20 +17,47 @@
 
 <style>
 
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+html, body {
+  height:100%;
+}
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 
 .container {
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* other styles */
 }
+
 
 .container form {
 	width: 600px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  
 }
 .box {
 	width: 750px;
@@ -152,7 +179,14 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
-
+  .btn-primary:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+.btn-danger:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
   </style>
 
 </head>
@@ -163,25 +197,26 @@ font-size: 10px;;
 <div class="header" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
-
-
-
-
-
 <br>
 <br>
+<br>
+<br>
+<div class="fade-in">
 	<div class="container">
 		<form action="n-update.php" 
 		      method="post">
             
-		   <h4 class="display-4 text-center">Update</h4><hr><br>
-		   <?php if (isset($_GET['error'])) { ?>
-		   <div class="alert alert-danger" role="alert">
-			  <?php echo $_GET['error']; ?>
-		    </div>
-		   <?php } ?>
+          <header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+    <b>
+        <?php if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        } else {
+            echo 'Update';
+        } ?>
+    </b>
+</header>
 
-
+<br>
 <div class="form-group mb-3">
     <label for="" class="form-label"><b>Subject Name</b></label>
     <input 
@@ -206,517 +241,7 @@ font-size: 10px;;
     id="subjectid" 
     name="subjectname">
     </div>
-    <b>--------------------------------------------------------------------------------------</b>
-    <p class="text-start"><b>Subject Teachers</b></p>
-    <div class="form-group mb-3">
   
-  <select name="teacher1"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher1']?>"><?=$row['teacher1']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-    
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher2" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher2']?>"> <?=$row['teacher2']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher3" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher3']?>"><?=$row['teacher3']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher4" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher4']?>"><?=$row['teacher4']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher5" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher5']?>"><?=$row['teacher5']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher6" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher6']?>"><?=$row['teacher6']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher7" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher7']?>"><?=$row['teacher7']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher8" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher8']?>"><?=$row['teacher8']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher9" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher9']?>"><?=$row['teacher9']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="teacher10" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['teacher10']?>"><?=$row['teacher10']?></option>
-    <?php 
-    $query ="SELECT name FROM users";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-<br>
-
-    <b>--------------------------------------------------------------------------------------</b>
-    <p class="text-start"><b>For Section:</b></p>
-    <div class="form-group mb-3">
-  
-  <select name="section"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section']?>"><?=$row['section']?></option>
-  <option value=""></option>
-   <?php 
-    $query ="SELECT name FROM section";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="form-group mb-3">
-  
-  <select name="section2"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section2']?>"><?=$row['section2']?></option>
-  <option value=""></option>
-  <?php 
-    $query ="SELECT name FROM section";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-    <div class="form-group mb-3">
-  
-  <select name="section3"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section3']?>"><?=$row['section3']?></option>
-  <option value=""></option>
-   <?php 
-    $query ="SELECT name FROM section";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-    <div class="form-group mb-3">
-  
-  <select name="section4"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"> <option value="<?=$row['section4']?>"><?=$row['section4']?></option>
-  <option value=""></option>
-   <?php 
-    $query ="SELECT name FROM section";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
-    <div class="form-group mb-3">
-  
-  <select name="section5"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-     <option value="<?=$row['section5']?>"><?=$row['section5']?></option>
-     <option value=""></option>
-    <?php 
-    $query ="SELECT name FROM section";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-        $option =$optionData['name'];
-    ?>
-    <?php
-    //selected option
-    if(!empty($name) && $name== $option){
-    // selected option
-    ?>
-    <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-    <?php 
-continue;
-   }?>
-    <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-   <?php
-    }}
-    ?>
-</select>
-
-
-    </div>
-
-
 
 
 
@@ -730,23 +255,18 @@ continue;
 		
 <br>
 
-		   <button type="submit" 
-		           class="btn btn-primary"
-		           name="update">Update</button>
+	
+<button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
-
-				   <a class="link-primary" href="subjectlist.php" display-40>
-          <button type="button" class="btn btn-dark">
-
-      Cancel
-
-          </button>
+<button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='subjectlist.php'">
+<img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
 
 	
 	    </form>
 	</div>
-<br>
-<br>
+  </div>
+
   <script>
 window.onscroll = function() {myFunction()};
 

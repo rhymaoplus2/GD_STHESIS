@@ -13,6 +13,16 @@
     <style>
   
 
+  html, body {
+  height:100%;
+}
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 
   .container {
 	min-height: 100vh;
@@ -27,6 +37,7 @@
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
 }
 .box {
 	width: 750px;
@@ -178,18 +189,7 @@ font-size: 10px;;
 </div>
 <?php } ?>
 
-<!--
 
-  <div class="form-group">
-    <label for="exampleInputEmail1" class="form-label">Subject ID</label>
-    <input 
-    type="text" 
-    class="form-control" 
-    id="subjectid" 
-    placeholder="ex: 36162"
-    name="subjectid">
-  </div>
- -->
 
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Subject Name</label>

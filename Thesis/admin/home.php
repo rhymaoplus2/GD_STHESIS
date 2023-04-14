@@ -182,32 +182,19 @@ z-index: -1;
 
 <body>
 
-
 <div class="header" id="myHeader">
 <?PHP include_once('header.php'); ?>
 </div>
+<div class="container">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <img src="img/bgp.jpg" class="img-fluid mx-auto d-block" alt="Description of image" style=>
+    </div>
+  </div>
+</div>
 
-<video autoplay muted loop id="myVideo">
-  <source src="bg/admin.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
-
-  
+</div>
 </body>
 </html>
 <?php

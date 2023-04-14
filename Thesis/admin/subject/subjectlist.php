@@ -205,7 +205,10 @@ font-size: 10px;;
 
 #create-button:hover .btn-icon {
   transform: scale(1.2);
-}</style>
+}
+
+
+</style>
 </head>
 <body>
 

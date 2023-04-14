@@ -19,12 +19,32 @@ html, body {
 }
 
 body {
-  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
+.table-scrollable{
+  height: 300px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.table-scrollable::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+}
 
+.table-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 5px; /* roundness of the thumb */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
     .container {
  
     display: flex;
@@ -33,13 +53,14 @@ body {
     flex-direction: column;
 
 }
-
-.container form {
-	width: 1030px;
-	padding: 20px;
-	border-radius: 10px;
-
+.koko {
+    width: 1030px;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: inline-block;
 }
+
 .box {
 	width: auto;
   height: 700px;
@@ -314,11 +335,61 @@ td.left-align a:hover {
 input[type="text"]:hover {
     border-width: 2px;
   }
+  .form-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .rolling-div:hover::before,
+.rolling-div:hover::after {
+  animation: roll 1s ease-in-out infinite; /* use the roll animation when hovered */
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(45deg) translate(-50%, -50%);
+    animation-timing-function: ease-out;
+  }
+  30% {
+    transform: rotate(45deg) translate(50%, -50%) scaleY(0.8);
+    animation-timing-function: ease-in;
+  }
+  40% {
+    transform: rotate(45deg) translate(50%, -50%) scaleY(1.2);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    transform: rotate(45deg) translate(-50%, -50%) scaleY(0.6);
+    animation-timing-function: ease-in;
+  }
+  60% {
+    transform: rotate(45deg) translate(-50%, -50%) scaleY(1.1);
+    animation-timing-function: ease-out;
+  }
+  70% {
+    transform: rotate(45deg) translate(50%, -50%) scaleY(0.9);
+    animation-timing-function: ease-in;
+  }
+  80% {
+    transform: rotate(45deg) translate(-50%, -50%) scaleY(1.05);
+    animation-timing-function: ease-out;
+  }
+  90% {
+    transform: rotate(45deg) translate(50%, -50%) scaleY(0.95);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: rotate(45deg) translate(-50%, -50%);
+    animation-timing-function: ease-out;
+  }
+}
+
     </style>
 </head>
 <body>
 
-<div class="header" id="myHeader">
+<div class="header sticky-top" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
 
@@ -369,24 +440,17 @@ function myFunction() {
 </div>  <?php
 require "./php/db_conn.php";
 
-// Define number of results per page
-$results_per_page = 4;
-
-// Determine current page number
-if (!isset($_GET['page'])) {
-  $page = 1;
-} else {
-  $page = $_GET['page'];
-}
-
 // Calculate the starting row number for the current page
-$start_row = ($page - 1) * $results_per_page;
 
 // Construct the WHERE clause for the search query
 $where_clause = "";
 if (isset($_GET['submit']) && !empty($_GET['search_query'])) {
-  $search_query = $_GET['search_query'];
-  $where_clause = "WHERE name LIKE '%$search_query%' OR username LIKE '%$search_query%'";
+  $search_query = strtolower($_GET['search_query']); // convert to lowercase
+  $where_clause = "WHERE LOWER(name) LIKE '%$search_query%' 
+                   OR LOWER(username) LIKE '%$search_query%' 
+                   OR LOWER(role) LIKE '%$search_query%' 
+                   OR LOWER(role2) LIKE '%$search_query%' 
+                   OR LOWER(role3) LIKE '%$search_query%'";
 }
 
 // Query to retrieve the total number of rows
@@ -401,13 +465,11 @@ $query = "SELECT * FROM users $where_clause ORDER BY CASE
                                           WHEN status = 0 THEN 1 
                                           WHEN status = 2 THEN 2 
                                           ELSE 3 
-                                        END, name ASC LIMIT $start_row, $results_per_page";
+                                        END, name ASC";
 
 $result = mysqli_query($conn, $query);
-
-// Calculate total number of pages
-$total_pages = ceil($total_results / $results_per_page);
 ?>
+
 
 <div class="text text-center">
 <?php if (isset($_GET['success'])) { ?>
@@ -438,24 +500,75 @@ $total_pages = ceil($total_results / $results_per_page);
 <?php } ?>
 
 <div class="d-flex text-start">
-  
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="w-100" id="search-form">
-<a class="link-primary" href="create.php" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add new user" style="display: inline-block; margin-right: 10px;">
-  <img src="img/new.png" alt="Description of image" style="width: 45px;" class="img-fluid">
+
+<form class="koko"action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="w-100 d-flex align-items-center" id="search-form" style="position: relative;">
+
+<div class="d-flex flex-grow-1 align-items-center">
+  <a class="link-primary me-2" href="create.php" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add new user">
+  <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
 </a>
+
+<div class="input-group">
+  <input type="text" name="search_query" id="search_query" placeholder="Search Name...." class="form-control-sm bg-white text-black border-1" 
+         style="outline: none; border-image: black; margin-right: 1px; padding: 5px;" 
+         onfocus="this.style.boxShadow='0 0 0 0.25rem rgba(255, 255, 255, 0.25)'; showSuggestions();"
+         onblur="this.style.boxShadow='none'; hideSuggestions();">
+  <div class="input-group-append">
+    <div class="dropdown">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Suggestions</button>
+      <ul class="dropdown-menu" id="suggestion-menu" style="width:100%">
+        <li><a class="dropdown-item" href="#" onclick="selectSuggestion('Adviser')">Adviser</a></li>
+        <li><a class="dropdown-item" href="#" onclick="selectSuggestion('Subject Teacher')">Subject Teacher</a></li>
+        <li><a class="dropdown-item" href="#" onclick="selectSuggestion('Registrar Staff')">Registrar Staff</a></li>
+      </ul>
+    </div>
+  </div>
+  <button type="submit" name="submit" class="btn btn-link" style="padding: 5px;">
+    <img src="img/serts.png" alt="Description of image" style="width: 20px;" class="img-fluid">
+  </button>
+  
+<div class="text-center">
+  <h6>Showing results for: <span id="search-query"></span></h6>
+</div>
+
 <script>
-const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-tooltipTriggerList.map((tooltipTriggerEl) => {
-  new bootstrap.Tooltip(tooltipTriggerEl, {
-    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
-    delay: { show: 100, hide: 100 }
-  })
-})
+  const searchQueryElement = document.getElementById('search-query');
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get('search_query');
+  searchQueryElement.textContent = query;
+</script>
+</div>
+
+<script>
+function showSuggestions() {
+  document.getElementById("suggestion-menu").classList.add("show");
+}
+
+function hideSuggestions() {
+  document.getElementById("suggestion-menu").classList.remove("show");
+}
+
+function selectSuggestion(value) {
+  document.getElementById("search_query").value = value;
+  document.getElementById("myform").submit(); // replace "myform" with the ID of your form
+}
 
 </script>
-<input type="text" name="search_query" id="search_query" placeholder="Search User Name" class="form-control-sm bg-white text-black border-1" style="display: inline-block; width: 200px; outline: none; border-image: linear-gradient(to right, #0099ff 0%, #9933ff 100%) 1;" onfocus="this.style.boxShadow='0 0 0 0.25rem rgba(255, 255, 255, 0.25)';" onblur="this.style.boxShadow='none';">
+
+
+ 
+</div>
+</form>
 
 <script>
+  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.map((tooltipTriggerEl) => {
+    new bootstrap.Tooltip(tooltipTriggerEl, {
+      template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+      delay: { show: 100, hide: 100 }
+    })
+  })
+
   const searchInput = document.getElementById("search_query");
 
   // Add event listener to input field
@@ -470,18 +583,42 @@ tooltipTriggerList.map((tooltipTriggerEl) => {
     searchInput.value = savedValue;
   }
 </script>
-<button type="submit" name="submit" class="btn btn-link">
-<img src="img/search.png" alt="Description of image" style="width: 40px;" class="img-fluid">
-</button>
-
-</form>
-<img style="height:75px;" src="img/msu.png" class="img-fluid rotate-on-hover" alt="MSU-MSAT LOGO">
-
 
 
 </div>
 
 <hr>
+<div class="table-scrollable">
+<script>
+  // get the table element and its height
+var table = document.querySelector('.table-scrollable table');
+var tableHeight = table.offsetHeight;
+
+// set the interval (in milliseconds) for scrolling
+var interval = 2000; // scroll every 2 seconds
+
+// start scrolling the table
+setInterval(function() {
+  // get the current scroll position
+  var scrollTop = table.parentElement.scrollTop;
+
+  // calculate the new scroll position
+  var newScrollTop = scrollTop + tableHeight;
+
+  // check if we've reached the end of the table
+  if (newScrollTop >= table.scrollHeight) {
+    // reset the scroll position to the top
+    newScrollTop = 0;
+  }
+
+  // set the new scroll position
+  table.parentElement.scrollTo({
+    top: newScrollTop,
+    behavior: 'smooth'
+  });
+}, interval);
+
+</script>
 <table class="table table-bordered mb-25">
   
   <thead >
@@ -572,7 +709,11 @@ function updateStatusOfAllUsers(status) {
       while ($row = mysqli_fetch_assoc($result)) {
     ?>
         <tr>
-
+          <td hidden>
+        <li><div class="text-start uppercase"> <b> <?= $row['role'] ? $row['role'] : 'none' ?> </b></div></li>
+<li><div class="text-start uppercase"> <b> <?= $row['role2'] ? $row['role2'] : 'none' ?> </b></div></li>
+<li><div class="text-start uppercase"> <b> <?= $row['role3'] ? $row['role3'] : 'none' ?> </b></div></li>
+      </td>
 <td hidden class=""><?php echo $row["username"]; ?></td>
 
 
@@ -617,25 +758,7 @@ function updateStatusOfAllUsers(status) {
   </div>
 
 
-
-
-
-
-
-
-
-
-
-
   
-
-
-
-
-
-
-
-
   <a href="update.php?id=<?php echo $row['id'] ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
   <b>
     <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
@@ -784,31 +907,9 @@ If none of this works, contact the developer at: <b>reyrismilmao@gmail.com </b><
   </tbody>
   
 </table>
-<hr>
-<div class="text-center">
-  <?php
-  // Add "Previous" button if not on the first page
-  if ($page > 1) {
-    $prev_page = $page - 1;
-    echo "<a href='?page=$prev_page' class='btn'>Previous</a>";
-  }
-
-  // Add page numbers
-  for ($i = 1; $i <= $total_pages; $i++) {
-    if ($i == $page) {
-      echo "<a href='?page=$i' class='btn'><strong>$i</strong></a>"; // wrap the current page number in a strong tag
-    } else {
-      echo "<a href='?page=$i' class='btn'>$i</a>";
-    }
-  }
-
-  // Add "Next" button if not on the last page
-  if ($page < $total_pages) {
-    $next_page = $page + 1;
-    echo "<a href='?page=$next_page' class='btn'>Next</a>";
-  }
-  ?>
 </div>
+<hr>
+
 
 
 

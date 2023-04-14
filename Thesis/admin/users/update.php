@@ -29,14 +29,19 @@
   }
 }
 
+html, body {
+  height:100%;
+}
+
 body {
-  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
+
 .container {
-  min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,6 +197,9 @@ font-size: 10px;;
 
 
 
+
+<br>
+<br>
 
 <div class="fade-in">
 
