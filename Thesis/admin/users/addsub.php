@@ -241,7 +241,7 @@ body {
 <label for="" class="form-label text-center mb-3"><strong>Subjects</strong></label>
  
 <div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
- 
+ <!--
  <script>
 const scrollableElement = document.getElementById("scrollable");
 let scrollAmount = 0;
@@ -267,7 +267,7 @@ scrollableElement.addEventListener("mouseleave", () => {
 });
 
 </script>
-
+-->
   <select name="sub1" id="sub1" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub1 has no value
@@ -334,7 +334,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub2" id="sub3" class="form-control text-center mb-3">
+<select name="sub3" id="sub3" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub1 has no value
     if(empty($row['sub3'])){
@@ -608,7 +608,7 @@ scrollableElement.addEventListener("mouseleave", () => {
   <!-- content here -->
 
 
-
+<!--
 <script>
 var scrollDiv = document.getElementById("scroll");
 var scrollInterval1, scrollInterval2;
@@ -639,7 +639,7 @@ scrollDiv.addEventListener("mouseleave", function() {
 
 </script>
 
- 
+-->
 
 
 

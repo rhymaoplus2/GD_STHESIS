@@ -16,9 +16,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
   <style>
     
 
+    html, body {
+  height: 100%;
+}
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+}
+
+
+.fade-in {
+  animation: fadeIn 5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 .container {
-	min-height: 100vh;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -38,11 +60,14 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 }
 .container table {
 	padding: 20px;
-	
-	
+	border: 10px;
+  border-color: black;
+	border-radius: 100px;
   background-color: white;
-  border:10px;
+  width: 100%;
+  
 }
+
 .border {
 	padding: 15px;
 
@@ -75,16 +100,6 @@ font-size: 10px;;
 
 
 
-
-
-
-
-  .nav-item
-  {
-  
-      color:black;
-  
-  }
   .subjectlist{
   
       margin-left: 5rem;
@@ -132,8 +147,15 @@ font-size: 10px;;
       height: 10rem;
   }
 
+  a {
+  text-decoration: none;
+  font-size: 16px; /* Change this value to adjust the initial font size of your link */
+  transition: all 0.2s ease-in-out; /* This adds a smooth transition effect */
+}
 
-
+a:hover {
+font-weight: bold; /* Change this value to adjust the font size when hovering over the link */
+}
 
 .top-container {
     background-color: #f1f1f1;
@@ -157,6 +179,22 @@ font-size: 10px;;
     width: 100%;
   }
   
+.b::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.b::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.b::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+.b::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
   .sticky + .content {
     padding-top: 102px;
   }
@@ -172,7 +210,54 @@ top: 0;
 bottom: 0;
 z-index: -1;
   }
+ img {
+  border-radius: 20px;
+}
+.carousel-item {
+  transition-duration: 0.5s;
+}
 
+#carouselExampleIndicators {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all 0.90s ease;
+}
+
+#carouselExampleIndicators.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.logo img.zoom-image {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  transform-origin: center center;
+}
+
+.logo img.zoom-image:hover {
+  -webkit-transform: scale(1.2) translate(-5%, -5%);
+  transform: scale(1.2) translate(-5%, -5%);
+  z-index: 999;
+}
+.logo img.rotating-image {
+  -webkit-transition: -webkit-transform 0.8s ease-in-out;
+  transition: transform 0.8s ease-in-out;
+}
+
+.logo img.rotating-image:hover {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+.sm{
+  font-size: 10px;
+  text-align: justify;
+}
     </style>
 </head>
 <body>
@@ -185,25 +270,6 @@ z-index: -1;
 <div class="header" id="myHeader">
 <?PHP include_once('header.php'); ?>
 </div>
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/records.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 
 
 
@@ -239,145 +305,391 @@ function myFunction() {
 
 
 
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="border fade-in">
+     
+      <div class=" logo text-center">
+  <img src="img/msu.png" class="d-block rotating-image" style="width:70px;">
+</div>
+        <div class="b tex" style="height: 250px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
+        
 
-
-      <div class="container" >
-		<div class="box">
-    <div class="content">
-
-
-       <?php if (isset($_GET['success'])) { ?>
-           <div class="alert alert-success" role="alert">
-           <audio controls autoplay  hidden>
-<source src="../voice/success.mp3" type="audio/mpeg">
-</audio>
-			  <?php echo $_GET['success']; ?>
-		    </div>
-		    <?php } ?>
-			<?php if (mysqli_num_rows($result)) { ?>
-        <div class="border">
-            <table class="table table-bordered ">
-
-            <?php
-            $i = 0;
-            while ($rows = mysqli_fetch_assoc($result)) {
-                $i++;
-
-                ?> 
-           
-
-
-           <thead class="text-center">
-    <tr>
-        <th scope="col">Subject Name</th>
-        <th hidden scope="col">Section</th>
-        <th hidden scope="col">Adviser</th>
-        <th scope="col" colspan="2">Actions</th>
-    </tr>
-</thead>
-<tbody>    
-    <?php
-        require "./php/db_conn.php";
-        $name = $_SESSION['name'];
-       
-        $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5 ,u.sub1
-                  FROM users u
-                  WHERE u.name = '$name';";
-       
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) {
-            while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-                <tr>
-                    <td class="text-center"><b> <?php echo $Row["sub1"]; ?> </b></td>
-                    <td class="text-center">
-                        <a href="subject1view.php" class="btn btn-dark">VIEW / ADD GRADES</a>
-                    </td>
-             
-                </tr>
-    <?php
-            }
-        }
-    ?>
-</tbody>
-<tr class="">
-        <th scope="col"></th>
-        <th hidden scope="col"></th>
-        <th hidden scope="col"></th>
-        <th scope="col" colspan="2"></th>
-    </tr>
-<tbody>    
-    <?php
-        require "./php/db_conn.php";
-        $name = $_SESSION['name'];
-       
-        $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5 ,u.sub2
-                  FROM users u
-                  WHERE u.name = '$name';";
-       
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) {
-            while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-                <tr>
-                    <td class="text-center"><b> <?php echo $Row["sub2"]; ?> </b> </td>
-                    <td class="text-center">
-                        <a href="subject1view.php" class="btn btn-dark">VIEW / ADD GRADES</a>
-                    </td>
-                </tr>
-    <?php
-            }
-        }
-    ?>
-</tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-            <?php }
-                    }
-
-              }
+          <table class="table table-bordered table-sm rounded-4"style="border-radius: 10px;">
+            <thead class="text-center text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+              <tr>
+                <br>
+                <th scope="col">My Handled Subjects</th>
+              </tr>
+            </thead>
+            <tbody>
  
- ?>
+              <?php
+                require "./php/db_conn.php";
+                $name = $_SESSION['name'];
+                $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub1
+                          FROM users u
+                          WHERE u.name = '$name';";
+                $result = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result) > 0) {
+                  while ($Row = mysqli_fetch_assoc($result)) {
+              ?>
+                    <tr>
+                      <?php if (empty($Row["sub1"])) { ?>
+                        <td hidden class="text-center"><b></b></td>
+                        <td hidden class="text-center"></td>
+                      <?php } else { ?>
+                        <td class="text-center">
+                          <a href="subject1view.php" class=" text-dark" style="background-color: white; border: none;">
+                            <b><?php echo $Row["sub1"]; ?></b>
+                          </a>
+                        </td>
+                      <?php } ?>
+                    </tr>
+              <?php
+                  }
+                }
+              ?>
+            </tbody>
+            <?php
+              require "./php/db_conn.php";
+              $name = $_SESSION['name'];
 
+              $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub2
+                        FROM users u
+                        WHERE u.name = '$name';";
+              $result = mysqli_query($conn, $query);
+              if (mysqli_num_rows($result) > 0) {
+            ?>
+              <tbody>
+                <?php
+                  while ($Row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <tr>
+                      <?php if (empty($Row["sub2"])) { ?>
+                        <td hidden class="text-center"><b></b></td>
+                        <td hidden  class="text-center"></td>
+                      <?php } else { ?>
+                        <td class="text-center">
+                          <a href="subject2view.php" style="background-color: white; border: none;" class="text-dark">
+                            <b><?php echo $Row["sub2"]; ?></b>
+                          </a>
+                        </td>
+                      <?php } ?>
+                    </tr>
+                <?php
+                  }
+                ?>
+              </tbody>
+              <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
 
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub3
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub3"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject3view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub3"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+  <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
 
-         </tbody>
-      </table>
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub4
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub4"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject4view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub4"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+  <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
 
-              </div>
-     </div>
-   </div>
-  </div>
-          </div>
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub5
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub5"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject5view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub5"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+  <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
 
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub6
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub6"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject6view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub6"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+  <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
+
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub7
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub7"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject7view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub7"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+  <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
+
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub8
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub8"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject8view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub8"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+  <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
+
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub9
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub9"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject9view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub9"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+  <?php
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
+
+$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub10
+          FROM users u
+          WHERE u.name = '$name';";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+?>
+  <tbody>
+    <?php
+      while ($Row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr>
+          <?php if (empty($Row["sub10"])) { ?>
+            <td hidden class="text-center"><b></b></td>
+            <td hidden  class="text-center"></td>
+          <?php } else { ?>
+            <td class="text-center">
+              <a href="subject10view.php" style="background-color: white; border: none;" class="text-dark">
+                <b><?php echo $Row["sub10"]; ?></b>
+              </a>
+            </td>
+          <?php } ?>
+        </tr>
+    <?php
+      }
+    }
+    ?>
+  </tbody>
+
+              
+            <?php
+              }
+            }
+            ?>
+          </table>
           
-            </div>
-      
+        </div>
+        <span class="sm">
+    <b>Please be advised : </b> All displays on this table have been assigned by the administrator. If you have any concerns about missing or inappropriate subjects being displayed, we kindly request that you<br> <b>contact</b> the <b> Administrator </b> without delay.
+</span>
+
+      </div>
+    </div><div class="col-md-8 rounded" style="overflow: hidden;">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner rounded ">
+      <div class="carousel-item active">
+        <img src="img/pic1.gif" class="d-block w-100" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img src="img/pic2.gif" class="d-block w-100" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img src="img/pic3.gif" class="d-block w-100" alt="Third slide">
       </div>
     </div>
-      </div>
- 
-      </form>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <span class="text-white">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat officia pariatur voluptate odit, magni debitis odio nostrum corrupti animi asperiores tempora a quos error nisi sit quod assumenda ratione adipisci.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, odit! Ut repudiandae, architecto totam eveniet maxime autem ducimus impedit molestias id explicabo modi magni doloribus, voluptates quisquam nobis aspernatur commodi!
+          </span>
+</div>
 
-          
+
+
+<script>
+window.addEventListener("load", function () {
+  document.getElementById("carouselExampleIndicators").classList.add("show");
+});
+</script>
+
+</div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>

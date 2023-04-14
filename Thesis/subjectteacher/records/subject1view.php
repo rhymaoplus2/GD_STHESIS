@@ -18,9 +18,31 @@
   <style>
     
 
+    html, body {
+  height: 100%;
+}
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+}
+
+
+.fade-in {
+  animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 .container {
-	min-height: 100vh;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -37,7 +59,7 @@
   margin: 0 auto;
 }
 .box {
-	width: auto;
+	width: 100%;
 }
 .container table {
 	padding: 20px;
@@ -71,11 +93,6 @@
 
 
 
-.thead
-{
-font-size: 10px;;
-
-}
 
 
 
@@ -259,6 +276,10 @@ input::placeholder {
 
   max-width: 100%;
 }
+.bold {
+  font-weight: bold;
+}
+
 
     </style>
 </head>
@@ -271,25 +292,6 @@ input::placeholder {
 
 
 
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/records.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 
 <script>
 window.onscroll = function() {myFunction()};
@@ -308,36 +310,19 @@ function myFunction() {
 
 
 
-
-
-
-
-
-
-
-
-<!-- TITLE HERE    -->
-
-
-
-
       <div class="container" >
 		<div class="box">
     <div class="content">
 
-
-
-
-
     <div class="text-center mb-3">
+      
+    <!--
   <a class="link-primary" href="subject1.php"><button type="button" class="btn btn-dark"><b>ADD GRADES</b></button></a>
 
-
-<!-- Button trigger modal -->
 <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
 <b>PRINT GRADES</b>
 </button>
-
+-->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -354,8 +339,8 @@ function myFunction() {
         <br>
         <h3> Semester 2 - Quarter : </h3>
        
-        <button type="button" class="btn btn-success" onclick="window.open('sub1p3.php', '_blank')">1</button>
-        <button type="button" class="btn btn-danger" onclick="window.open('sub1p4.php', '_blank')">2</button>
+        <button type="button" class="btn btn-success" onclick="window.open('sub1p3.php', '_blank')">3</button>
+        <button type="button" class="btn btn-danger" onclick="window.open('sub1p4.php', '_blank')">4</button>
       </div>
     </div>
   </div>
@@ -376,7 +361,7 @@ function myFunction() {
 
 
 
-            <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
+            <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
   <b class="fs-2" style="white-space: nowrap;"><?=$_SESSION['sub1']?> </b>
   
 </div>
@@ -390,49 +375,48 @@ function myFunction() {
             <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
   <div class="row text-center">
  
-    <div class="col-md-4">
- 
-      <select class="form-select" id="quarter" name="quarter">
-        <option value=""><b>Select Quarter</b></option>
-        <option value="FIRST">First</option>
-        <option value="SECOND">Second</option>
-        <option value="THIRD">Third</option>
-        <option value="FOURTH">Fourth</option>
-      </select>
-    </div>
+  <div class="col-md-3">
+  <select class="form-select fw-bold fw-bold" id="quarter" name="quarter">
+    <option value="" class="fw-bold">Select Quarter</option>
+    <option value="FIRST" class="fw-bold">First</option>
+    <option value="SECOND" class="fw-bold">Second</option>
+    <option value="THIRD" class="fw-bold">Third</option>
+    <option value="FOURTH" class="fw-bold">Fourth</option>
+  </select>
+</div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         
-        <select class="form-select w-20" id="semester" name="semester">
-          <option value=""><b>Select Semester</b></option>
-          <option value="FIRST">First</option>
-          <option value="SECOND">Second</option>
+        <select class="form-select fw-bold fw-bold"  id="semester" name="semester">
+          <option value="" class="fw-bold"><b>Select Semester</b></option>
+          <option value="FIRST" class="fw-bold">First</option>
+          <option value="SECOND" class="fw-bold">Second</option>
         </select>
       </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
    
-      <select class="form-select" id="gender" name="gender">
-        <option value=""><b>Select Gender</b></option>
-        <option value="MALE">Male</option>
-        <option value="FEMALE">Female</option>
+      <select class="form-select fw-bold" id="gender" name="gender">
+        <option value=""class="fw-bold"><b>Select Gender</b></option>
+        <option value="MALE"class="fw-bold">Male</option>
+        <option value="FEMALE"class="fw-bold">Female</option>
       </select>
     </div>
   
-    <div class="text-center">
-      <br>
-  <select class="form-select text-center" id="sy" name="sy">
-    <option value=""><b>Select Academic Year</b></option>
-    <option value="2019-2020">2019-2020</option>
-    <option value="2020-2021">2020-2021</option>
-    <option value="2021-2022">2021-2022</option>
-    <option value="2022-2023">2022-2023</option>
-    <option value="2023-2024">2023-2024</option>
-    <option value="2024-2025">2024-2025</option>
-    <option value="2025-2026">2025-2026</option>
-    <option value="2026-2027">2026-2027</option>
-    <option value="2027-2028">2027-2028</option>
-    <option value="2028-2029">2028-2029</option>
-    <option value="2029-2030">2029-2030</option>
+    <div class="col-md-3 ">
+
+  <select class="form-select text-center fw-bold"  id="sy" name="sy">
+    <option value="" class="fw-bold"><b>Academic Year</b></option>
+    <option value="2019-2020"class="fw-bold">2019-2020</option>
+    <option value="2020-2021"class="fw-bold">2020-2021</option>
+    <option value="2021-2022"class="fw-bold">2021-2022</option>
+    <option value="2022-2023"class="fw-bold">2022-2023</option>
+    <option value="2023-2024"class="fw-bold">2023-2024</option>
+    <option value="2024-2025"class="fw-bold">2024-2025</option>
+    <option value="2025-2026"class="fw-bold">2025-2026</option>
+    <option value="2026-2027"class="fw-bold">2026-2027</option>
+    <option value="2027-2028"class="fw-bold">2027-2028</option>
+    <option value="2028-2029"class="fw-bold">2028-2029</option>
+    <option value="2029-2030"class="fw-bold">2029-2030</option>
 
   </select>
 </div>
@@ -440,7 +424,7 @@ function myFunction() {
   </div>
   <div class="text-center">
   <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
-  <img src="img/show.png" alt="Image" title="Add New Student" width="40" height="auto">
+  <img src="img/show.png" alt="Image" title="Add New Student" width="20" height="auto">
   <b></b>
 </button>
 
@@ -502,21 +486,24 @@ rotateBtn.addEventListener("click", () => {
 
 
 
-              <thead >
+              <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-color:black;  ">
                   <tr>
-                  <th scope="col" class="w-50"><h3 class="text-primary text-center"><b>StudentName</h3> </th>
-                  <th hidden scope="col"><h3 class="text-primary text-center"><b>Subject Name</h3></b></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Grade</b></h3></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Remarks</b></h3></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Section</b></h3></th>
-                <!--  <th scope="col"><h3 class="text-primary text-center"><b>Semester</b></h3></th> -->
-                  <th colspan="2" scope="col" class="w-50">
-        <h3 class="text-success center text-center"><b>Actions</b></h3>
+                  <th scope="col" class="w-50">StudentName</th>
+<th hidden scope="col">Subject Name</th>
+<th scope="col">Grade</th>
+<th scope="col">Remarks</th>
+<th scope="col">Section</th>
+<th scope="col">Quarter</th>
+
+<th colspan="2" scope="col" class="w-50">
+ 
+</th>
+
       </th>
                   
                 </tr>
               </thead>
-              <tbody>
+              <tbody style="  background-color:#e6e6e6; border-color:black;  ">
               <?php 
   require "./php/db_conn.php";
   $teacher = $_SESSION['name'];
@@ -527,14 +514,7 @@ rotateBtn.addEventListener("click", () => {
       FROM grade b, users a
       WHERE b.subjectname = a.sub1  
       AND a.name = b.teacher
-      AND ( b.adviser = a.sgh1 
-        OR b.adviser = a.sgh2
-        OR b.adviser = a.sgh3
-        OR b.adviser = a.sgh4
-        OR b.adviser = a.sgh5
-      )
       AND teacher = '$teacher'";
-
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $semester = $_POST["semester"];
     $quarter = $_POST["quarter"];
@@ -591,21 +571,25 @@ function filterTable() {
 
 
 </script>
-    <tr>
-      <td><b><?php echo $rows["studentname"]; ?></b></td>
-      <td hidden><b><?php echo $rows["subjectname"]; ?></b></td>
-      <td hidden><b><?php echo $rows["sy"]; ?></b></td>
-      <td hidden><b><?php echo $rows["section"]; ?></b></td>
-      <td class="text-center"><b><?php echo $rows["grade"]; ?></b></td>
-      <td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
-  <b><?php echo $rows["remarks"]; ?></b>
-</td>
+<td><?php echo $rows["studentname"]; ?></td>
+<td class="text-center"><b><?php echo $rows["grade"]; ?></b></td>
+<td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
+        <?php echo $rows["remarks"]; ?>
+      </td>
       <td class="text-center"><b><?php echo $rows["section"]; ?></b></td>
-      <td hidden class="text-center"><b><?php echo $rows["semester"]; ?></b></td>
+ 
+   
+      <td hidden><?php echo $rows["subjectname"]; ?></td>
+      <td hidden><?php echo $rows["sy"]; ?></td>
+      <td hidden><?php echo $rows["section"]; ?></td>
+
+  
+      <td><?php echo $rows["semester"]; ?></td>
       <td class="text-center">
-        <b>
-          <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary"><b>Update</b></a>
-</td>
+        <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary">Update</a>
+      </td>
+
+
 <td>
    
                    <script type="text/javascript">  

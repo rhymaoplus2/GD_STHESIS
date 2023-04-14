@@ -20,6 +20,7 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
     } else {
         header("Location:users.php");
+        exit();
     }
 
     $stmt->close();
@@ -32,17 +33,21 @@ if (isset($_GET['id'])) {
 
     if (empty($username)) {
         header("Location: generate.php?id=$id&error=Username is required");
+        exit();
     } else if (empty($password)) {
         header("Location: generate.php?id=$id&error=Password is required");
+        exit();
     } else {
         $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, xp = ? WHERE id = ?");
-        $stmt->bind_param("sisi", $username, $password, $today, $id);
+        $stmt->bind_param("ssii", $username, $password, $today, $id);
         $result = $stmt->execute();
 
         if ($result) {
             header("Location: users.php?success=User information updated successfully");
+            exit();
         } else {
             header("Location: generate.php?id=$id&error=Unknown error occurred");
+            exit();
         }
 
         $stmt->close();

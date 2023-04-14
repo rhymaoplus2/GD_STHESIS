@@ -464,33 +464,38 @@ function filterTable() {
 
 
 
-         
-<?php
-                    require "php/db_conn.php";
-            $name = $_SESSION["name"];
-                    $query =
-                    $query = "SELECT students.fullname, students.adviser_id, users.sub1,
-                    students.section, students.firstname,students.middlename,
-                    students.lastname,students.gender,students.syear,students.grade
-              FROM students
-              JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-              WHERE (students.subject1 = users.sub1 OR students.subject2 = users.sub1 OR students.subject3 = users.sub1 OR students.subject4 = users.sub1 OR students.subject5 = users.sub1 OR students.subject6 = users.sub1 OR students.subject7 = users.sub1 OR students.subject8 = users.sub1 OR students.subject9 = users.sub1 OR students.subject10 = users.sub1)
-              AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
-              AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
-              OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
-              OR students.subjectteacher10 = '".$_SESSION["name"]."')";
-    
-                  
-                    // $query = "SELECT students.fullname,students.adviser_id,students.firstname
-                    //FROM students 
-                    //INNER JOIN subjects   ON subjects.subjectgrouphead = adviser_id";
-                    $result = mysqli_query($conn, $query);
-                    if (mysqli_num_rows($result) > 0) {
+ <?php
+    require "php/db_conn.php";
+    $name = $_SESSION["name"];
+    $query = "SELECT students.fullname, students.adviser_id, users.sub1,
+    students.section, students.firstname, students.middlename,
+    students.trackstrand, students.lastname, students.gender,
+    students.syear, students.grade
+    FROM students
+    JOIN users ON 
+        (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
+        OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
+        OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
+        OR users.sec10 = students.section)
+    WHERE 
+        (students.subject1 = '".$_SESSION["sub1"]."' OR students.subject2 = '".$_SESSION["sub1"]."' 
+        OR students.subject3 = '".$_SESSION["sub1"]."' OR students.subject4 = '".$_SESSION["sub1"]."' 
+        OR students.subject5 = '".$_SESSION["sub1"]."' OR students.subject6 = '".$_SESSION["sub1"]."' 
+        OR students.subject7 = '".$_SESSION["sub1"]."' OR students.subject8 = '".$_SESSION["sub1"]."' 
+        OR students.subject9 = '".$_SESSION["sub1"]."' OR students.subject10 = '".$_SESSION["sub1"]."')
+        AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher7 = '".$_SESSION["name"]."' OR students.subjectteacher8 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher9 = '".$_SESSION["name"]."' OR students.subjectteacher10 = '".$_SESSION["name"]."')
+    GROUP BY students.fullname";
 
-                      while ($Row = mysqli_fetch_assoc($result)) {
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($Row = mysqli_fetch_assoc($result)) {
+            
+?>
 
-                        ?>
-   
 
 
 
@@ -536,6 +541,10 @@ function filterTable() {
 
 
  
+<td  hidden colspan="">
+<input class="no" id="ts" name="ts[]" value="<?= $Row['trackstrand'] ?>">
+</input>
+</td>
             <td hidden >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
             value="<?= $Row['sub1'] ?>">

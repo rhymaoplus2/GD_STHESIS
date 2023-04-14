@@ -25,6 +25,7 @@ if(isset($_POST['submit']))
         $gender = $_POST['gender'][$index];
         $sy = $_POST['sy'][$index];
         $year = $_POST['year'][$index];
+        $ts = $_POST['ts'][$index];
         // Skip inserting the record if the grade is 0
         if ($grade == 0) {
             continue;
@@ -47,9 +48,9 @@ if(isset($_POST['submit']))
             exit();
         } else {
             // The record doesn't exist, insert it into the database
-            $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser,firstname,middlename,lastname,gender,remarks,semester,quarter,sy,year) 
+            $query = "INSERT INTO grade(studentname,subjectname,grade,teacher,section,adviser,firstname,middlename,lastname,gender,remarks,semester,quarter,sy,year,ts) 
                       VALUES ('$studentname','$subjectname','$grade','$teacher','$section','$adviser',
-                      '$firstname','$middlename','$lastname','$gender','$remarks','$semester','$quarter','$sy','$year')";
+                      '$firstname','$middlename','$lastname','$gender','$remarks','$semester','$quarter','$sy','$year','$ts')";
             $query_run = mysqli_query($conn, $query);
 
             if (!$query_run)

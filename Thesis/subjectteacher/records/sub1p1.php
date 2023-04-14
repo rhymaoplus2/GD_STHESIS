@@ -21,10 +21,12 @@
     size: A4;
     margin: 0;
   }
+  
   .btn-icon img {
   width: 1.5rem;
   height: 1.5rem;
 }
+
 @page {
     margin-top: 50px;
   }
@@ -100,7 +102,72 @@
   }
 
 }
+@media print {
+  /* Set the page size to A4 */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .btn-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
+   .print-hidden {
+      display: none;
+    }
+  /* Set the footer to be at the bottom of the page */
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+
+  /* Set the page break after two pages */
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* Hide the file name and other description */
+  .print-header,
+  .print-footer {
+    display: none;
+  }
+
+  /* Only display content in the last page */
+  .wrapper {
+    counter-increment: page;
+  }
+
+  /* Add margin to the top of the second page */
+  .wrapper:nth-of-type(n+3) {
+    margin-top: 100px;
+  }
+
+  /* Add page number to the last page */
+  .wrapper:after {
+    content: counter(page);
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    page-break-after: always;
+  }
+  .wrapper:last-of-type:after {
+    content: "";
+  }
+  .container-fluid.p-0 {
+  display: none;
+}
+.tooltip {
+  display: none !important;
+}
+
+  
+}
 td {
   border: 1px solid black;
 }
@@ -381,7 +448,7 @@ $teacher = $_SESSION['name'];
 $filter = isset($_POST['section']) ? "AND b.section = '{$_POST['section']}'" : "";
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
 a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
-b.firstname, b.middlename, b.lastname, b.remarks,b.year,b.semester
+b.firstname, b.middlename, b.lastname, b.remarks,b.year,b.semester,b.ts
 FROM grade b
 INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
 WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND b.gender = 'MALE' AND a.name = '$teacher'
@@ -393,7 +460,7 @@ $result = mysqli_query($conn, $query);
 if ($Row = mysqli_fetch_assoc($result)) {
   $output_left = "<div id='left'>";
   $output_left .= "<p>";
-  $output_left .= "Track & Strands:&nbsp;<br>"; 
+  $output_left .= "Track & Strands:&nbsp;:&nbsp;<b>". $Row['ts']."</b> <br>" ; 
   $output_left .= "Year & Section:&nbsp; &nbsp;&nbsp;<strong>" . $Row['section'] ."&nbsp;". $Row['year'] . "</strong><br>";
   $output_left .= "Adviser:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
   <strong>" . $Row['adviser'] . "</strong><br>";
