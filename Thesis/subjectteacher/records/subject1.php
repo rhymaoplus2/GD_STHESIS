@@ -547,9 +547,9 @@ function filterTable() {
 </td>
             <td hidden >
             <input hidden class="no" id="subjectname" name="subjectname[]" 
-            value="<?= $Row['sub1'] ?>">
+            value=" <?=$_SESSION['sub1']?>">
              </input>
-          <b class="text-danger"><?= $Row['sub1'] ?></b>
+        
         </td>
           
         <td>

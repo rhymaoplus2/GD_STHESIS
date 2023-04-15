@@ -18,17 +18,51 @@
   <style>
     
 
+    a {
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+a img {
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover img {
+  transform: scale(1.2); /* Increase the image size by 20% on hover */
+}
+
     html, body {
-  height: 100%;
+  height: auto;
 }
 body {
   background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
   background-repeat: no-repeat;
 }
 
+.b::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.b::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.b::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+.b::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
 
 .fade-in {
-  animation: fadeIn 3s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -209,18 +243,6 @@ body {
   {
     margin-left:80%;
   }
-  #myVideo {
-
-width: 100vw;
-height: 100vh;
-object-fit: cover;
-position: fixed;
-left: 0;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: -1;
-  }
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -308,7 +330,65 @@ function myFunction() {
 }
 </script>
 
+<div class="text text-center">
+<?php if (isset($_GET['error'])) { ?>
+  <div class="modal fade show" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(to right, #ff0000 0%, #990000 100%);">
+          <h5 class="modal-title text-white" id="errorModalLabel">Error!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
+        </div>
+        <div class="modal-body">
+          <?php if ($_GET['error'] == 'wrong_password') { ?>
+    
+            <p>The password you entered is incorrect. Please try again.</p>
+          <?php } else if ($_GET['error'] == 'username_not_found') { ?>
+       
+            <p>The password you entered is incorrect. Please try again..</p>
+          <?php } else { ?>
+            <p>The password you entered is incorrect. Please try again.</p>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
+<script>
+  var errorModal = new bootstrap.Modal(document.getElementById('errorModal'), {
+    keyboard: false
+  });
+  errorModal.show();
+</script>
+</div>
 
+<div class="text text-center">
+<?php if (isset($_GET['success'])) { ?>
+  <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+          <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
+        </div>
+        <div class="modal-body">
+          <?php echo $_GET['success'];?>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+<?php ?>
+
+
+  </div>
+  <script>
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'), {
+      keyboard: false
+    });
+    successModal.show();
+  </script>
+<?php } ?>
 
       <div class="container" >
 		<div class="box">
@@ -317,11 +397,7 @@ function myFunction() {
     <div class="text-center mb-3">
       
     <!--
-  <a class="link-primary" href="subject1.php"><button type="button" class="btn btn-dark"><b>ADD GRADES</b></button></a>
 
-<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-<b>PRINT GRADES</b>
-</button>
 -->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -356,23 +432,38 @@ function myFunction() {
 
 
 
- 
-  <div class="border">
 
 
+
+
+
+            <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            
 
             <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;"><?=$_SESSION['sub1']?> </b>
+  <b class="fs-2" style="white-space: nowrap;">Adding Grades for Subject : <?=$_SESSION['sub1']?> </b>
   
 </div>
 
 <p class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" id="input-text" style="font-size: 30px; width:100px;"></p>
+<hr>  
+<div class="row">
+  <div class="col-md-1 mb-3">
+    <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Grades">
+      <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
+    </a>
+  </div>
+  <div class="col-md-1 mb-3">
+    <a class="link-primary me-2"  data-bs-toggle="modal" data-bs-target="#exampleModal" title="Print">
+      <img src="img/print.png" alt="Description of image" style="width: 35px;" class="img-fluid">
+    </a>
+  </div>
+  <div class="col-md-10 mb-3">
+    <input type="text" class="form-control" id="search-input" placeholder="Search" oninput="filterTable()">
+  </div>
+</div>
 
 
-  <table class="table table-bordered" id="grade-table">
-
-
-            <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
   <div class="row text-center">
  
   <div class="col-md-3">
@@ -424,7 +515,7 @@ function myFunction() {
   </div>
   <div class="text-center">
   <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
-  <img src="img/show.png" alt="Image" title="Add New Student" width="20" height="auto">
+  <img src="img/eye.png" alt="Image" title="Add New Student" width="30" height="auto">
   <b></b>
 </button>
 
@@ -438,35 +529,6 @@ rotateBtn.addEventListener("click", () => {
   setTimeout(() => rotateImg.classList.remove("rotate"), 1000);
 });
 
-</script>
-<div class="input-group mb-3">
-  <input type="text" class="form-control" id="search-input" placeholder="Type section name or student name" oninput="filterTable()">
-</div>
-
-<p id="input-text"></p>
-
-
-<script>
-  function filterTable() {
-    const input = document.getElementById("search-input").value;
-    const inputText = document.getElementById("input-text");
-    inputText.textContent = "You typed: " + input;
-
-    // your existing code to filter the table goes here...
-    const table = document.getElementById("table");
-    const rows = table.getElementsByTagName("tr");
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].getElementsByTagName("td");
-      let match = false;
-      for (let j = 0; j < cells.length; j++) {
-        if (cells[j].textContent.toLowerCase().includes(input.toLowerCase())) {
-          match = true;
-          break;
-        }
-      }
-      rows[i].style.display = match ? "" : "none";
-    }
-  }
 </script>
 
 
@@ -483,12 +545,13 @@ rotateBtn.addEventListener("click", () => {
 			  	 ?> 
            
 
-
-
-
+           <hr>
+           <div class="fade-in">
+           <div class="b tex" style="height: 255px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
+           <table class="table table-bordered" id="grade-table">  
               <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-color:black;  ">
                   <tr>
-                  <th scope="col" class="w-50">StudentName</th>
+                  <th scope="col" class="w-50 text-start">StudentName</th>
 <th hidden scope="col">Subject Name</th>
 <th scope="col">Grade</th>
 <th scope="col">Remarks</th>
@@ -503,43 +566,44 @@ rotateBtn.addEventListener("click", () => {
                   
                 </tr>
               </thead>
-              <tbody style="  background-color:#e6e6e6; border-color:black;  ">
+        
+              <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
               <?php 
-  require "./php/db_conn.php";
-  $teacher = $_SESSION['name'];
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
 
-  // Add the section column to the SELECT statement
-  $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-      a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
-      FROM grade b, users a
-      WHERE b.subjectname = a.sub1  
-      AND a.name = b.teacher
-      AND teacher = '$teacher'";
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $semester = $_POST["semester"];
-    $quarter = $_POST["quarter"];
-    $gender = $_POST["gender"];
-    $sy = $_POST["sy"];
+// Add the section column to the SELECT statement
+$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
+    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
+    FROM grade b, users a
+    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
+    AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+    AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
+    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')";
+  
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $semester = $_POST["semester"];
+  $quarter = $_POST["quarter"];
+  $gender = $_POST["gender"];
+  $sy = $_POST["sy"];
 
-
-    if (!empty($semester)) {
-      $query .= " AND semester = '$semester'";
-    }
-    if (!empty($quarter)) {
-      $query .= " AND quarter = '$quarter'";
-    }
-    if (!empty($gender)) {
-      $query .= " AND gender = '$gender'";
-    }
-    if (!empty($sy)) {
-      $query .= " AND sy = '$sy'";
-    }
-
- 
+  if (!empty($semester)) {
+    $query .= " AND semester = '$semester'";
   }
+  if (!empty($quarter)) {
+    $query .= " AND quarter = '$quarter'";
+  }
+  if (!empty($gender)) {
+    $query .= " AND gender = '$gender'";
+  }
+  if (!empty($sy)) {
+    $query .= " AND sy = '$sy'";
+  }
+}
 
-  $result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query);
 ?>
+
 
 
     <?php 
@@ -571,12 +635,12 @@ function filterTable() {
 
 
 </script>
-<td><?php echo $rows["studentname"]; ?></td>
-<td class="text-center"><b><?php echo $rows["grade"]; ?></b></td>
+<td class="text-start"><?php echo $rows["studentname"]; ?></td>
+<td class="text-center"><?php echo $rows["grade"]; ?></td>
 <td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
         <?php echo $rows["remarks"]; ?>
       </td>
-      <td class="text-center"><b><?php echo $rows["section"]; ?></b></td>
+      <td class="text-center"><?php echo $rows["section"]; ?></td>
  
    
       <td hidden><?php echo $rows["subjectname"]; ?></td>
@@ -586,24 +650,45 @@ function filterTable() {
   
       <td><?php echo $rows["semester"]; ?></td>
       <td class="text-center">
-        <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary">Update</a>
-      </td>
 
-
-<td>
-   
-                   <script type="text/javascript">  
-
-function openulr(newurl) {  
-
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
-  <b>DELETE</b>
+        <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <b>
+    <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+  </b>
 </a>
+<a type="button" class="btn" data-bs-toggle="modal" 
+  data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
+  style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+  <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+</a>
+
+<div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+        <h5 class="modal-title" id="deleteModalLabel<?php echo $rows['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p> <b></b>
+          <br> Are you sure you want to delete <br> <b> <?php echo $rows['name']; ?> Account?</b>
+        </p>
+        <form class="delete" action="delete_grade1.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
+          <div class="mb-3">
+            <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn" name="delete">
+            <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 			      </td>
 
@@ -637,7 +722,7 @@ function openulr(newurl) {
          </tbody>
       </table>
 </div>
-
+    </div>
   
 <div>
           <script>
