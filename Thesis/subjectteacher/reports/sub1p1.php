@@ -13,6 +13,9 @@
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 
+    <script src="path/jquery-3.6.4.min.js"></script>
+<script src="path/bootstrap.js"></script>
+
 
   <style>
     
@@ -217,56 +220,33 @@ font-family: calibri;
   border: 10px;
 }
 .container text{
-
-
 }
 .border {
 	padding: 15px;
-	
-
 }
-
 .link-right {
 	display: flex;
 	justify-content: flex-end;
 }
 
-
 .link-center {
 	display: flex;
 	justify-content: flex-end;
 }
-
-
-
-
-
-
 .thead
 {
 font-size: 10px;;
-
 }
-
-
-
-
-
-
   .nav-item
   {
-  
       color:black;
-  
   }
   .subjectlist{
   
       margin-left: 5rem;
       margin-top: 5rem;
   }
-  
   .studentlist{
-  
   margin-left: 20rem;
   margin-top: 5rem;
   }
@@ -277,17 +257,13 @@ font-size: 10px;;
   transform: translateX(-50%);
   z-index: 999;
 }
-
   .button{
-  
       margin-left: 5rem;
       margin-top: 11rem;
   }
   .form-label, .form-select {
       font-size: inherit;
     }
-
-  
   .button1{
   
   margin-left: 5rem;
@@ -302,7 +278,6 @@ font-size: 10px;;
   .text{
 
   }
-
   .text2
   {
       margin-left: 23rem;
@@ -310,36 +285,26 @@ font-size: 10px;;
       width: 45rem;
       height: 10rem;
   }
-
-
-
-
 .top-container {
     background-color: white;
     padding: 30px;
     text-align: center;
   }
-  
   .header {
-   
     background-color: white;
     color: #f1f1f1;
   }
-  
   .content {
     padding: 16px;
   }
-  
   .sticky {
     position: fixed;
     top: 0;
     width: 100%;
-  }
-  
+  } 
   .sticky + .content {
     padding-top: 102px;
   }
-
   .addbutton
   {
     margin-left:80%;
@@ -365,36 +330,19 @@ font-size: 10px;;
   select#section {
   font-weight: bold;
 }
-
-
     </style>
 </head>
 <body>
-
-
     <div class="d-flex justify-content-center align-items-center position-relative">
-
     <img src="msu.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
-
-
 </div>
-
 <button class="btn btn-primary fixed-button" onclick="window.print()" style="background-color: transparent; border: none; outline: none; box-shadow: none;">
   <img src="img/printx.gif" alt="Print" class="img-fluid" style="width: 100px;">
 </button>
-
-
-
-
-
-
 <div class="container " >
 <div style="text-align: center;">
 <form class="row text-center g-3 print-hidden" method="POST" action="" style=""> 
-
-
   <div class="col-auto">
-
   </div>
   <div class="col-auto" style="font-weight: bold;" >
     <select class="form-select" name="section" id="section">
@@ -404,15 +352,11 @@ font-size: 10px;;
       // Retrieve the section names from the "section" table
       $sql = "SELECT name FROM section";
       $result = $conn->query($sql);
-
-      // Generate the dropdown list options
       if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
               echo '<option value="' . $row["name"] . '">' . $row["name"] . '</option>';
           }
       }
-
-      // Close the database connection
       $conn->close();
       ?>
     </select>
@@ -422,13 +366,10 @@ font-size: 10px;;
     <img src="img/show.gif" alt="Print" class="img-fluid" style="width: 30px;">
   </button>
 </div>
-
 </form>
     </div>
 		<div class="box">
     <div class="content">
-
-
 <script>
   const searchInput = document.getElementById('search');
   const tableRows = document.querySelectorAll('table tbody tr');
@@ -449,9 +390,7 @@ font-size: 10px;;
     });
   });
 </script>
-
             <table class="table table-bordered small table-sm" >
-
 <?php
 require "./php/db_conn.php";
 $teacher = $_SESSION['name'];
@@ -471,7 +410,6 @@ AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 "; 
-
 $result = mysqli_query($conn, $query);
 if ($Row = mysqli_fetch_assoc($result)) {
   $output_left = "<div id='left'>";
@@ -482,7 +420,6 @@ if ($Row = mysqli_fetch_assoc($result)) {
   <strong>" . $Row['adviser'] . "</strong><br>";
   $output_left .= "</p>";
   $output_left .= "</div>";
-  
   $output_right = "<div id='right'>";
   $output_right .= "<p>";
   $output_right .= "Subject:&nbsp;<b>" .$Row['sub1'] ."</b><br>";
@@ -490,28 +427,15 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_right .= "Semester:&nbsp;<strong>" . $Row['semester'] . "</strong><br>";
   $output_right .= "</p>";
   $output_right .= "</div>";
-  
-  
-  
   echo $output_left;
   echo $output_right;
 } else {
   echo "<strong><h1>No Grades</h1></strong>
     ";
-    
 }
-
 mysqli_close($conn);
-
 ?>
-
-
-
 <thead>
-
-
-
-
 <tr style="text-align:center;">
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
@@ -520,23 +444,15 @@ mysqli_close($conn);
   <th class="text-center" style="width:90px; vertical-align: middle;">FIRST<br>QUARTER</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
 </tr>
-
-
-</thed>
-
-        
-             <thead>
-    <th colspan="6" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></th>
+</thed>  
+<thead>
+<th colspan="6" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></th>
 </thead>
-
 <?php
-
 require "./php/db_conn.php";
-
 $teacher = $_SESSION['name'];
 $rowNum = 0;
 $filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
-
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
 a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
@@ -553,10 +469,7 @@ $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 "; 
 
-
-
 $result = mysqli_query($conn, $query);
-
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; // increment rowNum
 ?>
@@ -575,13 +488,10 @@ while ($Row = mysqli_fetch_assoc($result)) {
 <?php } ?>
 
 </tbody>
-
-</div>     
+</div> 
                 <thead >
       <th colspan="6"class="text text-left" ><b><div class="text text-danger"><b>FEMALE</b></div></b></th>
               </thead>
-
-
               <?php
 $teacher = $_SESSION['name'];
 $rowNum = 0;
@@ -603,16 +513,10 @@ $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 ";
 
-
-
-
   $result = mysqli_query($conn, $query);
-  
-  // process the query result as needed
 }
-
 while ($Row = mysqli_fetch_assoc($result)) {
-  $rowNum++; // increment rowNum
+  $rowNum++; 
 ?>
      <br>
            <tr>
@@ -631,12 +535,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
             <?php }
  ?>
          </tbody>
-
-
       </table>
-
-
-
   <?php
 require "./php/db_conn.php";
 $teacher = $_SESSION['name'];
@@ -652,26 +551,15 @@ $filter
 ORDER BY b.studentname ASC;
 ";
 
-
 $result = mysqli_query($conn, $query);
-
 while ($Row = mysqli_fetch_assoc($result)) {
-  $rowNum++; // increment rowNum
+  $rowNum++;
 ?>
-
-
-
 <?php } ?>
-
-
-
       <table style="font-size: 16px; width:720px;">
   <thead>
     <tr>
-  
-
-
-    </tr>
+</tr>
   </thead>
   <tbody>
     <?php
@@ -683,9 +571,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
-        
           echo "<td style='border: none;'>";
-
           echo "
           Prepared by
           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -705,7 +591,6 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
           Checked by
-          
           <br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -723,7 +608,6 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
-         
           <u>
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -742,7 +626,6 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </u>
-
           <br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -768,11 +651,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;
-      
           <i>Date</i>
-      
-
-
           <br>
           <br>
           Noted by
@@ -793,7 +672,6 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
-       
           Approved by
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -819,16 +697,10 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;
-        
-          
-          
-          
-          
           <u>
           <b>
           "
           . $row['crname'] .
-          
           
           "</b></u>
           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -839,14 +711,6 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </u>
-          
-          
-          
-          
-          
-          
-          
-          
           <br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -872,14 +736,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp; &nbsp; 
           <i>Date</i>
           </td>";
-
-          
-
-
-
-
-
-          
+   
           echo "</tr>";
         }
       } else {
@@ -889,15 +746,10 @@ while ($Row = mysqli_fetch_assoc($result)) {
     ?>
   </tbody>
 </table>
-
-
-      
+  
 <script>
   var wrappers = document.querySelectorAll('.wrapper');
   wrappers[wrappers.length - 1].classList.add('last-page');
 </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

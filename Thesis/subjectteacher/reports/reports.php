@@ -11,6 +11,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+    <script src="path/jquery-3.6.4.min.js"></script>
+<script src="path/bootstrap.js"></script>
 
 
   <style>
@@ -400,6 +402,22 @@ function myFunction() {
 </div>
 
 
+<!-- 1st Quarter -->
+<div class="modal fade" id="subject1quarter1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Print Masterlist</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="sub1p1.php" width="100%" height="500"></iframe>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 
 <!-- Modal -->
@@ -417,14 +435,14 @@ function myFunction() {
 
         <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal" data-bs-dismiss="modal">
-    Open Subject 1 Modal
+   Masterlist
   </button>
 </li>
 
 
 
 <li>
-  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.open('sub1p1.php', '_blank');">
+  <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1quarter1Modal" data-bs-dismiss="modal">
     1st Quarter Grades
   </button>
 </li>
@@ -833,7 +851,5 @@ window.addEventListener("load", function () {
 
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
