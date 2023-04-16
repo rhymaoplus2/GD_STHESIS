@@ -23,211 +23,267 @@
 
 
   <style>
-    .no {border:0;outline:0;}
-
-
-
-.container {
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-  margin-top: -10rem;
-  width:1000px;
-
+     /* Reset styles */
+.no {
+  border: 0;
+  outline: 0;
 }
 
+/* Input styles */
+input {
+  border: none;
+  width: 100%;
+}
+
+input:active {
+  border: none;
+}
+
+/* Link styles */
+a {
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+a img {
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover img {
+  transform: scale(1.2); /* Increase the image size by 20% on hover */
+}
+
+/* Body styles */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Scrollbar styles */
+.b::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.b::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.b::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+.b::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+/* Animation styles */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Container styles */
 .container form {
-	width:600px;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: white ;
-  
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  margin: 0 auto;
 }
+
 .box {
-	width: 750px;
+  width: 90%;
+  max-width: 800px;
 }
+
 .container table {
-	padding: 20px;
-	border-radius: 10px;
+  width: 90%;
+  max-width: 1000px;
+  padding: 20px;
+  border-radius: 10px;
   background-color: white;
   border: 10px;
-  width:600px;
-
 }
+
 .border {
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 90%;
+  max-width: 600px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
-
+  border: 10px;
 }
 
-
+/* Link position styles */
 .link-right {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
-
 
 .link-center {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
-
-
-
-
-
-.thead
-{
-font-size: 10px;;
-
+/* Page content styles */
+.nav-item {
+  color: black;
 }
 
-
-
-
-
-
-
-
-
-  .nav-item
-  {
-  
-      color:black;
-  
-  }
-  .subjectlist{
-  
-      margin-left: 5rem;
-      margin-top: 5rem;
-  }
-  
-  .studentlist{
-  
-  margin-left: 20rem;
+.subjectlist {
+  margin-left: 5%;
   margin-top: 5rem;
-  }
-  
-  
-  .button{
-  
-      margin-left: 5rem;
-      margin-top: 11rem;
-  }
-  
-  
-  .button1{
-  
-  margin-left: 5rem;
+}
+
+.studentlist {
+  margin-left: 20%;
+  margin-top: 5rem;
+}
+
+.button {
+  margin-left: 5%;
+  margin-top: 11rem;
+}
+
+.button1 {
+  margin-left: 5%;
   margin-top: 9.5rem;
-  }
-  
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
-  }
-  .text1
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
-  
-  .text2
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
+}
 
+.title {
+margin-left: 40%;
+margin-top: 1rem;
+font-size: 3.5rem;
+}
 
+.text1 {
+margin-left: 23%;
+margin-top: -20rem;
+width: 45rem;
+height: 10rem;
+}
 
+.text2 {
+margin-left: 23%;
+margin-top: -20rem;
+width: 45rem;
+height: 10rem;
+}
+
+.red-text {
+color: red;
+}
+
+.cell-border {
+border: 1px solid black;
+}
+
+td.disabled {
+pointer-events: none;
+color: black; /* Change color to something other than red */
+}
 
 .top-container {
-    background-color: #f1f1f1;
-    padding: 30px;
-    text-align: center;
-  }
-  
-  .header {
-   
-    background-color: white;
-    color: #f1f1f1;
-  }
-  
-  .content {
-    padding: 16px;
-  }
-  
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  
-  .sticky + .content {
-    padding-top: 102px;
-  }
-  #myVideo {
+background-color: white;
+padding: 30px;
+text-align: center;
+}
 
-width: 100vw;
-height: 100vh;
-object-fit: cover;
+.header {
+background-color: white;
+color: #f1f1f1;
+}
+
+.content {
+padding: 16px;
+}
+
+.sticky {
 position: fixed;
-left: 0;
-right: 0;
 top: 0;
-bottom: 0;
-z-index: -1;
-  }
-
-  select option {
-  font-weight: bold;
+width: 100%;
 }
 
-select option:checked {
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
+.text-center {
+text-align: center;
+/* default border color */
 }
 
-select option[value="0"] {
-  font-weight: bold;
+.failed {
+color: red;
 }
 
-
-/* Make the selected text bold */
-select option::selection,
-select option::-moz-selection,
-select option::-webkit-selection {
-  font-weight: bold;
-}
-td.text-bold {
-  font-weight: bold;
-}
-.blue-border {
-  border-color: blue;
-  border-width: 3px;
+.failed + .text-center {
+border-color: black; /* override border color for cells with red text */
 }
 
-.red-border {
-  border-color: red;
-  border-width: 3px;
+.sticky + .content {
+padding-top: 102px;
 }
-.form-select-sm {
-    height: 30px;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-  }
+
+.addbutton {
+margin-left: 80%;
+}
+
+.btn-primary {
+background-color: #007bff;
+border-color: #007bff;
+}
+
+.btn-primary:hover {
+background-color: #0062cc;
+border-color: #005cbf;
+}
+
+#rotate-btn:hover img {
+transform: scale(1.2);
+transition: all 0.2s ease-in-out;
+}
+
+.btn-transparent:active {
+outline: none;
+border: none;
+}
+
+.btn-transparent:focus,
+.btn-transparent:hover {
+box-shadow: none;
+border: none;
+}
+
+#rotate-btn {
+transition: transform 0.5s;
+}
+
+#rotate-btn.clicked {
+transform: rotate(360deg);
+}
+
     </style>
 </head>
 <body>
@@ -239,26 +295,6 @@ td.text-bold {
 
 
 
-
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/records.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 
 
 
@@ -291,10 +327,36 @@ function myFunction() {
   include "./php/db_conn.php";
   ?>
   
+  <?php if (isset($_GET['error'])) { ?>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#errorModal">
+    Launch demo modal
+  </button>
 
-  <div class="alert alert-danger" role="alert">
-  <?php echo $_GET['error']; ?>
-</div>
+  <!-- Modal -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Already Submitted</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger" role="alert">
+            <?php echo $_GET['error'];} ?>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+  </div>
+
+  <!-- Trigger the modal popup onload -->
+  <script>
+    window.onload = function() {
+      $('#errorModal').modal('show');
+    };
+  </script>
 <?php } ?>
 
 
@@ -313,21 +375,13 @@ function myFunction() {
               $i++;
 
               ?> 
-           
+           <div class="fade-in">
            <div class="content">
 
 
-     <div class="container" >
 
  
-               
-   <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+            
 
       <div class="border">
         <!--
@@ -354,16 +408,17 @@ function myFunction() {
 ?>
 -->
    
-   <table class="table table-bordered" id="grades-table">
+ 
 
-   <div class="text-center bg-danger text-white rounded-pill mb-3">
-   ADDING GRADES FOR SUBJECT :  <b> <?=$_SESSION['sub1']?></b>
+   <div class="banner text-center text-white rounded-pill mb-3" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+   <b> ADDING GRADES FOR SUBJECT :  <?=$_SESSION['sub1']?></b>
 </div>
 
                    <?php }
                    ?>   
-
-<div class="form-floating mb-3">
+  <div class="row">
+<div class="col-md-15 text-center">
+<label for="section-filter mb-3"><small><b>Filter by Section</b></small></label>
   <select class="form-select form-select-sm" id="section-filter" onchange="filterTable()">
     <option value="">All Sections</option>
     <?php
@@ -374,9 +429,10 @@ function myFunction() {
     }
     ?>
   </select>
-  <label for="section-filter"><small>Filter by Section</small></label>
+
 </div>
-<hr>
+
+<br>
 
 <script>
 function filterTable() {
@@ -436,7 +492,11 @@ function filterTable() {
     </select>
   </div>
 </div>
-<br>
+</div>
+
+<hr>
+<div class="b" style="height: 250px; overflow-y: scroll; padding-right: 10px;" id="scroll">
+<table class="table table-bordered" id="grades-table">
               <thead >
                   <tr>
                   
@@ -502,8 +562,9 @@ function filterTable() {
    
                
 <td   colspan="">
-<input class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
+<input hidden class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
 </input>
+<?= $Row['fullname'] ?>
 </td>
                
 <td  hidden colspan="">
@@ -551,11 +612,10 @@ function filterTable() {
              </input>
         
         </td>
-          
         <td>
       <select id="grade-<?php echo $i; ?>" name="grade[]" class="form-control text-center grade-select">
-        <option value="0" class="">ADD GRADE</option>
-        <option value="1" class="text-danger"><b>INC</b></option>
+        <option value="0" class="">0</option>
+     
         <?php for ($j = 50; $j <= 100; $j++) { ?>
           <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
         <?php } ?>
@@ -602,17 +662,22 @@ function filterTable() {
          </tbody>
          
       </table>
-      <button type="submit"
-        class="btn btn-primary"
-        name="submit" id="submit"><b>ADD<b></button>
-      
-          <a class="link-primary" href="subject1view.php" display-40>
-          <button type="button" class="btn btn-dark">
+      </div>
+      <button type="submit" class="btn btn-primary" 
+name="submit" id="submit" style="background-color: transparent; 
+border: none; border-radius:100%; width:50px; height: 50px;">
+<img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
 
-      <b>CANCEL</b>
+ 
 
-          </button>
-          </a>
+          <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
+          onclick="location.href='subject1view.php'">
+<img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
+
+
+
           
           </div>
           <br>

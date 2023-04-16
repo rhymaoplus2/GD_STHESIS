@@ -219,7 +219,7 @@ z-index: -1;
   }
 
 .carousel-item {
-  transition-duration: 0.5s;
+  transition-duration: 0.5s;  
 }
 
 #carouselExampleIndicators {

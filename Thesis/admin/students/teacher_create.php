@@ -7,22 +7,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Update</title>
+	<title>ADD NEW STUDENT</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <style>
 
 
+
 html, body {
   height: 100%;
 }
 
-
 body {
   background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
   background-repeat: no-repeat;
+  background-size: cover;
 }
+
 
 
 .container {
@@ -34,7 +36,6 @@ body {
 }
 
 .container form {
-	width: 600px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -47,7 +48,7 @@ body {
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: white;
+  background-color:white;
 }
 
 .link-right {
@@ -173,7 +174,6 @@ top: 0;
 bottom: 0;
 z-index: -1;
   }
-
   .skrol {
   height: 300px;
   overflow-y: auto;
@@ -207,11 +207,13 @@ z-index: -1;
   background-color: #888;
   border-radius: 5px;
 }
+
 .btn-primary:hover img,
 .btn-danger:hover img {
     transform: scale(1.2);
     transition: transform 0.5s ease;
 }
+
 
 .fade-in {
   animation: fadeIn 1s ease-in-out;
@@ -237,35 +239,23 @@ z-index: -1;
 
 
 
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/students.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 
 
+<!--  CRUD AREA -->
 <br>
 <div class="fade-in">
-<div class="container mb-3">
-  
-    <form action="./php/create.php" method="post" >
-   
-    <div class="text-center text-white p-2 mb-4" style="font-size:24px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-radius: 10px;">
-  <label class="mb-0"><?php echo isset($_GET['error']) ? 'RETRY' : 'ADD NEW STUDENT'; ?></label>
+
+<div class="container">
+
+<form action="./php/create.php"
+      method="post">
+
+<div class="text-center text-white p-2 mb-4" style="font-size:24px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-radius: 10px;">
+    <label class="mb-0">
+  <?php echo isset($_GET['error']) ? 'RETRY' : 'ADD NEW STUDENT ' ?>
+</label>
+
+
 </div>
 
 
@@ -298,15 +288,47 @@ function myFunction() {
   </script>
 <?php } ?>
 
-
+<div class="   text-center">
+  <label for="subjectteacher1" class="form-label text-dark mb-3"><i><b>Personal Details</b></i></label>
+</div>
 <hr>
+<div class="skrol"style="height: 100px; overflow-y: auto;">
+<div class="form-group text-center">
 
-<div class="skrol"style="height: 150px; overflow-y: auto;">
-  <label for="" class="form-label warning"><b>ID no.</b></label>
+
+
+  <label for="" class="form-label warning ">I  D no.</label>
   <input type="text" class="form-control mb-3" id="idnumber" placeholder="ex: 12913937" name="idnumber">
+</div>
 
-<div class="form-group mb-3">
-    <label for="" class="form-label warning" ><b>LRN no.</b></label>
+<div class="form-group text-center">
+  <label for="" class="form-label warning">Re-Enter ID no.</label>
+  <input type="text" class="form-control" id="id" placeholder="ex: 12913937" name="id">
+  <div class="invalid-feedback">Please input the same value.</div>
+</div>
+
+
+<script>
+  const idNumberInput = document.querySelector('#idnumber');
+const idInput = document.querySelector('#id');
+const invalidFeedback = document.querySelector('.invalid-feedback');
+
+function checkIdNumber() {
+  if (idNumberInput.value !== idInput.value) {
+    invalidFeedback.style.display = 'block';
+  } else {
+    invalidFeedback.style.display = 'none';
+  }
+}
+
+idNumberInput.addEventListener('input', checkIdNumber);
+idInput.addEventListener('input', checkIdNumber);
+
+</script>
+<br>
+
+<div class="form-group text-center">
+    <label for="" class="form-label warning" >LRN no.</label>
     <input 
     type="text" 
     class="form-control" 
@@ -317,15 +339,15 @@ function myFunction() {
 
 
 
-
-  <div class="mb-3">
-  <label for="adviser_id" class="form-label warning"><b>ADVISER</b></label>
+  <br>
+  <div class="mb-3 text-center">
+  <label for="adviser_id" class="form-label warning">ADVISER</label>
   <select class="form-select" id="adviser_id" name="adviser_id">
     <?php
       // Replace "your_database_name" and "your_table_name" with your actual database and table names
       require "./php/db_conn.php";
 
-      $result = mysqli_query($conn, "SELECT name FROM users WHERE role='adviser' OR role2='adviser'");
+      $result = mysqli_query($conn, "SELECT name FROM users WHERE (role='adviser' OR role2='adviser') AND status = 1");
       while ($row = mysqli_fetch_assoc($result)) {
         echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
       }
@@ -338,8 +360,8 @@ function myFunction() {
 
 
 
-<div class="form-group">
-  <label for="exampleInputEmail1" class="form-label"><b>First Name</b></label>
+<div class="form-group text-center">
+  <label for="exampleInputEmail1" class="form-label">First Name</label>
   <input 
     type="text" 
     class="form-control" 
@@ -351,8 +373,8 @@ function myFunction() {
 </div>
 <br>
 
-<div class="mb-3">
-  <label for="exampleInputEmail1" class="form-label"><b>Middle Name</b></label>
+<div class="mb-3 text-center">
+  <label for="exampleInputEmail1" class="form-label">Middle Name</label>
   <input 
     type="middlename" 
     class="form-control" 
@@ -363,8 +385,8 @@ function myFunction() {
   >
 </div>
 
-<div class="mb-3">
-  <label for="exampleInputEmail1" class="form-label"><b>Last Name</b></label>
+<div class="mb-3 text-center">
+  <label for="exampleInputEmail1" class="form-label">Last Name</label>
   <input 
     type="lastname" 
     class="form-control" 
@@ -375,8 +397,8 @@ function myFunction() {
   >
 </div>
 
-<div class="mb-3">
-  <label for="exampleInputEmail1" class="form-label"><b>Full Name<b></label>
+<div class="mb-3 text-center">
+  <label for="exampleInputEmail1" class="form-label">Full Name</label>
   <input 
     type="fullname" 
     class="form-control" 
@@ -385,7 +407,7 @@ function myFunction() {
     name="fullname"
     oninput="checkFullName()"
   >
-  <small id="name-comment" class="text-danger d-none">Please input the same Name</small>
+  <small id="name-comment" class="text-danger d-none">Please input the same value</small>
 </div>
 
 <script>
@@ -410,8 +432,8 @@ function myFunction() {
 
 
 
-  <div class="from-group mb-3">
-                                <label class=" mb-3"for=""><b>Suffix</b></label>
+  <div class="from-group mb-3 text-center">
+                                <label for="">Suffix</label>
                                 <select name="suffix" id="suffix" class="form-control">
                                     <option value=" "><b>None</b></option>
                                     <option value="Jr."><b>Jr.</b></option>
@@ -422,7 +444,7 @@ function myFunction() {
 
 
                        <div class="from-group mb-3">
-                                <label class=" mb-3" for=""><b>Gender</b></label>
+                                <label for="">Gender</label>
                                 <select name="gender" id="gender" class="form-control">
                                     <option value="Male"><b>Male</b></option>
                                     <option value="Female"><b>Female</b></option>
@@ -431,8 +453,8 @@ function myFunction() {
 
 
 
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label"><b>Birth Place </b></label>
+  <div class="mb-3 text-center">
+    <label for="exampleInputEmail1" class="form-label">Birth Place </label>
     <input 
     type="text" 
     class="form-control" 
@@ -442,8 +464,8 @@ function myFunction() {
 
   </div>
   
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label"><b>Birth Date</b></label>
+  <div class="mb-3 text-center">
+    <label for="exampleInputEmail1" class="form-label">Birth Date</label>
     <input 
     type="date" 
     class="form-control" 
@@ -453,7 +475,7 @@ function myFunction() {
 
   </div>
 
-  <div class="mb-3">
+  <div class="mb-3 text-center">
     <label for="exampleInputEmail1" class="form-label">Age</label>
     <input 
     type="age" 
@@ -465,7 +487,7 @@ function myFunction() {
   </div>
 
 
-  <div class="mb-3">
+  <div class="mb-3 text-center">
     <label for="exampleInputEmail1" class="form-label">Address</label>
     <input 
     type="address" 
@@ -478,7 +500,7 @@ function myFunction() {
 
 
   
-  <div class="mb-3">
+  <div class="mb-3 text-center">
     <label for="exampleInputEmail1" class="form-label">Parent/Guardian</label>
     <input 
     type="parent" 
@@ -490,7 +512,7 @@ function myFunction() {
   </div>
  
 
-  <div class="mb-3">
+  <div class="mb-3 text-center">
     <label for="exampleInputEmail1" class="form-label">School Year</label>
     <input 
     type="" 
@@ -502,7 +524,7 @@ function myFunction() {
 
 
 
-  <div class="from-group mb-3">
+  <div class="from-group mb-3 text-center">
                                 <label class="mb-2" for="">Year Level</label>
                                 
                                 <select name="grade" id="grade" class="form-control">
@@ -517,7 +539,7 @@ function myFunction() {
 
 
 
-  <div class="mb-3">
+  <div class="mb-3 text-center">
     <label for="exampleInputEmail1" class="form-label">Section Name</label>
     <input 
     type="" 
@@ -526,67 +548,11 @@ function myFunction() {
     placeholder="ex: Lilac"
     name="section">
   </div>
+<hr>
 
-  <script>
-  // Get the input elements
-  const idnumberInput = document.getElementById("idnumber");
-  const lrnnumberInput = document.getElementById("lrnnumber");
-  const adviserIdInput = document.getElementById("adviser_id");
-  const firstnameInput = document.getElementById("firstname");
-  const middlenameInput = document.getElementById("middlename");
-  const lastnameInput = document.getElementById("lastname");
-  const suffixInput = document.getElementById("suffix");
-  const genderInput = document.getElementById("gender");
-  const birthplaceInput = document.getElementById("birthplace");
-  const birthdayInput = document.getElementById("birthday");
-
-  // Load the saved values from Local Storage if they exist
-  idnumberInput.value = localStorage.getItem("idnumber") || "";
-  lrnnumberInput.value = localStorage.getItem("lrnnumber") || "";
-  adviserIdInput.value = localStorage.getItem("adviser_id") || "";
-  firstnameInput.value = localStorage.getItem("firstname") || "";
-  middlenameInput.value = localStorage.getItem("middlename") || "";
-  lastnameInput.value = localStorage.getItem("lastname") || "";
-  suffixInput.value = localStorage.getItem("suffix") || "";
-  genderInput.value = localStorage.getItem("gender") || "";
-  birthplaceInput.value = localStorage.getItem("birthplace") || "";
-  birthdayInput.value = localStorage.getItem("birthday") || "";
-
-  // Save the input values to Local Storage when they change
-  idnumberInput.addEventListener("input", () => {
-    localStorage.setItem("idnumber", idnumberInput.value);
-  });
-  lrnnumberInput.addEventListener("input", () => {
-    localStorage.setItem("lrnnumber", lrnnumberInput.value);
-  });
-  adviserIdInput.addEventListener("change", () => {
-    localStorage.setItem("adviser_id", adviserIdInput.value);
-  });
-  firstnameInput.addEventListener("input", () => {
-    localStorage.setItem("firstname", firstnameInput.value);
-  });
-  middlenameInput.addEventListener("input", () => {
-    localStorage.setItem("middlename", middlenameInput.value);
-  });
-  lastnameInput.addEventListener("input", () => {
-    localStorage.setItem("lastname", lastnameInput.value);
-  });
-  suffixInput.addEventListener("change", () => {
-    localStorage.setItem("suffix", suffixInput.value);
-  });
-  genderInput.addEventListener("change", () => {
-    localStorage.setItem("gender", genderInput.value);
-  });
-  birthplaceInput.addEventListener("input", () => {
-    localStorage.setItem("birthplace", birthplaceInput.value);
-  });
-  birthdayInput.addEventListener("input", () => {
-    localStorage.setItem("birthday", birthdayInput.value);
-  });
-</script>
-
-<!--  
-  <div class="mb-3 text-center">
+</div>
+  <div hidden  class="mb-3 text-center">
+  <div class="mb-3 text-center ">
   <label for="subjectteacher1" class="form-label text-danger mb-3"><b>Subject Teachers</b></label>
 </div>
 
@@ -720,163 +686,387 @@ function myFunction() {
   <br>
 
 
-      
-    -->
+  <select class="form-control" id="subjectteacher10" name="subjectteacher10">
+  <option value="">Select Subject Teacher</option>
+    <?php
+      // Assuming you have a database connection
+      require "./php/db_conn.php";
+      $result = mysqli_query($conn, "SELECT name FROM users WHERE role = 'subject teacher' OR role2 = 'subject teacher'");
+      while ($row = mysqli_fetch_array($result)) {
+        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+      }
+    ?>
+  </select>
+
+  <br>
     </div>
-    <hr>
-    <div class="mb-2 text-center">
-  <label for="subjectteacher1" class="form-label text-dark mb-3"><i>Subjects</i></label>
-</div>
 <hr>
-    <div class="skrol"style="height: 100px; overflow-y: auto;">
 
+<div class="text-center">
+<label for="subjectteacher1" class="form-label text-dark mb-3"><i><b>Subjects</b></i></label>
 
-  <select class="form-control" id="subject1" name="subject1">
-  <option value="">Select Subject</option>
+</div>
+<div class="skrol"style="height: 100px; overflow-y: auto;">
+
+ 
+
+<select name="subject1" id="subject1" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if sub5 has no value
+    if(empty($row['subject1'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject1'].'" selected>'.$row['subject1'].'</option>';
+    }
     ?>
-  </select>
-<br>
-  <select class="form-control" id="subject2" name="subject2">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject1']) && $row['subject1']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+
+<select name="subject2" id="subject2" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if sub5 has no value
+    if(empty($row['subject2'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject2'].'" selected>'.$row['subject2'].'</option>';
+    }
     ?>
-  </select>
-
-  <br>
-  <select class="form-control" id="subject3" name="subject3">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject2']) && $row['subject2']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject3" id="subject3" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject3 has no value
+    if(empty($row['subject3'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject3'].'" selected>'.$row['subject3'].'</option>';
+    }
     ?>
-  </select>
-
-  <br>
-  <select class="form-control" id="subject4" name="subject4">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject3']) && $row['subject3']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject4" id="subject4" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject4 has no value
+    if(empty($row['subject4'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject4'].'" selected>'.$row['subject4'].'</option>';
+    }
     ?>
-  </select>
-
-  <br>
-  <select class="form-control" id="subject5" name="subject5">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject4']) && $row['subject4']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject5" id="subject5" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject5 has no value
+    if(empty($row['subject5'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject5'].'" selected>'.$row['subject5'].'</option>';
+    }
     ?>
-  </select>
-
-  <br>
-  <select class="form-control" id="subject6" name="subject6">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject5']) && $row['subject5']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject6" id="subject6" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject6 has no value
+    if(empty($row['subject6'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject6'].'" selected>'.$row['subject6'].'</option>';
+    }
     ?>
-  </select>
-
-
-  <br>
-  <select class="form-control" id="subject7" name="subject7">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject6']) && $row['subject6']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject7" id="subject7" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject7 has no value
+    if(empty($row['subject7'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject7'].'" selected>'.$row['subject7'].'</option>';
+    }
     ?>
-  </select>
-
-  <br>
-  <select class="form-control" id="subject8" name="subject8">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject7']) && $row['subject7']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject8" id="subject8" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject8 has no value
+    if(empty($row['subject8'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject8'].'" selected>'.$row['subject8'].'</option>';
+    }
     ?>
-  </select>
-
-
-  <br>
-  <select class="form-control" id="subject9" name="subject9">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject8']) && $row['subject8']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject9" id="subject9" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject9 has no value
+    if(empty($row['subject9'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject9'].'" selected>'.$row['subject9'].'</option>';
+    }
     ?>
-  </select>
-
-
-  <br>
-  <select class="form-control" id="subject10" name="subject10">  <option value="">Select Subject</option>
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject9']) && $row['subject9']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
+<select name="subject10" id="subject10" class="form-control text-center mb-3">
     <?php
-      // Assuming you have a database connection
-      $result = mysqli_query($conn, "SELECT subjectname FROM subjects");
-      while ($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
-      }
+    // Add blank option if subject10 has no value
+    if(empty($row['subject10'])){
+        echo '<option value="" selected></option>';
+    }else{
+        echo '<option value="'.$row['subject10'].'" selected>'.$row['subject10'].'</option>';
+    }
     ?>
-  </select>
-  <script>
-  // Get all select elements
-  const selectElements = document.querySelectorAll('select.form-control');
+    <option value=""></option>
+    <?php 
+    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $result = $conn->query($query);
+    if($result->num_rows> 0){
+        while($optionData=$result->fetch_assoc()){
+            $option =$optionData['subjectname'];
+            ?>
+            <?php
+            //selected option
+            if(!empty($row['subject10']) && $row['subject10']== $option){
+                // selected option
+                ?>
+                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
+                <?php 
+                continue;
+            }?>
+            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
+            <?php
+        }
+    }
+    ?>
+</select>
 
-  // Restore selected options from local storage on page load
-  window.addEventListener('load', () => {
-    selectElements.forEach(select => {
-      const selectedOption = localStorage.getItem(select.id);
-      if (selectedOption) {
-        select.value = selectedOption;
-      }
-    });
+
+<script>
+  // Get all select elements with class "form-control"
+const selectElements = document.querySelectorAll('.form-control');
+
+// Loop through each select element and add an event listener for when the value changes
+selectElements.forEach(select => {
+  select.addEventListener('change', () => {
+    // Store the selected value in local storage using the select element's id as the key
+    localStorage.setItem(select.id, select.value);
   });
 
-  // Save selected option to local storage on change
-  selectElements.forEach(select => {
-    select.addEventListener('change', () => {
-      localStorage.setItem(select.id, select.value);
-    });
-  });
+  // Retrieve the previously selected value from local storage and set it as the selected value
+  const selectedValue = localStorage.getItem(select.id);
+  if (selectedValue) {
+    select.value = selectedValue;
+  }
+});
+
 </script>
 
 
+
+
+
+
+
+
+
+
+
 </div>
+<span style="font-size:10.5px;"> "To ensure successful submission, take a moment to verify the accuracy of the details you've provided." </span>
 
-
-
-<hr>
-
-
-
-
-
-
-
+<br>
 
 <button type="submit" class="btn btn-primary" 
 name="create" style="background-color: transparent; 
@@ -892,6 +1082,20 @@ border: none; border-radius:100%; width:50px; height: 50px;">
 </button>
 
 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+ 
+
 </form>
 </div>
 
@@ -900,7 +1104,7 @@ border: none; border-radius:100%; width:50px; height: 50px;">
 </div>
 
 
-</div>
+
 <script>
 window.onscroll = function() {myFunction()};
 

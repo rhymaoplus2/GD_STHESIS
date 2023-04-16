@@ -282,15 +282,30 @@ td a:hover {
 
 
 <div class="container" >
+<?php if (isset($_GET['success'])) { ?>
+  <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-white"  style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+          <h5 class="modal-title" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><?php echo $_GET['success']; ?></p>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  <script>
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'), {
+      keyboard: false
+    });
+    successModal.show();
+  </script>
+<?php } ?>
 
- 
 
-       <?php if (isset($_GET['success'])) { ?>
-           <div class="alert alert-success" role="alert">
-			  <?php echo $_GET['success']; ?>
-		    </div>
-		    <?php } ?>
-			<?php if (mysqli_num_rows($result)) { ?>
         
         <div class="border">
       
@@ -626,7 +641,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 
 
       }
-    }
 
 
 

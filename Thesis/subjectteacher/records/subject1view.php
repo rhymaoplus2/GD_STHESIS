@@ -85,8 +85,7 @@ body {
 }
 
 .container form {
-	width: 800px;
-	padding: 20px;
+		padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
@@ -94,6 +93,7 @@ body {
 }
 .box {
 	width: 100%;
+  
 }
 .container table {
 	padding: 20px;
@@ -167,12 +167,7 @@ body {
   margin-left: 5rem;
   margin-top: 9.5rem;
   }
-  
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
-  }
+
   .text1
   {
       margin-left: 23rem;
@@ -300,6 +295,17 @@ input::placeholder {
 }
 .bold {
   font-weight: bold;
+}
+
+.tooltip .tooltip-inner,
+.tooltip.tooltip-black .tooltip-inner {
+  background-color: #000;
+  color: #fff;
+}
+
+.tooltip .tooltip-arrow,
+.tooltip.tooltip-black .tooltip-arrow {
+  border-bottom-color: #000;
 }
 
 
@@ -448,16 +454,38 @@ function myFunction() {
 <p class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" id="input-text" style="font-size: 30px; width:100px;"></p>
 <hr>  
 <div class="row">
-  <div class="col-md-1 mb-3">
-    <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Grades">
-      <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
-    </a>
-  </div>
-  <div class="col-md-1 mb-3">
-    <a class="link-primary me-2"  data-bs-toggle="modal" data-bs-target="#exampleModal" title="Print">
-      <img src="img/print.png" alt="Description of image" style="width: 35px;" class="img-fluid">
-    </a>
-  </div>
+<div class="col-md-1 mb-3">
+  <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
+    <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
+  </a>
+</div>
+
+<!--
+<div class="col-md-1 mb-3">
+  <a class="link-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-class="tooltip" title="Print">
+    <img src="img/print.png" alt="Description of image" style="width: 35px;" class="img-fluid">
+  </a>
+</div>
+  -->
+
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+  keyboard: false
+})
+
+</script>
+  <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+</script>
   <div class="col-md-10 mb-3">
     <input type="text" class="form-control" id="search-input" placeholder="Search" oninput="filterTable()">
   </div>
@@ -513,9 +541,10 @@ function myFunction() {
 </div>
 
   </div>
+
   <div class="text-center">
   <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
-  <img src="img/eye.png" alt="Image" title="Add New Student" width="30" height="auto">
+  <img src="img/eye.png" alt="Image" title="Show" width="30" height="auto">
   <b></b>
 </button>
 
