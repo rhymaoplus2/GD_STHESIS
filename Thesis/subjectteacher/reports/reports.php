@@ -329,8 +329,6 @@ function myFunction() {
 <!-- TITLE HERE    -->
 
 
-
-
 <br>
 <div class="container">
   <div class="row">
@@ -344,7 +342,7 @@ function myFunction() {
 </div>
 -->
 <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;">Students Reports</b>
+  <b class="fs-2" style="white-space: nowrap;">Printable Data</b>
   
 </div>
 <hr>
@@ -384,18 +382,46 @@ function myFunction() {
   </a>
 </td>
 
+<!--Pages Modals-->
+
+<div class="modal fade" id="subject1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Print Masterlist</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="sub1m.php" width="100%" height="500"></iframe>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Select What to Print</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Printable Data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
         <!-- Add buttons for selecting different options -->
         <ul>
-  <li><button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal">Masterlist</button></li>
+
+
+        <li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal" data-bs-dismiss="modal">
+    Open Subject 1 Modal
+  </button>
+</li>
+
+
 
 <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.open('sub1p1.php', '_blank');">
