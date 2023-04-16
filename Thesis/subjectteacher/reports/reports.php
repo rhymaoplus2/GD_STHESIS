@@ -273,6 +273,17 @@ z-index: -1;
     opacity: 1;
     transform: translateY(0);
   }
+  .btn {
+  background-color: transparent !important;
+  color: black;
+  border:1px;
+}
+.btn:hover {
+  background-color: transparent !important;
+  color: black;
+  border: 1px solid black;
+}
+
     </style>
 </head>
 <body>
@@ -333,7 +344,7 @@ function myFunction() {
 </div>
 -->
 <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;">Students Records Management Page </b>
+  <b class="fs-2" style="white-space: nowrap;">Students Reports</b>
   
 </div>
 <hr>
@@ -342,13 +353,13 @@ function myFunction() {
   <div style="flex: 1;">
 
   
-    <img src="img/pik.gif" alt="Description of the image" style="max-width: 260%;">
+    <img src="img/typing.gif" alt="Description of the image" style="max-width: 260%;">
   </div>
   <div style="flex: 3;">
     <table class="table table-bordered table-sm rounded-4" style="border-radius: 10px;">
       <thead class="text-center text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
         <tr>
-          <th scope="col">My Handled Subjects</th>
+          <th scope="col">Select One Subject</th>
         </tr>
       </thead>
       <tbody>
@@ -367,11 +378,66 @@ function myFunction() {
                   <td class="text-center"><b>-</b></td>
                   <td hidden class="text-center"></td>
                 <?php } else { ?>
-                  <td class="text-center">
-                    <a href="subject1view.php" class=" text-dark" style="background-color: white; border: none;">
-                      <b><?php echo $Row["sub1"]; ?></b>
-                    </a>
-                  </td>
+                  <td class="text-center" onclick="showModal()">
+  <a class="text-dark" style="background-color: white; border: none;">
+    <b><?php echo $Row["sub1"]; ?></b>
+  </a>
+</td>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Select What to Print</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <!-- Add buttons for selecting different options -->
+        <ul>
+  <li><button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal">Masterlist</button></li>
+
+<li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.open('sub1p1.php', '_blank');">
+    1st Quarter Grades
+  </button>
+</li>
+
+<li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p2.php'">
+    2nd Quarter Grades
+  </button>
+</li>
+<li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p3.php'">
+    Third Quarter Grades
+  </button>
+</li>
+
+<li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p4.php'">
+    Fourth Quarter Grades
+  </button>
+</li>
+
+<li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1m.php'">
+    Consolidated Grades
+  </button>
+</li>
+
+</ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showModal() {
+    $('#exampleModal').modal('show');
+  }
+</script>
+
                 <?php } ?>
               </tr>
         <?php
@@ -720,10 +786,9 @@ if (mysqli_num_rows($result) > 0) {
   <div>
   <span class="text-white" style=" text-align: justify;">
     <h6>
-      Grades are an important aspect of the educational process that allow teachers to evaluate and communicate their students' academic performance. They provide a means for teachers to track students' progress throughout the school year and identify areas in which they may need additional support. By setting clear expectations and providing feedback on performance, grades help students understand where they stand academically and what they need to do to improve. In addition, grades enable teachers to communicate with parents and guardians about their child's progress and identify areas for collaboration. Overall, grades play a critical role in helping students achieve academic success and helping teachers support their students effectively.    
-    </h6>
+    "This page allows you to print data such as your students' grades and the master list of students in the subjects you handle.
+Whether you need to print a list of students enrolled in a particular subject or print out individual grade reports, this page provides a convenient and efficient way to manage your classroom data. By utilizing this tool, you can streamline your administrative tasks and focus more on providing quality education to your students.Moreover, this page ensures the security and privacy of your data by implementing strict measures to protect it from unauthorized access. You can trust that your students' information will be kept confidential and will only be accessed by authorized personnel. Additionally, this page is user-friendly and easy to navigate, making it accessible to all users, even those who are not tech-savvy. With just a few clicks, you can have the data you need printed out and ready to use, saving you time and effort in managing your classroom."  </h6>
   </span>
- 
 
 </div>
 

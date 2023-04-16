@@ -9,10 +9,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="../home.php" >Home</a>
       </li>
-    
-      <li class="nav-item"><a class="nav-link  " href="students/teacher_read.php">Master List</a></li>
- 
-       
+
       <li class="nav-item">
         <a class="nav-link " href="../records/records.php">Records</a>
       </li>
