@@ -30,7 +30,7 @@ body {
 
 
 .fade-in {
-  animation: fadeIn 2s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -41,7 +41,80 @@ body {
     opacity: 1;
   }
 }
+.fade-in1 {
+  animation: fadeIn 0.5s ease-in-out;
+}
 
+@keyframes fadeIn1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in2 {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-in3 {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in4 {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn4 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-in5 {
+  animation: fadeIn 2.5s ease-in-out;
+}
+
+@keyframes fadeIn5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-in6 {
+  animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn6 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .container {
 
@@ -389,8 +462,8 @@ function myFunction() {
 <div class="modal fade" id="subject1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Print Masterlist</h5>
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Masterlist: Printable Data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -406,8 +479,8 @@ function myFunction() {
 <div class="modal fade" id="subject1quarter1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Print Masterlist</h5>
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 1: Printable Data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -432,43 +505,53 @@ function myFunction() {
         <!-- Add buttons for selecting different options -->
         <ul>
 
-
+        <div class="fade-in1">
         <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal" data-bs-dismiss="modal">
    Masterlist
   </button>
 </li>
+</div>
 
-
-
+<div class="fade-in2">
 <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1quarter1Modal" data-bs-dismiss="modal">
     1st Quarter Grades
   </button>
 </li>
+</div>
 
+<div class="fade-in3">
 <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p2.php'">
     2nd Quarter Grades
   </button>
 </li>
+</div>
+
+<div class="fade-in4">
 <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p3.php'">
     Third Quarter Grades
   </button>
 </li>
+</div>
 
+<div class="fade-in5">
 <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p4.php'">
     Fourth Quarter Grades
   </button>
 </li>
+</div>
 
+<div class="fade-in6">
 <li>
   <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1m.php'">
     Consolidated Grades
   </button>
 </li>
+</div>
 
 </ul>
       </div>
@@ -832,7 +915,7 @@ if (mysqli_num_rows($result) > 0) {
     <h6>
     "This page allows you to print data such as your students' grades and the master list of students in the subjects you handle.
 Whether you need to print a list of students enrolled in a particular subject or print out individual grade reports, this page provides a convenient and efficient way to manage your classroom data. By utilizing this tool, you can streamline your administrative tasks and focus more on providing quality education to your students.Moreover, this page ensures the security and privacy of your data by implementing strict measures to protect it from unauthorized access. You can trust that your students' information will be kept confidential and will only be accessed by authorized personnel. Additionally, this page is user-friendly and easy to navigate, making it accessible to all users, even those who are not tech-savvy. With just a few clicks, you can have the data you need printed out and ready to use, saving you time and effort in managing your classroom."  </h6>
-  </span>
+Milmao Reyris P. - Developer</span>
 
 </div>
 
