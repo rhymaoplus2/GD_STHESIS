@@ -493,6 +493,25 @@ function myFunction() {
 
 
 
+
+<!-- Conso -->
+<div class="modal fade" id="consoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Consolidated Grades: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="conso.php" width="100%" height="500"></iframe>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -547,8 +566,8 @@ function myFunction() {
 
 <div class="fade-in6">
 <li>
-  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1m.php'">
-    Consolidated Grades
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#consoModal" data-bs-dismiss="modal">
+   Consolidated Grades
   </button>
 </li>
 </div>
@@ -915,7 +934,7 @@ if (mysqli_num_rows($result) > 0) {
     <h6>
     "This page allows you to print data such as your students' grades and the master list of students in the subjects you handle.
 Whether you need to print a list of students enrolled in a particular subject or print out individual grade reports, this page provides a convenient and efficient way to manage your classroom data. By utilizing this tool, you can streamline your administrative tasks and focus more on providing quality education to your students.Moreover, this page ensures the security and privacy of your data by implementing strict measures to protect it from unauthorized access. You can trust that your students' information will be kept confidential and will only be accessed by authorized personnel. Additionally, this page is user-friendly and easy to navigate, making it accessible to all users, even those who are not tech-savvy. With just a few clicks, you can have the data you need printed out and ready to use, saving you time and effort in managing your classroom."  </h6>
-Milmao Reyris P. - Developer</span>
+Milmao Reyris P. - Developer  </span>
 
 </div>
 

@@ -369,7 +369,24 @@ font-size: 10px;;
   font-weight: bold;
 }
 
+#my-element {
+  transform-origin: center;
+  transition: transform 5s, opacity 2s;
+}
 
+#my-element.zoom-rotate-fade {
+  transform: scale(6) rotate(180deg);
+  opacity: 3;
+}
+
+#my-element button {
+  background: none;
+  border: none;
+}
+
+#my-element button:hover img {
+  opacity: 0.8;
+}
     </style>
 </head>
 <body>
@@ -382,13 +399,27 @@ font-size: 10px;;
 
 </div>
 -->
-<button class="btn btn-primary fixed-button" onclick="window.print()" style="background-color: transparent; border: none; outline: none; box-shadow: none;">
-  <img src="img/printx.gif" alt="Print" class="img-fluid" style="width: 100px;">
-</button>
+
+<div id="my-element" class="position-fixed bottom-0 w-100 text-center" style="z-index: 9999;">
+  <button class="fixed-button" onclick="animateElement()">
+    <img src="img/iprint.png" alt="Print" class="img-fluid" style="width: 50px;">
+  </button>
+</div>
 
 
+<script>
+function animateElement() {
+  var element = document.getElementById('my-element');
+  
+  element.classList.add('zoom-rotate-fade');
+  
+  setTimeout(function() {
+    window.print();
+  }, 3000);
+}
 
 
+</script>
 
 
 <div class="container " >
