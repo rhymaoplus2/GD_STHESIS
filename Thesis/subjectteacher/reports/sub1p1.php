@@ -348,7 +348,7 @@ font-size: 10px;;
 #my-element button:hover img {
   opacity: 0.8;
 }
-    </style>
+</style>
 </head>
 <body>
     <div class="d-flex justify-content-center align-items-center position-relative">
@@ -408,7 +408,6 @@ function animateElement() {
 <script>
   const searchInput = document.getElementById('search');
   const tableRows = document.querySelectorAll('table tbody tr');
-
   searchInput.addEventListener('input', () => {
     const searchText = searchInput.value.toLowerCase();
     tableRows.forEach(row => {

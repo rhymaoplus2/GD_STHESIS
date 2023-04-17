@@ -16,8 +16,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 
 
   <style>
-    
-
+  
     html, body {
   height: 100%;
   
