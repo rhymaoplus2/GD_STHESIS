@@ -29,14 +29,41 @@
   }
 }
 
-html, body {
-  height:100%;
-}
 
 body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wave {
+  position: relative;
+  width: 100%;
+  height: 100%;
   background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.wave::before,
+.wave::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  background-color: #fff;
+  transform-origin: bottom center;
+  transform: skewY(-12deg);
+  z-index: -1;
+}
+
+.wave::before {
+  top: -10%;
+}
+
+.wave::after {
+  bottom: -10%;
 }
 
 
@@ -200,7 +227,7 @@ font-size: 10px;;
 
 <br>
 <br>
-
+<div class="wave">
 <div class="fade-in">
 
 	<div class="container">
@@ -277,6 +304,7 @@ font-size: 10px;;
 </form>
 
 	</div>
+  </div>
   </div>
 <br>
 <br>

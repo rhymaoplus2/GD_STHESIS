@@ -9,21 +9,19 @@
       <li class="nav-item active">
         <a class="nav-link" href="../home.php" >Home</a>
       </li>
-
+    
+       
       <li class="nav-item">
-        <a class="nav-link " href="../records/records.php">Records</a>
+        <a class="nav-link" href="../records/">Records</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link text-white" href="reports.php">Reports</a>
+        <a class="nav-link text-white" href="">Reports</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../users/users.php">Users</a>
-      </li>
+   
   
 	  <li class="nav-item ">
-        <a class="nav-link " href="logout.php">Logout</a>
+        <a class="nav-link" href="logout.php">Logout</a>
       </li>
-  
     </ul>
 
 	

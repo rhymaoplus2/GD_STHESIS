@@ -5,10 +5,6 @@
 
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +17,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 </header>
 
 <style>
-  
+
+
+  html, body {
+
+  height:auto;
+}
+
+body {
+
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 
   .container {
@@ -131,6 +138,9 @@ font-size: 10px;;
   }
 
 
+.carousel-item img {
+  border-radius: 10px;
+}
 
 
 .top-container {
@@ -177,6 +187,16 @@ z-index: -1;
 {
   margin: auto;
 }
+
+html, body {
+  height:100%;
+}
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
   </style>
 </head>
 
@@ -185,15 +205,95 @@ z-index: -1;
 <div class="header" id="myHeader">
 <?PHP include_once('header.php'); ?>
 </div>
-<div class="container">
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <img src="img/bgp.jpg" class="img-fluid mx-auto d-block" alt="Description of image" style=>
+<script>
+
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
+
+ 
+
+                    <div class="container">
+                      
+                    <br>
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/banner.gif" class="d-block" style="width:70%;" alt="...">
     </div>
+    <div class="carousel-item ">
+      <img src="img/banner.gif" class="d-block" style="width:70%;" alt="...">
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+  <br>
+  <div class="row text-center justify-content-center">
+  <div class="col-2 text-center">
+    
+    <button type="button" class="btn btn-primary bg-white text-dark">
+      <img src="button1.jpg" alt="Button 1 Image">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
+    
+   
+    </button>
+  </div>
+  <div class="col-2 text-center">
+    <button type="button" class="btn btn-danger bg-white text-dark">
+      <img src="button2.jpg" alt="Button 2 Image">
+      
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
+    
+    
+    </button>
+  </div>
+  <div class="col-2 text-center">
+    <button type="button" class="btn btn-warning bg-white text-dark">
+      <img src="button3.jpg" alt="Button 3 Image">
+      
+       
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
+    
+  </button>
+  </div>
+  <div class="col-2 text-center">
+    <button type="button" class="btn btn-dark bg-white text-dark">
+      <img src="button4.jpg" alt="Button 4 Image">
+    
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
+    </button>
   </div>
 </div>
 
+
+
+
+</div>
 </div>
 </body>
 </html>

@@ -17,6 +17,9 @@
 
 
   <style>
+      .boton:hover {
+    font-weight: bold;
+  }
     html, body {
   height: 100%;
   
@@ -117,7 +120,7 @@ function myFunction() {
 				</div>
 			</div>
 			<div class="tabled col-md-8">
-				<table class="table">
+				<table class="table table-bordered">
 					<br>
 					<thead class="text-white"style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
 						<tr>
@@ -137,7 +140,7 @@ function myFunction() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <iframe src="schoolyear.php" width="100%" height="280"></iframe>
+        <iframe src="schoolyear.php" width="100%" height="450"></iframe>
       </div>
     </div>
   </div>
@@ -148,9 +151,7 @@ School Year
 
                             </td>
 
-							<td>Data 2</td>
-							<td>Data 3</td>
-						</tr>
+						
 						<tr>
 							<td>
 
@@ -158,7 +159,7 @@ School Year
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Set name Junior High Principal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Set Junior High Principal Name</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -174,8 +175,7 @@ Junior High Principal
 
 
 							</td>
-							<td>Data 5</td>
-							<td>Data 6</td>
+					
 						</tr>
 						<tr>
 							<td>
@@ -198,7 +198,7 @@ Junior High Principal
   </div>
 </div>
 <button type="button" class="boton mb-3 " style="backgrp"data-bs-toggle="modal" data-bs-target="#shsp" data-bs-dismiss="modal">
-Senio High Principal
+Senior High Principal
 </button>
 
 
@@ -206,9 +206,43 @@ Senio High Principal
 
 
 							</td>
-							<td>Data 8</td>
-							<td>Data 9</td>
+			
 						</tr>
+
+
+						<tr>
+							<td>
+
+
+
+
+
+							<div class="modal fade" id="admin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Admin Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="principal.php" width="100%" height="280"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" class="boton mb-3 " style="backgrp"data-bs-toggle="modal" data-bs-target="#admin" data-bs-dismiss="modal">
+Admin Profile
+</button>
+
+
+
+
+
+							</td>
+			
+						</tr>
+
+            
 					</tbody>
 				</table>
 			</div>

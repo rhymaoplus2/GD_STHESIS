@@ -169,7 +169,7 @@ h1{
   display: none !important;
 }
 
-  
+
 }
 td {
   border: 1px solid black;
@@ -391,6 +391,7 @@ font-size: 10px;;
 </head>
 <body>
 
+
 <!--
     <div class="d-flex justify-content-center align-items-center position-relative">
 
@@ -399,7 +400,6 @@ font-size: 10px;;
 
 </div>
 -->
-
 <div id="my-element" class="position-fixed bottom-0 w-100 text-center" style="z-index: 9999;">
   <button class="fixed-button" onclick="animateElement()">
     <img src="img/iprint.png" alt="Print" class="img-fluid" style="width: 50px;">
@@ -417,8 +417,6 @@ function animateElement() {
     window.print();
   }, 3000);
 }
-
-
 </script>
 
 
@@ -428,7 +426,6 @@ function animateElement() {
 
 
   <div class="col-auto">
-
   </div>
   <div class="col-auto" style="font-weight: bold;" >
     <select class="form-select" name="section" id="section">
@@ -445,8 +442,6 @@ function animateElement() {
               echo '<option value="' . $row["name"] . '">' . $row["name"] . '</option>';
           }
       }
-
-      // Close the database connection
       $conn->close();
       ?>
     </select>
@@ -487,11 +482,13 @@ function animateElement() {
       
 
       
-
+<div class="d-flex justify-content-center align-items-center position-relative">
+    <img src="msu.png" class="  top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
+</div>
             <?php
 require "./php/db_conn.php";
 
-// Sanitize user input
+
 $teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
 $filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
 

@@ -10,18 +10,14 @@
         <a class="nav-link" href="../home.php" >Home</a>
       </li>
     
-      <li class="nav-item"><a class="nav-link  " href="students/teacher_read.php">Master List</a></li>
- 
        
       <li class="nav-item">
-        <a class="nav-link text-white" href="records.php">Records</a>
+        <a class="nav-link text-white" href="">Records</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="../reports/reports.php">Reports</a>
+        <a class="nav-link" href="../reports/">Reports</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../users/users.php">Users</a>
-      </li>
+   
   
 	  <li class="nav-item ">
         <a class="nav-link " href="logout.php">Logout</a>

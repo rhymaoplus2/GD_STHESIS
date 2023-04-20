@@ -530,7 +530,7 @@ function filterTable() {
     $query = "SELECT students.fullname, students.adviser_id, users.sub1,
     students.section, students.firstname, students.middlename,
     students.trackstrand, students.lastname, students.gender,
-    students.syear, students.grade
+    students.syear, students.grade,students.id
     FROM students
     JOIN users ON 
         (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
@@ -558,7 +558,12 @@ function filterTable() {
 
 
 
-
+               
+<td  hidden colspan="">
+<input hidden class="no" id="studentid" name="studentid[]" value="<?= $Row['id'] ?>">
+</input>
+<?= $Row['id'] ?>
+</td>
    
                
 <td   colspan="">
