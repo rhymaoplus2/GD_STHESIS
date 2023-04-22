@@ -135,7 +135,9 @@ input {
 input[type="text"] {
   margin-bottom: 5px;
 }
-
+hr{
+  display: none;
+}
 .info{
   font-size: 9px;
 }
@@ -148,7 +150,9 @@ input[type="text"] {
     content: "";
   }
 }
-
+.font{
+  font-size: 10px;
+}
 /* Hide elements that are not required for printing */
 .btn {
   display: none;
@@ -407,11 +411,11 @@ hr {
 }
 
 
-#my-table td {
-  font-size: 10px;
-  padding: 2px;
-}
 
+table {
+ font-size: 5px;
+  padding:10px;
+}
 
 .fail {
    color: red;
@@ -456,14 +460,13 @@ width: 700px;
 	<div class="container">
   <div class="page1">
   <div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="img/msuperma.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
-</div>
-  <?php
+    <img src="img/wholegrades.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
+</div><?php
 // Include the database connection file
 include "db_conn.php";
 
 // Construct the SQL query with prepared statements
-$sql = "SELECT subjectname, studentname, UPPER(quarter) as quarter, ROUND(AVG(grade), 0) as average FROM grade GROUP BY subjectname, studentname, UPPER(quarter)";
+$sql = "SELECT section, subjectname, studentname, teacher, adviser, UPPER(quarter) as quarter, ROUND(AVG(grade), 0) as average FROM grade GROUP BY section, subjectname, studentname, UPPER(quarter)";
 $stmt = mysqli_prepare($conn, $sql);
 
 // Execute the query and get the result set
@@ -473,6 +476,7 @@ if(mysqli_stmt_execute($stmt)) {
     $table_index = 1;
     $first_grade = 0;
     $second_grade = 0;
+  
     $current_subject = null;
 
     // Check if there are any rows returned
@@ -481,19 +485,20 @@ if(mysqli_stmt_execute($stmt)) {
             if($row['subjectname'] !== $current_subject) {
                 // Close the previous table
                 if($current_subject !== null) {
-                    echo "</tbody></table></div>";
+                    echo "</tbody></table><hr></div>";
                 }
 
                 // Set the current subject name and increment the table index
-                $current_subject = "<span style='font-size: 20px'>" . $row['subjectname'] . "</span>";
+                $current_subject = "<span style='font-size: 20px'> " . $row['subjectname'] . "</span>";
                 $table_class = "p" . $table_index;
                 $table_index++;
 
                 // Start a new table for the current subject
                 echo "<div class='table $table_class'>";
-                echo "<div class='mb-4' style='font-size: 20px'>Subject: " . $current_subject . "</div>";
-                echo "<table >";
-                echo "<tr><td><b>STUDENT NAME</td><td class='text-center'> <b>1ST QUARTER</td><td class='text-center'><b>2ND QUARTER</td><td class='text-center'><b>AVERAGE</td><td class='text-center'><b>REMARKS</td></td></tr>";
+                
+                echo "<div class='mb-4' style='font-size: 20px'>Subject: <b>" . $current_subject . "</b><br>Subject Teacher: <b>" . $row['teacher'] . "</b><br>Adviser:<b> " . $row['adviser'] . "</b><br>Section: <b>" . $row['section'] . "</b></div>" ;
+                echo "<table class='font' >";
+                echo "<tr><td style='width:40%;'><b>&nbsp;&nbsp;STUDENT NAME</td><td class='text-center'> <b>1ST QUARTER</td><td class='text-center'><b>2ND QUARTER</td><td class='text-center'><b>AVERAGE</td><td class='text-center'><b>REMARKS</td></td></tr>";
 
                 echo "<tbody>";
             }
@@ -507,26 +512,25 @@ if(mysqli_stmt_execute($stmt)) {
             }
             $average = ($first_grade + $second_grade)/2;
             $pass_fail_td = "<td class='text-center " . ($average >= 75 ? "text-darj'>PASS" : "text-danger'>FAIL") . "</td>";
-            echo "<tr><td>" . htmlspecialchars($row['studentname']) . "</td><td class='text-center'>" . $first_grade . "</td><td class='text-center'>" . $second_grade . "</td><td class='text-center'>" . $average . "</td>" . $pass_fail_td . "</tr>";
-            
-           
-            
-          }
+            echo "<tr><td>&nbsp;&nbsp;" . htmlspecialchars($row['studentname']) . "</td><td class='text-center'>" . $first_grade . "</td><td class='text-center'>" . $second_grade . "</td><td class='text-center'>" . $average . "</td>" . $pass_fail_td . "</tr>";
+        }
 
         // Close the last table
         echo "</tbody></table></div>";
-    } else {
-        echo "No results found";
-    }
-} else {
-    // Handle the error
-    echo "Error: " . mysqli_error($conn);
-}
+      } else {
+      echo "No results found";
+      }
+      } else {
+      // Handle the error
+      echo "Error: " . mysqli_error($conn);
+      }
+      
+      // Close the prepared statement and the database connection
+      mysqli_stmt_close($stmt);
+      mysqli_close($conn);
+      ?>
 
-// Close the prepared statement and the database connection
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
-?>
+
 
 
 	</div>
