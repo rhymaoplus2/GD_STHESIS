@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOME</title>
+	<title>Sections Grades</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -332,7 +332,7 @@ if (mysqli_num_rows($result) > 0) {
     } ?>">
     <?php 
       $grade = sprintf("%02d", $Row["grade"]); // add leading zero for numbers less than 10
-      echo $grade . " " . $Row["name"]; // display grade and name separated by a space
+      echo $grade . " - " . $Row["name"]; // display grade and name separated by a space
     ?>
   </a>
 </td>
@@ -348,7 +348,9 @@ if (mysqli_num_rows($result) > 0) {
       <div class="modal-body">
       <div class="mb-3">Select Semester to print for Grade: <b><?php echo $Row["grade"]; ?> - <?php echo $Row["name"]; ?></b></div>
         <ul class="list-group">
-          <li class="list-group-item">FIRST</li>
+        <a href="sectiongradeshs1.php?name=<?php echo $Row['name']; ?>" class="list-group-item" target="_blank">FIRST</a>
+
+
           <li class="list-group-item">SECOND</li>
         </ul>
       </div>

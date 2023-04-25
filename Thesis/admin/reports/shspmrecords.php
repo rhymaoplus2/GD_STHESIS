@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<title>SHS PERMANENT RECORDS</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -438,11 +438,8 @@ hr {
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-
+</div>
 <a href="current-page.html?showModal=true">Open modal</a>
-
-          
           -->
         </div>
       </div>

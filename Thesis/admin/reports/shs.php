@@ -21,6 +21,7 @@
   margin-left: 1cm;
   margin-right: 1cm;
 }
+
 #my-element img {
     display: none;
   }
@@ -490,7 +491,9 @@ function animateElement() {
 
 
 </script>
+<div class="rotate-container">
 	<div class="container">
+  
   <div class="page1">
   <div class="d-flex justify-content-center align-items-center position-relative">
     <img src="img/wholegrades.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
@@ -581,8 +584,12 @@ if (isset($_GET['name'])) {
               }
                 ?>
 
+<style>
+
+</style>
 
 	</div>
+  </div>
   </div>
 <br>
 <br>

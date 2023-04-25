@@ -61,7 +61,7 @@ a:hover img {
 /* Body styles */
 html,
 body {
-  height: 100%;
+  height: auto;
 }
 
 body {

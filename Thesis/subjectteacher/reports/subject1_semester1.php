@@ -438,11 +438,9 @@ b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE REPLACE(LOWER(b.semester), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
-AND REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
+
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
 AND b.semester = 'FIRST'
-AND b.quarter = 'SECOND'
 AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
@@ -460,7 +458,7 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_right = "<div id='right'>";
   $output_right .= "<p>";
   $output_right .= "Subject:&nbsp;<b>" .$Row['sub1'] ."</b><br>";
-  $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
+  $output_right .= "Quarter:&nbsp;<strong>" . "First & Second</strong><br>";
   $output_right .= "Semester:&nbsp;<strong>" . $Row['semester'] . "</strong><br>";
   $output_right .= "</p>";
   $output_right .= "</div>";
@@ -501,9 +499,9 @@ $query = "SELECT
 b.firstname, 
 b.middlename, 
 b.lastname, 
-ROUND(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0) AS One, 
-ROUND(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0) AS Two, 
-ROUND(AVG(b.grade), 0) AS final
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0), 0) AS One, 
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0), 0) AS Two, 
+ROUND(((COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0) + COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0))/2), 0) AS final
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE REPLACE(LOWER(b.semester), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
@@ -513,7 +511,9 @@ AND b.semester = 'FIRST'
 AND a.name = '$teacher'
 $filter
 GROUP BY b.firstname, b.middlename, b.lastname
-ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;";
+ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
+";
+
 
 
 $result = mysqli_query($conn, $query);
@@ -530,7 +530,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
     <td class="text text-center"><?php echo $Row["Two"]; ?></td>
     <td class="text text-center"><?php echo $Row["final"]; ?></td>
     <td class="text text-center" style="color: <?php echo $Row["final"] < 75 ? 'red' : 'black'; ?>;">
-  <?php echo $Row["final"] < 75 ? 'FAILED' : 'PASS'; ?>
+  <?php echo strtoupper($Row["final"] < 75 ? 'FAILED' : 'PASSED'); ?>
 </td>
 
     
@@ -543,6 +543,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
 <th colspan="8" class="text text-left"><b><div class="text text-danger"><b>FEMALE</b></div></b></th>
 </thead>
 
+
 <?php
 require "./php/db_conn.php";
 $teacher = $_SESSION['name'];
@@ -552,19 +553,21 @@ $query = "SELECT
 b.firstname, 
 b.middlename, 
 b.lastname, 
-ROUND(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0) AS One, 
-ROUND(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0) AS Two, 
-ROUND(AVG(b.grade), 0) AS final
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0), 0) AS One, 
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0), 0) AS Two, 
+ROUND(((COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0) + COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0))/2), 0) AS final
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE REPLACE(LOWER(b.semester), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '')
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-AND b.semester = 'FIRST'
+AND b.semester = 'FEMALE'
 AND a.name = '$teacher'
 $filter
 GROUP BY b.firstname, b.middlename, b.lastname
-ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;";
+ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
+";
+
 
 
 $result = mysqli_query($conn, $query);
@@ -581,10 +584,9 @@ while ($Row = mysqli_fetch_assoc($result)) {
     <td class="text text-center"><?php echo $Row["Two"]; ?></td>
     <td class="text text-center"><?php echo $Row["final"]; ?></td>
     <td class="text text-center" style="color: <?php echo $Row["final"] < 75 ? 'red' : 'black'; ?>;">
-  <?php echo $Row["final"] < 75 ? 'FAILED' : 'PASS'; ?>
+  <?php echo strtoupper($Row["final"] < 75 ? 'FAILED' : 'PASSED'); ?>
 </td>
 
-    
  
   </tr>
 

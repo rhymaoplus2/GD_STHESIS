@@ -463,7 +463,7 @@ function myFunction() {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">SELECT</h5>
+        <h5 class="modal-title" id="exampleModalLabel">SELECT FORMAT</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
@@ -471,7 +471,7 @@ function myFunction() {
 
         <div class="fade-in1">
         <li>
-        <button type="button" class="btn btn-secondary mb-3" onclick="showModal2()" data-bs-dismiss="modal">  Junior High School
+        <button type="button" class="btn btn-secondary mb-3" onclick="showModaljhs()" data-bs-dismiss="modal">  Junior High School
   </button>
 </li>
 </div>
@@ -513,10 +513,58 @@ function myFunction() {
     </div>
   </div>
 </div>
+<!-- JHS MODAL FRAME Quarter-->
 
 
-<!-- 1st Quarter -->
-<div class="modal fade" id="subject1quarter1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="sub1q1jhs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 1: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter1jhs.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="sub1q2jhs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 2: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter2jhs.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="sub1q3jhs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 3: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter3jhs.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="subject1quarter1Modaljhs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
@@ -532,7 +580,65 @@ function myFunction() {
 </div>
 
 
+<!-- SHS MODAL FRAME -->
+<div class="modal fade" id="subject1quarter1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Semester 1: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_semester1.php" width="100%" height="500"></iframe>
+      </div>
 
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="subject1semester2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Semester 2: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_semester2.php" width="100%" height="500"></iframe>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--Quarter Modals -->
+<div class="modal fade" id="sub1q1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 1: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter1.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="sub1q2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 2: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter2.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
 
 <!-- Conso -->
 <div class="modal fade" id="consoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -551,13 +657,67 @@ function myFunction() {
 </div>
 
 
-
-<!-- Modal -->
+<!-- Modal SHS-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">SHS - Printable Data Formats</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <!-- Add buttons for selecting different options -->
+        <ul>
+
+        <div class="fade-in1">
+        <li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal" data-bs-dismiss="modal">
+   Masterlist
+  </button>
+</li>
+</div>
+<div class="fade-in2">
+<li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1quarter1Modal" data-bs-dismiss="modal">
+    1st Semester Grades
+  </button>
+</li>
+</div>
+<div class="fade-in2">
+<li>
+  <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1semester2Modal" data-bs-dismiss="modal">
+    2nd Semester Grades
+  </button>
+</li>
+</div>
+
+<div class="fade-in3">
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q1jhs" data-bs-dismiss="modal">
+    1st Quarter Grades
+  </button>
+</li>
+</div>
+
+<div class="fade-in3">
+<li>
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q2" data-bs-dismiss="modal">
+      2nd Quarter Grades
+  </button>
+</li>
+</div>
+
+
+</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- JHS -->
+<div class="modal fade" id="exampleModaljhs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Jhs</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
@@ -574,24 +734,23 @@ function myFunction() {
 
 <div class="fade-in2">
 <li>
-  <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#subject1quarter1Modal" data-bs-dismiss="modal">
-    1st Semester Grades
+  <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q1jhs" data-bs-dismiss="modal">
+    1st Quarter Grades
   </button>
 </li>
 </div>
-
 <div class="fade-in3">
 <li>
-  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p2.php'">
-    2nd Quarter Grades
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q2jhs" data-bs-dismiss="modal">
+      2nd Quarter Grades
   </button>
 </li>
 </div>
 
 <div class="fade-in4">
 <li>
-  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p3.php'">
-    Third Quarter Grades
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q3jhs" data-bs-dismiss="modal">
+    3rd Quarter Grades
   </button>
 </li>
 </div>
@@ -617,12 +776,19 @@ function myFunction() {
     </div>
   </div>
 </div>
-
 <script>
   function showModal() {
     $('#exampleModal').modal('show');
   }
 </script>
+<script>
+  function showModaljhs() {
+    $('#exampleModaljhs').modal('show');
+  }
+
+
+</script>
+
 
                 <?php } ?>
               </tr>

@@ -35,7 +35,7 @@ if(isset($_POST['submit']))
 
         // Determine the value of the remarks field based on the grade
         if ($grade >= 75) {
-            $remarks = "PASS";
+            $remarks = "PASSED";
         } else {
             $remarks = "FAILED";
         }
@@ -62,7 +62,6 @@ if(isset($_POST['submit']))
             }
         }
     }
-
     header("Location: ../subject1view.php?success=Grades added successfully");
 }
 

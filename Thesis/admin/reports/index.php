@@ -366,9 +366,17 @@ function myFunction() {
               
               <td class="text-center">
   <a class="text-dark" style="background-color: white; border: none;" href="permanent.php">
-    <b>Consolidated Grades</b>
+    <b>Permanent Records</b>
   </a>
 </td> 
+</tr>
+<tr>
+<td class="text-center">
+  <a class="text-dark" style="background-color: white; border: none;" href="sections.php">
+    <b>Grade Sheet</b>
+  </a>
+</td> 
+</tr>
 </tbody>
 
           </table>
