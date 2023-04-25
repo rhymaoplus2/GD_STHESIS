@@ -451,7 +451,22 @@ table {
 font-size: 15px;
 width: 700px;
   }
-  
+  @keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blink 4s linear infinite;
+}
+
   </style>
 
 </head>
@@ -465,72 +480,89 @@ width: 700px;
 // Include the database connection file
 include "db_conn.php";
 
-// Construct the SQL query with prepared statements
-$sql = "SELECT section, subjectname, studentname, teacher, adviser, UPPER(quarter) as quarter, ROUND(AVG(grade), 0) as average FROM grade GROUP BY section, subjectname, studentname, UPPER(quarter)";
-$stmt = mysqli_prepare($conn, $sql);
+// Define the validation function
+function validate($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
-// Execute the query and get the result set
-if(mysqli_stmt_execute($stmt)) {
-    $result = mysqli_stmt_get_result($stmt);
+if (isset($_GET['name'])) {
+  $section_name = validate($_GET['name']);
 
-    $table_index = 1;
-    $first_grade = 0;
-    $second_grade = 0;
+  // Construct the SQL query with prepared statements
+  $sql = "SELECT section, subjectname, studentname, teacher, adviser, UPPER(quarter) as quarter, ROUND(AVG(grade), 0) as average 
+  FROM grade 
+  WHERE section = ? AND semester = 'FIRST'
+  GROUP BY section, subjectname, studentname, UPPER(quarter)";
   
-    $current_subject = null;
+  $stmt = mysqli_prepare($conn, $sql);
+  // Bind the parameters
+  mysqli_stmt_bind_param($stmt, "s", $section_name);
 
-    // Check if there are any rows returned
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            if($row['subjectname'] !== $current_subject) {
-                // Close the previous table
-                if($current_subject !== null) {
-                    echo "</tbody></table><hr></div>";
+  // Execute the query and get the result set
+  if(mysqli_stmt_execute($stmt)) {
+      // rest of the code goes here
+
+        $result = mysqli_stmt_get_result($stmt);
+
+        $table_index = 1;
+        $first_grade = 0;
+        $second_grade = 0;
+      
+        $current_subject = null;
+
+        // Check if there are any rows returned
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                if($row['subjectname'] !== $current_subject) {
+                    // Close the previous table
+                    if($current_subject !== null) {
+                        echo "</tbody></table><hr></div>";
+                    }
+
+                    // Set the current subject name and increment the table index
+                    $current_subject = "<span style='font-size: 20px'> " . $row['subjectname'] . "</span>";
+                    $table_class = "p" . $table_index;
+                    $table_index++;
+
+                    // Start a new table for the current subject
+                    echo "<div class='table $table_class'>";
+                    
+                    echo "<div class='mb-4' style='font-size: 20px'>Subject: <b>" . $current_subject . "</b><br>Subject Teacher: <b>" . $row['teacher'] . "</b><br>Adviser:<b> " . $row['adviser'] . "</b><br>Section: <b>" . $row['section'] . "</b></div>" ;
+                    echo "<table class='font' >";
+                    echo "<tr><td style='width:40%;'><b>&nbsp;&nbsp;STUDENT NAME</td><td class='text-center'> <b>1ST QUARTER</td><td class='text-center'><b>2ND QUARTER</td><td class='text-center'><b>AVERAGE</td><td class='text-center'><b>REMARKS</td></td></tr>";
+
+                    echo "<tbody>";
                 }
 
-                // Set the current subject name and increment the table index
-                $current_subject = "<span style='font-size: 20px'> " . $row['subjectname'] . "</span>";
-                $table_class = "p" . $table_index;
-                $table_index++;
-
-                // Start a new table for the current subject
-                echo "<div class='table $table_class'>";
+                // Process the current row
+                if($row['quarter'] === 'FIRST') {
+                    $first_grade = $row['average'];
+                    $second_grade = 0; // initialize second grade to 0
+                } else if($row['quarter'] === 'SECOND') {
+                    $second_grade = $row['average'];
+                }
+                $average = ($first_grade + $second_grade)/2;
+                $pass_fail_td = "<td class='text-center " . ($average >= 75 ?"text-dark'>PASS" : "text-danger'>FAIL") . "</td>";
+                echo "<tr><td>  " . htmlspecialchars($row['studentname']) . "</td><td class='text-center'>" . $first_grade . "</td><td class='text-center'>" . $second_grade . "</td><td class='text-center'>" . $average . "</td>" . $pass_fail_td . "</tr>";
+                }
+                // Close the last table
+                echo "</tbody></table></div>";
+                } else {
+                  echo "<h1 class='blink text-center text-danger'>There are no validated grades <br>for the ". htmlspecialchars($_GET['name']) ." section.";
+                }
+                } else {
+                // Handle the error
+                echo "Error: " . mysqli_error($conn);
+                }
                 
-                echo "<div class='mb-4' style='font-size: 20px'>Subject: <b>" . $current_subject . "</b><br>Subject Teacher: <b>" . $row['teacher'] . "</b><br>Adviser:<b> " . $row['adviser'] . "</b><br>Section: <b>" . $row['section'] . "</b></div>" ;
-                echo "<table class='font' >";
-                echo "<tr><td style='width:40%;'><b>&nbsp;&nbsp;STUDENT NAME</td><td class='text-center'> <b>1ST QUARTER</td><td class='text-center'><b>2ND QUARTER</td><td class='text-center'><b>AVERAGE</td><td class='text-center'><b>REMARKS</td></td></tr>";
-
-                echo "<tbody>";
-            }
-
-            // Process the current row
-            if($row['quarter'] === 'FIRST') {
-                $first_grade = $row['average'];
-                $second_grade = 0; // initialize second grade to 0
-            } else if($row['quarter'] === 'SECOND') {
-                $second_grade = $row['average'];
-            }
-            $average = ($first_grade + $second_grade)/2;
-            $pass_fail_td = "<td class='text-center " . ($average >= 75 ? "text-darj'>PASS" : "text-danger'>FAIL") . "</td>";
-            echo "<tr><td>&nbsp;&nbsp;" . htmlspecialchars($row['studentname']) . "</td><td class='text-center'>" . $first_grade . "</td><td class='text-center'>" . $second_grade . "</td><td class='text-center'>" . $average . "</td>" . $pass_fail_td . "</tr>";
-        }
-
-        // Close the last table
-        echo "</tbody></table></div>";
-      } else {
-      echo "No results found";
-      }
-      } else {
-      // Handle the error
-      echo "Error: " . mysqli_error($conn);
-      }
-      
-      // Close the prepared statement and the database connection
-      mysqli_stmt_close($stmt);
-      mysqli_close($conn);
-      ?>
-
-
+                // Close the prepared statement and the database connection
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+              }
+                ?>
 
 
 	</div>

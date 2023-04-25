@@ -216,7 +216,10 @@ font-size: 10px;;
   transform: scale(1.2);
 }
 
-
+a {
+  text-decoration: none;
+  color:black
+}
 </style>
 </head>
 <body>
@@ -265,47 +268,30 @@ function myFunction() {
 
 
            <div class="container mt-4">
-           <div class="box2">
+     
            <div class="container text-center">
-  <form class="" method="get">
+           <form method="get">
   <br>
-    <div class="input-group mb-3 form text-center">
- 
-      <input type="text" class="form-control" name="search" placeholder="Search subjects...">
-      <button class="btn btn-outline-secondary border-0 p-0" type="submit" id="search-button text-center">
-        <img src="img/search.gif" alt="search-icon" class="btn-icon">
-      </button>
-    </div>
-  </form>
+  <div class="input-group mb-3 form text-center">
+    <input type="text" class="form-control" name="search" placeholder="Search Section Name">
+    <button class="btn btn-outline-secondary border-0 p-0" type="submit" id="search-button">
+      <img src="img/search.gif" alt="search-icon" class="btn-icon">
+    </button>
+  </div>
+</form>
 </div>
-
-
-           </div>
-           <!--
-        
-  <table class="table table-bordered ">
-              <thead >
-                  <tr>
-                  <th hidden scope="col">Subject ID </th>
-                  <th scope="col">Subject Name </th>
-                  <th hidden scope="col">Subject Teacher Username</th>
-                  
-                  <th class="text-center"scope="col" colspan="2">Actions </th>
-                </tr>
-              </thead>
-        <tbody>    
-             -->
-       
-        
-
-        <?php
+<?php
 require "./php/db_conn.php";
 
-$search_keyword = isset($_GET['search']) ? $_GET['search'] : '';
+$search_keyword = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 $query = "SELECT * FROM section";
+
 if (!empty($search_keyword)) {
   $query .= " WHERE name LIKE '%" . mysqli_real_escape_string($conn, $search_keyword) . "%'";
 }
+
+$query .= " ORDER BY grade";
+
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
   $results_per_page = 5;
@@ -337,7 +323,60 @@ if (mysqli_num_rows($result) > 0) {
   while ($Row = mysqli_fetch_assoc($result)) {
   ?>
     <tr>
-    <td><a href="sectiongrade.php?name=<?php echo $Row["name"]; ?>"><?php echo $Row["name"]; ?></a></td>
+    <td>
+  <a href="#" data-bs-toggle="modal" data-bs-target="<?php 
+    if($Row['grade'] >= 11) { 
+      echo '#SHSmodal'.$Row['id']; 
+    } else { 
+      echo '#JHSmodal'.$Row['id']; 
+    } ?>">
+    <?php 
+      $grade = sprintf("%02d", $Row["grade"]); // add leading zero for numbers less than 10
+      echo $grade . " " . $Row["name"]; // display grade and name separated by a space
+    ?>
+  </a>
+</td>
+
+<!-- Modal -->
+<div class="modal fade" id="SHSmodal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="semesterModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="semesterModalLabel">SHS Grades</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="mb-3">Select Semester to print for Grade: <b><?php echo $Row["grade"]; ?> - <?php echo $Row["name"]; ?></b></div>
+        <ul class="list-group">
+          <li class="list-group-item">FIRST</li>
+          <li class="list-group-item">SECOND</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="JHSmodal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="semesterModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="semesterModalLabel">JHS Grades</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="mb-3">Select Quarter to print for Grade: <b><?php echo $Row["grade"]; ?> - <?php echo $Row["name"]; ?></b></div>
+        <ul class="list-group">
+          <li class="list-group-item">FIRST</li>
+          <li class="list-group-item">SECOND</li>
+          <li class="list-group-item">THIRD</li>
+          <li class="list-group-item">FOURTH</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
     </tr>
   <?php
