@@ -1,13 +1,5 @@
 
 
-
-<?php include './php/admin_update.php'; ?>
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,31 +9,55 @@
 
 <style>
 
+html, body {
+  height: 100%;
+}
 
-.container {
-	min-height: 100vh;
+
+body {
+
+  background-repeat: no-repeat;
+}
+
+
+
+  .container {
+  width: 1000px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+
+
 }
 
-.container form {
-	width: 600px;
+.formx {
+	width: auto;
 	padding: 20px;
-	border-radius: 10px;
+	border-radius: 30px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: white;
 }
 .box {
-	width: 750px;
+	width: 900px;
+  
 }
-.container table {
+ table {
+	padding: 20px;
+	border-radius: 10px;
+	max-width: 80%;
+  border:10px;
+
+}
+.border {
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border:10px;
+  border-radius: 30px;
   background-color: white;
+
 }
+
 
 .link-right {
 	display: flex;
@@ -66,8 +82,12 @@ font-size: 10px;;
 }
 
 
-
-
+.modal
+{
+ border: 100px;
+ background-color: ;
+ 
+}
 
 
 
@@ -154,230 +174,175 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
-  #myVideo {
-
-width: 100vw;
-height: 100vh;
-object-fit: cover;
-position: fixed;
-left: 0;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: -1;
+  .btn-transparent {
+    background-color: transparent;
+    border: none;
   }
 
+  .btn-transparent:hover {
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-transparent:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .btn img {
+    width: 30px;
+    height: 30px;
+  }
+  #refresh-img {
+  transition: all 0.2s;
+}
+
+#refresh-img:hover {
+  transform: scale(1.2);
+}
+#search {
+  border-width: 2px;
+}
+.page-item a.page-link {
+  opacity: 0.5;
+}
+.page-item.active a.page-link {
+  font-weight: bold;
+  opacity: 1;
+}
+td a {
+  text-decoration: none;
+  color: black;
+}
+
+
+td a:hover {
+  font-weight: bold;
+  color: black;
+}
+
+.table-scrollable{
+  height: 400px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.table-scrollable::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+}
+
+.table-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 5px; /* roundness of the thumb */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+  .form-group p {
+  display: inline-block;
+  margin-right: 10px; /* optional spacing between the label and value */
+}
+.label-value {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+.label {
+  margin-right: 5px;
+}
   </style>
 
 </head>
 <body>
 
 
-
-<div class="header" id="myHeader">
-<?PHP include_once('header.php');?>
-</div>
- <br>
- <br>
-
-
- <video autoplay muted loop id="myVideo">
-  <source src="../bg/students.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
-
-
-<br>
-<br>
-	<div class="container">
-		<form action="php/view.php" 
-		      method="post">
-            
-		   <h4 class="display-10 text-center"> <?=$row['fullname'] ?> Information</h4><hr>
-       <br>
-		   <?php if (isset($_GET['error'])) { ?>
-		   <div class="alert alert-danger" role="alert">
-			  <?php echo $_GET['error']; ?>
-		    </div>
-		   <?php } ?>
-           
-
-
-       
-       <div class="form-group">
-
-<p class="fw-bold">ID No.</p>
-
-<?=$row['id'] ?>
-
-
-       </div>
-       <br>
-           <div class="form-group">
-
-    <p class="fw-bold">Lrn. No.</p>
- 
-	<?=$row['lrnnumber'] ?>
-  
-
-           </div>
-           
-<!--
-  <div class="form-group">
- 
-
-    <label for="" class="form-label">Adviser ID</label>
-    <input 
-	value="<?=$row['adviser_id'] ?>" 
-    type="text" 
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: 12913937"
-    name="adviser_id">
-  </div>
-       -->
-
-
-
-
-
-
-
-
- 
-       <div class="mb-3">
-    <input
-    type="hidden"
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: Science"
-    name="adviser_id"
-    value="<?php echo $_SESSION['id']?>"
-    >
-    
-  </div>
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="form-group">
-  <p class="fw-bold">First Name</p>
-	<?=$row['firstname'] ?>
-  </div>
   <br>
+  <?php
+if (isset($_GET['id'])) {
+    include "db_conn.php";
 
+    function validate($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
-  <div class="mb-3">
-  <p class="fw-bold">Middle Name</p>
-   <?=$row['middlename'] ?>
+    $id = validate($_GET['id']);
 
-  </div>
+    $sql = "SELECT * FROM students WHERE id=$id";
+    $result = mysqli_query($conn, $sql);
 
-  
-  <div class="mb-3">
-  <p class="fw-bold">Last Name</p>
-    <?=$row['lastname'] ?>
+    if (mysqli_num_rows($result) > 0) {
+        echo "<table class='table'>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td><b>ID Number:</b> ".$row['id']."</td>";
+            echo "<td colspan='3'><b>LRN Number:</b> ".$row['lrnnumber']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td><b>First Name:</b> ".$row['firstname']."</td>";
+            echo "<td><b>Middle Name:</b> ".$row['middlename']."</td>";
+            echo "<td><b>Last Name:</b> ".$row['lastname']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Suffix:</b> ".$row['suffix']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Gender:</b> ".$row['gender']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Birth Place:</b> ".$row['birthplace']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Birth Date:</b> ".$row['birthday']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Age:</b> ".$row['age']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Address:</b> ".$row['address']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Parent/Guardian:</b> ".$row['parent']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>School Year:</b> ".$row['syear']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Grade Level:</b> ".$row['grade']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'><b>Section Name:</b> ".$row['section']."</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No records found";
+    }
 
-  </div>
+    mysqli_close($conn);
+}
+?>
 
-  
-  <div class="mb-3">
-  <p class="fw-bold">Suffix</p>
-    <?=$row['suffix'] ?>
-  </div>
-
-
-
-
-
-
-
-      
-  <div class="mb-3">
-  <p class="fw-bold">Gender</p>
-    <?=$row['gender'] ?>
-
-  </div>
-
-
-
-
-  <div class="mb-3">
-  <p class="fw-bold">Birth Place</p>
-    <?=$row['birthplace'] ?>
-  </div>
-  
-  <div class="mb-3">
-  <p class="fw-bold">Birth Date</p>
-    <?=$row['birthday'] ?>
-  </div>
-
-  <div class="mb-3">
-  <p class="fw-bold">Age</p>
-    <?=$row['age'] ?>
-  </div>
-
-
-  <div class="mb-3">
-  <p class="fw-bold">Address</p>
-    <?=$row['address'] ?>
-
-  </div>
-
-
-  
-  <div class="mb-3">
-  <p class="fw-bold">Parent/Guardian</p>
-   <?=$row['parent'] ?>
-  </div>
-
-  <div class="mb-3">
-  <p class="fw-bold">School Year</p>
-    <?=$row['syear'] ?>
-
-  </div>
-
-
-  
- 
-  <div class="mb-3">
-  <p class="fw-bold">Grade Level</p>
-    <?=$row['grade'] ?>
-
-  </div>
-
-
-  <div class="mb-3">
-  <p class="fw-bold">Section Name</p>
-    <?=$row['section'] ?>
 
   </div>
 
@@ -394,15 +359,18 @@ function myFunction() {
 		          name="id"
 		          value="<?=$row['id']?>"
 		          hidden >
+              <!--
 				   <a class="link-primary" href="teacher_read.php" display-40>
           <button type="button" class="btn btn-dark">
 
      Back
           </button>
 
-
+       -->
 	
 	    </form>
+      <br>
+      <br>
 	</div>
 <br>
 <br>
@@ -420,7 +388,6 @@ function myFunction() {
   }
 }
 </script>
-  
   
 
 </body>

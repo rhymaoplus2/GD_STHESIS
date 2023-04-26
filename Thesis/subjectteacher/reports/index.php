@@ -503,7 +503,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Masterlist: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Masterlist: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -520,7 +520,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Quarter 1: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 1: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -537,7 +537,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Quarter 2: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 2: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -551,7 +551,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Quarter 3: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 3: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -561,6 +561,20 @@ function myFunction() {
   </div>
 </div>
 
+
+<div class="modal fade" id="sub1q4jhs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 4: Printable Data (JHS FORMAT )</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter4jhs.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -756,13 +770,12 @@ function myFunction() {
 </div>
 
 <div class="fade-in5">
-<li>
-  <button type="button" class="btn btn-secondary mb-3" data-bs-dismiss="modal" onclick="window.location.href='sub1p4.php'">
-    Fourth Quarter Grades
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q4jhs" data-bs-dismiss="modal">
+    4th Quarter Grades
   </button>
 </li>
 </div>
-
+<!-- 
 <div class="fade-in6">
 <li>
 <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#consoModal" data-bs-dismiss="modal">
@@ -770,7 +783,7 @@ function myFunction() {
   </button>
 </li>
 </div>
-
+-->
 </ul>
       </div>
     </div>

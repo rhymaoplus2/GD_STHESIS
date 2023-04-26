@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     if (mysqli_num_rows($result) > 0) {
     	$row = mysqli_fetch_assoc($result);
     }else {
-    	header("Location: ../teacher/teacher_view.php");
+    	header("Location: ./view.php");
     }
 
 

@@ -23,6 +23,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <style>
   
 
+  html, body {
+  height: 100%;
+}
+
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+}
 
   .container {
 	min-height: 100vh;
@@ -170,9 +179,11 @@ top: 0;
 bottom: 0;
 z-index: -1;
   }
-.carousel-inner img {
-  margin: auto;
-}
+  #carouselExampleSlidesOnly {
+    margin-right: auto;
+    margin-left: 0;
+  }
+
 .poster img
 {
   margin: auto;
@@ -186,65 +197,63 @@ z-index: -1;
 <div class="header" id="myHeader">
 <?PHP include_once('header.php'); ?>
 </div>
-<video autoplay muted loop id="myVideo">
-  <source src="bg/video.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
 
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 <div class="content">
 
 
+<!-- Modal -->
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Welcome <?=$_SESSION['name']?>!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This is a welcome message.
+        <br>We hope you enjoy your experience on our System.
+  
+        
+     
+      </div>
+      <div class="modal-footer">
+      <i>Milmao Reyris P.</i>
+    
+   
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+  // Show the modal when the page loads
+  window.addEventListener('load', function() {
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+      keyboard: false
+    });
+    myModal.show();
+  });
+</script>
+
+  
 <br>
 <br>
-
-<div id="carouselExampleSlidesOnly" class="carousel  slide start-middle" data-bs-ride="carousel">
+<div id="carouselExampleSlidesOnly" class="carousel slide start-middle" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/poster1.gif" class="d-block w-25 lign-items-sm-center " alt="...">
-      
+      <img src="img/poster1.gif" class="d-block w-25 lign-items-sm-center" alt="...">
     </div>
-
     <div class="carousel-item">
       <img src="img/poster2.gif" class="d-block w-25" alt="...">
     </div>
-    <!--
-    <img src=
-"img/poster.gif"
-            class="img-responsive" alt="Responsive image"
-            width="307" height="240"/>
--->
   </div>
-  <!--
-  <div class="round">
-  <img src="img/poster.gif" class="rounded float-end " alt="...">
-  </div>
--->
-
-</div>
-
-
-
-    </div>
-
-</div>
-
-
   
+</div>
+
+<!-- Modal -->
+
 </body>
 </html>
 <?php
