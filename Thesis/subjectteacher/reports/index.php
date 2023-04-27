@@ -654,6 +654,36 @@ function myFunction() {
   </div>
 </div>
 
+
+
+<div class="modal fade" id="sub1q3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 3: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter3.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="sub1q4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 4: Printable Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="subject1_quarter4.php" width="100%" height="500"></iframe>
+</div>
+    </div>
+  </div>
+</div>
+
+
 <!-- Conso -->
 <div class="modal fade" id="consoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -706,7 +736,7 @@ function myFunction() {
 </div>
 
 <div class="fade-in3">
-<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q1jhs" data-bs-dismiss="modal">
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q1" data-bs-dismiss="modal">
     1st Quarter Grades
   </button>
 </li>
@@ -719,8 +749,20 @@ function myFunction() {
   </button>
 </li>
 </div>
-
-
+<div class="fade-in3">
+<li>
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q3" data-bs-dismiss="modal">
+      3rd Quarter Grades
+  </button>
+</li>
+</div>
+<div class="fade-in3">
+<li>
+<button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#sub1q4" data-bs-dismiss="modal">
+      4th Quarter Grades
+  </button>
+</li>
+</div>
 </ul>
       </div>
     </div>
