@@ -11,10 +11,10 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link text-white" href="records">Students</a>
+        <a class="nav-link text-white" href="students">Students</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="../reports/reports">Reports</a>
+        <a class="nav-link" href="../reports">Reports</a>
       </li>
 	  <li class="nav-item ">
         <a class="nav-link " href="logout.php">Logout</a>

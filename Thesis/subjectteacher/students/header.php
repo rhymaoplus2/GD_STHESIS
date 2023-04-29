@@ -28,10 +28,10 @@
           </ul>
 -->
       <li class="nav-item">
-        <a class="nav-link text-dark" href="../records/records.php">Records</a>
+        <a class="nav-link text-dark" href="../records/">Records</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link text-dark" href="../reports/reports.php">Reports</a>
+        <a class="nav-link text-dark" href="../reports/">Reports</a>
       </li>
   
 	  <li class="nav-item ">

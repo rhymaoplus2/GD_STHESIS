@@ -212,7 +212,9 @@ font-size: 10px;;
   #refresh-img {
   transition: all 0.2s;
 }
-
+.btn:hover img {
+    transform: scale(1.2);
+}
 #refresh-img:hover {
   transform: scale(1.2);
 }
@@ -306,16 +308,17 @@ a.btn:hover img {
 		    <?php } ?>
 			<?php if (mysqli_num_rows($result)) { ?>
         <div class="border">
-               
-    <form method="get" id="my-form" class="text-center">
+             
+    <form method="get" id="my-form" class="">
 <div>
+    <!-- 
 <select class= "selct-lg mb-3" name="gender" id="gender">
   <option value="">FILTER BY GENDER</option>
   <option value="Male">Male</option>
   <option value="Female">Female</option>
 </select>
 
-</form>&nbsp;&nbsp;&nbsp;
+</form>&nbsp;&nbsp;&nbsp;-->
 <a type="button" class="btn" title="print masterlist"  onclick="window.open('advisory.php', '_blank').print();"> <img style="width:30px;" src="img/print.png" class="img-fluid" alt="Description of image"></a>
 
       </div>
@@ -381,11 +384,11 @@ genderSelect.addEventListener('change', function() {
           ?>
         <tr style="     background: #f2f2f2">
          <td style="width:50%; ">
-         <a type="button" class="  mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal<?= $Row['id'] ?>">
+         <a type="button" class="  mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal<?= $Row['lrnnumber'] ?>">
   <b><?= $Row["lastname"] ?>, <?= $Row["firstname"] ?> <?= substr($Row["middlename"], 0, 1) ?>.</b>
         </a>
 
-<div class="modal fade" id="subject1Modal<?= $Row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="subject1Modal<?= $Row['lrnnumber'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
@@ -393,7 +396,7 @@ genderSelect.addEventListener('change', function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <iframe src="view.php?id=<?= $Row['id'] ?>" width="100%" height="500" frameborder="0"></iframe>
+        <iframe src="view.php?lrnnumber=<?= $Row['lrnnumber'] ?>" width="100%" height="500" frameborder="0"></iframe>
       </div>
     </div>
   </div>

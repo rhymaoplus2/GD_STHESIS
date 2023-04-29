@@ -3,7 +3,7 @@
    session_start();
    include "./php/db_conn.php";
 
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 
 
 
@@ -183,44 +183,138 @@ z-index: -1;
 <body>
 
 
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/bg.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 <div class="content">
 
+<div class="container">
+    <h1>Grades Table</h1>
+    <?php
+// Include the database connection script
+include "php/db_conn.php";
 
-<audio controls autoplay  hidden>
-<source src="../voice/not.mp3" type="audio/mpeg">
-</audio>
+// Execute the SQL query to retrieve the student data
+$student_query = "SELECT studentname, subjectname, grade, quarter FROM grade ORDER by studentname";
+$student_result = mysqli_query($conn, $student_query);
+
+// Execute the SQL query to retrieve the grade information
+$info_query = "SELECT sy, year, adviser, section FROM grade LIMIT 1";
+$info_result = mysqli_query($conn, $info_query);
+$info_row = mysqli_fetch_assoc($info_result);
+
+// Display the grade information in a paragraph
+echo '<p>SY: ' . $info_row['sy'] . ' | Year: ' . $info_row['year'] . ' | Adviser: ' . $info_row['adviser'] . ' | Section: ' . $info_row['section'] . '</p>';
+
+// Initialize an empty array to hold the student data
+$students = [];
+
+// Loop through the student query results and organize the data by student and subject
+while ($row = mysqli_fetch_assoc($student_result)) {
+  $student_name = $row['studentname'];
+  $subject_name = $row['subjectname'];
+  $grade = $row['grade'];
+  $quarter = $row['quarter'];
+
+  if (!isset($students[$student_name])) {
+    $students[$student_name] = [];
+  }
+
+  if (!isset($students[$student_name][$subject_name])) {
+    $students[$student_name][$subject_name] = [
+      'first' => null,
+      'second' => null,
+      'average' => null
+    ];
+  }
+
+  if ($quarter === 'First') {
+    $students[$student_name][$subject_name]['first'] = $grade;
+  } else if ($quarter === 'Second') {
+    $students[$student_name][$subject_name]['second'] = $grade;
+  }
+}
+
+// Output the table header
+echo '<table>';
+echo '<thead><tr><th>Student Name</th>';
+
+// Create the subject headers
+$subject_headers = [];
+foreach ($students as $student_name => $grades) {
+  foreach ($grades as $subject_name => $data) {
+    $subject_headers[$subject_name] = true;
+  }
+}
+$subject_headers = array_keys($subject_headers);
+foreach ($subject_headers as $subject_name) {
+  echo '<th>' . $subject_name . '</th>';
+}
+echo '<th>TOTAL</th><th>AVE</th><th>AVE</th><th>RANK</th>';
+// Output the table body
+echo '<tbody>';// Create an array of all the student averages
+$student_averages = [];
+foreach ($students as $student_name => $grades) {
+  $total_subject_averages = [];
+  foreach ($subject_headers as $subject_name) {
+    if (isset($grades[$subject_name])) {
+      $first = $grades[$subject_name]['first'] ?? 0;
+      $second = $grades[$subject_name]['second'] ?? 0;
+      $average = round(($first + $second) / 2, 1);
+      $total_subject_averages[] = $average;
+    }
+  }
+  $total = array_sum($total_subject_averages);
+  $ave_decimal = round($total / count($total_subject_averages), 1);
+  $student_averages[$student_name] = $ave_decimal;
+}
+
+// Rank the students based on their average
+arsort($student_averages);
+$rank = 1;
+foreach ($student_averages as $student_name => $average) {
+  $student_averages[$student_name] = [$average, $rank];
+  $rank++;
+}
+
+// Output the table rows with rank and highlight the row with the highest average
+foreach ($students as $student_name => $grades) {
+  echo '<tr';
+
+  echo '><td>' . $student_name . '</td>';
+  
+  $total_subject_averages = [];
+  
+  foreach ($subject_headers as $subject_name) {
+    if (!isset($students[$student_name][$subject_name])) {
+      $average = '-';
+    } else {
+      $first = $students[$student_name][$subject_name]['first'] ?? 0;
+      $second = $students[$student_name][$subject_name]['second'] ?? 0;
+      $average = round(($first + $second) / 2, 1);
+      
+      $total_subject_averages[] = $average;
+    }
+    
+    echo '<td>' . $average . '</td>';
+  }
+  
+  $total = array_sum($total_subject_averages);
+  $ave_decimal = round($total / count($total_subject_averages), 1);
+  $ave_no_decimal = round($ave_decimal);
+  
+  echo '<td>' . $total . '</td>';
+  echo '<td>' . $ave_decimal . '</td>';
+  echo '<td>' . $ave_no_decimal . '</td>';
+  echo '<td>' . $student_averages[$student_name][1] . '</td></tr>';
+}
+
+?>
 
 
-<div id="carouselExampleSlidesOnly" class="carousel  slide start-middle" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img/1.gif" class="d-block w-50 align-items-sm-center " alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="img/3.gif" class="d-block w-50" alt="...">
-    </div>
 
-</div>
 
+      </tbody>
+    </table>
+  </div>
+  
 
 
     </div>
@@ -231,8 +325,6 @@ function myFunction() {
   
 </body>
 </html>
-<?php
 
-}
 
 

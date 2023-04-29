@@ -16,39 +16,77 @@
   <style>
     
 
-
-.container {
-	min-height: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+    .fade-in {
+  animation: fadeIn 1s ease-in-out;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+html, body {
+  height:100%;
+}
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.table-scrollable{
+  height: 250px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.table-scrollable::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+}
+
+.table-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 5px; /* roundness of the thumb */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
+
+.container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* other styles */
+}
+
+
 .container form {
-	width:auto;
+	width: 600px;
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
   
 }
 .box {
-  width:auto;
-
-}
-.box2 {
-  width:500px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
-  border-radius: 10px;
-  height: 6 0px; 
-  margin: 20px 0;
+	width: 750px;
 }
 .container table {
-  width:500px;
 	padding: 20px;
 	border-radius: 10px;
-  border:10px;  
-
+  background-color:  white;
 }
 
 .link-right {
@@ -66,12 +104,6 @@
 
 
 
-
-.thead
-{
-font-size: 10px;;
-
-}
 
 
 
@@ -162,52 +194,23 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
-  .btn-icon {
-  width: 2rem; /* or whatever size you want */
-  height: auto; /* or whatever size you want */
-  object-fit: contain;
-  vertical-align: middle;
-  margin-right: 0.5rem; /* or whatever margin you want */
-}
-
-#search-button {
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-}
-
-#search-button:hover img {
+  .btn-primary:hover {
   transform: scale(1.2);
+  transition: transform 0.5s ease;
 }
-
-#search-button img {
-  transition: transform 0.2s ease-in-out;
-}
-
-#create-button {
-  background-color: transparent;
-  color: #343a40;
-  font-weight: bold;
-  transition: transform 0.2s ease-in-out;
-}
-
-#create-button:hover {
-  background-color: transparent;
-  color: #007bff;
-  transform: scale(1.05);
-}
-
-#create-button .btn-icon {
-  max-height: 5rem;
-  vertical-align: middle;
-  transition: transform 0.2s ease-in-out;
-}
-
-#create-button:hover .btn-icon {
+.btn-danger:hover {
   transform: scale(1.2);
+  transition: transform 0.5s ease;
 }
+.link-primary {
+
+  padding:10px;
+}
+input{
 
 
+  border-radius: 10px;
+}
 </style>
 </head>
 <body>
@@ -232,19 +235,15 @@ function myFunction() {
 }
 </script>
 
-
+<br>
+<br>
 <!-- TITLE HERE -->
+<div class="container">
 
 
 
-
-        <div class=" container ">
        
-      
-      <div class=" text-center mb-3">
-     
 
-			</div>
 
 <form>
 
@@ -258,49 +257,34 @@ function myFunction() {
              
 			  	 ?> 
            
-
-
-           <div class="container mt-4">
-           <div class="box2">
-           <div class="container text-center">
   <form class="" method="get">
   <br>
-    <div class="input-group mb-3 form text-center">
-   
+    <div class="input-group mb-3 form text-center" >
+
       <a class="link-primary" href="create.php" display-40>
      
         <button type="button" class="btn btn-outline-secondary border-0 p-0 text-center" id="create-button">
-          <img src="img/add.gif" alt="search-icon" class="btn-icon">
+          <img src="img/add.gif" alt="search-icon" class="btn-icon" style="width:25px;">
         </button>
       </a>
-      <input type="text" class="form-control" name="search" placeholder="Search subjects...">
-      <button class="btn btn-outline-secondary border-0 p-0" type="submit" id="search-button text-center">
-        <img src="img/search.gif" alt="search-icon" class="btn-icon">
-      </button>
-    </div>
-  </form>
-</div>
 
+ 
+ 
+  <input type="text" class="form-control" name="search"  placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" >
 
-           </div>
-           <!--
-        
-  <table class="table table-bordered ">
-              <thead >
-                  <tr>
-                  <th hidden scope="col">Subject ID </th>
-                  <th scope="col">Subject Name </th>
-                  <th hidden scope="col">Subject Teacher Username</th>
-                  
-                  <th class="text-center"scope="col" colspan="2">Actions </th>
-                </tr>
-              </thead>
-        <tbody>    
+<!--
+      <input type="text" class="form-control" name="search" placeholder="Search subjects..." >
              -->
-       
-        
+      &nbsp;&nbsp;
+      <a class="link-primary btn-outline-secondary border-0 p-0" type="submit" id="search-button text-center">
+        <img src="img/search.gif" alt="search-icon" class="btn-icon" style="width:25px;">
+             </a>
+    </div>
 
-        <?php
+
+
+    
+    <?php
 require "./php/db_conn.php";
 $teacherid = $_SESSION['username'];
 $subjectgrouphead = $_SESSION["id"];
@@ -327,8 +311,9 @@ if (mysqli_num_rows($result) > 0) {
   // Display the table
   ?>
   <div class="table-responsive">
+<div class="table-scrollable">
     <table class="table table-bordered">
-      <thead>
+      <thead class="tetxt-white" style="  color:white;background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
         <tr>
           <th hidden scope="col">Subject ID</th>
           <th scope="col">Subject Name</th>
@@ -345,8 +330,41 @@ if (mysqli_num_rows($result) > 0) {
             <td><?php echo $Row["subjectname"]; ?></td>
             <td hidden><?php echo $Row["teacherid"]; ?></td>
             <td class="text-center">
-              <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn btn-dark">+</a>
+     
+
+              <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+
+<img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+</b></a>
+
+<a type="button" class="btn" data-bs-toggle="modal" 
+data-bs-target="#deleteModal<?php echo $Row['id']; ?>"
+style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+<img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image"><b>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
               <a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?php echo $Row['id']; ?>');">DISCARD</a>
+            
+        -->
             </td>
           </tr>
         <?php
@@ -355,7 +373,7 @@ if (mysqli_num_rows($result) > 0) {
       </tbody>
     </table>
   </div>
-
+  </div>
   <?php
   // Add the page buttons for all the available pages
   if ($total_pages > 1) {
@@ -410,6 +428,15 @@ if ($current_page < $total_pages) {
             }
           }
 ?>
+  </form>
+
+
+
+ 
+
+</div>
+
+       
 
 
 

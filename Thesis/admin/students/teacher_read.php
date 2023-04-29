@@ -227,7 +227,10 @@ td a {
   text-decoration: none;
   color: black;
 }
-
+button.btn:hover img,
+a.btn:hover img {
+    transform: scale(1.2);
+}
 
 td a:hover {
   font-weight: bold;
@@ -235,7 +238,7 @@ td a:hover {
 }
 
 .table-scrollable{
-  height: 400px;
+  height: 220px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -255,7 +258,11 @@ td a:hover {
 .table-scrollable::-webkit-scrollbar-thumb:hover {
   background: #555; /* color of the thumb on hover */
 }
-
+.table-scrollable thead {
+  position: sticky; /* Make the header sticky */
+  top: 0; /* Position the header at the top */
+  z-index: 1; /* Make the header stay on top of the rows */
+}
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -268,6 +275,7 @@ td a:hover {
     opacity: 1;
   }
 }
+
   </style>
 </head>
 
@@ -293,7 +301,6 @@ td a:hover {
         <div class="modal-body">
           <p><?php echo $_GET['success']; ?></p>
         </div>
-       
       </div>
     </div>
   </div>
@@ -455,9 +462,10 @@ while($row = mysqli_fetch_array($result)) {
 </form>
 
 <br>
+
 <div class="fade-in">
 <div class="table-scrollable">
-  <table class="table table-bordered">
+<table class="table table-bordered">
 <Script>
   // get the table element and its height
 var table = document.querySelector('.table-scrollable table');
@@ -576,11 +584,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
   
      <td class="text-center">
       
-     <a href="update.php?id=<?php echo $Row['id'] ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+     <a href="update.php?id=<?php echo $Row['id'] ?>" class="btn btn-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
 
                    <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
                    </b></a>
-                   <a type="button" class="btn" data-bs-toggle="modal" 
+                   <a type="button" class="btn btn-transparent" data-bs-toggle="modal" 
   data-bs-target="#deleteModal<?php echo $Row['id']; ?>"
   style="border: none; background-color:transparent; outline: none;" title="Delete">
 
@@ -606,7 +614,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
     <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
     <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
   </div>
-  <button type="submit" class="btns" name="delete" style="background-color: transparent; border: none;">
+  <button type="submit" class="btn btn-transparent" name="delete" style="background-color: transparent; border: none;">
   <img style="height:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
 </button>
 

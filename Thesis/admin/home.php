@@ -32,7 +32,7 @@ body {
 
 
   .container {
-	min-height: 100vh;
+	min-height: 50vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -253,39 +253,36 @@ function myFunction() {
 
 
   <br>
-  <div class="row text-center justify-content-center">
-  <div class="col-2 text-center">
+  <div class="row text-center justify-content-center" style="max-height">
+  <div class="col-2 text-center" style="width:100">
     
-    <button type="button" class="btn btn-primary bg-white text-dark">
+    <button type="button w-10" class="btn btn-primary bg-white text-dark" >
       <img src="button1.jpg" alt="Button 1 Image">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
-    
-   
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio unde, 
+      maxime 
     </button>
   </div>
   <div class="col-2 text-center">
     <button type="button" class="btn btn-danger bg-white text-dark">
       <img src="button2.jpg" alt="Button 2 Image">
-      
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
-    
-    
+
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio unde, 
+      maxime 
     </button>
   </div>
   <div class="col-2 text-center">
     <button type="button" class="btn btn-warning bg-white text-dark">
       <img src="button3.jpg" alt="Button 3 Image">
       
-       
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
-    
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio unde, 
+      maxime 
   </button>
   </div>
   <div class="col-2 text-center">
     <button type="button" class="btn btn-dark bg-white text-dark">
       <img src="button4.jpg" alt="Button 4 Image">
-    
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quo nam modi nostrum, quod eligendi pariatur ullam veniam non neque adipisci earum! Quaerat temporibus neque nam illum in fugiat molestiae.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio unde, 
+      maxime 
     </button>
   </div>
 </div>

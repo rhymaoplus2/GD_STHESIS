@@ -276,7 +276,7 @@ td a:hover {
 
   <br>
   <?php
-if (isset($_GET['id'])) {
+if (isset($_GET['lrnnumber'])) {
     include "db_conn.php";
 
     function validate($data){
@@ -286,9 +286,9 @@ if (isset($_GET['id'])) {
         return $data;
     }
 
-    $id = validate($_GET['id']);
+    $lrnnumber = validate($_GET['lrnnumber']);
 
-    $sql = "SELECT * FROM students WHERE id=$id";
+    $sql = "SELECT  * FROM students WHERE lrnnumber=$lrnnumber";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -354,11 +354,7 @@ if (isset($_GET['id'])) {
 	
 
 
-		   
-		   <input type="text" 
-		          name="id"
-		          value="<?=$row['id']?>"
-		          hidden >
+		
               <!--
 				   <a class="link-primary" href="teacher_read.php" display-40>
           <button type="button" class="btn btn-dark">
