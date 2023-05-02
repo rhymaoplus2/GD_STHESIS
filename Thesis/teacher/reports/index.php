@@ -433,8 +433,8 @@ function myFunction() {
           </tr>
           <tr>
             <td></td>
-            <td><button type="button" rowspan="2" class="btn btn-primary">Semester 1</button></td>
-            <td><button type="button" wowspan="2" class="btn btn-primary">Semester 2</button></td>
+            <td><br><br><br></td>
+            <td><br><br></td>
             <td></td>
           </tr>
         </tbody>
@@ -458,13 +458,18 @@ function myFunction() {
 </td>
 
             <td>  <button type="button" class="btn btn-primary" onclick="window.open('shsq2.php', '_blank')">Quarter <br>2</button></td>
-            <td><button type="button" colspan="1" class="btn btn-primary"></button></td>
-            <td><button type="button" class="btn btn-primary"></button></td>
+            <td><button type="button" class="btn btn-primary">Quarter 3</button></td>
+            <td><button type="button" class="btn btn-primary">Quarter 4</button></td>
           </tr>
           <tr>
             <td></td>
-            <td><button type="button" rowspan="2" class="btn btn-primary">Semester 1</button></td>
-            <td><button type="button" wowspan="2" class="btn btn-primary">Semester 2</button></td>
+            <td>
+  <button type="button" class="btn btn-primary" onclick="window.open('shss1.php', '_blank')">Semester <br>1</button>
+</td>
+
+<td>
+  <button type="button" class="btn btn-primary" onclick="window.open('shss2.php', '_blank')">Semester <br>2</button>
+</td>
             <td></td>
           </tr>
         </tbody>

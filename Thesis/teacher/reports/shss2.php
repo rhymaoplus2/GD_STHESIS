@@ -12,7 +12,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QUARTER 1 SHS</title>
+	<title>Semester 2 SHS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -391,7 +391,7 @@ echo '
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
       . $info_row['sy'] . '</b><br>
-      Semester: Semester:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' . $info_row['semester'] .' Quarter </b>
+   Semester:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' Second</b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -401,7 +401,6 @@ echo '
     </div>
   </div>
 </div>';
-
 
 // Create an associative array to store the grades for each student and subject
 $grades = array();
@@ -494,8 +493,8 @@ foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num ++;
 }
-echo "<th class='text-center'> ".  $info_row['quarter'] .
-" Sem<br>Final<br>Average</th><th></th><th></th>";
+echo "<th class='text-center'> ". 
+"Second Sem<br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
 foreach ($unique_subjects as $subject) {
@@ -544,11 +543,7 @@ foreach ($total_grades as $subjectname => $student_grades) {
 }
 $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
 $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
-echo "<td class='text-center'>" . $full / $num . "</td>";
-
-
-
-
+echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
 echo "<td class='text-center'>".round(($full / $num))."</td>";
 
 $full=0;
@@ -728,8 +723,7 @@ echo "</table>";
             <br>
             <br>
             <br>
-    
-<?php
+            <?php
 // Include the database connection script
 include "php/db_conn.php";
 
@@ -759,7 +753,7 @@ echo '
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
       . $info_row['sy'] . '</b><br>
-      Semester: Semester:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' . $info_row['semester'] .' Quarter </b>
+   Semester:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' Second</b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -770,11 +764,10 @@ echo '
   </div>
 </div>';
 
-
 // Create an associative array to store the grades for each student and subject
 $grades = array();
 $num=0;
-$total=0;
+$full=0;
 // Create an array to store the unique subject names
 $unique_subjects = array();
 
@@ -814,7 +807,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         );
     }
 
-    if ($quarter == "Third") {
+    if ($quarter =="Third") {
         $grades[$studentname][$subjectname]["3rd"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
@@ -862,8 +855,8 @@ foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num ++;
 }
-echo "<th class='text-center'> ".  $info_row['quarter'] .
-" Sem<br>Final<br>Average</th><th></th><th></th>";
+echo "<th class='text-center'> ". 
+"Second Sem<br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
 foreach ($unique_subjects as $subject) {
@@ -874,14 +867,15 @@ echo "<th></th><th></th><th></th></tr></thead><tbody>";
 
 // Loop through the grades array and display the grades for each student and subject
 foreach ($grades as $studentname => $subjects) {
-  echo "<tr><td>".$firsname."</td>";
+  echo "<tr><td>".$studentname."</td>";
   foreach ($unique_subjects as $subject) {
       if (isset($subjects[$subject])) {
           echo "<td class='text-center'>".$subjects[$subject]["3rd"]."</td><td class='text-center'>".$subjects[$subject]["4th"]."</td>";
           $third = intval($subjects[$subject]["3rd"]);
           $fourth = intval($subjects[$subject]["4th"]);
           $average = ($third + $fourth) / 2;
-          $total += ($third + $fourth) / 2;
+          $full +=$average;
+          
           echo "
                 <td class='text-center'>".$average."</td>";
           
@@ -890,8 +884,10 @@ foreach ($grades as $studentname => $subjects) {
          
       else {
         
-          echo "<td></td><td></td>$tol<td></td>";
+          echo "<td></td><td></td><td></td>";
       }
+
+      
       
   }
   
@@ -909,10 +905,10 @@ foreach ($total_grades as $subjectname => $student_grades) {
 }
 $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
 $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
-echo "<td class='text-center'>" . $average_per_subject . "</td>";
+echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
+echo "<td class='text-center'>".round(($full / $num))."</td>";
 
-
-echo "<td class='text-center'>".round(($average_per_subject / $num))."</td>";
+$full=0;
 $average_overall = $average_per_subject / $num;
 if ($average_overall >= 90 && $average_overall <= 94) {
   $honor = 'With honors';
@@ -963,7 +959,6 @@ echo "</table>";
     mysqli_close($conn);
     
     ?>
-     
      <br>
     <br>
    
