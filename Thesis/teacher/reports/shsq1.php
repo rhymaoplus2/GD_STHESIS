@@ -12,9 +12,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>REPORTS</title>
+	<title>QUARTER 1 SHS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script src="path/jquery-3.6.4.min.js"></script>
+<script src="path/bootstrap.js"></script>
+
 
   <header>
 
@@ -219,6 +223,15 @@ table {
     size: auto;  /* Use the default page size */
        /* Reset the page margin to zero */
   }
+  .img-fluid{
+
+    display: none;
+  }
+
+  .my-element
+  {
+    display: none;
+  }
   /* Define the styles for the printable elements */
   .printable {
     visibility: visible;
@@ -231,16 +244,122 @@ table {
   .page2 {
     page-break-before: always;
   }
+  .form-control 
+{
+border:none;
+text-align: center;
+}
+.table-borderless {
+text-align: center;
+  
+}
+label {
+  text-align: center;
+  }
 }
 
+.footer input {
+    font-size: 12px;
+  }
+  .d-flex {
+  display: flex;
+  align-items: flex-end;
+}
 
+.d-flex input::placeholder {
+  font-weight: bold;
+}
 
+.footer
+{
+    font-size: 12px;
+    border-left: none;
+ 
+  }
+  .table-borderless input {
+width:200px;
+
+}
+.table-borderless {
+  border-collapse: collapse;
+  
+}
+
+.table-borderless td, .table-borderless th {
+  border: none;
+  font-size: 12px;
+  padding: 0px; /* adjust the padding value as desired */
+  margin: 0; /* set margin to 0 to remove any extra space between cells */
+  white-space: nowrap;
+}
+label {
+    display: block;
+    font-size: 12px;
+    margin-top: 0;
+  }
+  .form-control {
+font-size: 12px;
+
+  padding: 0;
+  margin: 0;
+}
+
+#my-element {
+  transform-origin: center;
+  transition: transform 5s, opacity 2s;
+}
+
+#my-element.zoom-rotate-fade {
+  transform: scale(6) rotate(180deg);
+  opacity: 3;
+}
+
+#my-element button {
+  background: none;
+  border: none;
+}
+
+#my-element button:hover img {
+  opacity: 0.8;
+}
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #my-element {
+    animation: blink 3s infinite;
+  }
 </style>
 
   </style>
 </head>
 
 <body>
+<div id="my-element" class="position-fixed" style="z-index: 9999; top: 0; right: 0; text-align: center;">
+  <button class="fixed-button" id="print-button">
+    <img src="img/iprint.png" alt="Print" class="img-fluid" style="width: 50px;">
+  </button>
+</div>
+
+
+<script>
+  const printButton = document.getElementById('print-button');
+  printButton.addEventListener('click', () => {
+    window.print();
+  });
+</script>
+
+
+
+  <br><br>
 <div class="page1">
 <?php
 // Include the database connection script
@@ -264,7 +383,7 @@ $info_row = mysqli_fetch_assoc($info_result);
 // Display the grade information in a paragraph
 echo '
 <div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="img/consoheader.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
+    <img src="img/headerconso.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
 </div>
 <div>
   <div style="display: flex; justify-content: space-between;">
@@ -463,9 +582,128 @@ echo "</table>";
     mysqli_close($conn);
     
     ?>
-       </div>
+    <br>
+    <br>
+ 
+<table class="table-borderless">
+  <tbody>
+    <tr>
+<td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adviser&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-humss" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HUMSS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-abm" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-tvl" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TVL Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u>     
+  
+<input type="text" class="form-control" id="checked-by-sports">
+        
+        </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noted by:<br><br><br><u>
+  
+  
+<input disabled  type="text" class="form-control" value="<?php 
       
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT pname FROM principal WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $crname = $row['pname'];
+
+            // echo the value of crname
+            echo $crname;
+
+          ?>">
+
+
+
+
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINCIPAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
+  
+<input disabled type="text" class="form-control" value="<?php 
+      
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT crname FROM cr WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $crname = $row['crname'];
+
+            // echo the value of crname
+            echo $crname;
+
+          ?>">
+
+
+
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Campus Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+
+    </tr>
+   
+  </tbody>
+</table>
           
+<script>
+  // Check if values are stored in sessionStorage
+  if (sessionStorage.getItem("checked-by-stem")) {
+    document.getElementById("checked-by-stem").value = sessionStorage.getItem("checked-by-stem");
+  }
+  if (sessionStorage.getItem("checked-by-humss")) {
+    document.getElementById("checked-by-humss").value = sessionStorage.getItem("checked-by-humss");
+  }
+  if (sessionStorage.getItem("checked-by-abm")) {
+    document.getElementById("checked-by-abm").value = sessionStorage.getItem("checked-by-abm");
+  }
+  if (sessionStorage.getItem("checked-by-tvl")) {
+    document.getElementById("checked-by-tvl").value = sessionStorage.getItem("checked-by-tvl");
+  }
+  if (sessionStorage.getItem("checked-by-sports")) {
+    document.getElementById("checked-by-sports").value = sessionStorage.getItem("checked-by-sports");
+  }
+  if (sessionStorage.getItem("noted-by-principal")) {
+    document.getElementById("noted-by-principal").value = sessionStorage.getItem("noted-by-principal");
+  }
+  if (sessionStorage.getItem("approved-by-cr")) {
+    document.getElementById("approved-by-cr").value = sessionStorage.getItem("approved-by-cr");
+  }
+
+  // Store values in sessionStorage on change
+  document.getElementById("checked-by-stem").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-stem", document.getElementById("checked-by-stem").value);
+  });
+  document.getElementById("checked-by-humss").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-humss", document.getElementById("checked-by-humss").value);
+  });
+  document.getElementById("checked-by-abm").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-abm", document.getElementById("checked-by-abm").value);
+  });
+  document.getElementById("checked-by-tvl").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-tvl", document.getElementById("checked-by-tvl").value);
+  });
+  document.getElementById("checked-by-sports").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-sports", document.getElementById("checked-by-sports").value);
+  });
+  document.getElementById("noted-by-principal").addEventListener("change", function() {
+    sessionStorage.setItem("noted-by-principal", document.getElementById("noted-by-principal").value);
+  });
+  document.getElementById("approved-by-cr").addEventListener("change", function() {
+    sessionStorage.setItem("approved-by-cr", document.getElementById("approved-by-cr").value);
+  });
+</script>
+
+
           <div class="page2">
             <br>
             <br>
@@ -492,7 +730,7 @@ $info_row = mysqli_fetch_assoc($info_result);
 // Display the grade information in a paragraph
 echo '
 <div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="img/consoheader.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
+    <img src="img/headerconso.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
 </div>
 <div>
   <div style="display: flex; justify-content: space-between;">
@@ -692,6 +930,130 @@ echo "</table>";
     
     ?>
      
+     <br>
+    <br>
+   
+<table class="table-borderless">
+  <tbody>
+    <tr>
+<td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adviser&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-humss" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HUMSS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-abm" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-tvl" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TVL Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u>     
+  
+<input type="text" class="form-control" id="checked-by-sports">
+        
+        </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noted by:<br><br><br><u>
+  
+  
+<input disabled  type="text" class="form-control" value="<?php 
+      
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT pname FROM principal WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $crname = $row['pname'];
+
+            // echo the value of crname
+            echo $crname;
+
+          ?>">
+
+
+
+
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINCIPAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
+  
+<input disabled type="text" class="form-control" value="<?php 
+      
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT crname FROM cr WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $crname = $row['crname'];
+
+            // echo the value of crname
+            echo $crname;
+
+          ?>">
+
+
+
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Campus Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+
+    </tr>
+   
+  </tbody>
+</table>
+          
+<script>
+  // Check if values are stored in sessionStorage
+  if (sessionStorage.getItem("checked-by-stem")) {
+    document.getElementById("checked-by-stem").value = sessionStorage.getItem("checked-by-stem");
+  }
+  if (sessionStorage.getItem("checked-by-humss")) {
+    document.getElementById("checked-by-humss").value = sessionStorage.getItem("checked-by-humss");
+  }
+  if (sessionStorage.getItem("checked-by-abm")) {
+    document.getElementById("checked-by-abm").value = sessionStorage.getItem("checked-by-abm");
+  }
+  if (sessionStorage.getItem("checked-by-tvl")) {
+    document.getElementById("checked-by-tvl").value = sessionStorage.getItem("checked-by-tvl");
+  }
+  if (sessionStorage.getItem("checked-by-sports")) {
+    document.getElementById("checked-by-sports").value = sessionStorage.getItem("checked-by-sports");
+  }
+  if (sessionStorage.getItem("noted-by-principal")) {
+    document.getElementById("noted-by-principal").value = sessionStorage.getItem("noted-by-principal");
+  }
+  if (sessionStorage.getItem("approved-by-cr")) {
+    document.getElementById("approved-by-cr").value = sessionStorage.getItem("approved-by-cr");
+  }
+
+  // Store values in sessionStorage on change
+  document.getElementById("checked-by-stem").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-stem", document.getElementById("checked-by-stem").value);
+  });
+  document.getElementById("checked-by-humss").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-humss", document.getElementById("checked-by-humss").value);
+  });
+  document.getElementById("checked-by-abm").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-abm", document.getElementById("checked-by-abm").value);
+  });
+  document.getElementById("checked-by-tvl").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-tvl", document.getElementById("checked-by-tvl").value);
+  });
+  document.getElementById("checked-by-sports").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-sports", document.getElementById("checked-by-sports").value);
+  });
+  document.getElementById("noted-by-principal").addEventListener("change", function() {
+    sessionStorage.setItem("noted-by-principal", document.getElementById("noted-by-principal").value);
+  });
+  document.getElementById("approved-by-cr").addEventListener("change", function() {
+    sessionStorage.setItem("approved-by-cr", document.getElementById("approved-by-cr").value);
+  });
+</script>
+
+
+
+
      </div> 
              
 

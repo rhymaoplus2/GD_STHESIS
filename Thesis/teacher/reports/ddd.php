@@ -5,6 +5,8 @@ include "php/db_conn.php";
 $student_query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter FROM grade ORDER by studentname, subjectname, quarter";
 
 $student_result = mysqli_query($conn, $student_query);
+$subject_totals = [];
+$subject_counts = [];
 
 // Initialize an empty array to hold the student data
 $students = [];
@@ -15,6 +17,18 @@ while ($row = mysqli_fetch_assoc($student_result)) {
   $subject_name = $row['subjectname'];
   $grade = $row['grade'];
   $quarter = $row['quarter'];
+  if (!isset($subject_totals[$subject_name])) {
+    $subject_totals[$subject_name] = 0;
+    $subject_counts[$subject_name] = 0;
+}
+
+if (isset($grades[$subject_name])) {
+    $first = $grades[$subject_name]['first'] ?? 0;
+    $second = $grades[$subject_name]['second'] ?? 0;
+    $average = round(($first + $second) / 2, 1);
+    $subject_totals[$subject_name] += $average;
+    $subject_counts[$subject_name]++;
+}
 
   if (!isset($students[$student_name])) {
     $students[$student_name] = [];
@@ -53,9 +67,10 @@ foreach ($students as $student_name => $grades) {
 }
 $subject_headers = array_keys($subject_headers);
 foreach ($subject_headers as $subject_name) {
-  echo '<th colspan="2">' . $subject_name . '</th>';
+    echo '<th>' . $subject_name . '</th>';
 }
-echo '<th>TOTAL</th><th>AVE</th><th>AVE</th><th style="text-align:center">RANK</th>';
+echo '<th>SUBJECT AVE</th><th>TOTAL</th><th>AVE</th><th>AVE</th><th style="text-align:center">RANK</th>';
+
 // Output the table body
 echo '<tbody>';
 // Create an array of all the student averages
@@ -98,37 +113,39 @@ foreach ($student_averages as $student_name => $average) {$student_averages[$stu
   echo '<td>' . $name_row['middlename'] . '</td>';
   
   $total_subject_averages = [];
-  
   foreach ($subject_headers as $subject_name) {
-  $first = $students[$student_name][$subject_name]['first'] ?? 0;
-  $second = $students[$student_name][$subject_name]['second'] ?? 0;
-  $quarter_grades = [$first, $second];// Add new logic to calculate the average per quarter for each subject
-  $quarter_averages = [];
-  foreach ($quarter_grades as $quarter_grade) {
-    if (!empty($quarter_grade)) {
-      $quarter_averages[] = (float) $quarter_grade;
+    if (!isset($students[$student_name][$subject_name])) {
+        $average = '-';
+    } else {
+        $first = $students[$student_name][$subject_name]['first'] ?? 0;
+        $second = $students[$student_name][$subject_name]['second'] ?? 0;
+        $average = round(($first + $second) / 2, 1);
     }
-  }
-  $quarter_average = !empty($quarter_averages) ? round(array_sum($quarter_averages) / count($quarter_averages), 1) : '-';
-  
-  echo '<td style="text-align:center;">' . $first . '</td>';
-  echo '<td style="text-align:center;">' . $second . '</td>';
-  echo '<td style="text-align:center;">' . $quarter_average . '</td>';
-  
-  $total_subject_averages[] = $quarter_average;
+    echo '<td style="text-align:center;">' . $average . '</td>';
 }
-
-$total = array_sum($total_subject_averages);
-$ave_decimal = round($total / count($total_subject_averages), 1);
-$ave_no_decimal = round($ave_decimal);
-
-// Add a CSS class to highlight the row with the highest average
-$row_class = '';
-if ($ave_decimal == $highest_average) {
-$row_class = ' class="highest"';
+$subject_total = 0;
+foreach ($subject_headers as $subject_name) {
+    if (isset($students[$student_name][$subject_name])) {
+        $first = $students[$student_name][$subject_name]['first'] ?? 0;
+        $second = $students[$student_name][$subject_name]['second'] ?? 0;
+        $average = round(($first + $second) / 2, 1);
+        $subject_total += $average;
+    }
 }
-
+$subject_ave = '-';
+if ($subject_counts[$subject_name] > 0) {
+    $subject_ave = round($subject_totals[$subject_name] / $subject_counts[$subject_name], 1);
 }
+echo '<td style="text-align:center;">' . $subject_ave . '</td>';
+echo '<td style="text-align:center;">' . $subject_total . '</td>';
+$student_total = array_sum($total_subject_averages);
+$student_ave_decimal = round($student_total / count($total_subject_averages), 1);
+$student_ave_no_decimal = round($student_ave_decimal);
+echo '<td style="text-align:center;">' . $student_total . '</td>';
+echo '<td style="text-align:center;">' . $student_ave_decimal . '</td>';
+echo '<td style="text-align:center;">' . $student_ave_no_decimal . '</td>';
+echo '<td style="text-align:center;">' . $student_averages[$student_name][1] . '</td>';
+
 
 echo '</tbody></table>';
 
