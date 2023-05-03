@@ -63,7 +63,7 @@ body {
 }
 
 .container {
-
+  width:400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +73,7 @@ body {
 
 
 .container form {
-	width: 600px;
+	width: 800px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -87,6 +87,7 @@ body {
 	padding: 20px;
 	border-radius: 10px;
   background-color:  white;
+  width:100%;
 }
 
 .link-right {
@@ -165,8 +166,6 @@ body {
       width: 45rem;
       height: 10rem;
   }
-
-
 
 
 .top-container {

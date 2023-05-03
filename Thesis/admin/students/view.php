@@ -361,7 +361,7 @@ font-size: 10px;;
 		          name="id"
 		          value="<?=$row['id']?>"
 		          hidden >
-				   <a class="link-primary" href="teacher_read.php" display-40>
+				   <a class="link-primary" href="./" display-40>
           <button type="button" class="btn btn-dark">
 
      Back

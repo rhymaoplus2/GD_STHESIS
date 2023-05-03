@@ -425,13 +425,20 @@ function myFunction() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><button type="button" class="btn btn-primary">Quarter 1</button></td>
-            <td><button type="button" class="btn btn-primary">Quarter 2</button></td>
-            <td><button type="button" class="btn btn-primary">Quarter 3</button></td>
-            <td><button type="button" class="btn btn-primary">Quarter 4</button></td>
+        <tr>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('jhsq1.php', '_blank', 'width=auto,height=600')">Quarter 1</button>
+          </td>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('jhsq2.php', '_blank', 'width=auto,height=600')">Quarter 2</button>
+          </td>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('jhsq3.php', '_blank', 'width=auto,height=600')">Quarter 3</button>
+          </td>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('jhsq4.php', '_blank', 'width=auto,height=600')">Quarter 4</button>
+          </td>
           </tr>
-          <tr>
             <td></td>
             <td><br><br><br></td>
             <td><br><br></td>
@@ -454,23 +461,27 @@ function myFunction() {
         <tbody>
           <tr>
           <td>
-  <button type="button" class="btn btn-primary" onclick="window.open('shsq1.php', '_blank')">Quarter <br>1</button>
-</td>
-
-            <td>  <button type="button" class="btn btn-primary" onclick="window.open('shsq2.php', '_blank')">Quarter <br>2</button></td>
-            <td><button type="button" class="btn btn-primary">Quarter 3</button></td>
-            <td><button type="button" class="btn btn-primary">Quarter 4</button></td>
+          <button type="button" class="btn btn-primary" onclick="window.open('shsq1.php', '_blank', 'width=auto,height=600')">Quarter 1</button>
+          </td>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('shsq2.php', '_blank', 'width=auto,height=600')">Quarter 2</button>
+          </td>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('shsq3.php', '_blank', 'width=auto,height=600')">Quarter 3</button>
+          </td>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('shsq4.php', '_blank', 'width=auto,height=600')">Quarter 4</button>
+          </td>
           </tr>
-          <tr>
+            <tr>
             <td></td>
             <td>
-  <button type="button" class="btn btn-primary" onclick="window.open('shss1.php', '_blank')">Semester <br>1</button>
-</td>
+          <button type="button" class="btn btn-primary" onclick="window.open('shss1.php', '_blank', 'width=auto,height=600')">Semester 1</button>
+          </td>
 
-<td>
-  <button type="button" class="btn btn-primary" onclick="window.open('shss2.php', '_blank')">Semester <br>2</button>
-</td>
-            <td></td>
+          <td>
+          <button type="button" class="btn btn-primary" onclick="window.open('shss2.php', '_blank', 'width=auto,height=600')">Semester 2</button>
+          </td>      <td></td>
           </tr>
         </tbody>
       </table>

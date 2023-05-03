@@ -1079,7 +1079,7 @@ border: none; border-radius:100%; width:50px; height: 50px;">
  
 
           <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
-          onclick="location.href='teacher_read.php'">
+          onclick="location.href='index.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
 

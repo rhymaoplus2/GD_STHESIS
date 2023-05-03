@@ -364,22 +364,25 @@ font-size: 12px;
 <?php
 // Include the database connection script
 include "php/db_conn.php";
-
+$name = $_SESSION["name"];
 // Execute the SQL query to retrieve the student data for the 1st quarter
 $query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
 FROM grade 
-WHERE quarter IN ('Third', 'Fourth')
+WHERE quarter IN ('Third', 'Fourth') AND adviser = '$name'
 
 AND LOWER(gender) = 'male'
 ORDER BY studentname, subjectname;
 ";
-
 // Execute the query and fetch the results
 $result = mysqli_query($conn, $query);
 // Execute the SQL query to retrieve the grade information
-$info_query = "SELECT * FROM grade LIMIT 1";
+$info_query = "SELECT * FROM grade 
+
+WHERE adviser = '$name' LIMIT 1
+";
 $info_result = mysqli_query($conn, $info_query);
 $info_row = mysqli_fetch_assoc($info_result);
+
 
 // Display the grade information in a paragraph
 echo '
@@ -726,11 +729,11 @@ echo "</table>";
             <?php
 // Include the database connection script
 include "php/db_conn.php";
-
+$name = $_SESSION["name"];
 // Execute the SQL query to retrieve the student data for the 1st quarter
 $query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
 FROM grade 
-WHERE quarter IN ('Third', 'Fourth')
+WHERE quarter IN ('Third', 'Fourth') AND adviser = '$name'
 
 AND LOWER(gender) = 'female'
 ORDER BY studentname, subjectname;
@@ -739,11 +742,13 @@ ORDER BY studentname, subjectname;
 // Execute the query and fetch the results
 $result = mysqli_query($conn, $query);
 // Execute the SQL query to retrieve the grade information
-$info_query = "SELECT * FROM grade LIMIT 1";
+$info_query = "SELECT * FROM grade 
+
+WHERE adviser = '$name' LIMIT 1
+";
 $info_result = mysqli_query($conn, $info_query);
 $info_row = mysqli_fetch_assoc($info_result);
 
-// Display the grade information in a paragraph
 echo '
 <div class="d-flex justify-content-center align-items-center position-relative">
     <img src="img/headerconso.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">

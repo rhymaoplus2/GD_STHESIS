@@ -22,7 +22,7 @@ if (isset($_POST['create'])) {
 
 	if (empty($subjectname))
 	 {
-		header ("Location:subjectlist/update.php?error=Subject ID is required&$user_data");
+		header ("Location:../index.php?error=Subject ID is required&$user_data");
 	}
 
 
@@ -35,12 +35,12 @@ if (isset($_POST['create'])) {
                VALUES('$subjectname')";
        $result = mysqli_query($conn, $sql);
        if ($result) {
-		header("Location: ../subjectlist.php?success=Added Successfully");
+		header("Location: ../index.php?success=Added Successfully");
 		
        }
 	   
        else {
-          header("Location:../create.php?error=unkown error occured&$user_data");
+          header("Location:../index.php?error=unkown error occured&$user_data");
        }
 	   
 	
