@@ -10,12 +10,13 @@
         <a class="nav-link " href="../home.php" >Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link t"href="../students">Student List</a></li>
+        <a class="nav-link "href="../students">Student List</a></li>
         <li class="nav-item">
-        <a class="nav-link" href="../subject">Subject List</a></li>
-     
+        <a class="nav-link " href="../subject">Subject List</a></li>
+        <li class="nav-item">
+        <a class="nav-link " href="../sections">Section List</a></li>
       <li class="nav-item">
-        <a class="nav-link" href="../records">Records</a>
+        <a class="nav-link " href="../records">Records</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="../reports">Reports</a>
@@ -25,7 +26,7 @@
       </li>
   
 	  <li class="nav-item ">
-        <a class="nav-link text-white" href="">Settings</a>
+        <a class="nav-link text-white" href="\">Settings</a>
       </li>
       <li class="nav-item ">
         <a class="nav-link " href="logout.php">Logout</a>

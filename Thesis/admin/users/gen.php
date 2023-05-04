@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
         $result = $stmt->execute();
 
         if ($result) {
-            header("Location: users.php?success=User information updated successfully");
+            header("Location: index.php?success=User information updated successfully");
             exit();
         } else {
             header("Location: generate.php?id=$id&error=Unknown error occurred");

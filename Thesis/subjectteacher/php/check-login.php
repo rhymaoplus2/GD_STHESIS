@@ -46,6 +46,15 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                         $_SESSION['name'] = $row['name'];
                         $_SESSION['sec1'] = $row['sec1'];
                         $_SESSION['sub1'] = $row['sub1'];
+                        $_SESSION['sub2'] = $row['sub2'];
+                        $_SESSION['sub3'] = $row['sub3'];
+                        $_SESSION['sub4'] = $row['sub4'];
+                        $_SESSION['sub5'] = $row['sub5'];
+                        $_SESSION['sub6'] = $row['sub6'];
+                        $_SESSION['sub7'] = $row['sub7'];
+                        $_SESSION['sub8'] = $row['sub8'];
+                        $_SESSION['sub9'] = $row['sub9'];
+                        $_SESSION['sub10'] = $row['sub10'];
                         $_SESSION['role'] = $role;
                         header("Location: ../home.php");
                         exit();

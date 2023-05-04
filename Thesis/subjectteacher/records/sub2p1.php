@@ -15,16 +15,19 @@
 
 
   <style>
+    
 @media print {
   /* Set the page size to A4 */
   @page {
     size: A4;
     margin: 0;
   }
+  
   .btn-icon img {
   width: 1.5rem;
   height: 1.5rem;
 }
+
 @page {
     margin-top: 50px;
   }
@@ -81,9 +84,91 @@
   display: none !important;
 }
 
-  
+.btn {
+    display: none;
+  }
+
+  /* Hide inputs */
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select,
+  textarea {
+    display: none;
+  }
+  select option {
+    display: none;
+  }
+
+}
+@media print {
+  /* Set the page size to A4 */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .btn-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
+   .print-hidden {
+      display: none;
+    }
+  /* Set the footer to be at the bottom of the page */
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+
+  /* Set the page break after two pages */
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* Hide the file name and other description */
+  .print-header,
+  .print-footer {
+    display: none;
+  }
+
+  /* Only display content in the last page */
+  .wrapper {
+    counter-increment: page;
+  }
+
+  /* Add margin to the top of the second page */
+  .wrapper:nth-of-type(n+3) {
+    margin-top: 100px;
+  }
+
+  /* Add page number to the last page */
+  .wrapper:after {
+    content: counter(page);
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    page-break-after: always;
+  }
+  .wrapper:last-of-type:after {
+    content: "";
+  }
+  .container-fluid.p-0 {
+  display: none;
+}
+.tooltip {
+  display: none !important;
+}
+
+  
+}
 td {
   border: 1px solid black;
 }
@@ -183,8 +268,14 @@ font-size: 10px;;
   margin-left: 20rem;
   margin-top: 5rem;
   }
-  
-  
+  .fixed-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
   .button{
   
       margin-left: 5rem;
@@ -272,46 +363,109 @@ font-size: 10px;;
 
     </style>
 </head>
-<body onload="window.print()">
+<body>
 
 
     <div class="d-flex justify-content-center align-items-center position-relative">
 
-    <img src="header.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
+    <img src="msu.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
 
 
 </div>
 
+<button class="btn btn-primary fixed-button" onclick="window.print()" style="background-color: transparent; border: none; outline: none; box-shadow: none;">
+  <img src="img/printx.gif" alt="Print" class="img-fluid" style="width: 100px;">
+</button>
 
 
-oyill
+
 
 
 
 <div class="container " >
+<div style="text-align: center;">
+<form class="row text-center g-3 print-hidden" method="POST" action="">
+
+
+  <div class="col-auto">
+
+  </div>
+  <div class="col-auto">
+    <select class="form-select" name="section" id="section">
+      <option value="">PRINT GRADES FROM SECTION</option>
+      <?php
+      require "./php/db_conn.php";
+      // Retrieve the section names from the "section" table
+      $sql = "SELECT name FROM section";
+      $result = $conn->query($sql);
+
+      // Generate the dropdown list options
+      if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
+              echo '<option value="' . $row["name"] . '">' . $row["name"] . '</option>';
+          }
+      }
+
+      // Close the database connection
+      $conn->close();
+      ?>
+    </select>
+  </div>
+  <div class="col-auto">
+  <button type="submit" class="btn btn-primary mb-3" style="background-color: transparent; border: none; outline: none; box-shadow: none;">
+    <img src="img/show.gif" alt="Print" class="img-fluid" style="width: 30px;">
+  </button>
+</div>
+
+</form>
+    </div>
 		<div class="box">
     <div class="content">
 
 
+<script>
+  const searchInput = document.getElementById('search');
+  const tableRows = document.querySelectorAll('table tbody tr');
+
+  searchInput.addEventListener('input', () => {
+    const searchText = searchInput.value.toLowerCase();
+    tableRows.forEach(row => {
+      const name = row.querySelector('.name').textContent.toLowerCase();
+      const subject = row.querySelector('.subject').textContent.toLowerCase();
+      const grade = row.querySelector('.grade').textContent.toLowerCase();
+      const teacher = row.querySelector('.teacher').textContent.toLowerCase();
+      const section = row.querySelector('.section').textContent.toLowerCase();
+      if (name.includes(searchText) || subject.includes(searchText) || grade.includes(searchText) || teacher.includes(searchText) || section.includes(searchText)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+</script>
+
             <table class="table table-bordered small table-sm" >
 
-            <?php
+<?php
 require "./php/db_conn.php";
 $teacher = $_SESSION['name'];
+$filter = isset($_POST['section']) ? "AND b.section = '{$_POST['section']}'" : "";
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,b.semester,
-b.firstname, b.middlename, b.lastname, b.remarks,b.year
+a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
+b.firstname, b.middlename, b.lastname, b.remarks,b.year,b.semester,b.ts
 FROM grade b
 INNER JOIN users a ON a.sub2 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
-WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND b.gender = 'FEMALE' AND a.name = '$teacher'
-ORDER BY b.studentname ASC LIMIT 1;";
+WHERE  b.quarter = 'FIRST' AND b.gender = 'MALE' AND a.name = '$teacher'
+$filter
+ORDER BY b.studentname ASC;
+";
 
 $result = mysqli_query($conn, $query);
 if ($Row = mysqli_fetch_assoc($result)) {
   $output_left = "<div id='left'>";
   $output_left .= "<p>";
-  $output_left .= "Track & Strands:&nbsp;<br>"; 
-  $output_left .= "Year & Section:&nbsp; &nbsp;&nbsp;<strong>" . $Row['section'] . $Row['year'] . "</strong><br>";
+  $output_left .= "Track & Strands:&nbsp;:&nbsp;<b>". $Row['ts']."</b> <br>" ; 
+  $output_left .= "Year & Section:&nbsp; &nbsp;&nbsp;<strong>" . $Row['section'] ."&nbsp;". $Row['year'] . "</strong><br>";
   $output_left .= "Adviser:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
   <strong>" . $Row['adviser'] . "</strong><br>";
   $output_left .= "</p>";
@@ -321,7 +475,7 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_right .= "<p>";
   $output_right .= "Subject:&nbsp;<b>" .$Row['sub2'] ."</b><br>";
   $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
-  $output_right .= "Semester:&nbsp;<strong>" . $Row['semester'] . "</strong><br>";
+  $output_right .= "Semester:&nbsp;<strong>" .  "FIRST</strong><br>";
   $output_right .= "</p>";
   $output_right .= "</div>";
   
@@ -330,17 +484,18 @@ if ($Row = mysqli_fetch_assoc($result)) {
   echo $output_left;
   echo $output_right;
 } else {
-  echo "No results found";
+  echo "<strong>There are no grades available for printing.</strong>
+    ";
+    
 }
 
 mysqli_close($conn);
+
 ?>
 
 
 
 <thead>
-
-
 
 
 
@@ -363,18 +518,28 @@ mysqli_close($conn);
 </thead>
 
 <?php
+
 require "./php/db_conn.php";
+
 $teacher = $_SESSION['name'];
-$rowNum = 0; 
-$sql = "SELECT * FROM grade ORDER BY studentname ASC  ";   
+$rowNum = 0;
+$filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
+
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
 a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
-INNER JOIN users a ON a.sub2 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
-WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND b.gender = 'MALE' AND a.name = '$teacher'
-ORDER BY b.studentname ASC;
-";
+INNER JOIN users a ON REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
+WHERE 
+ REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
+AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
+AND b.quarter = 'FIRST'
+AND a.name = '$teacher'
+$filter
+ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
+"; 
+
 
 
 $result = mysqli_query($conn, $query);
@@ -405,18 +570,26 @@ while ($Row = mysqli_fetch_assoc($result)) {
 
 
               <?php
-require "./php/db_conn.php";
 $teacher = $_SESSION['name'];
-$rowNum = 0; 
-$sql = "SELECT * FROM grade ORDER BY studentname ASC  ";   
+$rowNum = 0;
+$filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
+
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
 a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
-INNER JOIN users a ON a.sub2 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
-WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND b.gender = 'FEMALE' AND a.name = '$teacher'
-ORDER BY b.studentname ASC;
+INNER JOIN users a ON REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
+WHERE 
+REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '') 
+AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
+AND b.quarter = 'FIRST'
+AND a.name = '$teacher'
+$filter
+ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 ";
+
+
 
 
   $result = mysqli_query($conn, $query);
@@ -433,7 +606,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
           <td class="text "><?php echo $Row["lastname"]; ?></td>
           <td class="text " ><?php echo $Row["firstname"]; ?></td>
           <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
-          
+         
           <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
   
           <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
@@ -448,6 +621,33 @@ while ($Row = mysqli_fetch_assoc($result)) {
 
       </table>
 
+
+
+  <?php
+require "./php/db_conn.php";
+$teacher = $_SESSION['name'];
+$rowNum = 0; 
+$filter = isset($_POST['section']) ? "AND b.section = '{$_POST['section']}'" : "";
+$query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
+a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
+b.firstname, b.middlename, b.lastname, b.remarks
+FROM grade b
+INNER JOIN users a ON a.sub2 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
+WHERE  b.quarter = 'FIRST' AND a.name = '$teacher'
+$filter
+ORDER BY b.studentname ASC;
+";
+
+
+$result = mysqli_query($conn, $query);
+
+while ($Row = mysqli_fetch_assoc($result)) {
+  $rowNum++; // increment rowNum
+?>
+
+
+
+<?php } ?>
 
 
 
@@ -669,7 +869,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
           echo "</tr>";
         }
       } else {
-        echo "<tr><td colspan='4'>No results found</td></tr>";
+        echo "<tr><td colspan='4'>There are no grades available for printing.</td></tr>";
       }
       mysqli_close($conn);
     ?>
@@ -687,3 +887,5 @@ while ($Row = mysqli_fetch_assoc($result)) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+p'[p---=0
+ ]

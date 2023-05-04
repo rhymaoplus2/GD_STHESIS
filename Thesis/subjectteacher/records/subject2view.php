@@ -2,7 +2,7 @@
 
    session_start();
    include "../php/db_conn.php";
-   include "./php/subject1view.php";
+   include "./php/sub.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
@@ -18,9 +18,65 @@
   <style>
     
 
+    a {
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+a img {
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover img {
+  transform: scale(1.2); /* Increase the image size by 20% on hover */
+}
+
+    html, body {
+  height: auto;
+}
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+}
+
+.b::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.b::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.b::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+.b::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 .container {
-	min-height: 100vh;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -29,15 +85,15 @@
 }
 
 .container form {
-	width: 800px;
-	padding: 20px;
+		padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
   margin: 0 auto;
 }
 .box {
-	width: auto;
+	width: 100%;
+  
 }
 .container table {
 	padding: 20px;
@@ -51,6 +107,7 @@
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color:white;
+ 
   border: 10px;
 }
 
@@ -70,11 +127,6 @@
 
 
 
-.thead
-{
-font-size: 10px;;
-
-}
 
 
 
@@ -115,12 +167,7 @@ font-size: 10px;;
   margin-left: 5rem;
   margin-top: 9.5rem;
   }
-  
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
-  }
+
   .text1
   {
       margin-left: 23rem;
@@ -191,18 +238,6 @@ font-size: 10px;;
   {
     margin-left:80%;
   }
-  #myVideo {
-
-width: 100vw;
-height: 100vh;
-object-fit: cover;
-position: fixed;
-left: 0;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: -1;
-  }
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -258,6 +293,21 @@ input::placeholder {
 
   max-width: 100%;
 }
+.bold {
+  font-weight: bold;
+}
+
+.tooltip .tooltip-inner,
+.tooltip.tooltip-black .tooltip-inner {
+  background-color: #000;
+  color: #fff;
+}
+
+.tooltip .tooltip-arrow,
+.tooltip.tooltip-black .tooltip-arrow {
+  border-bottom-color: #000;
+}
+
 
     </style>
 </head>
@@ -270,25 +320,6 @@ input::placeholder {
 
 
 
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/records.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 
 <script>
 window.onscroll = function() {myFunction()};
@@ -305,34 +336,75 @@ function myFunction() {
 }
 </script>
 
+<div class="text text-center">
+<?php if (isset($_GET['error'])) { ?>
+  <div class="modal fade show" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(to right, #ff0000 0%, #990000 100%);">
+          <h5 class="modal-title text-white" id="errorModalLabel">Error!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
+        </div>
+        <div class="modal-body">
+          <?php if ($_GET['error'] == 'wrong_password') { ?>
+    
+            <p>The password you entered is incorrect. Please try again.</p>
+          <?php } else if ($_GET['error'] == 'username_not_found') { ?>
+       
+            <p>The password you entered is incorrect. Please try again..</p>
+          <?php } else { ?>
+            <p>The password you entered is incorrect. Please try again.</p>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
+<script>
+  var errorModal = new bootstrap.Modal(document.getElementById('errorModal'), {
+    keyboard: false
+  });
+  errorModal.show();
+</script>
+</div>
+
+<div class="text text-center">
+<?php if (isset($_GET['success'])) { ?>
+  <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+          <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
+        </div>
+        <div class="modal-body">
+          <?php echo $_GET['success'];?>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+<?php ?>
 
 
-
-
-
-
-
-
-
-
-<!-- TITLE HERE    -->
-
-
-
+  </div>
+  <script>
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'), {
+      keyboard: false
+    });
+    successModal.show();
+  </script>
+<?php } ?>
 
       <div class="container" >
 		<div class="box">
     <div class="content">
 
     <div class="text-center mb-3">
-  <a class="link-primary" href="subject1.php"><button type="button" class="btn btn-dark"><b>ADD GRADES</b></button></a>
+      
+    <!--
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-<b>PRINT GRADES</b>
-</button>
-
+-->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -344,13 +416,13 @@ function myFunction() {
       <div class="modal-body">
         <h3> Semester 1 - Quarter : </h3>
       
-        <button type="button" class="btn btn-primary" onclick="window.open('sub1p1.php', '_blank')">1</button>
-        <button type="button" class="btn btn-secondary" onclick="window.open('sub1p2.php', '_blank')">2</button>
+        <button type="button" class="btn btn-primary" onclick="window.open('sub2p1.php', '_blank')">1</button>
+        <button type="button" class="btn btn-secondary" onclick="window.open('sub2p2.php', '_blank')">2</button>
         <br>
         <h3> Semester 2 - Quarter : </h3>
        
-        <button type="button" class="btn btn-success" onclick="window.open('sub1p3.php', '_blank')">3</button>
-        <button type="button" class="btn btn-danger" onclick="window.open('sub1p4.php', '_blank')">4</button>
+        <button type="button" class="btn btn-success" onclick="window.open('sub2p3.php', '_blank')">3</button>
+        <button type="button" class="btn btn-danger" onclick="window.open('sub2p4.php', '_blank')">4</button>
       </div>
     </div>
   </div>
@@ -366,76 +438,113 @@ function myFunction() {
 
 
 
- 
-  <div class="border">
 
 
 
-            <div class="mx-auto text-center text-wrap mb-3 bg-danger text-white rounded-pill shadow">
-  <b class="fs-2" style="white-space: nowrap;"><?=$_SESSION['sub1']?> </b>
+
+
+            <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            
+
+            <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+  <b class="fs-2" style="white-space: nowrap;"> Students Grades in Subject : <?=$_SESSION['sub2']?> </b>
   
 </div>
 
 <p class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" id="input-text" style="font-size: 30px; width:100px;"></p>
+<hr>  
+<div class="row">
+<div class="col-md-1 mb-3">
+  <a class="link-primary me-2" href="subject2.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
+    <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
+  </a>
+</div>
+
+<!--
+<div class="col-md-1 mb-3">
+  <a class="link-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-class="tooltip" title="Print">
+    <img src="img/print.png" alt="Description of image" style="width: 35px;" class="img-fluid">
+  </a>
+</div>
+  -->
+
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+  keyboard: false
+})
+
+</script>
+  <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+</script>
+  <div class="col-md-10 mb-3">
+    <input type="text" class="form-control" id="search-input" placeholder="Search" oninput="filterTable()">
+  </div>
+</div>
 
 
-  <table class="table table-bordered" id="grade-table">
-
-
-            <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
   <div class="row text-center">
  
-    <div class="col-md-4">
- 
-      <select class="form-select" id="quarter" name="quarter">
-        <option value=""><b>Select Quarter</b></option>
-        <option value="FIRST">First</option>
-        <option value="SECOND">Second</option>
-        <option value="THIRD">Third</option>
-        <option value="FOURTH">Fourth</option>
-      </select>
-    </div>
+  <div class="col-md-3">
+  <select class="form-select fw-bold fw-bold" id="quarter" name="quarter">
+    <option value="" class="fw-bold">Select Quarter</option>
+    <option value="FIRST" class="fw-bold">First</option>
+    <option value="SECOND" class="fw-bold">Second</option>
+    <option value="THIRD" class="fw-bold">Third</option>
+    <option value="FOURTH" class="fw-bold">Fourth</option>
+  </select>
+</div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         
-        <select class="form-select w-20" id="semester" name="semester">
-          <option value=""><b>Select Semester</b></option>
-          <option value="FIRST">First</option>
-          <option value="SECOND">Second</option>
+        <select class="form-select fw-bold fw-bold"  id="semester" name="semester">
+          <option value="" class="fw-bold"><b>Select Semester</b></option>
+          <option value="FIRST" class="fw-bold">First</option>
+          <option value="SECOND" class="fw-bold">Second</option>
         </select>
       </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
    
-      <select class="form-select" id="gender" name="gender">
-        <option value=""><b>Select Gender</b></option>
-        <option value="MALE">Male</option>
-        <option value="FEMALE">Female</option>
+      <select class="form-select fw-bold" id="gender" name="gender">
+        <option value=""class="fw-bold"><b>Select Gender</b></option>
+        <option value="MALE"class="fw-bold">Male</option>
+        <option value="FEMALE"class="fw-bold">Female</option>
       </select>
     </div>
   
-    <div class="text-center">
-      <br>
-  <select class="form-select text-center" id="sy" name="sy">
-    <option value=""><b>Select Academic Year</b></option>
-    <option value="2019-2020">2019-2020</option>
-    <option value="2020-2021">2020-2021</option>
-    <option value="2021-2022">2021-2022</option>
-    <option value="2022-2023">2022-2023</option>
-    <option value="2023-2024">2023-2024</option>
-    <option value="2024-2025">2024-2025</option>
-    <option value="2025-2026">2025-2026</option>
-    <option value="2026-2027">2026-2027</option>
-    <option value="2027-2028">2027-2028</option>
-    <option value="2028-2029">2028-2029</option>
-    <option value="2029-2030">2029-2030</option>
+    <div class="col-md-3 ">
+
+  <select class="form-select text-center fw-bold"  id="sy" name="sy">
+    <option value="" class="fw-bold"><b>Academic Year</b></option>
+    <option value="2019-2020"class="fw-bold">2019-2020</option>
+    <option value="2020-2021"class="fw-bold">2020-2021</option>
+    <option value="2021-2022"class="fw-bold">2021-2022</option>
+    <option value="2022-2023"class="fw-bold">2022-2023</option>
+    <option value="2023-2024"class="fw-bold">2023-2024</option>
+    <option value="2024-2025"class="fw-bold">2024-2025</option>
+    <option value="2025-2026"class="fw-bold">2025-2026</option>
+    <option value="2026-2027"class="fw-bold">2026-2027</option>
+    <option value="2027-2028"class="fw-bold">2027-2028</option>
+    <option value="2028-2029"class="fw-bold">2028-2029</option>
+    <option value="2029-2030"class="fw-bold">2029-2030</option>
 
   </select>
 </div>
 
   </div>
+
   <div class="text-center">
   <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
-  <img src="img/show.png" alt="Image" title="Add New Student" width="40" height="auto">
+  <img src="img/eye.png" alt="Image" title="Show" width="30" height="auto">
   <b></b>
 </button>
 
@@ -449,35 +558,6 @@ rotateBtn.addEventListener("click", () => {
   setTimeout(() => rotateImg.classList.remove("rotate"), 1000);
 });
 
-</script>
-<div class="input-group mb-3">
-  <input type="text" class="form-control" id="search-input" placeholder="Type section name or student name" oninput="filterTable()">
-</div>
-
-<p id="input-text"></p>
-
-
-<script>
-  function filterTable() {
-    const input = document.getElementById("search-input").value;
-    const inputText = document.getElementById("input-text");
-    inputText.textContent = "You typed: " + input;
-
-    // your existing code to filter the table goes here...
-    const table = document.getElementById("table");
-    const rows = table.getElementsByTagName("tr");
-    for (let i = 0; i < rows.length; i++) {
-      const cells = rows[i].getElementsByTagName("td");
-      let match = false;
-      for (let j = 0; j < cells.length; j++) {
-        if (cells[j].textContent.toLowerCase().includes(input.toLowerCase())) {
-          match = true;
-          break;
-        }
-      }
-      rows[i].style.display = match ? "" : "none";
-    }
-  }
 </script>
 
 
@@ -494,69 +574,65 @@ rotateBtn.addEventListener("click", () => {
 			  	 ?> 
            
 
-
-
-
-              <thead >
+           <hr>
+           <div class="fade-in">
+           <div class="b tex" style="height: 255px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
+           <table class="table table-bordered" id="grade-table">  
+              <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-color:black;  ">
                   <tr>
-                  <th scope="col" class="w-50"><h3 class="text-primary text-center"><b>StudentName</h3> </th>
-                  <th hidden scope="col"><h3 class="text-primary text-center"><b>Subject Name</h3></b></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Grade</b></h3></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Remarks</b></h3></th>
-                  <th scope="col"><h3 class="text-primary text-center"><b>Section</b></h3></th>
-                <!--  <th scope="col"><h3 class="text-primary text-center"><b>Semester</b></h3></th> -->
-                  <th colspan="2" scope="col" class="w-50">
-        <h3 class="text-success center text-center"><b>Actions</b></h3>
+                  <th scope="col" class="w-50 text-start">StudentName</th>
+<th hidden scope="col">Subject Name</th>
+<th scope="col">Grade</th>
+<th scope="col">Remarks</th>
+<th scope="col">Section</th>
+<th scope="col">Quarter</th>
+
+<th colspan="2" scope="col" class="w-50">
+ 
+</th>
+
       </th>
                   
                 </tr>
               </thead>
-              <tbody>
+        
+              <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
               <?php 
-  require "./php/db_conn.php";
-  $teacher = $_SESSION['name'];
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
 
-  // Add the section column to the SELECT statement
-  $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-      a.name, a.sub2, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
-      FROM grade b, users a
-      WHERE b.subjectname = a.sub2  
-      AND a.name = b.teacher
-      /*
-      AND ( b.adviser = a.sgh1 
-        OR b.adviser = a.sgh2
-        OR b.adviser = a.sgh3
-        OR b.adviser = a.sgh4
-        OR b.adviser = a.sgh5
-      )
-      */
-      AND teacher = '$teacher'";
+// Add the section column to the SELECT statement
+$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
+    a.name, a.sub2, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
+    FROM grade b, users a
+    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')  
+    AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+    AND REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')
+    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')";
+  
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $semester = $_POST["semester"];
+  $quarter = $_POST["quarter"];
+  $gender = $_POST["gender"];
+  $sy = $_POST["sy"];
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $semester = $_POST["semester"];
-    $quarter = $_POST["quarter"];
-    $gender = $_POST["gender"];
-    $sy = $_POST["sy"];
-
-
-    if (!empty($semester)) {
-      $query .= " AND semester = '$semester'";
-    }
-    if (!empty($quarter)) {
-      $query .= " AND quarter = '$quarter'";
-    }
-    if (!empty($gender)) {
-      $query .= " AND gender = '$gender'";
-    }
-    if (!empty($sy)) {
-      $query .= " AND sy = '$sy'";
-    }
-
- 
+  if (!empty($semester)) {
+    $query .= " AND semester = '$semester'";
   }
+  if (!empty($quarter)) {
+    $query .= " AND quarter = '$quarter'";
+  }
+  if (!empty($gender)) {
+    $query .= " AND gender = '$gender'";
+  }
+  if (!empty($sy)) {
+    $query .= " AND sy = '$sy'";
+  }
+}
 
-  $result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query);
 ?>
+
 
 
     <?php 
@@ -588,35 +664,60 @@ function filterTable() {
 
 
 </script>
-    <tr>
-      <td><b><?php echo $rows["studentname"]; ?></b></td>
-      <td hidden><b><?php echo $rows["subjectname"]; ?></b></td>
-      <td hidden><b><?php echo $rows["sy"]; ?></b></td>
-      <td hidden><b><?php echo $rows["section"]; ?></b></td>
-      <td class="text-center"><b><?php echo $rows["grade"]; ?></b></td>
-      <td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
-  <b><?php echo $rows["remarks"]; ?></b>
-</td>
-      <td class="text-center"><b><?php echo $rows["section"]; ?></b></td>
-      <td hidden class="text-center"><b><?php echo $rows["semester"]; ?></b></td>
-      <td class="text-center">
-        <b>
-          <a href="update.php?id=<?=$rows['id']?>" class="btn btn-primary"><b>Update</b></a>
-</td>
-<td>
+<td class="text-start"><?php echo $rows["studentname"]; ?></td>
+<td class="text-center"><?php echo $rows["grade"]; ?></td>
+<td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
+        <?php echo $rows["remarks"]; ?>
+      </td>
+      <td class="text-center"><?php echo $rows["section"]; ?></td>
+ 
    
-                   <script type="text/javascript">  
+      <td hidden><?php echo $rows["subjectname"]; ?></td>
+      <td hidden><?php echo $rows["sy"]; ?></td>
+      <td hidden><?php echo $rows["section"]; ?></td>
 
-function openulr(newurl) {  
+  
+      <td><?php echo $rows["semester"]; ?></td>
+      <td class="text-center">
 
-  if (confirm("Are you sure you want to Delete?")) {    
-
-    document.location = newurl;  
-  }}
-    </script>
-<a class="btn btn-danger" href="javascript:openulr('php/delete.php?id=<?= $rows['id'] ?>');">
-  <b>DELETE</b>
+        <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <b>
+    <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+  </b>
 </a>
+<a type="button" class="btn" data-bs-toggle="modal" 
+  data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
+  style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+  <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+</a>
+
+<div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+        <h5 class="modal-title" id="deleteModalLabel<?php echo $rows['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p> <b></b>
+          <br> Are you sure you want to delete <br> <b> <?php echo $rows['name']; ?> Account?</b>
+        </p>
+        <form class="delete" action="delete_grade1.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
+          <div class="mb-3">
+            <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn" name="delete">
+            <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 			      </td>
 
@@ -650,12 +751,12 @@ function openulr(newurl) {
          </tbody>
       </table>
 </div>
-
+    </div>
   
 <div>
           <script>
 		function printPage() {
-			window.open("printsubject1.php", "_blank");
+			window.open("printsubject2.php", "_blank");
 		}
 	</script>
 <bR>

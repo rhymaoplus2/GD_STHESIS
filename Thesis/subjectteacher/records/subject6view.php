@@ -416,13 +416,13 @@ function myFunction() {
       <div class="modal-body">
         <h3> Semester 1 - Quarter : </h3>
       
-        <button type="button" class="btn btn-primary" onclick="window.open('sub1p1.php', '_blank')">1</button>
-        <button type="button" class="btn btn-secondary" onclick="window.open('sub1p2.php', '_blank')">2</button>
+        <button type="button" class="btn btn-primary" onclick="window.open('sub6p1.php', '_blank')">1</button>
+        <button type="button" class="btn btn-secondary" onclick="window.open('sub6p2.php', '_blank')">2</button>
         <br>
         <h3> Semester 2 - Quarter : </h3>
        
-        <button type="button" class="btn btn-success" onclick="window.open('sub1p3.php', '_blank')">3</button>
-        <button type="button" class="btn btn-danger" onclick="window.open('sub1p4.php', '_blank')">4</button>
+        <button type="button" class="btn btn-success" onclick="window.open('sub6p3.php', '_blank')">3</button>
+        <button type="button" class="btn btn-danger" onclick="window.open('sub6p4.php', '_blank')">4</button>
       </div>
     </div>
   </div>
@@ -447,7 +447,7 @@ function myFunction() {
             
 
             <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;"> Students Grades in Subject : <?=$_SESSION['sub1']?> </b>
+  <b class="fs-2" style="white-space: nowrap;"> Students Grades in Subject : <?=$_SESSION['sub6']?> </b>
   
 </div>
 
@@ -455,7 +455,7 @@ function myFunction() {
 <hr>  
 <div class="row">
 <div class="col-md-1 mb-3">
-  <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
+  <a class="link-primary me-2" href="subject6.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
     <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
   </a>
 </div>
@@ -603,11 +603,11 @@ $name = $_SESSION['name'];
 
 // Add the section column to the SELECT statement
 $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
+    a.name, a.sub6, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
     FROM grade b, users a
-    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
+    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub6']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
+    AND REPLACE(LOWER(a.sub6), ' ', '') = REPLACE(LOWER('{$_SESSION['sub6']}'), ' ', '')
     AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')";
   
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -756,7 +756,7 @@ function filterTable() {
 <div>
           <script>
 		function printPage() {
-			window.open("printsubject1.php", "_blank");
+			window.open("printsubject6.php", "_blank");
 		}
 	</script>
 <bR>

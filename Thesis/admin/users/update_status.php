@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "UPDATE users SET status = $status WHERE id = $id";
     
     if ($conn->query($sql) === TRUE) {
-        header("Location:users.php?id=$id&Account Activated");
+        header("Location:index.php?id=$id&Account Activated");
     } else {
         echo "Error updating status: ";
     }

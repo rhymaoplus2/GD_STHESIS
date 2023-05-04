@@ -28,10 +28,10 @@ if (isset($_POST['create'])) {
 			 VALUES('$name')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                header("Location: ../users.php?success=Added Successfully");
+                header("Location: ../index.php?success=Added Successfully");
                 exit();
             } else {
-                header("Location: ../create.php?error=Unknown error occurred&$user_data");
+                header("Location: ../index.php?error=Unknown error occurred&$user_data");
                 exit();
             }
         }

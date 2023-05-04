@@ -15,11 +15,11 @@ if(isset($_GET['id'])){
 	        WHERE id='$id'";
    $result = mysqli_query($conn, $sql);
    if ($result) {
-   	  header("Location: ../users.php?success=successfully deleted");
+   	  header("Location: ../index.php?success=successfully deleted");
    }else {
-      header("Location: ../users.php?error=unknown error occurred&$user_data");
+      header("Location: ../index.php?error=unknown error occurred&$user_data");
    }
 
 }else {
-	header("Location: ../users .php");
+	header("Location: ../index.php");
 }

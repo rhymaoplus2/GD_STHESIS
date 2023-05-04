@@ -549,7 +549,7 @@ function updateStatusOfAllUsers(status) {
     data: {status: status},
     success: function(response) {
       // Handle success response
-      window.location.href = "users.php?success=Status updated successfully!";
+      window.location.href = "index.php?success=Status updated successfully!";
     },
     error: function(error) {
       // Handle error response
@@ -757,7 +757,7 @@ function updateStatusOfAllUsers(status) {
     } else {
     ?>
     
-<a href="users.php" class="btn">    <img style="width:30px;" src="img/refresh.png" class="img-fluid" alt="Description of image"><b>
+<a href="index.php" class="btn">    <img style="width:30px;" src="img/refresh.png" class="img-fluid" alt="Description of image"><b>
 
       <tr>
       <td class="text-start"colspan="4" ><h3><b><span class="blink text-danger text-center">The system cannot locate the user in the database.</span></b></h3>

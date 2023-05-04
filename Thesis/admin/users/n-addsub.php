@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
     if (mysqli_num_rows($result) > 0) {
     	$row = mysqli_fetch_assoc($result);
     } else {
-    	header("Location:users.php");
+    	header("Location:index.php");
     }
 } else if(isset($_POST['update'])){
     include "db_conn.php";
@@ -110,7 +110,7 @@ if (isset($_GET['id'])) {
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         $name = $row['name'];
-        header("Location: users.php?id=$id&success=Succesfully Updated to <b>$name</b>");
+        header("Location: index.php?id=$id&success=Succesfully Updated to <b>$name</b>");
 
     }else {
         header("Location: addsub.php?id=$id&error=unknown error occurred&$user_data");

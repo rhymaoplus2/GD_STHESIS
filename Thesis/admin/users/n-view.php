@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     if (mysqli_num_rows($result) > 0) {
     	$row = mysqli_fetch_assoc($result);
     }else {
-    	header("Location:users.php");
+    	header("Location:index.php");
     }
 
 
@@ -60,12 +60,12 @@ if (isset($_GET['id'])) {
                WHERE id='$id'";
        $result = mysqli_query($conn, $sql);
        if ($result) {
-       	  header("Location: users.php?id=$id&success=successfully updated");
+       	  header("Location: index.php?id=$id&success=successfully updated");
           
        }
        
        else {
-          header("Location: users.php?id=$id&error=unknown error occurred&$user_data");
+          header("Location: index.php?id=$id&error=unknown error occurred&$user_data");
        }
 	}
 }
