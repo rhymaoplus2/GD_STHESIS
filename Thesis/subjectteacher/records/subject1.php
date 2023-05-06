@@ -4,7 +4,7 @@
 
       
    session_start();
-   include "../php/db_conn.php";
+   include "php/db_conn.php";
    include "php/subject1.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
@@ -59,16 +59,14 @@ a:hover img {
 }
 
 /* Body styles */
-html,
-body {
-  height: auto;
+html, body {
+  height:100%;
 }
 
 body {
   background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-size: cover;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
 }
 
 
@@ -121,7 +119,7 @@ body {
 }
 
 .container table {
-  width: 90%;
+
   max-width: 1000px;
   padding: 20px;
   border-radius: 10px;
@@ -130,8 +128,7 @@ body {
 }
 
 .border {
-  width: 90%;
-  max-width: 600px;
+
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -315,18 +312,13 @@ function myFunction() {
 </script>
 
 
-<!-- TITLE HERE -->
-
 
 <form action="./php/subject1create.php"
       method="post" >
 
 
 
-    <?php if (isset($_GET['error'])) { 
-  include "./php/db_conn.php";
-  ?>
-  
+
   <?php if (isset($_GET['error'])) { ?>
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#errorModal">
@@ -343,7 +335,8 @@ function myFunction() {
         </div>
         <div class="modal-body">
           <div class="alert alert-danger" role="alert">
-            <?php echo $_GET['error'];} ?>
+            <?php echo $_GET['error'];} }
+            ?>
           </div>
         </div>
     
@@ -357,7 +350,7 @@ function myFunction() {
       $('#errorModal').modal('show');
     };
   </script>
-<?php } ?>
+
 
 
 
@@ -384,7 +377,7 @@ function myFunction() {
             
 
       <div class="border">
-        <!--
+        
       <?php
     require "php/db_conn.php";
     $name = $_SESSION["name"];
@@ -406,26 +399,29 @@ function myFunction() {
         $row = mysqli_fetch_assoc($result);
         // Do something with the row
 ?>
--->
    
  
 
-   <div class="banner text-center text-white rounded-pill mb-3" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-   <b> ADDING GRADES FOR SUBJECT :  <?=$_SESSION['sub1']?></b>
+   <div class="banner  text-center text-white rounded-pill mb-3" style=" font-size: 30px;background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+   <b>Adding grades for the subject of   <?=$_SESSION['sub1']?></b>       
+
 </div>
+
+<!-- TITLE HERE -->
+
 
                    <?php }
                    ?>   
   <div class="row">
 <div class="col-md-15 text-center">
-<label for="section-filter mb-3"><small><b>Filter by Section</b></small></label>
-  <select class="form-select form-select-sm" id="section-filter" onchange="filterTable()">
-    <option value="">All Sections</option>
+<label for="section-filter" class="text-primary  mb-3"><b>You can add grades for all students or for specific sections. Simply select the appropriate option below to filter the students accordingly.</b></small></label>
+  <br><select class="form-select mb-3  fw-bold" id="section-filter" onchange="filterTable()">
+    <option value=""class="fw-bold text-center">All Sections</option>
     <?php
     $query = "SELECT DISTINCT section FROM students ORDER BY section ASC";
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($result)) {
-      echo '<option value="' . $row['section'] . '">' . $row['section'] . '</option>';
+      echo '<option class="fw-bold text-center"value="' . $row['section'] . '">' . $row['section'] . '</option>';
     }
     ?>
   </select>
@@ -471,24 +467,16 @@ function filterTable() {
 
 </script>
       <div class="row">
-  <div class="col-md-6">
-    <label for="semester" class="form-label text-center"><b>Semester</b></label>
-    <select class="form-select" id="semester" name="semester">
 
-      <option value="First">FIRST</option>
-      <option value="Second">SECOND</option>
-      <option value="Third">THIRD</option>
-      <option value="Fourth">FOURTH</option>
-    </select>
-  </div>
-  <div class="col-md-6">
-    <label for="quarter" class="form-label text-center"><b>Quarter</b></label>
-    <select class="form-select" id="quarter" name="quarter">
+  <div class="text-center">
+    <label for="quarter" class="form-label text-center text-danger"><b>Which quarter should this grade be set for? Please select from the option below.</b></label>
+    <select class="form-select fw-bold " id="quarter" name="quarter">
 
-      <option value="First">FIRST</option>
-      <option value="Second">SECOND</option>
-      <option value="Third">THIRD</option>
-      <option value="Fourth">FOURTH</option>
+      <option value="First" class="fw-bold text-center">FIRST Quarter</option>
+      <option value="Second" class="fw-bold text-center">SECOND Quarter</option>
+      <option value="Third" class="fw-bold text-center">THIRD Quarter</option>
+      <option value="Fourth" class="fw-bold text-center">FOURTH Quarter
+      </option>
     </select>
   </div>
 </div>
@@ -504,23 +492,15 @@ function filterTable() {
           
                   <th scope="col">Student Name</th>
                   <th hidden  scope="col">Subject Name </th>
+                  <th scope="col" class="text-center">Gender </th>
                   <th scope="col" class="text-center">Grade </th>
       
                 </tr>
               </thead>
-          
+            
         <tbody>    
-          
-        <tr>
-           
+<!-- Modal button -->
 
-
-
-
-
-
-          
-       
 
 
 
@@ -537,7 +517,152 @@ function filterTable() {
         OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
         OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
         OR users.sec10 = students.section)
-    WHERE 
+    WHERE   gender = 'MALE' AND 
+        (students.subject1 = '".$_SESSION["sub1"]."' OR students.subject2 = '".$_SESSION["sub1"]."' 
+        OR students.subject3 = '".$_SESSION["sub1"]."' OR students.subject4 = '".$_SESSION["sub1"]."' 
+        OR students.subject5 = '".$_SESSION["sub1"]."' OR students.subject6 = '".$_SESSION["sub1"]."' 
+        OR students.subject7 = '".$_SESSION["sub1"]."' OR students.subject8 = '".$_SESSION["sub1"]."' 
+        OR students.subject9 = '".$_SESSION["sub1"]."' OR students.subject10 = '".$_SESSION["sub1"]."')
+        AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher7 = '".$_SESSION["name"]."' OR students.subjectteacher8 = '".$_SESSION["name"]."' 
+        OR students.subjectteacher9 = '".$_SESSION["name"]."' OR students.subjectteacher10 = '".$_SESSION["name"]."')
+    GROUP BY students.fullname  " ;
+
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($Row = mysqli_fetch_assoc($result)) {
+            
+?>
+
+
+<td  hidden colspan="">
+<input hidden class="no" id="studentid" name="studentid[]" value="<?= $Row['id'] ?>">
+</input>
+<?= $Row['id'] ?>
+</td>
+   
+               
+<td   colspan="">
+<input hidden class="no" id="studentname" name="studentname[]" value="<?= $Row['fullname'] ?>">
+</input>
+<?= $Row['fullname'] ?>
+</td>
+               
+<td  hidden colspan="">
+<input class="no" id="firstname" name="firstname[]" value="<?= $Row['firstname'] ?>">
+</input>
+</td>
+<td   colspan="">
+<input class="no text-center" id="sy" name="sy[]" value="<?= $Row['gender'] ?>">
+</input>
+</td>
+
+<td  hidden colspan="">
+<input class="no" id="year" name="year[]" value="<?= $Row['grade'] ?>">
+</input>
+</td>
+
+
+<td  hidden colspan="">
+<input class="no" id="sy" name="sy[]" value="<?= $Row['syear'] ?>">
+</input>
+</td>
+
+
+<td  hidden colspan="">
+<input class="no" id="middlename" name="middlename[]" value="<?= $Row['middlename'] ?>">
+</input>
+</td>
+
+<td  hidden colspan="">
+<input class="no" id="lastname" name="lastname[]" value="<?= $Row['lastname'] ?>">
+</input>
+</td>
+
+
+<td  hidden colspan="">
+<input class="no text-center" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
+</input>
+</td>
+
+
+ 
+<td  hidden colspan="">
+<input class="no" id="ts" name="ts[]" value="<?= $Row['trackstrand'] ?>">
+</input>
+</td>
+            <td hidden >
+            <input hidden class="no" id="subjectname" name="subjectname[]" 
+            value=" <?=$_SESSION['sub1']?>">
+             </input>
+        
+        </td>
+        <td style="width:30%;">
+      <select id="grade-<?php echo $i; ?>" name="grade[]" class="form-control text-center grade-select">
+        <option value="0" class="">0</option>
+     
+        <?php for ($j = 50; $j <= 100; $j++) { ?>
+          <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+        <?php } ?>
+      </select>
+    </td>
+
+
+
+
+
+
+
+    
+          <td hidden><input value="<?= $_SESSION['name']?>" id="teacher"name="teacher[]">
+
+        </td>
+        <td class="section" hidden><input hidden class="no" id="section" name="section[]" value="<?= $Row['section'] ?>"></td>
+
+        <td hidden>          
+
+        </input> 
+          <input hidden class="no" id="adviser" name="adviser[]" 
+            value="<?= $Row['adviser_id'] ?>">
+          </input> 
+                      </td> 
+			    </tr>
+
+
+       
+            <?php }
+                    }
+
+    
+
+  
+      ?>
+
+
+<td colspan="4"> <br> <br></td>
+         </tbody>
+
+
+
+
+
+
+ <?php
+    require "php/db_conn.php";
+    $name = $_SESSION["name"];
+    $query = "SELECT students.fullname, students.adviser_id, users.sub1,
+    students.section, students.firstname, students.middlename,
+    students.trackstrand, students.lastname, students.gender,
+    students.syear, students.grade,students.id
+    FROM students
+    JOIN users ON 
+        (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
+        OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
+        OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
+        OR users.sec10 = students.section)
+    WHERE  gender = 'FEMALE' AND 
         (students.subject1 = '".$_SESSION["sub1"]."' OR students.subject2 = '".$_SESSION["sub1"]."' 
         OR students.subject3 = '".$_SESSION["sub1"]."' OR students.subject4 = '".$_SESSION["sub1"]."' 
         OR students.subject5 = '".$_SESSION["sub1"]."' OR students.subject6 = '".$_SESSION["sub1"]."' 
@@ -574,6 +699,11 @@ function filterTable() {
                
 <td  hidden colspan="">
 <input class="no" id="firstname" name="firstname[]" value="<?= $Row['firstname'] ?>">
+</input>
+</td>
+
+<td   colspan="">
+<input class="no text-center" id="sy" name="sy[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
 
@@ -655,8 +785,8 @@ function filterTable() {
 
             }
       }
-            }
-          
+
+   
         
 
   

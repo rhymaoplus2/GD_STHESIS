@@ -18,29 +18,98 @@
 <style>
 
 
+
+a {
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+a img {
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover img {
+  transform: scale(1.2); /* Increase the image size by 20% on hover */
+}
+
+    html, body {
+  height: auto;
+}
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+}
+
+.b::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.b::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.b::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+.b::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
 .container {
-	min-height: 100vh;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+  border-color: #f1f1f1;
 }
 
 .container form {
-	width: 600px;
-	padding: 20px;
+		padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
+  margin: 0 auto;
 }
 .box {
-	width: 750px;
+	width: 100%;
+  
 }
 .container table {
 	padding: 20px;
 	border-radius: 10px;
+   
+  background-color:white;
+  border: 10px;
+}
+.border {
+	padding: 15px;
+	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: white;
+  background-color:white;
+ 
+  border: 10px;
 }
 
 .link-right {
@@ -59,11 +128,6 @@
 
 
 
-.thead
-{
-font-size: 10px;;
-
-}
 
 
 
@@ -104,12 +168,7 @@ font-size: 10px;;
   margin-left: 5rem;
   margin-top: 9.5rem;
   }
-  
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
-  }
+
   .text1
   {
       margin-left: 23rem;
@@ -125,12 +184,22 @@ font-size: 10px;;
       width: 45rem;
       height: 10rem;
   }
+  .red-text {
+  color: red;
+}
+
+.cell-border {
+  border: 1px solid black;
+}
 
 
-
+  td.disabled {
+  pointer-events: none;
+  color: black; /* Change color to something other than red */
+}
 
 .top-container {
-    background-color: #f1f1f1;
+    background-color: white;
     padding: 30px;
     text-align: center;
   }
@@ -150,22 +219,95 @@ font-size: 10px;;
     top: 0;
     width: 100%;
   }
-  
+  .text-center {
+  text-align: center;
+ /* default border color */
+}
+
+.failed {
+  color: red;
+}
+
+.failed + .text-center {
+  border-color: black; /* override border color for cells with red text */
+}
   .sticky + .content {
     padding-top: 102px;
   }
-  #myVideo {
 
-width: 100vw;
-height: 100vh;
-object-fit: cover;
-position: fixed;
-left: 0;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: -1;
+  .addbutton
+  {
+    margin-left:80%;
   }
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0062cc;
+    border-color: #005cbf;
+  }
+  #rotate-btn:hover img {
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;
+}
+.btn-transparent:active {
+  outline: none;
+  border: none;
+}
+.btn-transparent:focus, 
+.btn-transparent:hover {
+  box-shadow: none;
+  border: none;
+}
+#rotate-btn {
+  transition: transform 0.5s;
+}
+
+#rotate-btn.clicked {
+  transform: rotate(360deg);
+}
+/* CSS */
+#rotate-btn {
+  position: relative;
+}
+
+#rotate-btn:active img {
+  animation: rotate .3s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+input::placeholder {
+  color: gray;
+  font-style: italic;
+}
+.ff {
+
+  max-width: 100%;
+}
+.bold {
+  font-weight: bold;
+}
+
+.tooltip .tooltip-inner,
+.tooltip.tooltip-black .tooltip-inner {
+  background-color: #000;
+  color: #fff;
+}
+
+.tooltip .tooltip-arrow,
+.tooltip.tooltip-black .tooltip-arrow {
+  border-bottom-color: #000;
+}
 
   </style>
 
@@ -179,31 +321,23 @@ z-index: -1;
 </div>
 
 
-
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/records.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
-
-
-
-<br>
-<br>
+<div class="text text-center">
+<?php if (isset($_GET['success'])) { ?>
+  <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+          <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
+        </div>
+        <div class="modal-body">
+          <?php echo $_GET['success'];?>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+<?php } ?>
 	<div class="container">
 		<form action="php/update.php" 
 		      method="post">
@@ -242,15 +376,25 @@ function myFunction() {
 		          value="<?=$row['id']?>"
 		          hidden >
                   <br>
-		   <button type="submit" 
-		           class="btn btn-primary"
-		           name="update">Update</button>
 
-               <a class="link-primary" href="subject1view.php" display-40>
-               <button type="button" class="btn btn-dark">
-    Cancel
+
+<button type="submit" class="btn btn-primary" 
+name="update" id="submit" style="background-color: transparent; 
+border: none; border-radius:100%; width:50px; height: 50px;">
+<img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
 
+ 
+
+<button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="goBack()">
+  <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 
 
 	    </form>

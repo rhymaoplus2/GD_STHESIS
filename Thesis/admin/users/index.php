@@ -2,7 +2,7 @@
 
    session_start();
    include "../php/db_conn.php";
-   include "../php/read.php";
+   include "php/read.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>

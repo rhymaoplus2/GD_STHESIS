@@ -33,15 +33,23 @@ body {
 
 }
 
+.btn{
 
+  background-color: transparent;
+  border: none;
+}
 
   .container {
-	min-height: 100vh;
+width:600px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-  
+  background-color: white;
+
+  margin-top:1cm;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius:20px;
 }
 
 .container form {
@@ -52,14 +60,14 @@ body {
  
 }
 .box {
-	width: auto;
+	width:100px;
 }
 .container table {
-	padding: 20px;
+
 	border-radius: 10px;
   border:10px;
   background-color: white;
-  width : auto;
+  width : 500px;
 }
 .border {
 	padding: 20px;
@@ -234,8 +242,7 @@ font-size: 10px;;
 <?PHP include_once('header.php');?>
 </div>
 
-<div class="container" >
-  
+
 		<div class="box">
       
     <?php if (isset($_GET['error'])) { ?>
@@ -253,17 +260,12 @@ font-size: 10px;;
       </div>
     <?php } ?>
     <?php if (mysqli_num_rows($result)) { ?>
-    <div class="content">
-
-  
+    
  
-      <div class="border text-center">
-      <div class="head text-center" style="box-shadow: 2px 2px 4px  width: 105%;">
-  <b>Assign a subject teacher for each <br> "Section"</b>
-</div>
+      <div class="container text-center">
 
 <br>
-        <div class="d-flex justify-content-center">
+        <div class="f">
           
    
           <table class="table table-bordered">
@@ -306,10 +308,11 @@ $result = mysqli_query($conn, $query);
 <table class="table table-bordered">
 
   <thead>
-    <tr>
+    <tr class="text-white" style="
+      background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
 
-      <th scope="col">Section Name</th>
-      <th scope="col">Assign To</th>
+      <th scope="col" colspan="2">Asign Sections</th>
+  
     </tr>
   </thead>
   <tbody>
@@ -319,8 +322,8 @@ $result = mysqli_query($conn, $query);
       <tr>
         <td class="text-center"><b><?php echo $row["name"]; ?></b></td>
         <td>
-        <button type="button" class="btn btn-dark text-truncate" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $row['name']; ?>">
-  Assign To
+        <button type="btn" class="btn" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $row['name']; ?>">
+  <img src="img/assign.gif">
 </button>
 
 

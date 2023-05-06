@@ -36,13 +36,16 @@ a:hover img {
   transform: scale(1.2); /* Increase the image size by 20% on hover */
 }
 
-    html, body {
-  height: auto;
+html, body {
+  height:100%;
 }
+
 body {
   background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-size: cover;
   background-repeat: no-repeat;
 }
+
 
 .b::-webkit-scrollbar {
   width: 10px; /* Width of the scrollbar */
@@ -514,10 +517,10 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       </div>
     <div class="col-md-3">
    
-      <select class="form-select fw-bold" id="gender" name="gender">
-        <option value=""class="fw-bold"><b>Select Gender</b></option>
-        <option value="MALE"class="fw-bold">Male</option>
-        <option value="FEMALE"class="fw-bold">Female</option>
+      <select class="form-select fw-bold" id="section" name="section">
+        <option value=""class="fw-bold"><b>Select section</b></option>
+        <option value="Lilac"class="fw-bold">Lilac</option>
+        <option value="Diamond"class="fw-bold">Diamond</option>
       </select>
     </div>
   
@@ -603,7 +606,7 @@ $name = $_SESSION['name'];
 
 // Add the section column to the SELECT statement
 $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.gender, b.sy, b.section
+    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.section, b.sy, b.section
     FROM grade b, users a
     WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
@@ -613,7 +616,7 @@ $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.secti
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $semester = $_POST["semester"];
   $quarter = $_POST["quarter"];
-  $gender = $_POST["gender"];
+  $section = $_POST["section"];
   $sy = $_POST["sy"];
 
   if (!empty($semester)) {
@@ -622,8 +625,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!empty($quarter)) {
     $query .= " AND quarter = '$quarter'";
   }
-  if (!empty($gender)) {
-    $query .= " AND gender = '$gender'";
+  if (!empty($section)) {
+    $query .= " AND section = '$section'";
   }
   if (!empty($sy)) {
     $query .= " AND sy = '$sy'";
