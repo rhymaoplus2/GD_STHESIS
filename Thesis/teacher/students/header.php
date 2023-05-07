@@ -11,7 +11,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link text-white" href="students">Students</a>
+        <a class="nav-link text-white" href="">Students</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="../reports">Reports</a>

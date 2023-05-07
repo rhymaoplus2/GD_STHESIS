@@ -22,18 +22,15 @@
 </header>
 
 <style>
-  
-  html, body {
+ html, body {
   height: 100%;
 }
 
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(-225deg, #9EFBD3 0%, #57E9F2 48%, #45D4FB 100%);
   background-repeat: no-repeat;
 }
-
-
 
   .container {
   width: 1000px;
@@ -209,6 +206,8 @@ font-size: 10px;;
     width: 30px;
     height: 30px;
   }
+
+
   #refresh-img {
   transition: all 0.2s;
 }
@@ -216,6 +215,9 @@ font-size: 10px;;
     transform: scale(1.2);
 }
 #refresh-img:hover {
+  transform: scale(1.2);
+}
+.zoom:hover img {
   transform: scale(1.2);
 }
 #search {
@@ -285,15 +287,25 @@ td a:hover {
 a.btn:hover img {
     transform: scale(1.2);
 }
+#rolling-image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 9999; /* or any higher value than other elements on the page */
+}
+
+
   </style>
 </head>
 
 <body>
 
-
 <div class="header" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
+
 <div class="container" >
 		<div class="box">
       
@@ -310,18 +322,116 @@ a.btn:hover img {
         <div class="border">
              
     <form method="get" id="my-form" class="">
-<div>
-    <!-- 
-<select class= "selct-lg mb-3" name="gender" id="gender">
-  <option value="">FILTER BY GENDER</option>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
-</select>
-
-</form>&nbsp;&nbsp;&nbsp;-->
-<a type="button" class="btn" title="print masterlist"  onclick="window.open('advisory.php', '_blank').print();"> <img style="width:30px;" src="img/print.png" class="img-fluid" alt="Description of image"></a>
-
+    <div class="d-flex justify-content-between align-items-center">
+<!-- Button trigger modal -->
+<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#print-modal">
+  <img src="img/print.png" class="img-fluid" alt="Description of image" style="width:30px;">
+</button>
+      <h3 class="text-dark"><i>My Students</i></h3>
+<!-- Modal -->
+<div class="modal fade" id="print-modal" tabindex="-1" aria-labelledby="print-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content text-center">
+      <div class="modal-header text-white" style="   background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);">
+        <h5 class="modal-title" id="print-modal-label">Print Masterlist</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+  
+
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/masterlist3.gif" class="d-block w-100" alt="...">
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="modal-body text-center">
+        <iframe src="advisory.php" id="print-frame" style="display:none;"></iframe>
+      </div>
+<div class="text-center">
+      <a class="btn btn-primary text-center" 
+style="background-color: transparent; 
+border: none; border-radius:100%; width:50px; height: 50px;" onclick="printIframe();">
+<img style="width:50px;" src="img/print.png" class="img-fluid rotate-on-hover" alt="submit" title="print">
+      </a>
+
+ 
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+function printIframe() {
+  var iframe = document.getElementById("print-frame");
+  iframe.contentWindow.print();
+}
+</script>
+
+
+  <div class="text-center">
+  <a class="zoom" href="#" id="modalLink"><img style="width:60px; margin-right: 10px;" src="img/msu.png" class="img-fluid" alt="Description of image"></a>
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">GUIDE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="img1.jpg" class="d-block w-100" alt="Image 1">
+            </div>
+            <div class="carousel-item">
+              <img src="img2.jpg" class="d-block w-100" alt="Image 2">
+            </div>
+            <div class="carousel-item">
+              <img src="img3.jpg" class="d-block w-100" alt="Image 3">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<script>
+  var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+  document.getElementById('modalLink').addEventListener('click', function () {
+    myModal.show();
+  })
+</script>
+ 
+  </div>
+</div>
+
+
 <hr>
 <script>
 document.getElementById('gender').addEventListener('change', function() {
@@ -360,7 +470,7 @@ genderSelect.addEventListener('change', function() {
            
    
 
-  <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+  <thead class="text-white" style="   background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);">
     <tr>
       <th scope="col"><h5 >Student Name</h5></th>
       <th scope="col" class="text-center"><h5 >LRN No.</h5></th>
@@ -391,8 +501,8 @@ genderSelect.addEventListener('change', function() {
 <div class="modal fade" id="subject1Modal<?= $Row['lrnnumber'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+      <div class="modal-header text-dark" style="  background-image: linear-gradient(-225deg, #9EFBD3 0%, #57E9F2 48%, #45D4FB 100%);">
+        <h5 class="modal-title" id="exampleModalLabel"><?= $Row['fullname'] ?> - Perosnal Information</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -458,7 +568,6 @@ function myFunction() {
   }
 }
 </script>
-
 
 
 

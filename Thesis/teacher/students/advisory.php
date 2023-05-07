@@ -14,225 +14,31 @@
 
 
 
-  <style>
-    
-@media print {
-  /* Set the page size to A4 */
-  @page {
-    size: A4;
-    margin: 0;
-  }
+ 
+<style>
   
-  .btn-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-@page {
-    margin-top: 50px;
-  }
-   .print-hidden {
-      display: none;
-    }
-  /* Set the footer to be at the bottom of the page */
-  .print-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-
-  /* Set the page break after two pages */
-  .page-break {
-    page-break-after: always;
-  }
-
-  /* Hide the file name and other description */
-  .print-header,
-  .print-footer {
-    display: none;
-  }
-h1{
-  display: none;
-}
-  /* Only display content in the last page */
-  .wrapper {
-    counter-increment: page;
-  }
-
-  /* Add margin to the top of the second page */
-  .wrapper:nth-of-type(n+3) {
-    margin-top: 100px;
-  }
-
-  /* Add page number to the last page */
-  .wrapper:after {
-    content: counter(page);
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    page-break-after: always;
-  }
-  .wrapper:last-of-type:after {
-    content: "";
-  }
-  .container-fluid.p-0 {
-  display: none;
-}
-.tooltip {
-  display: none !important;
-}
-.img-fluid{
-    display: none;
-}
-
-.btn {
-    display: none;
-  }
-
-  /* Hide inputs */
-  input[type="button"],
-  input[type="submit"],
-  input[type="reset"],
-  input[type="checkbox"],
-  input[type="radio"],
-  select,
-  textarea {
-    display: none;
-  }
-  select option {
-    display: none;
-  }
-
-}
-@media print {
-  /* Set the page size to A4 */
-  @page {
-    size: A4;
-    margin: 0;
-
-  }
- .print{
-    display: none;
-  }
-  .btn-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-   .print-hidden {
-      display: none;
-    }
-  /* Set the footer to be at the bottom of the page */
-  .print-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-
-  /* Set the page break after two pages */
-  .page-break {
-    page-break-after: always;
-  }
-
-  /* Hide the file name and other description */
-  .print-header,
-  .print-footer {
-    display: none;
-  }
-
-  /* Only display content in the last page */
-  .wrapper {
-    counter-increment: page;
-  }
-
-  /* Add margin to the top of the second page */
-  .wrapper:nth-of-type(n+3) {
-    margin-top: 100px;
-  }
-
-  /* Add page number to the last page */
-  .wrapper:after {
-    content: counter(page);
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    page-break-after: always;
-  }
-  .wrapper:last-of-type:after {
-    content: "";
-  }
-  .container-fluid.p-0 {
-  display: none;
-}
-.tooltip {
-  display: none !important;
-}
 
 
-}
-td {
-  border: 1px solid black;
-}
-
-.failed {
-  color: red;
-  border-right-color: white; /* set border color to white */
-}
-
-.wrapper{
-  font-size: 11px;
-}
-.container {
-
+  .container {
+	min-height: 100vh;
 	display: flex;
-	justify-content: ;
+	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-   border: 10px;
-   border-color: black;
-
 }
-hr {
-  border: none;
-  border: 1px solid;
-  width: 120%;
-  background-color: black;
-}
-
 
 .container form {
-	width: 800px;
+	width: 600px;
 	padding: 20px;
-    background-color: white;
-
+	border-radius: 10px;
 
 }
 .box {
 	width: 750px;
 }
-
 .container table {
-	padding: 5px;
-
-  font-size: 11px;
-font-family: calibri;
-  border: 10px;
-}
-.container text{
-
-
-}
-.border {
-	padding: 15px;
-	
+	padding: 20px;
+	border-radius: 10px;
 
 }
 
@@ -263,6 +69,9 @@ font-size: 10px;;
 
 
 
+
+
+
   .nav-item
   {
   
@@ -280,23 +89,14 @@ font-size: 10px;;
   margin-left: 20rem;
   margin-top: 5rem;
   }
-  .fixed-button {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
-}
-
+  
+  
   .button{
   
       margin-left: 5rem;
       margin-top: 11rem;
   }
-  .form-label, .form-select {
-      font-size: inherit;
-    }
-
+  
   
   .button1{
   
@@ -309,10 +109,14 @@ font-size: 10px;;
       margin-top: 1rem;
       font-size: 3.5rem;
   }
-  .text{
-
+  .text1
+  {
+      margin-left: 23rem;
+      margin-top: -20rem;
+      width: 45rem;
+      height: 10rem;
   }
-
+  
   .text2
   {
       margin-left: 23rem;
@@ -323,9 +127,27 @@ font-size: 10px;;
 
 
 
+  table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 600px) {
+  td, th {
+    font-size: 12px;
+    padding: 12px;
+
+  }
+}
 
 .top-container {
-    background-color: white;
+    background-color: #f1f1f1;
     padding: 30px;
     text-align: center;
   }
@@ -349,31 +171,128 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  #myVideo {
 
-  .addbutton
+width: 100vw;
+height: 100vh;
+object-fit: cover;
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+z-index: -1;
+  }
+.carousel-inner img {
+  margin: auto;
+}
+.poster img
+{
+  margin: auto;
+}
+table {
+    border-collapse: collapse;
+  }
+  td, th {
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+
+  #no-border {
+  border: none;
+  visibility: hidden;
+  border-bottom: none !important;
+}
+/* Define the styles for the page */
+
+@media print {
+  /* Set the page size to A4 */
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
+    size: auto;  /* Use the default page size */
+       /* Reset the page margin to zero */
+  }
+  .img-fluid{
+
+    display: none;
+  }
+
+  .my-element
   {
-    margin-left:80%;
+    display: none;
   }
-  .btn-bold {
-  font-weight: bold;
+  /* Define the styles for the printable elements */
+  .printable {
+    visibility: visible;
+  }
+  /* Define the styles for page 1 */
+  .page1 {
+    page-break-after: always;
+  }
+  /* Define the styles for page 2 */
+  .page2 {
+    page-break-before: always;
+  }
+  .form-control 
+{
+border:none;
+text-align: center;
 }
-#left {
-  float: left;
-  width: 50%;
-  font-size: 13px
+.table-borderless {
+text-align: center;
+  
+}
+label {
+  text-align: center;
+  }
 }
 
-#right {
-  float: right;
-  width: 34%;
-  font-size: 13px
-}
-#left, #right {
-    display: inline-block;
-    vertical-align: top;
+.footer input {
+    font-size: 12px;
   }
-  select#section {
+  .d-flex {
+  display: flex;
+  align-items: flex-end;
+}
+
+.d-flex input::placeholder {
   font-weight: bold;
+}
+
+.footer
+{
+    font-size: 12px;
+    border-left: none;
+ 
+  }
+  .table-borderless input {
+width:200px;
+
+}
+.table-borderless {
+  border-collapse: collapse;
+  
+}
+
+.table-borderless td, .table-borderless th {
+  border: none;
+  font-size: 12px;
+  padding: 0px; /* adjust the padding value as desired */
+  margin: 0; /* set margin to 0 to remove any extra space between cells */
+  white-space: nowrap;
+}
+label {
+    display: block;
+    font-size: 12px;
+    margin-top: 0;
+  }
+  .form-control {
+font-size: 12px;
+
+  padding: 0;
+  margin: 0;
 }
 
 #my-element {
@@ -394,7 +313,33 @@ font-size: 10px;;
 #my-element button:hover img {
   opacity: 0.8;
 }
-    </style>
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #my-element {
+    animation: blink 3s infinite;
+  }
+
+  .column-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 1px;
+}
+</style>
 </head>
 <body>
 
@@ -435,28 +380,6 @@ function animateElement() {
     <div class="content">
 
 
-<script>
-  const searchInput = document.getElementById('search');
-  const tableRows = document.querySelectorAll('table tbody tr');
-
-  searchInput.addEventListener('input', () => {
-    const searchText = searchInput.value.toLowerCase();
-    tableRows.forEach(row => {
-      const name = row.querySelector('.name').textContent.toLowerCase();
-      const subject = row.querySelector('.subject').textContent.toLowerCase();
-      const grade = row.querySelector('.grade').textContent.toLowerCase();
-      const teacher = row.querySelector('.teacher').textContent.toLowerCase();
-      const section = row.querySelector('.section').textContent.toLowerCase();
-      if (name.includes(searchText) || subject.includes(searchText) || grade.includes(searchText) || teacher.includes(searchText) || section.includes(searchText)) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
-    });
-  });
-</script>
-
-      
 
       
 <div class="d-flex justify-content-center align-items-center position-relative">
@@ -484,7 +407,7 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_left .= "S.Y.&nbsp;:&nbsp;<b>". $Row['syear']."</b>" ;
 
 
-  $output_left .= "</p>";
+  $output_left .= "<br>Gender: <b>Male</b></p>";
   $output_left .= "</div>";
 
   
@@ -503,35 +426,122 @@ mysqli_close($conn);
 
 
 
-        
+<div class="page1">    
 
 <?php
 require "./php/db_conn.php";
 $name = $_SESSION["name"];
-
 $teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
 
-$query = "SELECT * FROM students WHERE adviser_id = '$name'   ORDER by lastname";
+$query = "SELECT * FROM students WHERE adviser_id = '$name'  and gender='male'  ORDER by lastname";
 
 $result = mysqli_query($conn, $query);
-$rowNum = 0;
-while ($row = mysqli_fetch_assoc($result)) {
-    $rowNum++; 
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$row_count = count($rows);
+$half_row_count = ceil($row_count / 2);
+$rowNum1 = 1;
+$rowNum2 = $half_row_count + 1;
+
+echo '<div class="column-wrapper">';
+for ($i = 0; $i < $half_row_count; $i++) {
+    echo '<div class="column">';
+    echo $rowNum1++ . ". " . $rows[$i]["lastname"] . " ". $rows[$i]["firstname"]  . " ". $rows[$i]["middlename"] ."<br>";
+    echo "</div>";
+    
+    if ($rowNum2 <= $row_count) {
+        echo '<div class="column">';
+        echo $rowNum2++ . ". " . $rows[$half_row_count + $i]["fullname"] . "<br>";
+        echo "</div>";
+    }
+} 
+   
+echo "</div>";
 ?>
 
- 
- <?php echo  $rowNum ?>.
 
- <?php echo $row["fullname"]; ?>
-<br>
-<?php }
-} ?>
 
-</tbody>
+</div> 
 
 
 
-        
+
+
+<div class="page2">    
+     
+<div class="d-flex justify-content-center align-items-center position-relative">
+    <img src="img/headergen.png" class="  top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
+</div>
+            <?php
+require "./php/db_conn.php";
+$name = $_SESSION["name"];
+
+$teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
+$filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
+$query = "SELECT * FROM students WHERE adviser_id = '$name' ORDER by lastname";
+
+
+$result = mysqli_query($conn, $query);
+if ($Row = mysqli_fetch_assoc($result)) {
+  $output_left = "<div id=''>";
+  $output_left .= "<p>";
+
+  $output_left .= "Adviser :&nbsp;:&nbsp;<b>".$Row['adviser_id']."</b> <br>" ; 
+
+  $output_left .= "Section:&nbsp;:&nbsp;<b>". $Row['section']."</b> <br>" ; 
+  $output_left .= "Track & Strands&nbsp;:&nbsp;<b>". (!empty($Row['trackstrand']) ? $Row['trackstrand'] : "N/A") ."</b> <br>";
+
+  $output_left .= "S.Y.&nbsp;:&nbsp;<b>". $Row['syear']."</b>" ;
+
+  $output_left .= "<br>Gender: <b>Female</b></p>";
+  $output_left .= "</div>";
+
+  
+  
+  echo $output_left;
+;
+} else {
+  echo "<strong><h1>No Results, Select Section First</h1></strong>
+    ";
+    
+}
+
+mysqli_close($conn);
+
+?>
+<?php
+require "./php/db_conn.php";
+$name = $_SESSION["name"];
+$teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
+
+$query = "SELECT * FROM students WHERE adviser_id = '$name' and gender='female'  ORDER by lastname";
+
+$result = mysqli_query($conn, $query);
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$row_count = count($rows);
+$half_row_count = ceil($row_count / 2);
+$rowNum1 = 1;
+$rowNum2 = $half_row_count + 1;
+
+echo '<div class="column-wrapper">';
+for ($i = 0; $i < $half_row_count; $i++) {
+    echo '<div class="column">';
+    echo $rowNum1++ . ". " . $rows[$i]["lastname"] . " ". $rows[$i]["firstname"]  . " ". $rows[$i]["middlename"] ."<br>";
+    echo "</div>";
+    
+    if ($rowNum2 <= $row_count) {
+        echo '<div class="column">';
+        echo $rowNum2++ . ". " . $rows[$half_row_count + $i]["fullname"] . "<br>";
+        echo "</div>";
+    }
+} 
+   }
+echo "</div>";
+?>
+
+
+
+</div> 
+
 
 
       

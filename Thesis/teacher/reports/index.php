@@ -16,17 +16,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 
 
   <style>
-  
-    html, body {
+html, body {
   height: 100%;
-  
 }
+
+
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);
   background-repeat: no-repeat;
-
 }
-
 
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
@@ -116,7 +114,7 @@ body {
 }
 
 .container {
-width: 400px;
+  
 	display:  flex;
 	justify-content: center;
 	align-items: center;
@@ -143,7 +141,7 @@ width: 400px;
   border: 10px;
   border-color: black;
   background-color: white;
-
+ width: 1130px;
   float: right;
 
 }
@@ -419,9 +417,9 @@ function myFunction() {
   <div class="carousel-inner">
     <div class="carousel-item active">
       <table class="table">
-        <thead style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <thead style="  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
           <tr>
-            <th class="text-white text-center" colspan="4">Junior High Format</th>
+            <th class="text-dark text-center" colspan="4">Junior High Format</th>
           </tr>
         </thead>
         <tbody>
@@ -440,7 +438,7 @@ function myFunction() {
           </td>
           </tr>
             <td></td>
-            <td><br><br><br></td>
+            <td></td>
             <td><br><br></td>
             <td></td>
           </tr>
@@ -452,10 +450,10 @@ function myFunction() {
     </div>
 
     <div class="carousel-item">
-      <table class="table">
-      <thead style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+      <table class="table fw-bold">
+      <thead style="  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
           <tr>
-            <th class="text-white text-center" colspan="4">Senior High Format</th>
+            <th class="text-dark text-center" colspan="4">Senior High Format</th>
           </tr>
         </thead>
         <tbody>

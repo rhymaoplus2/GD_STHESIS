@@ -22,30 +22,56 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 
 <style>
   
+ 
+  html, body {
+  height: 100%;
+}
+
+
+body {
+
+  background-repeat: no-repeat;
+}
+
 
 
   .container {
-	min-height: 100vh;
+  width: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+  padding: 20px;
+
 }
 
-.container form {
-	width: 600px;
+.formx {
+	width: auto;
 	padding: 20px;
-	border-radius: 10px;
+	border-radius: 30px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box {
-	width: 750px;
+	width: 900px;
+  
 }
 .container table {
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
+  border:10px;
+  background-color: white;
 }
+.border {
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border:10px;
+  border-radius: 30px;
+  background-color: white;
+
+}
+
 
 .link-right {
 	display: flex;
@@ -69,9 +95,15 @@ font-size: 10px;;
 
 }
 
-
-
-
+.img-fluid:hover {
+  width: 40px; /* or any other desired size */
+}
+.modal
+{
+ border: 100px;
+ background-color: ;
+ 
+}
 
 
 
@@ -158,93 +190,254 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
-  #myVideo {
-
-width: 100vw;
-height: 100vh;
-object-fit: cover;
-position: fixed;
-left: 0;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: -1;
+  .btn-transparent {
+    background-color: transparent;
+    border: none;
   }
-.carousel-inner img {
-  margin: auto;
+
+  .btn-transparent:hover {
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-transparent:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .btn img {
+    width: 30px;
+    height: 30px;
+  }
+
+
+  #refresh-img {
+  transition: all 0.2s;
 }
-.poster img
-{
-  margin: auto;
+.btn:hover img {
+    transform: scale(1.2);
 }
+#refresh-img:hover {
+  transform: scale(1.2);
+}
+.zoom:hover img {
+  transform: scale(1.2);
+}
+#search {
+  border-width: 2px;
+}
+.page-item a.page-link {
+  opacity: 0.5;
+}
+.page-item.active a.page-link {
+  font-weight: bold;
+  opacity: 1;
+}
+td a {
+  text-decoration: none;
+  color: black;
+}
+
+
+td a:hover {
+  font-weight: bold;
+  color: black;
+}
+
+.table-scrollable{
+  height: 350px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.table-scrollable::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+}
+
+.table-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 5px; /* roundness of the thumb */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+.table-scrollable {
+  overflow-y: scroll; /* Make the container scrollable */
+}
+
+.table-scrollable thead {
+  position: sticky; /* Make the header sticky */
+  top: 0; /* Position the header at the top */
+  z-index: 1; /* Make the header stay on top of the rows */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+a.btn:hover img {
+    transform: scale(1.2);
+}
+#rolling-image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 9999; /* or any higher value than other elements on the page */
+}
+.about{
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 20px;
+}
+.about img {
+  transition: transform .3s ease;
+}
+
+.about img:hover {
+  transform: scale(1.1);
+}
+
+.text{
+
+  font-size: 30px;
+  font-family: tahoma;
+  color: white;
+
+}
+html, body {
+  height: 100%;
+}
+
+
+body {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-repeat: no-repeat;
+}
+
+.image-container {
+  overflow: hidden;
+}
+
+.about {
+  transition: transform 0.3s ease-out;
+}
+
+.about:hover {
+  transform: scale(1.1);
+}
+
   </style>
 </head>
 
 <body>
 
-
-<div class="header" id="myHeader">
-<?PHP include_once('header.php'); ?>
+<div class="header sticky-top">
+  <?PHP include_once('header.php'); ?>
 </div>
-<video autoplay muted loop id="myVideo">
-  <source src="bg/video.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Welcome <?=$_SESSION['name']?>!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This is a welcome message.
+        <br>We hope you enjoy your experience on our System.
+  
+        
+     
+      </div>
+      <div class="modal-footer">
+      <i>Milmao Reyris P.</i>
+    
+   
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
+  // Show the modal when the page loads
+  window.addEventListener('load', function() {
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+      keyboard: false
+    });
+    myModal.show();
+  });
 </script>
-<div class="content">
-
-
-
-<br>
-<br>
-
-<div id="carouselExampleSlidesOnly" class="carousel  slide start-middle" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img/poster1.gif" class="d-block w-25 lign-items-sm-center " alt="...">
-      
-    </div>
-
-    <div class="carousel-item">
-      <img src="img/poster2.gif" class="d-block w-25" alt="...">
-    </div>
-    <!--
-    <img src=
-"img/poster.gif"
-            class="img-responsive" alt="Responsive image"
-            width="307" height="240"/>
--->
-  </div>
-  <!--
-  <div class="round">
-  <img src="img/poster.gif" class="rounded float-end " alt="...">
-  </div>
--->
-
-</div>
-
-
-
-    </div>
-
-</div>
-
-
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-md-6 mb-3">
+      <span class="text mb-3">
+       <b>High School Grade Reporting and Recording System of the 
+        <br> MSU-MSAT
+</b>  <div>
+User logged in:  <?=$_SESSION['name']?>
+    <p id="date-time">
   
+
+
+    </p>
+    
+  </div>
+
+  <script>
+    function updateDateTime() {
+      // Create a new Date object and get the current date and time
+      let now = new Date();
+
+      // Format the date and time as a string
+      let dateTimeString = now.toLocaleString();
+
+      // Update the HTML element with the formatted date and time
+      document.getElementById("date-time").textContent = dateTimeString;
+    }
+
+    // Call the updateDateTime function every second to update the date and time in real-time
+    setInterval(updateDateTime, 1000);
+  </script>
+
+      </span>
+    </div>
+    <div class="col-md-6">
+      <div class="row text-center">
+        <div class="col-md-6 mb-3">
+          <img class="about" src="img/new.gif" class="img-fluid" alt="Image 1" style="width:90%;">
+        </div>
+        <div class="col-md-6 mb-3">
+          <img class="about" src="img/tutorial.gif" class="img-fluid" alt="Image 2" style="width:90%;">
+        </div>
+        <div class="col-md-6 mb-3">
+          <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
+        </div>
+        <div class="col-md-6 mb-3">
+          <img class="about" src="img/abt.gif" class="img-fluid" alt="Image 4" style="width:90%;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>
 <?php
