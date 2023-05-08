@@ -600,13 +600,14 @@ function filterTable() {
 </td>
 
 
-<td  hidden colspan="">
-<input class="no" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
+<td   hidden colspan="">
+<input class="no text-center" id="sy" name="sy[]" value="<?= $Row['syear'] ?>">
 </input>
 </td>
-
-
- 
+<td   colspan="">
+<input class="no text-center" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
+</input>
+</td>
 <td  hidden colspan="">
 <input class="no" id="ts" name="ts[]" value="<?= $Row['trackstrand'] ?>">
 </input>

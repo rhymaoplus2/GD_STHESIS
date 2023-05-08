@@ -16,11 +16,11 @@
 
 
 html, body {
-  height: 100%;
+  height: auto;
 }
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -77,8 +77,6 @@ body {
 font-size: 10px;;
 
 }
-
-
 
 
 
@@ -232,6 +230,10 @@ z-index: -1;
     opacity: 1;
   }
 }
+label{
+
+  text-align: left!important;
+}
       </style>
 </head>
 <body>
@@ -248,16 +250,18 @@ z-index: -1;
 
 <!--  CRUD AREA -->
 <br>
-<div class="fade-in">
+<div class="fade-in text-left">
 
-<div class="container">
+<div class="container text-left">
 
 <form action="./php/create.php"
       method="post">
 
-<div class="text-center text-white p-2 mb-4" style="font-size:24px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-radius: 10px;">
+<div class=" text-white   text-center p-2 mb-4" style="font-size:24px;
+
+background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     <label class="mb-0">
-  <?php echo isset($_GET['error']) ? 'RETRY' : 'ADD NEW STUDENT ' ?>
+  <?php echo isset($_GET['error']) ? 'RETRY' : '<b>ADD NEW STUDENT </b>' ?>
 </label>
 
 
@@ -293,45 +297,22 @@ z-index: -1;
   </script>
 <?php } ?>
 
-<div class="   text-center">
+<div class="     text-center">
   <label for="subjectteacher1" class="form-label text-dark mb-3"><i><b>Personal Details</b></i></label>
 </div>
 <hr>
-<div class="skrol"style="height: 500px; overflow-y: auto;">
-<div class="form-group text-center">
+<div class="skrol "style="height: 500px; overflow-y: auto;" >
+<div class="form-group ">
 
-ID number:
-  <input type="text" class="form-control mb-3" id="idnumber" placeholder="ex: 12913937" name="idnumber">
-
-
-Re-Enter ID no.
-  <input type="text" class="form-control" id="id" placeholder="ex: 12913937" name="id">
-  <div class="invalid-feedback">Please input the same value.</div>
-</div>
+<label for="adviser_id" class="form-label warning text-left"><b>ID Number</b></label>
+<input style="width:100%;" type="text" class="form-control mb-3" id="idnumber" placeholder="ex: 12913937" name="idnumber" value="12913937">
 
 
-<script>
-  const idNumberInput = document.querySelector('#idnumber');
-const idInput = document.querySelector('#id');
-const invalidFeedback = document.querySelector('.invalid-feedback');
-
-function checkIdNumber() {
-  if (idNumberInput.value !== idInput.value) {
-    invalidFeedback.style.display = 'block';
-  } else {
-    invalidFeedback.style.display = 'none';
-  }
-}
-
-idNumberInput.addEventListener('input', checkIdNumber);
-idInput.addEventListener('input', checkIdNumber);
-
-</script>
 <br>
 
-<div class="form-group text-center">
-    <label for="" class="form-label warning" >LRN no.</label>
-    <input 
+<div class="form-group ">
+    <label for="" class="form-label warning text-left" ><b>LRN no.</b></label>
+    <input style="width:100%;"
     type="text" 
     class="form-control" 
     id="lrnnumber" 
@@ -342,8 +323,8 @@ idInput.addEventListener('input', checkIdNumber);
 
 
   <br>
-  <div class="mb-3 text-center">
-  <label for="adviser_id" class="form-label warning">ADVISER</label>
+  <div class="mb-3   1">
+  <label for="adviser_id" class="form-label warning text-left"><b>ADVISER</b></label>
   <select class="form-select" id="adviser_id" name="adviser_id">
     <?php
       // Replace "your_database_name" and "your_table_name" with your actual database and table names
@@ -362,9 +343,9 @@ idInput.addEventListener('input', checkIdNumber);
 
 
 
-<div class="form-group text-center">
-  <label for="exampleInputEmail1" class="form-label">First Name</label>
-  <input 
+<div class="form-group   1">
+  <label for="exampleInputEmail1" class="form-label text-left"><b>First Name</b></label>
+  <input style="width:100%;"
     type="text" 
     class="form-control" 
     id="firstname" 
@@ -375,9 +356,9 @@ idInput.addEventListener('input', checkIdNumber);
 </div>
 <br>
 
-<div class="mb-3 text-center">
-  <label for="exampleInputEmail1" class="form-label">Middle Name</label>
-  <input 
+<div class="mb-3   1">
+  <label for="exampleInputEmail1" class="form-label text-left"><b>Middle Name</b></label>
+  <input style="width:100%;"
     type="middlename" 
     class="form-control" 
     id="middlename" 
@@ -387,9 +368,9 @@ idInput.addEventListener('input', checkIdNumber);
   >
 </div>
 
-<div class="mb-3 text-center">
-  <label for="exampleInputEmail1" class="form-label">Last Name</label>
-  <input 
+<div class="mb-3   1">
+  <label for="exampleInputEmail1" class="form-label text-left"><b>Last Name</b></label>
+  <input style="width:100%;"
     type="lastname" 
     class="form-control" 
     id="lastname" 
@@ -399,9 +380,9 @@ idInput.addEventListener('input', checkIdNumber);
   >
 </div>
 
-<div class="mb-3 text-center">
-  <label for="exampleInputEmail1" class="form-label">Full Name</label>
-  <input 
+<div class="mb-3   1">
+  <label for="exampleInputEmail1" class="form-label text-left"><b>Full Name</b></label>
+  <input style="width:100%;"
     type="fullname" 
     class="form-control" 
     id="fullname" 
@@ -434,9 +415,9 @@ idInput.addEventListener('input', checkIdNumber);
 
 
 
-  <div class="from-group mb-3 text-center">
-                                <label for="">Suffix</label>
-                                <select name="suffix" id="suffix" class="form-control">
+  <div class="from-group mb-3   1">
+                                <label for="" class="text-left"><b>Suffix</b></label>
+                                <select style="width:100%"  name="suffix" id="suffix" class="form-control">
                                     <option value=" "><b>None</b></option>
                                     <option value="Jr."><b>Jr.</b></option>
                                     <option value="Sr."><b>Sr.</b></option>
@@ -446,8 +427,8 @@ idInput.addEventListener('input', checkIdNumber);
 
 
                        <div class="from-group mb-3">
-                                <label for="">Gender</label>
-                                <select name="gender" id="gender" class="form-control">
+                                <label for="" class="text-left"><b>Gender</b></label>
+                                <select style="width:100%"  name="gender" id="gender" class="form-control">
                                     <option value="Male"><b>Male</b></option>
                                     <option value="Female"><b>Female</b></option>
                                 </select>
@@ -455,9 +436,9 @@ idInput.addEventListener('input', checkIdNumber);
 
 
 
-  <div class="mb-3 text-center">
-    <label for="exampleInputEmail1" class="form-label">Birth Place </label>
-    <input 
+  <div class="mb-3   1">
+    <label for="exampleInputEmail1" class="form-label text-left"><b>Birth Place</b></label>
+    <input style="width:100%;"
     type="text" 
     class="form-control" 
     id="birthplace"
@@ -466,9 +447,9 @@ idInput.addEventListener('input', checkIdNumber);
 
   </div>
   
-  <div class="mb-3 text-center">
-    <label for="exampleInputEmail1" class="form-label">Birth Date</label>
-    <input 
+  <div class="mb-3   1">
+    <label for="exampleInputEmail1" class="form-label text-left"><b>Birth Date</b></label>
+    <input style="width:100%;"
     type="date" 
     class="form-control" 
     id="birthday" 
@@ -477,9 +458,9 @@ idInput.addEventListener('input', checkIdNumber);
 
   </div>
 
-  <div class="mb-3 text-center">
-    <label for="exampleInputEmail1" class="form-label">Age</label>
-    <input 
+  <div class="mb-3   1">
+    <label for="exampleInputEmail1" class="form-label text-left"><b>Age</b></label>
+    <input style="width:100%;"
     type="age" 
     class="form-control" 
     id="age" 
@@ -489,9 +470,9 @@ idInput.addEventListener('input', checkIdNumber);
   </div>
 
 
-  <div class="mb-3 text-center">
-    <label for="exampleInputEmail1" class="form-label">Address</label>
-    <input 
+  <div class="mb-3   1">
+    <label for="exampleInputEmail1" class="form-label text-left"><b>Address</b></label>
+    <input style="width:100%;"
     type="address" 
     class="form-control" 
     id="address" 
@@ -502,9 +483,9 @@ idInput.addEventListener('input', checkIdNumber);
 
 
   
-  <div class="mb-3 text-center">
-    <label for="exampleInputEmail1" class="form-label">Parent/Guardian</label>
-    <input 
+  <div class="mb-3   1">
+    <label for="exampleInputEmail1" class="form-label text-left"><b>Parent/Guardian</b></label>
+    <input style="width:100%;"
     type="parent" 
     class="form-control" 
     id="parent" 
@@ -514,9 +495,9 @@ idInput.addEventListener('input', checkIdNumber);
   </div>
  
 
-  <div class="mb-3 text-center">
-    <label for="exampleInputEmail1" class="form-label">School Year</label>
-    <input 
+  <div class="mb-3   1">
+    <label for="exampleInputEmail1" class="form-label text-left"><b>School Year</b></label>
+    <input style="width:100%;"
     type="" 
     class="form-control" 
     id="syear" 
@@ -526,10 +507,10 @@ idInput.addEventListener('input', checkIdNumber);
 
 
 
-  <div class="from-group mb-3 text-center">
-                                <label class="mb-2" for="">Year Level</label>
+  <div class="from-group mb-3   1">
+                                <label class="mb-2 text-left" for=""><b>Year Level</b></label>
                                 
-                                <select name="grade" id="grade" class="form-control">
+                                <select style="width:100%" name="grade" id="grade" class="form-control">
                                     <option value="7">7</option>
                                     <option value="8">8</option>
                                     <option value="9">9</option>
@@ -541,9 +522,9 @@ idInput.addEventListener('input', checkIdNumber);
 
 
 
-  <div class="mb-3 text-center">
-    <label for="exampleInputEmail1" class="form-label">Section Name</label>
-    <input 
+  <div class="mb-3   1">
+    <label for="exampleInputEmail1" class="form-label text-left"><b>Section Name</b></label>
+    <input style="width:100%;"
     type="" 
     class="form-control" 
     id="section" 
@@ -553,13 +534,13 @@ idInput.addEventListener('input', checkIdNumber);
 <hr>
 
 </div>
-  <div hidden  class="mb-3 text-center">
-  <div class="mb-3 text-center ">
-  <label for="subjectteacher1" class="form-label text-danger mb-3"><b>Subject Teachers</b></label>
+  <div hidden  class="mb-3   1">
+  <div class="mb-3   text-center ">
+  <label for="subjectteacher1" class="form-label text-danger mb-3"><b><b>Subject Teachers</b></b></label>
 </div>
 
   <select class="form-control" id="subjectteacher1" name="subjectteacher1">
-  <option value="">Select Subject Teacher</option>
+  <option value=""><b>Select Subject Teacher</b></option>
     <?php
       // Assuming you have a database connection
       require "./php/db_conn.php";
@@ -705,14 +686,14 @@ idInput.addEventListener('input', checkIdNumber);
 <hr>
 
 <div class="text-center">
-<label for="subjectteacher1" class="form-label text-dark mb-3"><i><b>Subjects</b></i></label>
+<label for="subjectteacher1" class="form-label text-cneter text-dark mb-3"><i><b>Subjects</b></i></label>
 
 </div>
-<div class="skrol"style="height: 100px; overflow-y: auto;">
+
 
  
 
-<select name="subject1" id="subject1" class="form-control text-center mb-3">
+   <select style="width:100%"  name="subject1" id="subject1" class="form-control   1 mb-3">
     <?php
     // Add blank option if sub5 has no value
     if(empty($row['subject1'])){
@@ -745,7 +726,7 @@ idInput.addEventListener('input', checkIdNumber);
     ?>
 </select>
 
-<select name="subject2" id="subject2" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject2" id="subject2" class="form-control   1 mb-3">
     <?php
     // Add blank option if sub5 has no value
     if(empty($row['subject2'])){
@@ -777,7 +758,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject3" id="subject3" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject3" id="subject3" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject3 has no value
     if(empty($row['subject3'])){
@@ -809,7 +790,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject4" id="subject4" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject4" id="subject4" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject4 has no value
     if(empty($row['subject4'])){
@@ -841,7 +822,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject5" id="subject5" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject5" id="subject5" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject5 has no value
     if(empty($row['subject5'])){
@@ -873,7 +854,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject6" id="subject6" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject6" id="subject6" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject6 has no value
     if(empty($row['subject6'])){
@@ -905,7 +886,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject7" id="subject7" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject7" id="subject7" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject7 has no value
     if(empty($row['subject7'])){
@@ -937,7 +918,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject8" id="subject8" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject8" id="subject8" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject8 has no value
     if(empty($row['subject8'])){
@@ -969,7 +950,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject9" id="subject9" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject9" id="subject9" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject9 has no value
     if(empty($row['subject9'])){
@@ -1001,7 +982,7 @@ idInput.addEventListener('input', checkIdNumber);
     }
     ?>
 </select>
-<select name="subject10" id="subject10" class="form-control text-center mb-3">
+<select style="width:100%"  name="subject10" id="subject10" class="form-control   1 mb-3">
     <?php
     // Add blank option if subject10 has no value
     if(empty($row['subject10'])){

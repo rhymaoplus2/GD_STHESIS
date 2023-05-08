@@ -424,7 +424,10 @@ hr {
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header text-white modal-light" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+          <div class="modal-header text-white modal-light" style=" 
+          
+          
+          background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
             <h5 class="modal-title" id="exampleModalLabel">PRINTING PERMANENT RECORDS</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>

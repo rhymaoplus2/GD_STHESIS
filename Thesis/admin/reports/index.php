@@ -21,11 +21,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {  } ?>
   
 }
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 
 }
-
 
 .fade-in {
   animation: fadeIn 2s ease-in-out;
@@ -341,7 +340,10 @@ function myFunction() {
   <img src="img/msu.png" class="d-block rotating-image" style="width:70px;">
 </div>
 -->
-<div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+<div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style=" 
+
+
+background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
   <b class="fs-2" style="white-space: nowrap;">Student Printable Data</b>
   
 </div>
@@ -355,7 +357,9 @@ function myFunction() {
   </div>
   <div style="flex: 3;">
     <table class="table table-bordered table-sm rounded-4" style="border-radius: 10px;">
-      <thead class="text-center text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+      <thead class="text-center text-white" style="
+        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);      
+      ">
         <tr>
           <th scope="col">Select Data</th>
         </tr>
@@ -397,7 +401,7 @@ function myFunction() {
     </div>
     </div>
     </div>
-    
+    <!--
     <div class="col-md-5 rounded" style="overflow: hidden;">
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -428,7 +432,7 @@ function myFunction() {
     </button>
     
   </div>
-  
+-->
   <div class="slide-up">
   <div>
   <span class="text-white" style=" text-align: justify;">

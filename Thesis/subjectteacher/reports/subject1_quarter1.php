@@ -111,14 +111,15 @@ h1{
 @media print {
   /* Set the page size to A4 */
   @page {
-    size: A4;
-    margin: 0;
+  
   }
   .btn-icon img {
   width: 1.5rem;
   height: 1.5rem;
 }
-
+#my-element  {
+ display: none;
+}
    .print-hidden {
       display: none;
     }
@@ -192,6 +193,7 @@ td {
 	justify-content: ;
 	align-items: center;
 	flex-direction: column;
+  margin-top:0;
 
 }
 hr {
@@ -214,7 +216,7 @@ hr {
 
 .container table {
 	padding: 5px;
-
+  margin-top: 0;
   font-size: 11px;
 font-family: calibri;
   border: 10px;

@@ -46,12 +46,12 @@ if(isset($_POST['submit']))
         }
 
         // Check if the record already exists
-        $query = "SELECT * FROM grade WHERE studentname='$studentname' AND semester='$semester' AND quarter='$quarter'";
+        $query = "SELECT * FROM grade WHERE studentname='$studentname' AND semester='$semester' AND quarter='$quarter' AND subjectname='$subjectname'";
         $query_run = mysqli_query($conn, $query);
         $name = $_SESSION['name'];
         if (mysqli_num_rows($query_run) > 0) {
             // The record already exists, show an error message
-            header("Location: ../subject2.php?error=Hello $name, You already submitted a grade for this student this quarter and semester. Go back and click update!");
+            header("Location: ../subject1.php?error=Hello $name, You already submitted a grade for this student this quarter and semester. Go back and click update!");
             exit();
         } else {
             // The record doesn't exist, insert it into the database
@@ -62,12 +62,12 @@ if(isset($_POST['submit']))
 
             if (!$query_run)
             {
-                header("Location: ../subject2.php?error=Error inserting grades into database");
+                header("Location: ../subject1.php?error=Error inserting grades into database");
                 exit();
             }
         }
     }
-    header("Location: ../subject2view.php?success=Grades added successfully");
+    header("Location: ../subject1view.php?success=Grades added successfully");
 }
 
 

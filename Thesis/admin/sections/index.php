@@ -28,7 +28,7 @@
   
 }
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 
 }
@@ -262,7 +262,7 @@ font-size: 10px;;
     <?php if (mysqli_num_rows($result)) { ?>
     
  
-      <div class="container text-center">
+      <div class="container ">
 
 <br>
         <div class="f">
@@ -299,7 +299,7 @@ $start_index = ($current_page - 1) * $results_per_page;
 $end_index = $start_index + $results_per_page;
 
 // Query to get results for the current page
-$query = "SELECT name FROM section LIMIT $start_index, $results_per_page";
+$query = "SELECT * FROM section order by grade LIMIT $start_index, $results_per_page";
 $result = mysqli_query($conn, $query);
 
 // Display results in table
@@ -308,8 +308,8 @@ $result = mysqli_query($conn, $query);
 <table class="table table-bordered">
 
   <thead>
-    <tr class="text-white" style="
-      background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+    <tr class="text-white text-center" style="
+       background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 
       <th scope="col" colspan="2">Asign Sections</th>
   
@@ -320,39 +320,63 @@ $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($result)) {
       ?>
       <tr>
-        <td class="text-center"><b><?php echo $row["name"]; ?></b></td>
-        <td>
-        <button type="btn" class="btn" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $row['name']; ?>">
+        <td class=""><b>Grade <?php echo $row["grade"]; ?> - <?php echo $row["name"]; ?></b></td>
+        <td class="text-center">
+        <button type="btn" class="btn text-center" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $row['name']; ?>">
   <img src="img/assign.gif">
 </button>
 
+<div class="modal fade" id="assignModal-<?php echo $row['name']; ?>" tabindex="-1" aria-labelledby="assignModalLabel-<?php echo $row['name']; ?>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="assignModalLabel-<?php echo $row['name']; ?>">
+          Assign a Subject Teacher to: Grade <?php echo $row["grade"]; ?> - <?php echo $row["name"]; ?>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+        <input type="text" class="form-control" placeholder="Search teacher..." onkeyup="filterTeachers(this)">
+          <?php
+          $query2 = "SELECT name FROM users ORDER by name";
+          $result2 = mysqli_query($conn, $query2);
 
-          <div class="modal fade" id="assignModal-<?php echo $row['name']; ?>" tabindex="-1" aria-labelledby="assignModalLabel-<?php echo $row['name']; ?>" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="assignModalLabel-<?php echo $row['name']; ?>">Assign a Subject Teacher to - <?php echo $row["name"]; ?></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <ul class="list-group">
-                    <?php
-                    $query2 = "SELECT name FROM users";
-                    $result2 = mysqli_query($conn, $query2);
+          while ($row2 = mysqli_fetch_assoc($result2)) {
+            ?>
+            <li class="list-group-item teacher-item">
+              <a href="assign_section.php?section_name=<?php echo $row['name']; ?>&user_name=<?php echo $row2['name']; ?>">
+                <?php echo $row2["name"]; ?>
+              </a>
+            </li>
+          <?php
+          }
+          ?>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-                    while ($row2 = mysqli_fetch_assoc($result2)) {
-                      ?>
-                      <li class="list-group-item">
-                        <a href="assign_section.php?section_name=<?php echo $row['name']; ?>&user_name=<?php echo $row2['name']; ?>"><?php echo $row2["name"]; ?></a>
-                      </li>
-                    <?php
-                    }
-                    ?>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+<script>
+  function filterTeachers(input) {
+    // Get all teacher items
+    var teacherItems = document.querySelectorAll(".teacher-item");
+
+    // Loop through all teacher items and show/hide based on search input
+    for (var i = 0; i < teacherItems.length; i++) {
+      var teacherName = teacherItems[i].querySelector("a").textContent.toLowerCase();
+      var searchValue = input.value.toLowerCase();
+      if (teacherName.includes(searchValue)) {
+        teacherItems[i].style.display = "";
+      } else {
+        teacherItems[i].style.display = "none";
+      }
+    }
+  }
+</script>
+
         </td>
       </tr>
     <?php

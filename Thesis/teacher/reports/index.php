@@ -412,10 +412,7 @@ function myFunction() {
 <div class="container">
 <label class="text-center mb-3"> Consolidated Grades</label>
 
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="carousel-item active">
+
       <table class="table">
         <thead style="  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
           <tr>
@@ -443,14 +440,8 @@ function myFunction() {
             <td></td>
           </tr>
         </tbody>
-      </table>
-      <div class="text-center mt-3">
-        <button class="btn btn-secondary mx-1 btn-sm" type="button" data-bs-target="#myCarousel" data-bs-slide-to="1">SHS Format</button>
-      </div>
-    </div>
 
-    <div class="carousel-item">
-      <table class="table fw-bold">
+
       <thead style="  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
           <tr>
             <th class="text-dark text-center" colspan="4">Senior High Format</th>
@@ -483,22 +474,9 @@ function myFunction() {
           </tr>
         </tbody>
       </table>
-      <div class="text-center mt-3">
-        <button class="btn btn-secondary mx-1 btn-sm" type="button" data-bs-target="#myCarousel" data-bs-slide-to="0">JHS Format</button>
-      </div>
+  
     </div>
   </div>
-
-  <!-- Left and right controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
 
 <script>

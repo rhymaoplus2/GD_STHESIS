@@ -18,7 +18,7 @@
 }
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -208,7 +208,7 @@ font-size: 10px;;
           class="btn btn-primary"
           name="create">Create</button>
 
-          <a class="link-primary" href="subjectlist.php">
+          <a class="link-primary" href="index.php">
           <button type="button" class="btn btn-dark">
 
       

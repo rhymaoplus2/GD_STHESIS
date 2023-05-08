@@ -28,7 +28,7 @@ html, body {
 
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 }
 
@@ -527,7 +527,8 @@ setInterval(function() {
 
 </script>
 
-  <thead class="text-white"style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);;">
+  <thead class="text-white"style="
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     <tr>
       <th scope="col">Name</th>
   

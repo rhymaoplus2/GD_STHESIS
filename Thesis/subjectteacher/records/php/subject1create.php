@@ -46,7 +46,7 @@ if(isset($_POST['submit']))
         }
 
         // Check if the record already exists
-        $query = "SELECT * FROM grade WHERE studentname='$studentname' AND semester='$semester' AND quarter='$quarter'";
+        $query = "SELECT * FROM grade WHERE studentname='$studentname' AND semester='$semester' AND quarter='$quarter' AND subjectname='$subjectname'";
         $query_run = mysqli_query($conn, $query);
         $name = $_SESSION['name'];
         if (mysqli_num_rows($query_run) > 0) {

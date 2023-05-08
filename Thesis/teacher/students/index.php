@@ -502,7 +502,7 @@ genderSelect.addEventListener('change', function() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-dark" style="  background-image: linear-gradient(-225deg, #9EFBD3 0%, #57E9F2 48%, #45D4FB 100%);">
-        <h5 class="modal-title" id="exampleModalLabel"><?= $Row['fullname'] ?> - Perosnal Information</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><?= $Row['fullname'] ?> - Personal Information</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

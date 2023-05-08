@@ -22,7 +22,7 @@ html, body {
 }
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -268,7 +268,9 @@ function myFunction() {
 		<form action="n-update.php" 
 		      method="post">
       
-    <div class="text-center text-white p-2 mb-4" style="font-size:24px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-radius: 10px;">
+    <div class="text-center text-white p-2 mb-4" style="font-size:24px; 
+    
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); border-radius: 10px;">
     <label class="mb-0">
   <?php echo isset($_GET['error']) ? 'RETRY' : 'UPDATE: ' . $row['fullname']; ?>
 </label>
@@ -284,7 +286,8 @@ function myFunction() {
 
   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-modal="true">
     <div class="modal-dialog">
-      <div class="modal-content" style="background-image: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);">
+      <div class="modal-content" style="
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <div class="modal-header">
           <h5 class="modal-title text-white" id="errorModalLabel">Oops!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

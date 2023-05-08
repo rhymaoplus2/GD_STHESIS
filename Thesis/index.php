@@ -23,7 +23,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+        
         }
         .container {
             border-radius: 15px;
@@ -35,10 +35,16 @@
         .btn {
             background-color: #F2F2F2;
             color: black;
+            border-radius: 20px;
         }
-        .btn:hover {
-            background-color: #D9D9D9; /* Replace with your desired shade of darker white */
+     
+        .text{
+text-align: center;
+            font-size: 40px;
+            text-shadow: .5px .5px .5px  #000000;
+            font-family: tahoma ;
         }
+ 
         #myVideo {
   width: 100vw;
   height: 100vh;
@@ -50,7 +56,20 @@
   bottom: 0;
   z-index: -1;
 }
+/*
+.login {
+  animation: slide-in 3s ease-out forwards;
+}
 
+@keyframes slide-in {
+  0% {
+    transform: translateX(7 0%); /* Start position outside the screen, to the right */
+  }
+  100% {
+    transform: translateX(0); /* End position, slide in to the screen */
+  }
+}
+*/
     </style>
 </head>
 <body>
@@ -60,35 +79,46 @@
   <source src="bg.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
-
+<br>
+<br>
 <div class="content">
-<div class="center">
-    <div class="container bg-white p-4">
-        <div class="row">
-            <div class="col text-center">
-            <img src="img/msu.png" width="70" height="70" alt="Logo">
-            <br>
-            <br>
-            <h2 class="text-left" style="font-family: Tahoma;">Select User Type</h2>
+  <div class="container      p-4">
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <span class=" text text-center text-white fw-bold"  > 
+      
+            <b>
+              <br>
+        
+              <br>
+              MSU-MSAT High School Grade Reporting and Recording System
+            </b>
        
-<br>
-<button class="btn text-center" onclick="window.location.href='teacher/index.php'" style="color: black; text-decoration: none;"><img src="img/adviser.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Continue as Adviser</b></button>
-<br>
-<br>
-<button class="btn text-center" onclick="window.location.href='subjectteacher/index.php'" style="color: black; text-decoration: none;"><img src="img/sub.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Continue as Subject Teacher</b></button>
-<br>
-<br>
-<button class="btn" onclick="window.location.href=''" style="color: black; text-decoration: none;"><img src="img/registrar.png" alt="Registrar Icon" style="float:left;width:30px;"><b>Continue as Registrar Staff</b></button>
-<br>
-<br>    
-<button class="btn" onclick="window.location.href='admin/index.php'" style="color: black; text-decoration: none;"><img src="img/admin.png" alt="Admin Icon" style="float:left;width:30px;"><b>Continue as Administrator</b></button>
+        </span>  
+      </div>
+     
+      <div class=" login col-md-6  text-center bg-white"  style="border-radius:20px; padding:30px; width: auto;">
+        <img class="mb-3" src="img/msu.png" width="80" height="80" alt="Logo">
+        <br>
+        <b>Select </b>   <h4 class="text-left mb-3" style="font-family: Tahoma;"><b>User Type</b></h4>
 
-            </div>
-        </div>
+        <button class="btn btn-primary" onclick="window.location.href='admin/index.php'"><img src="img/admin.png" alt="Admin Icon" style="float:left;width:30px;"><b>Administrator</b></button>
+        <br>
+        <br>
+        <button class="btn btn-secondary" onclick="window.location.href=''" style="text-decoration: none;"><img src="img/registrar.png" alt="Registrar Icon" style="float:left;width:30px;"><b>Registrar's Staff</b></button>
+        <br>
+        <br>
+        <button class="btn btn-info text-center" onclick="window.location.href='subjectteacher/index.php'" style="text-decoration: none;"><img src="img/sub.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Subject Teacher</b></button>
+
+        <br>
+        <br>  
+        <button class="btn btn-success text-left" onclick="window.location.href='teacher/index.php'" style="text-decoration: none;"><img src="img/adviser.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Adviser</b></button>
+      </div>
+    </div>
     </div>
 </div>
-</div>
-    
+  </div>
+
    
     <script>
 var video = document.getElementById("myVideo");

@@ -153,8 +153,7 @@ font-size: 10px;;
   height: 100%;
 }
 
-body {
-  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+body {  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 }
 .fade-in {
@@ -216,7 +215,10 @@ body {
 
 		<form action="gen.php" 
 		      method="post">
-          <header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+          <header class="text-center text-white" style="font-size:30px;
+          
+          
+          background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); border-radius: 20px;">
     <b>
         <?php if (isset($_GET['error'])) {
             echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
@@ -252,7 +254,7 @@ body {
   type="button"
   class="btn btn-outline-primary text-white"
   onclick="document.getElementById('username').value = '<?= generateRandomString() ?>'; document.getElementById('password').value = '<?= generateRandomString() ?>';"
-  style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); "
+  style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);"
 >
   Generate Account
 </button>

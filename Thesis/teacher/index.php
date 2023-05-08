@@ -5,12 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adviser</title>
+    <title>Subject Teacher</title>
     <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <style>
-    
+html, body {
+  height: 100%;
+}
+
+
+body {
+  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);
+  background-repeat: no-repeat;
+}
+
 .logo
 {
 margin-left: 1rem;
@@ -49,27 +58,20 @@ margin-top: -5rem;
 
 }
 .container {
-    width: 350px; 
+    width: 550px; 
 
   }
   
   .link-primary {
     float: left;
   }
-  .rounded {
-  border-radius: 60px;
-}
+
 
 </style>
 </head>
 
 <body>
-  
 
-<video autoplay muted loop id="myVideo">
-  <source src="../bg.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
 <div class="content">
 
 
@@ -77,10 +79,10 @@ margin-top: -5rem;
     align-items-center "
     style="min-height: 100vh " >
     
-        <form class="border shadow p-3 rounded bg-white"
+        <form class="border shadow p-3 text-center  bg-white"
         action="php/check-login.php"
         method="post"      
-        style="width: 450px;"> 
+        style="width: 450px; border-radius: 20px;"> 
 
   <a class="link-primary" href="../index.php" display-40>
     <b>
@@ -89,9 +91,9 @@ margin-top: -5rem;
     </b>
   </a>
  
-  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">&nbsp;<b>Logging in as an Adviser</b></span>
+  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as an&nbsp;<b>&nbsp;ADVISER</b></span>
  <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
-  <br>Never share your password<br>with anyone. </span>
+  <br>*To maintain security, refrain from sharing your password with anyone </span>
 </div>
 
 
@@ -108,8 +110,7 @@ margin-top: -5rem;
   
               </div>
 -->
-              <br>
-             
+       
               <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
         
@@ -120,11 +121,11 @@ margin-top: -5rem;
 			  <?php echo $_GET['error']; ?>
 		    </div>
 		   <?php } ?>
-               
+               <br>
   <div class="mb-3">
-  <label for="username" class="form-label" style="display: inline-block; font-size: 12px; font-family: Tahoma;">username</label>
+  <label for="username" class="form-label fw-bold" style="display: inline-block; font-size: 12px; font-family: Tahoma;">Username</label>
     <input type="text" 
-    placeholder="reyrismilmao2023"
+    placeholder="kentvergel2023"
            class="form-control" 
            id="username"
            name="username">
@@ -135,16 +136,18 @@ margin-top: -5rem;
   <label for="username" class="form-label"><b>username</b></label>
     <label for="password" class="form-label"><b>password</b></label>
               -->
-              <label for="username" class="form-label" style="display: inline-block; font-size: 12px; font-family: Tahoma;">password</label>
+              <label for="username" class="form-label fw-bold" style="display: inline-block; font-size: 12px; font-family: Tahoma;">Password</label>
     <input type="password" 
-           placeholder="milmao@subjectteacher"
+           placeholder="kentvergel@subjectteacher"
            class="form-control" 
            id="password"
            name="password">
   </div>
 
 
-  <button type="submit" class="btn btn-primary" style="width: 300px;"><b>Continue</b></button>
+  <button type="submit" class="btn btn-dark text-dark text-center" style="width: 300px;  
+  
+  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);"><b>Continue</b></button>
 
 </form>
 

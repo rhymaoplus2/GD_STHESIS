@@ -36,9 +36,9 @@ for ($i = 1; $i <= 10; $i++) {
 }
 
 if ($assigned) {
-  header("Location:sections.php?id=$id&success=Section assigned to $user_name");
+  header("Location:index.php?id=$id&success=Section assigned to $user_name");
 } else {
-  header("Location:sections.php?id=$id&error=All slots are occupied or user has already assigned to a section in all tables.");
+  header("Location:index.php?id=$id&error=All slots are occupied or user has already assigned to a section in all tables.");
 }
 
 mysqli_close($conn);

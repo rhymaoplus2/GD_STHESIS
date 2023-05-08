@@ -21,7 +21,7 @@
 
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 }
 
@@ -311,7 +311,9 @@ if (mysqli_num_rows($result) > 0) {
   ?>
   <div class="table-responsive">
     <table class="table table-bordered">
-      <thead class="text-white"style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+      <thead class="text-white"style=" 
+      
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <tr>
     
           <th scope="col">Section Name</th>
@@ -341,7 +343,8 @@ if (mysqli_num_rows($result) > 0) {
 <div class="modal fade" id="SHSmodal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="semesterModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+      <div class="modal-header text-white" style=" 
+        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title" id="semesterModalLabel">SHS Grades</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -363,7 +366,10 @@ if (mysqli_num_rows($result) > 0) {
 <div class="modal fade" id="JHSmodal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="semesterModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+      <div class="modal-header text-white" style="  
+      
+      
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title" id="semesterModalLabel">JHS Grades</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -393,7 +399,7 @@ if (mysqli_num_rows($result) > 0) {
   // Add the page buttons for all the available pages
   if ($total_pages > 1) {
   ?>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center btn">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
 
@@ -404,8 +410,8 @@ if (mysqli_num_rows($result) > 0) {
 
           if ($current_page > 1) {
           ?>
-            <li class="page-item">
-              <a class="page-link" href="?page=<?php echo ($current_page - 1); ?>&search=<?php echo $search_keyword; ?>" aria-label="Previous">
+            <li class="page-item btn-dark">
+              <a class="page-link text-dark" href="?page=<?php echo ($current_page - 1); ?>&search=<?php echo $search_keyword; ?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
               </a>
@@ -421,8 +427,8 @@ if (mysqli_num_rows($result) > 0) {
 }
 if ($current_page < $total_pages) {
   ?>
-    <li class="page-item">
-      <a class="page-link" href="?page=<?php echo ($current_page + 1); ?>&search=<?php echo $search_keyword; ?>" aria-label="Next">
+    <li class="page-item btn-dark">
+      <a class="page-link text-dark" href="?page=<?php echo ($current_page + 1); ?>&search=<?php echo $search_keyword; ?>" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Next</span>
       </a>

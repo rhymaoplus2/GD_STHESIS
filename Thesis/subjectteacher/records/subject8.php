@@ -598,10 +598,12 @@ function filterTable() {
 <input class="no" id="lastname" name="lastname[]" value="<?= $Row['lastname'] ?>">
 </input>
 </td>
-
-
-<td  hidden colspan="">
-<input class="no" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
+<td   hidden colspan="">
+<input class="no text-center" id="sy" name="sy[]" value="<?= $Row['syear'] ?>">
+</input>
+</td>
+<td   colspan="">
+<input class="no text-center" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
 

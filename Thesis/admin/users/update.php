@@ -36,14 +36,6 @@ body {
   padding: 0;
 }
 
-.wave {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
 .wave::before,
 .wave::after {
@@ -213,6 +205,16 @@ font-size: 10px;;
   transform: scale(1.2);
   transition: transform 0.5s ease;
 }
+html, body {
+  height:100%;
+}
+
+body {
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
   </style>
 
 </head>
@@ -234,7 +236,9 @@ font-size: 10px;;
 
 
 	<form action="n-update.php" method="post">
-  <header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+  <header class="text-center text-white" style="font-size:30px; 
+  
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); border-radius: 20px;">
     <b>
         <?php if (isset($_GET['error'])) {
             echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';

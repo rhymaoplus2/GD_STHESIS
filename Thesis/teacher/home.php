@@ -388,8 +388,7 @@ body {
   <div class="row align-items-center">
     <div class="col-md-6 mb-3">
       <span class="text mb-3">
-       <b>High School Grade Reporting and Recording System of the 
-        <br> MSU-MSAT
+       <b>MSU-MSAT High School Grade Reporting and Recording System
 </b>  <div>
 User logged in:  <?=$_SESSION['name']?>
     <p id="date-time">

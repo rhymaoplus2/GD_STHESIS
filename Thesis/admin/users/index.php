@@ -19,7 +19,7 @@ html, body {
 }
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -476,7 +476,7 @@ $result = mysqli_query($conn, $query);
   <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header" style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+        <div class="modal-header" style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
           <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
         </div>
@@ -622,7 +622,7 @@ setInterval(function() {
 <table class="table table-bordered mb-25">
   
   <thead >
-  <tr class="  text-white" style=" background: linear-gradient(to right,  #9933ff 0%,#0099ff 100%);">
+  <tr class="  text-white" style="   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 
 
       <th hidden>Username</th>
@@ -640,7 +640,9 @@ setInterval(function() {
 <div class="modal fade" id="activatePauseAllModal" tabindex="-1" role="dialog" aria-labelledby="activatePauseAllModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+      <div class="modal-header" style=" 
+      
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title" id="activatePauseAllModalLabel">Status update</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -731,7 +733,10 @@ function updateStatusOfAllUsers(status) {
   >
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-white"  style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+        <div class="modal-header text-white"  style="
+        
+        
+        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
           <h5 class="modal-title" id="exampleModalLabel"><b><?=$row['name']?></b></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -846,7 +851,9 @@ function updateStatusOfAllUsers(status) {
 <div class="modal fade" id="statusModal<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="statusModalLabel<?php echo $row['id'] ?>" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header bg-light text-white" style=" background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
+      <div class="modal-header bg-light text-white" style=" 
+      
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title text-center" id="statusModalLabel<?php echo $row['id'] ?>">Status Update</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

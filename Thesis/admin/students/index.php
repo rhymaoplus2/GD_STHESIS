@@ -28,7 +28,7 @@ html, body {
 
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 }
 
@@ -294,7 +294,7 @@ td a:hover {
   <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-white"  style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <div class="modal-header text-white"  style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
           <h5 class="modal-title" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -497,7 +497,7 @@ setInterval(function() {
 
 </script>
 
-  <thead class="text-white"style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);;">
+  <thead class="text-white"style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     <tr>
       <th scope="col">Name</th>
   

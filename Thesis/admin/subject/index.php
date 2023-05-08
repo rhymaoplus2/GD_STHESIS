@@ -34,7 +34,7 @@ html, body {
 }
 
 body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -269,7 +269,7 @@ function myFunction() {
 
  
  
-  <input type="text" class="form-control" name="search"  placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" >
+  <input type="text" class="form-control" name="search"  placeholder="subjectname" aria-label="Username" aria-describedby="basic-addon1" >
 
 <!--
       <input type="text" class="form-control" name="search" placeholder="Search subjects..." >
@@ -312,7 +312,9 @@ if (mysqli_num_rows($result) > 0) {
   <div class="table-responsive">
 <div class="table-scrollable">
     <table class="table table-bordered">
-      <thead class="tetxt-white" style="  color:white;background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+      <thead class="tetxt-white" style="  color:white;
+      
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <tr>
           <th hidden scope="col">Subject ID</th>
           <th scope="col">Subject Name</th>

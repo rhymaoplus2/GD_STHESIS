@@ -557,8 +557,12 @@ function filterTable() {
 <input class="no" id="firstname" name="firstname[]" value="<?= $Row['firstname'] ?>">
 </input>
 </td>
+<td   hidden colspan="">
+<input class="no text-center" id="sy" name="sy[]" value="<?= $Row['syear'] ?>">
+</input>
+</td>
 <td   colspan="">
-<input class="no text-center" id="sy" name="sy[]" value="<?= $Row['gender'] ?>">
+<input class="no text-center" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
 
