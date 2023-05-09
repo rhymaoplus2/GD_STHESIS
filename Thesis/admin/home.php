@@ -421,10 +421,10 @@ body {
     <div class="col-md-6">
       <div class="row text-center">
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/1.gif" class="img-fluid" alt="Image 1" style="width:90%;">
+          <img class="about" src="img/bako.gif" class="img-fluid" alt="Image 1" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/manual.gif" class="img-fluid" alt="Image 2" style="width:90%;">
+          <img class="about" src="img/gay.gif" class="img-fluid" alt="Image 2" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
           <img class="about" src="img/3.gif" class="img-fluid" alt="Image 3" style="width:90%;">

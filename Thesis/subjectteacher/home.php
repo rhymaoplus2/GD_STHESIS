@@ -424,7 +424,7 @@ User logged in:  <?=$_SESSION['name']?>
           <img class="about" src="img/new.gif" class="img-fluid" alt="Image 1" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/tutorial.gif" class="img-fluid" alt="Image 2" style="width:90%;">
+          <img class="about" src="img/guide.gif" class="img-fluid" alt="Image 2" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
           <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
