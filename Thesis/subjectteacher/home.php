@@ -356,18 +356,16 @@ body {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Welcome <?=$_SESSION['name']?>!</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Welcome!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        This is a welcome message.
-        <br>We hope you enjoy your experience on our System.
-  
+      MSU-MSAT High School Grade Reporting and Recording System
         
      
       </div>
       <div class="modal-footer">
-      <i>Milmao Reyris P.</i>
+      <i>User Logged in:</i> <b>  <?=$_SESSION['name']?></b>
     
    
       </div>

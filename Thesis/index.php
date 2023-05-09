@@ -105,7 +105,7 @@ text-align: center;
         <button class="btn btn-primary" onclick="window.location.href='admin/index.php'"><img src="img/admin.png" alt="Admin Icon" style="float:left;width:30px;"><b>Administrator</b></button>
         <br>
         <br>
-        <button class="btn btn-secondary" onclick="window.location.href=''" style="text-decoration: none;"><img src="img/registrar.png" alt="Registrar Icon" style="float:left;width:30px;"><b>Registrar's Staff</b></button>
+        <button class="btn btn-secondary" onclick="window.location.href='registrar/'" style="text-decoration: none;"><img src="img/registrar.png" alt="Registrar Icon" style="float:left;width:30px;"><b>Registrar's Staff</b></button>
         <br>
         <br>
         <button class="btn btn-info text-center" onclick="window.location.href='subjectteacher/index.php'" style="text-decoration: none;"><img src="img/sub.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Subject Teacher</b></button>

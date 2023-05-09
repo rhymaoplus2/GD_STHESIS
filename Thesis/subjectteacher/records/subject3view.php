@@ -447,7 +447,7 @@ function myFunction() {
             
 
             <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;"> Students Grades in Subject : <?=$_SESSION['sub3']?> </b>
+  <b class="" style="white-space: nowrap;"> Students Grades in Subject : <?=$_SESSION['sub3']?> </b>
   
 </div>
 

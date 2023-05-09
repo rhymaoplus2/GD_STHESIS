@@ -875,7 +875,7 @@ function myFunction() {
                         <td hidden  class="text-center"></td>
                       <?php } else { ?>
                         <td class="text-center">
-                          <a href="subject2view.php" style="background-color: white; border: none;" class="text-dark">
+                          <a href="javascript:void(0);"  href="subject2view.php" style="background-color: white; border: none;" class="text-dark">
                             <b><?php echo $Row["sub2"]; ?></b>
                           </a>
                         </td>
@@ -905,7 +905,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject3view.php" style="background-color: white; border: none;" class="text-dark">
+              <a  href="javascript:void(0);" href="subject3view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub3"]; ?></b>
               </a>
             </td>
@@ -936,7 +936,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject4view.php" style="background-color: white; border: none;" class="text-dark">
+              <a href="javascript:void(0);" href="subject4view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub4"]; ?></b>
               </a>
             </td>
@@ -967,7 +967,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject5view.php" style="background-color: white; border: none;" class="text-dark">
+              <a href="javascript:void(0);" href="subject5view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub5"]; ?></b>
               </a>
             </td>
@@ -998,7 +998,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject6view.php" style="background-color: white; border: none;" class="text-dark">
+              <a href="javascript:void(0);" href="subject6view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub6"]; ?></b>
               </a>
             </td>
@@ -1029,7 +1029,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject7view.php" style="background-color: white; border: none;" class="text-dark">
+              <a href="javascript:void(0);" href="subject7view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub7"]; ?></b>
               </a>
             </td>
@@ -1060,7 +1060,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject8view.php" style="background-color: white; border: none;" class="text-dark">
+              <a href="javascript:void(0);" href="subject8view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub8"]; ?></b>
               </a>
             </td>
@@ -1091,7 +1091,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject9view.php" style="background-color: white; border: none;" class="text-dark">
+              <a href="javascript:void(0);" href="subject9view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub9"]; ?></b>
               </a>
             </td>
@@ -1122,7 +1122,7 @@ if (mysqli_num_rows($result) > 0) {
             <td hidden  class="text-center"></td>
           <?php } else { ?>
             <td class="text-center">
-              <a href="subject10view.php" style="background-color: white; border: none;" class="text-dark">
+              <a href="javascript:void(0);" href="subject10view.php" style="background-color: white; border: none;" class="text-dark">
                 <b><?php echo $Row["sub10"]; ?></b>
               </a>
             </td>

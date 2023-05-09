@@ -288,7 +288,7 @@ require "./php/db_conn.php";
 $teacherid = $_SESSION['username'];
 $subjectgrouphead = $_SESSION["id"];
 $search_keyword = isset($_GET['search']) ? $_GET['search'] : '';
-$query = "SELECT * FROM subjects";
+$query = "SELECT *FROM subjects ";
 if (!empty($search_keyword)) {
   $query .= " WHERE subjectname LIKE '%" . mysqli_real_escape_string($conn, $search_keyword) . "%'";
 }

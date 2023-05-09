@@ -404,7 +404,7 @@ function myFunction() {
  
 
    <div class="banner  text-center text-white rounded-pill mb-3" style=" font-size: 30px;background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-   <b>Adding grades for the subject of   <?=$_SESSION['sub3']?></b>       
+   <b>Adding grades for the subject of   <br><?=$_SESSION['sub3']?></b>       
 
 </div>
 
@@ -558,7 +558,7 @@ function filterTable() {
 </input>
 </td>
 <td   colspan="">
-<input class="no text-center" id="sy" name="sy[]" value="<?= $Row['gender'] ?>">
+<input class="no text-center" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
 
@@ -735,10 +735,6 @@ function filterTable() {
 
 <td   hidden colspan="">
 <input class="no text-center" id="sy" name="sy[]" value="<?= $Row['syear'] ?>">
-</input>
-</td>
-<td   colspan="">
-<input class="no text-center" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
 

@@ -12,7 +12,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Students</title>
+	<title>HOME</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -350,6 +350,59 @@ body {
   <?PHP include_once('header.php'); ?>
 </div>
 
+<?php
+// Check if the button is clicked
+if(isset($_POST['export_button'])) {
+    // Connect to the database
+    $conn = mysqli_connect('localhost', 'username', 'password', 'my_db');
+
+    // Retrieve all table names
+    $result = mysqli_query($conn, "SHOW TABLES");
+    $tables = array();
+    while ($row = mysqli_fetch_row($result)) {
+        $tables[] = $row[0];
+    }
+
+    // Loop through the tables and retrieve data
+    $sql = "";
+    foreach ($tables as $table) {
+        $result = mysqli_query($conn, "SELECT * FROM $table");
+        $num_fields = mysqli_num_fields($result);
+
+        $sql .= "DROP TABLE IF EXISTS $table;";
+        $create_table_query = mysqli_query($conn, "SHOW CREATE TABLE $table");
+        $create_table_row = mysqli_fetch_row($create_table_query);
+        $sql .= "\n\n" . $create_table_row[1] . ";\n\n";
+
+        for ($i = 0; $i < $num_fields; $i++) {
+            while ($row = mysqli_fetch_row($result)) {
+                $sql .= "INSERT INTO $table VALUES(";
+                for ($j = 0; $j < $num_fields; $j++) {
+                    $row[$j] = addslashes($row[$j]);
+                    if (isset($row[$j])) {
+                        $sql .= '"' . $row[$j] . '"';
+                    } else {
+                        $sql .= '""';
+                    }
+                    if ($j < ($num_fields - 1)) {
+                        $sql .= ',';
+                    }
+                }
+                $sql .= ");\n";
+            }
+        }
+        $sql .= "\n\n\n";
+    }
+
+    // Save the SQL file
+    $filename = 'my_db_backup_' . date('Y-m-d_H-i-s') . '.sql';
+    header('Content-Type: application/octet-stream');
+    header("Content-Transfer-Encoding: Binary");
+    header("Content-disposition: attachment; filename=\"" . $filename . "\"");
+    echo $sql;
+    exit;
+}
+?>
 
 
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -421,13 +474,24 @@ body {
     <div class="col-md-6">
       <div class="row text-center">
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/bako.gif" class="img-fluid" alt="Image 1" style="width:90%;">
+        <img class="about" src="img/bako.gif" class="img-fluid" alt="Image 1" style="width:90%;" onclick="openBackupWindow()">
+
+<script>
+function openBackupWindow() {
+  window.open("./backup/");
+}
+</script>
+
+
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/gay.gif" class="img-fluid" alt="Image 2" style="width:90%;">
+        <a href="guide.php" target="_blank">
+  <img class="about" src="img/gay.gif" class="img-fluid" alt="Image 2" style="width:90%;">
+</a>
+
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/3.gif" class="img-fluid" alt="Image 3" style="width:90%;">
+          <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
           <img class="about" src="img/ab.gif" class="img-fluid" alt="Image 4" style="width:90%;">

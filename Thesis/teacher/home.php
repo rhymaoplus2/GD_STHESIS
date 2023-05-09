@@ -366,7 +366,7 @@ body {
      
       </div>
       <div class="modal-footer">
-      <i>User Loged in: <b><?=$_SESSION['name']?></b></i>
+      <i>User Logged in: <b><?=$_SESSION['name']?></b></i>
     
    
       </div>
@@ -419,10 +419,105 @@ User logged in:  <?=$_SESSION['name']?>
     <div class="col-md-6">
       <div class="row text-center">
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/acc.gif" class="img-fluid" alt="Image 1" style="width:90%;">
+    <!-- Image -->
+<img id="image1" class="about" src="img/acc.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-left">
+      
+
+
+
+
+ 
+    <?php
+   include "./php/db_conn.php";
+   $name = $_SESSION['name'];
+
+      $sql = "SELECT * FROM users where name = '$name'";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+          echo "Name<br><b> " . $row["name"] . "</b>";
+          echo "<br><hr> <br>Login Validity<br><b>  " . $row["xp"] . " </b> days(s)";
+        }
+      } else {
+        echo "";
+      }
+    ?>
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+    
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/guide.gif" class="img-fluid" alt="Image 2" style="width:90%;">
+        <img id="image1" class="about" src="img/guide.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#guide">
+<!-- Bootstrap Modal -->
+<div class="modal fade " id="guide" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header" style="background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Guide</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start" >
+      <b>TERMS AND CONDITIONS FOR USING THE 
+        <br>MSU-MSAT HIGH SCHOOL GRADE REPORTING AND RECORDING SYSTEM</b>
+<br>
+
+<span clas="text-center">
+By using the MSU-MSAT High School Grade Reporting and Recording System, you agree to be bound by the following terms and conditions:
+<br>
+<br>
+<b> 1.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is provided by MSU-MSAT for the sole purpose of recording and reporting grades for high school students.
+<br>
+<b> 2.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is protected by copyright and other intellectual property laws. You may not copy, reproduce, distribute, or modify any part of the system without the prior written consent of MSU-MSAT.
+<br>
+<b> 3.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is provided "as is" and without warranties of any kind, whether express or implied. MSU-MSAT does not guarantee that the system will be error-free or that it will meet your specific requirements.
+<br>
+<b> 4.&nbsp;&nbsp;</b> You are solely responsible for ensuring that your use of the MSU-MSAT High School Grade Reporting and Recording System complies with all applicable laws, rules, and regulations.
+<br>
+<b> 5.&nbsp;&nbsp;</b> MSU-MSAT reserves the right to modify, suspend, or discontinue the MSU-MSAT High School Grade Reporting and Recording System at any time, with or without notice to you.
+<br>
+<b> 6.&nbsp;&nbsp;</b> MSU-MSAT may terminate your access to the MSU-MSAT High School Grade Reporting and Recording System at any time if you violate these terms and conditions.
+<br>
+<b> 7.&nbsp;&nbsp;</b> MSU-MSAT will not be liable to you or any third party for any damages arising out of your use of or inability to use the MSU-MSAT High School Grade Reporting and Recording System.
+<br>
+<b> 8.&nbsp;&nbsp;</b> These terms and conditions constitute the entire agreement between you and MSU-MSAT with respect to your use of the MSU-MSAT High School Grade Reporting and Recording System and supersede all prior or contemporaneous communications and proposals, whether oral or written.
+<br>
+<b> 9.&nbsp;&nbsp;</b> These terms and conditions shall be governed by and construed in accordance with the laws of the jurisdiction in which MSU-MSAT is located, without giving effect to any principles of conflicts of law.
+<br>
+<b> 10.&nbsp;</b> By using the MSU-MSAT High School Grade Reporting and Recording System, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions. 
+
+
+
+<br>
+<br> If you do not agree to these terms and conditions, you may not use the MSU-MSAT High School Grade Reporting and Recording System.
+
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</div>
+  </div>
+</div>
         </div>
         <div class="col-md-6 mb-3">
           <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">

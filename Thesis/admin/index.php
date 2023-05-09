@@ -92,7 +92,7 @@ margin-top: -5rem;
     </b>
   </a>
  
-  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as an&nbsp;<b>&nbsp;ADVISER</b></span>
+  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as an&nbsp;<b>&nbsp;ADMIN</b></span>
  <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
   <br>*To maintain security, refrain from sharing your password with anyone </span>
 </div>

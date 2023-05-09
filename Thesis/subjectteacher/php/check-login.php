@@ -27,7 +27,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         header("Location: ../index.php?error=Password is Required");
     } else {
 
-        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password' and status=1";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
