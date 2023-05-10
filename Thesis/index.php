@@ -56,9 +56,10 @@ text-align: center;
   bottom: 0;
   z-index: -1;
 }
-/*
+
 .login {
   animation: slide-in 3s ease-out forwards;
+
 }
 
 @keyframes slide-in {
@@ -69,7 +70,7 @@ text-align: center;
     transform: translateX(0); /* End position, slide in to the screen */
   }
 }
-*/
+
     </style>
 </head>
 <body>
@@ -96,8 +97,8 @@ text-align: center;
        
         </span>  
       </div>
-     
-      <div class=" login col-md-6  text-center bg-white"  style="border-radius:20px; padding:30px; width: auto;">
+    
+      <div class="login col-md-6  text-center bg-white"  style="border-radius:20px; padding:30px; width: auto;">
         <img class="mb-3" src="img/msu.png" width="80" height="80" alt="Logo">
         <br>
         <b>Select </b>   <h4 class="text-left mb-3" style="font-family: Tahoma;"><b>User Type</b></h4>

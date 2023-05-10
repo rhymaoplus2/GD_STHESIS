@@ -1,9 +1,9 @@
 <?php
-  session_start();
-  include "../php/db_conn.php";
-  include "../php/read.php";
-  
-  if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
+session_start();
+include "../php/db_conn.php";
+include "../php/read.php";
+
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 
     // Fetch section names from the section table
     $query_sections = "SELECT name FROM section";
@@ -12,39 +12,44 @@
     // Fetch subject names from the subject table
     $query_subjects = "SELECT subjectname FROM subjects";
     $result_subjects = mysqli_query($conn, $query_subjects);
-    // Fetch school years from the schoolyear table
-$query_schoolyears = "SELECT sy FROM schoolyear";
-$result_schoolyears = mysqli_query($conn, $query_schoolyears);
 
+    // Fetch school years from the schoolyear table
+    $query_schoolyears = "SELECT sy FROM schoolyear";
+    $result_schoolyears = mysqli_query($conn, $query_schoolyears);
 
     // Check for section and subject filters
     $selected_section = "";
     $selected_subject = "";
     if (isset($_POST['section'])) {
-      $selected_section = $_POST['section'];
+        $selected_section = $_POST['section'];
     }
     if (isset($_POST['subject'])) {
-      $selected_subject = $_POST['subject'];
+        $selected_subject = $_POST['subject'];
     }
-    
+
+    // Check for school year filter
+    $selected_schoolyear = "";
+    if (isset($_POST['schoolyear'])) {
+        $selected_schoolyear = $_POST['schoolyear'];
+    }
+
+    // Build the SQL query with filters
     $query = "SELECT * FROM grade WHERE 1=1";
-    
+
     if (!empty($selected_section)) {
-      $query .= " AND section = '$selected_section'";
+        $query .= " AND section = '$selected_section'";
     }
 
     if (!empty($selected_subject)) {
-      $query .= " AND subjectname = '$selected_subject'";
+        $query .= " AND subjectname = '$selected_subject'";
     }
-    $selected_schoolyear = "";
-if (isset($_POST['schoolyear'])) {
-  $selected_schoolyear = $_POST['schoolyear'];
-}
 
-if (!empty($selected_schoolyear)) {
-  $query .= " AND sy = '$selected_schoolyear'";
-}
+    if (!empty($selected_schoolyear)) {
+        $query .= " AND sy = '$selected_schoolyear'";
+    }
 
+    // Group the data by the desired columns
+    $query .= " GROUP BY subjectname, sy, quarter, semester, section, adviser, teacher";
 
     $result = mysqli_query($conn, $query);
 ?>
@@ -361,6 +366,7 @@ html, body {
             
             background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
               <tr>
+            
                 <th scope="col">Subject Teacher</th>
       
                 <th class="text-center" scope="col">Subject Name</th>

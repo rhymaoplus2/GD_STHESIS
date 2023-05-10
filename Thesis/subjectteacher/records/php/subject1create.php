@@ -10,12 +10,7 @@ if(isset($_POST['submit']))
         return $data;
     }
 
-    $quarter = $_POST['quarter'];
-    if ($quarter == "First" || $quarter == "Second") {
-        $semester = "First";
-    } else {
-        $semester = "Second";
-    }
+
 
     // Loop through each student's grades and insert them into the database
     foreach ($_POST['studentname'] as $index => $studentname)
@@ -32,6 +27,8 @@ if(isset($_POST['submit']))
         $sy = $_POST['sy'][$index];
         $year = $_POST['year'][$index];
         $ts = $_POST['ts'][$index];
+        $quarter = $_POST['quarter'];
+        $semester = $_POST['semester'];
         $studentid = $_POST['studentid'][$index];
         // Skip inserting the record if the grade is 0
         if ($grade == 0) {

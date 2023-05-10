@@ -357,7 +357,7 @@ html, body {
         <div class="table-scrollable">
           <table class="table table-bordered" style="height:300px">
             <thead class="text-white" style="
-      background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+      background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);x ">
               <tr>
                 <th scope="col">Student Name</th>
                 <th class="text-center" scope="col">Grade</th>

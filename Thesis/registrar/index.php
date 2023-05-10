@@ -91,7 +91,7 @@ margin-top: -5rem;
     </b>
   </a>
  
-  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as a&nbsp;<b>&nbsp;<br>Registrar's Staff member</b></span>
+  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as a&nbsp;<b>&nbsp;<br>Registrar's Staff</b></span>
  <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
   <br>*To maintain security, refrain from sharing your password with anyone </span>
 </div>

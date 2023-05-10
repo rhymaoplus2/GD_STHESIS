@@ -353,8 +353,7 @@ if (mysqli_num_rows($result) > 0) {
         <ul class="list-group">
         <a href="sectiongradeshs1.php?name=<?php echo $Row['name']; ?>" class="list-group-item" target="_blank">FIRST</a>
 
-
-          <li class="list-group-item">SECOND</li>
+<a href="sectiongradeshs2.php?name=<?php echo $Row['name']; ?>" class="list-group-item" target="_blank">SECOND</a>
         </ul>
       </div>
     </div>

@@ -470,7 +470,7 @@ if ($Row = mysqli_fetch_assoc($result)) {
 mysqli_close($conn);
 ?>
 <thead>
-<tr style="text-align:center;">
+<tr style="text-align:center;" >
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
@@ -507,7 +507,7 @@ $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; // increment rowNum
 ?>
-  <br>
+  
   <tr>
     <td class="text text-center"><?php echo  $rowNum ?></td>
     <td class="text"><?php echo $Row["lastname"]; ?></td>
@@ -552,7 +552,7 @@ ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; 
 ?>
-     <br>
+
            <tr>
            <td class="text text-center" ><?php echo  $rowNum ?></td>
           <td class="text "><?php echo $Row["lastname"]; ?></td>

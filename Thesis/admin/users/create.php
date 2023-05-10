@@ -165,7 +165,7 @@ font-size: 10px;;
 }
 
 body {
-  background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 }
 
@@ -187,7 +187,9 @@ body {
 <div class="content">
 <form action="php/create.php"
       method="post">
-      <header class="text-center text-white" style="font-size:30px; background: linear-gradient(to right, #0099ff 0%, #9933ff 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+      <header class="text-center text-white" style="font-size:30px;
+      
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
     <b>
         <?php if (isset($_GET['error'])) {
             echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';

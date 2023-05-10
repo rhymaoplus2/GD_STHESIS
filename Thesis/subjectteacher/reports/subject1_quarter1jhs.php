@@ -118,7 +118,10 @@ h1{
   width: 1.5rem;
   height: 1.5rem;
 }
-
+.img-fluid
+{
+  display:none;
+}
    .print-hidden {
       display: none;
     }
@@ -502,7 +505,7 @@ $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; // increment rowNum
 ?>
-  <br>
+  
   <tr>
     <td class="text text-center"><?php echo  $rowNum ?></td>
     <td class="text"><?php echo $Row["lastname"]; ?></td>
@@ -547,7 +550,7 @@ ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; 
 ?>
-     <br>
+     
            <tr>
            <td class="text text-center" ><?php echo  $rowNum ?></td>
           <td class="text "><?php echo $Row["lastname"]; ?></td>

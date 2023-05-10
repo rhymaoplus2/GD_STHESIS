@@ -156,7 +156,7 @@ School Year
 <?php
    include "../php/db_conn.php";
 
-// Retrieve data from principal table
+// Retrieve data from settings table
 $sql = "SELECT schoolyear FROM users LIMIT 1";
 $result = mysqli_query($conn, $sql);
 
@@ -179,67 +179,15 @@ if (mysqli_num_rows($result) > 0) {
 						<tr>
 							<td>
 
-							<div class="modal fade" id="juniorprincipal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal fade" id="juniorsettings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Set Junior High Principal Name</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Set Principal Name</h5>
 
 
 
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <iframe src="juniorprincipal.php" width="100%" height="280"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-<button type="button" class="boton mb-3" style="backgrp" data-bs-toggle="modal" data-bs-target="#juniorprincipal" data-bs-dismiss="modal">
-Junior High Principal :
-</button>
-<b>
-
-<?php
-   include "../php/db_conn.php";
-
-// Retrieve data from principal table
-$sql = "SELECT * FROM principal";
-$result = mysqli_query($conn, $sql);
-
-// Display data using echo statement
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "" . $row["p2name"]. "";
-    }
-} else {
-    echo "0 results";
-}
-
-
-?>
-</b>
-
-
-							</td>
-					
-						</tr>
-						<tr>
-							<td>
-
-
-
-
-
-							<div class="modal fade" id="shsp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header text-white" style="
-      
-      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Set Senior High Principal Name</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -248,16 +196,16 @@ if (mysqli_num_rows($result) > 0) {
     </div>
   </div>
 </div>
-<button type="button" class="boton mb-3 " style="backgrp"data-bs-toggle="modal" data-bs-target="#shsp" data-bs-dismiss="modal">
-Senior High Principal :
+<button type="button" class="boton mb-3" style="backgrp" data-bs-toggle="modal" data-bs-target="#juniorsettings" data-bs-dismiss="modal">
+Principal :
 </button>
 <b>
 
 <?php
    include "../php/db_conn.php";
 
-// Retrieve data from principal table
-$sql = "SELECT * FROM principal";
+// Retrieve data from settings table
+$sql = "SELECT * FROM settings";
 $result = mysqli_query($conn, $sql);
 
 // Display data using echo statement
@@ -273,6 +221,124 @@ if (mysqli_num_rows($result) > 0) {
 
 ?>
 </b>
+
+
+							</td>
+</tr>
+<tr>
+              <td>
+
+<div class="modal fade" id="semestersettings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header text-white" style="
+background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+<h5 class="modal-title" id="exampleModalLabel">Set Semester</h5>
+
+
+
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+<iframe src="semester.php" width="100%" height="280"></iframe>
+</div>
+</div>
+</div>
+</div>
+<button type="button" class="boton mb-3" style="backgrp" data-bs-toggle="modal" data-bs-target="#semestersettings" data-bs-dismiss="modal">
+Semester :
+</button>
+<b>
+
+<?php
+include "../php/db_conn.php";
+
+// Retrieve data from settings table
+$sql = "SELECT * FROM settings";
+$result = mysqli_query($conn, $sql);
+
+// Display data using echo statement
+if (mysqli_num_rows($result) > 0) {
+// output data of each row
+while($row = mysqli_fetch_assoc($result)) {
+echo "" . $row["semester"]. "";
+}
+} else {
+echo "0 results";
+}
+
+
+?>
+</b>
+
+
+</td>		
+						</tr>
+						<tr>
+							<td>
+
+
+
+
+
+
+
+							</td>
+			
+						</tr>
+            <tr>
+              <td>
+
+<div class="modal fade" id="quartersettings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header text-white" style="
+background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+<h5 class="modal-title" id="exampleModalLabel">Set Quarter</h5>
+
+
+
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+<iframe src="quarter.php" width="100%" height="280"></iframe>
+</div>
+</div>
+</div>
+</div>
+<button type="button" class="boton mb-3" style="backgrp" data-bs-toggle="modal" data-bs-target="#quartersettings" data-bs-dismiss="modal">
+Quarter :
+</button>
+<b>
+
+<?php
+include "../php/db_conn.php";
+
+// Retrieve data from settings table
+$sql = "SELECT * FROM settings";
+$result = mysqli_query($conn, $sql);
+
+// Display data using echo statement
+if (mysqli_num_rows($result) > 0) {
+// output data of each row
+while($row = mysqli_fetch_assoc($result)) {
+echo "" . $row["quarter"]. "";
+}
+} else {
+echo "0 results";
+}
+
+
+?>
+</b>
+
+
+</td>		
+						</tr>
+						<tr>
+							<td>
+
+
 
 
 
@@ -300,7 +366,7 @@ if (mysqli_num_rows($result) > 0) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <iframe src="principal.php" width="100%" height="280"></iframe>
+        <iframe src="settings.php" width="100%" height="280"></iframe>
       </div>
     </div>
   </div>

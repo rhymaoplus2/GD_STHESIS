@@ -311,7 +311,7 @@ $result = mysqli_query($conn, $query);
     <tr class="text-white text-center" style="
        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 
-      <th scope="col" colspan="2">Asign Sections</th>
+      <th scope="col" colspan="2">Assign Sections</th>
   
     </tr>
   </thead>

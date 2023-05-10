@@ -240,7 +240,7 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); border-radiu
 </header>
 
 <hr>  
-<label for="" class="form-label text-center mb-3"><strong>Subjects</strong></label>
+<label for="" class="form-label text-start mb-3"><strong>Subjects</strong></label>
  
 <div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
  <!--
@@ -270,7 +270,7 @@ scrollableElement.addEventListener("mouseleave", () => {
 
 </script>
 -->
-  <select name="sub1" id="sub1" class="form-control text-center mb-3">
+  <select name="sub1" id="sub1" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub1 has no value
     if(empty($row['sub1'])){
@@ -281,7 +281,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -303,7 +303,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub2" id="sub2" class="form-control text-center mb-3">
+<select name="sub2" id="sub2" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub1 has no value
     if(empty($row['sub2'])){
@@ -314,7 +314,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -336,7 +336,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub3" id="sub3" class="form-control text-center mb-3">
+<select name="sub3" id="sub3" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub1 has no value
     if(empty($row['sub3'])){
@@ -347,7 +347,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -369,7 +369,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub4" id="sub4" class="form-control text-center mb-3">
+<select name="sub4" id="sub4" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub4 has no value
     if(empty($row['sub4'])){
@@ -380,7 +380,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -402,7 +402,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub5" id="sub5" class="form-control text-center mb-3">
+<select name="sub5" id="sub5" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub5 has no value
     if(empty($row['sub5'])){
@@ -413,7 +413,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -435,7 +435,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub6" id="sub6" class="form-control text-center mb-3">
+<select name="sub6" id="sub6" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub6 has no value
     if(empty($row['sub6'])){
@@ -446,7 +446,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -468,7 +468,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub7" id="sub7" class="form-control text-center mb-3">
+<select name="sub7" id="sub7" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub7 has no value
     if(empty($row['sub7'])){
@@ -479,7 +479,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -501,7 +501,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub8" id="sub8" class="form-control text-center mb-3">
+<select name="sub8" id="sub8" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub8 has no value
     if(empty($row['sub8'])){
@@ -512,7 +512,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -534,7 +534,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub9" id="sub9" class="form-control text-center mb-3">
+<select name="sub9" id="sub9" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub9 has no value
     if(empty($row['sub9'])){
@@ -545,7 +545,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -567,7 +567,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
 </select>
 
-<select name="sub10" id="sub10" class="form-control text-center mb-3">
+<select name="sub10" id="sub10" class="form-control text-start mb-3">
     <?php
     // Add blank option if sub10 has no value
     if(empty($row['sub10'])){
@@ -578,7 +578,7 @@ scrollableElement.addEventListener("mouseleave", () => {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER BY subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -604,7 +604,7 @@ scrollableElement.addEventListener("mouseleave", () => {
   </div>
     
   <hr>
-  <label for="" class="form-label text-center"><strong>Sections</strong></label>
+  <label for="" class="form-label text-start"><strong>Sections</strong></label>
 <br> 
 <div class="b" style="height: 100px; overflow-y: scroll; padding-right: 10px;" id="scroll">
   <!-- content here -->
@@ -646,11 +646,11 @@ scrollDiv.addEventListener("mouseleave", function() {
 
 
 
-<select name="sec1" id="sec1" class="form-control text-center mb-3">
+<select name="sec1" id="sec1" class="form-control text-start mb-3">
  <option value="<?=$row['sec1']?>"><?=$row['sec1']?></option>
  <option value=""?></option>
     <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -674,11 +674,11 @@ continue;
 
 
 
-<select name="sec2" id="sec2" class="form-control text-center mb-3">
+<select name="sec2" id="sec2" class="form-control text-start mb-3">
 <option value="<?=$row['sec2']?>"><?=$row['sec2']?></option>
 <option value=""?></option>
    <?php 
-   $query ="SELECT name FROM section ORDER BY id ASC";
+   $query ="SELECT name FROM section ORDER BY name ASC";
    $result = $conn->query($query);
    if($result->num_rows> 0){
        while($optionData=$result->fetch_assoc()){
@@ -701,11 +701,11 @@ continue;
 </select>
 
 
-<select name="sec3" id="sec3" class="form-control text-center mb-3">
+<select name="sec3" id="sec3" class="form-control text-start mb-3">
   <option value="<?=$row['sec3']?>"><?=$row['sec3']?></option>
   <option value=""?></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){
@@ -727,11 +727,11 @@ continue;
   ?>
 </select>
 
-<select name="sec4" id="sec4" class="form-control text-center mb-3">
+<select name="sec4" id="sec4" class="form-control text-start mb-3">
   <option value="<?=$row['sec4']?>"><?=$row['sec4']?></option>
   <option value=""></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){
@@ -753,11 +753,11 @@ continue;
   ?>
 </select>
 
-<select name="sec5" id="sec5" class="form-control text-center mb-3">
+<select name="sec5" id="sec5" class="form-control text-start mb-3">
   <option value="<?=$row['sec5']?>"><?=$row['sec5']?></option>
   <option value=""></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){
@@ -779,11 +779,11 @@ continue;
   ?>
 </select>
 
-<select name="sec6" id="sec6" class="form-control text-center mb-3">
+<select name="sec6" id="sec6" class="form-control text-start mb-3">
   <option value="<?=$row['sec6']?>"><?=$row['sec6']?></option>
   <option value=""></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){
@@ -805,11 +805,11 @@ continue;
   ?>
 </select>
 
-<select name="sec7" id="sec7" class="form-control text-center mb-3">
+<select name="sec7" id="sec7" class="form-control text-start mb-3">
   <option value="<?=$row['sec7']?>"><?=$row['sec7']?></option>
   <option value=""></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){
@@ -832,11 +832,11 @@ continue;
 </select>
 
 <!-- Repeat the above code with "sec8", "sec9", and "sec10" -->
-<select name="sec8" id="sec8" class="form-control text-center mb-3">
+<select name="sec8" id="sec8" class="form-control text-start mb-3">
   <option value="<?=$row['sec8']?>"><?=$row['sec8']?></option>
   <option value=""></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){
@@ -858,11 +858,11 @@ continue;
   ?>
 </select>
 
-<select name="sec9" id="sec9" class="form-control text-center mb-3">
+<select name="sec9" id="sec9" class="form-control text-start mb-3">
   <option value="<?=$row['sec9']?>"><?=$row['sec9']?></option>
   <option value=""></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){
@@ -884,11 +884,11 @@ continue;
   ?>
 </select>
 
-<select name="sec10" id="sec10" class="form-control text-center mb-3">
+<select name="sec10" id="sec10" class="form-control text-start mb-3">
   <option value="<?=$row['sec10']?>"><?=$row['sec10']?></option>
   <option value=""></option>
   <?php 
-    $query ="SELECT name FROM section ORDER BY id ASC";
+    $query ="SELECT name FROM section ORDER BY name ASC";
     $result = $conn->query($query);
     if($result->num_rows > 0){
       while($optionData = $result->fetch_assoc()){

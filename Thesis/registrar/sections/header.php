@@ -20,14 +20,7 @@
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="../reports">Reports</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../users">Users</a>
-      </li>
-  
-	  <li class="nav-item ">
-        <a class="nav-link " href="../settings">Settings</a>
-      </li>
+</li>
       <li class="nav-item ">
         <a class="nav-link " href="logout.php">Logout</a>
       </li>

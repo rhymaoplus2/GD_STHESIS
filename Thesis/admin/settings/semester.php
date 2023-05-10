@@ -51,30 +51,6 @@ body {
     </style>
 </head>
 <body>
-<!--
-<div class="header sticky-top" id="myHeader">
-<?PHP include_once('header.php');?>
-</div>
-
-<script>
-window.onscroll = function() {myFunction()};
-
-var header = document.getElementById("myHeader");
-var sticky = header.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-  }
-}
-</script>
-
-
--->
-
-
 
 
 	<div class="container my-5">
@@ -82,24 +58,25 @@ function myFunction() {
 			<div class="col-md-6 mx-auto">
 			<div class="card">
 
-					<!--
-					<div class="card-header text-white" style=" background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-						<h4>Settings</h4>
-					</div>
---><div class="card-body">
+			
+<div class="card-body">
   <form method="POST" action="">
     <div class="form-group mb-3">
-      <label for="pname" class="mb-3 text-center"><b> Principal Name : </b> </label>
-      <input type="text" class="form-control" name="pname" value="<?php echo isset($_SESSION['pname']) ? $_SESSION['pname'] : ''; ?>" id="pname" required>
+      <label for="semester" class="mb-3 text-center"><b> SEMESTER : </b> </label>
+      <select class="form-select" name="semester" id="semester" required>
+  <option value="" selected disabled>Select</option>
+  <option value="FIRST"<?php if(isset($_SESSION['semester']) && $_SESSION['semester'] == 'FIRST') echo ' selected'; ?>>FIRST</option>
+  <option value="SECOND"<?php if(isset($_SESSION['semester']) && $_SESSION['semester'] == 'SECOND') echo ' selected'; ?>>SECOND</option>
+</select>
 
       <script>
         document.addEventListener("DOMContentLoaded", function() {
-          var pnameInput = document.getElementById('pname');
-          if(localStorage.getItem('pname')){
-            pnameInput.value = localStorage.getItem('pname');
+          var semesterInput = document.getElementById('semester');
+          if(localStorage.getItem('semester')){
+            semesterInput.value = localStorage.getItem('semester');
           }
-          pnameInput.addEventListener('input', function(){
-            localStorage.setItem('pname', pnameInput.value);
+          semesterInput.addEventListener('input', function(){
+            localStorage.setItem('semester', semesterInput.value);
           });
         });
       </script>
@@ -120,16 +97,16 @@ function myFunction() {
 	include "../php/db_conn.php";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$pname = mysqli_real_escape_string($conn, $_POST["pname"]);
+		$semester = mysqli_real_escape_string($conn, $_POST["semester"]);
 		
 		
-            $sql = "UPDATE settings SET pname='$pname'";
+            $sql = "UPDATE settings SET semester='$semester'";
 
 			if (mysqli_query($conn, $sql)) {
 				echo "<p class='mt-3 alert alert-success'> <b>Updating</b> 
 <span class='wave-text'>.</span>
 <span class='wave-text'>.</span>
-<span class='wave-text'>.</span> <br> Updating Principal Name Would Take Some Time 
+<span class='wave-text'>.</span> <br> Updating Senior High settings Name Would Take Some Time 
 
 
 				<br> Just logout and login back , thanks : )</p>";

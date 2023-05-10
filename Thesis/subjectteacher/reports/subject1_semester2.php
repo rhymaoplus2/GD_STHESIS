@@ -118,6 +118,10 @@ h1{
   width: 1.5rem;
   height: 1.5rem;
 }
+.img-fluid
+{
+  display:none;
+}
 
    .print-hidden {
       display: none;

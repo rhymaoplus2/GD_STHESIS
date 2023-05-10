@@ -280,7 +280,13 @@ transition: transform 0.5s;
 #rotate-btn.clicked {
 transform: rotate(360deg);
 }
-
+body.zoomed-in {
+      zoom: 1.2; /* Change the value as needed for zoom level */
+    }
+    
+    body.zoomed-out {
+      zoom: 0.8; /* Change the value as needed for zoom level */
+    }
     </style>
 </head>
 <body>
@@ -288,9 +294,6 @@ transform: rotate(360deg);
 <div class="header" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
-
-
-
 
 
 
@@ -467,41 +470,76 @@ function filterTable() {
 
 </script>
       <div class="row">
+      <?php
+// Assuming you have already established a database connection in db_conn.php
+include "php/db_conn.php";
 
-  <div class="text-center">
-    <label for="quarter" class="form-label text-center text-danger"><b>Which quarter should this grade be set for? Please select from the option below.</b></label>
-    <select class="form-select fw-bold " id="quarter" name="quarter">
+$id = 1; // ID value for the row you want to fetch
+$query = "SELECT quarter FROM settings WHERE id = $id";
+$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
 
-      <option value="First" class="fw-bold text-center">FIRST Quarter</option>
-      <option value="Second" class="fw-bold text-center">SECOND Quarter</option>
-      <option value="Third" class="fw-bold text-center">THIRD Quarter</option>
-      <option value="Fourth" class="fw-bold text-center">FOURTH Quarter
-      </option>
-    </select>
-  </div>
+if ($result && mysqli_num_rows($result) > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $quarter = $row['quarter'];
+} else {
+  // Default value if no row is found or an error occurs
+  $quarter = ' ';
+}
+?>
+      <div class="row">
+      <?php
+// Assuming you have already established a database connection in db_conn.php
+include "php/db_conn.php";
+
+$id = 1; // ID value for the row you want to fetch
+$query = "SELECT semester FROM settings WHERE id = $id";
+$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
+
+if ($result && mysqli_num_rows($result) > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $semester = $row['semester'];
+} else {
+  // Default value if no row is found or an error occurs
+  $semester = ' ';
+}
+?>
+<div hidden class="text-center">
+  <label for="quarter" class="form-label text-center text-danger"><b>Which quarter should this grade be set for? Please select from the option below.</b></label>
+  <input type="text" class="form-control" id="quarter" name="quarter" value="<?php echo $quarter; ?>" readonly>
 </div>
+<div hidden class="text-center">
+  <label for="semester" class="form-label text-center text-danger"><b>Which quarter should this grade be set for? Please select from the option below.</b></label>
+  <input type="text" class="form-control" id="semester" name="semester" value="<?php echo $semester; ?>" readonly>
 </div>
-
 <hr>
-<div class="b" style="height: 250px; overflow-y: scroll; padding-right: 10px;" id="scroll">
-<table class="table table-bordered" id="grades-table">
+<div class="b" style="height: 350px; overflow-y: scroll; padding-right: 10px;" id="scroll">
+
+<div class="span mb-3 text-center">
+<b> MALE </b>
+</div>
+<table class="table table-bordered" id="grades-table" style="border:20px;">
               <thead >
                   <tr>
                   
               
           
-                  <th scope="col">Student Name</th>
+                  <th scope="col" style="width:45%;"><i>Student Name</i></th>
                   <th hidden  scope="col">Subject Name </th>
-                  <th scope="col" class="text-center">Gender </th>
+                  <th hidden scope="col" class="text-center">Gender </th>
                   <th scope="col" class="text-center">Grade </th>
       
                 </tr>
-              </thead>
             
+              </thead>
+        <tbody>
+
+       
+
+
+</tbody>   
+
         <tbody>    
 <!-- Modal button -->
-
-
 
 
  <?php
@@ -558,7 +596,7 @@ function filterTable() {
 <input class="no text-center" id="sy" name="sy[]" value="<?= $Row['syear'] ?>">
 </input>
 </td>
-<td  olspan="">
+<td hidden  colspan="">
 <input class="no text-center" id="gender" name="gender[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
@@ -604,7 +642,7 @@ function filterTable() {
         
         </td>
         <td style="width:30%;">
-      <select id="grade-<?php echo $i; ?>" name="grade[]" class="form-control text-center grade-select">
+      <select id="grade-<?php echo $i; ?>" name="grade[]" class="form-control fw-bold text-center grade-select">
         <option value="0" class="">0</option>
      
         <?php for ($j = 50; $j <= 100; $j++) { ?>
@@ -645,11 +683,35 @@ function filterTable() {
       ?>
 
 
-<td colspan="4"> <br> <br></td>
          </tbody>
 
+</table>
+
+         <div class="span mb-3 text-danger text-center">
+<b> FEMALE </b>
+</div>
+<table class="table table-bordered" id="grades-table" style="border:20px;">
+              <thead >
+                  <tr>
+                  
+              
+          
+                  <th scope="col" style="width:60%;"><i>Student Name</i></th>
+                  <th hidden  scope="col">Subject Name </th>
+                  <th hidden scope="col" class="text-center">Gender </th>
+                  <th scope="col" class="text-center">Grade </th>
+      
+                </tr>
+            
+              </thead>
+        <tbody>
+
+       
 
 
+</tbody>   
+
+        <tbody>    
 
 
 
@@ -706,7 +768,7 @@ function filterTable() {
 </input>
 </td>
 
-<td   colspan="">
+<td  hidden colspan="">
 <input class="no text-center" id="sy" name="sy[]" value="<?= $Row['gender'] ?>">
 </input>
 </td>
@@ -752,7 +814,7 @@ function filterTable() {
         
         </td>
         <td>
-      <select id="grade-<?php echo $i; ?>" name="grade[]" class="form-control text-center grade-select">
+      <select id="grade-<?php echo $i; ?>" name="grade[]" class="form-control fw-bold text-center grade-select">
         <option value="0" class="">0</option>
      
         <?php for ($j = 50; $j <= 100; $j++) { ?>

@@ -47,7 +47,10 @@
     padding: 10px;
     border-top: 1px solid #ccc;
   }
-
+  .img-fluid
+{
+  display:none;
+}
   /* Set the page break after two pages */
   .page-break {
     page-break-after: always;
@@ -505,7 +508,7 @@ $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; // increment rowNum
 ?>
-  <br>
+
   <tr>
     <td class="text text-center"><?php echo  $rowNum ?></td>
     <td class="text"><?php echo $Row["lastname"]; ?></td>
@@ -550,7 +553,7 @@ ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; 
 ?>
-     <br>
+     
            <tr>
            <td class="text text-center" ><?php echo  $rowNum ?></td>
           <td class="text "><?php echo $Row["lastname"]; ?></td>
