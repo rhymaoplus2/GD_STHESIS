@@ -48,8 +48,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
         $query .= " AND sy = '$selected_schoolyear'";
     }
 
-    // Group the data by the desired columns
-    $query .= " GROUP BY subjectname, sy, quarter, semester, section, adviser, teacher";
+    // Group the data by the desired column
+    $query .= " GROUP BY session";
 
     $result = mysqli_query($conn, $query);
 ?>

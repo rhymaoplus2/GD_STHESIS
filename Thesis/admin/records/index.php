@@ -361,13 +361,12 @@ html, body {
             
             background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
               <tr>
-                <th scope="col">Subject Teacher</th>
-      
-                <th class="text-center" scope="col">Subject Name</th>
+                <th scope="col">Student Name</th>
                 <th class="text-center" scope="col">Grade</th>
-                <th class="text-center" scope="col">Section</th>
-                <th class="text-center" scope="col">Quarter</th>
+                <th class="text-center" scope="col">Subject Name</th>
                 <th class="text-center" scope="col">Semester</th>
+                <th class="text-center" scope="col">Quarter</th>
+                <th class="text-center" scope="col">Section</th>
                 <th class="text-center" scope="col">SY</th>
                 <th class="text-center" scope="col">Actions</th>
               </tr>
@@ -377,12 +376,12 @@ html, body {
                 while ($row = mysqli_fetch_assoc($result)) { 
               ?>
               <tr style="background: #f2f2f2;">
-                <td><?php echo $row["teacher"]; ?></td>
+                <td><?php echo $row["studentname"]; ?></td>
+                <td><?php echo $row["grade"]; ?></td>
                 <td><?php echo $row["subjectname"]; ?></td>
-                <td><?php echo $row["year"]; ?></td>
-                <td><?php echo $row["section"]; ?></td>
+                <td><?php echo $row["semester"]; ?></td>
                 <td><?php echo $row["quarter"]; ?></td>
-                <td class="text-center"><?php echo $row["semester"]; ?></td>
+                <td class="text-center"><?php echo $row["section"]; ?></td>
                 <td class="text-center"><?php echo $row["sy"]; ?></td>
                 
                 <!-- ACTIONS -->

@@ -415,21 +415,24 @@ function myFunction() {
 
                    <?php }
                    ?>   
-  <div class="row">
-<div class="col-md-15 text-center">
-<label for="section-filter" class="text-primary  mb-3"><b>You can add grades for all students or for specific sections. Simply select the appropriate option below to filter the students accordingly.</b></small></label>
-  <br><select class="form-select mb-3  fw-bold" id="section-filter" onchange="filterTable()">
-    <option value=""class="fw-bold text-center">All Sections</option>
-    <?php
-    $query = "SELECT DISTINCT section FROM students ORDER BY section ASC";
-    $result = mysqli_query($conn, $query);
-    while ($row = mysqli_fetch_assoc($result)) {
-      echo '<option class="fw-bold text-center"value="' . $row['section'] . '">' . $row['section'] . '</option>';
-    }
-    ?>
-  </select>
-
+  <div class="row text">
+  <div class="container text-center">
+  <div class="col-md-6 text-center mx-auto">
+    <label for="section-filter" class="text-primary mb-3"><strong>You can add grades for all students or for specific sections. Simply select the appropriate option below to filter the students accordingly.</strong></label>
+    <br>
+    <select class="form-select mb-3 fw-bold" id="section-filter" onchange="filterTable()" name="section">
+      <option value="" class="fw-bold text-center">Select Section First</option>
+      <?php
+      $query = "SELECT DISTINCT section FROM students ORDER BY section ASC";
+      $result = mysqli_query($conn, $query);
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo '<option class="fw-bold text-center" value="' . $row['section'] . '">' . $row['section'] . '</option>';
+      }
+      ?>
+    </select>
+  </div>
 </div>
+
 
 <br>
 
@@ -503,6 +506,51 @@ if ($result && mysqli_num_rows($result) > 0) {
   $semester = ' ';
 }
 ?>
+
+<input hidden id="randomInput" class="form-control" type="text" name="session">
+
+<script>
+  window.addEventListener('load', function() {
+    generateRandomValue();
+  });
+
+  function generateRandomValue() {
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var randomValue = '';
+    var inputField = document.getElementById('randomInput');
+
+    for (var i = 0; i < 8; i++) {
+      var randomIndex = Math.floor(Math.random() * characters.length);
+      randomValue += characters.charAt(randomIndex);
+    }
+
+    inputField.value = randomValue;
+  }
+</script>
+<input hidden type="date" class="form-control" id="dateInput" value="" name="date">
+<input hidden type="time" class="form-control" id="timeInput" value="" name="time">
+
+<script>
+  // Get the current date
+  var currentDate = new Date();
+  
+  // Format the date to the required format (YYYY-MM-DD)
+  var formattedDate = currentDate.toISOString().split('T')[0];
+  
+  // Set the value of the date input field
+  document.getElementById("dateInput").value = formattedDate;
+  
+  // Get the current time
+  var currentHour = currentDate.getHours();
+  var currentMinute = currentDate.getMinutes();
+  
+  // Format the time to the required format (HH:MM)
+  var formattedTime = (currentHour < 10 ? "0" + currentHour : currentHour) + ":" + (currentMinute < 10 ? "0" + currentMinute : currentMinute);
+  
+  // Set the value of the time input field
+  document.getElementById("timeInput").value = formattedTime;
+</script>
+
 <div hidden class="text-center">
   <label for="quarter" class="form-label text-center text-danger"><b>Which quarter should this grade be set for? Please select from the option below.</b></label>
   <input type="text" class="form-control" id="quarter" name="quarter" value="<?php echo $quarter; ?>" readonly>
@@ -512,6 +560,7 @@ if ($result && mysqli_num_rows($result) > 0) {
   <input type="text" class="form-control" id="semester" name="semester" value="<?php echo $semester; ?>" readonly>
 </div>
 <hr>
+
 <div class="b" style="height: 350px; overflow-y: scroll; padding-right: 10px;" id="scroll">
 
 <div class="span mb-3 text-center">
@@ -661,7 +710,7 @@ if ($result && mysqli_num_rows($result) > 0) {
           <td hidden><input value="<?= $_SESSION['name']?>" id="teacher"name="teacher[]">
 
         </td>
-        <td class="section" hidden><input hidden class="no" id="section" name="section[]" value="<?= $Row['section'] ?>"></td>
+        <td class="section" hidden><input hidden class="no" id="section" value="<?= $Row['section'] ?>"></td>
 
         <td hidden>          
 
@@ -833,7 +882,7 @@ if ($result && mysqli_num_rows($result) > 0) {
           <td hidden><input value="<?= $_SESSION['name']?>" id="teacher"name="teacher[]">
 
         </td>
-        <td class="section" hidden><input hidden class="no" id="section" name="section[]" value="<?= $Row['section'] ?>"></td>
+        <td class="section" hidden><input hidden class="no" id="section"  value="<?= $Row['section'] ?>"></td>
 
         <td hidden>          
 
