@@ -321,6 +321,23 @@ html, body {
   </div>
   
   <br>
+  <div class="text text-center">
+<?php if (isset($_GET['success'])) { ?>
+  <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+          <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
+        </div>
+        <div class="modal-body">
+          <?php echo $_GET['success'];?>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
+</div>
 
   <div class="container">
     <div class="border">
@@ -397,7 +414,21 @@ html, body {
                 <td class="text-center"><?php echo $row["time"]; ?></td>
                 
                 <!-- ACTIONS -->
-                <td class="text-center">-</td>
+                <td class="text-center">
+ 
+
+    <a href="check.php?session=<?php echo $row["session"]; ?>">
+    <?php
+    if ($row["status"] == 0) {
+        echo 'NOT YET VALIDATED';
+    } else {
+        echo 'VALIDATED';
+    }
+    ?>
+    </a>
+</td>
+
+
               </tr>
               <?php 
                 }
