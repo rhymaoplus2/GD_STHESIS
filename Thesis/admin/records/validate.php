@@ -81,6 +81,7 @@ html, body {
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      width: auto;
   
   }
   
@@ -108,7 +109,7 @@ html, body {
     border:10px;
     border-radius: 30px;
     background-color: white;
-    width: 900px;
+    width: auto;
   
   }
   
@@ -375,6 +376,8 @@ html, body {
                 <th class="text-center" scope="col">Quarter</th>
                 <th class="text-center" scope="col">Semester</th>
                 <th class="text-center" scope="col">SY</th>
+                <th class="text-center" scope="col">DATE</th>
+                <th class="text-center" scope="col">TIME</th>
                 <th class="text-center" scope="col">Actions</th>
               </tr>
             </thead>
@@ -390,6 +393,8 @@ html, body {
                 <td><?php echo $row["quarter"]; ?></td>
                 <td class="text-center"><?php echo $row["semester"]; ?></td>
                 <td class="text-center"><?php echo $row["sy"]; ?></td>
+                <td class="text-center"><?php echo $row["date"]; ?></td>
+                <td class="text-center"><?php echo $row["time"]; ?></td>
                 
                 <!-- ACTIONS -->
                 <td class="text-center">-</td>
