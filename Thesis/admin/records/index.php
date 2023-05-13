@@ -124,7 +124,7 @@ html, body {
       justify-content: center;
       align-items: center;
       flex-direction: column;
-  
+
   }
   
   .formx {
@@ -320,6 +320,14 @@ html, body {
 .zoom-img:hover {
   transform: scale(1.2);  /* Zoom in the image on hover */
 }
+  
+.zoom-img {
+  transition: transform 0.3s;  /* Add smooth transition effect */
+}
+
+.zoom-img:hover {
+  transform: scale(1.2);  /* Zoom in the image on hover */
+}
 
   td a:hover {
     font-weight: bold;
@@ -327,7 +335,7 @@ html, body {
   }
   
   .table-scrollable{
-    height: 350px;
+    height: 250px;
     overflow-y: auto;
     scroll-behavior: smooth;
  
@@ -361,6 +369,15 @@ html, body {
       opacity: 1;
     }
   }
+  a {
+    text-decoration: ;
+  }
+  .sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 
   </style>
 </head>
@@ -377,9 +394,56 @@ html, body {
     <form method="post" class="formx text-center">
     <div class="row">
   <div class="col-md-1 mb-3">
-      <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
-        <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
-      </a>
+     
+  <?php
+function generateNotification() {
+    include "../php/db_conn.php";
+  
+    // Assuming your database connection is stored in the $conn variable
+  
+    // Prepare the SQL query
+    $sql = "SELECT session, COUNT(DISTINCT status) AS count FROM grade WHERE status != 1 GROUP BY session";
+    $count = 0;
+    // Execute the query
+    $result = $conn->query($sql);
+  
+    // Check if the query executed successfully
+    if ($result) {
+        // Loop through the result set
+        while ($row = $result->fetch_assoc()) {
+            // Access the session and count values
+            $session = $row['session'];
+            $count = $row['count'];
+      
+            // Output the count
+        }
+        if ($count >= 1) {
+            echo "<a style='text-decoration:none;' class='link-primary me-2' href='validate.php' data-bs-toggle='tooltip' data-bs-placement='bottom' data-bs-class='tooltip' title='New Grades to Validate'>";
+            echo "<div style='position: relative; display: inline-block;'>";
+            echo "<img style='width: 30px;' src='img/notification.png' class='img-fluid zoom-img'>";
+            echo "<span style='position: absolute; top: -5px; right: -5px; background-color: black; color: white; border-radius: 50%; padding: 2px 5px; font-size: 12px;'>$count</span>";
+            echo "</div>";
+            echo "</a>";
+        } else {
+            echo "<a disabled style='text-decoration:none;' class='link-primary me-2' href='#' data-bs-toggle='tooltip' data-bs-placement='bottom' data-bs-class='tooltip' title='Zero Request'>";
+            echo "<div style='position: relative; display: inline-block;'>";
+            echo "<img style='width: 30px;' src='img/notification.png' class='img-fluid zoom-img'>";
+            echo "</div>";
+            echo "</a>";
+        }
+    } else {
+  
+    }
+  
+    // Close the database connection
+    $conn->close();
+}
+
+// Call the function to generate the notification
+generateNotification();
+?>
+
+  
     </div>
     <div class="col ">
     <input type="text" class="form-control mb-3" id="search" name="search" placeholder="Search" value="<?php echo $search_query; ?>">
@@ -506,20 +570,14 @@ function updateSelectedOption() {
       <div class="fade-in">
         <div class="table-scrollable">
           <table class="table " style="height:300px">
-            <thead class="text-white" style="
+            <thead class="text-white sticky-header" style="
             
             
             background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
               <tr>
                 <th scope="col">Student Name</th>
                 <th class="text-center" scope="col">Grade</th>
-                <!--
-                <th class="text-center" scope="col">Subject Name</th>
-                <th class="text-center" scope="col">Semester</th>
-                <th class="text-center" scope="col">Quarter</th>
-                <th class="text-center" scope="col">Section</th>
-                <th class="text-center" scope="col">SY</th>
-        -->
+        
                 <th class="text-center" scope="col">Actions</th>
               </tr>
             </thead>
@@ -530,13 +588,7 @@ function updateSelectedOption() {
               <tr style="background: #f2f2f2;">
                 <td><?php echo $row["studentname"]; ?></td>
                 <td class="text-center"><?php echo $row["grade"]; ?></td>
-                <!-- <td><?php echo $row["subjectname"]; ?></td>
-                <td><?php echo $row["semester"]; ?></td>
-                <td><?php echo $row["quarter"]; ?></td>
-                <td class="text-center"><?php echo $row["section"]; ?></td>
-                <td class="text-center"><?php echo $row["sy"]; ?></td>
-                -->
-                <!-- ACTIONS -->
+             
                 <td class="text-center"> 
                   
                 <a href="update.php?id=<?php echo $row['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Grade">

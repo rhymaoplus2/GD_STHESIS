@@ -17,7 +17,7 @@ $sql = "UPDATE grade SET status = 1 WHERE session = '$session'";
 // Execute the query
 if (mysqli_query($conn, $sql)) {
     // Update successful
-     header("Location: validate.php");
+     header("Location: index.php");
 } else {
     // Error occurred
     echo "Error updating status: " . mysqli_error($conn);
