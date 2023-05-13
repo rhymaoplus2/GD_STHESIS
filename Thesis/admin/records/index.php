@@ -1,58 +1,106 @@
 <?php
-  session_start();
-  include "../php/db_conn.php";
-  include "../php/read.php";
-  
-  if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
+session_start();
+include "../php/db_conn.php";
+include "../php/read.php";
 
-    // Fetch section names from the section table
-    $query_sections = "SELECT name FROM section";
-    $result_sections = mysqli_query($conn, $query_sections);
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
+  // Fetch section names from the section table
+  $query_sections = "SELECT name FROM section ORDER BY name";
+  $result_sections = mysqli_query($conn, $query_sections);
 
-    // Fetch subject names from the subject table
-    $query_subjects = "SELECT subjectname FROM subjects";
-    $result_subjects = mysqli_query($conn, $query_subjects);
-    // Fetch school years from the schoolyear table
-$query_schoolyears = "SELECT sy FROM schoolyear";
-$result_schoolyears = mysqli_query($conn, $query_schoolyears);
+  // Fetch subject names from the subject table
+  $query_subjects = "SELECT subjectname FROM subjects ORDER BY subjectname";
+  $result_subjects = mysqli_query($conn, $query_subjects);
 
+  // Fetch school years from the schoolyear table
+  $query_schoolyears = "SELECT sy FROM schoolyear";
+  $result_schoolyears = mysqli_query($conn, $query_schoolyears);
 
-    // Check for section and subject filters
-    $selected_section = "";
-    $selected_subject = "";
-    if (isset($_POST['section'])) {
-      $selected_section = $_POST['section'];
-    }
-    if (isset($_POST['subject'])) {
-      $selected_subject = $_POST['subject'];
-    }
-    
-    $query = "SELECT * FROM grade WHERE 1=1";
-    
-    if (!empty($selected_section)) {
-      $query .= " AND section = '$selected_section'";
-    }
+  // Check for section, subject, gender, and year level filters
+  $selected_section = "";
+  $selected_subject = "";
+  $selected_gender = "";
+  $selected_schoolyear = "";
+  $selected_year = "";
 
-    if (!empty($selected_subject)) {
-      $query .= " AND subjectname = '$selected_subject'";
-    }
-    $selected_schoolyear = "";
+  if (isset($_POST['section'])) {
+    $selected_section = $_POST['section'];
+  }
+  if (isset($_POST['subject'])) {
+    $selected_subject = $_POST['subject'];
+  }
+  if (isset($_POST['gender'])) {
+    $selected_gender = $_POST['gender'];
+  }
+  if (isset($_POST['schoolyear'])) {
+    $selected_schoolyear = $_POST['schoolyear'];
+  }
+  if (isset($_POST['year'])) {
+    $selected_year = $_POST['year'];
+  }
+
+  // Check for section, subject, gender, year level, and search filters
+$selected_section = "";
+$selected_subject = "";
+$selected_gender = "";
+$selected_schoolyear = "";
+$selected_year = "";
+$search_query = "";
+
+if (isset($_POST['section'])) {
+  $selected_section = $_POST['section'];
+}
+if (isset($_POST['subject'])) {
+  $selected_subject = $_POST['subject'];
+}
+if (isset($_POST['gender'])) {
+  $selected_gender = $_POST['gender'];
+}
 if (isset($_POST['schoolyear'])) {
   $selected_schoolyear = $_POST['schoolyear'];
 }
-
-if (!empty($selected_schoolyear)) {
-  $query .= " AND sy = '$selected_schoolyear'";
+if (isset($_POST['year'])) {
+  $selected_year = $_POST['year'];
+}
+if (isset($_POST['search'])) {
+  $search_query = $_POST['search'];
 }
 
+$query = "SELECT * FROM grade WHERE 1=1";
+if (!empty($search_query)) {
+  $query .= " AND (lastname LIKE '%$search_query%' OR firstname LIKE '%$search_query%')";
+}
 
-    $result = mysqli_query($conn, $query);
+  if (!empty($selected_section)) {
+    $query .= " AND section = '$selected_section'";
+  }
+
+  if (!empty($selected_subject)) {
+    $query .= " AND subjectname = '$selected_subject'";
+  }
+
+  if (!empty($selected_gender)) {
+    $query .= " AND gender = '$selected_gender'";
+  }
+
+  if (!empty($selected_schoolyear)) {
+    $query .= " AND sy = '$selected_schoolyear'";
+  }
+
+  if (!empty($selected_year)) {
+    $query .= " AND year = '$selected_year'";
+  }
+
+  $query .= " ORDER BY lastname";
+  $result = mysqli_query($conn, $query);
+
 ?>
+
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Users</title>
+  <title>Records</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css.css" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -265,7 +313,14 @@ html, body {
     color: black;
   }
   
-  
+  .zoom-img {
+  transition: transform 0.3s;  /* Add smooth transition effect */
+}
+
+.zoom-img:hover {
+  transform: scale(1.2);  /* Zoom in the image on hover */
+}
+
   td a:hover {
     font-weight: bold;
     color: black;
@@ -309,7 +364,8 @@ html, body {
 
   </style>
 </head>
-<body>
+<body onload="updateSelectedOption()">
+
   <div class="header" id="myHeader">
     <?php include_once('header.php');?>
   </div>
@@ -318,44 +374,138 @@ html, body {
 
   <div class="container">
     <div class="border">
-      <form method="post" class="formx text-center" style="">
-        <div class="form-group row">
-   
-          <div class="col-sm-4">
-            <select class="form-control" id="section" name="section" onchange="this.form.submit()">
-              <option value="">Sections</option>
-              <?php while ($row_sections = mysqli_fetch_assoc($result_sections)) { ?>
-                <option value="<?php echo $row_sections["name"]; ?>" <?php if ($selected_section == $row_sections["name"]) {echo "selected";} ?>><?php echo $row_sections["name"]; ?></option>
-              <?php } ?>
-            </select>
-          </div>
+    <form method="post" class="formx text-center">
+    <div class="row">
+  <div class="col-md-1 mb-3">
+      <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
+        <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
+      </a>
+    </div>
+    <div class="col ">
+    <input type="text" class="form-control mb-3" id="search" name="search" placeholder="Search" value="<?php echo $search_query; ?>">
+    </div>
+    </div>
+  <div class="row">
+    
+    <div class="col-sm-2">
+      <select class="form-select fw-bold" id="gender" name="gender" onchange="this.form.submit()">
+        <option value="" selected>Gender</option>
+        <option value="MALE" <?php if ($selected_gender == "MALE") {echo "selected";} ?>>MALE</option>
+        <option value="FEMALE" <?php if ($selected_gender == "FEMALE") {echo "selected";} ?>>FEMALE</option>
+      </select>
+    </div>
 
-          <div class="col-sm-4">
-            <select class="form-control" id="subject" name="subject" onchange="this.form.submit()">
-              <option value="">Subject Name</option>
-              <?php while ($row_subjects = mysqli_fetch_assoc($result_subjects)) { ?>
-                <option value="<?php echo $row_subjects["subjectname"]; ?>" <?php if ($selected_subject == $row_subjects["subjectname"]) {echo "selected";} ?>><?php echo $row_subjects["subjectname"]; ?></option>
-              <?php } ?>
-            </select>
-          </div>
-        </div>
-        <br>
-        <div class="col-sm-3">
-  <select class="form-control" id="schoolyear" name="schoolyear" onchange="this.form.submit()">
-    <option value="">School Year</option>
-    <?php while ($row_schoolyears = mysqli_fetch_assoc($result_schoolyears)) { ?>
-      <option value="<?php echo $row_schoolyears["sy"]; ?>" <?php if ($selected_schoolyear == $row_schoolyears["sy"]) {echo "selected";} ?>><?php echo $row_schoolyears["sy"]; ?></option>
-    <?php } ?>
+    <div class="col-sm-2">
+    <select class="form-select fw-bold "  id="year" name="year" onchange="this.form.submit()">
+        <option  class="text-center"value="" selected>Grade</option>
+        <option class="text-center" value="7" <?php if ($selected_year == "7") {echo "selected";} ?>>7</option>
+        <option class="text-center" value="8" <?php if ($selected_year == "8") {echo "selected";} ?>>8</option>
+        <option class="text-center" value="9" <?php if ($selected_year == "9") {echo "selected";} ?>>9</option>
+        <option class="text-center" value="10" <?php if ($selected_year == "10") {echo "selected";} ?>>10</option>
+        <option class="text-center" value="11" <?php if ($selected_year == "11") {echo "selected";} ?>>11</option>
+        <option class="text-center" value="12" <?php if ($selected_year == "12") {echo "selected";} ?>>12</option>
+      </select>
+    </div>
+
+    <div class="col-sm-3">
+    <select class="form-select fw-bold"  id="section" name="section" onchange="this.form.submit()">
+        <option value="" selected>Section</option>
+        <?php while ($row_sections = mysqli_fetch_assoc($result_sections)) { ?>
+          <option value="<?php echo $row_sections["name"]; ?>" <?php if ($selected_section == $row_sections["name"]) {echo "selected";} ?>><?php echo $row_sections["name"]; ?></option>
+        <?php } ?>
+      </select>
+    </div>
+
+    <div class="col-sm-3">
+    <select class="form-select fw-bold" id="subject" name="subject" onchange="this.form.submit()">
+        <option value="" selected>Subject Name</option>
+        
+        <?php while ($row_subjects = mysqli_fetch_assoc($result_subjects)) { ?>
+          <option value="<?php echo $row_subjects["subjectname"]; ?>" <?php if ($selected_subject == $row_subjects["subjectname"]) {echo "selected";} ?>><?php echo $row_subjects["subjectname"]; ?></option>
+        <?php } ?>
+      </select>
+    </div>
+    <div class="col-sm-2">
+  <select class="form-select fw-bold" id="schoolyear" name="schoolyear" onchange="this.form.submit()">
+    <option value="" selected>SY</option>
+    <?php
+      $startYear = 2017;
+      $endYear = 2030;
+
+      for ($year = $startYear; $year <= $endYear; $year++) {
+        $optionValue = $year . " - " . ($year + 1);
+        $optionText = $year . " - " . ($year + 1);
+
+        if ($selected_schoolyear == $optionValue) {
+          $selectedAttribute = "selected";
+        } else {
+          $selectedAttribute = "";
+        }
+
+        echo '<option value="' . $optionValue . '" ' . $selectedAttribute . '>' . $optionText . '</option>';
+      }
+    ?>
   </select>
 </div>
+</div>
 
-      </form>
+</form>
+
+
+<script>
+function updateSelectedOption() {
+  var selectedOptions = [];
+
+  // Get the selected option from the gender select element
+  var genderSelect = document.getElementById("gender");
+  if (genderSelect.selectedIndex !== -1 && genderSelect.options[genderSelect.selectedIndex].value !== "") {
+    var selectedGender = 'Gender : <strong>' + genderSelect.options[genderSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedGender);
+  }
+
+  // Get the selected option from the year select element
+  var yearSelect = document.getElementById("year");
+  if (yearSelect.selectedIndex !== -1 && yearSelect.options[yearSelect.selectedIndex].value !== "") {
+    var selectedYear = 'Year : <strong>' + yearSelect.options[yearSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedYear);
+  }
+
+  // Get the selected option from the section select element
+  var sectionSelect = document.getElementById("section");
+  if (sectionSelect.selectedIndex !== -1 && sectionSelect.options[sectionSelect.selectedIndex].value !== "") {
+    var selectedSection = 'Section : <strong>' + sectionSelect.options[sectionSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedSection);
+  }
+
+  // Get the selected option from the subject select element
+  var subjectSelect = document.getElementById("subject");
+  if (subjectSelect.selectedIndex !== -1 && subjectSelect.options[subjectSelect.selectedIndex].value !== "") {
+    var selectedSubject = 'Subject : <strong>' + subjectSelect.options[subjectSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedSubject);
+  }
+
+  // Get the selected option from the schoolyear select element
+  var schoolYearSelect = document.getElementById("schoolyear");
+  if (schoolYearSelect.selectedIndex !== -1 && schoolYearSelect.options[schoolYearSelect.selectedIndex].value !== "") {
+    var selectedSchoolYear = 'SY : <strong>' + schoolYearSelect.options[schoolYearSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedSchoolYear);
+  }
+
+  // Update the content of the selectedOption paragraph with the selected options
+  document.getElementById("selectedOption").innerHTML = " " + selectedOptions.join(" - ");
+}
+</script>
+
+
+<div class="mt-3 text-center">
+      <p id="selectedOption"></p>
+    </div>
 
       <br>
 
       <div class="fade-in">
         <div class="table-scrollable">
-          <table class="table table-bordered" style="height:300px">
+          <table class="table " style="height:300px">
             <thead class="text-white" style="
             
             
@@ -363,11 +513,13 @@ html, body {
               <tr>
                 <th scope="col">Student Name</th>
                 <th class="text-center" scope="col">Grade</th>
+                <!--
                 <th class="text-center" scope="col">Subject Name</th>
                 <th class="text-center" scope="col">Semester</th>
                 <th class="text-center" scope="col">Quarter</th>
                 <th class="text-center" scope="col">Section</th>
                 <th class="text-center" scope="col">SY</th>
+        -->
                 <th class="text-center" scope="col">Actions</th>
               </tr>
             </thead>
@@ -377,15 +529,57 @@ html, body {
               ?>
               <tr style="background: #f2f2f2;">
                 <td><?php echo $row["studentname"]; ?></td>
-                <td><?php echo $row["grade"]; ?></td>
-                <td><?php echo $row["subjectname"]; ?></td>
+                <td class="text-center"><?php echo $row["grade"]; ?></td>
+                <!-- <td><?php echo $row["subjectname"]; ?></td>
                 <td><?php echo $row["semester"]; ?></td>
                 <td><?php echo $row["quarter"]; ?></td>
                 <td class="text-center"><?php echo $row["section"]; ?></td>
                 <td class="text-center"><?php echo $row["sy"]; ?></td>
-                
+                -->
                 <!-- ACTIONS -->
-                <td class="text-center">-</td>
+                <td class="text-center"> 
+                  
+                <a href="update.php?id=<?php echo $row['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Grade">
+  <b>
+    <img style="width:30px;" src="img/up.png" class="img-fluid zoom-img"  alt="Description of image">
+  </b>
+</a>
+
+<a type="button" class="btn img-fluid zoom-img"  data-bs-toggle="modal" 
+  data-bs-target="#deleteModal<?php echo $row['id']; ?>"
+  style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+  <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+</a>
+
+<div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+        <h5 class="modal-title" id="deleteModalLabel<?php echo $row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p> <b></b>
+          <br> Are you sure you want to delete <br> <b> <?php echo $row['studentname']; ?></b>
+          <br>
+          GRADE in <b> <?php echo $row['subjectname']; ?>?</b>
+        </p>
+        <form class="delete" action="delete_grade1.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+          <div class="mb-3">
+            <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-danger" name="delete">
+       PROCEED
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+                </td>
               </tr>
               <?php 
                 }

@@ -42,7 +42,7 @@ html, body {
   
   
   body {
-    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
     background-repeat: no-repeat;
   }
   
@@ -330,7 +330,7 @@ input::placeholder {
   <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <div class="modal-header" style="background: linear-gradient(to right, #0099ff 0%, #9933ff 100%);">
           <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
         </div>
@@ -389,6 +389,7 @@ border: none; border-radius:100%; width:50px; height: 50px;">
 </button>
 
  
+
 <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="goBack()">
   <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
@@ -398,7 +399,6 @@ function goBack() {
   window.history.back();
 }
 </script>
-
 
 
 	    </form>

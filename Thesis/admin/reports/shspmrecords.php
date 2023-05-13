@@ -157,7 +157,7 @@ td {
 }
 
 .failed {
-  color: red;
+  color: black;
   border-right-color: white; /* set border color to white */
 }
 
@@ -387,7 +387,7 @@ hr {
 
 
 .fail {
-   color: red;
+   color: black;
 }
 
 
@@ -717,8 +717,8 @@ if (isset($_GET['id'])) {
                 <td style=" "class="text-center"><?php echo $second_average ?></td>
                 <td style="; "class="text-center"><?php echo ($first_average + $second_average) / 2 ?></td>
                 <td style=" "class="text-center <?php echo (($first_average + $second_average) / 2 >= 75) ? 'pass' : 'fail'; ?>"
-    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: red;"'; } ?>>
-    <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASS' : 'FAIL'; ?>
+    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: black;"'; } ?>>
+    <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASSED' : 'FAILED'; ?>
 </td>
 
             </tr>
@@ -803,7 +803,7 @@ if (isset($_GET['id'])) {
     include "db_conn.php";
     $id = validate($_GET['id']);
 
-    $sql = "SELECT * FROM grade WHERE studentid='$id' AND (semester='Second' OR semester='second' OR semester=' Second') AND year=11";
+    $sql = "SELECT * FROM grade WHERE studentid='$id' AND (semester='Second' OR semester='SECOND' OR semester=' Second') AND year=11";
 
     $result = mysqli_query($conn, $sql);
 
@@ -837,10 +837,10 @@ if (isset($_GET['id'])) {
             }
 
             // set the first or second quarter grade
-            if ($quarter == "First") {
+            if ($quarter == "THIRD") {
                 $first = $grade;
                 $second = 0;
-            } else if ($quarter == "Second") {
+            } else if ($quarter == "FOURTH") {
                 $first = 0;
                 $second = $grade;
             }
@@ -861,9 +861,9 @@ if (isset($_GET['id'])) {
                     $count = count($grades);
                     $sum = array_sum($grades);
                     $average = $sum / $count;
-                    if ($quarter == "First") {
+                    if ($quarter == "THIRD") {
                         $first_average = $average;
-                    } else if ($quarter == "Second") {
+                    } else if ($quarter == "FOURTH") {
                         $second_average = $average;
                     }
                 ?>
@@ -872,8 +872,8 @@ if (isset($_GET['id'])) {
                 <td style=" "class="text-center"><?php echo $second_average ?></td>
                 <td style=" "class="text-center"><?php echo ($first_average + $second_average) / 2 ?></td>
                 <td style=" "class="text-center <?php echo (($first_average + $second_average) / 2 >= 75) ? 'pass' : 'fail'; ?>"
-    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: red;"'; } ?>>
-    <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASS' : 'FAIL'; ?>
+    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: black;"'; } ?>>
+    <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASSED' : 'FAILED'; ?>
 </td>
 
             </tr>
@@ -891,8 +891,8 @@ $overall_average = round($total_average / count($subjects), 2);
 
 
         <td style="" colspan="3"class="text-center"><?php echo $overall_average ?></td>
-        <td style="" class="text-center <?php echo ($overall_average >= 75) ? 'pass' : 'fail'; ?>">
-   <?php echo ($overall_average >= 75) ? 'PASS' : 'FAIL'; ?>
+        <td style="" class="text-center <?php echo ($overall_average >= 75) ? 'PASSED' : 'FAILED'; ?>">
+   <?php echo ($overall_average >= 75) ? 'PASSED' : 'FAILED'; ?>
 </td>
 
       </tr>
@@ -950,7 +950,7 @@ $(function() {
     if (mysqli_num_rows($result) > 0) {
         // display student information
         $row = mysqli_fetch_assoc($result);
-        echo "<br><br><br><br><br><strong>" . $row['adviser_id'] . "</strong>";
+        echo "<br><br><br><br><br><strong>" . strtoupper($row['adviser_id']) ."</strong>";
         echo "<br>". "<i>Adviser</i>";
     }
     ?>
@@ -979,7 +979,7 @@ $(function() {
     if (mysqli_num_rows($result) > 0) {
         // display student information
         $row = mysqli_fetch_assoc($result);
-        echo "<br><br><br><br><br><strong>" . $row['adviser_id'] . "</strong>";
+        echo "<br><br><br><br><br><strong>" . strtoupper($row['adviser_id']) ."</strong>";
         echo "<br>". "<i>Adviser</i>";
     }
     ?>
@@ -1013,13 +1013,84 @@ $(function() {
 	<div class="border">
 
     
-
 <div class="horizontal-line"></div>
 <div class="row" style=";">
   <div class="col-md-6">
     <div class="text-start">
  
 
+
+    <?php 
+if (isset($_GET['id'])) {
+    include "db_conn.php";
+    $id = validate($_GET['id']);
+    $sql = "SELECT * FROM students WHERE id='$id' AND grade= 11";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        // display student information
+        $row = mysqli_fetch_assoc($result);
+        echo "SCHOOL: <strong>" . "MSU-MAIGO SCHOOL OF ARTS AND TRADES"."</strong>";
+        echo "<br>";
+        echo "SCHOOL YEAR: <strong>" . $row['syear']."</strong>";
+        echo "<br>";
+        echo "GRADE & SECTION: <strong>" . $row['grade']."-". $row['section']."</strong>";
+        echo "<br>";
+        echo "TRACK/SECTION: <strong>" . $row['trackstrand']."</strong>";
+        echo "<br>";
+        echo "Specialization: <strong>" . $row['parent']."</strong>";
+        echo "<br>";
+        echo "SEMESTER: <strong>"."FIRST</strong>" ;
+ 
+      
+    
+}
+}
+?>
+
+
+
+
+
+
+    </div>
+    <br>
+  </div>
+  <div class="col-md-6">
+    <div class="text-start">
+     
+    <?php 
+if (isset($_GET['id'])) {
+    include "db_conn.php";
+    $id = validate($_GET['id']);
+
+    $sql = "SELECT * FROM students WHERE id='$id' AND grade= 11";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        // display student information
+        $row = mysqli_fetch_assoc($result);
+        echo "SCHOOL: <strong>" . "MSU-MAIGO SCHOOL OF ARTS AND TRADES"."</strong>";
+        echo "<br>";
+        echo "SCHOOL YEAR: <strong>" . $row['syear']."</strong>";
+        echo "<br>";
+        echo "GRADE & SECTION: <strong>" . $row['grade']."-". $row['section']."</strong>";
+        echo "<br>";
+        echo "TRACK/SECTION: <strong>" . $row['trackstrand']."</strong>";
+        echo "<br>";
+        echo "Specialization: <strong>" . $row['parent']."</strong>";
+        echo "<br>";
+        echo "SEMESTER: <strong>"."SECOND</strong>" ;
+ 
+      
+    
+}
+}
+?>
+
+    </div>
+  </div>
+</div>
 
     <?php 
 if (isset($_GET['id'])) {
@@ -1197,7 +1268,7 @@ if (isset($_GET['id'])) {
                 <td style=" "class="text-center"><?php echo $second_average ?></td>
                 <td style="; "class="text-center"><?php echo ($first_average + $second_average) / 2 ?></td>
                 <td style=" "class="text-center <?php echo (($first_average + $second_average) / 2 >= 75) ? 'pass' : 'fail'; ?>"
-    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: red;"'; } ?>>
+    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: black;"'; } ?>>
     <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASS' : 'FAIL'; ?>
 </td>
 
@@ -1216,8 +1287,8 @@ $overall_average = round($total_average / count($subjects), 2);
 
 
         <td style="" colspan="3"class="text-center"><?php echo $overall_average ?></td>
-        <td style="" class="text-center <?php echo ($overall_average >= 75) ? 'pass' : 'fail'; ?>">
-   <?php echo ($overall_average >= 75) ? 'PASS' : 'FAIL'; ?>
+        <td style="" class="text-center <?php echo ($overall_average >= 75) ? 'PASSED' : 'FAILED'; ?>">
+   <?php echo ($overall_average >= 75) ? 'PASSED' : 'FAILED'; ?>
 </td>
 
       </tr>
@@ -1283,7 +1354,7 @@ if (isset($_GET['id'])) {
     include "db_conn.php";
     $id = validate($_GET['id']);
 
-    $sql = "SELECT * FROM grade WHERE studentid='$id' AND (semester='Second' OR semester='second' OR semester=' Second') AND year = 12";
+    $sql = "SELECT * FROM grade WHERE studentid='$id' AND (semester='Second' OR semester='SECOND' OR semester=' Second') AND year = 12";
 
     $result = mysqli_query($conn, $sql);
 
@@ -1291,8 +1362,8 @@ if (isset($_GET['id'])) {
         // display student information
         $row = mysqli_fetch_assoc($result);
     ?>
-     
-        <?php // display grades per subject and quarter
+       
+       <?php // display grades per subject and quarter
         $subjects = array();
         mysqli_data_seek($result, 0); // reset the result pointer
         while ($row = mysqli_fetch_assoc($result)) {
@@ -1317,10 +1388,10 @@ if (isset($_GET['id'])) {
             }
 
             // set the first or second quarter grade
-            if ($quarter == "First") {
+            if ($quarter == "THIRD") {
                 $first = $grade;
                 $second = 0;
-            } else if ($quarter == "Second") {
+            } else if ($quarter == "FOURTH") {
                 $first = 0;
                 $second = $grade;
             }
@@ -1351,9 +1422,9 @@ if (isset($_GET['id'])) {
                 <td style=" "class="text-center"><?php echo $first_average ?></td>
                 <td style=" "class="text-center"><?php echo $second_average ?></td>
                 <td style=" "class="text-center"><?php echo ($first_average + $second_average) / 2 ?></td>
-                <td style=" "class="text-center <?php echo (($first_average + $second_average) / 2 >= 75) ? 'pass' : 'fail'; ?>"
-    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: red;"'; } ?>>
-    <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASS' : 'FAIL'; ?>
+                <td style=" "class="text-center <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASSED' : 'FAILED'; ?>"
+    <?php if (($first_average + $second_average) / 2 >= 75) { echo 'style="color: black;"'; } else { echo 'style="color: black;"'; } ?>>
+    <?php echo (($first_average + $second_average) / 2 >= 75) ? 'PASSED' : 'FAILED'; ?>
 </td>
 
             </tr>
@@ -1371,8 +1442,8 @@ $overall_average = round($total_average / count($subjects), 2);
 
 
         <td style="" colspan="3"class="text-center"><?php echo $overall_average ?></td>
-        <td style="" class="text-center <?php echo ($overall_average >= 75) ? 'pass' : 'fail'; ?>">
-   <?php echo ($overall_average >= 75) ? 'PASS' : 'FAIL'; ?>
+        <td style="" class="text-center <?php echo ($overall_average >= 75) ? 'PASSED' : 'FAILED'; ?>">
+   <?php echo ($overall_average >= 75) ? 'PASSED' : 'FAILED'; ?>
 </td>
 
       </tr>
@@ -1429,7 +1500,8 @@ $(function() {
     if (mysqli_num_rows($result) > 0) {
         // display student information
         $row = mysqli_fetch_assoc($result);
-        echo "<br><br><br><br><br><strong>" . $row['adviser_id'] . "</strong>";
+        echo "<br><br><br><br><br><strong>" . strtoupper($row['adviser_id']) . "</strong>";
+
         echo "<br>". "<i>Adviser</i>";
     }
     ?>
@@ -1458,7 +1530,7 @@ $(function() {
     if (mysqli_num_rows($result) > 0) {
         // display student information
         $row = mysqli_fetch_assoc($result);
-        echo "<br><br><br><br><br><strong>" . $row['adviser_id'] . "</strong>";
+        echo "<br><br><br><br><br><strong>" . strtoupper($row['adviser_id']) . "</strong>";
         echo "<br>". "<i>Adviser</i>";
     }
     ?>

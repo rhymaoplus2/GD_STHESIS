@@ -223,7 +223,7 @@ html, body {
   }
   
   .table-scrollable{
-    height: 350px;
+    height: 300px;
     overflow-y: auto;
     scroll-behavior: smooth;
  
@@ -257,6 +257,16 @@ html, body {
       opacity: 1;
     }
   }
+a{
+  text-decoration: none;
+}
+.zoom-image img {
+  transition: transform 0.3s;
+}
+
+.zoom-image:hover img {
+  transform: scale(1.4);
+}
 
   </style>
 </head>
@@ -270,6 +280,11 @@ html, body {
   <div class="container">
     <div class="border">
 
+    <a href="validate.php" class="zoom-image" title="back">
+  <img src="img/back.png" alt="Description of the image" style="width:30px;" class="mb-3 img-fluid">
+</a>
+
+<br>
 
     <?php
     // Include the database connection file
@@ -321,14 +336,28 @@ html, body {
           
         <?php endforeach; ?>
         <br>
-        Section : 
+        Grade / Section : 
         <?php foreach ($grades as $row): ?>
           
-           <b> <?php echo $row["section"]; ?> </b>
+           <b><?php echo $row["year"]; ?>  -  <?php echo $row["section"]; ?> </b>
+          
+        <?php endforeach; ?>
+        <br>
+        Semester: 
+        <?php foreach ($grades as $row): ?>
+          
+           <b> <?php echo $row["semester"]; ?> </b>
+          
+        <?php endforeach; ?>
+        <br>
+        Quarter : 
+        <?php foreach ($grades as $row): ?>
+          
+           <b> <?php echo $row["quarter"]; ?> </b>
           
         <?php endforeach; ?>
    <br>
-   <br>
+
 
 
     <?php
@@ -350,7 +379,8 @@ html, body {
         $grades_male = mysqli_fetch_all($result_male, MYSQLI_ASSOC);
     } else {
         $grades_male = array(); // Initialize an empty array
-        echo "<b class='text-center'> No grades have been submitted for Male students. </b>";
+        echo "<b class='text-center' style='color: red;'>! No grades have been submitted for Male students.</b>";
+
     }
 
     // Prepare the SQL query for female students
@@ -365,7 +395,8 @@ html, body {
         $grades_female = mysqli_fetch_all($result_female, MYSQLI_ASSOC);
     } else {
         $grades_female = array(); // Initialize an empty array
-        echo "<b class='text-center'> No grades have been submitted for Male students.</b>";
+        echo "<b class='text-center' style='color: red;'>No grades have been submitted for Female students.</b>";
+
     }
 
     // Close the database connection
@@ -374,6 +405,7 @@ html, body {
 <div class="mb-3">
 </div>
 <!-- HTML code for table rendering -->
+<div class="table-scrollable">
 <table class="table">
 
     <thead>
@@ -383,13 +415,25 @@ html, body {
         </tr>
     </thead>
     <tbody>
+    <thead>
+        <tr>
+            <th colspan="2">Male</th>
+         
+        </tr>
+    </thead>
         <?php foreach ($grades_male as $row): ?>
+   
             <tr>
                 <td><?php echo $row["lastname"]; ?>&nbsp;<?php echo $row["firstname"]; ?>&nbsp;<?php echo $row["middlename"]; ?></td>
                 <td class="text-center"><?php echo $row["grade"]; ?></td>
             </tr>
         <?php endforeach; ?>
-
+        <thead>
+        <tr>
+            <th colspan="2">Female</th>
+         
+        </tr>
+    </thead>
         <?php foreach ($grades_female as $row): ?>
             <tr>
                 <td><?php echo $row["lastname"]; ?>&nbsp;<?php echo $row["firstname"]; ?>&nbsp;<?php echo $row["middlename"]; ?></td>
@@ -430,13 +474,14 @@ html, body {
 
 <!-- HTML code for table rendering -->
 <br>
-          VALIDATE : 
+      <div class="text-center">   
+        
         <?php foreach ($grades as $row): ?>
           
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    <b><?php echo $row["session"]; ?></b>
+            <button type="button" class="btn btn-dark " data-bs-toggle="modal" data-bs-target="#myModal">
+    <b> VALIDATE  </b>
   </button>
-
+        </div>
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

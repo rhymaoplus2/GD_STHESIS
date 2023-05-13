@@ -34,7 +34,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
     }
 
     // Build the SQL query with filters
-    $query = "SELECT * FROM grade WHERE 1=1";
+    $query = "SELECT * FROM grade WHERE 1=1 AND status != '1'";
 
     if (!empty($selected_section)) {
         $query .= " AND section = '$selected_section'";
@@ -312,6 +312,19 @@ html, body {
       opacity: 1;
     }
   }
+  .table-bordered td {
+    border: 1px solid black;
+  }
+  a{
+  text-decoration: none;
+}
+.zoom-image img {
+  transition: transform 0.3s;
+}
+
+.zoom-image:hover img {
+  transform: scale(1.4);
+}
 
   </style>
 </head>
@@ -341,38 +354,9 @@ html, body {
 
   <div class="container">
     <div class="border">
-      <form method="post" class="formx text-center" style="">
-        <div class="form-group row">
-   
-          <div class="col-sm-4">
-            <select class="form-control" id="section" name="section" onchange="this.form.submit()">
-              <option value="">Sections</option>
-              <?php while ($row_sections = mysqli_fetch_assoc($result_sections)) { ?>
-                <option value="<?php echo $row_sections["name"]; ?>" <?php if ($selected_section == $row_sections["name"]) {echo "selected";} ?>><?php echo $row_sections["name"]; ?></option>
-              <?php } ?>
-            </select>
-          </div>
-
-          <div class="col-sm-4">
-            <select class="form-control" id="subject" name="subject" onchange="this.form.submit()">
-              <option value="">Subject Name</option>
-              <?php while ($row_subjects = mysqli_fetch_assoc($result_subjects)) { ?>
-                <option value="<?php echo $row_subjects["subjectname"]; ?>" <?php if ($selected_subject == $row_subjects["subjectname"]) {echo "selected";} ?>><?php echo $row_subjects["subjectname"]; ?></option>
-              <?php } ?>
-            </select>
-          </div>
-        </div>
-        <br>
-        <div class="col-sm-3">
-  <select class="form-control" id="schoolyear" name="schoolyear" onchange="this.form.submit()">
-    <option value="">School Year</option>
-    <?php while ($row_schoolyears = mysqli_fetch_assoc($result_schoolyears)) { ?>
-      <option value="<?php echo $row_schoolyears["sy"]; ?>" <?php if ($selected_schoolyear == $row_schoolyears["sy"]) {echo "selected";} ?>><?php echo $row_schoolyears["sy"]; ?></option>
-    <?php } ?>
-  </select>
-</div>
-
-      </form>
+    <a href="./" class="zoom-image" title="back">
+  <img src="img/back.png" alt="Description of the image" style="width:30px;" class="mb-3 img-fluid">
+</a>
 
       <br>
 
@@ -384,43 +368,44 @@ html, body {
             
             background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
               <tr>
-            
-                <th scope="col">Subject Teacher</th>
+
+              <th class="text-center" scope="col" style=" width:20%;">DATE</th>
+              <th class="text-center" scope="col">TIME</th>
+                <th class="text-center"scope="col">Teacher Name</th>
       
-                <th class="text-center" scope="col">Subject Name</th>
-                <th class="text-center" scope="col">Grade</th>
-                <th class="text-center" scope="col">Section</th>
+                <th class="text-center" scope="col">Description</th>
+        
                 <th class="text-center" scope="col">Quarter</th>
                 <th class="text-center" scope="col">Semester</th>
-                <th class="text-center" scope="col">SY</th>
-                <th class="text-center" scope="col">DATE</th>
-                <th class="text-center" scope="col">TIME</th>
+                <th class="text-center" scope="col">School Year</th>
+              
+           
                 <th class="text-center" scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
+              
               <?php 
                 while ($row = mysqli_fetch_assoc($result)) { 
               ?>
-              <tr style="background: #f2f2f2;">
-                <td><?php echo $row["teacher"]; ?></td>
-                <td><?php echo $row["subjectname"]; ?></td>
-                <td><?php echo $row["year"]; ?></td>
-                <td><?php echo $row["section"]; ?></td>
-                <td><?php echo $row["quarter"]; ?></td>
-                <td class="text-center"><?php echo $row["semester"]; ?></td>
-                <td class="text-center"><?php echo $row["sy"]; ?></td>
-                <td class="text-center"><?php echo $row["date"]; ?></td>
-                <td class="text-center"><?php echo $row["time"]; ?></td>
-                
-                <!-- ACTIONS -->
-                <td class="text-center">
+              <tr class="text-center" style="background: #f2f2f2;">
+              <td class="text-center" style="text-align: center; vertical-align: middle;"><b> <?php echo $row["date"]; ?></b></td>
+                <td class="text-center" style="text-align: center; vertical-align: middle;" ><b> <?php echo $row["time"]; ?></b></td>
+                <td style="text-align: center; vertical-align: middle; width:15%;"><b> <?php echo $row["teacher"]; ?></b></td>
+               <td style="text-align: center; vertical-align: middle; width:60%;"> <b><?php echo $row["subjectname"]; ?></b> - Grades for Grade:               <b> <?php echo $row["year"]; ?>
+                <?php echo $row["section"]; ?> </b> </td> 
+                <td style="text-align: center; vertical-align: middle;" ><b><?php echo $row["quarter"]; ?></b></td>
+                <td class="text-center" style="text-align: center; vertical-align: middle;"><b><?php echo $row["semester"]; ?></b></td>
+                <td class="text-center" style="text-align: center; vertical-align: middle; width:15%;" ><b><?php echo $row["sy"]; ?></b></td>
+                <td class="text-center" style="text-align: center; vertical-align: middle;">
+
+
  
 
-    <a href="check.php?session=<?php echo $row["session"]; ?>">
+    <a class="zoom-image"href="check.php?session=<?php echo $row["session"]; ?>">
     <?php
     if ($row["status"] == 0) {
-        echo 'NOT YET VALIDATED';
+        echo '<img src="img/show.png" alt="Description of the image" style="width:30px;" class="mb-3 img-fluid">';
     } else {
         echo 'VALIDATED';
     }

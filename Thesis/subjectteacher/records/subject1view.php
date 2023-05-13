@@ -444,129 +444,101 @@ function myFunction() {
 
 
 
-
-
-            <form method="POST"class="mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            
-
-            <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;"> Students Grades in Subject : <?=$_SESSION['sub1']?> </b>
-  
-</div>
-
-<p class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" id="input-text" style="font-size: 30px; width:100px;"></p>
-<hr>  
-<div class="row">
+<form method="POST" class="mb-3 d-flex flex-wrap align-items-center justify-content-center" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 <div class="col-md-1 mb-3">
-  <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
-    <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
-  </a>
-</div>
-
-<!--
-<div class="col-md-1 mb-3">
-  <a class="link-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-class="tooltip" title="Print">
-    <img src="img/print.png" alt="Description of image" style="width: 35px;" class="img-fluid">
-  </a>
-</div>
-  -->
-
-<script>
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
-
-var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-  keyboard: false
-})
-
-</script>
-  <script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
-
-</script>
-  <div class="col-md-10 mb-3">
-    <input type="text" class="form-control" id="search-input" placeholder="Search" oninput="filterTable()">
-  </div>
-</div>
-
-
-  <div class="row text-center">
- 
-  <div class="col-md-3">
-  <select class="form-select fw-bold fw-bold" id="quarter" name="quarter">
-    <option value="" class="fw-bold">Select Quarter</option>
-    <option value="FIRST" class="fw-bold">First</option>
-    <option value="SECOND" class="fw-bold">Second</option>
-    <option value="THIRD" class="fw-bold">Third</option>
-    <option value="FOURTH" class="fw-bold">Fourth</option>
-  </select>
-</div>
-
-    <div class="col-md-3">
-        
-        <select class="form-select fw-bold fw-bold"  id="semester" name="semester">
-          <option value="" class="fw-bold"><b>Select Semester</b></option>
-          <option value="FIRST" class="fw-bold">First</option>
-          <option value="SECOND" class="fw-bold">Second</option>
-        </select>
-      </div>
-    <div class="col-md-3">
-   
-      <select class="form-select fw-bold" id="section" name="section">
-        <option value=""class="fw-bold"><b>Select section</b></option>
-        <option value="Lilac"class="fw-bold">Lilac</option>
-        <option value="Diamond"class="fw-bold">Diamond</option>
-      </select>
+      <a class="link-primary me-2" href="subject1.php" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-class="tooltip" title="Add Grades">
+        <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid">
+      </a>
     </div>
+<div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="padding: 10px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+  <b style="white-space: nowrap;"> Students Grades in Subject: <?php echo substr($_SESSION['sub1'], 0, 30); ?> </b>
+</div>
+
   
-    <div class="col-md-3 ">
-
-  <select class="form-select text-center fw-bold"  id="sy" name="sy">
-    <option value="" class="fw-bold"><b>Academic Year</b></option>
-    <option value="2019-2020"class="fw-bold">2019-2020</option>
-    <option value="2020-2021"class="fw-bold">2020-2021</option>
-    <option value="2021-2022"class="fw-bold">2021-2022</option>
-    <option value="2022-2023"class="fw-bold">2022-2023</option>
-    <option value="2023-2024"class="fw-bold">2023-2024</option>
-    <option value="2024-2025"class="fw-bold">2024-2025</option>
-    <option value="2025-2026"class="fw-bold">2025-2026</option>
-    <option value="2026-2027"class="fw-bold">2026-2027</option>
-    <option value="2027-2028"class="fw-bold">2027-2028</option>
-    <option value="2028-2029"class="fw-bold">2028-2029</option>
-    <option value="2029-2030"class="fw-bold">2029-2030</option>
-
+  <p class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" id="input-text" style="font-size: 30px; width: 100px;"></p>
+  <hr>
+  
+  
+  <div class="row">
+    
+   
+    <div class="col-md-10 mb-3">
+      <input type="text" class="form-control" id="search-input" placeholder="Search" oninput="filterTable()">
+    </div>
+  </div><div class="row text-center">
+  <div class="row text-center">
+  <div class="col">
+    <select class="form-select fw-bold" id="gender" name="gender">
+      <option value="">Gender</option>
+      <option value="MALE">Male</option>
+      <option value="FEMALE">Female</option>
+    </select>
+  </div>
+  <div class="col">
+    <select class="form-select fw-bold" id="quarter" name="quarter">
+      <option value="">Quarter</option>
+      <option value="FIRST">First</option>
+      <option value="SECOND">Second</option>
+      <option value="THIRD">Third</option>
+      <option value="FOURTH">Fourth</option>
+    </select>
+  </div>
+  <div class="col">
+    <select class="form-select fw-bold" id="semester" name="semester">
+      <option value="">Semester</option>
+      <option value="FIRST">First</option>
+      <option value="SECOND">Second</option>
+    </select>
+  </div>
+  <div class="col">
+    <select class="form-select fw-bold" id="section" name="section">
+      <option value="">Section</option>
+      <option value="Lilac">Lilac</option>
+      <option value="Diamond">Diamond</option>
+    </select>
+  </div>
+  <div class="col">
+    <select class="form-select fw-bold" id="sy" name="sy">
+      <option value="">Academic Year</option>
+      <option value="2019-2020">2019-2020</option>
+      <option value="2020-2021">2020-2021</option>
+      <option value="2021-2022">2021-2022</option>
+      <option value="2022-2023">2022-2023</option>
+      <option value="2023-2024">2023-2024</option>
+      <option value="2024-2025">2024-2025</option>
+      <option value="2025-2026">2025-2026</option>
+      <option value="2026-2027">2026-2027</option>
+      <option value="2027-2028">2027-2028</option>
+      <option value="2028-2029">2028-2029</option>
+      <option value="2029-2030">2029-2030</option>
+    </select>
+  </div>
+  <div class="col">
+  <select class="form-select fw-bold" id="status" name="status">
+    <option value="">Status</option>
+    <option value="1">VALIDATED</option>
+    <option value="0">NOT YET VALIDATED</option>
   </select>
 </div>
 
-  </div>
+</div>
+
 
   <div class="text-center">
-  <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
-  <img src="img/eye.png" alt="Image" title="Show" width="30" height="auto">
-  <b></b>
-</button>
+    <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
+      <img src="img/eye.png" alt="Image" title="Show" width="30" height="auto">
+      <b></b>
+    </button>
+  </div>
+  <script>
+    const rotateBtn = document.getElementById("rotate-btn");
+    const rotateImg = document.getElementById("rotate-img");
 
-
-<script>
- const rotateBtn = document.getElementById("rotate-btn");
-const rotateImg = document.getElementById("rotate-img");
-
-rotateBtn.addEventListener("click", () => {
-  rotateImg.classList.add("rotate");
-  setTimeout(() => rotateImg.classList.remove("rotate"), 1000);
-});
-
-</script>
-
-
-
-
-
+    rotateBtn.addEventListener("click", () => {
+      rotateImg.classList.add("rotate");
+      setTimeout(() => rotateImg.classList.remove("rotate"), 1000);
+    });
+  </script>
 </form>
 
             <?php 
@@ -586,9 +558,7 @@ rotateBtn.addEventListener("click", () => {
                   <th scope="col" class="w-50 text-start">StudentName</th>
 <th hidden scope="col">Subject Name</th>
 <th scope="col">Grade</th>
-<th scope="col">Remarks</th>
-<th scope="col">Section</th>
-<th scope="col">Quarter</th>
+
 
 <th colspan="2" scope="col" class="w-50">
  
@@ -598,26 +568,31 @@ rotateBtn.addEventListener("click", () => {
                   
                 </tr>
               </thead>
-        
-              <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
+              <tbody class="text-center">
+            
+            <td colspan="3"><b>MALE</b></td>
+            
+                  </tbody>
+        <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
               <?php 
 require "./php/db_conn.php";
 $name = $_SESSION['name'];
 
 // Add the section column to the SELECT statement
-$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.section, b.sy, b.section
+$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,b.gender,b.status,
+    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.section, b.sy, b.section,b.status
     FROM grade b, users a
     WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
-    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')";
+    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '') AND GENDER = 'MALE'";
   
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $semester = $_POST["semester"];
   $quarter = $_POST["quarter"];
   $section = $_POST["section"];
   $sy = $_POST["sy"];
+
 
   if (!empty($semester)) {
     $query .= " AND semester = '$semester'";
@@ -630,6 +605,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   if (!empty($sy)) {
     $query .= " AND sy = '$sy'";
+  }
+
+  if (isset($_POST["gender"])) {
+    $gender = $_POST["gender"];
+    
+    if (!empty($gender)) {
+      $query .= " AND gender = '$gender'";
+    }
+  }
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // ...
+  
+    if (isset($_POST["status"])) {
+      $status = $_POST["status"];
+      
+      if (!empty($status)) {
+        $query .= " AND b.status = '$status'";
+      }
+    }
   }
 }
 
@@ -668,32 +662,201 @@ function filterTable() {
 
 </script>
 <td class="text-start"><?php echo $rows["studentname"]; ?></td>
-<td class="text-center"><?php echo $rows["grade"]; ?></td>
-<td class="text-center cell-border <?php if ($rows['remarks'] == 'FAILED') { ?> red-text <?php } ?>">
-        <?php echo $rows["remarks"]; ?>
-      </td>
-      <td class="text-center"><?php echo $rows["section"]; ?></td>
- 
+<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
+
+
    
       <td hidden><?php echo $rows["subjectname"]; ?></td>
-      <td hidden><?php echo $rows["sy"]; ?></td>
-      <td hidden><?php echo $rows["section"]; ?></td>
-
-  
-      <td><?php echo $rows["semester"]; ?></td>
+   
       <td class="text-center">
 
-        <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
-  <b>
-    <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
-  </b>
-</a>
-<a type="button" class="btn" data-bs-toggle="modal" 
-  data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
-  style="border: none; background-color:transparent; outline: none;" title="Delete">
+      <?php if ($rows['status'] != 1): ?>
+  <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+    <b>
+      <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+    </b>
+  </a>
+  <a type="button" class="btn" data-bs-toggle="modal" 
+    data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
+    style="border: none; background-color:transparent; outline: none;" title="Delete">
 
-  <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
-</a>
+    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+  </a>
+<?php else: ?>
+  <b> VALIDATED </b>
+ <?php endif; ?>
+
+
+<div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+        <h5 class="modal-title" id="deleteModalLabel<?php echo $rows['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p> <b></b>
+          <br> Are you sure you want to delete <br> <b> <?php echo $rows['name']; ?> Account?</b>
+        </p>
+        <form class="delete" action="delete_grade1.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
+          <div class="mb-3">
+            <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn" name="delete">
+            <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+			      </td>
+
+			    </tr>
+     
+
+
+
+
+
+
+
+
+
+
+
+
+       
+            <?php }
+
+
+ ?>
+
+
+
+         </tbody>
+         <tbody class="text-center">
+            
+            <td colspan="3"><b>FEMALE</b></td>
+            
+                  </tbody>
+
+         <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
+              <?php 
+require "./php/db_conn.php";
+$name = $_SESSION['name'];
+
+// Add the section column to the SELECT statement
+$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,b.gender,b.status,
+    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.section, b.sy, b.section,b.status
+    FROM grade b, users a
+    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
+    AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+    AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
+    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '') AND GENDER = 'FEMALE'";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $semester = $_POST["semester"];
+  $quarter = $_POST["quarter"];
+  $section = $_POST["section"];
+  $sy = $_POST["sy"];
+
+
+  if (!empty($semester)) {
+    $query .= " AND semester = '$semester'";
+  }
+  if (!empty($quarter)) {
+    $query .= " AND quarter = '$quarter'";
+  }
+  if (!empty($section)) {
+    $query .= " AND section = '$section'";
+  }
+  if (!empty($sy)) {
+    $query .= " AND sy = '$sy'";
+  }
+
+  if (isset($_POST["gender"])) {
+    $gender = $_POST["gender"];
+    
+    if (!empty($gender)) {
+      $query .= " AND gender = '$gender'";
+    }
+  }
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // ...
+  
+    if (isset($_POST["status"])) {
+      $status = $_POST["status"];
+      
+      if (!empty($status)) {
+        $query .= " AND b.status = '$status'";
+      }
+    }
+  }
+}
+
+$result = mysqli_query($conn, $query);
+?>
+
+
+
+    <?php 
+      $i = 0;
+      while($rows = mysqli_fetch_assoc($result)) {
+        $i++;
+    ?>
+
+
+<script>
+function filterTable() {
+  var input = document.getElementById("search-input").value.toUpperCase();
+  var table = document.getElementById("grade-table");
+  var tbody = table.getElementsByTagName("tbody")[0];
+  var rows = tbody.getElementsByTagName("tr");
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].getElementsByTagName("td");
+    var match = false;
+    for (var j = 0; j < cells.length; j++) {
+      var cellText = cells[j].textContent.toUpperCase();
+      if (cellText.indexOf(input) > -1) {
+        match = true;
+        break;
+      }
+    }
+    rows[i].style.display = match ? "" : "none";
+  }
+}
+
+
+</script>
+<td class="text-start"><?php echo $rows["studentname"]; ?></td>
+<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
+
+
+   
+      <td hidden><?php echo $rows["subjectname"]; ?></td>
+   
+      <td class="text-center">
+
+      <?php if ($rows['status'] != 1): ?>
+  <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+    <b>
+      <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+    </b>
+  </a>
+  <a type="button" class="btn" data-bs-toggle="modal" 
+    data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
+    style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+  </a>
+<?php else: ?>
+  <b> VALIDATED </b>
+<?php endif; ?>
+
 
 <div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
   <div class="modal-dialog">
@@ -785,6 +948,29 @@ function filterTable() {
       </div>
  
       </form>
+      <script>
+  // Restore the selected values from local storage
+  window.addEventListener("DOMContentLoaded", () => {
+    const selects = document.querySelectorAll("select");
+    selects.forEach((select) => {
+      const name = select.getAttribute("name");
+      const value = localStorage.getItem(name);
+      if (value) {
+        select.value = value;
+      }
+    });
+  });
+
+  // Store the selected values in local storage
+  const selects = document.querySelectorAll("select");
+  selects.forEach((select) => {
+    select.addEventListener("change", (event) => {
+      const name = event.target.getAttribute("name");
+      const value = event.target.value;
+      localStorage.setItem(name, value);
+    });
+  });
+</script>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
