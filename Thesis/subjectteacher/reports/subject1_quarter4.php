@@ -113,6 +113,8 @@ h1{
   @page {
     size: A4;
     margin: 0;
+    margin-top: 1cm;
+    margin-bottom: 1cm;
   }
   .btn-icon img {
   width: 1.5rem;
@@ -600,8 +602,8 @@ while ($Row = mysqli_fetch_assoc($result)) {
     <?php
       require "./php/db_conn.php";
       $query = "SELECT pname, crname, name
-                FROM principal, cr, users
-                WHERE users.name = '" . $_SESSION['name'] . "'";
+                FROM settings, cr, users
+                WHERE users.name = '" . $_SESSION['name'] . "' LIMIT 1";
       $result = mysqli_query($conn, $query);
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {

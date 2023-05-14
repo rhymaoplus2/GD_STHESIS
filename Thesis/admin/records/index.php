@@ -90,7 +90,30 @@ if (!empty($search_query)) {
   if (!empty($selected_year)) {
     $query .= " AND year = '$selected_year'";
   }
+  $selected_quarter = "";
 
+  if (isset($_POST['quarter'])) {
+    $selected_quarter = $_POST['quarter'];
+  }
+  
+  // ...
+  
+  if (!empty($selected_quarter)) {
+    $query .= " AND quarter = '$selected_quarter'";
+  }
+  $selected_semester = "";
+
+if (isset($_POST['semester'])) {
+  $selected_semester = $_POST['semester'];
+}
+
+// ...
+
+if (!empty($selected_semester)) {
+  $query .= " AND semester = '$selected_semester'";
+}
+
+  
   $query .= " ORDER BY lastname";
   $result = mysqli_query($conn, $query);
 
@@ -119,7 +142,7 @@ html, body {
   
   
     .container {
-    width: 1000px;
+    width: auto;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -146,12 +169,12 @@ html, body {
   }
   .border {
       padding: 20px;
-      border-radius: 10px;
+ 
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border:10px;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: white;
-    width: 900px;
+    width: auto;
   
   }
   
@@ -409,16 +432,15 @@ function generateNotification() {
   
     // Check if the query executed successfully
     if ($result) {
-        // Loop through the result set
-        while ($row = $result->fetch_assoc()) {
-            // Access the session and count values
-            $session = $row['session'];
-            $count = $row['count'];
-      
-            // Output the count
-        }
+      while ($row = $result->fetch_assoc()) {
+        // Access the session and count values
+        $session = $row['session'];
+        $count += $row['count']; // Accumulate the counts instead of overwriting
+    
+        // Output the count
+    }
         if ($count >= 1) {
-            echo "<a style='text-decoration:none;' class='link-primary me-2' href='validate.php' data-bs-toggle='tooltip' data-bs-placement='bottom' data-bs-class='tooltip' title='New Grades to Validate'>";
+            echo "<a style='text-decoration:none;' class='link-primary me-2' href='validate.php' data-bs-toggle='tooltip' data-bs-placement='bottom' data-bs-class='tooltip' title='New Grades to Validate  '>";
             echo "<div style='position: relative; display: inline-block;'>";
             echo "<img style='width: 30px;' src='img/notification.png' class='img-fluid zoom-img'>";
             echo "<span style='position: absolute; top: -5px; right: -5px; background-color: black; color: white; border-radius: 50%; padding: 2px 5px; font-size: 12px;'>$count</span>";
@@ -449,68 +471,83 @@ generateNotification();
     <input type="text" class="form-control mb-3" id="search" name="search" placeholder="Search" value="<?php echo $search_query; ?>">
     </div>
     </div>
-  <div class="row">
-    
-    <div class="col-sm-2">
-      <select class="form-select fw-bold" id="gender" name="gender" onchange="this.form.submit()">
-        <option value="" selected>Gender</option>
-        <option value="MALE" <?php if ($selected_gender == "MALE") {echo "selected";} ?>>MALE</option>
-        <option value="FEMALE" <?php if ($selected_gender == "FEMALE") {echo "selected";} ?>>FEMALE</option>
-      </select>
-    </div>
+    <div class="row d-flex">
+  <div class="col">
+    <select class="form-select fw-bold" id="gender" name="gender" onchange="this.form.submit()">
+      <option value="" selected>Gender</option>
+      <option value="MALE" <?php if ($selected_gender == "MALE") {echo "selected";} ?>>MALE</option>
+      <option value="FEMALE" <?php if ($selected_gender == "FEMALE") {echo "selected";} ?>>FEMALE</option>
+    </select>
+  </div>
 
-    <div class="col-sm-2">
-    <select class="form-select fw-bold "  id="year" name="year" onchange="this.form.submit()">
-        <option  class="text-center"value="" selected>Grade</option>
-        <option class="text-center" value="7" <?php if ($selected_year == "7") {echo "selected";} ?>>7</option>
-        <option class="text-center" value="8" <?php if ($selected_year == "8") {echo "selected";} ?>>8</option>
-        <option class="text-center" value="9" <?php if ($selected_year == "9") {echo "selected";} ?>>9</option>
-        <option class="text-center" value="10" <?php if ($selected_year == "10") {echo "selected";} ?>>10</option>
-        <option class="text-center" value="11" <?php if ($selected_year == "11") {echo "selected";} ?>>11</option>
-        <option class="text-center" value="12" <?php if ($selected_year == "12") {echo "selected";} ?>>12</option>
-      </select>
-    </div>
+  <div class="col">
+    <select class="form-select fw-bold" id="quarter" name="quarter" onchange="this.form.submit()">
+      <option value="" selected>Quarter</option>
+      <option value="FIRST" <?php if ($selected_quarter == "FIRST") {echo "selected";} ?>>FIRST</option>
+      <option value="SECOND" <?php if ($selected_quarter == "SECOND") {echo "selected";} ?>>SECOND</option>
+      <option value="THIRD" <?php if ($selected_quarter == "THIRD") {echo "selected";} ?>>THIRD</option>
+      <option value="FOURTH" <?php if ($selected_quarter == "FOURTH") {echo "selected";} ?>>FOURTH</option>
+    </select>
+  </div>
 
-    <div class="col-sm-3">
-    <select class="form-select fw-bold"  id="section" name="section" onchange="this.form.submit()">
-        <option value="" selected>Section</option>
-        <?php while ($row_sections = mysqli_fetch_assoc($result_sections)) { ?>
-          <option value="<?php echo $row_sections["name"]; ?>" <?php if ($selected_section == $row_sections["name"]) {echo "selected";} ?>><?php echo $row_sections["name"]; ?></option>
-        <?php } ?>
-      </select>
-    </div>
+  <div class="col">
+    <select class="form-select fw-bold" id="semester" name="semester" onchange="this.form.submit()">
+      <option value="" selected>Semester</option>
+      <option value="FIRST" <?php if ($selected_semester == "FIRST") {echo "selected";} ?>>FIRST</option>
+      <option value="SECOND" <?php if ($selected_semester == "SECOND") {echo "selected";} ?>>SECOND</option>
+    </select>
+  </div>
 
-    <div class="col-sm-3">
-    <select class="form-select fw-bold" id="subject" name="subject" onchange="this.form.submit()">
-        <option value="" selected>Subject Name</option>
-        
-        <?php while ($row_subjects = mysqli_fetch_assoc($result_subjects)) { ?>
-          <option value="<?php echo $row_subjects["subjectname"]; ?>" <?php if ($selected_subject == $row_subjects["subjectname"]) {echo "selected";} ?>><?php echo $row_subjects["subjectname"]; ?></option>
-        <?php } ?>
-      </select>
-    </div>
-    <div class="col-sm-2">
+  <div class="col">
+    <select class="form-select fw-bold" id="year" name="year" onchange="this.form.submit()">
+      <option class="text-center" value="" selected>Grade</option>
+      <option class="text-center" value="7" <?php if ($selected_year == "7") {echo "selected";} ?>>7</option>
+      <option class="text-center" value="8" <?php if ($selected_year == "8") {echo "selected";} ?>>8</option>
+      <option class="text-center" value="9" <?php if ($selected_year == "9") {echo "selected";} ?>>9</option>
+      <option class="text-center" value="10" <?php if ($selected_year == "10") {echo "selected";} ?>>10</option>
+      <option class="text-center" value="11" <?php if ($selected_year == "11") {echo "selected";} ?>>11</option>
+      <option class="text-center" value="12" <?php if ($selected_year == "12") {echo "selected";} ?>>12</option>
+    </select>
+  </div>
+
+  <div class="col">
+    <select class="form-select fw-bold" id="section" name="section" onchange="this.form.submit()">
+      <option value="" selected>Section</option>
+      <?php while ($row_sections = mysqli_fetch_assoc($result_sections)) { ?>
+        <option value="<?php echo $row_sections["name"]; ?>" <?php if ($selected_section == $row_sections["name"]) {echo "selected";} ?>><?php echo $row_sections["name"]; ?></option>
+      <?php } ?>
+    </select>
+  </div>
+
+<div class="col">
+  <select class="form-select fw-bold" id="subject" name="subject" onchange="this.form.submit()">
+    <option value="" selected>Subject</option>
+    <?php while ($row_subjects = mysqli_fetch_assoc($result_subjects)) { ?>
+      <option value="<?php echo $row_subjects["subjectname"]; ?>" <?php if ($selected_subject == $row_subjects["subjectname"]) {echo "selected";} ?>><?php echo $row_subjects["subjectname"]; ?></option>
+    <?php } ?>
+  </select>
+</div>
+<div class="col">
   <select class="form-select fw-bold" id="schoolyear" name="schoolyear" onchange="this.form.submit()">
     <option value="" selected>SY</option>
     <?php
       $startYear = 2017;
       $endYear = 2030;
-
       for ($year = $startYear; $year <= $endYear; $year++) {
         $optionValue = $year . " - " . ($year + 1);
         $optionText = $year . " - " . ($year + 1);
-
+  
         if ($selected_schoolyear == $optionValue) {
           $selectedAttribute = "selected";
         } else {
           $selectedAttribute = "";
         }
-
+  
         echo '<option value="' . $optionValue . '" ' . $selectedAttribute . '>' . $optionText . '</option>';
       }
     ?>
   </select>
-</div>
+  </div>
 </div>
 
 </form>
@@ -554,6 +591,19 @@ function updateSelectedOption() {
     var selectedSchoolYear = 'SY : <strong>' + schoolYearSelect.options[schoolYearSelect.selectedIndex].value + '</strong>';
     selectedOptions.push(selectedSchoolYear);
   }
+// Get the selected option from the semester select element
+var semesterSelect = document.getElementById("semester");
+if (semesterSelect.selectedIndex !== -1 && semesterSelect.options[semesterSelect.selectedIndex].value !== "") {
+  var selectedSemester = 'Semester: <strong>' + semesterSelect.options[semesterSelect.selectedIndex].value + '</strong>';
+  selectedOptions.push(selectedSemester);
+}
+// Get the selected option from the quarter select element
+var quarterSelect = document.getElementById("quarter");
+if (quarterSelect.selectedIndex !== -1 && quarterSelect.options[quarterSelect.selectedIndex].value !== "") {
+  var selectedQuarter = 'Quarter: <strong>' + quarterSelect.options[quarterSelect.selectedIndex].value + '</strong>';
+  selectedOptions.push(selectedQuarter);
+}
+
 
   // Update the content of the selectedOption paragraph with the selected options
   document.getElementById("selectedOption").innerHTML = " " + selectedOptions.join(" - ");

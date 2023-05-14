@@ -49,10 +49,10 @@ html, body {
   }
   .border {
       padding: 20px;
-      border-radius: 10px;
+   
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border:10px;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: white;
     width: 900px;
   
@@ -319,46 +319,50 @@ a{
     // Close the database connection (assuming it's handled in db_conn.php)
     mysqli_close($conn);
 ?>
-
 <!-- HTML code for table rendering -->
+<style>
+    .section {
+        display: block;
+        margin-bottom: 0;
+    }
+</style>
 
-           Subject Name : 
+<span style="font-size:15px;">
+    <span class="section">
+        Subject Name:
         <?php foreach ($grades as $row): ?>
-          
-           <b> <?php echo $row["subjectname"]; ?> </b>
-          
+            <b><?php echo $row["subjectname"]; ?></b>
         <?php endforeach; ?>
-<br>
-        Subject Teacher : 
-        <?php foreach ($grades as $row): ?>
-          
-           <b> <?php echo $row["teacher"]; ?> </b>
-          
-        <?php endforeach; ?>
-        <br>
-        Grade / Section : 
-        <?php foreach ($grades as $row): ?>
-          
-           <b><?php echo $row["year"]; ?>  -  <?php echo $row["section"]; ?> </b>
-          
-        <?php endforeach; ?>
-        <br>
-        Semester: 
-        <?php foreach ($grades as $row): ?>
-          
-           <b> <?php echo $row["semester"]; ?> </b>
-          
-        <?php endforeach; ?>
-        <br>
-        Quarter : 
-        <?php foreach ($grades as $row): ?>
-          
-           <b> <?php echo $row["quarter"]; ?> </b>
-          
-        <?php endforeach; ?>
-   <br>
+    </span>
 
+    <span class="section">
+        Subject Teacher:
+        <?php foreach ($grades as $row): ?>
+            <b><?php echo $row["teacher"]; ?></b>
+        <?php endforeach; ?>
+    </span>
 
+    <span class="section">
+        Grade / Section:
+        <?php foreach ($grades as $row): ?>
+            <b><?php echo $row["year"]; ?> - <?php echo $row["section"]; ?></b>
+        <?php endforeach; ?>
+    </span>
+
+    <span class="section">
+        Semester:
+        <?php foreach ($grades as $row): ?>
+            <b><?php echo $row["semester"]; ?></b>
+        <?php endforeach; ?>
+    </span>
+
+    <span class="section">
+        Quarter:
+        <?php foreach ($grades as $row): ?>
+            <b><?php echo $row["quarter"]; ?></b>
+        <?php endforeach; ?>
+    </span>
+</span>
 
     <?php
     // Include the database connection file
@@ -408,17 +412,15 @@ a{
 <div class="table-scrollable">
 <table class="table">
 
-    <thead>
-        <tr>
-            <th>Student Name</th>
-            <th class="text-center">Grade</th>
-        </tr>
-    </thead>
+
     <tbody>
-    <thead>
+    <thead style=" position: sticky;
+    top: 0;
+    background-color: #fff; /* adjust the background color as needed */
+    z-index: 1;">
         <tr>
-            <th colspan="2">Male</th>
-         
+            <th colspan="">Male</th>
+            <th colspan="" class="text-center">Grade</th>
         </tr>
     </thead>
         <?php foreach ($grades_male as $row): ?>
@@ -428,9 +430,13 @@ a{
                 <td class="text-center"><?php echo $row["grade"]; ?></td>
             </tr>
         <?php endforeach; ?>
-        <thead>
+        <thead style=" position: sticky;
+    top: 0;
+    background-color: #fff; /* adjust the background color as needed */
+    z-index: 1;">
         <tr>
-            <th colspan="2">Female</th>
+            <th colspan="">Female</th>
+            <th colspan="" class="text-center">Grade</th>
          
         </tr>
     </thead>
@@ -496,9 +502,9 @@ a{
         <div class="modal-footer">
         <?php
 if ($row["status"] != 1) {
-    echo '<a href="go.php?session=' . $row["session"] . '" class="btn btn-success">VALIDATE</a>';
+    echo '<a href="go.php?session=' . $row["session"] . '" class="btn btn-dark">VALIDATE</a>';
 } else {
-    echo '<a href="no.php?session=' . $row["session"] . '" class="btn btn-success">Undo Validation</a>';
+    echo '<a href="nos.php?session=' . $row["session"] . '" class="btn btn-success">Undo Validation</a>';
 }
 ?>
 

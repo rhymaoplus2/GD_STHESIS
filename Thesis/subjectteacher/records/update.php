@@ -347,8 +347,8 @@ input::placeholder {
 		      method="post">
             
 		 
-           <h4 class="fs-6 ">Student Name: </h4> <?=$row['studentname']?><br><br>
-           <h4 class="fs-6 ">Subject: </h4> <?=$row['subjectname']?><hr><br>
+           <h4 class="fs-6 ">Student Name: </h4> <b> <?=$row['studentname']?></b><br><br>
+           <h4 class="fs-6 ">Subject: </h4> <b> <?=$row['subjectname']?></b> <hr><br>
 		   <?php if (isset($_GET['error'])) { ?>
 		   <div class="alert alert-danger" role="alert">
 			  <?php echo $_GET['error']; ?>
@@ -358,7 +358,7 @@ input::placeholder {
 
 
            <div class="mb-3">
-           <label for="exampleInputEmail1" class="form-label">Grade</label>
+           <label for="exampleInputEmail1" class="form-label"><b> Grade </b></label>
 <select name="grade" id="grade" class="form-control">
     <?php
     for ($i=50; $i<=100; $i++) {

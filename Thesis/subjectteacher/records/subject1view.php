@@ -463,7 +463,8 @@ function myFunction() {
     
    
     <div class="col-md-10 mb-3">
-      <input type="text" class="form-control" id="search-input" placeholder="Search" oninput="filterTable()">
+    <input type="text" class="form-control" id="search-input" placeholder="Search" oninput="filterTable()">
+
     </div>
   </div><div class="row text-center">
   <div class="row text-center">
@@ -517,7 +518,7 @@ function myFunction() {
   <select class="form-select fw-bold" id="status" name="status">
     <option value="">Status</option>
     <option value="1">VALIDATED</option>
-    <option value="0">NOT YET VALIDATED</option>
+    <option value="0" selected>NOT YET VALIDATED</option>
   </select>
 </div>
 
@@ -568,18 +569,25 @@ function myFunction() {
                   
                 </tr>
               </thead>
-              <tbody class="text-center">
-            
-            <td colspan="3"><b>MALE</b></td>
-            
-                  </tbody>
+              <thead class="text-dark" style="   border-color:black;  ">
+                  <tr>
+                  <th scope="col" colspan="3" class="w-50 text-start">MALE</th>
+
+
+</th>
+
+      
+                  
+                </tr>
+              </thead>
+          
         <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
-              <?php 
+        <?php 
 require "./php/db_conn.php";
 $name = $_SESSION['name'];
 
 // Add the section column to the SELECT statement
-$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,b.gender,b.status,
+$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
     a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.section, b.sy, b.section,b.status
     FROM grade b, users a
     WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
@@ -592,7 +600,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $quarter = $_POST["quarter"];
   $section = $_POST["section"];
   $sy = $_POST["sy"];
-
 
   if (!empty($semester)) {
     $query .= " AND semester = '$semester'";
@@ -614,21 +621,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $query .= " AND gender = '$gender'";
     }
   }
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // ...
-  
-    if (isset($_POST["status"])) {
-      $status = $_POST["status"];
-      
-      if (!empty($status)) {
-        $query .= " AND b.status = '$status'";
-      }
+
+  if (isset($_POST["status"])) {
+    $status = $_POST["status"];
+
+    if ($status !== "") {
+      $query .= " AND b.status = '$status'";
     }
   }
 }
 
 $result = mysqli_query($conn, $query);
 ?>
+
 
 
 
@@ -639,28 +644,6 @@ $result = mysqli_query($conn, $query);
     ?>
 
 
-<script>
-function filterTable() {
-  var input = document.getElementById("search-input").value.toUpperCase();
-  var table = document.getElementById("grade-table");
-  var tbody = table.getElementsByTagName("tbody")[0];
-  var rows = tbody.getElementsByTagName("tr");
-  for (var i = 0; i < rows.length; i++) {
-    var cells = rows[i].getElementsByTagName("td");
-    var match = false;
-    for (var j = 0; j < cells.length; j++) {
-      var cellText = cells[j].textContent.toUpperCase();
-      if (cellText.indexOf(input) > -1) {
-        match = true;
-        break;
-      }
-    }
-    rows[i].style.display = match ? "" : "none";
-  }
-}
-
-
-</script>
 <td class="text-start"><?php echo $rows["studentname"]; ?></td>
 <td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
 
@@ -696,13 +679,14 @@ function filterTable() {
       </div>
       <div class="modal-body">
         <p> <b></b>
-          <br> Are you sure you want to delete <br> <b> <?php echo $rows['name']; ?> Account?</b>
+          <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
+       Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
         <form class="delete" action="delete_grade1.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
-            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+            <input type="password" class="form-control" placeholder="Input your Password <?php echo $rows['teacher']; ?> " id="password" name="password" required>
           </div>
           <button type="submit" class="btn" name="delete">
             <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
@@ -738,13 +722,19 @@ function filterTable() {
 
 
 
-         </tbody>
-         <tbody class="text-center">
-            
-            <td colspan="3"><b>FEMALE</b></td>
-            
-                  </tbody>
+        </tbody>
+        <thead class="text-dark" style="   border-color:black;  ">
+                  <tr>
+                  <th scope="col" colspan="3" class="w-50 text-start">FEMALE</th>
 
+
+</th>
+
+      
+                  
+                </tr>
+              </thead>
+          
          <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
               <?php 
 require "./php/db_conn.php";
@@ -808,30 +798,8 @@ $result = mysqli_query($conn, $query);
       while($rows = mysqli_fetch_assoc($result)) {
         $i++;
     ?>
+    <tr>
 
-
-<script>
-function filterTable() {
-  var input = document.getElementById("search-input").value.toUpperCase();
-  var table = document.getElementById("grade-table");
-  var tbody = table.getElementsByTagName("tbody")[0];
-  var rows = tbody.getElementsByTagName("tr");
-  for (var i = 0; i < rows.length; i++) {
-    var cells = rows[i].getElementsByTagName("td");
-    var match = false;
-    for (var j = 0; j < cells.length; j++) {
-      var cellText = cells[j].textContent.toUpperCase();
-      if (cellText.indexOf(input) > -1) {
-        match = true;
-        break;
-      }
-    }
-    rows[i].style.display = match ? "" : "none";
-  }
-}
-
-
-</script>
 <td class="text-start"><?php echo $rows["studentname"]; ?></td>
 <td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
 
@@ -972,6 +940,29 @@ function filterTable() {
   });
 </script>
 
+
+<script>
+function filterTable() {
+  var input = document.getElementById("search-input").value.toUpperCase();
+  var table = document.getElementById("grade-table");
+  var tbody = table.getElementsByTagName("tbody")[0];
+  var rows = tbody.getElementsByTagName("tr");
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].getElementsByTagName("td");
+    var match = false;
+    for (var j = 0; j < cells.length; j++) {
+      var cellText = cells[j].textContent.toUpperCase();
+      if (cellText.indexOf(input) > -1) {
+        match = true;
+        break;
+      }
+    }
+    rows[i].style.display = match ? "" : "none";
+  }
+}
+
+
+</script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

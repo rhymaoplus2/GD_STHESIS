@@ -7,7 +7,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOME</title>
+	<title>REPORTS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -599,7 +599,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Semester 1: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Semester 1: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -613,7 +613,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Semester 2: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Semester 2: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -630,7 +630,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Quarter 1: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 1: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -644,7 +644,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Quarter 2: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 2: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -660,7 +660,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Quarter 3: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 3: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -673,7 +673,7 @@ function myFunction() {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Quarter 4: Printable Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Quarter 4: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

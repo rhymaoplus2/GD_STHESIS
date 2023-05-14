@@ -113,6 +113,8 @@ h1{
   @page {
     size: A4;
     margin: 0;
+    margin-top: 1cm;
+    margin-bottom: 1cm;
   }
   .btn-icon img {
   width: 1.5rem;
@@ -503,9 +505,9 @@ $query = "SELECT
 b.firstname, 
 b.middlename, 
 b.lastname, 
-ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0), 0) AS One, 
-ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0), 0) AS Two, 
-ROUND(((COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0) + COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0))/2), 0) AS final
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'THIRD' THEN b.grade ELSE NULL END), 0), 0) AS One, 
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'FOURTH' THEN b.grade ELSE NULL END), 0), 0) AS Two, 
+ROUND(((COALESCE(AVG(CASE WHEN b.quarter = 'THIRD' THEN b.grade ELSE NULL END), 0) + COALESCE(AVG(CASE WHEN b.quarter = 'FOURTH' THEN b.grade ELSE NULL END), 0))/2), 0) AS final
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE REPLACE(LOWER(b.semester), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
@@ -556,9 +558,9 @@ $query = "SELECT
 b.firstname, 
 b.middlename, 
 b.lastname, 
-ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0), 0) AS One, 
-ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0), 0) AS Two, 
-ROUND(((COALESCE(AVG(CASE WHEN b.quarter = 'FIRST' THEN b.grade ELSE NULL END), 0) + COALESCE(AVG(CASE WHEN b.quarter = 'SECOND' THEN b.grade ELSE NULL END), 0))/2), 0) AS final
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'THIRD' THEN b.grade ELSE NULL END), 0), 0) AS One, 
+ROUND(COALESCE(AVG(CASE WHEN b.quarter = 'FOURTH' THEN b.grade ELSE NULL END), 0), 0) AS Two, 
+ROUND(((COALESCE(AVG(CASE WHEN b.quarter = 'THIRD' THEN b.grade ELSE NULL END), 0) + COALESCE(AVG(CASE WHEN b.quarter = 'FOURTH' THEN b.grade ELSE NULL END), 0))/2), 0) AS final
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE REPLACE(LOWER(b.semester), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
@@ -638,8 +640,8 @@ while ($Row = mysqli_fetch_assoc($result)) {
     <?php
       require "./php/db_conn.php";
       $query = "SELECT pname, crname, name
-                FROM principal, cr, users
-                WHERE users.name = '" . $_SESSION['name'] . "'";
+                FROM settings, cr, users
+                WHERE users.name = '" . $_SESSION['name'] . "' LIMIT 1";
       $result = mysqli_query($conn, $query);
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
