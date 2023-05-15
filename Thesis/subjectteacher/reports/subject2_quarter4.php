@@ -24,8 +24,6 @@
   @page {
     size: A4;
     margin: 0;
-    margin-top: 1cm;
-    margin-bottom: 1cm;
   }
   
   .btn-icon img {
@@ -115,6 +113,8 @@ h1{
   @page {
     size: A4;
     margin: 0;
+    margin-top: 1cm;
+    margin-bottom: 1cm;
   }
   .btn-icon img {
   width: 1.5rem;
@@ -433,15 +433,16 @@ require "./php/db_conn.php";
 $teacher = $_SESSION['name'];
 $filter = isset($_POST['section']) ? "AND b.section = '{$_POST['section']}'" : "";
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,b.ts,b.year,b.semester,
+a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,b.ts,b.year,b.semester,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
-INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
+INNER JOIN users a ON REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
-REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
+REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FOURTH'), ' ', '')
 AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-AND b.quarter = 'FIRST'
+
+AND b.quarter = 'FOURTH'
 AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
@@ -449,7 +450,8 @@ ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 $result = mysqli_query($conn, $query);
 if ($Row = mysqli_fetch_assoc($result)) {
   $output_left = "<div id='left'>";
-  $output_left .= "<p><br>";
+  $output_left .= "<p>";
+  $output_left .= "Track & Strands:&nbsp;:&nbsp;<b>". $Row['ts']."</b> <br>" ; 
   $output_left .= "Year & Section:&nbsp; &nbsp;&nbsp;<strong>" . $Row['section'] ."&nbsp;". $Row['year'] . "</strong><br>";
   $output_left .= "Adviser:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
   <strong>" . $Row['adviser'] . "</strong><br>";
@@ -457,9 +459,9 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_left .= "</div>";
   $output_right = "<div id='right'>";
   $output_right .= "<p>";
-  $output_right .= "Subject:&nbsp;<b>" .$Row['sub1'] ."</b><br>";
+  $output_right .= "Subject:&nbsp;<b>" .$Row['sub2'] ."</b><br>";
   $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
-  $output_right .= "Semester:&nbsp;<strong>"  . "N/A</strong><br>";
+  $output_right .= "Semester:&nbsp;<strong>" .  " Second</strong><br>";
   $output_right .= "</p>";
   $output_right .= "</div>";
   echo $output_left;
@@ -476,7 +478,7 @@ mysqli_close($conn);
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
   <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">FIRST<br>QUARTER</th>
+  <th class="text-center" style="width:90px; vertical-align: middle;">FOURTH<br>QUARTER</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
 </tr>
 </thed>  
@@ -489,20 +491,21 @@ $teacher = $_SESSION['name'];
 $rowNum = 0;
 $filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
+a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
-INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
+INNER JOIN users a ON REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
- REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
+ REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FOURTH'), ' ', '')
 AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
 
-AND b.quarter = 'FIRST'
+AND b.quarter = 'FOURTH'
 AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 "; 
+
 $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; // increment rowNum
@@ -532,16 +535,16 @@ $rowNum = 0;
 $filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
 
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
+a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
-INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
+INNER JOIN users a ON REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
- REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
+ REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('THIRD'), ' ', '')
 AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '') 
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-AND b.semester = 'FIRST'
-AND b.quarter = 'FIRST'
+AND b.semester = 'SECOND'
+AND b.quarter = 'FOURTH'
 AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
@@ -576,14 +579,15 @@ $teacher = $_SESSION['name'];
 $rowNum = 0; 
 $filter = isset($_POST['section']) ? "AND b.section = '{$_POST['section']}'" : "";
 $query = "SELECT DISTINCT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,
-a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
+a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
-INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
+INNER JOIN users a ON a.sub2 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
 WHERE b.semester = 'FIRST' AND b.quarter = 'FIRST' AND a.name = '$teacher'
 $filter
 ORDER BY b.studentname ASC;
 ";
+
 $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++;
