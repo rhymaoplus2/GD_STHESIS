@@ -366,9 +366,9 @@ font-size: 12px;
 include "php/db_conn.php";
 $name = $_SESSION["name"];
 // Execute the SQL query to retrieve the student data for the 1st quarter
-$query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
+$query = "SELECT lastname, FIRSTname, middlename, studentname, subjectname, grade, quarter 
 FROM grade 
-WHERE quarter = 'First' 
+WHERE quarter = 'FIRST' 
 AND LOWER(gender) = 'male' AND adviser = '$name'
 ORDER BY studentname, subjectname;
 ";
@@ -392,7 +392,7 @@ echo '
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
       . $info_row['sy'] . '</b><br>
-     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' First </b>
+     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST </b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -446,7 +446,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         );
     }
 
-    if ($quarter == "First") {
+    if ($quarter == "FIRST") {
         $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
@@ -494,7 +494,7 @@ foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num++;
 }
-echo "<th class='text-center'> ".  $info_row['quarter'] .
+echo "<th class='text-center'> First".
 " Quarter<br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
@@ -510,9 +510,9 @@ foreach ($grades as $studentname => $subjects) {
   foreach ($unique_subjects as $subject) {
       if (isset($subjects[$subject])) {
           echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-          $first = intval($subjects[$subject]["1st"]);
+          $FIRST = intval($subjects[$subject]["1st"]);
  
-          $average = $first;
+          $average = $FIRST;
          
           $full +=$average;
         }
@@ -621,7 +621,7 @@ echo "</table>";
       
       include "php/db_conn.php";
             // select the crname from the table where the id matches a certain value
-            $result = mysqli_query($conn, "SELECT pname FROM principal WHERE id=1");
+            $result = mysqli_query($conn, "SELECT pname FROM settings WHERE id=1");
 
             // fetch the row as an associative array and extract the value of crname
             $row = mysqli_fetch_assoc($result);
@@ -722,9 +722,9 @@ echo "</table>";
 include "php/db_conn.php";
 $name = $_SESSION["name"];
 // Execute the SQL query to retrieve the student data for the 1st quarter
-$query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
+$query = "SELECT lastname, FIRSTname, middlename, studentname, subjectname, grade, quarter 
 FROM grade 
-WHERE quarter = 'First' 
+WHERE quarter = 'FIRST' 
 AND LOWER(gender) = 'male' AND adviser = '$name'
 ORDER BY studentname, subjectname;
 ";
@@ -749,7 +749,7 @@ echo '
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
       . $info_row['sy'] . '</b><br>
-     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' First </b>
+     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST </b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -802,7 +802,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         );
     }
 
-    if ($quarter == "First") {
+    if ($quarter == "FIRST") {
         $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
@@ -850,7 +850,7 @@ foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num++;
 }
-echo "<th class='text-center'> ".  $info_row['quarter'] .
+echo "<th class='text-center'> First".
 " Quarter <br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
@@ -866,9 +866,9 @@ foreach ($grades as $studentname => $subjects) {
   foreach ($unique_subjects as $subject) {
       if (isset($subjects[$subject])) {
           echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-          $first = intval($subjects[$subject]["1st"]);
+          $FIRST = intval($subjects[$subject]["1st"]);
  
-          $average = $first;
+          $average = $FIRST;
          
           $full +=$average;
         }
@@ -950,21 +950,22 @@ echo "</table>";
      
      <br>
     <br>
-   
-<table class="table-borderless">
+
+ 
+    <table class="table-borderless">
   <tbody>
     <tr>
 <td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">
 </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adviser&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-humss" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HUMSS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-abm" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-tvl" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TVL Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u>     
   
 <input type="text" class="form-control" id="checked-by-sports">
@@ -978,7 +979,7 @@ echo "</table>";
       
       include "php/db_conn.php";
             // select the crname from the table where the id matches a certain value
-            $result = mysqli_query($conn, "SELECT pname FROM principal WHERE id=1");
+            $result = mysqli_query($conn, "SELECT pname FROM settings WHERE id=1");
 
             // fetch the row as an associative array and extract the value of crname
             $row = mysqli_fetch_assoc($result);
@@ -992,7 +993,7 @@ echo "</table>";
 
 
 
-</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINCIPAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
   

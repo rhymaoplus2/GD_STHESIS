@@ -115,6 +115,7 @@ h1{
   @page {
     size: A4;
     margin: 0;
+    
   }
   .btn-icon img {
   width: 1.5rem;

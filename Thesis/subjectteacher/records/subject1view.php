@@ -491,13 +491,26 @@ function myFunction() {
       <option value="SECOND">Second</option>
     </select>
   </div>
+
   <div class="col">
-    <select class="form-select fw-bold" id="section" name="section">
-      <option value="">Section</option>
-      <option value="Lilac">Lilac</option>
-      <option value="Diamond">Diamond</option>
-    </select>
-  </div>
+ 
+   
+      <select class="form-select fw-bold" id="section" name="section">
+        <option value="">All</option>
+        <?php
+        include "php/db_conn.php";
+        $sectionQuery = "SELECT name FROM section";
+        $sectionResult = mysqli_query($conn, $sectionQuery);
+        while ($sectionRow = mysqli_fetch_assoc($sectionResult)) {
+            $sectionName = $sectionRow['name'];
+            echo "<option value='" . $sectionName . "'>" . $sectionName . "</option>";
+        }
+        mysqli_close($conn); // Close the database connection
+        ?>
+      </select>
+    </div>
+
+  
   <div class="col">
     <select class="form-select fw-bold" id="sy" name="sy">
       <option value="">Academic Year</option>
@@ -585,15 +598,16 @@ function myFunction() {
         <?php 
 require "./php/db_conn.php";
 $name = $_SESSION['name'];
-
 // Add the section column to the SELECT statement
 $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
-    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.section, b.sy, b.section,b.status
+    a.name AS user_name, a.sub1 AS user_sub1, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
     FROM grade b, users a
     WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
-    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '') AND GENDER = 'MALE'";
+    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+    AND b.gender = 'MALE'";
+
   
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $semester = $_POST["semester"];
@@ -739,15 +753,16 @@ $result = mysqli_query($conn, $query);
               <?php 
 require "./php/db_conn.php";
 $name = $_SESSION['name'];
-
 // Add the section column to the SELECT statement
-$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser,b.gender,b.status,
-    a.name, a.sub1, a.name, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.section, b.sy, b.section,b.status
+$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
+    a.name AS user_name, a.sub1 AS user_sub1, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
     FROM grade b, users a
     WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
-    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '') AND GENDER = 'FEMALE'";
+    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+    AND b.gender = 'FEMALE'";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $semester = $_POST["semester"];
   $quarter = $_POST["quarter"];
