@@ -475,7 +475,7 @@ mysqli_close($conn);
 <tr style="text-align:center;">
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
+  <th class="text-center" style="width:200px; vertical-align: middle;">NAME</th>
   <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">THIRD<br>QUARTER</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
@@ -583,7 +583,7 @@ a.name, a.sub2, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON a.sub2 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
-WHERE b.semester = 'FIRST' AND b.quarter = 'SECOND' AND a.name = '$teacher'
+WHERE b.semester = 'SECOND' AND b.quarter = 'SECOND' AND a.name = '$teacher'
 $filter
 ORDER BY b.studentname ASC;
 ";
