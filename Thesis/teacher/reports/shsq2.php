@@ -12,7 +12,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QUARTER 1 SHS</title>
+	<title>QUARTER 2 SHS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -413,7 +413,7 @@ $unique_subjects = array();
 // Create an associative array to store the total grades for each subject for each student
 $total_grades = array();
 
-// Create an array to store the quarter 1 grades for each student
+// Create an array to store the QUARTER 2 grades for each student
 $quarter1_grades = array();
 $num_subjects = count($unique_subjects);
 $total_grades_1st = 0;
@@ -448,7 +448,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     if ($quarter == "SECOND") {
         $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
-        // Add the grade to the quarter 1 grades for the student
+        // Add the grade to the QUARTER 2 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
             $quarter1_grades[$studentname] = array();
         }
@@ -768,7 +768,7 @@ $unique_subjects = array();
 // Create an associative array to store the total grades for each subject for each student
 $total_grades = array();
 
-// Create an array to store the quarter 1 grades for each student
+// Create an array to store the QUARTER 2 grades for each student
 $quarter1_grades = array();
 $num_subjects = count($unique_subjects);
 $total_grades_1st = 0;
@@ -803,7 +803,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     if ($quarter == "SECOND") {
         $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
-        // Add the grade to the quarter 1 grades for the student
+        // Add the grade to the QUARTER 2 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
             $quarter1_grades[$studentname] = array();
         }
@@ -951,7 +951,7 @@ echo "</table>";
     <br>
   
  
-<table class="table-borderless">
+    <table class="table-borderless">
   <tbody>
     <tr>
 <td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">

@@ -594,20 +594,20 @@ echo "</table>";
     <br>
     <br>
  
-<table class="table-borderless">
+    <table class="table-borderless">
   <tbody>
     <tr>
 <td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">
 </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adviser&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-humss" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HUMSS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-abm" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-tvl" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TVL Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u>     
   
 <input type="text" class="form-control" id="checked-by-sports">
@@ -635,7 +635,7 @@ echo "</table>";
 
 
 
-</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINCIPAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
   

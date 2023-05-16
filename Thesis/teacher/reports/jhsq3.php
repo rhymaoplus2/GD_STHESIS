@@ -12,7 +12,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QUARTER 3 JHS</title>
+	<title>QUARTER 1 JHS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -367,7 +367,7 @@ font-size: 12px;
 // Include the database connection script
 include "php/db_conn.php";
 $name = $_SESSION["name"];
-// Execute the SQL query to retrieve the student data for the 3rd quarter
+// Execute the SQL query to retrieve the student data for the 1st quarter
 $query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
           FROM grade 
           WHERE quarter = 'THIRD' 
@@ -420,16 +420,16 @@ $total_grades = array();
 // Create an array to store the quarter 1 grades for each student
 $quarter1_grades = array();
 $num_subjects = count($unique_subjects);
-$total_grades_3rd = 0;
+$total_grades_1st = 0;
 foreach ($quarter1_grades as $student_grades) {
     foreach ($student_grades as $grade) {
-        $total_grades_3rd += $grade;
+        $total_grades_1st += $grade;
     }
 }
 if ($num_subjects > 0) {
-  $average_grade_3rd = $total_grades_3rd / $num_subjects;
+  $average_grade_1st = $total_grades_1st / $num_subjects;
 } else {
-  $average_grade_3rd = 0;
+  $average_grade_1st = 0;
 }
 
 while ($row = mysqli_fetch_assoc($result)) {
@@ -449,13 +449,13 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     if (!isset($grades[$studentname][$subjectname])) {
         $grades[$studentname][$subjectname] = array(
-            "3rd" => "",
+            "1st" => "",
      
         );
     }
 
     if ($quarter == "THIRD") {
-        $grades[$studentname][$subjectname]["3rd"] = ($grade === null) ? 0 : $grade;
+        $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
             $quarter1_grades[$studentname] = array();
@@ -520,10 +520,6 @@ foreach ($total_grades as $subjectname => $student_grades) {
     }
 }
 
-// Sort the total grade sum array in descending order
-
-
-
 
 $highest_grade = max($total_grade_sum);
 // Create a new array to store student names and total grades
@@ -583,8 +579,8 @@ foreach ($total_grade_sum as $studentname => $total_grade) {
 $no++;
     // Loop through the subjects and display the grades for each subject
     foreach ($unique_subjects as $subject) {
-        if (isset($grades[$studentname][$subject]["3rd"])) {
-            echo "<td class='text-center'>" . $grades[$studentname][$subject]["3rd"] . "</td>";
+        if (isset($grades[$studentname][$subject]["1st"])) {
+            echo "<td class='text-center'>" . $grades[$studentname][$subject]["1st"] . "</td>";
         
         } else {
             echo "<td class='text-center'>-</td>";

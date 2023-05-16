@@ -22,7 +22,7 @@
 
 
 
-  <style>
+    <style>
      /* Reset styles */
 .no {
   border: 0;
@@ -87,6 +87,12 @@ body {
 .b::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* Color of the scrollbar thumb on hover */
 }
+.b thead {
+  position: sticky; /* Make the header sticky */
+  top: 0; /* Position the header at the top */
+  z-index: 1; 
+  justify-content: sticky;
+}
 
 /* Animation styles */
 .fade-in {
@@ -125,6 +131,7 @@ body {
   border-radius: 10px;
   background-color: white;
   border: 10px;
+  background-color: white;
 }
 
 .border {
@@ -217,7 +224,9 @@ color: #f1f1f1;
 }
 
 .content {
-padding: 16px;
+  padding: 10px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .sticky {
@@ -287,6 +296,7 @@ body.zoomed-in {
     body.zoomed-out {
       zoom: 0.8; /* Change the value as needed for zoom level */
     }
+
     </style>
 </head>
 <body>
@@ -579,18 +589,17 @@ if ($result && mysqli_num_rows($result) > 0) {
 </div>
 <hr>
 
-<div class="b" style="height: 350px; overflow-y: scroll; padding-right: 10px;" id="scroll">
+<div class="b" style="height: 290px; overflow-y: scroll; padding-right: 10px;" id="scroll">
 
 
 <table class="table table-bordered" id="grades-table" style="border:20px;">
-              <thead >
+              <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
                   <tr>
                   
               
           
-                  <th scope="col" style="width:45%;"><i>MALE</i></th>
-                  <th hidden  scope="col">Subject Name </th>
-                  <th hidden scope="col" class="text-center">Gender </th>
+                  <th  scope="col" style="width:45%;"><i>MALE</i></th>
+            
                   <th scope="col" class="text-center">Grade </th>
       
                 </tr>
@@ -746,8 +755,9 @@ echo "<tr>";
   </table>
 
   <table class="table table-bordered" id="grades-table" style="border:20px;">
-              <thead >
+  <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
                   <tr>
+                  
                   
               
           

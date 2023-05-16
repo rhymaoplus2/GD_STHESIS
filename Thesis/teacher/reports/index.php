@@ -7,7 +7,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOME</title>
+	<title>REPORTS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
