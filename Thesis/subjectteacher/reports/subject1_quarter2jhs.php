@@ -17,343 +17,345 @@
 <script src="path/bootstrap.js"></script>
 
 
-  <style>
+
+<style>
     
-@media print {
-  /* Set the page size to A4 */
-  @page {
-    size: A4;
-    margin: 0;
-    margin-top: 1cm;
-    margin-bottom: 1cm;
-  }
-  
-  .btn-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-@page {
-    margin-top: 50px;
-  }
-   .print-hidden {
+    @media print {
+      /* Set the page size to A4 */
+      @page {
+        size: A4;
+        margin: 0;
+        margin-top: 1cm!important;
+        margin-bottom: 1cm!important;
+      }
+      
+      .btn-icon img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    
+    @page {
+        margin-top: 50px;
+      }
+       .print-hidden {
+          display: none;
+        }
+      /* Set the footer to be at the bottom of the page */
+      .print-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+      }
+    
+      /* Set the page break after two pages */
+      .page-break {
+        page-break-after: always;
+      }
+    
+      /* Hide the file name and other description */
+      .print-header,
+      .print-footer {
+        display: none;
+      }
+    h1{
       display: none;
     }
-  /* Set the footer to be at the bottom of the page */
-  .print-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-
-  /* Set the page break after two pages */
-  .page-break {
-    page-break-after: always;
-  }
-
-  /* Hide the file name and other description */
-  .print-header,
-  .print-footer {
-    display: none;
-  }
-h1{
-  display: none;
-}
-  /* Only display content in the last page */
-  .wrapper {
-    counter-increment: page;
-  }
-
-  /* Add margin to the top of the second page */
-  .wrapper:nth-of-type(n+3) {
-    margin-top: 100px;
-  }
-
-  /* Add page number to the last page */
-  .wrapper:after {
-    content: counter(page);
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    page-break-after: always;
-  }
-  .wrapper:last-of-type:after {
-    content: "";
-  }
-  .container-fluid.p-0 {
-  display: none;
-}
-.tooltip {
-  display: none !important;
-}
-
-.btn {
-    display: none;
-  }
-
-  /* Hide inputs */
-  input[type="button"],
-  input[type="submit"],
-  input[type="reset"],
-  input[type="checkbox"],
-  input[type="radio"],
-  select,
-  textarea {
-    display: none;
-  }
-  select option {
-    display: none;
-  }
-
-}
-@media print {
-  /* Set the page size to A4 */
-  @page {
-    size: A4;
-    margin: 0;
-  }
-  .btn-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-.img-fluid
-{
-  display:none;
-}
-   .print-hidden {
+      /* Only display content in the last page */
+      .wrapper {
+        counter-increment: page;
+      }
+    
+      /* Add margin to the top of the second page */
+      .wrapper:nth-of-type(n+3) {
+        margin-top: 100px;
+      }
+    
+      /* Add page number to the last page */
+      .wrapper:after {
+        content: counter(page);
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        page-break-after: always;
+      }
+      .wrapper:last-of-type:after {
+        content: "";
+      }
+      .container-fluid.p-0 {
       display: none;
     }
-  /* Set the footer to be at the bottom of the page */
-  .print-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-
-  /* Set the page break after two pages */
-  .page-break {
-    page-break-after: always;
-  }
-
-  /* Hide the file name and other description */
-  .print-header,
-  .print-footer {
-    display: none;
-  }
-
-  /* Only display content in the last page */
-  .wrapper {
-    counter-increment: page;
-  }
-
-  /* Add margin to the top of the second page */
-  .wrapper:nth-of-type(n+3) {
-    margin-top: 100px;
-  }
-
-  /* Add page number to the last page */
-  .wrapper:after {
-    content: counter(page);
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    page-break-after: always;
-  }
-  .wrapper:last-of-type:after {
-    content: "";
-  }
-  .container-fluid.p-0 {
-  display: none;
-}
-.tooltip {
-  display: none !important;
-}
-
-  
-}
-td {
-  border: 1px solid black;
-}
-
-.failed {
-  color: red;
-  border-right-color: white; /* set border color to white */
-}
-
-.wrapper{
-  font-size: 11px;
-}
-.container {
-
-	display: flex;
-	justify-content: ;
-	align-items: center;
-	flex-direction: column;
-
-}
-hr {
-  border: none;
-  border: 1px solid;
-  width: 120%;
-  background-color: black;
-}
-
-
-.container form {
-	width: 800px;
-	padding: 20px;
-
-
-}
-.box {
-	width: 750px;
-}
-
-.container table {
-	padding: 5px;
-
-  font-size: 11px;
-font-family: calibri;
-  border: 10px;
-}
-.container text{
-}
-.border {
-	padding: 15px;
-}
-.link-right {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.link-center {
-	display: flex;
-	justify-content: flex-end;
-}
-.thead
-{
-font-size: 10px;;
-}
-  .nav-item
-  {
-      color:black;
-  }
-  .subjectlist{
-  
-      margin-left: 5rem;
+    .tooltip {
+      display: none !important;
+    }
+    
+    .btn {
+        display: none;
+      }
+    
+      /* Hide inputs */
+      input[type="button"],
+      input[type="submit"],
+      input[type="reset"],
+      input[type="checkbox"],
+      input[type="radio"],
+      select,
+      textarea {
+        display: none;
+      }
+      select option {
+        display: none;
+      }
+    
+    }
+    @media print {
+      /* Set the page size to A4 */
+      @page {
+        size: A4;
+        margin: 0;
+        
+      }
+      .btn-icon img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    .img-fluid
+    {
+      display:none;
+    }
+       .print-hidden {
+          display: none;
+        }
+      /* Set the footer to be at the bottom of the page */
+      .print-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+      }
+    
+      /* Set the page break after two pages */
+      .page-break {
+        page-break-after: always;
+      }
+    
+      /* Hide the file name and other description */
+      .print-header,
+      .print-footer {
+        display: none;
+      }
+    
+      /* Only display content in the last page */
+      .wrapper {
+        counter-increment: page;
+      }
+    
+      /* Add margin to the top of the second page */
+      .wrapper:nth-of-type(n+3) {
+        margin-top: 100px;
+      }
+    
+      /* Add page number to the last page */
+      .wrapper:after {
+        content: counter(page);
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        page-break-after: always;
+      }
+      .wrapper:last-of-type:after {
+        content: "";
+      }
+      .container-fluid.p-0 {
+      display: none;
+    }
+    .tooltip {
+      display: none !important;
+    }
+    
+      
+    }
+    td {
+      border: 1px solid black;
+    }
+    
+    .failed {
+      color: red;
+      border-right-color: white; /* set border color to white */
+    }
+    
+    .wrapper{
+      font-size: 11px;
+    }
+    .container {
+    
+      display: flex;
+      justify-content: ;
+      align-items: center;
+      flex-direction: column;
+    
+    }
+    hr {
+      border: none;
+      border: 1px solid;
+      width: 120%;
+      background-color: black;
+    }
+    
+    
+    .container form {
+      width: 800px;
+      padding: 20px;
+    
+    
+    }
+    .box {
+      width: 750px;
+    }
+    
+    .container table {
+      padding: 5px;
+    
+      font-size: 11px;
+    font-family: calibri;
+      border: 10px;
+    }
+    .container text{
+    }
+    .border {
+      padding: 15px;
+    }
+    .link-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .link-center {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .thead
+    {
+    font-size: 10px;;
+    }
+      .nav-item
+      {
+          color:black;
+      }
+      .subjectlist{
+      
+          margin-left: 5rem;
+          margin-top: 5rem;
+      }
+      .studentlist{
+      margin-left: 20rem;
       margin-top: 5rem;
-  }
-  .studentlist{
-  margin-left: 20rem;
-  margin-top: 5rem;
-  }
-  .fixed-button {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
-}
-  .button{
-      margin-left: 5rem;
-      margin-top: 11rem;
-  }
-  .form-label, .form-select {
-      font-size: inherit;
+      }
+      .fixed-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
     }
-  .button1{
-  
-  margin-left: 5rem;
-  margin-top: 9.5rem;
-  }
-  
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
-  }
-  .text{
-
-  }
-  .text2
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
-.top-container {
-    background-color: white;
-    padding: 30px;
-    text-align: center;
-  }
-  .header {
-    background-color: white;
-    color: #f1f1f1;
-  }
-  .content {
-    padding: 16px;
-  }
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  } 
-  .sticky + .content {
-    padding-top: 102px;
-  }
-  .addbutton
-  {
-    margin-left:80%;
-  }
-  .btn-bold {
-  font-weight: bold;
-}
-#left {
-  float: left;
-  width: 50%;
-  font-size: 13px
-}
-
-#right {
-  float: right;
-  width: 34%;
-  font-size: 13px
-}
-#left, #right {
-    display: inline-block;
-    vertical-align: top;
-  }
-  select#section {
-  font-weight: bold;
-}
-#my-element {
-  transform-origin: center;
-  transition: transform 5s, opacity 2s;
-}
-
-#my-element.zoom-rotate-fade {
-  transform: scale(6) rotate(180deg);
-  opacity: 3;
-}
-
-#my-element button {
-  background: none;
-  border: none;
-}
-
-#my-element button:hover img {
-  opacity: 0.8;
-}
-</style>
+      .button{
+          margin-left: 5rem;
+          margin-top: 11rem;
+      }
+      .form-label, .form-select {
+          font-size: inherit;
+        }
+      .button1{
+      
+      margin-left: 5rem;
+      margin-top: 9.5rem;
+      }
+      
+      .title{
+          margin-left: 40rem;
+          margin-top: 1rem;
+          font-size: 3.5rem;
+      }
+      .text{
+    
+      }
+      .text2
+      {
+          margin-left: 23rem;
+          margin-top: -20rem;
+          width: 45rem;
+          height: 10rem;
+      }
+    .top-container {
+        background-color: white;
+        padding: 30px;
+        text-align: center;
+      }
+      .header {
+        background-color: white;
+        color: #f1f1f1;
+      }
+      .content {
+        padding: 16px;
+      }
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+      } 
+      .sticky + .content {
+        padding-top: 102px;
+      }
+      .addbutton
+      {
+        margin-left:80%;
+      }
+      .btn-bold {
+      font-weight: bold;
+    }
+    #left {
+      float: left;
+      width: 50%;
+      font-size: 13px
+    }
+    
+    #right {
+      float: right;
+      width: 34%;
+      font-size: 13px
+    }
+    #left, #right {
+        display: inline-block;
+        vertical-align: top;
+      }
+      select#section {
+      font-weight: bold;
+    }
+    #my-element {
+      transform-origin: center;
+      transition: transform 5s, opacity 2s;
+    }
+    
+    #my-element.zoom-rotate-fade {
+      transform: scale(6) rotate(180deg);
+      opacity: 3;
+    }
+    
+    #my-element button {
+      background: none;
+      border: none;
+    }
+    
+    #my-element button:hover img {
+      opacity: 0.8;
+    }
+    </style>
 </head>
 <body>
     <div class="d-flex justify-content-center align-items-center position-relative">
@@ -441,7 +443,6 @@ WHERE
 REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
 AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-
 AND b.quarter = 'SECOND'
 AND a.name = '$teacher'
 $filter
@@ -460,7 +461,7 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_right .= "<p>";
   $output_right .= "Subject:&nbsp;<b>" .$Row['sub1'] ."</b><br>";
   $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
-  $output_right .= "Semester:&nbsp;<strong>" .  "N/A</strong><br>";
+  $output_right .= "Semester:&nbsp;<strong>"  . "N/A</strong><br>";
   $output_right .= "</p>";
   $output_right .= "</div>";
   echo $output_left;
@@ -475,7 +476,7 @@ mysqli_close($conn);
 <tr style="text-align:center;">
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
+  <th class="text-center" style="width:200px; vertical-align: middle;">SECONDNAME</th>
   <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">SECOND<br>QUARTER</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
@@ -496,14 +497,14 @@ FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
  REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
+
 AND b.quarter = 'SECOND'
 AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 "; 
-
 $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; // increment rowNum
@@ -539,9 +540,9 @@ FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
  REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '') 
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '') 
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-
+AND b.semester = 'SECOND'
 AND b.quarter = 'SECOND'
 AND a.name = '$teacher'
 $filter
@@ -581,11 +582,10 @@ a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
-WHERE b.semester = 'FIRST' AND b.quarter = 'SECOND' AND a.name = '$teacher'
+WHERE b.semester = 'SECOND' AND b.quarter = 'SECOND' AND a.name = '$teacher'
 $filter
 ORDER BY b.studentname ASC;
 ";
-
 $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++;
@@ -601,7 +601,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
       require "./php/db_conn.php";
       $query = "SELECT pname, crname, name
                 FROM settings, cr, users
-                WHERE users.name = '" . $_SESSION['name'] . "'LIMIT 1";
+                WHERE users.name = '" . $_SESSION['name'] . "' LIMIT 1";
       $result = mysqli_query($conn, $query);
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {

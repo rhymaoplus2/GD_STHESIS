@@ -24,8 +24,8 @@
   @page {
     size: A4;
     margin: 0;
-    margin-top: 1cm;
-    margin-bottom: 1cm;
+    margin-top: 1cm!important;
+    margin-bottom: 1cm!important;
   }
   
   .btn-icon img {
@@ -115,6 +115,7 @@ h1{
   @page {
     size: A4;
     margin: 0;
+    
   }
   .btn-icon img {
   width: 1.5rem;
@@ -438,10 +439,9 @@ b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
- REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('THIRD'), ' ', '')
+REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('THIRD'), ' ', '')
 AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-
 AND b.quarter = 'THIRD'
 AND a.name = '$teacher'
 $filter
@@ -460,7 +460,7 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_right .= "<p>";
   $output_right .= "Subject:&nbsp;<b>" .$Row['sub1'] ."</b><br>";
   $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
-  $output_right .= "Semester:&nbsp;<strong>" .  "N/A</strong><br>";
+  $output_right .= "Semester:&nbsp;<strong>"  . "N/A</strong><br>";
   $output_right .= "</p>";
   $output_right .= "</div>";
   echo $output_left;
@@ -475,7 +475,7 @@ mysqli_close($conn);
 <tr style="text-align:center;">
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
+  <th class="text-center" style="width:200px; vertical-align: middle;">THIRDNAME</th>
   <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">THIRD<br>QUARTER</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
@@ -496,7 +496,7 @@ FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
  REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('THIRD'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
 
 AND b.quarter = 'THIRD'
@@ -504,13 +504,11 @@ AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 "; 
-
-
 $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; // increment rowNum
 ?>
-
+  
   <tr>
     <td class="text text-center"><?php echo  $rowNum ?></td>
     <td class="text"><?php echo $Row["lastname"]; ?></td>
@@ -541,9 +539,9 @@ FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
  REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('THIRD'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '') 
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '') 
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-
+AND b.semester = 'THIRD'
 AND b.quarter = 'THIRD'
 AND a.name = '$teacher'
 $filter
@@ -583,11 +581,10 @@ a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
-WHERE b.semester = 'FIRST' AND b.quarter = 'SECOND' AND a.name = '$teacher'
+WHERE b.semester = 'THIRD' AND b.quarter = 'THIRD' AND a.name = '$teacher'
 $filter
 ORDER BY b.studentname ASC;
 ";
-
 $result = mysqli_query($conn, $query);
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++;
@@ -602,8 +599,8 @@ while ($Row = mysqli_fetch_assoc($result)) {
     <?php
       require "./php/db_conn.php";
       $query = "SELECT pname, crname, name
-      FROM settings, cr, users
-      WHERE users.name = '" . $_SESSION['name'] . "'LIMIT 1";
+                FROM settings, cr, users
+                WHERE users.name = '" . $_SESSION['name'] . "' LIMIT 1";
       $result = mysqli_query($conn, $query);
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {

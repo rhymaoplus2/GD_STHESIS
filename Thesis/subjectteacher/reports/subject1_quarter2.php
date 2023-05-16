@@ -33,6 +33,7 @@
 
 @page {
     margin-top: 50px;
+    margin-bottom: 1cm;
   }
    .print-hidden {
       display: none;
@@ -111,16 +112,14 @@ h1{
 @media print {
   /* Set the page size to A4 */
   @page {
-    size: A4;
-    margin: 0;
+  
   }
   .btn-icon img {
   width: 1.5rem;
   height: 1.5rem;
 }
-.img-fluid
-{
-  display:none;
+#my-element  {
+ display: none;
 }
    .print-hidden {
       display: none;
@@ -195,6 +194,7 @@ td {
 	justify-content: ;
 	align-items: center;
 	flex-direction: column;
+  margin-top:0;
 
 }
 hr {
@@ -217,7 +217,7 @@ hr {
 
 .container table {
 	padding: 5px;
-
+  margin-top: 0;
   font-size: 11px;
 font-family: calibri;
   border: 10px;
@@ -459,7 +459,7 @@ if ($Row = mysqli_fetch_assoc($result)) {
   $output_right .= "<p>";
   $output_right .= "Subject:&nbsp;<b>" .$Row['sub1'] ."</b><br>";
   $output_right .= "Quarter:&nbsp;<strong>" . $Row['quarter'] . "</strong><br>";
-  $output_right .= "Semester:&nbsp;<strong>" . "First</strong><br>";
+  $output_right .= "Semester:&nbsp;<strong>" . $Row['semester'] . "</strong><br>";
   $output_right .= "</p>";
   $output_right .= "</div>";
   echo $output_left;
@@ -471,10 +471,10 @@ if ($Row = mysqli_fetch_assoc($result)) {
 mysqli_close($conn);
 ?>
 <thead>
-<tr style="text-align:center;">
+<tr style="text-align:center;" >
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
+  <th class="text-center" style="width:200px; vertical-align: middle;">SECONDNAME</th>
   <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">SECOND<br>QUARTER</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
@@ -494,11 +494,11 @@ b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE 
- REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('FIRST'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '')
+ REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '')
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
 
-AND b.quarter = 'FIRST'
+AND b.quarter = 'SECOND'
 AND a.name = '$teacher'
 $filter
 ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
@@ -538,8 +538,8 @@ b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER(b.subjectname), ' ', '') AND (REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec1), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec2), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec3), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec4), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec5), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec6), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec7), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec8), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec9), ' ', '') OR REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER(a.sec10), ' ', ''))
 WHERE
- REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
-AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '') 
+REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('SECOND'), ' ', '')
+AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('MALE'), ' ', '') 
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
 
 AND b.quarter = 'SECOND'
@@ -553,7 +553,7 @@ ORDER BY REPLACE(LOWER(b.studentname), ' ', '') ASC;
 while ($Row = mysqli_fetch_assoc($result)) {
   $rowNum++; 
 ?>
-     
+
            <tr>
            <td class="text text-center" ><?php echo  $rowNum ?></td>
           <td class="text "><?php echo $Row["lastname"]; ?></td>
@@ -581,7 +581,7 @@ a.name, a.sub1, a.sec1, a.sgh1, b.gender, b.quarter,
 b.firstname, b.middlename, b.lastname, b.remarks
 FROM grade b
 INNER JOIN users a ON a.sub1 = b.subjectname AND (b.section = a.sec1 OR b.section = a.sec2 OR b.section = a.sec3 OR b.section = a.sec4 OR b.section = a.sec5 OR b.section = a.sec6 OR b.section = a.sec7 OR b.section = a.sec8 OR b.section = a.sec9 OR b.section = a.sec10)
-WHERE b.semester = 'FIRST' AND b.quarter = 'SECOND' AND a.name = '$teacher'
+WHERE b.semester = 'SECOND' AND b.quarter = 'SECOND' AND a.name = '$teacher'
 $filter
 ORDER BY b.studentname ASC;
 ";
@@ -601,10 +601,13 @@ while ($Row = mysqli_fetch_assoc($result)) {
       require "./php/db_conn.php";
       $query = "SELECT pname, crname, name
                 FROM settings, cr, users
-                WHERE users.name = '" . $_SESSION['name'] . "' LIMIT 1";
+                WHERE users.name = '" . $_SESSION['name'] . "'LIMIT 1";
       $result = mysqli_query($conn, $query);
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+          
+          $pname = $row['pname'];
+          $uppercasePname = strtoupper($pname);
           echo "<tr>";
           echo "<td style='border: none;'>";
           echo "
@@ -717,7 +720,8 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;
           <u>"
-          . $row['pname'] ."</b></u>
+          
+          . $uppercasePname."</b></u>
           &nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;
           &nbsp;
