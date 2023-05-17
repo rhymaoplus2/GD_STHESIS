@@ -1274,6 +1274,8 @@ function myFunction() {
           }
         ?>
       </tbody>
+
+     
       <tbody>
         <?php
           require "./php/db_conn.php";
@@ -1290,7 +1292,7 @@ function myFunction() {
                   <td class="text-center"><b>-</b></td>
                   <td hidden class="text-center"></td>
                 <?php } else { ?>
-                  <td class="text-center" onclick="select3()">
+                  <td class="text-center" onclick="select4()">
   <a class="text-dark" style="background-color: white; border: none;">
     <b><?php echo $Row["sub3"]; ?></b>
   </a>
@@ -1299,7 +1301,7 @@ function myFunction() {
 
 
 <!-- Modal -->
-<div class="modal fade" id="select3" tabindex="-1" aria-labelledby="example3ModalLabel" aria-hidden="true">
+<div class="modal fade" id="select4" tabindex="-1" aria-labelledby="example3ModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
@@ -1311,14 +1313,14 @@ function myFunction() {
 
         <div class="fade-in1">
         <li>
-        <button type="button" class="btn btn-secondary mb-3" onclick="showModal2jhs()" data-bs-dismiss="modal">  Junior High School
+        <button type="button" class="btn btn-secondary mb-3" onclick="showmodalsub4jhs()" data-bs-dismiss="modal">  Junior High School
   </button>
 </li>
 </div>
 
 <div class="fade-in2">
 <li>
-  <button type="button" class="btn btn-secondary mb-3" onclick="showModal2()" data-bs-dismiss="modal">
+  <button type="button" class="btn btn-secondary mb-3" onclick="showmodalsub4()" data-bs-dismiss="modal">
     Senior High School
   </button>
 </li>
@@ -1332,8 +1334,8 @@ function myFunction() {
 
 
 <script>
-  function select3() {
-    $('#select3').modal('show');
+  function select4() {
+    $('#select4').modal('show');
   }
 </script>
 
@@ -1550,7 +1552,7 @@ function myFunction() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <!-- Add buttons for select3ing different options -->
+        <!-- Add buttons for select4ing different options -->
         <ul>
 
         <div class="fade-in1">
@@ -1617,7 +1619,7 @@ function myFunction() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <!-- Add buttons for select3ing different options -->
+        <!-- Add buttons for select4ing different options -->
         <ul>
 
         <div class="fade-in1">
@@ -1672,12 +1674,12 @@ function myFunction() {
   </div>
 </div>
 <script>
-  function showModal2() {
+  function showmodalsub4() {
     $('#example3Modal').modal('show');
   }
 </script>
 <script>
-  function showModal2jhs() {
+  function showmodalsub4jhs() {
     $('#example3Modaljhs').modal('show');
   }
 
@@ -1692,7 +1694,6 @@ function myFunction() {
           }
         ?>
       </tbody>
-      
   <?php
 require "./php/db_conn.php";
 $name = $_SESSION['name'];

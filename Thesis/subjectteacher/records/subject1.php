@@ -589,10 +589,10 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 <div class="b" style="height: 290px; overflow-y: scroll; padding-right: 10px;" id="scroll">
 
-
 <table class="table table-bordered" id="grades-table" style="border:20px;">
-<thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
+  <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
                   <tr>
+                  
                   
                   
               
@@ -642,7 +642,7 @@ if ($result && mysqli_num_rows($result) > 0) {
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE  gender = 'MALE' AND  (students.subject1 = '".$_SESSION["sub1"]."' OR students.subject2 = '".$_SESSION["sub1"]."' 
+     WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub1"]."' OR students.subject2 = '".$_SESSION["sub1"]."' 
          OR students.subject3 = '".$_SESSION["sub1"]."' OR students.subject4 = '".$_SESSION["sub1"]."' 
          OR students.subject5 = '".$_SESSION["sub1"]."' OR students.subject6 = '".$_SESSION["sub1"]."' 
          OR students.subject7 = '".$_SESSION["sub1"]."' OR students.subject8 = '".$_SESSION["sub1"]."' 
@@ -674,12 +674,14 @@ echo "<tr>";
       echo $Row['id'];
       echo "</td>";
 
+
+      echo "<td hidden colspan=''>";
+      echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
+      echo "</td>";
+      
       echo "<td colspan=''>";
       echo "<input hidden class='no' id='studentname' name='studentname[]' value='" . $Row['fullname'] . "'>";
       echo $Row['fullname'];
-      echo "</td>";
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
       echo "</td>";
 
       echo "<td hidden colspan=''>";
@@ -690,9 +692,6 @@ echo "<tr>";
       echo "<input class='no text-center' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
       echo "</td>";
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no text-center' id='gender' name='gender[]' value='" . $Row['gender'] . "'>";
-      echo "</td>";
 
       echo "<td hidden colspan=''>";
       echo "<input class='no' id='year' name='year[]' value='" . $Row['grade'] . "'>";
@@ -740,8 +739,7 @@ echo "<tr>";
               echo "</tr>";
           }
 }
-}
-    }
+
 
     
 // Add the closing PHP tag
@@ -754,10 +752,10 @@ echo "<tr>";
 
   </table>
 
-  <table class="table table-bordered" id="grades-table" style="border:20px;">
-  <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
+
+<table class="table table-bordered" id="grades-table" style="border:20px;">
+<thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
                   <tr>
-                  
                   
                   
               
@@ -807,7 +805,7 @@ echo "<tr>";
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE gender = 'FEMALE' AND (students.subject1 = '".$_SESSION["sub1"]."' OR students.subject2 = '".$_SESSION["sub1"]."' 
+     WHERE  gender = 'FEMALE' AND  (students.subject1 = '".$_SESSION["sub1"]."' OR students.subject2 = '".$_SESSION["sub1"]."' 
          OR students.subject3 = '".$_SESSION["sub1"]."' OR students.subject4 = '".$_SESSION["sub1"]."' 
          OR students.subject5 = '".$_SESSION["sub1"]."' OR students.subject6 = '".$_SESSION["sub1"]."' 
          OR students.subject7 = '".$_SESSION["sub1"]."' OR students.subject8 = '".$_SESSION["sub1"]."' 
@@ -839,14 +837,12 @@ echo "<tr>";
       echo $Row['id'];
       echo "</td>";
 
-
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
-      echo "</td>";
-      
       echo "<td colspan=''>";
       echo "<input hidden class='no' id='studentname' name='studentname[]' value='" . $Row['fullname'] . "'>";
       echo $Row['fullname'];
+      echo "</td>";
+      echo "<td hidden colspan=''>";
+      echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
       echo "</td>";
 
       echo "<td hidden colspan=''>";
@@ -877,9 +873,7 @@ echo "<tr>";
       echo "<input class='no' id='lastname' name='lastname[]' value='" . $Row['lastname'] . "'>";
       echo "</td>";
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no text-center' id='gender' name='gender[]' value='" . $Row['gender'] . "'>";
-      echo "</td>";
+   
 
       echo "<td hidden colspan=''>";
       echo "<input class='no' id='ts' name='ts[]' value='" . $Row['trackstrand'] . "'>";
@@ -907,8 +901,9 @@ echo "<tr>";
               echo "</tr>";
           }
 }
-
-
+}
+    }
+  
     
 // Add the closing PHP tag
 ?>
