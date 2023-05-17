@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
         $name = $_SESSION['name'];
 
         if (mysqli_num_rows($query_run) > 0 || in_array($studentname, $submittedStudents)) {
-            header("Location: ../subject1.php?error=Hello $name, You already submitted a grade for this student this quarter and semester. Go back and click update!");
+            header("Location: ../subject4.php?error=Hello $name, You already submitted a grade for this student this quarter and semester. Go back and click update!");
             exit();
         } else {
             $submittedStudents[] = $studentname; // Add the student to the submitted students array
@@ -61,11 +61,11 @@ if (isset($_POST['submit'])) {
             $query_run = mysqli_query($conn, $query);
 
             if (!$query_run) {
-                header("Location: ../subject1.php?error=Error inserting grades into the database");
+                header("Location: ../subject4.php?error=Error inserting grades into the database");
                 exit();
             }
         }
     }
-    header("Location: ../subject1view.php?success=Grades added successfully");
+    header("Location: ../subject4view.php?success=Grades added successfully");
 }
 ?>
