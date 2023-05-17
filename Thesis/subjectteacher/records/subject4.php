@@ -5,7 +5,7 @@
       
    session_start();
    include "php/db_conn.php";
-   include "php/subject4.php";
+   include "php/subject1.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 	<title>RECORDS</title>
   <script>
 		function printPage() {
-			window.location.href = "printsubject4.php";
+			window.location.href = "printsubject1.php";
 		}
 	</script>
 
@@ -221,6 +221,10 @@ color: #f1f1f1;
   max-width: 800px;
   margin: 0 auto;
 }
+th {
+  position: sticky;
+  top: 0;
+}
 
 .sticky {
 position: fixed;
@@ -324,7 +328,7 @@ function myFunction() {
 
 
 
-<form action="./php/subject4create.php"
+<form action="./php/subject1create.php"
       method="post" >
 
 
@@ -397,7 +401,7 @@ function myFunction() {
             students.lastname,students.gender
             FROM students
             JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-            WHERE (students.subject4 = users.sub4 OR students.subject4 = users.sub4 OR students.subject4 = users.sub4 OR students.subject4 = users.sub4 OR students.subject5 = users.sub4 OR students.subject6 = users.sub4 OR students.subject7 = users.sub4 OR students.subject8 = users.sub4 OR students.subject9 = users.sub4 OR students.subject10 = users.sub4)
+            WHERE (students.subject1 = users.sub4 OR students.subject2 = users.sub4 OR students.subject3 = users.sub4 OR students.subject4 = users.sub4 OR students.subject5 = users.sub4 OR students.subject6 = users.sub4 OR students.subject7 = users.sub4 OR students.subject8 = users.sub4 OR students.subject9 = users.sub4 OR students.subject10 = users.sub4)
             AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
@@ -413,7 +417,7 @@ function myFunction() {
    
  
 
-   <div class="banner  text-center text-white rounded-pill mb-3" style=" background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+   <div class="banner  text-center text-white rounded-pill mb-3" style=" font-size: 30px;background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
    <b>Adding grades for the subject of   <?=$_SESSION['sub4']?></b>       
 
 </div>
@@ -426,7 +430,9 @@ function myFunction() {
   <div class="row text">
   <div class="container text-center">
   <div class="col-md-6 text-center mx-auto">
-
+  <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="padding: 10px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+  <b style="white-space: nowrap;">  <?php echo substr($_SESSION['sub4'], 0, 30); ?> </b>
+</div>
 <div class="row">
   <div class="col">
     <div class="mb-3">
@@ -640,8 +646,8 @@ if ($result && mysqli_num_rows($result) > 0) {
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE gender = 'MALE' AND (students.subject4 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
-         OR students.subject4 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
+     WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub4"]."' OR students.subject2 = '".$_SESSION["sub4"]."' 
+         OR students.subject3 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
          OR students.subject5 = '".$_SESSION["sub4"]."' OR students.subject6 = '".$_SESSION["sub4"]."' 
          OR students.subject7 = '".$_SESSION["sub4"]."' OR students.subject8 = '".$_SESSION["sub4"]."' 
          OR students.subject9 = '".$_SESSION["sub4"]."' OR students.subject10 = '".$_SESSION["sub4"]."')
@@ -803,8 +809,8 @@ echo "<tr>";
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE  gender = 'FEMALE' AND  (students.subject4 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
-         OR students.subject4 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
+     WHERE  gender = 'FEMALE' AND  (students.subject1 = '".$_SESSION["sub4"]."' OR students.subject2 = '".$_SESSION["sub4"]."' 
+         OR students.subject3 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
          OR students.subject5 = '".$_SESSION["sub4"]."' OR students.subject6 = '".$_SESSION["sub4"]."' 
          OR students.subject7 = '".$_SESSION["sub4"]."' OR students.subject8 = '".$_SESSION["sub4"]."' 
          OR students.subject9 = '".$_SESSION["sub4"]."' OR students.subject10 = '".$_SESSION["sub4"]."')
@@ -923,7 +929,7 @@ border: none; border-radius:100%; width:50px; height: 50px;">
  
 
           <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
-          onclick="location.href='subject4view.php'">
+          onclick="location.href='subject1view.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
 

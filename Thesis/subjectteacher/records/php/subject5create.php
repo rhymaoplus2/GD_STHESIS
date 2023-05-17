@@ -10,6 +10,8 @@ if (isset($_POST['submit'])) {
         return $data;
     }
 
+    $submittedStudents = array(); // Array to keep track of submitted students
+
     $quarter = validate($_POST['quarter']);
     $semester = validate($_POST['semester']);
 
@@ -47,21 +49,23 @@ if (isset($_POST['submit'])) {
         $query_run = mysqli_query($conn, $query);
         $name = $_SESSION['name'];
 
-        if (mysqli_num_rows($query_run) > 0) {
-            header("Location: ../subject1.php?error=Hello $name, You already submitted a grade for this student this quarter and semester. Go back and click update!");
+        if (mysqli_num_rows($query_run) > 0 || in_array($studentname, $submittedStudents)) {
+            header("Location: ../subject5.php?error=Hello $name, You already submitted a grade for this student this quarter and semester. Go back and click update!");
             exit();
         } else {
-            $query = "INSERT INTO grade (studentname, subjectname, grade, teacher, section, adviser, firstname, middlename, lastname, gender, remarks, semester, quarter, sy, year, ts, studentid, session, date, time, status, success)
+            $submittedStudents[] = $studentname; // Add the student to the submitted students array
+
+            $query = "INSERT INTO grade (studentname, subjectname, grade, teacher, section, adviser, firstname, middlename, lastname, gender, remarks, semester, quarter, sy, year, ts, studentid, session, date, time, status)
                       VALUES ('$studentname', '$subjectname', '$grade', '$teacher', '$section', '$adviser',
-                      '$firstname', '$middlename', '$lastname', '$gender', '$remarks', '$semester', '$quarter', '$sy', '$year', '$ts', '$studentid', '$session', '$date', '$time', '$status', '1')";
+                      '$firstname', '$middlename', '$lastname', '$gender', '$remarks', '$semester', '$quarter', '$sy', '$year', '$ts', '$studentid', '$session', '$date', '$time', '$status')";
             $query_run = mysqli_query($conn, $query);
 
             if (!$query_run) {
-                header("Location: ../subject1.php?error=Error inserting grades into the database");
+                header("Location: ../subject5.php?error=Error inserting grades into the database");
                 exit();
             }
         }
     }
-    header("Location: ../subject1view.php?success=Grades added successfully");
+    header("Location: ../subject5view.php?success=Grades added successfully");
 }
 ?>
