@@ -317,7 +317,7 @@ input::placeholder {
 <body>
 
 <div class="header" id="myHeader">
-<?PHP include_once('header.php');?>
+<?php include_once('header.php');?>
 </div>
 
 
@@ -352,7 +352,7 @@ function myFunction() {
           <?php if ($_GET['error'] == 'wrong_password') { ?>
     
             <p>The password you entered is incorrect. Please try again.</p>
-          <?php } else if ($_GET['error'] == 'username_not_found') { ?>
+          <?php } elseif ($_GET['error'] == 'username_not_found') { ?>
        
             <p>The password you entered is incorrect. Please try again..</p>
           <?php } else { ?>
@@ -498,15 +498,15 @@ function myFunction() {
       <select class="form-select fw-bold" id="section" name="section">
         <option value="">All</option>
         <?php
-        include "php/db_conn.php";
-        $sectionQuery = "SELECT name FROM section";
-        $sectionResult = mysqli_query($conn, $sectionQuery);
-        while ($sectionRow = mysqli_fetch_assoc($sectionResult)) {
-            $sectionName = $sectionRow['name'];
-            echo "<option value='" . $sectionName . "'>" . $sectionName . "</option>";
-        }
-        mysqli_close($conn); // Close the database connection
-        ?>
+  include "php/db_conn.php";
+    $sectionQuery = "SELECT name FROM section";
+    $sectionResult = mysqli_query($conn, $sectionQuery);
+    while ($sectionRow = mysqli_fetch_assoc($sectionResult)) {
+        $sectionName = $sectionRow['name'];
+        echo "<option value='" . $sectionName . "'>" . $sectionName . "</option>";
+    }
+    mysqli_close($conn); // Close the database connection
+    ?>
       </select>
     </div>
 
@@ -555,350 +555,170 @@ function myFunction() {
   </script>
 </form>
 
-            <?php 
-			  	   $i = 0;
-			  	   while($rows = mysqli_fetch_assoc($result)){
-			  	   $i++;
-             
-			  	 ?> 
+            <?php
+               $i = 0;
+    while($rows = mysqli_fetch_assoc($result)) {
+        $i++;
+
+        ?> 
            
 
            <hr>
            <div class="fade-in">
            <div class="b tex" style="height: 255px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
-           <table class="table table-bordered" id="grade-table">  
-              <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-color:black;  ">
-                  <tr>
-                  <th scope="col" class="w-50 text-start">StudentName</th>
-<th hidden scope="col">Subject Name</th>
-<th scope="col">Grade</th>
-
-
-<th colspan="2" scope="col" class="w-50">
- 
-</th>
-
-      </th>
-                  
-                </tr>
-              </thead>
-              <thead class="text-dark" style="   border-color:black;  ">
-                  <tr>
-                  <th scope="col" colspan="3" class="w-50 text-start">MALE</th>
-
-
-</th>
-
-      
-                  
-                </tr>
-              </thead>
-          
-        <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
-        <?php 
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
-// Add the section column to the SELECT statement
-$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
-    a.name AS user_name, a.sub3 AS user_sub3, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
-    FROM grade b, users a
-    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')  
-    AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND REPLACE(LOWER(a.sub3), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')
-    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND b.gender = 'MALE'";
-
-  
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $semester = $_POST["semester"];
-  $quarter = $_POST["quarter"];
-  $section = $_POST["section"];
-  $sy = $_POST["sy"];
-
-  if (!empty($semester)) {
-    $query .= " AND semester = '$semester'";
-  }
-  if (!empty($quarter)) {
-    $query .= " AND quarter = '$quarter'";
-  }
-  if (!empty($section)) {
-    $query .= " AND section = '$section'";
-  }
-  if (!empty($sy)) {
-    $query .= " AND sy = '$sy'";
-  }
-
-  if (isset($_POST["gender"])) {
-    $gender = $_POST["gender"];
-    
-    if (!empty($gender)) {
-      $query .= " AND gender = '$gender'";
-    }
-  }
-
-  if (isset($_POST["status"])) {
-    $status = $_POST["status"];
-
-    if ($status !== "") {
-      $query .= " AND b.status = '$status'";
-    }
-  }
-}
-
-$result = mysqli_query($conn, $query);
-?>
-
-
-
-
-    <?php 
-      $i = 0;
-      while($rows = mysqli_fetch_assoc($result)) {
-        $i++;
-    ?>
-
-
-<td class="text-start"><?php echo $rows["studentname"]; ?></td>
-<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
-
-
-   
-      <td hidden><?php echo $rows["subjectname"]; ?></td>
-   
-      <td class="text-center">
-
-      <?php if ($rows['status'] != 1): ?>
-  <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
-    <b>
-      <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
-    </b>
-  </a>
-  <a type="button" class="btn" data-bs-toggle="modal" 
-    data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
-    style="border: none; background-color:transparent; outline: none;" title="Delete">
-
-    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
-  </a>
-<?php else: ?>
-  <b> VALIDATED </b>
- <?php endif; ?>
-
-
-<div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
-        <h5 class="modal-title" id="deleteModalLabel<?php echo $rows['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p> <b></b>
-          <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
-       Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
-        </p>
-        <form class="delete" action="delete_grade1.php" method="POST">
-          <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
-          <div class="mb-3">
-            <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
-            <input type="password" class="form-control" placeholder="Input your Password <?php echo $rows['teacher']; ?> " id="password" name="password" required>
-          </div>
-          <button type="submit" class="btn" name="delete">
-            <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-			      </td>
-
-			    </tr>
-     
-
-
-
-
-
-
-
-
-
-
-
-
-       
-            <?php }
-
-
- ?>
-
-
-
-        </tbody>
-        <thead class="text-dark" style="   border-color:black;  ">
-                  <tr>
-                  <th scope="col" colspan="3" class="w-50 text-start">FEMALE</th>
-
-
-</th>
-
-      
-                  
-                </tr>
-              </thead>
-          
-         <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
-              <?php 
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
-// Add the section column to the SELECT statement
-$query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
-    a.name AS user_name, a.sub3 AS user_sub3, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
-    FROM grade b, users a
-    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')  
-    AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND REPLACE(LOWER(a.sub3), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')
-    AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND b.gender = 'FEMALE'";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $semester = $_POST["semester"];
-  $quarter = $_POST["quarter"];
-  $section = $_POST["section"];
-  $sy = $_POST["sy"];
-
-
-  if (!empty($semester)) {
-    $query .= " AND semester = '$semester'";
-  }
-  if (!empty($quarter)) {
-    $query .= " AND quarter = '$quarter'";
-  }
-  if (!empty($section)) {
-    $query .= " AND section = '$section'";
-  }
-  if (!empty($sy)) {
-    $query .= " AND sy = '$sy'";
-  }
-
-  if (isset($_POST["gender"])) {
-    $gender = $_POST["gender"];
-    
-    if (!empty($gender)) {
-      $query .= " AND gender = '$gender'";
-    }
-  }
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // ...
-  
-    if (isset($_POST["status"])) {
-      $status = $_POST["status"];
-      
-      if (!empty($status)) {
-        $query .= " AND b.status = '$status'";
-      }
-    }
-  }
-}
-
-$result = mysqli_query($conn, $query);
-?>
-
-
-
-    <?php 
-      $i = 0;
-      while($rows = mysqli_fetch_assoc($result)) {
-        $i++;
-    ?>
+           <table class="table table-bordered" id="grade-table">
+  <thead class="text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); border-color:black;">
     <tr>
+      <th scope="col" class="w-50 text-start">StudentName</th>
+      <th hidden scope="col">Subject Name</th>
+      <th scope="col">Grade</th>
+      <th colspan="2" scope="col" class="w-50"></th>
+    </tr>
+  </thead>
+  <thead class="text-dark" style="border-color:black;">
+    <tr>
+      <th scope="col" colspan="3" class="w-50 text-start">MALE</th>
+    </tr>
+  </thead>
+  <tbody class="text-dark" style="background-color:#e6e6e6; border-color:black;">
+  <?php
+            require "./php/db_conn.php";
+        $name = $_SESSION['name'];
+        // Add the section column to the SELECT statement
+        $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section,
+b.adviser, b.gender, b.status,
+a.name AS user_name, a.sub3 AS user_sub3, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
+FROM grade b, users a
+WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')
+AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+AND REPLACE(LOWER(a.sub3), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')
+AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+AND b.gender = 'MALE'";// Add the ORDER BY clause to sort by studentname
+        $query .= " ORDER BY b.studentname";
 
-<td class="text-start"><?php echo $rows["studentname"]; ?></td>
-<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
+        // Rest of the code remains the same
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // ...
+        }
 
+        $result = mysqli_query($conn, $query);
 
-   
-      <td hidden><?php echo $rows["subjectname"]; ?></td>
-   
-      <td class="text-center">
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($result)) {
+            ?>
+      <tr>
+        <td class="text-start"><?php echo $rows["studentname"]; ?></td>
+        <td class="text-center" style="width:30%;"><?php echo $rows["grade"]; ?></td>
+        <td hidden><?php echo $rows["subjectname"]; ?></td>
+        <td class="text-center">
+          <?php if ($rows['status'] != 1): ?>
+            <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+              <b>
+                <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+              </b>
+            </a>
+            <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $rows['id']; ?>" style="border: none; background-color:transparent; outline: none;" title="Delete">
+              <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+            </a>
+          <?php else: ?>
+            <b> VALIDATED </b>
+          <?php endif; ?>
 
-      <?php if ($rows['status'] != 1): ?>
-  <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
-    <b>
-      <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
-    </b>
-  </a>
-  <a type="button" class="btn" data-bs-toggle="modal" 
-    data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
-    style="border: none; background-color:transparent; outline: none;" title="Delete">
-
-    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
-  </a>
-<?php else: ?>
-  <b> VALIDATED </b>
-<?php endif; ?>
-
-
-<div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
-        <h5 class="modal-title" id="deleteModalLabel<?php echo $rows['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p> <b></b>
-          <br> Are you sure you want to delete <br> <b> <?php echo $rows['name']; ?> Account?</b>
-        </p>
-        <form class="delete" action="delete_grade1.php" method="POST">
-          <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
-          <div class="mb-3">
-            <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
-            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+          <div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+                  <h5 class="modal-title" id="deleteModalLabel<?php echo $rows['id']; ?>">
+                    <div class="text text-center text-white">WARNING! Actions cannot be undone! </div>
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>
+                    <b></b><br>
+                    Are you sure you want to delete <br>
+                    <b><?php echo $rows['studentname']; ?></b>
+                    Grade in <b><?php echo $rows['subjectname']; ?></b> ?
+                  </p>
+                  <form class="delete" action="delete_grade1.php" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
+                    <div class="mb-3">
+                      <label for="password" class="form-label">
+                        <div class="text text-danger"><b>Password Required!</b></div>
+                      </label>
+                      <input type="password" class="form-control" placeholder="Input your Password <?php echo $rows['teacher']; ?> " id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn" name="delete">
+                      <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn" name="delete">
-            <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+        </td>
+      </tr>
+    <?php }
+        }
+} ?>
+  </tbody>
 
+  <thead class="text-dark" style="border-color:black;">
+    <tr>
+      <th scope="col" colspan="3" class="w-50 text-start">MALE</th>
+    </tr>
+  </thead>
 
-			      </td>
+  <tbody class="text-dark" style="background-color:#e6e6e6; border-color:black;">
+    <?php
+            require "./php/db_conn.php";
+        $name = $_SESSION['name'];
+        // Add the section column to the SELECT statement
+        $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section,
+b.adviser, b.gender, b.status,
+a.name AS user_name, a.sub3 AS user_sub3, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
+FROM grade b, users a
+WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')
+AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+AND REPLACE(LOWER(a.sub3), ' ', '') = REPLACE(LOWER('{$_SESSION['sub3']}'), ' ', '')
+AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
+AND b.gender = 'FEMALE'";// Add the ORDER BY clause to sort by studentname
+        $query .= " ORDER BY b.studentname";
 
-			    </tr>
-     
+        // Rest of the code remains the same
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        }
 
+        $result = mysqli_query($conn, $query);
 
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($result)) {
+            ?>
+  <tr>
+    <td class="text-start"><?php echo $rows["studentname"]; ?></td>
+    <td class="text-center" style="width:30%;"><?php echo $rows["grade"]; ?></td>
+    <td hidden><?php echo $rows["subjectname"]; ?></td>
+    <td class="text-center">
+      <?php if ($rows['status'] != 1): ?>
+        <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+          <b>
+            <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+          </b>
+        </a>
+        <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $rows['id']; ?>" style="border: none; background-color:transparent; outline: none;" title="Delete">
+          <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+        </a>
+      <?php else: ?>
+        <b> VALIDATED </b>
+      <?php endif; ?>
+      <!-- Rest of the code remains the same -->
+    </td>
+  </tr>
+<?php }
 
-
-
-
-
-
-
-
-
-
-       
-            <?php }
- }
-
-
-
-     }
-
-
- ?>
-
-
-
-         </tbody>
-      </table>
+?>
+</tbody>
+</table>
 </div>
     </div>
   
