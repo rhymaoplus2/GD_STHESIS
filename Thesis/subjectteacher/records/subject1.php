@@ -511,40 +511,34 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
     </div>
-
-      <?php
-// Assuming you have already established a database connection in db_conn.php
+    <?php
 include "php/db_conn.php";
 
 $id = 1; // ID value for the row you want to fetch
+
+// Fetching 'quarter' value
 $query = "SELECT quarter FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
+$result = mysqli_query($conn, $query);
+$quarter = '';
 
 if ($result && mysqli_num_rows($result) > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $quarter = $row['quarter'];
-} else {
-  // Default value if no row is found or an error occurs
-  $quarter = ' ';
+    $quarter = mysqli_fetch_assoc($result)['quarter'];
 }
-?>
- 
-      <?php
-// Assuming you have already established a database connection in db_conn.php
-include "php/db_conn.php";
 
-$id = 1; // ID value for the row you want to fetch
+// Fetching 'semester' value
 $query = "SELECT semester FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
+$result = mysqli_query($conn, $query);
+$semester = '';
 
 if ($result && mysqli_num_rows($result) > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $semester = $row['semester'];
-} else {
-  // Default value if no row is found or an error occurs
-  $semester = ' ';
+    $semester = mysqli_fetch_assoc($result)['semester'];
 }
+
+// Outputting the values
+echo "<input hidden class='quarter' id='quarter' name='quarter' value='" . $quarter. "'>";
+echo "<input hidden class='semester' id='semester' name='semester' value='" . $semester . "'>";
 ?>
+
 
 <input hidden id="randomInput" class="form-control" type="text" name="session">
 

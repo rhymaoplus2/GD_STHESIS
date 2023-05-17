@@ -339,7 +339,7 @@ function myFunction() {
 
 
 
-<form action="./php/subject2create.php"
+<form action="./php/subject3create.php"
       method="post" >
 
 
@@ -407,12 +407,12 @@ function myFunction() {
       <?php
     require "php/db_conn.php";
     $name = $_SESSION["name"];
-    $query = "SELECT students.fullname, students.adviser_id, users.sub2,
+    $query = "SELECT students.fullname, students.adviser_id, users.sub3,
             students.section, students.firstname,students.middlename,
             students.lastname,students.gender
             FROM students
             JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-            WHERE (students.subject1 = users.sub2 OR students.subject2 = users.sub2 OR students.subject3 = users.sub2 OR students.subject4 = users.sub2 OR students.subject5 = users.sub2 OR students.subject6 = users.sub2 OR students.subject7 = users.sub2 OR students.subject8 = users.sub2 OR students.subject9 = users.sub2 OR students.subject10 = users.sub2)
+            WHERE (students.subject1 = users.sub3 OR students.subject2 = users.sub3 OR students.subject3 = users.sub3 OR students.subject4 = users.sub3 OR students.subject5 = users.sub3 OR students.subject6 = users.sub3 OR students.subject7 = users.sub3 OR students.subject8 = users.sub3 OR students.subject9 = users.sub3 OR students.subject10 = users.sub3)
             AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
@@ -429,7 +429,7 @@ function myFunction() {
  
 
    <div class="banner  text-center text-white rounded-pill mb-3" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-   <b><?=$_SESSION['sub2']?></b>       
+   <b><?=$_SESSION['sub3']?></b>       
 
 </div>
 
@@ -638,7 +638,7 @@ if ($result && mysqli_num_rows($result) > 0) {
  
  // Rest of the code...
  
- $query = "SELECT students.fullname, students.adviser_id, users.sub2,
+ $query = "SELECT students.fullname, students.adviser_id, users.sub3,
      students.section, students.firstname, students.middlename,
      students.trackstrand, students.lastname, students.gender,
      students.syear, students.grade, students.id
@@ -648,11 +648,11 @@ if ($result && mysqli_num_rows($result) > 0) {
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
-         OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
-         OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
-         OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
-         OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
+     WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub3"]."' OR students.subject2 = '".$_SESSION["sub3"]."' 
+         OR students.subject3 = '".$_SESSION["sub3"]."' OR students.subject4 = '".$_SESSION["sub3"]."' 
+         OR students.subject5 = '".$_SESSION["sub3"]."' OR students.subject6 = '".$_SESSION["sub3"]."' 
+         OR students.subject7 = '".$_SESSION["sub3"]."' OR students.subject8 = '".$_SESSION["sub3"]."' 
+         OR students.subject9 = '".$_SESSION["sub3"]."' OR students.subject10 = '".$_SESSION["sub3"]."')
          AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
          OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
          OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
@@ -724,7 +724,7 @@ echo "<tr>";
       echo "</td>";
 
       echo "<td hidden>";
-      echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub2'] . "'>";
+      echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub3'] . "'>";
       echo "</td>";
 
       echo "<td style='width:30%;'>";
@@ -801,7 +801,7 @@ echo "<tr>";
  
  // Rest of the code...
  
- $query = "SELECT students.fullname, students.adviser_id, users.sub2,
+ $query = "SELECT students.fullname, students.adviser_id, users.sub3,
      students.section, students.firstname, students.middlename,
      students.trackstrand, students.lastname, students.gender,
      students.syear, students.grade, students.id
@@ -811,11 +811,11 @@ echo "<tr>";
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE  gender = 'FEMALE' AND  (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
-         OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
-         OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
-         OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
-         OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
+     WHERE  gender = 'FEMALE' AND  (students.subject1 = '".$_SESSION["sub3"]."' OR students.subject2 = '".$_SESSION["sub3"]."' 
+         OR students.subject3 = '".$_SESSION["sub3"]."' OR students.subject4 = '".$_SESSION["sub3"]."' 
+         OR students.subject5 = '".$_SESSION["sub3"]."' OR students.subject6 = '".$_SESSION["sub3"]."' 
+         OR students.subject7 = '".$_SESSION["sub3"]."' OR students.subject8 = '".$_SESSION["sub3"]."' 
+         OR students.subject9 = '".$_SESSION["sub3"]."' OR students.subject10 = '".$_SESSION["sub3"]."')
          AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
          OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
          OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
@@ -886,7 +886,7 @@ echo "<tr>";
       echo "</td>";
 
       echo "<td hidden>";
-      echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub2'] . "'>";
+      echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub3'] . "'>";
       echo "</td>";
 
       echo "<td style='width:30%;'>";

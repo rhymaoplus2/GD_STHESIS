@@ -423,13 +423,13 @@ function myFunction() {
       <div class="modal-body">
         <h3> Semester 1 - Quarter : </h3>
       
-        <button type="button" class="btn btn-primary" onclick="window.open('sub2p1.php', '_blank')">1</button>
-        <button type="button" class="btn btn-secondary" onclick="window.open('sub2p2.php', '_blank')">2</button>
+        <button type="button" class="btn btn-primary" onclick="window.open('sub1p1.php', '_blank')">1</button>
+        <button type="button" class="btn btn-secondary" onclick="window.open('sub1p2.php', '_blank')">2</button>
         <br>
         <h3> Semester 2 - Quarter : </h3>
        
-        <button type="button" class="btn btn-success" onclick="window.open('sub2p3.php', '_blank')">3</button>
-        <button type="button" class="btn btn-danger" onclick="window.open('sub2p4.php', '_blank')">4</button>
+        <button type="button" class="btn btn-success" onclick="window.open('sub1p3.php', '_blank')">3</button>
+        <button type="button" class="btn btn-danger" onclick="window.open('sub1p4.php', '_blank')">4</button>
       </div>
     </div>
   </div>
@@ -455,7 +455,7 @@ function myFunction() {
       </a>
     </div>
 <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="padding: 10px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b style="white-space: nowrap;"> Students Grades in Subject: <?php echo substr($_SESSION['sub1'], 0, 30); ?> </b>
+  <b style="white-space: nowrap;"><?php echo substr($_SESSION['sub1'], 0, 30); ?> </b>
 </div>
 
   
@@ -588,11 +588,11 @@ require "./php/db_conn.php";
 $name = $_SESSION['name'];
 // Add the section column to the SELECT statement
 $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
-    a.name AS user_name, a.sub1 AS user_sub1, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
+    a.name AS user_name, a.sub1 AS user_sub1, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy,b.success
     FROM grade b, users a
-    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')  
+    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')
+    AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
     AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND b.gender = 'MALE' AND b.success='1'";
 
@@ -731,6 +731,7 @@ $result = mysqli_query($conn, $query);
 <th hidden scope="col">Subject Name</th>
 <th scope="col">Grade</th>
 
+
 <th colspan="2" scope="col" class="w-50">
  
 </th>
@@ -746,11 +747,11 @@ require "./php/db_conn.php";
 $name = $_SESSION['name'];
 // Add the section column to the SELECT statement
 $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
-    a.name AS user_name, a.sub1 AS user_sub1, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
+    a.name AS user_name, a.sub1 AS user_sub1, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy,b.success
     FROM grade b, users a
-    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')  
+    WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')
+    AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
     AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND b.gender = 'FEMALE' AND b.success='1'";
 

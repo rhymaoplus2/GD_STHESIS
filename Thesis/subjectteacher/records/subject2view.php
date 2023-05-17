@@ -455,7 +455,7 @@ function myFunction() {
       </a>
     </div>
 <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="padding: 10px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b style="white-space: nowrap;"> Students Grades in Subject: <?php echo substr($_SESSION['sub2'], 0, 30); ?> </b>
+  <b style="white-space: nowrap;"><?php echo substr($_SESSION['sub2'], 0, 30); ?> </b>
 </div>
 
   
@@ -588,7 +588,7 @@ require "./php/db_conn.php";
 $name = $_SESSION['name'];
 // Add the section column to the SELECT statement
 $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
-    a.name AS user_name, a.sub2 AS user_sub2, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
+    a.name AS user_name, a.sub2 AS user_sub2, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy,b.success
     FROM grade b, users a
     WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
@@ -731,6 +731,7 @@ $result = mysqli_query($conn, $query);
 <th hidden scope="col">Subject Name</th>
 <th scope="col">Grade</th>
 
+
 <th colspan="2" scope="col" class="w-50">
  
 </th>
@@ -746,7 +747,7 @@ require "./php/db_conn.php";
 $name = $_SESSION['name'];
 // Add the section column to the SELECT statement
 $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.section, b.adviser, b.gender, b.status,
-    a.name AS user_name, a.sub2 AS user_sub2, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy
+    a.name AS user_name, a.sub2 AS user_sub2, a.sec1, a.sgh1, b.remarks, b.quarter, b.semester, b.sy,b.success
     FROM grade b, users a
     WHERE REPLACE(LOWER(b.subjectname), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')  
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')

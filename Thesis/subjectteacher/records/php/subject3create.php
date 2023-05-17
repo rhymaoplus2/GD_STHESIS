@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 
     $quarter = validate($_POST['quarter']);
     $semester = validate($_POST['semester']);
-
+    $session = validate($_POST['session']);
     foreach ($_POST['studentname'] as $index => $studentname) {
         $subjectname = validate($_POST['subjectname'][$index]);
         $grade = validate($_POST['grade'][$index]);
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         $studentid = validate($_POST['studentid'][$index]);
         $section = validate($_POST['section'][$index]);
 
-        $session = validate($_POST['session']);
+    
         $time = validate($_POST['time']);
         $date = validate($_POST['date']);
         $status = validate($_POST['status']);
