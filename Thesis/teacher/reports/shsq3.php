@@ -23,7 +23,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
   <header>
 
 </header>
-
 <style>
   
 
@@ -218,7 +217,7 @@ table {
 @media print {
   /* Set the page size to A4 */
   @page {
-    margin-top: 0;
+    margin-top: 1cm;
     margin-bottom: 0;
     size: auto;  /* Use the default page size */
        /* Reset the page margin to zero */
@@ -339,7 +338,6 @@ font-size: 12px;
   }
 </style>
 
-  </style>
 </head>
 
 <body>
@@ -727,7 +725,7 @@ $name = $_SESSION["name"];
 $query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
 FROM grade 
 WHERE quarter = 'THIRD' 
-AND LOWER(gender) = 'male' AND adviser = '$name'
+AND LOWER(gender) = 'female' AND adviser = '$name'
 ORDER BY studentname, subjectname;
 ";
 

@@ -7,7 +7,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {  } ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOME</title>
+	<title>REPORTS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -376,8 +376,8 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 </tr>
 <tr>
 <td class="text-center">
-  <a class="text-dark" style="background-color: white; border: none;" href="sections.php">
-    <b>Grade Sheet</b>
+  <a class="text-dark" style="background-color: white; border: none;" href="consolidated.php">
+    <b>Consolidated Grades</b>
   </a>
 </td> 
 </tr>

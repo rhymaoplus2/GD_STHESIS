@@ -3,6 +3,7 @@
    session_start();
    include "./php/db_conn.php";
 
+
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 
 
@@ -23,6 +24,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
   <header>
 
 </header>
+
 <style>
   
 
@@ -338,6 +340,7 @@ font-size: 12px;
   }
 </style>
 
+
 </head>
 
 <body>
@@ -358,26 +361,36 @@ font-size: 12px;
 
 
   <br><br>
+  
 <div class="page1">
 <?php
-// Include the database connection script
+
+
+
+function validate($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+$section = validate($_GET['section']);
+$syear = validate($_GET['syear']);
 include "php/db_conn.php";
-$name = $_SESSION["name"];
-// Execute the SQL query to retrieve the student data for the 1st quarter
-$query = "SELECT lastname, FIRSTname, middlename, studentname, subjectname, grade, quarter 
-FROM grade 
-WHERE quarter = 'FIRST' 
-AND LOWER(gender) = 'male' AND adviser = '$name'
+
+$query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
+FROM grade
+WHERE quarter = 'FIRST'
+  AND LOWER(gender) = 'male'
+  AND section = '$section'
+  AND sy = '$syear'
 ORDER BY studentname, subjectname;
 ";
 
 // Execute the query and fetch the results
 $result = mysqli_query($conn, $query);
-// Execute the SQL query to retrieve the grade information
-$info_query = "SELECT * FROM grade 
 
-WHERE adviser = '$name' LIMIT 1
-";
+// Execute the SQL query to retrieve the grade information
+$info_query = "SELECT * FROM grade LIMIT 1";
 $info_result = mysqli_query($conn, $info_query);
 $info_row = mysqli_fetch_assoc($info_result);
 
@@ -388,9 +401,8 @@ echo '
 <div>
   <div style="display: flex; justify-content: space-between;">
     <p style="text-align: left;">
-      School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-      . $info_row['sy'] . '</b><br>
-     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST </b>
+      School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['sy'] . '</b><br>
+      Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>FIRST</b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -403,8 +415,9 @@ echo '
 
 // Create an associative array to store the grades for each student and subject
 $grades = array();
-$full=0;
-$num=0;
+$full = 0;
+$num = 0;
+
 // Create an array to store the unique subject names
 $unique_subjects = array();
 
@@ -421,9 +434,9 @@ foreach ($quarter1_grades as $student_grades) {
     }
 }
 if ($num_subjects > 0) {
-  $average_grade_1st = $total_grades_1st / $num_subjects;
+    $average_grade_1st = $total_grades_1st / $num_subjects;
 } else {
-  $average_grade_1st = 0;
+    $average_grade_1st = 0;
 }
 
 // Loop through the results and populate the grades and unique_subjects arrays
@@ -470,125 +483,84 @@ while ($row = mysqli_fetch_assoc($result)) {
         array_push($unique_subjects, $subjectname);
     }
 }
+
 $honor = '';
 
 // Create a table to display the grades for each student and subject
 echo "
-    ";
-echo "<table >
-<thead>
-
-  <th class='text-center' rowspan='2'>LEARNERS' NAME</th>
-  <th class='text-center' colspan='90' style='border: none!important;''></th>
-
-   <thead>
-        <tr >
-        <th class='text-center' rowspan='2' >MALE</th>
-
-";
+<table>
+  <thead>
+    <tr>
+      <th class='text-center' rowspan='2'>LEARNERS' NAME</th>
+      <th class='text-center' colspan='90' style='border: none!important;'></th>
+    </tr>
+    <tr>
+      <th class='text-center' rowspan='2'>MALE</th>";
 
 // Add the unique subject names and the "average" column to the header row
 foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num++;
 }
-echo "<th class='text-center'> First".
-" Quarter<br>Final<br>Average</th><th></th><th></th>";
+echo "<th class='text-center'>First Quarter<br>Final Average</th><th></th>";
 echo "</tr>
-        <tr class='text-center'>";
+    <tr class='text-center'>";
+
 foreach ($unique_subjects as $subject) {
-    echo "<th class='text-center'>1st<br>Quarter</th><th class='text-center'>2nd<br>Quarter</th><th class='text-center'>"."Final</th>";
+    echo "<th class='text-center'>1st<br>Quarter</th><th class='text-center'>2nd<br>Quarter</th><th class='text-center'>Final</th>";
 }
 
 echo "<th></th><th></th><th></th></tr></thead><tbody>";
 
 // Loop through the grades array and display the grades for each student and subject
 foreach ($grades as $studentname => $subjects) {
-  echo "<tr><td>".$studentname."</td>";
-  foreach ($unique_subjects as $subject) {
-      if (isset($subjects[$subject])) {
-          echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-          $FIRST = intval($subjects[$subject]["1st"]);
- 
-          $average = $FIRST;
-         
-          $full +=$average;
+    echo "<tr><td>".$studentname."</td>";
+    foreach ($unique_subjects as $subject) {
+        if (isset($subjects[$subject])) {
+            echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
+            $FIRST = intval($subjects[$subject]["1st"]);
+            $average = $FIRST;
+            $full += $average;
+        } else {
+            echo "<td></td><td></td><td></td>";
         }
-         
-      else {
-          echo "<td></td><td></td><td></td>";
-      }
-      
-  }
-  
-  // Calculate and display the average for the student
-  $total_grade = 0;
-  $num_subjects = 0;
-// Calculate and display the average for the student
-$total_grade = 0;
-$num_subjects = 0;
-foreach ($total_grades as $subjectname => $student_grades) {
-    if (isset($student_grades[$studentname])) {
-        $total_grade += $student_grades[$studentname];
-        $num_subjects++;
     }
+
+    // Calculate and display the average for the student
+    $total_grade = 0;
+    $num_subjects = 0;
+    foreach ($total_grades as $subjectname => $student_grades) {
+        if (isset($student_grades[$studentname])) {
+            $total_grade += $student_grades[$studentname];
+            $num_subjects++;
+        }
+    }
+    $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
+    $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+
+    echo "<td class='text-center'>" . number_format($full / $num, 3) . "</td>";
+    echo "<td class='text-center'>" . ROUND($full / $num) . "</td>";
+
+    $full = 0;
+    if ($average_per_subject >= 90 && $average_per_subject <= 94) {
+        $honor = 'With honors';
+    } else if ($average_per_subject >= 95 && $average_per_subject <= 97) {
+        $honor = 'With high honors';
+    } else if ($average_per_subject >= 98 && $average_per_subject <= 100) {
+        $honor = 'With highest honors';
+    } else {
+        $honor = '&nbsp;&nbsp;&nbsp;';
+    }
+    echo "<td class='text-center'>". $honor ."</td></tr></tbody>";
 }
-$average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
-$average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
 
-echo "<td class='text-center'>" . number_format($full / $num, 3) . "</td>";
-
-echo "<td class='text-center'>" . ROUND($full / $num) . "</td>";
-
-$full=0;
-if ($average_per_subject >= 90 && $average_per_subject <= 94) {
-  $honor = 'With honors';
-} else if ($average_per_subject >= 95 && $average_per_subject <= 97) {
-  $honor = 'With high honors';
-} else if ($average_per_subject >= 98 && $average_per_subject <= 100) {
-  $honor = 'With highest honors';
-}
-else{
-  $honor = '&nbsp;&nbsp;&nbsp;';
-}
- echo "<td class='text-center'>". " $honor</td></tr></tbody>";
-
-
-
-}
 // Close the row
+echo "</tbody></table>";
 
-echo "</tr></tbody>
+// Close the database connection
+mysqli_close($conn);
+?>
 
-<tbody>
-
-
-<td style='border:none;'> </td>
-
-
-
-
-
-";
-
-// Add the unique subject names and the "average" column to the header row
-foreach ($unique_subjects as $subject) {
-  echo "<th class='text-center' colspan='3'>","<br></th>";
-}
-echo "</tbody><tr  class='no-border'><tbody class='no-border'>
-   ";
-foreach ($unique_subjects as $subject) {
-  
-}
-
-// Close the table tag
-echo "</table>";
-
-    
-    // Close the database connection
-    mysqli_close($conn);
-    
-    ?>
     <br>
     <br>
  
@@ -596,7 +568,7 @@ echo "</table>";
   <tbody>
     <tr>
 <td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">
-</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adviser&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
@@ -717,26 +689,27 @@ echo "</table>";
             <br>
             <?php
 // Include the database connection script
+
+
+
 include "php/db_conn.php";
-$name = $_SESSION["name"];
-// Execute the SQL query to retrieve the student data for the 1st quarter
-$query = "SELECT lastname, FIRSTname, middlename, studentname, subjectname, grade, quarter 
-FROM grade 
-WHERE quarter = 'FIRST' 
-AND LOWER(gender) = 'female' AND adviser = '$name'
+
+$query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
+FROM grade
+WHERE quarter = 'FIRST'
+  AND LOWER(gender) = 'female'
+  AND section = '$section'
+  AND sy = '$syear'
 ORDER BY studentname, subjectname;
 ";
 
 // Execute the query and fetch the results
 $result = mysqli_query($conn, $query);
-// Execute the SQL query to retrieve the grade information
-$info_query = "SELECT * FROM grade 
 
-WHERE adviser = '$name' LIMIT 1
-";
+// Execute the SQL query to retrieve the grade information
+$info_query = "SELECT * FROM grade LIMIT 1";
 $info_result = mysqli_query($conn, $info_query);
 $info_row = mysqli_fetch_assoc($info_result);
-
 // Display the grade information in a paragraph
 echo '
 <div class="d-flex justify-content-center align-items-center position-relative">
@@ -953,8 +926,22 @@ echo "</table>";
     <table class="table-borderless">
   <tbody>
     <tr>
-<td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">
-</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adviser&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td>Prepared by:<br><br><br><u>  
+<input disabled  type="text" class="form-control" value="<?php 
+      
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT name FROM users WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $name = $row['name'];
+
+            // echo the value of crname
+            echo $name;
+
+          ?>">
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>

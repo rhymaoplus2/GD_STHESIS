@@ -619,25 +619,25 @@ $no++;
     $ranking++;
 }
 
-echo "</tbody>";
+
 
 echo "<tbody>
 
 
 <tr>
-<td> </td>
-<td class='text-center'  colspan='3'>Teacher's Initials</td>
+
+<td class='text-center'  colspan='4'>Teacher's Initials</td>
 
 
 
 ";
-for ($i = 1; $i <= $num; $i++) {
+for ($i = 1; $i <= $num/2; $i++) {
   echo  "<td> <td> ";
 }
+
+
 echo "
-<td> </td>
-<td> </td>
-<td> </td>
+
 
 
 </tr>
