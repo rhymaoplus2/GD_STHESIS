@@ -7,7 +7,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOME</title>
+	<title>RECORDS</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -60,7 +60,7 @@ body {
 
 
 .container {
-
+padding: 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -342,7 +342,7 @@ function myFunction() {
 
 
 
-<br>
+
 <div class="container">
   <div class="row">
 
@@ -361,10 +361,10 @@ function myFunction() {
 <hr>
         <div class="b " >
         <div style="display: flex;">
-  <div style="flex: 1;">
+  <div style="flex: 1;" style="">
 
   
-    <img src="img/pik.gif" alt="Description of the image" style="max-width: 260%;">
+    <img src="img/pik.gif" alt="Description of the image" style="max-width: 240%;">
   </div>
   <div style="flex: 3;">
   <div class="b tex" style="height: 300px; overflow-y: scroll; padding-right: 10px;" id="scrollable">

@@ -469,7 +469,10 @@ if ($Row = mysqli_fetch_assoc($result)) {
 }
 mysqli_close($conn);
 ?>
+
 <thead>
+
+
 <tr style="text-align:center;" >
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
