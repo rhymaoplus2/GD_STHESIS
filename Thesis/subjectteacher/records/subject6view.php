@@ -684,7 +684,7 @@ $result = mysqli_query($conn, $query);
           <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
        Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
-        <form class="delete" action="delete_grade1.php" method="POST">
+        <form class="delete" action="delete_grade6.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
