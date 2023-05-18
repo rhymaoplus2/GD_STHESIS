@@ -10,8 +10,6 @@ if (isset($_POST['submit'])) {
         return $data;
     }
 
-    $submittedStudents = array(); // Array to keep track of submitted students
-
     $quarter = validate($_POST['quarter']);
     $semester = validate($_POST['semester']);
 
@@ -49,15 +47,13 @@ if (isset($_POST['submit'])) {
         $query_run = mysqli_query($conn, $query);
         $name = $_SESSION['name'];
 
-        if (mysqli_num_rows($query_run) > 0 || in_array($studentname, $submittedStudents)) {
+        if (mysqli_num_rows($query_run) > 0) {
             header("Location: ../subject5.php?error=Hello $name, You already submitted a grade for this student this quarter and semester. Go back and click update!");
             exit();
         } else {
-            $submittedStudents[] = $studentname; // Add the student to the submitted students array
-
-            $query = "INSERT INTO grade (studentname, subjectname, grade, teacher, section, adviser, firstname, middlename, lastname, gender, remarks, semester, quarter, sy, year, ts, studentid, session, date, time, status)
+            $query = "INSERT INTO grade (studentname, subjectname, grade, teacher, section, adviser, firstname, middlename, lastname, gender, remarks, semester, quarter, sy, year, ts, studentid, session, date, time, status, success)
                       VALUES ('$studentname', '$subjectname', '$grade', '$teacher', '$section', '$adviser',
-                      '$firstname', '$middlename', '$lastname', '$gender', '$remarks', '$semester', '$quarter', '$sy', '$year', '$ts', '$studentid', '$session', '$date', '$time', '$status')";
+                      '$firstname', '$middlename', '$lastname', '$gender', '$remarks', '$semester', '$quarter', '$sy', '$year', '$ts', '$studentid', '$session', '$date', '$time', '$status', '1')";
             $query_run = mysqli_query($conn, $query);
 
             if (!$query_run) {

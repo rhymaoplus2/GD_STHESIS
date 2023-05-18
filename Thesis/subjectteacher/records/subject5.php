@@ -5,7 +5,7 @@
       
    session_start();
    include "php/db_conn.php";
-   include "php/subject1.php";
+   include "php/subject5.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 	<title>RECORDS</title>
   <script>
 		function printPage() {
-			window.location.href = "printsubject1.php";
+			window.location.href = "printsubject5.php";
 		}
 	</script>
 
@@ -80,7 +80,7 @@ body {
 }
 
 .b::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color of the scrollbar thumb */
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); /* Color of the scrollbar thumb */
   border-radius: 5px; /* Rounded corners of the scrollbar thumb */
 }
 
@@ -128,7 +128,7 @@ body {
 }
 
 .border {
-
+  
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -295,6 +295,21 @@ body.zoomed-in {
   z-index: 1; 
   justify-content: sticky;
 }
+
+
+select::-webkit-scrollbar {
+  width: 8px; /* Adjust as needed */
+}
+
+select::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Adjust as needed */
+}
+
+select::-webkit-scrollbar-thumb {
+  background-color: #888; /* Adjust as needed */
+  border-radius: 4px; /* Adjust as needed */
+}
+
     </style>
 </head>
 <body>
@@ -324,7 +339,7 @@ function myFunction() {
 
 
 
-<form action="./php/subject1create.php"
+<form action="./php/subject5create.php"
       method="post" >
 
 
@@ -397,7 +412,7 @@ function myFunction() {
             students.lastname,students.gender
             FROM students
             JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-            WHERE (students.subject1 = users.sub5 OR students.subject2 = users.sub5 OR students.subject3 = users.sub5 OR students.subject4 = users.sub5 OR students.subject5 = users.sub5 OR students.subject6 = users.sub5 OR students.subject7 = users.sub5 OR students.subject8 = users.sub5 OR students.subject9 = users.sub5 OR students.subject10 = users.sub5)
+            WHERE (students.subject5 = users.sub5 OR students.subject2 = users.sub5 OR students.subject3 = users.sub5 OR students.subject4 = users.sub5 OR students.subject5 = users.sub5 OR students.subject6 = users.sub5 OR students.subject7 = users.sub5 OR students.subject8 = users.sub5 OR students.subject9 = users.sub5 OR students.subject10 = users.sub5)
             AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
@@ -413,8 +428,8 @@ function myFunction() {
    
  
 
-   <div class="banner  text-center text-white rounded-pill mb-3" style=" font-size: 30px;background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-   <b>Adding grades for the subject of   <?=$_SESSION['sub5']?></b>       
+   <div class="banner  text-center text-white rounded-pill mb-3" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+   <b><?=$_SESSION['sub5']?></b>       
 
 </div>
 
@@ -426,10 +441,8 @@ function myFunction() {
   <div class="row text">
   <div class="container text-center">
   <div class="col-md-6 text-center mx-auto">
-  <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="padding: 10px; background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b style="white-space: nowrap;">  <?php echo substr($_SESSION['sub5'], 0, 30); ?> </b>
-</div>
-<div class="row">
+
+<div class="row" style="">
   <div class="col">
     <div class="mb-3">
       <label for="sectionSelect" class="form-label"><b>Section</b></label>
@@ -460,6 +473,7 @@ function myFunction() {
   </div>
 </div>
   </div>
+  
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const genderSelect = document.getElementById('genderSelect');
@@ -497,40 +511,34 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
     </div>
-      <div class="row">
-      <?php
-// Assuming you have already established a database connection in db_conn.php
+    <?php
 include "php/db_conn.php";
 
 $id = 1; // ID value for the row you want to fetch
+
+// Fetching 'quarter' value
 $query = "SELECT quarter FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
+$result = mysqli_query($conn, $query);
+$quarter = '';
 
 if ($result && mysqli_num_rows($result) > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $quarter = $row['quarter'];
-} else {
-  // Default value if no row is found or an error occurs
-  $quarter = ' ';
+    $quarter = mysqli_fetch_assoc($result)['quarter'];
 }
-?>
-      <div class="row">
-      <?php
-// Assuming you have already established a database connection in db_conn.php
-include "php/db_conn.php";
 
-$id = 1; // ID value for the row you want to fetch
+// Fetching 'semester' value
 $query = "SELECT semester FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
+$result = mysqli_query($conn, $query);
+$semester = '';
 
 if ($result && mysqli_num_rows($result) > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $semester = $row['semester'];
-} else {
-  // Default value if no row is found or an error occurs
-  $semester = ' ';
+    $semester = mysqli_fetch_assoc($result)['semester'];
 }
+
+// Outputting the values
+echo "<input hidden class='quarter' id='quarter' name='quarter' value='" . $quarter. "'>";
+echo "<input hidden class='semester' id='semester' name='semester' value='" . $semester . "'>";
 ?>
+
 
 <input hidden id="randomInput" class="form-control" type="text" name="session">
 
@@ -577,19 +585,11 @@ if ($result && mysqli_num_rows($result) > 0) {
   document.getElementById("timeInput").value = formattedTime;
 </script>
 
-<div hidden class="text-center">
-  <label for="quarter" class="form-label text-center text-danger"><b>Which quarter should this grade be set for? Please select from the option below.</b></label>
-  <input type="text" class="form-control" id="quarter" name="quarter" value="<?php echo $quarter; ?>" readonly>
-</div>
-<div hidden class="text-center">
-  <label for="semester" class="form-label text-center text-danger"><b>Which quarter should this grade be set for? Please select from the option below.</b></label>
-  <input type="text" class="form-control" id="semester" name="semester" value="<?php echo $semester; ?>" readonly>
-</div>
-<hr>
+
 
 <div class="b" style="height: 290px; overflow-y: scroll; padding-right: 10px;" id="scroll">
 
-<table class="table table-bordered" id="grades-table" style="border:20px;">
+<table class="table table-bordered" id="grades-table" style="border:20px; ">
   <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
                   <tr>
                   
@@ -642,7 +642,7 @@ if ($result && mysqli_num_rows($result) > 0) {
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub5"]."' OR students.subject2 = '".$_SESSION["sub5"]."' 
+     WHERE gender = 'MALE' AND (students.subject5 = '".$_SESSION["sub5"]."' OR students.subject2 = '".$_SESSION["sub5"]."' 
          OR students.subject3 = '".$_SESSION["sub5"]."' OR students.subject4 = '".$_SESSION["sub5"]."' 
          OR students.subject5 = '".$_SESSION["sub5"]."' OR students.subject6 = '".$_SESSION["sub5"]."' 
          OR students.subject7 = '".$_SESSION["sub5"]."' OR students.subject8 = '".$_SESSION["sub5"]."' 
@@ -753,7 +753,7 @@ echo "<tr>";
   </table>
 
 
-<table class="table table-bordered" id="grades-table" style="border:20px;">
+<table class="table table-bordered" id="grades-table" style="border:20px;  ">
 <thead class="text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" >
                   <tr>
                   
@@ -805,7 +805,7 @@ echo "<tr>";
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE  gender = 'FEMALE' AND  (students.subject1 = '".$_SESSION["sub5"]."' OR students.subject2 = '".$_SESSION["sub5"]."' 
+     WHERE  gender = 'FEMALE' AND  (students.subject5 = '".$_SESSION["sub5"]."' OR students.subject2 = '".$_SESSION["sub5"]."' 
          OR students.subject3 = '".$_SESSION["sub5"]."' OR students.subject4 = '".$_SESSION["sub5"]."' 
          OR students.subject5 = '".$_SESSION["sub5"]."' OR students.subject6 = '".$_SESSION["sub5"]."' 
          OR students.subject7 = '".$_SESSION["sub5"]."' OR students.subject8 = '".$_SESSION["sub5"]."' 
@@ -916,6 +916,12 @@ echo "<tr>";
   </table>
 
       </div>
+  
+     
+
+          
+          </div>
+           
       <button type="submit" class="btn btn-primary" 
 name="submit" id="submit" style="background-color: transparent; 
 border: none; border-radius:100%; width:50px; height: 50px;">
@@ -925,16 +931,11 @@ border: none; border-radius:100%; width:50px; height: 50px;">
  
 
           <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
-          onclick="location.href='subject1view.php'">
+          onclick="location.href='subject5view.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
 
-
-
-          
-          </div>
-          <br>
-    
+   
 
 
 
