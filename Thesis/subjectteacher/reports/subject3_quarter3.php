@@ -24,6 +24,8 @@
   @page {
     size: A4;
     margin: 0;
+    margin-top: 1cm;
+    margin-bottom: 1cm;
   }
   
   .btn-icon img {

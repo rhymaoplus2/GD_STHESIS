@@ -112,7 +112,8 @@ h1{
 @media print {
   /* Set the page size to A4 */
   @page {
-  
+  margin-top: 1cm;
+  margin-bottom: 1cm;
   }
   .btn-icon img {
   width: 1.5rem;
