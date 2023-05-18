@@ -412,7 +412,7 @@ function myFunction() {
             students.lastname,students.gender
             FROM students
             JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-            WHERE (students.subject10 = users.sub9 OR students.subject2 = users.sub9 OR students.subject3 = users.sub9 OR students.subject4 = users.sub9 OR students.subject5 = users.sub9 OR students.subject6 = users.sub9 OR students.subject7 = users.sub9 OR students.subject8 = users.sub9 OR students.subject10 = users.sub9 OR students.subject100 = users.sub9)
+            WHERE (students.subject10 = users.sub9 OR students.subject2 = users.sub9 OR students.subject3 = users.sub9 OR students.subject4 = users.sub9 OR students.subject5 = users.sub9 OR students.subject6 = users.sub9 OR students.subject7 = users.sub9 OR students.subject8 = users.sub9 OR students.subject10 = users.sub9 OR students.subject10 = users.sub9)
             AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
@@ -646,7 +646,7 @@ echo "<input hidden class='semester' id='semester' name='semester' value='" . $s
          OR students.subject3 = '".$_SESSION["sub9"]."' OR students.subject4 = '".$_SESSION["sub9"]."' 
          OR students.subject5 = '".$_SESSION["sub9"]."' OR students.subject6 = '".$_SESSION["sub9"]."' 
          OR students.subject7 = '".$_SESSION["sub9"]."' OR students.subject8 = '".$_SESSION["sub9"]."' 
-         OR students.subject10 = '".$_SESSION["sub9"]."' OR students.subject100 = '".$_SESSION["sub9"]."')
+         OR students.subject10 = '".$_SESSION["sub9"]."' OR students.subject10 = '".$_SESSION["sub9"]."')
          AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
          OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
          OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
@@ -809,7 +809,7 @@ echo "<tr>";
          OR students.subject3 = '".$_SESSION["sub9"]."' OR students.subject4 = '".$_SESSION["sub9"]."' 
          OR students.subject5 = '".$_SESSION["sub9"]."' OR students.subject6 = '".$_SESSION["sub9"]."' 
          OR students.subject7 = '".$_SESSION["sub9"]."' OR students.subject8 = '".$_SESSION["sub9"]."' 
-         OR students.subject10 = '".$_SESSION["sub9"]."' OR students.subject100 = '".$_SESSION["sub9"]."')
+         OR students.subject10 = '".$_SESSION["sub9"]."' OR students.subject10 = '".$_SESSION["sub9"]."')
          AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
          OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
          OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
