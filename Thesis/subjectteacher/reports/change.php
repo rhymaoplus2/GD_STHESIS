@@ -14,7 +14,7 @@
                   <td class="text-center"><b>-</b></td>
                   <td hidden class="text-center"></td>
                 <?php } else { ?>
-                  <td class="text-center" onclick="select6()">
+                  <td class="text-center" onclick="select7()">
   <a class="text-dark" style="background-color: white; border: none;">
     <b><?php echo $Row["sub5"]; ?></b>
   </a>
@@ -23,11 +23,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="select6" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="select7" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">SELECT FORMAT</h5>
+        <h5 class="modal-title" id="example6ModalLabel">SELECT FORMAT</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
@@ -56,18 +56,18 @@
 
 
 <script>
-  function select6() {
-    $('#select6').modal('show');
+  function select7() {
+    $('#select7').modal('show');
   }
 </script>
 
 <!--Pages Modals-->
 
-<div class="modal fade" id="subject5Modal" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="subject5Modal" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Masterlist: Printable Data (JHS FORMAT )</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Masterlist: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -80,11 +80,11 @@
 <!-- JHS MODAL FRAME Quarter-->
 
 
-<div class="modal fade" id="sub5q1jhs" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q1jhs" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 1: Printable Data (JHS FORMAT )</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 1: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -97,11 +97,11 @@
 
 
 
-<div class="modal fade" id="sub5q2jhs" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q2jhs" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 2: Printable Data (JHS FORMAT )</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 2: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -111,11 +111,11 @@
   </div>
 </div>
 
-<div class="modal fade" id="sub5q3jhs" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q3jhs" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 3: Printable Data (JHS FORMAT )</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 3: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -126,11 +126,11 @@
 </div>
 
 
-<div class="modal fade" id="sub5q4jhs" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q4jhs" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 4: Printable Data (JHS FORMAT )</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 4: Printable Data (JHS FORMAT )</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -142,11 +142,11 @@
 
 
 
-<div class="modal fade" id="subject5quarter1Modaljhs" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="subject5quarter1Modaljhs" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Semester 1: Printable Data</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Semester 1: Printable Data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -159,11 +159,11 @@
 
 
 <!-- SHS MODAL FRAME -->
-<div class="modal fade" id="subject5quarter1Modal" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="subject5quarter1Modal" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Semester 1: Printable Data (SHS FORMAT)</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Semester 1: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -173,11 +173,11 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="subject5semester2Modal" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="subject5semester2Modal" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Semester 2: Printable Data (SHS FORMAT)</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Semester 2: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -190,11 +190,11 @@
 
 
 <!--Quarter Modals -->
-<div class="modal fade" id="sub5q1" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q1" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 1: Printable Data (SHS FORMAT)</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 1: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -204,11 +204,11 @@
   </div>
 </div>
 
-<div class="modal fade" id="sub5q2" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q2" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 2: Printable Data (SHS FORMAT)</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 2: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -220,11 +220,11 @@
 
 
 
-<div class="modal fade" id="sub5q3" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q3" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 3: Printable Data (SHS FORMAT)</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 3: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -233,11 +233,11 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="sub5q4" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="sub5q4" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Quarter 4: Printable Data (SHS FORMAT)</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Quarter 4: Printable Data (SHS FORMAT)</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -249,11 +249,11 @@
 
 
 <!-- Conso -->
-<div class="modal fade" id="consoModal" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="consoModal" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Consolidated Grades: Printable Data</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Consolidated Grades: Printable Data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -266,15 +266,15 @@
 
 
 <!-- Modal SHS-->
-<div class="modal fade" id="#example4Modal5" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="example6Modal" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">SHS - Printable Data Formats</h5>
+        <h5 class="modal-title" id="example6ModalLabel">SHS - Printable Data Formats</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <!-- Add buttons for select6ing different options -->
+        <!-- Add buttons for select7ing different options -->
         <ul>
 
         <div class="fade-in1">
@@ -333,15 +333,15 @@
   </div>
 </div>
 <!-- JHS -->
-<div class="modal fade" id="example5Modaljhs" tabindex="-1" aria-labelledby="#example4Modal5Label" aria-hidden="true">
+<div class="modal fade" id="example6Modaljhs" tabindex="-1" aria-labelledby="example6ModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white "style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <h5 class="modal-title" id="#example4Modal5Label">Jhs</h5>
+        <h5 class="modal-title" id="example6ModalLabel">Jhs</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <!-- Add buttons for select6ing different options -->
+        <!-- Add buttons for select7ing different options -->
         <ul>
 
         <div class="fade-in1">
@@ -397,12 +397,12 @@
 </div>
 <script>
   function show() {
-    $('#example4Modal5').modal('show');
+    $('#example6Modal').modal('show');
   }
 </script>
 <script>
   function showjhs() {
-    $('#example5Modaljhs').modal('show');
+    $('#example6Modaljhs').modal('show');
   }
 
 
@@ -416,4 +416,6 @@
           }
         ?>
       </tbody>
+
+
 
