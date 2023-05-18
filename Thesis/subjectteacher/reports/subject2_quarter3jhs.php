@@ -541,7 +541,7 @@ WHERE
  REPLACE(LOWER(b.quarter), ' ', '') = REPLACE(LOWER('THIRD'), ' ', '')
 AND REPLACE(LOWER(b.gender), ' ', '') = REPLACE(LOWER('FEMALE'), ' ', '') 
 AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$teacher'), ' ', '')
-AND b.semester = 'THIRD'
+
 AND b.quarter = 'THIRD'
 AND a.name = '$teacher'
 $filter
