@@ -817,7 +817,7 @@ $result = mysqli_query($conn, $query);
       <td class="text-center">
 
       <?php if ($rows['status'] != 1): ?>
-  <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <a href="update4.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
     <b>
       <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
     </b>
