@@ -822,6 +822,7 @@ $result = mysqli_query($conn, $query);
       <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
     </b>
   </a>
+ 
   <a type="button" class="btn" data-bs-toggle="modal" 
     data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
     style="border: none; background-color:transparent; outline: none;" title="Delete">
@@ -830,7 +831,7 @@ $result = mysqli_query($conn, $query);
   </a>
 <?php else: ?>
   <b> VALIDATED </b>
-<?php endif; ?>
+ <?php endif; ?>
 
 
 <div class="modal fade" id="deleteModal<?php echo $rows['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
@@ -842,13 +843,14 @@ $result = mysqli_query($conn, $query);
       </div>
       <div class="modal-body">
         <p> <b></b>
-          <br> Are you sure you want to delete <br> <b> <?php echo $rows['name']; ?> Account?</b>
+          <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
+       Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
         <form class="delete" action="delete_grade2.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
-            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+            <input type="password" class="form-control" placeholder="Input your Password <?php echo $rows['teacher']; ?> " id="password" name="password" required>
           </div>
           <button type="submit" class="btn" name="delete">
             <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">

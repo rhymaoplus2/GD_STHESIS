@@ -661,6 +661,7 @@ $result = mysqli_query($conn, $query);
       <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
     </b>
   </a>
+
   <a type="button" class="btn" data-bs-toggle="modal" 
     data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
     style="border: none; background-color:transparent; outline: none;" title="Delete">
@@ -698,7 +699,6 @@ $result = mysqli_query($conn, $query);
     </div>
   </div>
 </div>
-
 
 			      </td>
 
