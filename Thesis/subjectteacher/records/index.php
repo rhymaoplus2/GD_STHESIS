@@ -16,6 +16,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
   <style>
     
 
+
+    .b::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.b::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.b::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);/* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+.b::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
     html, body {
   height: 100%;
   
@@ -273,6 +291,10 @@ z-index: -1;
     opacity: 1;
     transform: translateY(0);
   }
+  thead {
+  position: sticky;
+  top: 0;
+}
     </style>
 </head>
 <body>
@@ -345,6 +367,7 @@ function myFunction() {
     <img src="img/pik.gif" alt="Description of the image" style="max-width: 260%;">
   </div>
   <div style="flex: 3;">
+  <div class="b tex" style="height: 300px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
     <table class="table table-bordered table-sm rounded-4" style="border-radius: 10px;">
       <thead class="text-center text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
         <tr>
@@ -670,7 +693,7 @@ if (mysqli_num_rows($result) > 0) {
           
         </div>
  
-
+        </div>
       </div>
       <!--
       <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
