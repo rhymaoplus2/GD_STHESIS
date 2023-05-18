@@ -5,7 +5,7 @@
       
    session_start();
    include "php/db_conn.php";
-   include "php/subject1.php";
+   include "php/subject3.php";
    if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 	<title>RECORDS</title>
   <script>
 		function printPage() {
-			window.location.href = "printsubject1.php";
+			window.location.href = "printsubject3.php";
 		}
 	</script>
 
@@ -412,7 +412,7 @@ function myFunction() {
             students.lastname,students.gender
             FROM students
             JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-            WHERE (students.subject1 = users.sub3 OR students.subject2 = users.sub3 OR students.subject3 = users.sub3 OR students.subject4 = users.sub3 OR students.subject5 = users.sub3 OR students.subject6 = users.sub3 OR students.subject7 = users.sub3 OR students.subject8 = users.sub3 OR students.subject9 = users.sub3 OR students.subject10 = users.sub3)
+            WHERE (students.subject3 = users.sub3 OR students.subject2 = users.sub3 OR students.subject3 = users.sub3 OR students.subject4 = users.sub3 OR students.subject5 = users.sub3 OR students.subject6 = users.sub3 OR students.subject7 = users.sub3 OR students.subject8 = users.sub3 OR students.subject9 = users.sub3 OR students.subject10 = users.sub3)
             AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
@@ -511,40 +511,34 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
     </div>
-
-      <?php
-// Assuming you have already established a database connection in db_conn.php
+    <?php
 include "php/db_conn.php";
 
 $id = 1; // ID value for the row you want to fetch
+
+// Fetching 'quarter' value
 $query = "SELECT quarter FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
+$result = mysqli_query($conn, $query);
+$quarter = '';
 
 if ($result && mysqli_num_rows($result) > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $quarter = $row['quarter'];
-} else {
-  // Default value if no row is found or an error occurs
-  $quarter = ' ';
+    $quarter = mysqli_fetch_assoc($result)['quarter'];
 }
-?>
- 
-      <?php
-// Assuming you have already established a database connection in db_conn.php
-include "php/db_conn.php";
 
-$id = 1; // ID value for the row you want to fetch
+// Fetching 'semester' value
 $query = "SELECT semester FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query); // Use $conn instead of $mysql
+$result = mysqli_query($conn, $query);
+$semester = '';
 
 if ($result && mysqli_num_rows($result) > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $semester = $row['semester'];
-} else {
-  // Default value if no row is found or an error occurs
-  $semester = ' ';
+    $semester = mysqli_fetch_assoc($result)['semester'];
 }
+
+// Outputting the values
+echo "<input hidden class='quarter' id='quarter' name='quarter' value='" . $quarter. "'>";
+echo "<input hidden class='semester' id='semester' name='semester' value='" . $semester . "'>";
 ?>
+
 
 <input hidden id="randomInput" class="form-control" type="text" name="session">
 
@@ -648,7 +642,7 @@ if ($result && mysqli_num_rows($result) > 0) {
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub3"]."' OR students.subject2 = '".$_SESSION["sub3"]."' 
+     WHERE gender = 'MALE' AND (students.subject3 = '".$_SESSION["sub3"]."' OR students.subject2 = '".$_SESSION["sub3"]."' 
          OR students.subject3 = '".$_SESSION["sub3"]."' OR students.subject4 = '".$_SESSION["sub3"]."' 
          OR students.subject5 = '".$_SESSION["sub3"]."' OR students.subject6 = '".$_SESSION["sub3"]."' 
          OR students.subject7 = '".$_SESSION["sub3"]."' OR students.subject8 = '".$_SESSION["sub3"]."' 
@@ -811,7 +805,7 @@ echo "<tr>";
          OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
          OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
          OR users.sec10 = students.section)
-     WHERE  gender = 'FEMALE' AND  (students.subject1 = '".$_SESSION["sub3"]."' OR students.subject2 = '".$_SESSION["sub3"]."' 
+     WHERE  gender = 'FEMALE' AND  (students.subject3 = '".$_SESSION["sub3"]."' OR students.subject2 = '".$_SESSION["sub3"]."' 
          OR students.subject3 = '".$_SESSION["sub3"]."' OR students.subject4 = '".$_SESSION["sub3"]."' 
          OR students.subject5 = '".$_SESSION["sub3"]."' OR students.subject6 = '".$_SESSION["sub3"]."' 
          OR students.subject7 = '".$_SESSION["sub3"]."' OR students.subject8 = '".$_SESSION["sub3"]."' 

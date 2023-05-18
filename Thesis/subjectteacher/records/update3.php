@@ -343,7 +343,7 @@ input::placeholder {
   </div>
 <?php } ?>
 	<div class="container">
-		<form action="php/update.php" 
+		<form action="php/update3.php" 
 		      method="post">
             
 		 

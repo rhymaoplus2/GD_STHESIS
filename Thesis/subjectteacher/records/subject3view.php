@@ -656,7 +656,7 @@ $result = mysqli_query($conn, $query);
       <td class="text-center">
 
       <?php if ($rows['status'] != 1): ?>
-  <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <a href="update3.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
     <b>
       <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
     </b>
@@ -684,7 +684,7 @@ $result = mysqli_query($conn, $query);
           <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
        Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
-        <form class="delete" action="delete_grade1.php" method="POST">
+        <form class="delete" action="delete_grade3.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
@@ -817,7 +817,7 @@ $result = mysqli_query($conn, $query);
       <td class="text-center">
 
       <?php if ($rows['status'] != 1): ?>
-  <a href="update.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <a href="update3.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
     <b>
       <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
     </b>
@@ -844,7 +844,7 @@ $result = mysqli_query($conn, $query);
         <p> <b></b>
           <br> Are you sure you want to delete <br> <b> <?php echo $rows['name']; ?> Account?</b>
         </p>
-        <form class="delete" action="delete_grade1.php" method="POST">
+        <form class="delete" action="delete_grade3.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
@@ -897,7 +897,7 @@ $result = mysqli_query($conn, $query);
 <div>
           <script>
 		function printPage() {
-			window.open("printsubject3.php", "_blank");
+			window.open("printsubject1.php", "_blank");
 		}
 	</script>
 <bR>
