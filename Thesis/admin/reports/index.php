@@ -381,6 +381,42 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
   </a>
 </td> 
 </tr>
+<tr>
+
+<td class="text-center">
+<a class="text-dark" style="background-color: white; border: none;" href="#" data-bs-toggle="modal" data-bs-target="#modalGradeSheets">
+  <b>Grade Sheets</b>
+</a>
+
+  <!-- Modal -->
+<div class="modal fade" id="modalGradeSheets" tabindex="-1" aria-labelledby="modalGradeSheetsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalGradeSheetsLabel">Grade Sheets</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <b>SHS FORMAT</b>
+          <a href="quarter1.php" class="list-group-item list-group-item-action">Quarter 1</a>
+          <a href="quarter2.php" class="list-group-item list-group-item-action">Quarter 2</a>
+          <a href="quarter3.php" class="list-group-item list-group-item-action">Quarter 3</a>
+          <a href="quarter4.php" class="list-group-item list-group-item-action">Quarter 4</a>
+          <b>JHS FORMAT</b>
+          <a href="quarter1.php" class="list-group-item list-group-item-action">Quarter 1</a>
+          <a href="quarter2.php" class="list-group-item list-group-item-action">Quarter 2</a>
+          <a href="quarter3.php" class="list-group-item list-group-item-action">Quarter 3</a>
+          <a href="quarter4.php" class="list-group-item list-group-item-action">Quarter 4</a>
+          <!-- Add more buttons with page links as needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</td> 
+</tr>
 </tbody>
 
           </table>
