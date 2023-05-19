@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QUARTER 2 SHS CONSOLIDATED GRADES</title>
+<title>QUARTER 4 JHS CONSOLIDATED GRADES</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -374,7 +374,7 @@ function validate($data){
     return $data;
 }
 $section = validate($_GET['section']);
-$syear = validate($_GET['syear']);
+$sy = validate($_GET['sy']);
 include "php/db_conn.php";
 
 $query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
@@ -382,7 +382,7 @@ FROM grade
 WHERE quarter = 'FOURTH'
   AND LOWER(gender) = 'male'
   AND section = '$section'
-  AND sy = '$syear'
+  AND sy = '$sy'
 ORDER BY studentname, subjectname;
 ";
 
@@ -589,7 +589,7 @@ mysqli_close($conn);
             echo $name;
 
           ?>">
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
@@ -720,7 +720,7 @@ FROM grade
 WHERE quarter = 'FOURTH'
   AND LOWER(gender) = 'female'
   AND section = '$section'
-  AND sy = '$syear'
+  AND sy = '$sy'
 ORDER BY studentname, subjectname;
 ";
 
@@ -962,7 +962,7 @@ echo "</table>";
             echo $name;
 
           ?>">
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>

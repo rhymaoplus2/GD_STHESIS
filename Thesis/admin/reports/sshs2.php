@@ -372,7 +372,7 @@ function validate($data){
 }
 
 $section = validate($_GET['section']);
-$syear = validate($_GET['syear']);
+$sy = validate($_GET['sy']);
 
 // Execute the SQL query to retrieve the student data for the 3rd quarter
 $query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
@@ -380,7 +380,7 @@ FROM grade
 WHERE quarter IN ('THIRD', 'FOURTH')
 AND LOWER(gender) = 'male'
 AND section = '$section'
-AND sy = '$syear'
+AND sy = '$sy'
 ORDER BY studentname, subjectname";
 
 // Execute the query and fetch the results
@@ -390,7 +390,7 @@ $result = mysqli_query($conn, $query);
 $info_query = "SELECT * FROM grade 
 WHERE 
    section = '$section'
-  AND sy = '$syear' 
+  AND sy = '$sy' 
 LIMIT 1";
 
 $info_result = mysqli_query($conn, $info_query);
@@ -632,7 +632,7 @@ echo "</table>";
             echo $name;
 
           ?>">
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
@@ -760,7 +760,7 @@ FROM grade
 WHERE quarter IN ('THIRD', 'FOURTH')
 AND LOWER(gender) = 'female'
 AND section = '$section'
-AND sy = '$syear'
+AND sy = '$sy'
 ORDER BY studentname, subjectname";
 
 // Execute the query and fetch the results
@@ -770,7 +770,7 @@ $result = mysqli_query($conn, $query);
 $info_query = "SELECT * FROM grade 
 WHERE 
    section = '$section'
-  AND sy = '$syear' 
+  AND sy = '$sy' 
 LIMIT 1";
 
 $info_result = mysqli_query($conn, $info_query);
@@ -1015,7 +1015,7 @@ echo "</table>";
             echo $name;
 
           ?>">
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>

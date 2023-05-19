@@ -374,7 +374,7 @@ function validate($data){
     return $data;
 }
 $section = validate($_GET['section']);
-$syear = validate($_GET['syear']);
+$sy = validate($_GET['sy']);
 include "php/db_conn.php";
 
 $query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
@@ -382,7 +382,7 @@ FROM grade
 WHERE quarter = 'SECOND'
   AND LOWER(gender) = 'male'
   AND section = '$section'
-  AND sy = '$syear'
+  AND sy = '$sy'
 ORDER BY studentname, subjectname;
 ";
 
@@ -569,27 +569,11 @@ mysqli_close($conn);
     <br>
     <br>
  
-
- 
     <table class="table-borderless">
   <tbody>
     <tr>
-<td>Prepared by:<br><br><br><u>  
-<input disabled  type="text" class="form-control" value="<?php 
-      
-      include "php/db_conn.php";
-            // select the crname from the table where the id matches a certain value
-            $result = mysqli_query($conn, "SELECT name FROM users WHERE id=1");
-
-            // fetch the row as an associative array and extract the value of crname
-            $row = mysqli_fetch_assoc($result);
-            $name = $row['name'];
-            $name = strtoupper($name);
-            // echo the value of crname
-            echo $name;
-
-          ?>">
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td>Prepared by:<br><br><br><u><input disabled type="text" class="form-control" value="<?php if (isset($_SESSION['name'])) echo $_SESSION['name']; ?>">
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
@@ -603,8 +587,8 @@ mysqli_close($conn);
   
 <input type="text" class="form-control" id="checked-by-sports">
         
-        </u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-        <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+        </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noted by:<br><br><br><u>
   
   
@@ -617,7 +601,7 @@ mysqli_close($conn);
             // fetch the row as an associative array and extract the value of crname
             $row = mysqli_fetch_assoc($result);
             $crname = $row['pname'];
-            $crname = strtoupper($crname);
+
             // echo the value of crname
             echo $crname;
 
@@ -626,8 +610,8 @@ mysqli_close($conn);
 
 
 
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Principal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
   
 <input disabled type="text" class="form-control" value="<?php 
@@ -640,16 +624,15 @@ mysqli_close($conn);
             $row = mysqli_fetch_assoc($result);
             $crname = $row['crname'];
 
-            $crname = strtoupper($crname);
+            // echo the value of crname
             echo $crname;
-            
 
           ?>">
 
 
 
 </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Campus Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 
     </tr>
    
@@ -721,7 +704,7 @@ FROM grade
 WHERE quarter = 'SECOND'
   AND LOWER(gender) = 'female'
   AND section = '$section'
-  AND sy = '$syear'
+  AND sy = '$sy'
 ORDER BY studentname, subjectname;
 ";
 
@@ -944,7 +927,6 @@ echo "</table>";
      <br>
     <br>
 
-
  
     <table class="table-borderless">
   <tbody>
@@ -959,12 +941,12 @@ echo "</table>";
             // fetch the row as an associative array and extract the value of crname
             $row = mysqli_fetch_assoc($result);
             $name = $row['name'];
-            $name = strtoupper($name);
+
             // echo the value of crname
             echo $name;
 
           ?>">
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
@@ -978,8 +960,8 @@ echo "</table>";
   
 <input type="text" class="form-control" id="checked-by-sports">
         
-        </u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-        <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+        </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noted by:<br><br><br><u>
   
   
@@ -992,7 +974,7 @@ echo "</table>";
             // fetch the row as an associative array and extract the value of crname
             $row = mysqli_fetch_assoc($result);
             $crname = $row['pname'];
-            $crname = strtoupper($crname);
+
             // echo the value of crname
             echo $crname;
 
@@ -1001,8 +983,8 @@ echo "</table>";
 
 
 
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Principal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
   
 <input disabled type="text" class="form-control" value="<?php 
@@ -1015,16 +997,15 @@ echo "</table>";
             $row = mysqli_fetch_assoc($result);
             $crname = $row['crname'];
 
-            $crname = strtoupper($crname);
+            // echo the value of crname
             echo $crname;
-            
 
           ?>">
 
 
 
 </u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Campus Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 
     </tr>
    

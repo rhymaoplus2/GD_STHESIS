@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CONSOLIDATED GRADES OF STUDENTS</title>
+	<title>CONSOLIDATED GRADES</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -321,7 +321,7 @@ td a:hover {
     <option value="">ALL SECTIONS</option>
     <?php
     include "db_conn.php";
-    $query = "SELECT DISTINCT section FROM students ORDER BY section";
+    $query = "SELECT DISTINCT section FROM grade ORDER BY section";
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
@@ -331,15 +331,15 @@ td a:hover {
     ?>
   </select>
 &nbsp;&nbsp;
-  <select id="grade" onchange="filterTable()" class="fw-bold  form-select flex-grow-1">
+  <select id="year" onchange="filterTable()" class="fw-bold  form-select flex-grow-1">
     <option value="">ALL YEAR LEVEL</option>
     <?php
-    $query = "SELECT DISTINCT grade FROM students ORDER BY grade";
+    $query = "SELECT DISTINCT year FROM grade ORDER BY year";
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
-        $grade = urlencode($row['grade']);
-        echo "<option value=\"$grade\">{$row['grade']}</option>";
+        $year = urlencode($row['year']);
+        echo "<option value=\"$year\">{$row['year']}</option>";
     }
     ?>
   </select>
@@ -384,25 +384,29 @@ setInterval(function() {
             </thead>
             <tbody id="table-body">
                 <?php
-                $query = "SELECT MAX(section) AS section, MAX(grade) AS grade, MAX(syear) AS syear FROM students GROUP BY section, syear ORDER BY grade, section, syear";
+                $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy FROM grade GROUP BY section, sy ORDER BY year, section, sy";
                 $result = $conn->query($query);
 
                 while ($row = $result->fetch_assoc()) {
                     $section = urlencode($row['section']);
-                    $syear = urlencode($row['syear']);
-                    $gradeSectionYear = "GRADE: <b> ".$row['grade'] . "</b>&nbsp;&nbsp;-&nbsp;&nbsp;<b>" . $row['section'] . "</b> (&nbsp;ACADEMIC YEAR : <b> "  . $row['syear']. "</b>"."&nbsp;)";
+                    $sy = urlencode($row['sy']);
+                    $yearSectionYear = "Grade: <b> ".$row['year'] . "</b>&nbsp;&nbsp;-&nbsp;&nbsp;<b>" . $row['section'] . "</b> (&nbsp;ACADEMIC YEAR : <b> "  . $row['sy']. "</b>"."&nbsp;)";
 
-                    $quarter1shs = "q1shs.php?section=" . $section . "&syear=" . $row['syear'];
-                    $quarter2shs = "q2shs.php?section=" . $section . "&syear=" . $row['syear'];
-                    $quarter3shs = "q3shs.php?section=" . $section . "&syear=" . $row['syear'];
-                    $quarter4shs = "q4shs.php?section=" . $section . "&syear=" . $row['syear'];
-                    $sshs1 = "sshs1.php?section=" . $section . "&syear=" . $row['syear'];
-                    $sshs2 = "sshs2.php?section=" . $section . "&syear=" . $row['syear'];
+                    $quarter1shs = "q1shs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $quarter1jhs = "q1jhs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $quarter2jhs = "q2jhs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $quarter3jhs = "q3jhs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $quarter4jhs = "q4jhs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $quarter2shs = "q2shs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $quarter3shs = "q3shs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $quarter4shs = "q4shs.php?section=" . $section . "&sy=" . $row['sy'];
+                    $sshs1 = "sshs1.php?section=" . $section . "&sy=" . $row['sy'];
+                    $sshs2 = "sshs2.php?section=" . $section . "&sy=" . $row['sy'];
                     ?>
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#myModal<?php echo $section; ?>">
-                                <?php echo $gradeSectionYear; ?>
+                                <?php echo $yearSectionYear; ?>
                             </a>
                         </td>
                     </tr>
@@ -416,10 +420,10 @@ setInterval(function() {
                                 <div class="modal-body">
                                     <p><b>JHS FORMAT CONSOLIDATED GRADES</b></p>
                                     <ul>
-                                        <li><a href="#button1">Button 1</a></li>
-                                        <li><a href="#button2">Button 2</a></li>
-                                        <li><a href="#button3">Button 3</a></li>
-                                        <li><a href="#button4">Button 4</a></li>
+                                    <li><a href="<?php echo $quarter1jhs; ?>" target="_blank">Quarter 1</a></li>
+                                    <li><a href="<?php echo $quarter2jhs; ?>" target="_blank">Quarter 2</a></li>
+                                    <li><a href="<?php echo $quarter3jhs; ?>" target="_blank">Quarter 3</a></li>
+                                    <li><a href="<?php echo $quarter4jhs; ?>" target="_blank">Quarter 4</a></li>
                                     </ul>
                                     <p><b>SHS FORMAT CONSOLIDATED GRADES</b></p>
                                     <ul>
@@ -448,7 +452,7 @@ setInterval(function() {
 <script>
     function filterTable() {
         var section = document.getElementById("section").value;
-        var grade = document.getElementById("grade").value;
+        var year = document.getElementById("year").value;
         var rows = document.getElementById("table-body").getElementsByTagName("tr");
 
         for (var i = 0; i < rows.length; i++) {
@@ -457,7 +461,7 @@ setInterval(function() {
 
             if (
                 (section === "" || rowSection.includes(section)) &&
-                (grade === "" || rowSection.includes(grade))
+                (year === "" || rowSection.includes(year))
             ) {
                 row.style.display = "";
             } else {
