@@ -3,7 +3,6 @@
    session_start();
    include "./php/db_conn.php";
 
-
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 
 
@@ -13,7 +12,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QUARTER 1 SHS CONSOLIDATED GRADES</title>
+<title>Semester 1 SHS CONSOLIDATED GRADES</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -219,7 +218,7 @@ table {
 @media print {
   /* Set the page size to A4 */
   @page {
-    margin-top: 1cm;
+    margin-top: 0;
     margin-bottom: 0;
     size: auto;  /* Use the default page size */
        /* Reset the page margin to zero */
@@ -340,7 +339,7 @@ font-size: 12px;
   }
 </style>
 
-
+  </style>
 </head>
 
 <body>
@@ -361,11 +360,9 @@ font-size: 12px;
 
 
   <br><br>
-  
 <div class="page1">
 <?php
-
-
+include "php/db_conn.php";
 
 function validate($data){
     $data = trim($data);
@@ -373,27 +370,34 @@ function validate($data){
     $data = htmlspecialchars($data);
     return $data;
 }
+
 $section = validate($_GET['section']);
 $syear = validate($_GET['syear']);
-include "php/db_conn.php";
 
-$query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
-FROM grade
-WHERE quarter = 'FIRST'
-  AND LOWER(gender) = 'male'
-  AND section = '$section'
-  AND sy = '$syear'
-ORDER BY studentname, subjectname;
-";
+// Execute the SQL query to retrieve the student data for the 1st quarter
+$query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
+FROM grade 
+WHERE quarter IN ('FIRST', 'SECOND')
+AND LOWER(gender) = 'male'
+AND section = '$section'
+AND sy = '$syear'
+ORDER BY studentname, subjectname";
 
 // Execute the query and fetch the results
 $result = mysqli_query($conn, $query);
 
 // Execute the SQL query to retrieve the grade information
-$info_query = "SELECT * FROM grade LIMIT 1";
+$info_query = "SELECT * FROM grade 
+WHERE 
+   section = '$section'
+  AND sy = '$syear' 
+LIMIT 1";
+
 $info_result = mysqli_query($conn, $info_query);
 $info_row = mysqli_fetch_assoc($info_result);
 
+
+// Display the grade information in a paragraph
 echo '
 <div class="d-flex justify-content-center align-items-center position-relative">
     <img src="img/headerconso.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
@@ -401,8 +405,9 @@ echo '
 <div>
   <div style="display: flex; justify-content: space-between;">
     <p style="text-align: left;">
-      School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['sy'] . '</b><br>
-      Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>FIRST</b>
+      School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+      . $info_row['sy'] . '</b><br>
+   Semester:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST</b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -415,9 +420,8 @@ echo '
 
 // Create an associative array to store the grades for each student and subject
 $grades = array();
-$full = 0;
-$num = 0;
-
+$num=0;
+$full=0;
 // Create an array to store the unique subject names
 $unique_subjects = array();
 
@@ -434,9 +438,9 @@ foreach ($quarter1_grades as $student_grades) {
     }
 }
 if ($num_subjects > 0) {
-    $average_grade_1st = $total_grades_1st / $num_subjects;
+  $average_grade_1st = $total_grades_1st / $num_subjects;
 } else {
-    $average_grade_1st = 0;
+  $average_grade_1st = 0;
 }
 
 // Loop through the results and populate the grades and unique_subjects arrays
@@ -457,14 +461,14 @@ while ($row = mysqli_fetch_assoc($result)) {
         );
     }
 
-    if ($quarter == "FIRST") {
+    if ($quarter =="FIRST") {
         $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
             $quarter1_grades[$studentname] = array();
         }
         $quarter1_grades[$studentname][$subjectname] = ($grade === null) ? 0 : $grade;
-    } else if ($quarter == "Second") {
+    } else if ($quarter == "SECOND") {
         $grades[$studentname][$subjectname]["2nd"] = ($grade === null) ? 0 : $grade;
     }
 
@@ -483,9 +487,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         array_push($unique_subjects, $subjectname);
     }
 }
-
 $honor = '';
-
 
 // Create a table to display the grades for each student and subject
 echo "
@@ -505,10 +507,10 @@ echo "<table >
 // Add the unique subject names and the "average" column to the header row
 foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
-    $num++;
+    $num ++;
 }
-echo "<th class='text-center'> Second" .
-" Quarter<br>Final<br>Average</th><th></th><th></th>";
+echo "<th class='text-center'> ". 
+"FIRST Sem<br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
 foreach ($unique_subjects as $subject) {
@@ -519,58 +521,481 @@ echo "<th></th><th></th><th></th></tr></thead><tbody>";
 
 // Loop through the grades array and display the grades for each student and subject
 foreach ($grades as $studentname => $subjects) {
-    echo "<tr><td>".$studentname."</td>";
-    foreach ($unique_subjects as $subject) {
-        if (isset($subjects[$subject])) {
-            echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-            $FIRST = intval($subjects[$subject]["1st"]);
-            $average = $FIRST;
-            $full += $average;
-        } else {
-            echo "<td></td><td></td><td></td>";
+  echo "<tr><td>".$studentname."</td>";
+  foreach ($unique_subjects as $subject) {
+      if (isset($subjects[$subject])) {
+          echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td class='text-center'>".$subjects[$subject]["2nd"]."</td>";
+          $FIRST = intval($subjects[$subject]["1st"]);
+          $SECOND = intval($subjects[$subject]["2nd"]);
+          $average = ($FIRST + $SECOND) / 2;
+          $full +=$average;
+          
+          echo "
+                <td class='text-center'>".$average."</td>";
+          
         }
-    }
+        
+         
+      else {
+        
+          echo "<td></td><td></td><td></td>";
+      }
 
-    // Calculate and display the average for the student
-    $total_grade = 0;
-    $num_subjects = 0;
-    foreach ($total_grades as $subjectname => $student_grades) {
-        if (isset($student_grades[$studentname])) {
-            $total_grade += $student_grades[$studentname];
-            $num_subjects++;
-        }
+      
+      
+  }
+  
+  // Calculate and display the average for the student
+  $total_grade = 0;
+  $num_subjects = 0;
+// Calculate and display the average for the student
+$total_grade = 0;
+$num_subjects = 0;
+foreach ($total_grades as $subjectname => $student_grades) {
+    if (isset($student_grades[$studentname])) {
+        $total_grade += $student_grades[$studentname];
+        $num_subjects++;
     }
-    $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
-    $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+}
+$average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
+$average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
+echo "<td class='text-center'>".round(($full / $num))."</td>";
 
-    echo "<td class='text-center'>" . number_format($full / $num, 3) . "</td>";
-    echo "<td class='text-center'>" . ROUND($full / $num) . "</td>";
-
-    $full = 0;
-    if ($average_per_subject >= 90 && $average_per_subject <= 94) {
-        $honor = 'With honors';
-    } else if ($average_per_subject >= 95 && $average_per_subject <= 97) {
-        $honor = 'With high honors';
-    } else if ($average_per_subject >= 98 && $average_per_subject <= 100) {
-        $honor = 'With highest honors';
-    } else {
-        $honor = '&nbsp;&nbsp;&nbsp;';
-    }
-    echo "<td class='text-center'>". $honor ."</td></tr></tbody>";
+$full=0;
+$average_overall = $average_per_subject / $num;
+if ($average_overall >= 90 && $average_overall <= 94) {
+  $honor = 'With honors';
+} else if ($average_overall >= 95 && $average_overall <= 97) {
+  $honor = 'With high honors';
+} else if ($average_overall >= 98 && $average_overall <= 100) {
+  $honor = 'With highest honors';
 }
 
+else{
+  $honor = '&nbsp;&nbsp;&nbsp;';
+}
+ echo "<td class='text-center'>". " $honor</td></tr></tbody>";
+
+
+
+}
 // Close the row
-echo "</tbody></table>";
 
-// Close the database connection
-mysqli_close($conn);
-?>
+echo "</tr></tbody>
 
+<tbody>
+
+
+<td style='border:none;'> </td>
+
+
+
+
+
+";
+
+// Add the unique subject names and the "average" column to the header row
+foreach ($unique_subjects as $subject) {
+  echo "<th class='text-center' colspan='3'>","<br></th>";
+}
+echo "</tbody><tr  class='no-border'><tbody class='no-border'>
+   ";
+foreach ($unique_subjects as $subject) {
+  
+}
+
+// Close the table tag
+echo "</table>";
+
+    
+    // Close the database connection
+    mysqli_close($conn);
+    
+    ?>
+
+<table class="table-borderless">
+  <tbody>
+    <tr>
+<td>Prepared by:<br><br><br><u>  
+<input disabled  type="text" class="form-control" value="<?php 
+      
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT name FROM users WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $name = $row['name'];
+            $name = strtoupper($name);
+            // echo the value of crname
+            echo $name;
+
+          ?>">
+</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-humss" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HUMSS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-abm" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-tvl" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TVL Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u>     
+  
+<input type="text" class="form-control" id="checked-by-sports">
+        
+        </u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+        <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noted by:<br><br><br><u>
+  
+  
+<input disabled  type="text" class="form-control" value="<?php 
+      
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT pname FROM settings WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $crname = $row['pname'];
+            $crname = strtoupper($crname);
+            // echo the value of crname
+            echo $crname;
+
+          ?>">
+
+
+
+
+</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Principal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
+  
+<input disabled type="text" class="form-control" value="<?php 
+      
+      include "php/db_conn.php";
+            // select the crname from the table where the id matches a certain value
+            $result = mysqli_query($conn, "SELECT crname FROM cr WHERE id=1");
+
+            // fetch the row as an associative array and extract the value of crname
+            $row = mysqli_fetch_assoc($result);
+            $crname = $row['crname'];
+
+            $crname = strtoupper($crname);
+            echo $crname;
+            
+
+          ?>">
+
+
+
+</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Campus Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
+
+    </tr>
+   
+  </tbody>
+</table>
+</div> 
+<script>
+  // Check if values are stored in sessionStorage
+  if (sessionStorage.getItem("checked-by-stem")) {
+    document.getElementById("checked-by-stem").value = sessionStorage.getItem("checked-by-stem");
+  }
+  if (sessionStorage.getItem("checked-by-humss")) {
+    document.getElementById("checked-by-humss").value = sessionStorage.getItem("checked-by-humss");
+  }
+  if (sessionStorage.getItem("checked-by-abm")) {
+    document.getElementById("checked-by-abm").value = sessionStorage.getItem("checked-by-abm");
+  }
+  if (sessionStorage.getItem("checked-by-tvl")) {
+    document.getElementById("checked-by-tvl").value = sessionStorage.getItem("checked-by-tvl");
+  }
+  if (sessionStorage.getItem("checked-by-sports")) {
+    document.getElementById("checked-by-sports").value = sessionStorage.getItem("checked-by-sports");
+  }
+  if (sessionStorage.getItem("noted-by-principal")) {
+    document.getElementById("noted-by-principal").value = sessionStorage.getItem("noted-by-principal");
+  }
+  if (sessionStorage.getItem("approved-by-cr")) {
+    document.getElementById("approved-by-cr").value = sessionStorage.getItem("approved-by-cr");
+  }
+
+  // Store values in sessionStorage on change
+  document.getElementById("checked-by-stem").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-stem", document.getElementById("checked-by-stem").value);
+  });
+  document.getElementById("checked-by-humss").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-humss", document.getElementById("checked-by-humss").value);
+  });
+  document.getElementById("checked-by-abm").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-abm", document.getElementById("checked-by-abm").value);
+  });
+  document.getElementById("checked-by-tvl").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-tvl", document.getElementById("checked-by-tvl").value);
+  });
+  document.getElementById("checked-by-sports").addEventListener("change", function() {
+    sessionStorage.setItem("checked-by-sports", document.getElementById("checked-by-sports").value);
+  });
+  document.getElementById("noted-by-principal").addEventListener("change", function() {
+    sessionStorage.setItem("noted-by-principal", document.getElementById("noted-by-principal").value);
+  });
+  document.getElementById("approved-by-cr").addEventListener("change", function() {
+    sessionStorage.setItem("approved-by-cr", document.getElementById("approved-by-cr").value);
+  });
+</script>
+
+
+          <div class="page2">
+            <br>
+            <br>
+            <br>
+            <?php
+// Include the database connection script
+// Execute the SQL query to retrieve the student data for the 1st quarter
+$query = "SELECT lastname, firstname, middlename, studentname, subjectname, grade, quarter 
+FROM grade 
+WHERE quarter IN ('FIRST', 'SECOND')
+AND LOWER(gender) = 'female'
+AND section = '$section'
+AND sy = '$syear'
+ORDER BY studentname, subjectname";
+
+// Execute the query and fetch the results
+$result = mysqli_query($conn, $query);
+
+// Execute the SQL query to retrieve the grade information
+$info_query = "SELECT * FROM grade 
+WHERE 
+   section = '$section'
+  AND sy = '$syear' 
+LIMIT 1";
+
+$info_result = mysqli_query($conn, $info_query);
+$info_row = mysqli_fetch_assoc($info_result);
+
+
+
+echo '
+<div class="d-flex justify-content-center align-items-center position-relative">
+    <img src="img/headerconso.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
+</div>
+<div>
+  <div style="display: flex; justify-content: space-between;">
+    <p style="text-align: left;">
+      School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+      . $info_row['sy'] . '</b><br>
+   Semester:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST</b>
+    </p>
+    <div class="text-left">
+      <p style="text-align: left;">
+        Grade:<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['year'] . '</b><br>
+        section:<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['section'] . '</b>
+      </p>
+    </div>
+  </div>
+</div>';
+
+// Create an associative array to store the grades for each student and subject
+$grades = array();
+$num=0;
+$full=0;
+// Create an array to store the unique subject names
+$unique_subjects = array();
+
+// Create an associative array to store the total grades for each subject for each student
+$total_grades = array();
+
+// Create an array to store the quarter 1 grades for each student
+$quarter1_grades = array();
+$num_subjects = count($unique_subjects);
+$total_grades_1st = 0;
+foreach ($quarter1_grades as $student_grades) {
+    foreach ($student_grades as $grade) {
+        $total_grades_1st += $grade;
+    }
+}
+if ($num_subjects > 0) {
+  $average_grade_1st = $total_grades_1st / $num_subjects;
+} else {
+  $average_grade_1st = 0;
+}
+
+// Loop through the results and populate the grades and unique_subjects arrays
+while ($row = mysqli_fetch_assoc($result)) {
+    $studentname = $row['studentname'];
+    $subjectname = $row['subjectname'];
+    $grade = $row['grade'];
+    $quarter = $row['quarter'];
+
+    if (!isset($grades[$studentname])) {
+        $grades[$studentname] = array();
+    }
+
+    if (!isset($grades[$studentname][$subjectname])) {
+        $grades[$studentname][$subjectname] = array(
+            "1st" => "",
+            "2nd" => "",
+        );
+    }
+
+    if ($quarter =="FIRST") {
+        $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
+        // Add the grade to the quarter 1 grades for the student
+        if (!isset($quarter1_grades[$studentname])) {
+            $quarter1_grades[$studentname] = array();
+        }
+        $quarter1_grades[$studentname][$subjectname] = ($grade === null) ? 0 : $grade;
+    } else if ($quarter == "SECOND") {
+        $grades[$studentname][$subjectname]["2nd"] = ($grade === null) ? 0 : $grade;
+    }
+
+    // Add the grade to the total for the subject for the student
+    if (!isset($total_grades[$subjectname])) {
+        $total_grades[$subjectname] = array();
+    }
+
+    if (!isset($total_grades[$subjectname][$studentname])) {
+        $total_grades[$subjectname][$studentname] = 0;
+    }
+
+    $total_grades[$subjectname][$studentname] += ($grade === null) ? 0 : $grade;
+
+    if (!in_array($subjectname, $unique_subjects)) {
+        array_push($unique_subjects, $subjectname);
+    }
+}
+$honor = '';
+
+// Create a table to display the grades for each student and subject
+echo "
+    ";
+echo "<table >
+<thead>
+
+  <th class='text-center' rowspan='2'>LEARNERS' NAME</th>
+  <th class='text-center' colspan='90' style='border: none!important;''></th>
+
+   <thead>
+        <tr >
+        <th class='text-center' rowspan='2' >FEMALE</th>
+
+";
+
+// Add the unique subject names and the "average" column to the header row
+foreach ($unique_subjects as $subject) {
+    echo "<th class='text-center' colspan='3'>".$subject."</th>";
+    $num ++;
+}
+echo "<th class='text-center'> ". 
+"FIRST Sem<br>Final<br>Average</th><th></th><th></th>";
+echo "</tr>
+        <tr class='text-center'>";
+foreach ($unique_subjects as $subject) {
+    echo "<th class='text-center'>1st<br>Quarter</th><th class='text-center'>2nd<br>Quarter</th><th class='text-center'>"."Final</th>";
+}
+
+echo "<th></th><th></th><th></th></tr></thead><tbody>";
+
+// Loop through the grades array and display the grades for each student and subject
+foreach ($grades as $studentname => $subjects) {
+  echo "<tr><td>".$studentname."</td>";
+  foreach ($unique_subjects as $subject) {
+      if (isset($subjects[$subject])) {
+          echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td class='text-center'>".$subjects[$subject]["2nd"]."</td>";
+          $FIRST = intval($subjects[$subject]["1st"]);
+          $SECOND = intval($subjects[$subject]["2nd"]);
+          $average = ($FIRST + $SECOND) / 2;
+          $full +=$average;
+          
+          echo "
+                <td class='text-center'>".$average."</td>";
+          
+        }
+        
+         
+      else {
+        
+          echo "<td></td><td></td><td></td>";
+      }
+
+      
+      
+  }
+  
+  // Calculate and display the average for the student
+  $total_grade = 0;
+  $num_subjects = 0;
+// Calculate and display the average for the student
+$total_grade = 0;
+$num_subjects = 0;
+foreach ($total_grades as $subjectname => $student_grades) {
+    if (isset($student_grades[$studentname])) {
+        $total_grade += $student_grades[$studentname];
+        $num_subjects++;
+    }
+}
+$average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
+$average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
+echo "<td class='text-center'>".round(($full / $num))."</td>";
+
+$full=0;
+$average_overall = $average_per_subject / $num;
+if ($average_overall >= 90 && $average_overall <= 94) {
+  $honor = 'With honors';
+} else if ($average_overall >= 95 && $average_overall <= 97) {
+  $honor = 'With high honors';
+} else if ($average_overall >= 98 && $average_overall <= 100) {
+  $honor = 'With highest honors';
+}
+
+else{
+  $honor = '&nbsp;&nbsp;&nbsp;';
+}
+ echo "<td class='text-center'>". " $honor</td></tr></tbody>";
+
+
+
+}
+// Close the row
+
+echo "</tr></tbody>
+
+<tbody>
+
+
+<td style='border:none;'> </td>
+
+
+
+
+
+";
+
+// Add the unique subject names and the "average" column to the header row
+foreach ($unique_subjects as $subject) {
+  echo "<th class='text-center' colspan='3'>","<br></th>";
+}
+echo "</tbody><tr  class='no-border'><tbody class='no-border'>
+   ";
+foreach ($unique_subjects as $subject) {
+  
+}
+
+// Close the table tag
+echo "</table>";
+
+    
+    // Close the database connection
+    mysqli_close($conn);
+    
+    ?>
+     <br>
     <br>
-    <br>
- 
-
- 
+  
     <table class="table-borderless">
   <tbody>
     <tr>
@@ -705,380 +1130,6 @@ mysqli_close($conn);
 </script>
 
 
-          <div class="page2">
-            <br>
-            <br>
-            <br>
-            <?php
-// Include the database connection script
-
-
-
-include "php/db_conn.php";
-
-$query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
-FROM grade
-WHERE quarter = 'FIRST'
-  AND LOWER(gender) = 'female'
-  AND section = '$section'
-  AND sy = '$syear'
-ORDER BY studentname, subjectname;
-";
-
-// Execute the query and fetch the results
-$result = mysqli_query($conn, $query);
-
-// Execute the SQL query to retrieve the grade information
-$info_query = "SELECT * FROM grade LIMIT 1";
-$info_result = mysqli_query($conn, $info_query);
-$info_row = mysqli_fetch_assoc($info_result);
-// Display the grade information in a paragraph
-echo '
-<div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="img/headerconso.png" class=" p top-0 w-10 h-auto" style="max-height: 150px;" alt="Example Image">
-</div>
-<div>
-  <div style="display: flex; justify-content: space-between;">
-    <p style="text-align: left;">
-      School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-      . $info_row['sy'] . '</b><br>
-     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST </b>
-    </p>
-    <div class="text-left">
-      <p style="text-align: left;">
-        Grade:<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['year'] . '</b><br>
-        section:<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['section'] . '</b>
-      </p>
-    </div>
-  </div>
-</div>';
-// Create an associative array to store the grades for each student and subject
-$grades = array();
-$full=0;
-$num=0;
-// Create an array to store the unique subject names
-$unique_subjects = array();
-
-// Create an associative array to store the total grades for each subject for each student
-$total_grades = array();
-
-// Create an array to store the quarter 1 grades for each student
-$quarter1_grades = array();
-$num_subjects = count($unique_subjects);
-$total_grades_1st = 0;
-foreach ($quarter1_grades as $student_grades) {
-    foreach ($student_grades as $grade) {
-        $total_grades_1st += $grade;
-    }
-}
-if ($num_subjects > 0) {
-  $average_grade_1st = $total_grades_1st / $num_subjects;
-} else {
-  $average_grade_1st = 0;
-}
-
-// Loop through the results and populate the grades and unique_subjects arrays
-while ($row = mysqli_fetch_assoc($result)) {
-    $studentname = $row['studentname'];
-    $subjectname = $row['subjectname'];
-    $grade = $row['grade'];
-    $quarter = $row['quarter'];
-
-    if (!isset($grades[$studentname])) {
-        $grades[$studentname] = array();
-    }
-
-    if (!isset($grades[$studentname][$subjectname])) {
-        $grades[$studentname][$subjectname] = array(
-            "1st" => "",
-            "2nd" => "",
-        );
-    }
-
-    if ($quarter == "FIRST") {
-        $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
-        // Add the grade to the quarter 1 grades for the student
-        if (!isset($quarter1_grades[$studentname])) {
-            $quarter1_grades[$studentname] = array();
-        }
-        $quarter1_grades[$studentname][$subjectname] = ($grade === null) ? 0 : $grade;
-    } else if ($quarter == "Second") {
-        $grades[$studentname][$subjectname]["2nd"] = ($grade === null) ? 0 : $grade;
-    }
-
-    // Add the grade to the total for the subject for the student
-    if (!isset($total_grades[$subjectname])) {
-        $total_grades[$subjectname] = array();
-    }
-
-    if (!isset($total_grades[$subjectname][$studentname])) {
-        $total_grades[$subjectname][$studentname] = 0;
-    }
-
-    $total_grades[$subjectname][$studentname] += ($grade === null) ? 0 : $grade;
-
-    if (!in_array($subjectname, $unique_subjects)) {
-        array_push($unique_subjects, $subjectname);
-    }
-}
-$honor = '';
-
-// Create a table to display the grades for each student and subject
-echo "
-    ";
-echo "<table >
-<thead>
-
-  <th class='text-center' rowspan='2'>LEARNERS' NAME</th>
-  <th class='text-center' colspan='90' style='border: none!important;''></th>
-
-   <thead>
-        <tr >
-        <th class='text-center' rowspan='2' >FEMALE</th>
-
-";
-
-// Add the unique subject names and the "average" column to the header row
-foreach ($unique_subjects as $subject) {
-    echo "<th class='text-center' colspan='3'>".$subject."</th>";
-    $num++;
-}
-echo "<th class='text-center'> First".
-" Quarter <br>Final<br>Average</th><th></th><th></th>";
-echo "</tr>
-        <tr class='text-center'>";
-foreach ($unique_subjects as $subject) {
-    echo "<th class='text-center'>1st<br>Quarter</th><th class='text-center'>2nd<br>Quarter</th><th class='text-center'>"."Final</th>";
-}
-
-echo "<th></th><th></th><th></th></tr></thead><tbody>";
-
-// Loop through the grades array and display the grades for each student and subject
-foreach ($grades as $studentname => $subjects) {
-  echo "<tr><td>".$studentname."</td>";
-  foreach ($unique_subjects as $subject) {
-      if (isset($subjects[$subject])) {
-          echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-          $FIRST = intval($subjects[$subject]["1st"]);
- 
-          $average = $FIRST;
-         
-          $full +=$average;
-        }
-         
-      else {
-          echo "<td></td><td></td><td></td>";
-      }
-      
-  }
-  
-  // Calculate and display the average for the student
-  $total_grade = 0;
-  $num_subjects = 0;
-// Calculate and display the average for the student
-$total_grade = 0;
-$num_subjects = 0;
-foreach ($total_grades as $subjectname => $student_grades) {
-    if (isset($student_grades[$studentname])) {
-        $total_grade += $student_grades[$studentname];
-        $num_subjects++;
-    }
-}
-$average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
-$average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
-
-echo "<td class='text-center'>" . number_format($full / $num, 3) . "</td>";
-
-echo "<td class='text-center'>" . ROUND($full / $num) . "</td>";
-
-$full=0;
-if ($average_per_subject >= 90 && $average_per_subject <= 94) {
-  $honor = 'With honors';
-} else if ($average_per_subject >= 95 && $average_per_subject <= 97) {
-  $honor = 'With high honors';
-} else if ($average_per_subject >= 98 && $average_per_subject <= 100) {
-  $honor = 'With highest honors';
-}
-else{
-  $honor = '&nbsp;&nbsp;&nbsp;';
-}
- echo "<td class='text-center'>". " $honor</td></tr></tbody>";
-
-
-
-}
-// Close the row
-
-echo "</tr></tbody>
-
-<tbody>
-
-
-<td style='border:none;'> </td>
-
-
-
-
-
-";
-
-// Add the unique subject names and the "average" column to the header row
-foreach ($unique_subjects as $subject) {
-  echo "<th class='text-center' colspan='3'>","<br></th>";
-}
-echo "</tbody><tr  class='no-border'><tbody class='no-border'>
-   ";
-foreach ($unique_subjects as $subject) {
-  
-}
-
-// Close the table tag
-echo "</table>";
-
-    
-    // Close the database connection
-    mysqli_close($conn);
-    
-    ?>
-     
-     <br>
-    <br>
-
-
- 
-    <table class="table-borderless">
-  <tbody>
-    <tr>
-<td>Prepared by:<br><br><br><u>  
-<input disabled  type="text" class="form-control" value="<?php 
-      
-      include "php/db_conn.php";
-            // select the crname from the table where the id matches a certain value
-            $result = mysqli_query($conn, "SELECT name FROM users WHERE id=1");
-
-            // fetch the row as an associative array and extract the value of crname
-            $row = mysqli_fetch_assoc($result);
-            $name = $row['name'];
-            $name = strtoupper($name);
-            // echo the value of crname
-            echo $name;
-
-          ?>">
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-stem"   type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STEM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-humss" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HUMSS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-abm" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABM Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u><input id="checked-by-tvl" type="text" class="form-control"></u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TVL Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked by:<br><br><br><u>     
-  
-<input type="text" class="form-control" id="checked-by-sports">
-        
-        </u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPORTS Subject Group Head&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-        <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noted by:<br><br><br><u>
-  
-  
-<input disabled  type="text" class="form-control" value="<?php 
-      
-      include "php/db_conn.php";
-            // select the crname from the table where the id matches a certain value
-            $result = mysqli_query($conn, "SELECT pname FROM settings WHERE id=1");
-
-            // fetch the row as an associative array and extract the value of crname
-            $row = mysqli_fetch_assoc($result);
-            $crname = $row['pname'];
-            $crname = strtoupper($crname);
-            // echo the value of crname
-            echo $crname;
-
-          ?>">
-
-
-
-
-</u><label class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Principal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved by:<br><br><br><u>
-  
-<input disabled type="text" class="form-control" value="<?php 
-      
-      include "php/db_conn.php";
-            // select the crname from the table where the id matches a certain value
-            $result = mysqli_query($conn, "SELECT crname FROM cr WHERE id=1");
-
-            // fetch the row as an associative array and extract the value of crname
-            $row = mysqli_fetch_assoc($result);
-            $crname = $row['crname'];
-
-            $crname = strtoupper($crname);
-            echo $crname;
-            
-
-          ?>">
-
-
-
-</u><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Campus Registrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-<td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
-
-    </tr>
-   
-  </tbody>
-</table>
-<script>
-  // Check if values are stored in sessionStorage
-  if (sessionStorage.getItem("checked-by-stem")) {
-    document.getElementById("checked-by-stem").value = sessionStorage.getItem("checked-by-stem");
-  }
-  if (sessionStorage.getItem("checked-by-humss")) {
-    document.getElementById("checked-by-humss").value = sessionStorage.getItem("checked-by-humss");
-  }
-  if (sessionStorage.getItem("checked-by-abm")) {
-    document.getElementById("checked-by-abm").value = sessionStorage.getItem("checked-by-abm");
-  }
-  if (sessionStorage.getItem("checked-by-tvl")) {
-    document.getElementById("checked-by-tvl").value = sessionStorage.getItem("checked-by-tvl");
-  }
-  if (sessionStorage.getItem("checked-by-sports")) {
-    document.getElementById("checked-by-sports").value = sessionStorage.getItem("checked-by-sports");
-  }
-  if (sessionStorage.getItem("noted-by-principal")) {
-    document.getElementById("noted-by-principal").value = sessionStorage.getItem("noted-by-principal");
-  }
-  if (sessionStorage.getItem("approved-by-cr")) {
-    document.getElementById("approved-by-cr").value = sessionStorage.getItem("approved-by-cr");
-  }
-
-  // Store values in sessionStorage on change
-  document.getElementById("checked-by-stem").addEventListener("change", function() {
-    sessionStorage.setItem("checked-by-stem", document.getElementById("checked-by-stem").value);
-  });
-  document.getElementById("checked-by-humss").addEventListener("change", function() {
-    sessionStorage.setItem("checked-by-humss", document.getElementById("checked-by-humss").value);
-  });
-  document.getElementById("checked-by-abm").addEventListener("change", function() {
-    sessionStorage.setItem("checked-by-abm", document.getElementById("checked-by-abm").value);
-  });
-  document.getElementById("checked-by-tvl").addEventListener("change", function() {
-    sessionStorage.setItem("checked-by-tvl", document.getElementById("checked-by-tvl").value);
-  });
-  document.getElementById("checked-by-sports").addEventListener("change", function() {
-    sessionStorage.setItem("checked-by-sports", document.getElementById("checked-by-sports").value);
-  });
-  document.getElementById("noted-by-principal").addEventListener("change", function() {
-    sessionStorage.setItem("noted-by-principal", document.getElementById("noted-by-principal").value);
-  });
-  document.getElementById("approved-by-cr").addEventListener("change", function() {
-    sessionStorage.setItem("approved-by-cr", document.getElementById("approved-by-cr").value);
-  });
-</script>
-
-
 
 
      </div> 
@@ -1098,5 +1149,6 @@ echo "</table>";
   
 </body>
 </html>
+
 
 

@@ -394,6 +394,10 @@ setInterval(function() {
 
                     $quarter1shs = "q1shs.php?section=" . $section . "&syear=" . $row['syear'];
                     $quarter2shs = "q2shs.php?section=" . $section . "&syear=" . $row['syear'];
+                    $quarter3shs = "q3shs.php?section=" . $section . "&syear=" . $row['syear'];
+                    $quarter4shs = "q4shs.php?section=" . $section . "&syear=" . $row['syear'];
+                    $sshs1 = "sshs1.php?section=" . $section . "&syear=" . $row['syear'];
+                    $sshs2 = "sshs2.php?section=" . $section . "&syear=" . $row['syear'];
                     ?>
                     <tr>
                         <td>
@@ -420,13 +424,13 @@ setInterval(function() {
                                     <p><b>SHS FORMAT CONSOLIDATED GRADES</b></p>
                                     <ul>
                                     <li><a href="<?php echo $quarter1shs; ?>" target="_blank">Quarter 1</a></li>
-<li><a href="<?php echo $quarter2shs; ?>" target="_blank">Quarter 2</a></li>
-
-                                        <li><a href="#button6">Button 6</a></li>
-                                        <li><a href="#button7">Button 7</a></li>
-                                        <li><a href="#button8">Button 8</a></li>
-                                        <li><a href="#button9">Button 9</a></li>
-                                        <li><a href="#button10">Button 10</a></li>
+                                    <li><a href="<?php echo $quarter2shs; ?>" target="_blank">Quarter 2</a></li>
+                                    <li><a href="<?php echo $quarter3shs; ?>" target="_blank">Quarter 3</a></li>
+                                    <li><a href="<?php echo $quarter4shs; ?>" target="_blank">Quarter 4</a></li>
+                                    <li><a href="<?php echo $sshs1; ?>" target="_blank">Semester 1</a></li>
+                                    <li><a href="<?php echo $sshs2; ?>" target="_blank">Semester 2</a></li>
+                               
+                              
                                     </ul>
                                 </div>
                             </div>

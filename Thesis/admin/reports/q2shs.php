@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QUARTER 1 SHS CONSOLIDATED GRADES</title>
+	<title>QUARTER 2 SHS CONSOLIDATED GRADES</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -379,7 +379,7 @@ include "php/db_conn.php";
 
 $query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
 FROM grade
-WHERE quarter = 'FIRST'
+WHERE quarter = 'SECOND'
   AND LOWER(gender) = 'male'
   AND section = '$section'
   AND sy = '$syear'
@@ -402,7 +402,7 @@ echo '
   <div style="display: flex; justify-content: space-between;">
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['sy'] . '</b><br>
-      Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>FIRST</b>
+      Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>SECOND</b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -457,7 +457,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         );
     }
 
-    if ($quarter == "FIRST") {
+    if ($quarter == "SECOND") {
         $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
@@ -522,9 +522,9 @@ foreach ($grades as $studentname => $subjects) {
     echo "<tr><td>".$studentname."</td>";
     foreach ($unique_subjects as $subject) {
         if (isset($subjects[$subject])) {
-            echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-            $FIRST = intval($subjects[$subject]["1st"]);
-            $average = $FIRST;
+            echo "<td class='text-center'>".$subjects[$subject]["2nd"]."</td><td class='text-center'>".$subjects[$subject]["1st"]."</td><td></td>";
+            $SECOND = intval($subjects[$subject]["1st"]);
+            $average = $SECOND;
             $full += $average;
         } else {
             echo "<td></td><td></td><td></td>";
@@ -718,7 +718,7 @@ include "php/db_conn.php";
 
 $query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
 FROM grade
-WHERE quarter = 'FIRST'
+WHERE quarter = 'SECOND'
   AND LOWER(gender) = 'female'
   AND section = '$section'
   AND sy = '$syear'
@@ -742,7 +742,7 @@ echo '
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
       . $info_row['sy'] . '</b><br>
-     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST </b>
+     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' SECOND </b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -795,7 +795,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         );
     }
 
-    if ($quarter == "FIRST") {
+    if ($quarter == "SECOND") {
         $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
@@ -843,7 +843,7 @@ foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num++;
 }
-echo "<th class='text-center'> First".
+echo "<th class='text-center'> SECOND".
 " Quarter <br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
@@ -858,10 +858,10 @@ foreach ($grades as $studentname => $subjects) {
   echo "<tr><td>".$studentname."</td>";
   foreach ($unique_subjects as $subject) {
       if (isset($subjects[$subject])) {
-          echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-          $FIRST = intval($subjects[$subject]["1st"]);
+          echo "<td class='text-center'>".$subjects[$subject]["2nd"]."</td><td class='text-center'>".$subjects[$subject]["1st"]."</td><td></td>";
+          $SECOND = intval($subjects[$subject]["1st"]);
  
-          $average = $FIRST;
+          $average = $SECOND;
          
           $full +=$average;
         }
@@ -1030,6 +1030,7 @@ echo "</table>";
    
   </tbody>
 </table>
+          
 <script>
   // Check if values are stored in sessionStorage
   if (sessionStorage.getItem("checked-by-stem")) {

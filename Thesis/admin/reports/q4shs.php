@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { }?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QUARTER 1 SHS CONSOLIDATED GRADES</title>
+	<title>QUARTER 2 SHS CONSOLIDATED GRADES</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -379,7 +379,7 @@ include "php/db_conn.php";
 
 $query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
 FROM grade
-WHERE quarter = 'FIRST'
+WHERE quarter = 'FOURTH'
   AND LOWER(gender) = 'male'
   AND section = '$section'
   AND sy = '$syear'
@@ -402,7 +402,7 @@ echo '
   <div style="display: flex; justify-content: space-between;">
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $info_row['sy'] . '</b><br>
-      Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>FIRST</b>
+      Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>FOURTH</b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -427,16 +427,16 @@ $total_grades = array();
 // Create an array to store the quarter 1 grades for each student
 $quarter1_grades = array();
 $num_subjects = count($unique_subjects);
-$total_grades_1st = 0;
+$total_grades_3rd = 0;
 foreach ($quarter1_grades as $student_grades) {
     foreach ($student_grades as $grade) {
-        $total_grades_1st += $grade;
+        $total_grades_3rd += $grade;
     }
 }
 if ($num_subjects > 0) {
-    $average_grade_1st = $total_grades_1st / $num_subjects;
+    $average_grade_3rd = $total_grades_3rd / $num_subjects;
 } else {
-    $average_grade_1st = 0;
+    $average_grade_3rd = 0;
 }
 
 // Loop through the results and populate the grades and unique_subjects arrays
@@ -452,20 +452,20 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     if (!isset($grades[$studentname][$subjectname])) {
         $grades[$studentname][$subjectname] = array(
-            "1st" => "",
-            "2nd" => "",
+            "3rd" => "",
+            "4th" => "",
         );
     }
 
-    if ($quarter == "FIRST") {
-        $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
+    if ($quarter == "FOURTH") {
+        $grades[$studentname][$subjectname]["3rd"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
             $quarter1_grades[$studentname] = array();
         }
         $quarter1_grades[$studentname][$subjectname] = ($grade === null) ? 0 : $grade;
-    } else if ($quarter == "Second") {
-        $grades[$studentname][$subjectname]["2nd"] = ($grade === null) ? 0 : $grade;
+    } else if ($quarter == "FOURTH") {
+        $grades[$studentname][$subjectname]["4th"] = ($grade === null) ? 0 : $grade;
     }
 
     // Add the grade to the total for the subject for the student
@@ -507,12 +507,12 @@ foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num++;
 }
-echo "<th class='text-center'> Second" .
+echo "<th class='text-center'> FOURTH" .
 " Quarter<br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
 foreach ($unique_subjects as $subject) {
-    echo "<th class='text-center'>1st<br>Quarter</th><th class='text-center'>2nd<br>Quarter</th><th class='text-center'>"."Final</th>";
+    echo "<th class='text-center'>3rd<br>Quarter</th><th class='text-center'>4th<br>Quarter</th><th class='text-center'>"."Final</th>";
 }
 
 echo "<th></th><th></th><th></th></tr></thead><tbody>";
@@ -522,9 +522,9 @@ foreach ($grades as $studentname => $subjects) {
     echo "<tr><td>".$studentname."</td>";
     foreach ($unique_subjects as $subject) {
         if (isset($subjects[$subject])) {
-            echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-            $FIRST = intval($subjects[$subject]["1st"]);
-            $average = $FIRST;
+            echo "<td class='text-center'>".$subjects[$subject]["4th"]."</td><td class='text-center'>".$subjects[$subject]["3rd"]."</td><td></td>";
+            $FOURTH = intval($subjects[$subject]["3rd"]);
+            $average = $FOURTH;
             $full += $average;
         } else {
             echo "<td></td><td></td><td></td>";
@@ -655,7 +655,6 @@ mysqli_close($conn);
    
   </tbody>
 </table>
-          
 <script>
   // Check if values are stored in sessionStorage
   if (sessionStorage.getItem("checked-by-stem")) {
@@ -718,7 +717,7 @@ include "php/db_conn.php";
 
 $query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
 FROM grade
-WHERE quarter = 'FIRST'
+WHERE quarter = 'FOURTH'
   AND LOWER(gender) = 'female'
   AND section = '$section'
   AND sy = '$syear'
@@ -742,7 +741,7 @@ echo '
     <p style="text-align: left;">
       School Year: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
       . $info_row['sy'] . '</b><br>
-     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FIRST </b>
+     Quarter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>' .' FOURTH </b>
     </p>
     <div class="text-left">
       <p style="text-align: left;">
@@ -765,16 +764,16 @@ $total_grades = array();
 // Create an array to store the quarter 1 grades for each student
 $quarter1_grades = array();
 $num_subjects = count($unique_subjects);
-$total_grades_1st = 0;
+$total_grades_3rd = 0;
 foreach ($quarter1_grades as $student_grades) {
     foreach ($student_grades as $grade) {
-        $total_grades_1st += $grade;
+        $total_grades_3rd += $grade;
     }
 }
 if ($num_subjects > 0) {
-  $average_grade_1st = $total_grades_1st / $num_subjects;
+  $average_grade_3rd = $total_grades_3rd / $num_subjects;
 } else {
-  $average_grade_1st = 0;
+  $average_grade_3rd = 0;
 }
 
 // Loop through the results and populate the grades and unique_subjects arrays
@@ -790,20 +789,20 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     if (!isset($grades[$studentname][$subjectname])) {
         $grades[$studentname][$subjectname] = array(
-            "1st" => "",
-            "2nd" => "",
+            "3rd" => "",
+            "4th" => "",
         );
     }
 
-    if ($quarter == "FIRST") {
-        $grades[$studentname][$subjectname]["1st"] = ($grade === null) ? 0 : $grade;
+    if ($quarter == "FOURTH") {
+        $grades[$studentname][$subjectname]["3rd"] = ($grade === null) ? 0 : $grade;
         // Add the grade to the quarter 1 grades for the student
         if (!isset($quarter1_grades[$studentname])) {
             $quarter1_grades[$studentname] = array();
         }
         $quarter1_grades[$studentname][$subjectname] = ($grade === null) ? 0 : $grade;
-    } else if ($quarter == "Second") {
-        $grades[$studentname][$subjectname]["2nd"] = ($grade === null) ? 0 : $grade;
+    } else if ($quarter == "FOURTH") {
+        $grades[$studentname][$subjectname]["4th"] = ($grade === null) ? 0 : $grade;
     }
 
     // Add the grade to the total for the subject for the student
@@ -843,12 +842,12 @@ foreach ($unique_subjects as $subject) {
     echo "<th class='text-center' colspan='3'>".$subject."</th>";
     $num++;
 }
-echo "<th class='text-center'> First".
+echo "<th class='text-center'> FOURTH".
 " Quarter <br>Final<br>Average</th><th></th><th></th>";
 echo "</tr>
         <tr class='text-center'>";
 foreach ($unique_subjects as $subject) {
-    echo "<th class='text-center'>1st<br>Quarter</th><th class='text-center'>2nd<br>Quarter</th><th class='text-center'>"."Final</th>";
+    echo "<th class='text-center'>3rd<br>Quarter</th><th class='text-center'>4th<br>Quarter</th><th class='text-center'>"."Final</th>";
 }
 
 echo "<th></th><th></th><th></th></tr></thead><tbody>";
@@ -858,10 +857,10 @@ foreach ($grades as $studentname => $subjects) {
   echo "<tr><td>".$studentname."</td>";
   foreach ($unique_subjects as $subject) {
       if (isset($subjects[$subject])) {
-          echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td>".$subjects[$subject]["2nd"]."</td><td></td>";
-          $FIRST = intval($subjects[$subject]["1st"]);
+          echo "<td class='text-center'>".$subjects[$subject]["4th"]."</td><td class='text-center'>".$subjects[$subject]["3rd"]."</td><td></td>";
+          $FOURTH = intval($subjects[$subject]["3rd"]);
  
-          $average = $FIRST;
+          $average = $FOURTH;
          
           $full +=$average;
         }
@@ -943,7 +942,6 @@ echo "</table>";
      
      <br>
     <br>
-
 
  
     <table class="table-borderless">
@@ -1030,6 +1028,7 @@ echo "</table>";
    
   </tbody>
 </table>
+          
 <script>
   // Check if values are stored in sessionStorage
   if (sessionStorage.getItem("checked-by-stem")) {
