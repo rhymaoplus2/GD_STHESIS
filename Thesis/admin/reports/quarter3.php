@@ -317,7 +317,7 @@ td a:hover {
     <div class="border">
 <div>
     <div  style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     border-radius:20px; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="mb-3 text-white text-center"><h4>SHS FIRST QUARTER PRINTABLE GRADES </h4></div>
+     border-radius:20px; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="mb-3 text-white text-center"><h4>SHS THIRd QUARTER PRINTABLE GRADES </h4></div>
 </div>  
 <div class="filter-options d-flex justify-content-center mb-3">
   
@@ -393,7 +393,7 @@ td a:hover {
         <?php
         $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy, MAX(quarter) AS quarter, subjectname, teacher
                   FROM grade 
-                  WHERE quarter='FIRST'
+                  WHERE quarter='THIRd'
                   GROUP BY session, quarter, sy 
                   ORDER BY subjectname, year, section, sy";
 

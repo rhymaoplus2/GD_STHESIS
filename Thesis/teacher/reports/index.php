@@ -405,7 +405,6 @@ function myFunction() {
 </script>
 
 
-<!-- TITLE HERE    -->
 
 
 <br>
@@ -433,11 +432,12 @@ function myFunction() {
           <td>
           <button type="button" class="btn btn-primary" onclick="window.open('jhsq4.php', '_blank', 'width=auto,height=600')">Quarter 4</button>
           </td>
-          </tr>
-            <td></td>
-            <td></td>
-            <td><br><br></td>
-            <td></td>
+          <tr class="text-center">
+    
+            <td colspan="4">
+          <button type="button" class="btn btn-primary" onclick="window.open('jhss1.php', '_blank', 'width=auto,height=600')">Whole Year</button>
+          </td>
+       
           </tr>
         </tbody>
 

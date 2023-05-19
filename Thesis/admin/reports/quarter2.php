@@ -277,7 +277,7 @@ td a:hover {
 }
 
 .table-scrollable{
-  height: 400px;
+  height: 300px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -297,7 +297,11 @@ td a:hover {
 .table-scrollable::-webkit-scrollbar-thumb:hover {
   background: #555; /* color of the thumb on hover */
 }
-
+.sticky {
+    position: sticky;
+    top: 0;
+  
+  }
   </style>
 </head>
 
@@ -312,16 +316,71 @@ td a:hover {
 <div class="container">
     <div class="border">
 <div>
-    <div style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     border-radius:20px; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="text-white text-center"><h4>SHS SECOND QUARTER PRINTABLE GRADES </h4></div>
+    <div  style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     border-radius:20px; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="mb-3 text-white text-center"><h4>SHS SECOND QUARTER PRINTABLE GRADES </h4></div>
+</div>  
+<div class="filter-options d-flex justify-content-center mb-3">
+  
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <select id="filter-year" class="form-select">
+        <option value="">GRADE LEVEL</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+      </select>
+    </div>
+    <div class="col-md-3 mb-3">
+      <select id="filter-section" class="form-select">
+        <option value="">SECTION</option>
+        <?php
+          require "./php/db_conn.php";
+          $query = "SELECT DISTINCT name FROM section";
+          $result = mysqli_query($conn, $query);
+
+          while($row = mysqli_fetch_array($result)) {
+            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+          }
+        ?>
+      </select>
+    </div>
+    <div class="col-md-3 mb-3">
+      <select id="filter-sy" class="form-select">
+        <option value="">SCHOOL YEAR</option>
+        <?php
+          require "./php/db_conn.php";
+          $query = "SELECT DISTINCT syear FROM students";
+          $result = mysqli_query($conn, $query);
+
+          while($row = mysqli_fetch_array($result)) {
+            echo "<option value='" . $row['syear'] . "'>" . $row['syear'] . "</option>";
+          }
+        ?>
+      </select>
+    </div>
+    <div class="col-md-3 mb-3">
+      <select id="filter-subject" class="form-select">
+        <option value="">SUBJECT NAME</option>
+        <?php
+          require "./php/db_conn.php";
+          $query = "SELECT DISTINCT subjectname FROM grade";
+          $result = mysqli_query($conn, $query);
+
+          while($row = mysqli_fetch_array($result)) {
+            echo "<option value='" . $row['subjectname'] . "'>" . $row['subjectname'] . "</option>";
+          }
+        ?>
+      </select>
+    </div>
+  </div>
 </div>
 
-    <div class="filter-options d-flex justify-content-between mb-3">
-        
 <div class="table-scrollable">
-  <table class="table table-bordered" style="width:1200px;">
-  <table class="table table-striped">
-    <thead class="text-white" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+<table class="table table-bordered" style="width: 1200px;">
+    <thead class="text-white sticky" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <tr>
             <th class="text-center">Subject</th>
             <th class="text-center">Year</th>
@@ -331,30 +390,29 @@ td a:hover {
         </tr>
     </thead>
     <tbody id="table-body">
-    <?php
-    $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy, MAX(quarter) AS quarter, subjectname, teacher
-              FROM grade 
-              WHERE quarter='SECOND' AND (year ='11' OR year ='12')
-              GROUP BY session, quarter, sy 
-              ORDER BY subjectname, year, section, sy";
+        <?php
+        $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy, MAX(quarter) AS quarter, subjectname, teacher
+                  FROM grade 
+                  WHERE quarter='SECOND'
+                  GROUP BY session, quarter, sy 
+                  ORDER BY subjectname, year, section, sy";
 
-    $result = $conn->query($query);
+        $result = $conn->query($query);
 
-    while ($row = $result->fetch_assoc()) {
-        $section = $row['section']; // Replace "your_section_value" with the actual value of $section
-        $quarter1shs = "shsprintquarter.php?section=" . $section . "&sy=" . $row['sy'] . "&quarter=" . $row['quarter']  . "&year=" . $row['year']
-            . "&subjectname=" . $row['subjectname']
-            . "&teacher=" . $row['teacher'];
-    
-?>
-
-            <tr>
-                <td><?php echo $row['subjectname']; ?></td>
+        while ($row = $result->fetch_assoc()) {
+            $section = $row['section'];
+            $quarter1shs = "shsprintquarter.php?section=" . $section . "&sy=" . $row['sy'] . "&quarter=" . $row['quarter'] . "&year=" . $row['year']
+                . "&subjectname=" . $row['subjectname']
+                . "&teacher=" . $row['teacher'];
+        
+            ?>
+            <tr data-year="<?php echo $row['year']; ?>" data-section="<?php echo $section; ?>" data-sy="<?php echo $row['sy']; ?>">
+                <td><b> <?php echo $row['subjectname']; ?> </b></td>
                 <td class="text-center"><?php echo $row['year']; ?></td>
-                <td class="text-center"><?php echo $row['section']; ?></td>
+                <td class="text-center"><?php echo $section; ?></td>
                 <td class="text-center"><?php echo $row['sy']; ?></td>
                 <td class="text-center">
-                    <a href="<?php echo $quarter1shs; ?>" target="_blank">Print</a>
+                    <b> <a href="<?php echo $quarter1shs; ?>" target="_blank">Print</a> </B>
                 </td>
             </tr>
         <?php
@@ -363,8 +421,38 @@ td a:hover {
         ?>
     </tbody>
 </table>
+<script>
+  const filterYear = document.getElementById('filter-year');
+  const filterSection = document.getElementById('filter-section');
+  const filterSy = document.getElementById('filter-sy');
+  const filterSubject = document.getElementById('filter-subject');
+  const tableBody = document.getElementById('table-body');
 
+  function applyFilters() {
+    const selectedYear = filterYear.value;
+    const selectedSection = filterSection.value;
+    const selectedSy = filterSy.value;
+    const selectedSubject = filterSubject.value;
 
+    Array.from(tableBody.children).forEach(row => {
+      const year = row.getAttribute('data-year');
+      const section = row.getAttribute('data-section');
+      const sy = row.getAttribute('data-sy');
+      const subject = row.cells[0].textContent.trim();
+
+      const showYear = selectedYear === '' || year === selectedYear;
+      const showSection = selectedSection === '' || section === selectedSection;
+      const showSy = selectedSy === '' || sy === selectedSy;
+      const showSubject = selectedSubject === '' || subject === selectedSubject;
+
+      row.style.display = showYear && showSection && showSy && showSubject ? 'table-row' : 'none';
+    });
+  }
+  filterYear.addEventListener('change', applyFilters);
+  filterSection.addEventListener('change', applyFilters);
+  filterSy.addEventListener('change', applyFilters);
+  filterSubject.addEventListener('change', applyFilters);
+</script>
     </div>
 </div>
 

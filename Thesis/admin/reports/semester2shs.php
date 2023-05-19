@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>GRADE SHEET</title>
+	<title>1st Grading</title>
   
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -18,161 +18,16 @@
 
 
   <style>
-    
-@media print {
+   @media print{
 
-  .btn-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-@page {
-    margin-top: 50px;
-    margin-bottom: 1cm!important;
-    margin-left:0;
-    margin-right: 0;
-  }
-   .print-hidden {
+    @page{
+      margin-top: 1cm;
+      margin-bottom: 1cm;
+    }
+    .img-fluid{
       display: none;
     }
-  /* Set the footer to be at the bottom of the page */
-  .print-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-
-  /* Set the page break after two pages */
-  .page-break {
-    page-break-after: always;
-  }
-
-  /* Hide the file name and other description */
-  .print-header,
-  .print-footer {
-    display: none;
-  }
-h1{
-  display: none;
-}
-  /* Only display content in the last page */
-  .wrapper {
-    counter-increment: page;
-  }
-
-  /* Add margin to the top of the second page */
-  .wrapper:nth-of-type(n+3) {
-    margin-top: 100px;
-  }
-
-  /* Add page number to the last page */
-  .wrapper:after {
-    content: counter(page);
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    page-break-after: always;
-  }
-  .wrapper:last-of-type:after {
-    content: "";
-  }
-  .container-fluid.p-0 {
-  display: none;
-}
-.tooltip {
-  display: none !important;
-}
-
-.btn {
-    display: none;
-  }
-
-  /* Hide inputs */
-  input[type="button"],
-  input[type="submit"],
-  input[type="reset"],
-  input[type="checkbox"],
-  input[type="radio"],
-  select,
-  textarea {
-    display: none;
-  }
-  select option {
-    display: none;
-  }
-
-}
-@media print {
-  /* Set the page size to A4 */
-  @page {
-  
-  }
-  .btn-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-#my-element  {
- display: none;
-}
-   .print-hidden {
-      display: none;
-    }
-  /* Set the footer to be at the bottom of the page */
-  .print-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
-
-  /* Set the page break after two pages */
-  .page-break {
-    page-break-after: always;
-  }
-
-  /* Hide the file name and other description */
-  .print-header,
-  .print-footer {
-    display: none;
-  }
-
-  /* Only display content in the last page */
-  .wrapper {
-    counter-increment: page;
-  }
-
-  /* Add margin to the top of the second page */
-  .wrapper:nth-of-type(n+3) {
-    margin-top: 100px;
-  }
-
-  /* Add page number to the last page */
-  .wrapper:after {
-    content: counter(page);
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    page-break-after: always;
-  }
-  .wrapper:last-of-type:after {
-    content: "";
-  }
-  .container-fluid.p-0 {
-  display: none;
-}
-.tooltip {
-  display: none !important;
-}
-
-  
-}
+   }
 td {
   border: 1px solid black;
 }
@@ -191,7 +46,6 @@ td {
 	justify-content: ;
 	align-items: center;
 	flex-direction: column;
-  margin-top:0;
 
 }
 hr {
@@ -214,7 +68,7 @@ hr {
 
 .container table {
 	padding: 5px;
-  margin-top: 0;
+
   font-size: 11px;
 font-family: calibri;
   border: 10px;
@@ -348,7 +202,9 @@ font-size: 10px;;
 #my-element button:hover img {
   opacity: 0.8;
 }
-</style>
+
+
+    </style>
 </head>
 <body>
     <div class="d-flex justify-content-center align-items-center position-relative">
@@ -371,166 +227,181 @@ function animateElement() {
     window.print();
   }, 3000);
 }
+
+
 </script>
 <div class="container " >
 <div style="text-align: center;">
 <form class="row text-center g-3 print-hidden" method="POST" action="" style=""> 
-  <div class="col-auto">
-  </div>
-
-</form>
-    </div>
-		<div class="box">
-    <div class="content">
-
-</script>
-            <table class="table table-bordered small table-sm" >
+ 
+<div class="text-start">
+        
             <?php
-function validate($data) {
-    return htmlspecialchars(trim($data));
-}
-
-$section = validate($_GET['section']);
-$sy = validate($_GET['sy']);
-$quarter = validate($_GET['quarter']);
-$year = validate($_GET['year']);
-$teacher = validate($_GET['teacher']);
-$subjectname = validate($_GET['subjectname']);
-
 require "./php/db_conn.php";
 
-$query = "SELECT DISTINCT * FROM grade 
-          WHERE subjectname ='$subjectname' 
-          AND year ='$year'
-          AND quarter ='$quarter'
-          AND sy ='$sy'
-          AND section ='$section'
-          AND teacher ='$teacher'";
+    function validate($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
+    $section = validate($_GET['section']);
+    $sy = validate($_GET['sy']);
+    $semester = validate($_GET['semester']);
+    $subjectname = validate($_GET['subjectname']);
+    $teacher = validate($_GET['teacher']);
 
-$result = mysqli_query($conn, $query);
-if ($row = mysqli_fetch_assoc($result)) {
-    $output_left = "<div id='left'>";
-    $output_left .= "<p>";
-    if ($row['ts'] !== '') {
-      $output_left .= "Track & Strands: <b>". $row['ts']."</b> <br>";
-  }
-  else{
-    $output_left .= "<br>";
-  }
-  
-    $output_left .= "Year & Section: <strong>" . $row['year'] ." - ". $row['section'] . "</strong><br>";
-    $output_left .= "Adviser: <strong>" . $row['teacher'] . "</strong><br>";
-    $output_left .= "</p>";
-    $output_left .= "</div>";
-    
-    $output_right = "<div id='right'>";
-    $output_right .= "<p>";
-    $output_right .= "Subject: <b>" .$row['subjectname'] ."</b><br>";
-    $output_right .= "Quarter: <strong>" . $row['quarter'] . "</strong><br>";
-    $output_right .= "Semester: <strong>" . $row['semester'] . "</strong><br>";
-    $output_right .= "</p>";
-    $output_right .= "</div>";
-    
-    echo $output_left;
-    echo $output_right;
-} else {
-    echo "<strong><h1>No Grades</h1></strong>";
-}
+    $year = validate($_GET['year']);
+    $query = "SELECT DISTINCT * 
+FROM grade
+WHERE semester = '$semester'
+AND teacher = '$teacher'
+;";
 
-mysqli_close($conn);
-?>
+    $result = mysqli_query($conn, $query);
 
+    if ($Row = mysqli_fetch_assoc($result)) {
+        $output_left = "<div id='left'>";
+        $output_left .= "<p>";
+        $output_left .= "Track & Strands: <b>". $Row['ts']."</b><br>";
+        $output_left .= "Year & Section: <strong>" . $Row['section'] ." ". $Row['year'] . "</strong><br>";
+        $output_left .= "Adviser: <strong>" . $Row['adviser'] . "</strong><br>";
+        $output_left .= "</p>";
+        $output_left .= "</div>";
 
+        $output_right = "<div id='right'>";
+        $output_right .= "<p>";
+        $output_right .= "Subject: <b>" .$Row['subjectname'] ."</b><br>";
+        $output_right .= "Quarter: <strong> THIRD & FOURTH</strong><br>";
+        $output_right .= "Semester: <strong>" . $Row['semester'] . "</strong><br>";
+        $output_right .= "</p>";
+        $output_right .= "</div>";
+
+        echo $output_left;
+        echo $output_right;
+    } else {
+        echo "<strong><h1>No Grades</h1></strong>";
+    }
+
+    mysqli_close($conn);
+    ?>
+</div>
+<table class="text-start table table-bordered small table-sm" >
 <thead>
-<tr style="text-align:center;" >
+<tr style="text-align:center;">
   <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
   <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
   <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">FIRST<br>QUARTER</th>
+  <th class="text-center" style="width:90px; vertical-align: middle;">1ST</th>
+  <th class="text-center" style="width:90px; vertical-align: middle;">2ND</th>
+  <th class="text-center" style="width:90px; vertical-align: middle;">FINAL</th>
   <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
 </tr>
-</thed>  
+</thead>  
+
 <thead>
-<th colspan="6" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></th>
+<th colspan="8" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></th>
 </thead>
 <?php
 require "./php/db_conn.php";
 
-$rowNum = 0;
+$query = "SELECT firstname, lastname, middlename, 
+          AVG(CASE WHEN quarter = 'THIRD' THEN grade END) AS  THIRD_average,
+          AVG(CASE WHEN quarter = 'FOURTH' THEN grade END) AS FOURTH_average
+          FROM grade
+          WHERE semester = '$semester'
+          AND section = '$section'
+          AND subjectname = '$subjectname'
+          AND teacher = '$teacher'
+          AND sy = '$sy'
+          AND year = '$year'
+          AND (quarter = 'THIRD' OR quarter = 'FOURTH')
+          AND gender = 'Male'
+          GROUP BY firstname, lastname, middlename
+          ORDER BY lastname";
 
 
-$query = "SELECT DISTINCT * FROM grade WHERE subjectname ='$subjectname' 
-AND year ='$year'
-AND quarter ='$quarter'
-AND sy ='$sy'
-AND section   ='$section'
-AND teacher ='$teacher'
-AND gender ='Male'
-";
-$result = mysqli_query($conn, $query);
-while ($Row = mysqli_fetch_assoc($result)) {
-  $rowNum++; // increment rowNum
-?>
-  
-  <tr>
-    <td class="text text-center"><?php echo  $rowNum ?></td>
-    <td class="text"><?php echo $Row["lastname"]; ?></td>
-    <td class="text"><?php echo $Row["firstname"]; ?></td>
-    <td class="text text-center"><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
-    <td class="text text-center"><?php echo $Row["grade"]; ?></td>
-    <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
-      <b><?php echo $Row["remarks"]; ?></b>
-    </td>
-  </tr>
+    $result = mysqli_query($conn, $query);
+    $rowNum = 0; // initialize rowNum
 
-<?php } ?>
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rowNum++; // increment rowNum
+        $finalAverage = ($row[" THIRD_average"] + $row["FOURTH_average"]) / 2; // Calculate the average
 
-</tbody>
-</div> 
-                <thead >
-      <th colspan="6"class="text text-left" ><b><div class="text text-danger"><b>FEMALE</b></div></b></th>
-              </thead>
-              <?php
-
-$rowNum = 0;
+        ?>
+    <tr>
+        <td class="text text-center"><?php echo $rowNum; ?></td>
+        <td class="text"><?php echo $row["lastname"]; ?></td>
+        <td class="text"><?php echo $row["firstname"]; ?></td>
+        <td class="text text-center"><?php echo substr($row["middlename"], 0, 1); ?>.</td>
+        <td class="text text-center"><?php echo $row[" THIRD_average"] ?: "-"; ?></td>
+        <td class="text text-center"><?php echo $row["FOURTH_average"] ?: "-"; ?></td>
+        <td class="text text-center"><?php echo $finalAverage; ?></td>
+        <td class="text text-center" style="color: <?php echo $finalAverage < 75 ? 'red' : 'black'; ?>;">
+            <?php echo strtoupper($finalAverage < 75 ? 'FAILED' : 'PASSED'); ?>
+        </td>
+    </tr>
+<?php
+    }
 
 
-$query = "SELECT DISTINCT * FROM grade 
-          WHERE subjectname ='$subjectname' 
-          AND year ='$year'
-          AND quarter ='$quarter'
-          AND sy ='$sy'
-          AND gender ='Female'
-          AND section ='$section'
-          AND teacher ='$teacher'";
-  $result = mysqli_query($conn, $query);
-}
-while ($Row = mysqli_fetch_assoc($result)) {
-  $rowNum++; 
+
 ?>
 
-           <tr>
-           <td class="text text-center" ><?php echo  $rowNum ?></td>
-          <td class="text "><?php echo $Row["lastname"]; ?></td>
-          <td class="text " ><?php echo $Row["firstname"]; ?></td>
-          <td class="text text-center "><?php echo substr($Row["middlename"], 0, 1); ?>.</td>
-         
-          <td class="text text-center" ><?php echo $Row["grade"]; ?></td>
-  
-          <td class="text text-center" <?php if ($Row["remarks"] == "FAILED") { ?> style="color: red;" <?php } ?>>
-  <b><?php echo $Row["remarks"]; ?></b>
- 
-</td>
-     </tr>
-            <?php }
- ?>
-         </tbody>
-      </table>
+<thead>
+<th colspan="8" class="text text-left"><b><div class="text text-danger"><b>FEMALE</b></div></b></th>
+</thead>
+<?php
+require "./php/db_conn.php";
+
+$query = "SELECT firstname, lastname, middlename, 
+AVG(CASE WHEN quarter = 'THIRD' THEN grade END) AS  THIRD_average,
+AVG(CASE WHEN quarter = 'FOURTH' THEN grade END) AS FOURTH_average
+FROM grade
+WHERE semester = '$semester'
+AND section = '$section'
+AND subjectname = '$subjectname'
+AND teacher = '$teacher'
+AND sy = '$sy'
+AND year = '$year'
+AND (quarter = 'THIRD' OR quarter = 'FOURTH')
+AND gender = 'Female'
+GROUP BY firstname, lastname, middlename
+ORDER BY lastname";
 
 
-      <table style="font-size: 16px; width:720px;">
+    $result = mysqli_query($conn, $query);
+    $rowNum = 0; // initialize rowNum
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rowNum++; // increment rowNum
+        $finalAverage = ($row[" THIRD_average"] + $row["FOURTH_average"]) / 2; // Calculate the average
+
+        ?>
+    <tr>
+        <td class="text text-center"><?php echo $rowNum; ?></td>
+        <td class="text"><?php echo $row["lastname"]; ?></td>
+        <td class="text"><?php echo $row["firstname"]; ?></td>
+        <td class="text text-center"><?php echo substr($row["middlename"], 0, 1); ?>.</td>
+        <td class="text text-center"><?php echo $row[" THIRD_average"] ?: "-"; ?></td>
+        <td class="text text-center"><?php echo $row["FOURTH_average"] ?: "-"; ?></td>
+        <td class="text text-center"><?php echo $finalAverage; ?></td>
+        <td class="text text-center" style="color: <?php echo $finalAverage < 75 ? 'red' : 'black'; ?>;">
+            <?php echo strtoupper($finalAverage < 75 ? 'FAILED' : 'PASSED'); ?>
+        </td>
+    </tr>
+<?php
+    }
+
+
+}// Add the string 'last-page'
+?>
+</table>
+</div>
+<table style="font-size: 16px; width:720px;">
   <thead>
     <tr>
 </tr>
@@ -601,7 +472,8 @@ while ($Row = mysqli_fetch_assoc($result)) {
           &nbsp;
           <u>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;      &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </u>
           </u>
           <br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -724,6 +596,7 @@ while ($Row = mysqli_fetch_assoc($result)) {
     ?>
   </tbody>
 </table>
+
   
 <script>
   var wrappers = document.querySelectorAll('.wrapper');

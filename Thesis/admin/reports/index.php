@@ -385,7 +385,7 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 
 <td class="text-center">
 <a class="text-dark" style="background-color: white; border: none;" href="#" data-bs-toggle="modal" data-bs-target="#modalGradeSheets">
-  <b>Grade Sheets</b>
+  <b>Quarterly Grade Sheets</b>
 </a>
 
   <!-- Modal -->
@@ -398,17 +398,11 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
       </div>
       <div class="modal-body">
         <div class="list-group">
-          <b>SHS FORMAT</b>
+      
           <a href="quarter1.php" class="list-group-item list-group-item-action">Quarter 1</a>
           <a href="quarter2.php" class="list-group-item list-group-item-action">Quarter 2</a>
           <a href="quarter3.php" class="list-group-item list-group-item-action">Quarter 3</a>
           <a href="quarter4.php" class="list-group-item list-group-item-action">Quarter 4</a>
-          <b>JHS FORMAT</b>
-          <a href="quarter1.php" class="list-group-item list-group-item-action">Quarter 1</a>
-          <a href="quarter2.php" class="list-group-item list-group-item-action">Quarter 2</a>
-          <a href="quarter3.php" class="list-group-item list-group-item-action">Quarter 3</a>
-          <a href="quarter4.php" class="list-group-item list-group-item-action">Quarter 4</a>
-          <!-- Add more buttons with page links as needed -->
         </div>
       </div>
     </div>
