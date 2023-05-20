@@ -389,11 +389,11 @@ function myFunction() {
            
 
             <?php
-            $i = 0;
-            while ($rows = mysqli_fetch_assoc($result)) {
-              $i++;
+$i = 0;
+    while ($rows = mysqli_fetch_assoc($result)) {
+        $i++;
 
-              ?> 
+        ?> 
            <div class="fade-in">
             <div class="content">
 
@@ -405,26 +405,26 @@ function myFunction() {
       <div class="border">
         
       <?php
-    require "php/db_conn.php";
-    $name = $_SESSION["name"];
-    $query = "SELECT students.fullname, students.adviser_id, users.sub4,
+        require "php/db_conn.php";
+        $name = $_SESSION["name"];
+        $query = "SELECT students.fullname, students.adviser_id, users.sub4,
             students.section, students.firstname,students.middlename,
             students.lastname,students.gender
             FROM students
             JOIN users ON users.sgh1 = students.adviser_id OR users.sgh2 = students.adviser_id OR users.sgh3 = students.adviser_id OR users.sgh4 = students.adviser_id OR users.sgh5 = students.adviser_id
-            WHERE (students.subject4 = users.sub4 OR students.subject2 = users.sub4 OR students.subject3 = users.sub4 OR students.subject4 = users.sub4 OR students.subject5 = users.sub4 OR students.subject6 = users.sub4 OR students.subject7 = users.sub4 OR students.subject8 = users.sub4 OR students.subject9 = users.sub4 OR students.subject10 = users.sub4)
+            WHERE (students.subject1 = users.sub4 OR students.subject2 = users.sub4 OR students.subject3 = users.sub4 OR students.subject4 = users.sub4 OR students.subject5 = users.sub4 OR students.subject6 = users.sub4 OR students.subject7 = users.sub4 OR students.subject8 = users.sub4 OR students.subject9 = users.sub4 OR students.subject10 = users.sub4)
             AND (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section OR users.sec10 = students.section)
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
             OR students.subjectteacher10 = '".$_SESSION["name"]."')
             LIMIT 1";
-    
-    $result = mysqli_query($conn, $query);
-    
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        // Do something with the row
-?>
+
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            // Do something with the row
+            ?>
    
  
 
@@ -437,12 +437,14 @@ function myFunction() {
 
 
                    <?php }
-                   ?>   
+        ?>   
+
+
   <div class="row text">
-  <div class="container text-center">
+  <div class="container ">
   <div class="col-md-6 text-center mx-auto">
 
-<div class="row" style="">
+  <div class="row" style="">
   <div class="col">
     <div class="mb-3">
       <label for="sectionSelect" class="form-label"><b>Section</b></label>
@@ -456,88 +458,92 @@ function myFunction() {
             $sectionName = $sectionRow['name'];
             echo "<option value='" . $sectionName . "'>" . $sectionName . "</option>";
         }
-        mysqli_close($conn); // Close the database connection
+        mysqli_close($conn);
         ?>
       </select>
     </div>
   </div>
+
   <div class="col">
     <div class="mb-3">
-      <label for="genderSelect" class="form-label"><b>Gender</b></label>
-      <select id="genderSelect" class="form-select">
+      <label for="gradeSelect" class="form-label"><b>Grade Level</b></label>
+      <select id="gradeSelect" class="form-select">
         <option value="">All</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
       </select>
     </div>
   </div>
 </div>
-  </div>
-  
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const genderSelect = document.getElementById('genderSelect');
-  const sectionSelect = document.getElementById('sectionSelect');
-  
-  // Check if the selected gender and section are stored in localStorage
-  const selectedGender = localStorage.getItem('selectedGender');
-  const selectedSection = localStorage.getItem('selectedSection');
-  
-  // Set the stored values as the selected options if they exist
-  if (selectedGender) {
-    genderSelect.value = selectedGender;
-  }
-  
-  if (selectedSection) {
-    sectionSelect.value = selectedSection;
-  }
-  
-  genderSelect.addEventListener('change', function() {
-    const selectedGender = genderSelect.value;
-    // Store the selected gender in localStorage
-    localStorage.setItem('selectedGender', selectedGender);
-    // Redirect to the same page with the selected gender as a query parameter
-    window.location.href = window.location.pathname + '?gender=' + selectedGender;
+  document.addEventListener('DOMContentLoaded', function() {
+    const gradeSelect = document.getElementById('gradeSelect');
+    const sectionSelect = document.getElementById('sectionSelect');
+
+    // Check if the selected grade and section are stored in localStorage
+    const selectedGrade = localStorage.getItem('selectedGrade');
+    const selectedSection = localStorage.getItem('selectedSection');
+
+    // Set the stored values as the selected options if they exist
+    if (selectedGrade) {
+      gradeSelect.value = selectedGrade;
+    }
+
+    if (selectedSection) {
+      sectionSelect.value = selectedSection;
+    }
+
+    gradeSelect.addEventListener('change', function() {
+      const selectedGrade = gradeSelect.value;
+      // Store the selected grade in localStorage
+      localStorage.setItem('selectedGrade', selectedGrade);
+      // Redirect to the same page with the selected grade as a query parameter
+      window.location.href = window.location.pathname + '?grade=' + selectedGrade;
+    });
+
+    sectionSelect.addEventListener('change', function() {
+      const selectedSection = sectionSelect.value;
+      // Store the selected section in localStorage
+      localStorage.setItem('selectedSection', selectedSection);
+      // Redirect to the same page with the selected section as a query parameter
+      window.location.href = window.location.pathname + '?section=' + selectedSection;
+    });
   });
-  
-  sectionSelect.addEventListener('change', function() {
-    const selectedSection = sectionSelect.value;
-    // Store the selected section in localStorage
-    localStorage.setItem('selectedSection', selectedSection);
-    // Redirect to the same page with the selected section as a query parameter
-    window.location.href = window.location.pathname + '?section=' + selectedSection;
-  });
-});
 </script>
 
     </div>
     <?php
 include "php/db_conn.php";
 
-$id = 1; // ID value for the row you want to fetch
+        $id = 1; // ID value for the row you want to fetch
 
-// Fetching 'quarter' value
-$query = "SELECT quarter FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query);
-$quarter = '';
+        // Fetching 'quarter' value
+        $query = "SELECT quarter FROM settings WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+        $quarter = '';
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $quarter = mysqli_fetch_assoc($result)['quarter'];
-}
+        if ($result && mysqli_num_rows($result) > 0) {
+            $quarter = mysqli_fetch_assoc($result)['quarter'];
+        }
 
-// Fetching 'semester' value
-$query = "SELECT semester FROM settings WHERE id = $id";
-$result = mysqli_query($conn, $query);
-$semester = '';
+        // Fetching 'semester' value
+        $query = "SELECT semester FROM settings WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+        $semester = '';
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $semester = mysqli_fetch_assoc($result)['semester'];
-}
+        if ($result && mysqli_num_rows($result) > 0) {
+            $semester = mysqli_fetch_assoc($result)['semester'];
+        }
 
-// Outputting the values
-echo "<input hidden class='quarter' id='quarter' name='quarter' value='" . $quarter. "'>";
-echo "<input hidden class='semester' id='semester' name='semester' value='" . $semester . "'>";
-?>
+        // Outputting the values
+        echo "<input hidden class='quarter' id='quarter' name='quarter' value='" . $quarter. "'>";
+        echo "<input hidden class='semester' id='semester' name='semester' value='" . $semester . "'>";
+        ?>
 
 
 <input hidden id="randomInput" class="form-control" type="text" name="session">
@@ -610,140 +616,141 @@ echo "<input hidden class='semester' id='semester' name='semester' value='" . $s
         <tbody>    
 <!-- Modal button -->
 <?php
- // Add this line to start the session
- require "php/db_conn.php";
+// Add this line to start the session
+require "php/db_conn.php";
 
- $name = $_SESSION["name"]; // Get the selected gender from the form
- $selectedGender = isset($_GET['gender']) ? $_GET['gender'] : '';
- 
- // Update the WHERE clause in the query based on the selected gender
- $whereClause = "";
- if (!empty($selectedGender)) {
-   $whereClause .= " AND students.gender = '" . $selectedGender . "'";
- }
- 
- // Get the selected section from the form
- $selectedSection = isset($_GET['section']) ? $_GET['section'] : '';
- 
- // Update the WHERE clause in the query based on the selected section
- if (!empty($selectedSection)) {
-   $whereClause .= " AND students.section = '" . $selectedSection . "'";
- }
- 
- // Rest of the code...
- 
- $query = "SELECT students.fullname, students.adviser_id, users.sub4,
-     students.section, students.firstname, students.middlename,
-     students.trackstrand, students.lastname, students.gender,
-     students.syear, students.grade, students.id
-     FROM students
-     JOIN users ON 
-         (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
-         OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
-         OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
-         OR users.sec10 = students.section)
-     WHERE gender = 'MALE' AND (students.subject4 = '".$_SESSION["sub4"]."' OR students.subject2 = '".$_SESSION["sub4"]."' 
-         OR students.subject3 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
-         OR students.subject5 = '".$_SESSION["sub4"]."' OR students.subject6 = '".$_SESSION["sub4"]."' 
-         OR students.subject7 = '".$_SESSION["sub4"]."' OR students.subject8 = '".$_SESSION["sub4"]."' 
-         OR students.subject9 = '".$_SESSION["sub4"]."' OR students.subject10 = '".$_SESSION["sub4"]."')
-         AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher7 = '".$_SESSION["name"]."' OR students.subjectteacher8 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher9 = '".$_SESSION["name"]."' OR students.subjectteacher10 = '".$_SESSION["name"]."')
-         $whereClause
-     GROUP BY students.fullname, students.gender
-     ORDER BY students.gender DESC, students.fullname ASC";
- 
+        $name = $_SESSION["name"]; // Get the selected gender from the form
 
-$result = mysqli_query($conn, $query);
-$maleHeaderDisplayed = false;
-$femaleHeaderDisplayed = false;
-if (mysqli_num_rows($result) > 0) {
-  $maleHeaderDisplayed = false;
-  $femaleHeaderDisplayed = false;
+        // Update the WHERE clause in the query based on the selected gender
 
-  while ($Row = mysqli_fetch_assoc($result)) {
-  
-      
-      // Display the student data here
-echo "<tr>";
-      echo "<td hidden colspan=''>";
-      echo "<input hidden class='no' id='studentid' name='studentid[]' value='" . $Row['id'] . "'>";
-      echo $Row['id'];
-      echo "</td>";
+        // Update the WHERE clause in the query based on the selected grade level
 
+        // Get the selected grade level from the form
+        $selectedGrade = isset($_GET['grade']) ? $_GET['grade'] : '';
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
-      echo "</td>";
-      
-      echo "<td colspan=''>";
-      echo "<input hidden class='no' id='studentname' name='studentname[]' value='" . $Row['fullname'] . "'>";
-      echo $Row['fullname'];
-      echo "</td>";
+        // Update the WHERE clause in the query based on the selected grade level
+        $whereClause = "";
+        if (!empty($selectedGrade)) {
+            $whereClause .= " AND students.grade = '" . $selectedGrade . "'";
+        }
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='firstname' name='firstname[]' value='" . $Row['firstname'] . "'>";
-      echo "</td>";
+        $selectedSection = isset($_GET['section']) ? $_GET['section'] : '';
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no text-center' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
-      echo "</td>";
+        // Update the WHERE clause in the query based on the selected section
+        if (!empty($selectedSection)) {
+            $whereClause .= " AND students.section = '" . $selectedSection . "'";
+        }
 
+        // Rest of the code...
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='year' name='year[]' value='" . $Row['grade'] . "'>";
-      echo "</td>";
+        $query = "SELECT students.fullname, students.adviser_id, users.sub4,
+ students.section, students.firstname, students.middlename,
+ students.trackstrand, students.lastname, students.gender,
+ students.syear, students.grade, students.id
+ FROM students
+ JOIN users ON 
+     (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
+     OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
+     OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
+     OR users.sec10 = students.section)
+ WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub4"]."' OR students.subject2 = '".$_SESSION["sub4"]."' 
+     OR students.subject3 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
+     OR students.subject5 = '".$_SESSION["sub4"]."' OR students.subject6 = '".$_SESSION["sub4"]."' 
+     OR students.subject7 = '".$_SESSION["sub4"]."' OR students.subject8 = '".$_SESSION["sub4"]."' 
+     OR students.subject9 = '".$_SESSION["sub4"]."' OR students.subject10 = '".$_SESSION["sub4"]."')
+     AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
+     students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher10 = '".$_SESSION["name"]."') 
+" . $whereClause . " 
+ORDER BY students.lastname ASC";
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
-      echo "</td>";
+        // Execute the query and fetch the results...
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='middlename' name='middlename[]' value='" . $Row['middlename'] . "'>";
-      echo "</td>";
+        // Rest of the code...
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='lastname' name='lastname[]' value='" . $Row['lastname'] . "'>";
-      echo "</td>";
+        $result = mysqli_query($conn, $query);
+        $maleHeaderDisplayed = false;
+        $femaleHeaderDisplayed = false;
+        if (mysqli_num_rows($result) > 0) {
+            $maleHeaderDisplayed = false;
+            $femaleHeaderDisplayed = false;
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no text-center' id='gender' name='gender[]' value='" . $Row['gender'] . "'>";
-      echo "</td>";
+            while ($Row = mysqli_fetch_assoc($result)) {
+                // Display the student data here
+                echo "<tr>";
+                echo "<td hidden colspan=''>";
+                echo "<input hidden class='no' id='studentid' name='studentid[]' value='" . $Row['id'] . "'>";
+                echo $Row['id'];
+                echo "</td>";
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='ts' name='ts[]' value='" . $Row['trackstrand'] . "'>";
-      echo "</td>";
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
+                echo "</td>";
 
-      echo "<td hidden>";
-      echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub4'] . "'>";
-      echo "</td>";
+                echo "<td colspan=''>";
+                echo "<input hidden class='no' id='studentname' name='studentname[]' value='" . $Row['fullname'] . "'>";
+                echo $Row['fullname'];
+                echo "</td>";
 
-      echo "<td style='width:30%;'>";
-      echo "<select id='grade-" . $i . "' name='grade[]' class='form-control fw-bold text-center grade-select'>";
-      echo "<option value='0' class=''>0</option>";
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='firstname' name='firstname[]' value='" . $Row['firstname'] . "'>";
+                echo "</td>";
 
-      for ($j = 50; $j <= 100; $j++) {
-          echo "<option
-          value='" . $j . "'>" . $j . "</option>";
-          }
-      
-              echo "</select>";
-              echo "</td>";
-          
-              echo "<td hidden><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
-              echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
-              echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
-              echo "</tr>";
-          }
-}
+                echo "<td hidden colspan=''>";
+                echo "<input class='no text-center' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
+                echo "</td>";
 
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='year' name='year[]' value='" . $Row['grade'] . "'>";
+                echo "</td>";
 
-    
-// Add the closing PHP tag
-?>
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='middlename' name='middlename[]' value='" . $Row['middlename'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='lastname' name='lastname[]' value='" . $Row['lastname'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no text-center' id='gender' name='gender[]' value='" . $Row['gender'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='ts' name='ts[]' value='" . $Row['trackstrand'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden>";
+                echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub4'] . "'>";
+                echo "</td>";
+
+                echo "<td style='width:30%;'>";
+                echo "<select id='grade-" . $i . "' name='grade[]' class='form-control fw-bold text-center grade-select'>";
+                echo "<option value='0' class=''>0</option>";
+
+                for ($j = 50; $j <= 100; $j++) {
+                    echo "<option value='" . $j . "'>" . $j . "</option>";
+                }
+
+                echo "</select>";
+                echo "</td>";
+
+                echo "<td hidden><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
+                echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
+                echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
+                echo "</tr>";
+            }
+        }
+
+        // Add the closing PHP tag
+        ?>
 
 
 
@@ -770,144 +777,145 @@ echo "<tr>";
               </thead>
     
 
-        <tbody>    
+        <tbody >    
 <!-- Modal button -->
 <?php
- // Add this line to start the session
- require "php/db_conn.php";
+        // Add this line to start the session
+        require "php/db_conn.php";
 
- $name = $_SESSION["name"]; // Get the selected gender from the form
- $selectedGender = isset($_GET['gender']) ? $_GET['gender'] : '';
- 
- // Update the WHERE clause in the query based on the selected gender
- $whereClause = "";
- if (!empty($selectedGender)) {
-   $whereClause .= " AND students.gender = '" . $selectedGender . "'";
- }
- 
- // Get the selected section from the form
- $selectedSection = isset($_GET['section']) ? $_GET['section'] : '';
- 
- // Update the WHERE clause in the query based on the selected section
- if (!empty($selectedSection)) {
-   $whereClause .= " AND students.section = '" . $selectedSection . "'";
- }
- 
- // Rest of the code...
- 
- $query = "SELECT students.fullname, students.adviser_id, users.sub4,
-     students.section, students.firstname, students.middlename,
-     students.trackstrand, students.lastname, students.gender,
-     students.syear, students.grade, students.id
-     FROM students
-     JOIN users ON 
-         (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
-         OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
-         OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
-         OR users.sec10 = students.section)
-     WHERE  gender = 'FEMALE' AND  (students.subject4 = '".$_SESSION["sub4"]."' OR students.subject2 = '".$_SESSION["sub4"]."' 
-         OR students.subject3 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
-         OR students.subject5 = '".$_SESSION["sub4"]."' OR students.subject6 = '".$_SESSION["sub4"]."' 
-         OR students.subject7 = '".$_SESSION["sub4"]."' OR students.subject8 = '".$_SESSION["sub4"]."' 
-         OR students.subject9 = '".$_SESSION["sub4"]."' OR students.subject10 = '".$_SESSION["sub4"]."')
-         AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR students.subjectteacher2 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher3 = '".$_SESSION["name"]."' OR students.subjectteacher4 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher5 = '".$_SESSION["name"]."' OR students.subjectteacher6 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher7 = '".$_SESSION["name"]."' OR students.subjectteacher8 = '".$_SESSION["name"]."' 
-         OR students.subjectteacher9 = '".$_SESSION["name"]."' OR students.subjectteacher10 = '".$_SESSION["name"]."')
-         $whereClause
-     GROUP BY students.fullname, students.gender
-     ORDER BY students.gender DESC, students.fullname ASC";
- 
+        $name = $_SESSION["name"]; // Get the selected gender from the form
 
-$result = mysqli_query($conn, $query);
-$maleHeaderDisplayed = false;
-$femaleHeaderDisplayed = false;
-if (mysqli_num_rows($result) > 0) {
-  $maleHeaderDisplayed = false;
-  $femaleHeaderDisplayed = false;
+        // Update the WHERE clause in the query based on the selected gender
 
-  while ($Row = mysqli_fetch_assoc($result)) {
-  
-      
-      // Display the student data here
-echo "<tr>";
-      echo "<td hidden colspan=''>";
-      echo "<input hidden class='no' id='studentid' name='studentid[]' value='" . $Row['id'] . "'>";
-      echo $Row['id'];
-      echo "</td>";
+        // Update the WHERE clause in the query based on the selected grade level
 
-      echo "<td colspan=''>";
-      echo "<input hidden class='no' id='studentname' name='studentname[]' value='" . $Row['fullname'] . "'>";
-      echo $Row['fullname'];
-      echo "</td>";
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
-      echo "</td>";
+        // Get the selected grade level from the form
+        $selectedGrade = isset($_GET['grade']) ? $_GET['grade'] : '';
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='firstname' name='firstname[]' value='" . $Row['firstname'] . "'>";
-      echo "</td>";
+        // Update the WHERE clause in the query based on the selected grade level
+        $whereClause = "";
+        if (!empty($selectedGrade)) {
+            $whereClause .= " AND students.grade = '" . $selectedGrade . "'";
+        }
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no text-center' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
-      echo "</td>";
+        $selectedSection = isset($_GET['section']) ? $_GET['section'] : '';
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no text-center' id='gender' name='gender[]' value='" . $Row['gender'] . "'>";
-      echo "</td>";
+        // Update the WHERE clause in the query based on the selected section
+        if (!empty($selectedSection)) {
+            $whereClause .= " AND students.section = '" . $selectedSection . "'";
+        }
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='year' name='year[]' value='" . $Row['grade'] . "'>";
-      echo "</td>";
+        // Rest of the code...
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
-      echo "</td>";
+        $query = "SELECT students.fullname, students.adviser_id, users.sub4,
+ students.section, students.firstname, students.middlename,
+ students.trackstrand, students.lastname, students.gender,
+ students.syear, students.grade, students.id
+ FROM students
+ JOIN users ON 
+     (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
+     OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
+     OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
+     OR users.sec10 = students.section)
+ WHERE gender = 'FEMALE' AND (students.subject1 = '".$_SESSION["sub4"]."' OR students.subject2 = '".$_SESSION["sub4"]."' 
+     OR students.subject3 = '".$_SESSION["sub4"]."' OR students.subject4 = '".$_SESSION["sub4"]."' 
+     OR students.subject5 = '".$_SESSION["sub4"]."' OR students.subject6 = '".$_SESSION["sub4"]."' 
+     OR students.subject7 = '".$_SESSION["sub4"]."' OR students.subject8 = '".$_SESSION["sub4"]."' 
+     OR students.subject9 = '".$_SESSION["sub4"]."' OR students.subject10 = '".$_SESSION["sub4"]."')
+     AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
+     students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
+     OR students.subjectteacher10 = '".$_SESSION["name"]."') 
+" . $whereClause . " 
+ORDER BY students.lastname ASC";
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='middlename' name='middlename[]' value='" . $Row['middlename'] . "'>";
-      echo "</td>";
+        // Execute the query and fetch the results...
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='lastname' name='lastname[]' value='" . $Row['lastname'] . "'>";
-      echo "</td>";
+        // Rest of the code...
 
-   
+        $result = mysqli_query($conn, $query);
+        $maleHeaderDisplayed = false;
+        $femaleHeaderDisplayed = false;
+        if (mysqli_num_rows($result) > 0) {
+            $maleHeaderDisplayed = false;
+            $femaleHeaderDisplayed = false;
 
-      echo "<td hidden colspan=''>";
-      echo "<input class='no' id='ts' name='ts[]' value='" . $Row['trackstrand'] . "'>";
-      echo "</td>";
+            while ($Row = mysqli_fetch_assoc($result)) {
+                // Display the student data here
+                echo "<tr>";
+                echo "<td hidden colspan=''>";
+                echo "<input hidden class='no' id='studentid' name='studentid[]' value='" . $Row['id'] . "'>";
+                echo $Row['id'];
+                echo "</td>";
 
-      echo "<td hidden>";
-      echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub4'] . "'>";
-      echo "</td>";
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='section' name='section[]' value='" . $Row['section'] . "'>";
+                echo "</td>";
 
-      echo "<td style='width:30%;'>";
-      echo "<select id='grade-" . $i . "' name='grade[]' class='form-control fw-bold text-center grade-select'>";
-      echo "<option value='0' class=''>0</option>";
+                echo "<td colspan=''>";
+                echo "<input hidden class='no' id='studentname' name='studentname[]' value='" . $Row['fullname'] . "'>";
+                echo $Row['fullname'];
+                echo "</td>";
 
-      for ($j = 50; $j <= 100; $j++) {
-          echo "<option
-          value='" . $j . "'>" . $j . "</option>";
-          }
-      
-              echo "</select>";
-              echo "</td>";
-          
-              echo "<td hidden><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
-              echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
-              echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
-              echo "</tr>";
-          }
-}
-}
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='firstname' name='firstname[]' value='" . $Row['firstname'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no text-center' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='year' name='year[]' value='" . $Row['grade'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='sy' name='sy[]' value='" . $Row['syear'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='middlename' name='middlename[]' value='" . $Row['middlename'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='lastname' name='lastname[]' value='" . $Row['lastname'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no text-center' id='gender' name='gender[]' value='" . $Row['gender'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden colspan=''>";
+                echo "<input class='no' id='ts' name='ts[]' value='" . $Row['trackstrand'] . "'>";
+                echo "</td>";
+
+                echo "<td hidden>";
+                echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub4'] . "'>";
+                echo "</td>";
+
+                echo "<td style='width:30%;'>";
+                echo "<select id='grade-" . $i . "' name='grade[]' class='form-control fw-bold text-center grade-select'>";
+                echo "<option value='0' class=''>0</option>";
+
+                for ($j = 50; $j <= 100; $j++) {
+                    echo "<option value='" . $j . "'>" . $j . "</option>";
+                }
+
+                echo "</select>";
+                echo "</td>";
+
+                echo "<td hidden><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
+                echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
+                echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
+                echo "</tr>";
+            }
+        }
     }
-  
-    
+}
 // Add the closing PHP tag
 ?>
-
 
 
 
