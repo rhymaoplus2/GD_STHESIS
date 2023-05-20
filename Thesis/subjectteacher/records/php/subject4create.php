@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
             $remarks = "FAILED";
         }
 
-        $query = "SELECT * FROM grade WHERE studentname='$studentname' AND semester='$semester' AND quarter='$quarter' AND subjectname='$subjectname'";
+        $query = "SELECT * FROM grade WHERE studentname='$studentname' AND semester='$semester' AND quarter='$quarter' AND year='$year' AND subjectname='$subjectname'";
         $query_run = mysqli_query($conn, $query);
         $name = $_SESSION['name'];
 
