@@ -2,40 +2,41 @@
 include "db_conn.php";
 session_start();
 
-
 if (isset($_POST['username']) && isset($_POST['password'])) {
-
     function test_input($data) {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 
     $username = test_input($_POST['username']);
     $password = test_input($_POST['password']);
-    $name = test_input($_POST['name']);
-    $sec1 = test_input($_POST['sec1']);
-    $sub11 = test_input($_POST['sub1']);
 
-    // get today's day number
-    $day = date('j');
+    // get today's date
+    $today = date('Y-m-d');
 
     if (empty($username)) {
         header("Location: ../index.php?error=User Name is Required");
     } else if (empty($password)) {
         header("Location: ../index.php?error=Password is Required");
     } else {
-
-        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password' and status=1";
+        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password' AND status=1";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
-            // the user name must be unique
             $row = mysqli_fetch_assoc($result);
-            
-            // check if user has enough XP to log in
-            if (($row['xp'] - $day) >= 1) {
+
+            // calculate the date gap between xp and today's date
+            $xpDate = $row['xp'];
+            $todayTimestamp = strtotime($today);
+            $xpTimestamp = strtotime($xpDate);
+            $secondsPerDay = 24 * 60 * 60;
+            $gap = ($todayTimestamp - $xpTimestamp) / $secondsPerDay;
+
+            if ($gap >= 3) {
+                header("Location: ../index.php?error=You do not have access to this page");
+            } else {
                 // check if one of the roles is "subject teacher"
                 $roles = [$row['role'], $row['role2'], $row['role3']];
                 foreach ($roles as $role) {
@@ -62,16 +63,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 }
                 // if none of the roles is "subject teacher"
                 header("Location: ../index.php?error=You do not have access to this page");
-            } else {
-                header("Location: ../index.php?error=You do not have access to this page");
             }
-
+            
         } else {
             header("Location: ../index.php?error=Incorrect User name or password");
         }
-
     }
-    
 } else {
     header("Location: ../index.php");
 }
+?>
