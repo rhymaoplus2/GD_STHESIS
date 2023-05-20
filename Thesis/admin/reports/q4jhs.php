@@ -372,6 +372,7 @@ function validate($data){
 }
 $section = validate($_GET['section']);
 $sy = validate($_GET['sy']);
+$year = validate($_GET['year']);
 include "php/db_conn.php";
 
 // Execute the SQL query to retrieve the student data for the 1st quarter
@@ -380,6 +381,7 @@ $query = "SELECT lastname, firstname, middlename, studentname, subjectname, grad
           WHERE quarter = 'FOURTH' 
   AND section = '$section'
   AND sy = '$sy'
+  AND year = '$year'
           ORDER BY lastname;";
 
 // Execute the query and fetch the results
@@ -389,6 +391,7 @@ $info_query = "SELECT * FROM grade
 
 WHERE quarter = 'FOURTH' 
   AND section = '$section'
+  AND year = '$year'
   AND sy = '$sy'  LIMIT 1
 ";
 $info_result = mysqli_query($conn, $info_query);

@@ -375,6 +375,7 @@ function validate($data){
 }
 $section = validate($_GET['section']);
 $sy = validate($_GET['sy']);
+$year = validate($_GET['year']);
 include "php/db_conn.php";
 
 $query = "SELECT DISTINCT lastname, firstname, middlename, studentname, subjectname, grade, quarter, sy
@@ -383,6 +384,7 @@ WHERE quarter = 'THIRD'
   AND LOWER(gender) = 'male'
   AND section = '$section'
   AND sy = '$sy'
+  AND year = '$year'
 ORDER BY studentname, subjectname;
 ";
 
@@ -721,6 +723,7 @@ WHERE quarter = 'THIRD'
   AND LOWER(gender) = 'female'
   AND section = '$section'
   AND sy = '$sy'
+  AND year = '$year'
 ORDER BY studentname, subjectname;
 ";
 

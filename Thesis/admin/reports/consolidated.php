@@ -383,69 +383,75 @@ setInterval(function() {
                 </tr>
             </thead>
             <tbody id="table-body">
-                <?php
-                $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy FROM grade GROUP BY section, sy ORDER BY year, section, sy";
-                $result = $conn->query($query);
+    <?php
+    $query = "SELECT id, section, year, sy FROM grade GROUP BY section, sy ORDER BY year, section, sy";
+    $result = $conn->query($query);
 
-                while ($row = $result->fetch_assoc()) {
-                    $section = urlencode($row['section']);
-                    $sy = urlencode($row['sy']);
-                    $yearSectionYear = "Grade: <b> ".$row['year'] . "</b>&nbsp;&nbsp;-&nbsp;&nbsp;<b>" . $row['section'] . "</b> (&nbsp;ACADEMIC YEAR : <b> "  . $row['sy']. "</b>"."&nbsp;)";
+    $counter = 1; // Initialize a counter for unique identifiers
 
-                    $quarter1shs = "q1shs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $quarter1jhs = "q1jhs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $quarter2jhs = "q2jhs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $quarter3jhs = "q3jhs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $quarter4jhs = "q4jhs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $quarter2shs = "q2shs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $quarter3shs = "q3shs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $quarter4shs = "q4shs.php?section=" . $section . "&sy=" . $row['sy'];
-                    $sshs1 = "sshs1.php?section=" . $section . "&sy=" . $row['sy'];
-                    $sshs2 = "sshs2.php?section=" . $section . "&sy=" . $row['sy'];
-                    ?>
-                    <tr>
-                        <td>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal<?php echo $section; ?>">
-                                <?php echo $yearSectionYear; ?>
-                            </a>
-                        </td>
-                    </tr>
-                    <div class="modal fade" id="myModal<?php echo $section; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header text-white" style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-                                    <h5 class="modal-title" id="exampleModalLabel">CHOOSE DATA</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><b>JHS FORMAT CONSOLIDATED GRADES</b></p>
-                                    <ul>
-                                    <li><a href="<?php echo $quarter1jhs; ?>" target="_blank">Quarter 1</a></li>
-                                    <li><a href="<?php echo $quarter2jhs; ?>" target="_blank">Quarter 2</a></li>
-                                    <li><a href="<?php echo $quarter3jhs; ?>" target="_blank">Quarter 3</a></li>
-                                    <li><a href="<?php echo $quarter4jhs; ?>" target="_blank">Quarter 4</a></li>
-                                    </ul>
-                                    <p><b>SHS FORMAT CONSOLIDATED GRADES</b></p>
-                                    <ul>
-                                    <li><a href="<?php echo $quarter1shs; ?>" target="_blank">Quarter 1</a></li>
-                                    <li><a href="<?php echo $quarter2shs; ?>" target="_blank">Quarter 2</a></li>
-                                    <li><a href="<?php echo $quarter3shs; ?>" target="_blank">Quarter 3</a></li>
-                                    <li><a href="<?php echo $quarter4shs; ?>" target="_blank">Quarter 4</a></li>
-                                    <li><a href="<?php echo $sshs1; ?>" target="_blank">Semester 1</a></li>
-                                    <li><a href="<?php echo $sshs2; ?>" target="_blank">Semester 2</a></li>
-                               
-                              
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+    while ($row = $result->fetch_assoc()) {
+        $section = urlencode($row['section']);
+        $sy = urlencode($row['sy']);
+        $yearSectionYear = "Grade: <b> ".$row['year'] . "</b>&nbsp;&nbsp;-&nbsp;&nbsp;<b>" . $row['section'] . "</b> (&nbsp;ACADEMIC YEAR : <b> "  . $row['sy']. "</b>"."&nbsp;)";
+
+        $modalId = "myModal" . $counter; // Generate unique modal ID
+        $counter++;
+
+        $quarter1shs = "q1shs.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $quarter1jhs = "q1jhs.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $quarter2jhs = "q2jhs.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $quarter3jhs = "q3jhs.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $quarter4jhs = "q4jhs.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $quarter2shs = "q2shs.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $quarter3shs = "q3shs.php?section=". $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $quarter4shs = "q4shs.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $sshs1 = "sshs1.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        $sshs2 = "sshs2.php?section=" . $section . "&sy=" . $row['sy']. "&year=" . $row['year'];
+        ?>
+
+
+        <tr>
+            <td>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>">
+                    <?php echo $yearSectionYear; ?>
+                </a>
+            </td>
+        </tr>
+        <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-white" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+                        <h5 class="modal-title" id="exampleModalLabel">CHOOSE DATA</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <?php
-                }
-                $conn->close();
-                ?>
-            </tbody>
-        </table>
+                    <div class="modal-body">
+                        <p><b>JHS FORMAT CONSOLIDATED GRADES</b></p>
+                        <ul>
+                            <li><a href="<?php echo $quarter1jhs; ?>" target="_blank">Quarter 1</a></li>
+                            <li><a href="<?php echo $quarter2jhs; ?>" target="_blank">Quarter 2</a></li>
+                            <li><a href="<?php echo $quarter3jhs; ?>" target="_blank">Quarter 3</a></li>
+                            <li><a href="<?php echo $quarter4jhs; ?>" target="_blank">Quarter 4</a></li>
+                        </ul>
+                        <p><b>SHS FORMAT CONSOLIDATED GRADES</b></p>
+                        <ul>
+                            <li><a href="<?php echo $quarter1shs; ?>" target="_blank">Quarter 1</a></li>
+                            <li><a href="<?php echo $quarter2shs; ?>" target="_blank">Quarter 2</a></li>
+                            <li><a href="<?php echo $quarter3shs; ?>" target="_blank">Quarter 3</a></li>
+                            <li><a href="<?php echo $quarter4shs; ?>" target="_blank">Quarter 4</a></li>
+                            <li><a href="<?php echo $sshs1; ?>" target="_blank">Semester 1</a></li>
+                            <li><a href="<?php echo $sshs2; ?>" target="_blank">Semester 2</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+    $conn->close();
+    ?>
+</tbody>
+</table>
+
     </div>
 </div>
 
