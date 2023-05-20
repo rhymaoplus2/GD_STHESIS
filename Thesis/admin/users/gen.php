@@ -1,7 +1,7 @@
-<?php 
+<?php
 include "db_conn.php";
 
-function validate($data){
+function validate($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -19,12 +19,12 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        header("Location:users.php");
+        header("Location: users.php");
         exit();
     }
 
     $stmt->close();
-} else if(isset($_POST['update'])){
+} else if (isset($_POST['update'])) {
     $id = validate($_POST['id']);
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
@@ -53,3 +53,4 @@ if (isset($_GET['id'])) {
         $stmt->close();
     }
 }
+?>

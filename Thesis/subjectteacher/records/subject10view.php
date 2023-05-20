@@ -462,7 +462,8 @@ function myFunction() {
   <p class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" id="input-text" style="font-size: 30px; width: 100px;"></p>
   <hr>
   
-  
+  <p id="selected-value" class="ff mx-auto text-center text-wrap mb-3 bg-warning text-white rounded-pill shadow" style="font-size: 30px; width: 100px;"></p>
+
   <div class="row">
     
    
@@ -473,15 +474,26 @@ function myFunction() {
   </div><div class="row text-center">
   <div class="row text-center">
   <div class="col">
+    <select class="form-select fw-bold" id="year" name="year">
+      <option value="">All Year Level</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
+  </div>
+  <div class="col">
     <select class="form-select fw-bold" id="gender" name="gender">
-      <option value="">Gender</option>
+      <option value="">All Gender</option>
       <option value="MALE">Male</option>
       <option value="FEMALE">Female</option>
     </select>
   </div>
   <div class="col">
     <select class="form-select fw-bold" id="quarter" name="quarter">
-      <option value="">Quarter</option>
+      <option value="">All Quarter</option>
       <option value="FIRST">First</option>
       <option value="SECOND">Second</option>
       <option value="THIRD">Third</option>
@@ -490,7 +502,7 @@ function myFunction() {
   </div>
   <div class="col">
     <select class="form-select fw-bold" id="semester" name="semester">
-      <option value="">Semester</option>
+      <option value="">All Semester</option>
       <option value="FIRST">First</option>
       <option value="SECOND">Second</option>
     </select>
@@ -500,7 +512,7 @@ function myFunction() {
  
    
       <select class="form-select fw-bold" id="section" name="section">
-        <option value="">All</option>
+        <option value="">All Sections</option>
         <?php
         include "php/db_conn.php";
         $sectionQuery = "SELECT name FROM section";
@@ -517,7 +529,7 @@ function myFunction() {
   
   <div class="col">
     <select class="form-select fw-bold" id="sy" name="sy">
-      <option value="">Academic Year</option>
+      <option value="">Life Time</option>
       <option value="2019-2020">2019-2020</option>
       <option value="2020-2021">2020-2021</option>
       <option value="2021-2022">2021-2022</option>
@@ -602,6 +614,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $quarter = $_POST["quarter"];
   $section = $_POST["section"];
   $sy = $_POST["sy"];
+  $year = $_POST["year"];
 
   if (!empty($semester)) {
     $query .= " AND semester = '$semester'";
@@ -615,7 +628,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!empty($sy)) {
     $query .= " AND sy = '$sy'";
   }
-
+  if (!empty($year)) {
+    $query .= " AND year = '$year'";
+  }
   if (isset($_POST["gender"])) {
     $gender = $_POST["gender"];
     
@@ -664,7 +679,6 @@ $result = mysqli_query($conn, $query);
   <a type="button" class="btn" data-bs-toggle="modal" 
     data-bs-target="#deleteModal<?php echo $rows['id']; ?>"
     style="border: none; background-color:transparent; outline: none;" title="Delete">
-
     <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
   </a>
 <?php else: ?>
@@ -684,7 +698,7 @@ $result = mysqli_query($conn, $query);
           <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
        Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
-        <form class="delete" action="delete_grade10.php" method="POST">
+        <form class="delete" action="delete_grade1.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
@@ -742,7 +756,7 @@ $result = mysqli_query($conn, $query);
               </thead>
           
          <tbody class="text-dark" style="  background-color:#e6e6e6; border-color:black;  ">
-              <?php 
+         <?php 
 require "./php/db_conn.php";
 $name = $_SESSION['name'];
 // Add the section column to the SELECT statement
@@ -755,12 +769,13 @@ $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.secti
     AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND b.gender = 'FEMALE' AND b.success='1'";
 
+  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $semester = $_POST["semester"];
   $quarter = $_POST["quarter"];
   $section = $_POST["section"];
   $sy = $_POST["sy"];
-
+  $year = $_POST["year"];
 
   if (!empty($semester)) {
     $query .= " AND semester = '$semester'";
@@ -774,7 +789,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (!empty($sy)) {
     $query .= " AND sy = '$sy'";
   }
-
+  if (!empty($year)) {
+    $query .= " AND year = '$year'";
+  }
   if (isset($_POST["gender"])) {
     $gender = $_POST["gender"];
     
@@ -782,21 +799,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $query .= " AND gender = '$gender'";
     }
   }
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // ...
-  
-    if (isset($_POST["status"])) {
-      $status = $_POST["status"];
-      
-      if (!empty($status)) {
-        $query .= " AND b.status = '$status'";
-      }
+
+  if (isset($_POST["status"])) {
+    $status = $_POST["status"];
+
+    if ($status !== "") {
+      $query .= " AND b.status = '$status'";
     }
   }
 }
 
 $result = mysqli_query($conn, $query);
 ?>
+
 
 
 
@@ -845,7 +860,7 @@ $result = mysqli_query($conn, $query);
           <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
        Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
-        <form class="delete" action="delete_grade10.php" method="POST">
+        <form class="delete" action="delete_grade1.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>

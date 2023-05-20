@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QAURTER 1</title>
+	<title>CONSOLIDATED GRADES</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -27,7 +27,7 @@
   
 }
 body {
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
   background-repeat: no-repeat;
 
 }
@@ -44,7 +44,7 @@ body {
 .formx {
 	width: auto;
 	padding: 20px;
-	border-radius: 30px;
+	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box {
@@ -53,7 +53,7 @@ body {
 }
 .container table {
 	padding: 20px;
-	border-radius: 10px;
+	border-radius: 5px;
 	
   border:10px;
   background-color: white;
@@ -290,7 +290,7 @@ td a:hover {
 }
 
 .table-scrollable::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);/* color of the thumb */
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);* color of the thumb */
   border-radius: 5px; /* roundness of the thumb */
 }
 
@@ -302,6 +302,15 @@ td a:hover {
     top: 0;
   
   }
+  .zoom-image {
+  width: 30px;
+  transition: transform 0.3s ease;
+}
+
+.zoom-image:hover {
+  transform: scale(1.2); /* Increase the scale value to zoom in further */
+}
+
   </style>
 </head>
 
@@ -317,7 +326,7 @@ td a:hover {
     <div class="border">
 <div>
     <div  style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     border-radius:20px; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="mb-3 text-white text-center"><h4>SHS FIRST QUARTER PRINTABLE GRADES </h4></div>
+     border-radius:20px;   background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);" class="mb-3 text-white text-center"><h4>FIRST QUARTER PRINTABLE GRADES </h4></div>
 </div>  
 <div class="filter-options d-flex justify-content-center mb-3">
   
@@ -379,40 +388,50 @@ td a:hover {
 </div>
 
 <div class="table-scrollable">
-<table class="table table-bordered" style="width: 1200px;">
-    <thead class="text-white sticky" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+<table class="table table-bordered mb-3" style="width: 1200px;">
+    <thead class="text-white sticky" style="
+    
+    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
         <tr>
             <th class="text-center">Subject</th>
             <th class="text-center">Year</th>
             <th class="text-center">Section</th>
             <th class="text-center">School Year</th>
-            <th class="text-center">Print</th>
+            <th class="text-center"></th>
         </tr>
     </thead>
     <tbody id="table-body">
         <?php
-        $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy, MAX(quarter) AS quarter, subjectname, teacher
-                  FROM grade 
-                  WHERE quarter='FIRST'
-                  GROUP BY session, quarter, sy 
-                  ORDER BY subjectname, year, section, sy";
+    $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy, MAX(quarter) AS quarter, subjectname, teacher
+    FROM grade 
+    WHERE quarter='FIRST'
+    AND teacher = '" . $_SESSION['name'] . "'
+    GROUP BY session, quarter, sy ,year
+    ORDER BY subjectname, year, section, sy";
 
-        $result = $conn->query($query);
+$result = $conn->query($query);
+
 
         while ($row = $result->fetch_assoc()) {
             $section = $row['section'];
-            $quarter1shs = "shsprintquarter.php?section=" . $section . "&sy=" . $row['sy'] . "&quarter=" . $row['quarter'] . "&year=" . $row['year']
+            $quarter1shs = "quarterly.php?section=" . $section . "&sy=" . $row['sy'] . "&quarter=" . $row['quarter'] . "&year=" . $row['year']
+
+            . "&teacher=" . $row['teacher']
                 . "&subjectname=" . $row['subjectname']
                 . "&teacher=" . $row['teacher'];
         
             ?>
-            <tr data-year="<?php echo $row['year']; ?>" data-section="<?php echo $section; ?>" data-sy="<?php echo $row['sy']; ?>">
+            <tr style="background-color:#f5f5f0;" data-year="<?php echo $row['year']; ?>" data-section="<?php echo $section; ?>" data-sy="<?php echo $row['sy']; ?>">
                 <td><b> <?php echo $row['subjectname']; ?> </b></td>
                 <td class="text-center"><?php echo $row['year']; ?></td>
                 <td class="text-center"><?php echo $section; ?></td>
                 <td class="text-center"><?php echo $row['sy']; ?></td>
                 <td class="text-center">
-                    <b> <a href="<?php echo $quarter1shs; ?>" target="_blank">Print</a> </B>
+                   
+                <a href="<?php echo $quarter1shs; ?>" target="_blank" title="PRINT">
+  <img src="img/print.png" class="img-fluid zoom-image" alt="Description of image">
+</a>
+
                 </td>
             </tr>
         <?php
@@ -421,6 +440,9 @@ td a:hover {
         ?>
     </tbody>
 </table>
+
+      </div>
+      </div>
 <script>
   const filterYear = document.getElementById('filter-year');
   const filterSection = document.getElementById('filter-section');

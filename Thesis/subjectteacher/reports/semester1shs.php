@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Semestral Grades</title>
+	<title>SEMESTER 1 GRADES</title>
   
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -274,7 +274,7 @@ AND teacher = '$teacher'
         $output_right = "<div id='right'>";
         $output_right .= "<p>";
         $output_right .= "Subject: <b>" .$Row['subjectname'] ."</b><br>";
-        $output_right .= "Quarter: <strong>THIRD & FOURTH</strong><br>";
+        $output_right .= "Quarter: <strong>First & Second</strong><br>";
         $output_right .= "Semester: <strong>" . $Row['semester'] . "</strong><br>";
         $output_right .= "</p>";
         $output_right .= "</div>";
@@ -309,8 +309,8 @@ AND teacher = '$teacher'
 require "./php/db_conn.php";
 
 $query = "SELECT firstname, lastname, middlename, 
-          AVG(CASE WHEN quarter = 'THIRD' THEN grade END) AS THIRD_average,
-          AVG(CASE WHEN quarter = 'FOURTH' THEN grade END) AS FOURTH_average
+          AVG(CASE WHEN quarter = 'FIRST' THEN grade END) AS first_average,
+          AVG(CASE WHEN quarter = 'SECOND' THEN grade END) AS second_average
           FROM grade
           WHERE semester = '$semester'
           AND section = '$section'
@@ -318,7 +318,7 @@ $query = "SELECT firstname, lastname, middlename,
           AND teacher = '$teacher'
           AND sy = '$sy'
           AND year = '$year'
-          AND (quarter = 'THIRD' OR quarter = 'FOURTH')
+          AND (quarter = 'FIRST' OR quarter = 'SECOND')
           AND gender = 'Male'
           GROUP BY firstname, lastname, middlename
           ORDER BY lastname";
@@ -329,7 +329,7 @@ $query = "SELECT firstname, lastname, middlename,
 
     while ($row = mysqli_fetch_assoc($result)) {
         $rowNum++; // increment rowNum
-        $finalAverage = ($row["THIRD_average"] + $row["FOURTH_average"]) / 2; // Calculate the average
+        $finalAverage = ($row["first_average"] + $row["second_average"]) / 2; // Calculate the average
 
         ?>
     <tr>
@@ -337,9 +337,8 @@ $query = "SELECT firstname, lastname, middlename,
         <td class="text"><?php echo $row["lastname"]; ?></td>
         <td class="text"><?php echo $row["firstname"]; ?></td>
         <td class="text text-center"><?php echo substr($row["middlename"], 0, 1); ?>.</td>
-        <td class="text text-center"><?php echo round($row["THIRD_average"]) ?: "-"; ?></td>
-<td class="text text-center"><?php echo round($row["FOURTH_average"]) ?: "-"; ?></td>
-
+        <td class="text text-center"><?php echo round($row["first_average"]) ?: "-"; ?></td>
+<td class="text text-center"><?php echo round($row["second_average"]) ?: "-"; ?></td>
         <td class="text text-center"><?php echo $finalAverage; ?></td>
         <td class="text text-center" style="color: <?php echo $finalAverage < 75 ? 'red' : 'black'; ?>;">
             <?php echo strtoupper($finalAverage < 75 ? 'FAILED' : 'PASSED'); ?>
@@ -359,8 +358,8 @@ $query = "SELECT firstname, lastname, middlename,
 require "./php/db_conn.php";
 
 $query = "SELECT firstname, lastname, middlename, 
-AVG(CASE WHEN quarter = 'THIRD' THEN grade END) AS THIRD_average,
-AVG(CASE WHEN quarter = 'FOURTH' THEN grade END) AS FOURTH_average
+AVG(CASE WHEN quarter = 'FIRST' THEN grade END) AS first_average,
+AVG(CASE WHEN quarter = 'SECOND' THEN grade END) AS second_average
 FROM grade
 WHERE semester = '$semester'
 AND section = '$section'
@@ -368,7 +367,7 @@ AND subjectname = '$subjectname'
 AND teacher = '$teacher'
 AND sy = '$sy'
 AND year = '$year'
-AND (quarter = 'THIRD' OR quarter = 'FOURTH')
+AND (quarter = 'FIRST' OR quarter = 'SECOND')
 AND gender = 'Female'
 GROUP BY firstname, lastname, middlename
 ORDER BY lastname";
@@ -379,7 +378,7 @@ ORDER BY lastname";
 
     while ($row = mysqli_fetch_assoc($result)) {
         $rowNum++; // increment rowNum
-        $finalAverage = ($row["THIRD_average"] + $row["FOURTH_average"]) / 2; // Calculate the average
+        $finalAverage = ($row["first_average"] + $row["second_average"]) / 2; // Calculate the average
 
         ?>
     <tr>
@@ -387,9 +386,8 @@ ORDER BY lastname";
         <td class="text"><?php echo $row["lastname"]; ?></td>
         <td class="text"><?php echo $row["firstname"]; ?></td>
         <td class="text text-center"><?php echo substr($row["middlename"], 0, 1); ?>.</td>
-        <td class="text text-center"><?php echo round($row["THIRD_average"]) ?: "-"; ?></td>
-<td class="text text-center"><?php echo round($row["FOURTH_average"]) ?: "-"; ?></td>
-
+        <td class="text text-center"><?php echo round($row["first_average"]) ?: "-"; ?></td>
+<td class="text text-center"><?php echo round($row["second_average"]) ?: "-"; ?></td>
         <td class="text text-center"><?php echo $finalAverage; ?></td>
         <td class="text text-center" style="color: <?php echo $finalAverage < 75 ? 'red' : 'black'; ?>;">
             <?php echo strtoupper($finalAverage < 75 ? 'FAILED' : 'PASSED'); ?>

@@ -15,7 +15,7 @@
         <a class="nav-link" href="../records/">Records</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link text-white" href="">Reports</a>
+        <a class="nav-link text-white" href="index.php">Reports</a>
       </li>
    
   

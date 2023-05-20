@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>QAURTER 1</title>
+	<title>SEMESTER 2</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -317,7 +317,7 @@ td a:hover {
     <div class="border">
 <div>
     <div  style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     border-radius:20px; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="mb-3 text-white text-center"><h4>SHS FIRST QUARTER PRINTABLE GRADES </h4></div>
+     border-radius:20px; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);" class="mb-3 text-white text-center"><h4>SHS SECOND SEMESTER PRINTABLE GRADES </h4></div>
 </div>  
 <div class="filter-options d-flex justify-content-center mb-3">
   
@@ -391,17 +391,16 @@ td a:hover {
     </thead>
     <tbody id="table-body">
         <?php
-        $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy, MAX(quarter) AS quarter, subjectname, teacher
-                  FROM grade 
-                  WHERE quarter='FIRST'
-                  GROUP BY session, quarter, sy 
-                  ORDER BY subjectname, year, section, sy";
-
+ $query = "SELECT MAX(section) AS section, MAX(year) AS year, MAX(sy) AS sy, MAX(semester) AS semester, subjectname, teacher,session
+ FROM grade 
+ WHERE semester = 'SECOND'
+ GROUP BY subjectname, section, year, sy
+ ORDER BY subjectname, year, section, sy";
         $result = $conn->query($query);
 
         while ($row = $result->fetch_assoc()) {
             $section = $row['section'];
-            $quarter1shs = "shsprintquarter.php?section=" . $section . "&sy=" . $row['sy'] . "&quarter=" . $row['quarter'] . "&year=" . $row['year']
+            $semester1shs = "semester2shs.php?section=" . $section . "&sy=" . $row['sy'] . "&semester=" . $row['semester'] . "&year=" . $row['year']
                 . "&subjectname=" . $row['subjectname']
                 . "&teacher=" . $row['teacher'];
         
@@ -412,7 +411,7 @@ td a:hover {
                 <td class="text-center"><?php echo $section; ?></td>
                 <td class="text-center"><?php echo $row['sy']; ?></td>
                 <td class="text-center">
-                    <b> <a href="<?php echo $quarter1shs; ?>" target="_blank">Print</a> </B>
+                    <b> <a href="<?php echo $semester1shs; ?>" target="_blank">Print</a> </B>
                 </td>
             </tr>
         <?php
@@ -421,6 +420,7 @@ td a:hover {
         ?>
     </tbody>
 </table>
+
 <script>
   const filterYear = document.getElementById('filter-year');
   const filterSection = document.getElementById('filter-section');

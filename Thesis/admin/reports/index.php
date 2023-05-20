@@ -403,6 +403,8 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
           <a href="quarter2.php" class="list-group-item list-group-item-action">Quarter 2</a>
           <a href="quarter3.php" class="list-group-item list-group-item-action">Quarter 3</a>
           <a href="quarter4.php" class="list-group-item list-group-item-action">Quarter 4</a>
+          <a href="semester1.php" class="list-group-item list-group-item-action">Semester 1</a>
+          <a href="semester2.php" class="list-group-item list-group-item-action">Semester 2</a>
         </div>
       </div>
     </div>
