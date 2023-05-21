@@ -102,9 +102,6 @@ if (isset($_POST['create'])) {
 	else if (empty($middlename)) {
 		header ("Location: ../teacher_create.php?error=Middle Name is required&$user_data");
 	}
-	else if (empty($idnumber)) {
-		header ("Location: ../teacher_create.php?error=ID is required&$user_data");
-	}
 
 	else if (empty($firstname)) {
 		header ("Location: ../teacher_create.php?error=First Name is required&$user_data");
@@ -139,7 +136,7 @@ if (isset($_POST['create'])) {
 	else {
 
        $sql = "INSERT INTO students(id,idnumber,lrnnumber,adviser_id,firstname, middlename,lastname,fullname,gender,suffix,
-	   birthplace,birthday,age,parent,address,syear,grade,section,
+	   birthplace,birthday,age,address,parent,syear,grade,section,
 	   subjectteacher1,
 	   subjectteacher2,
 	   subjectteacher3,

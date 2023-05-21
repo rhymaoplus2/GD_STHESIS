@@ -614,7 +614,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
           <td hidden><?php echo $Row["trackstrand"]; ?></td>
   
      <td class="text-center">
-     <a href="<?php echo $Row['grade'] >= 11 ? 'shspmrecords.php?id='.$Row['id'].'&showModal=true' : 'jhspmrecords.php?id='.$Row['id'].'&showModal=true'; ?>" class="btn" target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Update Data">
+     <a href="<?php echo $Row['grade'] >= 11 ? 'shspmrecords.php?id='.$Row['id'].'&showModal=true' : 'permanentjhs.php?id='.$Row['id'].'&showModal=true'; ?>" class="btn" target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Update Data">
   <img style="width:30px;" src="img/print.png" class="img-fluid" alt="Description of image">
 </a>
 

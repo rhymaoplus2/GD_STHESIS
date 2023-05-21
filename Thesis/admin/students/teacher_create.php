@@ -254,7 +254,7 @@ label{
 
 <div class="container text-left">
 
-<form action="./php/create.php"
+<form action="php/create.php"
       method="post">
 
 <div class=" text-white   text-center p-2 mb-4" style="font-size:24px;
@@ -305,7 +305,7 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 <div class="form-group ">
 
 <label for="adviser_id" class="form-label warning text-left"><b>ID Number</b></label>
-<input style="width:100%;" type="text" class="form-control mb-3" id="idnumber" placeholder="ex: 12913937" name="idnumber" value="12913937">
+<input style="width:100%;" type="text" class="form-control mb-3" id="id" placeholder="ex: 12913937" name="id">
 
 
 <br>
