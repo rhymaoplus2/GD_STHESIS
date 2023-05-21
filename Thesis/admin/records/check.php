@@ -280,9 +280,6 @@ a{
   <div class="container">
     <div class="border">
 
-    <a href="validate.php" class="zoom-image" title="back">
-  <img src="img/back.png" alt="Description of the image" style="width:30px;" class="mb-3 img-fluid">
-</a>
 
 <br>
 
@@ -414,9 +411,9 @@ a{
 
 
     <tbody>
-    <thead style=" position: sticky;
+    <thead class="text-white"style="    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);  position: sticky;
     top: 0;
-    background-color: #fff; /* adjust the background color as needed */
+   /* adjust the background color as needed */
     z-index: 1;">
         <tr>
             <th colspan="">Male</th>
@@ -430,14 +427,13 @@ a{
                 <td class="text-center"><?php echo $row["grade"]; ?></td>
             </tr>
         <?php endforeach; ?>
-        <thead style=" position: sticky;
+        <thead class="text-white"style="    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);  position: sticky;
     top: 0;
-    background-color: #fff; /* adjust the background color as needed */
+   /* adjust the background color as needed */
     z-index: 1;">
         <tr>
             <th colspan="">Female</th>
             <th colspan="" class="text-center">Grade</th>
-         
         </tr>
     </thead>
         <?php foreach ($grades_female as $row): ?>

@@ -999,7 +999,7 @@ echo'
 include "php/db_conn.php";
 
 // First query to retrieve grade information
-$query = "SELECT * FROM grade WHERE studentid = '$id' AND year = '10'";
+$query = "SELECT * FROM grade WHERE   studentid = '$id' AND year = '10'";
 $result = mysqli_query($conn, $query);
 $total = 0;
 $count = 0;

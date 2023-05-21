@@ -109,7 +109,7 @@ html, body {
     border:10px;
     border-radius: 30px;
     background-color: white;
-    width: auto;
+    width:1200px;
   
   }
   
@@ -278,7 +278,7 @@ html, body {
   }
   
   .table-scrollable{
-    height: 350px;
+    height: 400px;
     overflow-y: auto;
     scroll-behavior: smooth;
  
@@ -292,7 +292,7 @@ html, body {
   }
   
   .table-scrollable::-webkit-scrollbar-thumb {
-    background: #888; /* color of the thumb */
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);/* color of the thumb */
     border-radius: 5px; /* roundness of the thumb */
   }
   
@@ -325,6 +325,13 @@ html, body {
 .zoom-image:hover img {
   transform: scale(1.4);
 }
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+
+}
 
   </style>
 </head>
@@ -354,71 +361,87 @@ html, body {
 
   <div class="container">
     <div class="border">
-    <a href="./" class="zoom-image" title="back">
-  <img src="img/back.png" alt="Description of the image" style="width:30px;" class="mb-3 img-fluid">
+   
+   <!-- <a href="./" class="zoom-image" title="back">
+  <img src="img/back.png" alt="Description of the image" style="width:30  px;" class="mb-3 img-fluid">
 </a>
-
+-->
       <br>
 
       <div class="fade-in">
         <div class="table-scrollable">
-          <table class="table table-bordered" style="height:300px">
-            <thead class="text-white" style="
-            
-            
-            background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-              <tr>
+          <table class="table table-bordered" style="height:350px">
+          <thead class="text-white sticky-header" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+  <tr>
+    <th class="text-center" style="width:20%;"><div style="display: flex; justify-content: center; align-items: center;">DATE</div></th>
+    <th class="text-center"><div style="display: flex; justify-content: center; align-items: center;">TIME</div></th>
+    <th class="text-center"><div style="display: flex; justify-content: center; align-items: center;">Teacher Name</div></th>
+    <th class="text-center"><div style="display: flex; justify-content: center; align-items: center;">Description</div></th>
+ </tr>
+</thead>
+<!-- ... previous code ... -->
 
-              <th class="text-center" scope="col" style=" width:20%;">DATE</th>
-              <th class="text-center" scope="col">TIME</th>
-                <th class="text-center"scope="col">Teacher Name</th>
-      
-                <th class="text-center" scope="col">Description</th>
-        
-                <th class="text-center" scope="col">Quarter</th>
-                <th class="text-center" scope="col">Semester</th>
-                <th class="text-center" scope="col">School Year</th>
-              
-           
-                <th class="text-center" scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <?php 
-                while ($row = mysqli_fetch_assoc($result)) { 
-              ?>
-              <tr class="text-center" style="background: #f2f2f2;">
-              <td class="text-center" style="text-align: center; vertical-align: middle;"><b> <?php echo $row["date"]; ?></b></td>
-                <td class="text-center" style="text-align: center; vertical-align: middle;" ><b> <?php echo $row["time"]; ?></b></td>
-                <td style="text-align: center; vertical-align: middle; width:15%;"><b> <?php echo $row["teacher"]; ?></b></td>
-               <td style="text-align: center; vertical-align: middle; width:60%;"> <b><?php echo $row["subjectname"]; ?></b> - Grades for Grade:               <b> <?php echo $row["year"]; ?>
-                <?php echo $row["section"]; ?> </b> </td> 
-                <td style="text-align: center; vertical-align: middle;" ><b><?php echo $row["quarter"]; ?></b></td>
-                <td class="text-center" style="text-align: center; vertical-align: middle;"><b><?php echo $row["semester"]; ?></b></td>
-                <td class="text-center" style="text-align: center; vertical-align: middle; width:15%;" ><b><?php echo $row["sy"]; ?></b></td>
-                <td class="text-center" style="text-align: center; vertical-align: middle;">
-
-
+<tbody>
+  <?php 
+    while ($row = mysqli_fetch_assoc($result)) { 
+  ?>
+    <tr style="background: #f2f2f2;">
+      <td class="text-center" style="text-align: center; vertical-align: middle;"><?php echo $row["date"]; ?></b></td>
+      <td class="text-center" style="text-align: center; vertical-align: middle;"><?php echo $row["time"]; ?></b></td>
+      <td style="text-align: center; vertical-align: middle; width:15%;"><?php echo $row["teacher"]; ?></b></td>
+      <td style="width:60%;">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#fullDescriptionModal<?php echo $row['session']; ?>">
+          <?php echo substr($row["subjectname"]." - Grades for Grade: ".$row["year"].$row["section"]." ".$row["quarter"]." ".$row["semester"], 0, 40); ?>......
+        </a>
+      </td>
  
+    </tr>
 
-    <a class="zoom-image"href="check.php?session=<?php echo $row["session"]; ?>">
-    <?php
-    if ($row["status"] == 0) {
-        echo '<img src="img/show.png" alt="Description of the image" style="width:30px;" class="mb-3 img-fluid">';
-    } else {
-        echo 'VALIDATED';
-    }
-    ?>
-    </a>
-</td>
+    <div class="modal fade" id="fullDescriptionModal<?php echo $row['session']; ?>" tabindex="-1" aria-labelledby="fullDescriptionModalLabel<?php echo $row['session']; ?>" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-white" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+            <h5 class="modal-title" id="fullDescriptionModalLabel<?php echo $row['session']; ?>">
+            <strong><?php echo $row["subjectname"]; ?></strong>
+           </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="">
+              <div class="row">
+                <div class="col-12">
+                  <p class="mb-2">SUBJECT TEACHER: <strong><?php echo $row["teacher"]; ?></strong></p>
+                  <p class="mb-2">GRADE: <strong><?php echo $row["year"]; ?></strong></p>
+                  <p class="mb-2">SECTION: <strong><?php echo $row["section"]; ?></strong></p>
+                  <p class="mb-2">QUARTER: <strong><?php echo $row["quarter"]; ?></strong></p>
+                  <p class="mb-2">SEMESTER: <strong><?php echo $row["semester"]; ?></strong></p>
+                  <p class="mb-2">DATE Submitted: <strong><?php echo $row["date"]; ?></strong></p>
+                  <p class="mb-2">TIME Submitted: <strong><?php echo $row["time"]; ?></strong></p>
+                </div>
+                
+              </div>
+              <div class="text-center">
+              <a class="zoom-image" href="check.php?session=<?php echo $row["session"]; ?>">
+          <?php
+          if ($row["status"] == 0) {
+              echo '<img src="img/show.png" alt="Description of the image" style="width:30px;" class="mb-3 img-fluid">';
+          } else {
+              echo 'VALIDATED';
+          }
+          ?>
+        </a>
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+</tbody>
+
+<!-- ... remaining code ... -->
 
 
-              </tr>
-              <?php 
-                }
-              ?>
-            </tbody>
           </table>
         </div>
       </div>
