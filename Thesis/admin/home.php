@@ -345,10 +345,33 @@ body {
 </head>
 
 <body>
+<style>
+  #logoutModal2 {
+    z-index: 9999;
+  }
+</style>
+
+<div class="modal fade" id="logoutModal2" tabindex="-1" aria-labelledby="logoutModal2Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+        <h5 class="modal-title" id="logoutModal2Label">Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to log out?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-dark rounded" href="logout.php">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="header sticky-top">
   <?PHP include_once('header.php'); ?>
 </div>
+
 
 <?php
 // Check if the button is clicked
@@ -408,37 +431,37 @@ if(isset($_POST['export_button'])) {
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog text-center">
     <div class="modal-content text-center">
-      <div class="modal-header text-white text-center" style="  
-      
-      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+      <div class="modal-header text-white text-center" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title text-center" id="exampleModalLabel text-center">Welcome!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
- <b> MSU-MSAT High School 
-  <br>Grade Reporting and Recording System</b>
-  
-        
-     
+        <b>MSU-MSAT High School<br>Grade Reporting and Recording System</b>
       </div>
       <div class="modal-footer">
-      <i>User Logged in: </i> <b> Administrator </b>
-    
-   
+        <i>User Logged in:</i> <b>Administrator</b>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // Show the modal when the page loads
-  window.addEventListener('load', function() {
+  // Check if the modal has been shown before
+  var modalShown = localStorage.getItem('modalShown');
+
+  if (!modalShown) {
+    // Show the modal
     var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
       keyboard: false
     });
     myModal.show();
-  });
+
+    // Store a flag indicating that the modal has been shown
+    localStorage.setItem('modalShown', true);
+  }
 </script>
+
+
 <div class="container">
   <div class="row align-items-center">
     <div class="col-md-6 mb-3">

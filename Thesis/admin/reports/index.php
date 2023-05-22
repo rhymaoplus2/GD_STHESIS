@@ -72,7 +72,7 @@ body {
 
 .border {
 	padding: 15px;
-  min-height: 450px;
+  min-height: 190px;
   background-color: white;
 border-radius: 20px;
 }
@@ -330,9 +330,7 @@ function myFunction() {
 
 <br>
 <div class="container">
-  <div class="row">
-
-    <div class="col-md-7">
+ 
       
       <div class="border fade-in">
      
@@ -350,12 +348,13 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 <hr>
         <div class="b " >
         <div style="display: flex;">
-  <div style="flex: 1;">
 
+
+
+  <div style="flex:2;">
+    
+  <img src="img/pik.gif" alt="Description of the image" style="max-width: 40%;">
   
-    <img src="img/pik.gif" alt="Description of the image" style="max-width: 260%;">
-  </div>
-  <div style="flex: 3;">
     <table class="table table-bordered table-sm rounded-4" style="border-radius: 10px;">
       <thead class="text-center text-white" style="
         background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);      
@@ -421,57 +420,7 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
  
 
       </div>
-      <!--
-      <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
-  <img src="img/eye.png" alt="Image" title="Add New Student" width="30" height="auto">
-  <b></b>
-</button>
-          -->
-          <span class="sm text-white">
-    <b>Please be advised : </b> All displays on this table have been assigned by the administrator. If you have any concerns about missing or inappropriate subjects being displayed, we kindly request that you <b>contact</b> the <b> Administrator </b> without delay.
-</span>
-    </div>
-    </div>
-    </div>
-    <!--
-    <div class="col-md-5 rounded" style="overflow: hidden;">
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
 
-    <div class="carousel-inner rounded mb-3">
-      <div class="carousel-item active">
-        <img src="img/pic1.gif" class="d-block w-100" alt="First slide">
-      </div>
-      <div class="carousel-item">
-        <img src="img/pic2.gif" class="d-block w-100" alt="Second slide">
-      </div>
-      <div class="carousel-item">
-        <img src="img/pic3.gif" class="d-block w-100" alt="Third slide">
-      </div>
-    </div>
-    
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-    
-  </div>
--->
-  <div class="slide-up">
-  <div>
-  <span class="text-white" style=" text-align: justify;">
-    <h6>
-      Grades are an important aspect of the educational process that allow teachers to evaluate and communicate their students' academic performance. They provide a means for teachers to track students' progress throughout the school year and identify areas in which they may need additional support. By setting clear expectations and providing feedback on performance, grades help students understand where they stand academically and what they need to do to improve. In addition, grades enable teachers to communicate with parents and guardians about their child's progress and identify areas for collaboration. Overall, grades play a critical role in helping students achieve academic success and helping teachers support their students effectively.    
-    </h6>
-  </span>
  
 
 </div>

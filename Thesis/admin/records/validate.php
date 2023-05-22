@@ -389,9 +389,9 @@ html, body {
       <td class="text-center" style="text-align: center; vertical-align: middle;"><?php echo $row["date"]; ?></b></td>
       <td class="text-center" style="text-align: center; vertical-align: middle;"><?php echo $row["time"]; ?></b></td>
       <td style="text-align: center; vertical-align: middle; width:15%;"><?php echo $row["teacher"]; ?></b></td>
-      <td style="width:60%;">
+      <td>
         <a href="#" data-bs-toggle="modal" data-bs-target="#fullDescriptionModal<?php echo $row['session']; ?>">
-          <?php echo substr($row["subjectname"]." - Grades for Grade: ".$row["year"].$row["section"]." ".$row["quarter"]." ".$row["semester"], 0, 40); ?>......
+          <?php echo substr($row["subjectname"]." - Grades for Grade: ".$row["year"].$row["section"]." ".$row["quarter"]." ".$row["semester"], 0, 90); ?>......
         </a>
       </td>
  

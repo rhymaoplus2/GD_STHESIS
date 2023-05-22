@@ -38,14 +38,14 @@ body {
 }
 
 .container form {
-	width: 600px;
+   width: 1000px;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
 }
 .box {
-	width: 750px;
+	width: 100%;
 }
 .container table {
 	padding: 20px;
@@ -311,7 +311,7 @@ function myFunction() {
 
 <hr>
  
-       <div class="skrol"style="height: 100px; overflow-y: auto;">
+<div class="skrol"style="height: 350px; overflow-y: auto;">
        <div class="form-group mb-3">
     <label for="" hidden class="form-label"><b>ID Number</b></label>
     <input 
@@ -512,9 +512,7 @@ function myFunction() {
     </div>
 
   
-    </div>
-    <br>
-    <hr>
+   
     <div class="form-group mb-3">
     <div class="d-flex justify-content-center">
   <label for="" class="form-label text-center"><i><b>Subjects</b></i></label>
@@ -522,7 +520,7 @@ function myFunction() {
 
 
 
-    <div class="skrol"style="height: 100px; overflow-y: auto;">
+
     <select name="subject1" id="subject1" class="form-control text-center mb-3">
     <?php
     // Add blank option if sub5 has no value
