@@ -178,7 +178,7 @@ font-size: 10px;;
   }
   
   .sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
   }
@@ -527,7 +527,7 @@ setInterval(function() {
 
 </script>
 
-  <thead class="text-white"style="
+  <thead class="sticky text-white"style="
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     <tr>
       <th scope="col">Name</th>

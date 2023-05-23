@@ -66,7 +66,7 @@ if (isset($_POST['search'])) {
   $search_query = $_POST['search'];
 }
 
-$query = "SELECT * FROM grade WHERE 1=1";
+$query = "SELECT * FROM grade WHERE 1=1 ";
 if (!empty($search_query)) {
   $query .= " AND (lastname LIKE '%$search_query%' OR firstname LIKE '%$search_query%')";
 }

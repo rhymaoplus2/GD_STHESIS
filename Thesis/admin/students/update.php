@@ -513,15 +513,15 @@ function myFunction() {
 
   
    
-    <div class="form-group mb-3">
-    <div class="d-flex justify-content-center">
-  <label for="" class="form-label text-center"><i><b>Subjects</b></i></label>
+    <div class="form-group mb-3 text-start">
+    <div class="d-flex  text-start  ">
+  <label for="" class="form-label "><i><b>Subjects</b></i></label>
 </div>
 
 
 
 
-    <select name="subject1" id="subject1" class="form-control text-center mb-3">
+    <select name="subject1" id="subject1" class="form-control  mb-3">
     <?php
     // Add blank option if sub5 has no value
     if(empty($row['subject1'])){
@@ -532,7 +532,7 @@ function myFunction() {
     ?>
     <option value=""></option>
     <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+    $query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
     $result = $conn->query($query);
     if($result->num_rows> 0){
         while($optionData=$result->fetch_assoc()){
@@ -553,7 +553,7 @@ function myFunction() {
     }
     ?>
 </select>
-<select name="subject2" id="subject2" class="form-control text-center mb-3">
+<select name="subject2" id="subject2" class="form-control  mb-3">
 <?php
 // Add blank option if subject2 has no value
 if(empty($row['subject2'])){
@@ -564,7 +564,7 @@ if(empty($row['subject2'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -585,7 +585,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject3" id="subject3" class="form-control text-center mb-3">
+<select name="subject3" id="subject3" class="form-control   mb-3">
 <?php
 // Add blank option if subject3 has no value
 if(empty($row['subject3'])){
@@ -596,7 +596,7 @@ if(empty($row['subject3'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -617,7 +617,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject4" id="subject4" class="form-control text-center mb-3">
+<select name="subject4" id="subject4" class="form-control   mb-3">
 <?php
 // Add blank option if subject4 has no value
 if(empty($row['subject4'])){
@@ -628,7 +628,7 @@ if(empty($row['subject4'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -649,7 +649,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject5" id="subject5" class="form-control text-center mb-3">
+<select name="subject5" id="subject5" class="form-control   mb-3">
 <?php
 // Add blank option if subject5 has no value
 if(empty($row['subject5'])){
@@ -660,7 +660,7 @@ if(empty($row['subject5'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -681,7 +681,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject6" id="subject6" class="form-control text-center mb-3">
+<select name="subject6" id="subject6" class="form-control   mb-3">
 <?php
 // Add blank option if subject6 has no value
 if(empty($row['subject6'])){
@@ -692,7 +692,7 @@ if(empty($row['subject6'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -713,7 +713,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject7" id="subject7" class="form-control text-center mb-3">
+<select name="subject7" id="subject7" class="form-control   mb-3">
 <?php
 // Add blank option if subject7 has no value
 if(empty($row['subject7'])){
@@ -724,7 +724,7 @@ if(empty($row['subject7'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -745,7 +745,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject8" id="subject8" class="form-control text-center mb-3">
+<select name="subject8" id="subject8" class="form-control   mb-3">
 <?php
 // Add blank option if subject8 has no value
 if(empty($row['subject8'])){
@@ -756,7 +756,7 @@ if(empty($row['subject8'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -777,7 +777,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject9" id="subject9" class="form-control text-center mb-3">
+<select name="subject9" id="subject9" class="form-control   mb-3">
 <?php
 // Add blank option if subject9 has no value
 if(empty($row['subject9'])){
@@ -788,7 +788,7 @@ if(empty($row['subject9'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){
@@ -809,7 +809,7 @@ if($result->num_rows> 0){
 }
 ?>
 </select>
-<select name="subject10" id="subject10" class="form-control text-center mb-3">
+<select name="subject10" id="subject10" class="form-control   mb-3">
 <?php
 // Add blank option if subject10 has no value
 if(empty($row['subject10'])){
@@ -820,7 +820,7 @@ if(empty($row['subject10'])){
 ?>
 <option value=""></option>
 <?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
+$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
 $result = $conn->query($query);
 if($result->num_rows> 0){
     while($optionData=$result->fetch_assoc()){

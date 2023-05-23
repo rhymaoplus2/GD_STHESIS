@@ -32,24 +32,26 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
     if (isset($_POST['schoolyear'])) {
         $selected_schoolyear = $_POST['schoolyear'];
     }
-
-    // Build the SQL query with filters
-    $query = "SELECT * FROM grade WHERE 1=1 AND status != '1'";
+    $query = "SELECT * FROM grade WHERE 1=1 AND status != '1' ";
 
     if (!empty($selected_section)) {
         $query .= " AND section = '$selected_section'";
     }
-
+    
     if (!empty($selected_subject)) {
         $query .= " AND subjectname = '$selected_subject'";
     }
-
+    
     if (!empty($selected_schoolyear)) {
         $query .= " AND sy = '$selected_schoolyear'";
     }
-
+    
     // Group the data by the desired column
     $query .= " GROUP BY session";
+    
+    // Order the results by date and time in ascending order
+    $query .= " ORDER BY date ASC, time ASC";
+    
 
     $result = mysqli_query($conn, $query);
 ?>
@@ -386,8 +388,17 @@ html, body {
     while ($row = mysqli_fetch_assoc($result)) { 
   ?>
     <tr style="background: #f2f2f2;">
-      <td class="text-center" style="text-align: center; vertical-align: middle;"><?php echo $row["date"]; ?></b></td>
-      <td class="text-center" style="text-align: center; vertical-align: middle;"><?php echo $row["time"]; ?></b></td>
+    <td class="text-center" style="text-align: center; vertical-align: middle;">
+  <?php
+    $date = $row["date"]; // Assuming $row["date"] contains the date in a valid format
+    $formattedDate = date("F j Y", strtotime($date));
+    echo strtoupper($formattedDate);
+  ?>
+</td>
+  <td class="text-center" style="width:10%; text-align: center; vertical-align: middle;">
+  <?php echo date("h:i A", strtotime($row["time"])); ?>
+</td>
+
       <td style="text-align: center; vertical-align: middle; width:15%;"><?php echo $row["teacher"]; ?></b></td>
       <td>
         <a href="#" data-bs-toggle="modal" data-bs-target="#fullDescriptionModal<?php echo $row['session']; ?>">
@@ -415,9 +426,15 @@ html, body {
                   <p class="mb-2">SECTION: <strong><?php echo $row["section"]; ?></strong></p>
                   <p class="mb-2">QUARTER: <strong><?php echo $row["quarter"]; ?></strong></p>
                   <p class="mb-2">SEMESTER: <strong><?php echo $row["semester"]; ?></strong></p>
-                  <p class="mb-2">DATE Submitted: <strong><?php echo $row["date"]; ?></strong></p>
-                  <p class="mb-2">TIME Submitted: <strong><?php echo $row["time"]; ?></strong></p>
-                </div>
+                  <p class="mb-2">DATE Submitted: <strong>
+  <?php
+    $date = $row["date"]; // Assuming $row["date"] contains the date in a valid format
+    $formattedDate = date("F j Y", strtotime($date));
+    echo strtoupper($formattedDate);
+  ?>
+</strong></p>
+<p class="mb-2">TIME Submitted: <strong><?php echo date("h:i A", strtotime($row["time"])); ?></strong></p>
+              </div>
                 
               </div>
               <div class="text-center">

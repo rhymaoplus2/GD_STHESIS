@@ -459,13 +459,15 @@ $count_result = mysqli_query($conn, $count_query);
 $count_row = mysqli_fetch_row($count_result);
 $total_results = $count_row[0];
 
-// Query to retrieve the results for the current page with custom sorting by "status" field
-$query = "SELECT * FROM users $where_clause ORDER BY CASE 
-                                          WHEN status = 1 THEN 0 
-                                          WHEN status = 0 THEN 1 
-                                          WHEN status = 2 THEN 2 
-                                          ELSE 3 
-                                        END, name ASC";
+$query = "SELECT * FROM users WHERE (role != 'admin' OR role2 != 'admin' OR role3 != 'admin') AND id 
+!= '1' ORDER BY 
+          CASE 
+            WHEN status = 1 THEN 0 
+            WHEN status = 0 THEN 1 
+            WHEN status = 2 THEN 2 
+            ELSE 3 
+          END, name ASC";
+
 
 $result = mysqli_query($conn, $query);
 ?>
