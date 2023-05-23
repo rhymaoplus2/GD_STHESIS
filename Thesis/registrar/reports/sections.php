@@ -21,7 +21,7 @@
 
 
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 }
 
@@ -313,7 +313,7 @@ if (mysqli_num_rows($result) > 0) {
     <table class="table table-bordered">
       <thead class="text-white"style=" 
       
-      background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <tr>
     
           <th scope="col">Section Name</th>
@@ -344,7 +344,7 @@ if (mysqli_num_rows($result) > 0) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white" style=" 
-       background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title" id="semesterModalLabel">SHS Grades</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -353,8 +353,7 @@ if (mysqli_num_rows($result) > 0) {
         <ul class="list-group">
         <a href="sectiongradeshs1.php?name=<?php echo $Row['name']; ?>" class="list-group-item" target="_blank">FIRST</a>
 
-
-          <li class="list-group-item">SECOND</li>
+<a href="sectiongradeshs2.php?name=<?php echo $Row['name']; ?>" class="list-group-item" target="_blank">SECOND</a>
         </ul>
       </div>
     </div>
@@ -368,7 +367,8 @@ if (mysqli_num_rows($result) > 0) {
     <div class="modal-content">
       <div class="modal-header text-white" style="  
       
-      background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+      
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title" id="semesterModalLabel">JHS Grades</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

@@ -26,8 +26,10 @@
         
         }
         .container {
-            border-radius: 15px;
+            border-radius: 30px;
             width:auto;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.30);
+            padding: 20px;
         }
         .btn {
             width: 300px;
@@ -40,7 +42,7 @@
      
         .text{
 text-align: center;
-            font-size: 40px;
+            font-size: 50px;
             text-shadow: .5px .5px .5px  #000000;
             font-family: tahoma ;
         }
@@ -70,6 +72,16 @@ text-align: center;
     transform: translateX(0); /* End position, slide in to the screen */
   }
 }
+.btn {
+  background-color: transparent;
+  border: 1px solid #000; /* Remove any existing borders */
+}
+
+.btn:hover {
+  border: 1.5px solid #000; /* Apply a dark border when hovering */
+}
+
+
 
     </style>
 </head>
@@ -81,40 +93,60 @@ text-align: center;
   Your browser does not support HTML5 video.
 </video>
 <br>
-<br>
+
 <div class="content">
-  <div class="container      p-4">
+  <div class="container ">
     <div class="row">
-      <div class="col-md-6 text-center">
+      <div class="col-md-8 text-center"> 
         <span class=" text text-center text-white fw-bold"  > 
       
             <b>
               <br>
         
               <br>
-              MSU-MSAT High School Grade Reporting and Recording System
+              MSU-MSAT High School <br>Grade Reporting <br> and Recording System
             </b>
        
         </span>  
       </div>
-    
-      <div class="login col-md-6  text-center bg-white"  style="border-radius:20px; padding:30px; width: auto;">
-        <img class="mb-3" src="img/msu.png" width="80" height="80" alt="Logo">
-        <br>
-        <b>Select </b>   <h4 class="text-left mb-3" style="font-family: Tahoma;"><b>User Type</b></h4>
+      <div class="login col-md-6 text-center bg-white" style="border-radius: 16px; padding: 25px; width: auto;  ">
+      <img id="logo" class="mb-3" src="img/msu.png" width="80" height="80" alt="Logo">
 
-        <button class="btn btn-primary" onclick="window.location.href='admin/index.php'"><img src="img/admin.png" alt="Admin Icon" style="float:left;width:30px;"><b>Administrator</b></button>
-        <br>
-        <br>
-        <button class="btn btn-secondary" onclick="window.location.href='registrar/'" style="text-decoration: none;"><img src="img/registrar.png" alt="Registrar Icon" style="float:left;width:30px;"><b>Registrar's Staff</b></button>
-        <br>
-        <br>
-        <button class="btn btn-info text-center" onclick="window.location.href='subjectteacher/index.php'" style="text-decoration: none;"><img src="img/sub.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Subject Teacher</b></button>
+  <br>
+  <b>Select </b>
+  <h4 class="text-left mb-3" style="font-family: Tahoma;"><b>User Type</b></h4>
 
-        <br>
-        <br>  
-        <button class="btn btn-success text-left" onclick="window.location.href='teacher/index.php'" style="text-decoration: none;"><img src="img/adviser.png" alt="Adviser Icon" style="float:left; width:30px;"><b>Adviser</b></button>
-      </div>
+  <button class="btn  btn-transparent" onclick="window.location.href='admin/index.php'">
+    <img src="img/admin.png" alt="Admin Icon" style="float: left; width: 30px;">
+    <b>Administrator</b>
+  </button>
+  <br>
+  <br>
+  <button class="btn  btn-transparent" onclick="window.location.href='registrar/'" style="text-decoration: none;">
+    <img src="img/registrar.png" alt="Registrar Icon" style="float: left; width: 30px;">
+    <b>Registrar's Staff</b>
+  </button>
+  <br>
+  <br>
+  <button class="btn btn-transparent text-center" onclick="window.location.href='subjectteacher/index.php'" style="text-decoration: none;">
+    <img src="img/sub.png" alt="Adviser Icon" style="float: left; width: 30px;">
+    <b>Subject Teacher</b>
+  </button>
+
+  <br>
+  <br>
+  <button class="btn btn-transparent text-left" onclick="window.location.href='teacher/index.php'" style="text-decoration: none;">
+    <img src="img/adviser.png" alt="Adviser Icon" style="float: left; width: 30px;">
+    <b>Adviser</b>
+  </button>
+  <br>
+  <br>
+  <button disabled class="btn  btn-transparent text-left" onclick="window.location.href='teacher/index.php'" style="text-decoration: none;">
+    <img src="img/principal.png" alt="Adviser Icon" style="float: left; width: 30px;">
+    <b>Principal</b>
+  </button>
+</div>
+
     </div>
     </div>
 </div>

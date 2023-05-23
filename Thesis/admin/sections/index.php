@@ -53,21 +53,18 @@ width:600px;
 }
 
 .container form {
-	width:auto;
-	padding: 20px;
-	border-radius: 30px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
  
 }
 .box {
 	width:100px;
 }
 .container table {
-
+  width: 100%;
 	border-radius: 10px;
   border:10px;
   background-color: white;
-  width : 500px;
+  width : 550px;
 }
 .border {
 	padding: 20px;
@@ -224,11 +221,58 @@ font-size: 10px;;
   transition: all 0.2s;
 }
 
+.sticky {
+    position: sticky;
+    top: 0;
+
+  }
+  
 #refresh-img:hover {
   transform: scale(1.2);
 }
 #search {
   border-width: 2px;
+}
+.table-scrollable{
+  height: 300px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.table-scrollable::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+}
+
+.table-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 5px; /* roundness of the thumb */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
+.zoom-button {
+ 
+}
+
+.zoom-image {
+  transition: transform 0s ease;
+}
+
+.zoom-button:hover .zoom-image {
+  transform: scale(1.5);
+}
+
+
+.zoom-image {
+  transition: transform 0.3s ease;
+}
+
+.zoom-link:hover .zoom-image {
+  transform: scale(1.2);
 }
 
 
@@ -239,195 +283,172 @@ font-size: 10px;;
 
 
 <div class="header" id="myHeader">
-<?PHP include_once('header.php');?>
+<?php include_once('header.php');?>
 </div>
 
 
-		<div class="box">
-      
-    <?php if (isset($_GET['error'])) { ?>
-		   <div class="alert alert-danger" role="alert">
-			  <?php echo $_GET['error']; ?>
-		    </div>
-		   <?php } ?>
-       </div>
-    
-  
- 
-    <?php if (isset($_GET['success'])) { ?>
-      <div class="alert alert-success" role="alert">
-        <?php echo $_GET['success']; ?>
+
+    <div class="container ">
+<div class="text text-center">
+<?php if (isset($_GET['success'])) { ?>
+  <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+          <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
+        </div>
+        <div class="modal-body">
+          <?php echo $_GET['success'];?>
+        </div>
+       
       </div>
-    <?php } ?>
+    </div>
+  </div>
+<?php ?>
+
+
+  </div>
+  <script>
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'), {
+      keyboard: false
+    });
+    successModal.show();
+  </script>
+<?php }
+ ?>
     <?php if (mysqli_num_rows($result)) { ?>
     
  
-      <div class="container ">
+
 
 <br>
-        <div class="f">
-          
-   
-          <table class="table table-bordered">
-            
-       
+        <div class="f text-start">
 
-            <?php
+<div class="text-start mb-3">
+<a class="link-primary me-2 zoom-link" data-bs-toggle="modal" data-bs-target="#sectionModal">
+  <img src="img/add.gif" alt="Description of image" style="width: 35px;" class="img-fluid zoom-image">
+</a>
+    </div>
+  <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-white" style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+          <h5 class="modal-title" id="sectionModalLabel">Add New Section</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="submit.php">
+            <div class="mb-3">
+              <label for="gradeInput" class="form-label">Grade Level</label>
+              <input type="text" class="form-control" name="grade" required>
+            </div>
+            <div class="mb-3">
+              <label for="sectionInput" class="form-label">Section Name</label>
+              <input type="text" class="form-control" name="section" required>
+            </div>
+            <button type="submit" name="submit" class="btn btn-link zoom-link" style="padding: 5px;">
+            <img src="img/ok.png" alt="Description of image" style="width: 30px;" class="img-fluid zoom-image">
+  </button>
+          </form>
+        </div>
+     
+      </div>
+    </div>
+  </div>
+
+
+  <div class="table-scrollable">
+        <?php
 require "./php/db_conn.php";
 
-// Number of results to show per page
-$results_per_page = 5;
 
-// Query to get total number of results
-$query = "SELECT COUNT(*) AS total_results FROM section";
-$result = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($result);
-$total_results = $row['total_results'];
+        // Query to get results for the current page
+        $query = "SELECT id, grade, name FROM section ORDER BY grade,name";
+        $result = mysqli_query($conn, $query);
 
-// Calculate total number of pages
-$total_pages = ceil($total_results / $results_per_page);
-
-// Check if current page is set, otherwise set it to the first page
-if (!isset($_GET['page'])) {
-  $current_page = 1;
-} else {
-  $current_page = $_GET['page'];
-}
-
-// Calculate the starting and ending indices of the results to display on the current page
-$start_index = ($current_page - 1) * $results_per_page;
-$end_index = $start_index + $results_per_page;
-
-// Query to get results for the current page
-$query = "SELECT * FROM section order by grade LIMIT $start_index, $results_per_page";
-$result = mysqli_query($conn, $query);
-
-// Display results in table
-?>
+        // Display results in table
+        ?>
 
 <table class="table table-bordered">
-
-  <thead>
-    <tr class="text-white text-center" style="
-       background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-
+  <thead class="sticky">
+    <tr class="text-white text-center" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
       <th scope="col" colspan="2">Assign Sections</th>
-  
     </tr>
   </thead>
   <tbody>
     <?php
-    while ($row = mysqli_fetch_assoc($result)) {
-      ?>
+            while ($row = mysqli_fetch_assoc($result)) {
+                $section_id = $row['id'];
+                ?>
       <tr>
         <td class=""><b>Grade <?php echo $row["grade"]; ?> - <?php echo $row["name"]; ?></b></td>
         <td class="text-center">
-        <button type="btn" class="btn text-center" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $row['name']; ?>">
-  <img src="img/assign.gif">
+         
+        <button type="button" class="btn text-center zoom-button" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $section_id; ?>">
+  <img src="img/assign.gif" class="zoom-image" alt="Image">
 </button>
 
-<div class="modal fade" id="assignModal-<?php echo $row['name']; ?>" tabindex="-1" aria-labelledby="assignModalLabel-<?php echo $row['name']; ?>" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="assignModalLabel-<?php echo $row['name']; ?>">
-          Assign a Subject Teacher to: Grade <?php echo $row["grade"]; ?> - <?php echo $row["name"]; ?>
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      
-      </div>
-      <div class="modal-body">
-        <ul class="list-group">
-        <input type="text" class="form-control" placeholder="Search teacher..." onkeyup="filterTeachers(this)">
-          <?php
-          $query2 = "SELECT name FROM users ORDER by name";
-          $result2 = mysqli_query($conn, $query2);
+        
+          <div class="modal fade" id="assignModal-<?php echo $section_id; ?>" tabindex="-1" aria-labelledby="assignModalLabel-<?php echo $section_id; ?>" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="assignModalLabel-<?php echo $section_id; ?>">
+                    Assign a Subject Teacher to: Grade <?php echo $row["grade"]; ?> - <?php echo $row["name"]; ?>
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-group">
+                    <input type="text" class="form-control" placeholder="Search teacher..." onkeyup="filterTeachers(this)">
+                    <?php
+                              $query2 = "SELECT id, name FROM users ORDER by name";
+                $result2 = mysqli_query($conn, $query2);
 
-          while ($row2 = mysqli_fetch_assoc($result2)) {
-            ?>
-            <li class="list-group-item teacher-item">
-              <a href="assign_section.php?section_name=<?php echo $row['name']; ?>&user_name=<?php echo $row2['name']; ?>">
-                <?php echo $row2["name"]; ?>
-              </a>
-            </li>
-          <?php
-          }
-          ?>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    ?>
+                      <li class="list-group-item teacher-item">
+                        <a href="assign_section.php?section_id=<?php echo $section_id; ?>&user_id=<?php echo $row2['id']; ?>">
+                          <?php echo $row2["name"]; ?>
+                        </a>
+                      </li>
+                    <?php
+                }
+                ?>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<script>
-  function filterTeachers(input) {
-    // Get all teacher items
-    var teacherItems = document.querySelectorAll(".teacher-item");
+          <script>
+            function filterTeachers(input) {
+              // Get all teacher items
+              var teacherItems = document.querySelectorAll(".teacher-item");
 
-    // Loop through all teacher items and show/hide based on search input
-    for (var i = 0; i < teacherItems.length; i++) {
-      var teacherName = teacherItems[i].querySelector("a").textContent.toLowerCase();
-      var searchValue = input.value.toLowerCase();
-      if (teacherName.includes(searchValue)) {
-        teacherItems[i].style.display = "";
-      } else {
-        teacherItems[i].style.display = "none";
-      }
-    }
-  }
-</script>
+              // Loop through all teacher items and show/hide based on search input
+              for (var i = 0; i < teacherItems.length; i++) {
+                var teacherId = teacherItems[i].querySelector("a").getAttribute("data-teacher-id");
+                var searchValue = input.value.toLowerCase();
+                if (teacherId.includes(searchValue)) {
+                  teacherItems[i].style.display = "";
+                } else {
+                  teacherItems[i].style.display = "none";
+                }
+              }
+            }
+          </script>
 
         </td>
       </tr>
     <?php
-    }
-  }
-}
-
-    ?>
+            }
+        ?>
   </tbody>
-  
 </table>
 
-
-
-
 </div>
-
-<div class="d-flex justify-content-center mt-3">
-  &nbsp;
-  &nbsp;&nbsp;
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
-      <?php if ($current_page > 1): ?>
-        <li class="page-item">
-          <a class="page-link btn-dark" href="?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-      <?php endif; ?>
-
-      <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-        <?php if ($i == $current_page): ?>
-          <li class="page-item active" aria-current="page">
-            <span class="page-link"><?php echo $i; ?><span class="visually-hidden">(current)</span></span>
-          </li>
-        <?php else: ?>
-          <li class="page-item"><a class="page-link btn-dark" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-        <?php endif; ?>
-      <?php endfor; ?>
-
-      <?php if ($current_page < $total_pages): ?>
-        <li class="page-item">
-          <a class="page-link btn-dark" href="?page=<?php echo $current_page + 1; ?>" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      <?php endif; ?>
-    </ul>
-  </nav>
-</div>
-
 
 </div>
 
@@ -456,8 +477,11 @@ function myFunction() {
 
 </script>
 </body>
+<?php
+    }
+}
+?>
 </html>
-<?php 
 
   
                                                           

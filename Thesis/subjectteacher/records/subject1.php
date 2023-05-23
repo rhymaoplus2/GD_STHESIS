@@ -742,7 +742,7 @@ ORDER BY students.lastname ASC";
                 echo "</select>";
                 echo "</td>";
 
-                echo "<td hidden><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
+                echo "<td hidden><input value='" . $_SESSION['id'] . "' id='teacher' name='teacher[]'></td>";
                 echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
                 echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
                 echo "</tr>";
@@ -906,7 +906,7 @@ ORDER BY students.lastname ASC";
                 echo "</select>";
                 echo "</td>";
 
-                echo "<td hidden><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
+                echo "<td hidden><input value='" . $_SESSION['id'] . "' id='teacher' name='teacher[]'></td>";
                 echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
                 echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
                 echo "</tr>";

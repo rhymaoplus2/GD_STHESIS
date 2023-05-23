@@ -22,8 +22,9 @@
 </header>
 
 <style>
+
 html, body {
-  height: auto;
+  height: 100%;
 }
 
 
@@ -178,7 +179,7 @@ font-size: 10px;;
   }
   
   .sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
   }
@@ -235,7 +236,7 @@ td a:hover {
 }
 
 .table-scrollable{
-  height: 400px;
+  height: 320px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -248,12 +249,12 @@ td a:hover {
 }
 
 .table-scrollable::-webkit-scrollbar-thumb {
-  background: #888; /* color of the thumb */
+  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);/* color of the thumb */
   border-radius: 5px; /* roundness of the thumb */
 }
 
 .table-scrollable::-webkit-scrollbar-thumb:hover {
-  background: #555; /* color of the thumb on hover */
+  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);/* color of the thumb on hover */
 }
 
 .fade-in {
@@ -289,8 +290,7 @@ td a:hover {
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header text-white modal-light" style=" 
-    background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+          <div class="modal-header text-white modal-light" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
             <h5 class="modal-title" id="exampleModalLabel">PERMANENT RECORDS</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -333,9 +333,7 @@ td a:hover {
   <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-white"  style="  
-        
-        background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+        <div class="modal-header text-white"  style="    background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
           <h5 class="modal-title" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -530,8 +528,8 @@ setInterval(function() {
 
 </script>
 
-  <thead class="text-white"style="
- background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);">
+  <thead class="text-white sticky"style="
+  background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);">
     <tr>
       <th scope="col">Name</th>
   
@@ -617,7 +615,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
           <td hidden><?php echo $Row["trackstrand"]; ?></td>
   
      <td class="text-center">
-     <a href="<?php echo $Row['grade'] >= 11 ? 'shspmrecords.php?id='.$Row['id'].'&showModal=true' : 'jhspmrecords.php?id='.$Row['id'].'&showModal=true'; ?>" class="btn" target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Update Data">
+     <a href="<?php echo $Row['grade'] >= 11 ? 'shspmrecords.php?id='.$Row['id'].'&showModal=true' : 'permanentjhs.php?id='.$Row['id'].'&showModal=true'; ?>" class="btn" target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Update Data">
   <img style="width:30px;" src="img/print.png" class="img-fluid" alt="Description of image">
 </a>
 

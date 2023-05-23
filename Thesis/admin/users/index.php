@@ -198,7 +198,7 @@ font-size: 10px;;
   }
   
   .sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
   }
@@ -621,7 +621,7 @@ setInterval(function() {
 </script>
 <table class="table table-bordered mb-25">
   
-  <thead >
+  <thead class="sticky">
   <tr class="  text-white" style="   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 
 

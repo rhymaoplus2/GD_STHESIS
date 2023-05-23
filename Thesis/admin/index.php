@@ -11,13 +11,12 @@
 
 <style>
 html, body {
-  height: 100%;
+  height:100%;
 }
 
-
 body {
-      
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -84,14 +83,14 @@ margin-top: -5rem;
         action="php/check-login.php"
         method="post"      
         style="width: 450px; border-radius: 20px;"> 
-
+<!--
   <a class="link-primary" href="../index.php" display-40>
     <b>
    
       <img src="img/back.png" class="rounded mx-auto d-block text-center" alt="..." style="display: inline-block; width: 30px; height:30px; display: inline-block;"> 
     </b>
   </a>
- 
+-->
   <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as an&nbsp;<b>&nbsp;ADMIN</b></span>
  <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
   <br>*To maintain security, refrain from sharing your password with anyone </span>

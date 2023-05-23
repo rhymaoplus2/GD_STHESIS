@@ -24,6 +24,10 @@
 #my-element img {
     display: none;
   }
+  table {
+    table-layout: auto;
+    width: auto;
+  }
 .p1 {
   page-break-after: always;
   margin-top: 50px; /* adjust the value as needed */
@@ -376,7 +380,10 @@ hr {
   background: none;
   border: none;
 }
+.resizable-table {
+    table-layout: auto;
 
+  }
 
 
 #my-element button:hover img {
@@ -514,7 +521,7 @@ if (isset($_GET['name'])) {
   // Construct the SQL query with prepared statements
   $sql = "SELECT section, subjectname, studentname, teacher, adviser,year, UPPER(quarter) as quarter, ROUND(AVG(grade), 0) as average 
   FROM grade 
-  WHERE section = ? AND semester = 'FIRST'
+  WHERE section = ? AND semester = 'SECOND'
   GROUP BY section, subjectname, studentname, UPPER(quarter)
   HAVING COUNT(*) = 1";
 
@@ -529,7 +536,7 @@ if (isset($_GET['name'])) {
         $result = mysqli_stmt_get_result($stmt);
 
         $table_index = 1;
-        $first_grade = 0;
+        $SECOND_grade = 0;
         $second_grade = 0;
       
         $current_subject = null;
@@ -555,22 +562,22 @@ if (isset($_GET['name'])) {
                     
                     
                     <br>Adviser:<b> " . $row['adviser'] . "</b><br>Section: <b>" . $row['section'] . "". "</b><br>Grade: <b>" . $row['year'] . "</b></div>" ;
-                    echo "<table class='font' >";
+                    echo "<table class='font resizable-table' >";
                     echo "<tr><td style='width:40%;'><b>&nbsp;&nbsp;STUDENT NAME</td><td class='text-center'> <b>1ST QUARTER</td><td class='text-center'><b>2ND QUARTER</td><td class='text-center'><b>AVERAGE</td><td class='text-center'><b>REMARKS</td></td></tr>";
 
                     echo "<tbody>";
                 }
 
                 // Process the current row
-                if($row['quarter'] === 'FIRST') {
-                    $first_grade = $row['average'];
+                if($row['quarter'] === 'SECOND') {
+                    $SECOND_grade = $row['average'];
                     $second_grade = 0; // initialize second grade to 0
                 } else if($row['quarter'] === 'SECOND') {
                     $second_grade = $row['average'];
                 }
-                $average = ($first_grade + $second_grade)/2;
+                $average = ($SECOND_grade + $second_grade)/2;
                 $pass_fail_td = "<td class='text-center " . ($average >= 75 ?"text-dark'>PASS" : "text-danger'>FAIL") . "</td>";
-                echo "<tr><td>  " . htmlspecialchars($row['studentname']) . "</td><td class='text-center'>" . $first_grade . "</td><td class='text-center'>" . $second_grade . "</td><td class='text-center'>" . $average . "</td>" . $pass_fail_td . "</tr>";
+                echo "<tr><td>  " . htmlspecialchars($row['studentname']) . "</td><td class='text-center'>" . $SECOND_grade . "</td><td class='text-center'>" . $second_grade . "</td><td class='text-center'>" . $average . "</td>" . $pass_fail_td . "</tr>";
                 }
                 // Close the last table
                 echo "</tbody></table></div>";
