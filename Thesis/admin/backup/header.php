@@ -13,19 +13,19 @@
             <a class="nav-link" href="../students">Student List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../subject">Subject List</a>
+            <a class="nav-link " href="../subject">Subject List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../sections">Section List</a>
+            <a class="nav-link " href="../sections">Section List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="index.php">Records</a>
+            <a class="nav-link " href="../records">Records</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../reports">Reports</a>
+            <a class="nav-link "  href="../reports">Reports</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../users">Users</a>
+            <a class="nav-link text-white" href="../index.php">Users</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -41,4 +41,23 @@
         </ul>
       </div>
     </nav>
+  </div>
+
+  <!-- Logout Modal -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header "style=" background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+          <h5 class="modal-title" id="logoutModalLabel">Logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to log out?</p>
+        </div>
+        <div class="modal-footer">
+
+          <a class="btn btn-dark rounded" href="logout.php">Logout</a>
+        </div>
+      </div>
+    </div>
   </div>

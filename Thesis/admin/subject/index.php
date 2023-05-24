@@ -210,10 +210,37 @@ body {
 
   padding:10px;
 }
+.zoom-on-hover {
+  transition: transform 0.3s ease;
+}
+
+.zoom-on-hover:hover {
+  transform: scale(1.2); /* Increase the scale value for more zoom */
+}
 
 </style>
 </head>
 <body>
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+                <h5 class="modal-title text-white" id="logoutModalLabel">Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="../img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" onclick="openBackupWindow()">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
   <div class="header" id="myHeader">
     <?php include_once('header.php');?>
   </div>
@@ -240,10 +267,15 @@ body {
     <form>
       <?php if (mysqli_num_rows($result)) { ?>
         <form class="" method="get">
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search subjects" aria-label="Search subjects" aria-describedby="search-btn" name="search">
 
+  <div  class="input-group mb-3">
+  <a type="button" class="btn" href="add.php">
+  <img src="img/user.png" alt="Image Description" class="zoom-on-hover">
+</a>
+
+ &nbsp;&nbsp;<input type="text" class="form-control " placeholder="Search subjects" aria-label="Search subjects" aria-describedby="search-btn" name="search">
   </div>
+
 
   <?php
       require "./php/db_conn.php";
@@ -269,7 +301,7 @@ body {
               <th hidden scope="col">Subject ID</th>
               <th scope="col">Subject Name</th>
               <th hidden scope="col">Subject Teacher Username</th>
-              <th class="text-center" scope="col" colspan="2">Actions</th>
+              <th class="text-center" scope="col" colspan="2"></th>
             </tr>
           </thead>
           <tbody>

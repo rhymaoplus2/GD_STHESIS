@@ -43,21 +43,3 @@
     </nav>
   </div>
 
-  <!-- Logout Modal -->
-  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header "style=" background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-          <h5 class="modal-title" id="logoutModalLabel">Logout</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to log out?</p>
-        </div>
-        <div class="modal-footer">
-
-          <a class="btn btn-dark rounded" href="logout.php">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>

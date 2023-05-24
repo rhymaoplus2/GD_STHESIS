@@ -358,16 +358,19 @@ body {
         <h5 class="modal-title" id="logoutModal2Label">Logout</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+ 
       <div class="modal-body">
-        <p>Are you sure you want to log out?</p>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-dark rounded" href="logout.php">Logout</a>
-      </div>
-    </div>
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" >
+                </a>
+            </div>
   </div>
 </div>
 
+</div>
 <div class="header sticky-top">
   <?PHP include_once('header.php'); ?>
 </div>
@@ -513,9 +516,13 @@ function openBackupWindow() {
 </a>
 
         </div>
+
         <div class="col-md-6 mb-3">
+        <a href="terms.php" target="_blank">
           <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
+          </a>
         </div>
+    
         <div class="col-md-6 mb-3">
           <img class="about" src="img/ab.gif" class="img-fluid" alt="Image 4" style="width:90%;">
         </div>

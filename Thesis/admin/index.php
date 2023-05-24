@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subject Teacher</title>
+    <title>Administrator</title>
     <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -83,14 +83,14 @@ margin-top: -5rem;
         action="php/check-login.php"
         method="post"      
         style="width: 450px; border-radius: 20px;"> 
-<!--
+
   <a class="link-primary" href="../index.php" display-40>
     <b>
    
       <img src="img/back.png" class="rounded mx-auto d-block text-center" alt="..." style="display: inline-block; width: 30px; height:30px; display: inline-block;"> 
     </b>
   </a>
--->
+
   <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as an&nbsp;<b>&nbsp;ADMIN</b></span>
  <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
   <br>*To maintain security, refrain from sharing your password with anyone </span>
