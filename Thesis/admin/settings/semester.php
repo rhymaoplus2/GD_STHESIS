@@ -15,7 +15,10 @@
 
   <style>
 
-
+html, body {
+  height: 100%;
+  
+}
 body {
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
@@ -52,7 +55,24 @@ body {
 </head>
 <body>
 
+<div class="header sticky-top" id="myHeader">
+<?php include_once('header.php');?>
+</div>
 
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
 	<div class="container my-5">
 		<div class="row">
 			<div class="col-md-6 mx-auto">
@@ -65,8 +85,12 @@ body {
       <label for="semester" class="mb-3 text-center"><b> SEMESTER : </b> </label>
       <select class="form-select" name="semester" id="semester" required>
   <option value="" selected disabled>Select</option>
-  <option value="FIRST"<?php if(isset($_SESSION['semester']) && $_SESSION['semester'] == 'FIRST') echo ' selected'; ?>>FIRST</option>
-  <option value="SECOND"<?php if(isset($_SESSION['semester']) && $_SESSION['semester'] == 'SECOND') echo ' selected'; ?>>SECOND</option>
+  <option value="FIRST"<?php if(isset($_SESSION['semester']) && $_SESSION['semester'] == 'FIRST') {
+      echo ' selected';
+  } ?>>FIRST</option>
+  <option value="SECOND"<?php if(isset($_SESSION['semester']) && $_SESSION['semester'] == 'SECOND') {
+      echo ' selected';
+  } ?>>SECOND</option>
 </select>
 
       <script>
@@ -90,33 +114,32 @@ body {
   </form>
 
 
-
-
-
-<?php
+  <?php
 	include "../php/db_conn.php";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$semester = mysqli_real_escape_string($conn, $_POST["semester"]);
 		
-		
-            $sql = "UPDATE settings SET semester='$semester'";
+		$sql = "UPDATE settings SET semester='$semester'";
 
-			if (mysqli_query($conn, $sql)) {
-				echo "<p class='mt-3 alert alert-success'> <b>Updating</b> 
+		if (mysqli_query($conn, $sql)) {
+			echo "<p class='mt-3 alert text-white ' style='  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);'> <b>Updating</b> 
 <span class='wave-text'>.</span>
 <span class='wave-text'>.</span>
-<span class='wave-text'>.</span> <br> Updating Senior High settings Name Would Take Some Time 
+<span class='wave-text'>.</span> <br> Updating Semester Would Take Some Time 
+</p>";
 
-
-				<br> Just logout and login back , thanks : )</p>";
-			} else {
-				echo "<p class='mt-3 alert alert-danger'>Error updating: " . mysqli_error($conn) . "</p>";
-			}
+			// Add JavaScript code to redirect after 5 seconds
+			echo "<script>
+				setTimeout(function() {
+					window.location.href = 'index.php';
+				}, 5000);
+			</script>";
+		} else {
+			echo "<p class='mt-3 alert alert-danger'>Error updating: " . mysqli_error($conn) . "</p>";
 		}
 	}
 ?>
-
 
 
 
@@ -127,6 +150,7 @@ body {
 		</div>
 	</div>
     <?php
+}
     ?>
   </body>
 </html>

@@ -29,6 +29,7 @@ body {
   background-repeat: no-repeat;
 
 }
+
 .wave-text {
     display: inline-block;
     font-weight: bold;
@@ -67,6 +68,14 @@ form{
 .tabled{
     background-color: white;
 	border-radius: 10px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+a:{
+  text-decoration: none;
+  color: black!important;
 }
     </style>
 </head>
@@ -151,25 +160,10 @@ function myFunction() {
 					<tbody>
 						<tr>
 							<td>
+              <a href="schoolyear.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
+  School Year
 
-                         <!-- 1st Quarter -->
-<div class="modal fade" id="schoolyear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header text-white" style="
-     background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Set Academic Year</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <iframe src="schoolyear.php" width="100%" height="450"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-<button  type="button" class="boton mb-3 " style="backgrp"data-bs-toggle="modal" data-bs-target="#schoolyear" data-bs-dismiss="modal">
-School Year
-</button>
+
 <b>
 :
 <?php
@@ -192,32 +186,15 @@ if (mysqli_num_rows($result) > 0) {
 
 ?>
 </b>
-                            </td>
+</a>                      </td>
 
 						
 						<tr>
 							<td>
 
-							<div class="modal fade" id="juniorsettings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header text-white" style="
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Set Principal Name</h5>
+              <a href="principal.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
+ Principal :
 
-
-
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <iframe src="principal.php" width="100%" height="280"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-<button type="button" class="boton mb-3" style="backgrp" data-bs-toggle="modal" data-bs-target="#juniorsettings" data-bs-dismiss="modal">
-Principal :
-</button>
 <b>
 
 <?php
@@ -241,32 +218,14 @@ if (mysqli_num_rows($result) > 0) {
 ?>
 </b>
 
-
+</a>
 							</td>
 </tr>
 <tr>
               <td>
+<a href="semester.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
+ Semester :
 
-<div class="modal fade" id="semestersettings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
-<div class="modal-content">
-<div class="modal-header text-white" style="
-background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-<h5 class="modal-title" id="exampleModalLabel">Set Semester</h5>
-
-
-
-<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-<div class="modal-body">
-<iframe src="semester.php" width="100%" height="280"></iframe>
-</div>
-</div>
-</div>
-</div>
-<button type="button" class="boton mb-3" style="backgrp" data-bs-toggle="modal" data-bs-target="#semestersettings" data-bs-dismiss="modal">
-Semester :
-</button>
 <b>
 
 <?php
@@ -289,45 +248,16 @@ echo "0 results";
 
 ?>
 </b>
-
-
+</a>
 </td>		
 						</tr>
-						<tr>
-							<td>
-
-
-
-
-
-
-
-							</td>
-			
-						</tr>
+				
             <tr>
               <td>
-
-<div class="modal fade" id="quartersettings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
-<div class="modal-content">
-<div class="modal-header text-white" style="
-background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-<h5 class="modal-title" id="exampleModalLabel">Set Quarter</h5>
-
-
-
-<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-<div class="modal-body">
-<iframe src="quarter.php" width="100%" height="280"></iframe>
-</div>
-</div>
-</div>
-</div>
-<button type="button" class="boton mb-3" style="backgrp" data-bs-toggle="modal" data-bs-target="#quartersettings" data-bs-dismiss="modal">
+              <a href="quarter.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
+ 
 Quarter :
-</button>
+
 <b>
 
 <?php
@@ -351,20 +281,8 @@ echo "0 results";
 ?>
 </b>
 
-
+</a>
 </td>		
-						</tr>
-						<tr>
-							<td>
-
-
-
-
-
-
-
-							</td>
-			
 						</tr>
 
 
@@ -402,7 +320,8 @@ Admin Profile
 			
 						</tr>
 
-            
+          
+
 					</tbody>
 				</table>
 			</div>

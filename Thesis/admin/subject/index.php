@@ -8,7 +8,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HOME</title>
+  <title>SUBJECT LIST</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   
@@ -269,7 +269,7 @@ body {
         <form class="" method="get">
 
   <div  class="input-group mb-3">
-  <a type="button" class="btn" href="add.php">
+  <a type="button" class="btn" href="create.php">
   <img src="img/user.png" alt="Image Description" class="zoom-on-hover">
 </a>
 
@@ -316,9 +316,43 @@ body {
                   <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
                     <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
                   </a>
-                  <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $Row['id']; ?>" style="border: none; background-color:transparent; outline: none;" title="Delete">
-                    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
-                  </a>
+            
+            <a type="button" class="btn" data-bs-toggle="modal" 
+  data-bs-target="#deleteModal<?php echo $Row['id']; ?>"
+  style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+            <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">
+      </a>
+             <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $Rows['id']; ?>" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <p> <b></b>
+             
+               <br> Are you sure you want to delete <br> <b> <?php echo $Row['subjectname']; ?> Subject?</b>
+
+            </p>
+            <form class="delete" action="delete_user.php" method="POST">
+               <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
+               <div class="mb-3">
+                  <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+                  <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
+               </div>
+               <button type="submit" class="btn" name="delete">
+               <img style="width:40px;" src="img/discard.png" class="img-fluid" alt="Description of image">
+
+
+
+               </button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
                 </td>
               </tr>
             <?php

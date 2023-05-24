@@ -785,7 +785,8 @@ function updateStatusOfAllUsers(status) {
 
 
   
-  <a href="update.php?id=<?php echo $row['id'] ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <a href="update.php?id=<?php echo $row['id']; ?>&name=<?php echo $row['name']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+
   <b>
     <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
   </b>

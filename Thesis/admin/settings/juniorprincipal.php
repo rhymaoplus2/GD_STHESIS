@@ -51,7 +51,7 @@ body {
     </style>
 </head>
 <body>
-<!--
+
 <div class="header sticky-top" id="myHeader">
 <?PHP include_once('header.php');?>
 </div>
@@ -72,7 +72,7 @@ function myFunction() {
 </script>
 
 
--->
+
 
 
 

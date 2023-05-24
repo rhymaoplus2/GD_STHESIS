@@ -16,6 +16,10 @@
   <style>
 
 
+html, body {
+  height: 100%;
+  
+}
 body {
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
@@ -51,6 +55,24 @@ body {
     </style>
 </head>
 <body>
+<div class="header sticky-top" id="myHeader">
+<?php include_once('header.php');?>
+</div>
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
 
 
 	<div class="container my-5">
@@ -65,10 +87,18 @@ body {
       <label for="quarter" class="mb-3 text-center"><b> Quarter : </b> </label>
       <select class="form-select" name="quarter" id="quarter" required>
   <option value="" selected disabled>Select</option>
-  <option value="FIRST"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'FIRST') echo ' selected'; ?>>FIRST</option>
-  <option value="SECOND"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'SECOND') echo ' selected'; ?>>SECOND</option>
-  <option value="THIRD"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'THIRD') echo ' selected'; ?>>THIRD</option>
-  <option value="FOURTH"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'FOURTH') echo ' selected'; ?>>FOURTH</option>
+  <option value="FIRST"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'FIRST') {
+      echo ' selected';
+  } ?>>FIRST</option>
+  <option value="SECOND"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'SECOND') {
+      echo ' selected';
+  } ?>>SECOND</option>
+  <option value="THIRD"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'THIRD') {
+      echo ' selected';
+  } ?>>THIRD</option>
+  <option value="FOURTH"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'FOURTH') {
+      echo ' selected';
+  } ?>>FOURTH</option>
 </select>
 
 
@@ -95,30 +125,31 @@ body {
 
 
 
+  <?php
+    include "../php/db_conn.php";
 
-<?php
-	include "../php/db_conn.php";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $quarter = mysqli_real_escape_string($conn, $_POST["quarter"]);
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$quarter = mysqli_real_escape_string($conn, $_POST["quarter"]);
-		
-		
-            $sql = "UPDATE settings SET quarter='$quarter'";
-
-			if (mysqli_query($conn, $sql)) {
-				echo "<p class='mt-3 alert alert-success'> <b>Updating</b> 
-<span class='wave-text'>.</span>
-<span class='wave-text'>.</span>
-<span class='wave-text'>.</span> <br> Updating Senior High settings Name Would Take Some Time 
-
-
-				<br> Just logout and login back , thanks : )</p>";
-			} else {
-				echo "<p class='mt-3 alert alert-danger'>Error updating: " . mysqli_error($conn) . "</p>";
-			}
-		}
-	}
-?>
+        $sql = "UPDATE settings SET quarter='$quarter'";
+        if (mysqli_query($conn, $sql)) {
+          echo "<p class='mt-3 alert text-white'  style='  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);'> <b>Updating</b> 
+    <span class='wave-text'>.</span>
+    <span class='wave-text'>.</span>
+    <span class='wave-text'>.</span> <br> Updating Quarter Would Take Some Time 
+    </p>";
+    
+          // Add JavaScript code to redirect after 5 seconds
+          echo "<script>
+            setTimeout(function() {
+              window.location.href = 'index.php';
+            }, 5000);
+          </script>";
+        }else {
+          echo "<p class='mt-3 alert alert-danger'>Error updating: " . mysqli_error($conn) . "</p>";
+      }
+  }
+    ?>
 
 
 
@@ -130,6 +161,7 @@ body {
 		</div>
 	</div>
     <?php
+}
     ?>
   </body>
 </html>

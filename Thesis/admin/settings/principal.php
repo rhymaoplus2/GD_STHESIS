@@ -16,12 +16,15 @@
   <style>
 
 
+html, body {
+  height: 100%;
+  
+}
 body {
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 
 }
-
 
 .wave-text {
     display: inline-block;
@@ -51,9 +54,8 @@ body {
     </style>
 </head>
 <body>
-<!--
 <div class="header sticky-top" id="myHeader">
-<?PHP include_once('header.php');?>
+<?php include_once('header.php');?>
 </div>
 
 <script>
@@ -72,7 +74,6 @@ function myFunction() {
 </script>
 
 
--->
 
 
 
@@ -116,29 +117,28 @@ function myFunction() {
 
 
 
-<?php
-	include "../php/db_conn.php";
+  <?php
+include "../php/db_conn.php";
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$pname = mysqli_real_escape_string($conn, $_POST["pname"]);
-		
-		
-            $sql = "UPDATE settings SET pname='$pname'";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $pname = mysqli_real_escape_string($conn, $_POST["pname"]);
 
-			if (mysqli_query($conn, $sql)) {
-				echo "<p class='mt-3 alert alert-success'> <b>Updating</b> 
-<span class='wave-text'>.</span>
-<span class='wave-text'>.</span>
-<span class='wave-text'>.</span> <br> Updating Principal Name Would Take Some Time 
+        $sql = "UPDATE settings SET pname='$pname'";
 
+        if (mysqli_query($conn, $sql)) {
+        
+            echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+              successModal.show();
+            });
+          </script>";
+        } else {
+            echo "<p class='mt-3 alert alert-danger'>Error updating: " . mysqli_error($conn) . "</p>";
+        }
+    }
+    ?>
 
-				<br> Just logout and login back , thanks : )</p>";
-			} else {
-				echo "<p class='mt-3 alert alert-danger'>Error updating: " . mysqli_error($conn) . "</p>";
-			}
-		}
-	}
-?>
 
 
 
@@ -150,6 +150,27 @@ function myFunction() {
 		</div>
 	</div>
     <?php
+}
     ?>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Success!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="redirectToIndex()"></button>
+      </div> 
+      <div class="modal-body text-white" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+        <b>The name of the new principal has been updated.</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function redirectToIndex() {
+    window.location.href = "index.php";
+  }
+</script>
+
   </body>
 </html>

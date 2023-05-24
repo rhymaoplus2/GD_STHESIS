@@ -169,10 +169,6 @@ font-size: 10px;;
 
 
 
-<!--  CRUD AREA -->
-<br>
-<br>
-
 <div class="container">
 <form action="./php/create.php"
       method="post">
@@ -202,20 +198,12 @@ font-size: 10px;;
 
   </div>
 
+          <button type="submit" class="btn btn-primary" name="create" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
- 
-  <button type="submit" 
-          class="btn btn-primary"
-          name="create">Create</button>
+<button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='index.php'">
+<img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
+</button>
 
-          <a class="link-primary" href="index.php">
-          <button type="button" class="btn btn-dark">
-
-      
-          Cancel
-
-          </button>
-          </a>
 </form>
 </div>
 
