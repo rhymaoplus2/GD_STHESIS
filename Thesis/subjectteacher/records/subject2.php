@@ -642,30 +642,31 @@ require "php/db_conn.php";
         }
 
         // Rest of the code...
-
-        $query = "SELECT students.fullname, students.adviser_id, users.sub2,
- students.section, students.firstname, students.middlename,
- students.trackstrand, students.lastname, students.gender,
- students.syear, students.grade, students.id
- FROM students
- JOIN users ON 
-     (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
-     OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
-     OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
-     OR users.sec10 = students.section)
- WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
-     OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
-     OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
-     OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
-     OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
-     AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
-     students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher10 = '".$_SESSION["name"]."') 
-" . $whereClause . " 
-ORDER BY students.lastname ASC";
+        $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub2,
+        students.section, students.firstname, students.middlename,
+        students.trackstrand, students.lastname, students.gender,
+        students.syear, students.grade, students.id
+        FROM students
+        JOIN users ON 
+            (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
+            OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
+            OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
+            OR users.sec10 = students.section)
+        WHERE gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
+            OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
+            OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
+            OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
+            OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
+            AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
+            students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
+            OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
+            OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
+            OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
+            OR students.subjectteacher10 = '".$_SESSION["name"]."') 
+        " . $whereClause . " 
+        GROUP BY students.id
+        ORDER BY students.lastname ASC";
+    
 
         // Execute the query and fetch the results...
 
@@ -806,30 +807,31 @@ ORDER BY students.lastname ASC";
         }
 
         // Rest of the code...
-
-        $query = "SELECT students.fullname, students.adviser_id, users.sub2,
- students.section, students.firstname, students.middlename,
- students.trackstrand, students.lastname, students.gender,
- students.syear, students.grade, students.id
- FROM students
- JOIN users ON 
-     (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
-     OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
-     OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
-     OR users.sec10 = students.section)
- WHERE gender = 'FEMALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
-     OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
-     OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
-     OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
-     OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
-     AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
-     students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
-     OR students.subjectteacher10 = '".$_SESSION["name"]."') 
-" . $whereClause . " 
-ORDER BY students.lastname ASC";
+   // Rest of the code...
+   $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub2,
+   students.section, students.firstname, students.middlename,
+   students.trackstrand, students.lastname, students.gender,
+   students.syear, students.grade, students.id
+   FROM students
+   JOIN users ON 
+       (users.sec1 = students.section OR users.sec2 = students.section OR users.sec3 = students.section 
+       OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
+       OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
+       OR users.sec10 = students.section)
+   WHERE gender = 'FEMALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
+       OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
+       OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
+       OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
+       OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
+       AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
+       students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
+       OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
+       OR students.subjectteacher6 = '".$_SESSION["name"]."' OR students.subjectteacher7 = '".$_SESSION["name"]."' 
+       OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
+       OR students.subjectteacher10 = '".$_SESSION["name"]."') 
+   " . $whereClause . " 
+   GROUP BY students.id
+   ORDER BY students.lastname ASC";
 
         // Execute the query and fetch the results...
 

@@ -505,35 +505,38 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     name="syear">
   </div>
 
-
-
-  <div class="from-group mb-3   1">
-                                <label class="mb-2 text-left" for=""><b>Year Level</b></label>
-                                
-                                <select style="width:100%" name="grade" id="grade" class="form-control">
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </div>
-
-
-
-  <div class="mb-3   1">
-    <label for="exampleInputEmail1" class="form-label text-left"><b>Section Name</b></label>
-    <input style="width:100%;"
-    type="" 
-    class="form-control" 
-    id="section" 
-    placeholder="ex: Lilac"
-    name="section">
+  <div class="from-group mb-3 row">
+  <div class="col-md-6">
+    <label class="mb-2 text-left" for=""><b>Year Level</b></label>
+    <select style="width:100%" name="grade" id="grade" class="form-control">
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
   </div>
-<hr>
-
+  <div class="col-md-6">
+    <label class="mb-2 text-left" for=""><b>Section</b></label>
+    <select class="form-control" id="section" name="section">
+      <option value="">Select Section</option>
+      <?php
+        // Assuming you have a database connection
+        require "./php/db_conn.php";
+        $result = mysqli_query($conn, "SELECT name FROM section ORDER BY name");
+        while ($row = mysqli_fetch_array($result)) {
+          echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+        }
+      ?>
+    </select>
+  </div>
 </div>
+
+
+
+    
+
   <div hidden  class="mb-3   1">
   <div class="mb-3   text-center ">
   <label for="subjectteacher1" class="form-label text-danger mb-3"><b><b>Subject Teachers</b></b></label>
@@ -1105,7 +1108,25 @@ function myFunction() {
 
 
 
+<script>
+  // Get all select elements with class "form-control"
+const selectElements = document.querySelectorAll('.form-control');
 
+// Loop through each select element and add an event listener for when the value changes
+selectElements.forEach(select => {
+  select.addEventListener('change', () => {
+    // Store the selected value in local storage using the select element's id as the key
+    localStorage.setItem(select.id, select.value);
+  });
+
+  // Retrieve the previously selected value from local storage and set it as the selected value
+  const selectedValue = localStorage.getItem(select.id);
+  if (selectedValue) {
+    select.value = selectedValue;
+  }
+});
+
+</script>
 
 
 </body>

@@ -265,7 +265,7 @@ function myFunction() {
 <div class="fade-in mb-3">
 
 	<div class="container">
-		<form action="n-update.php" 
+		<form action="update_process.php" 
 		      method="post">
       
     <div class="text-center text-white p-2 mb-4" style="font-size:24px; 

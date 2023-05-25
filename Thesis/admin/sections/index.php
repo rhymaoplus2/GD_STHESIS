@@ -227,7 +227,7 @@ font-size: 10px;;
 
   }
   
-#refresh-img:hover {
+a:hover {
   transform: scale(1.2);
 }
 #search {
@@ -392,7 +392,7 @@ require "./php/db_conn.php";
 <table class="table table-bordered">
   <thead class="sticky">
     <tr class="text-white text-center" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-      <th scope="col" colspan="2">Assign Sections</th>
+      <th scope="col" colspan="2">GRADE AND SECTIONS</th>
     </tr>
   </thead>
   <tbody>
@@ -404,43 +404,20 @@ require "./php/db_conn.php";
         <td class=""><b>Grade <?php echo $row["grade"]; ?> - <?php echo $row["name"]; ?></b></td>
         <td class="text-center">
          
-        <button type="button" class="btn text-center zoom-button" data-bs-toggle="modal" data-bs-target="#assignModal-<?php echo $section_id; ?>">
-  <img src="img/assign.gif" class="zoom-image" alt="Image">
-</button>
+        <a href="update.php?name=<?php echo $row['name']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Subject Teachers">
 
-        
-          <div class="modal fade" id="assignModal-<?php echo $section_id; ?>" tabindex="-1" aria-labelledby="assignModalLabel-<?php echo $section_id; ?>" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="assignModalLabel-<?php echo $section_id; ?>">
-                    Assign a Subject Teacher to: Grade <?php echo $row["grade"]; ?> - <?php echo $row["name"]; ?>
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <ul class="list-group">
-                    <input type="text" class="form-control" placeholder="Search teacher..." onkeyup="filterTeachers(this)">
-                    <?php
-                              $query2 = "SELECT id, name FROM users ORDER by name";
-                $result2 = mysqli_query($conn, $query2);
+        <img src="img/teacher.png" class="zoom-image" alt="Image">
+            </a>
+                   
+        <a href="subject.php?name=<?php echo $row['name']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Subjects">
 
-                while ($row2 = mysqli_fetch_assoc($result2)) {
-                    ?>
-                      <li class="list-group-item teacher-item">
-                        <a href="assign_section.php?section_id=<?php echo $section_id; ?>&user_id=<?php echo $row2['id']; ?>">
-                          <?php echo $row2["name"]; ?>
-                        </a>
-                      </li>
-                    <?php
-                }
-                ?>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+<img src="img/subjects.png" class="zoom-image" alt="Image">
+    </a>
 
+    <a href="adviser.php?name=<?php echo $row['name']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Assign Adviser">
+
+<img src="img/adviser.png" class="zoom-image" alt="Image">
+    </a>
           <script>
             function filterTeachers(input) {
               // Get all teacher items

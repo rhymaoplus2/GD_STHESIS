@@ -582,7 +582,7 @@ function myFunction() {
                   <tr>
                   <th scope="col" class="w-50 text-start">MALE</th>
 <th hidden scope="col">Subject Name</th>
-<th scope="col">Grade</th>
+<th scope="col">Grade per quarter </th>
 
 
 <th colspan="2" scope="col" class="w-50">
@@ -606,7 +606,7 @@ $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.secti
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND REPLACE(LOWER(a.sub1), ' ', '') = REPLACE(LOWER('{$_SESSION['sub1']}'), ' ', '')
     AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND b.gender = 'MALE' AND b.success='1'";
+    AND b.gender = 'MALE' AND b.success='1'  ORDER BY lastname";
 
   
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -662,9 +662,10 @@ $result = mysqli_query($conn, $query);
 
 
 <td class="text-start"><?php echo $rows["studentname"]; ?></td>
-<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
+<td class="text-start" style="width:30%;"> <b> <?php echo $rows["grade"]; ?> </b> - (<b> <?php echo $rows["quarter"]; ?></b> Quarter)</td>
 
 
+   
    
       <td hidden><?php echo $rows["subjectname"]; ?></td>
    
@@ -744,7 +745,7 @@ $result = mysqli_query($conn, $query);
                   <tr>
                   <th scope="col" class="w-50 text-start">FEMALE</th>
 <th hidden scope="col">Subject Name</th>
-<th scope="col">Grade</th>
+<th scope="col">Grade per quarter </th>
 
 
 <th colspan="2" scope="col" class="w-50">
@@ -824,11 +825,11 @@ $result = mysqli_query($conn, $query);
     <tr>
 
 <td class="text-start"><?php echo $rows["studentname"]; ?></td>
-<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
+<td class="text-start" style="width:20%;"> <b> <?php echo $rows["grade"]; ?> </b> - (<b> <?php echo $rows["quarter"]; ?></b> Quarter)</td>
 
 
    
-      <td hidden><?php echo $rows["subjectname"]; ?></td>
+      <td hidden><?php echo $rows["subjectname"]; ?> </td>
    
       <td class="text-center">
 

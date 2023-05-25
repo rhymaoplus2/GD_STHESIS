@@ -584,50 +584,48 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
   $query = "SELECT * FROM students $where_clause ORDER BY lastname ";
   $result = mysqli_query($conn, $query);
 
-  while ($Row = mysqli_fetch_assoc($result)) {
+  while ($row = mysqli_fetch_assoc($result)) {
 ?>
 
            <tr style="     background: #f2f2f2" >
-           <td hidden><?php echo $Row["id"]; ?></td>
+           <td hidden><?php echo $row["id"]; ?></td>
        
                 
-           <td style="width:50%;">    <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class=" "><?php echo $Row["lastname"].', '.$Row["firstname"].' '.substr($Row["middlename"], 0, 1).'.'; ?>
+           <td style="width:50%;">    <a href="view.php?id=<?=$row['id']?>" 
+			      	     class=" "><?php echo $row["lastname"].', '.$row["firstname"].' '.substr($row["middlename"], 0, 1).'.'; ?>
                    </a></td>
         
-          <td class="text-center"><?php echo $Row["section"]; ?></td>
-          <td hidden class="text-center"><?php echo $Row["section"]; ?></td>
-          <td hidden><?php echo $Row["grade"]; ?></td>
-          <td hidden><?php echo $Row["trackstrand"]; ?></td>
+          <td class="text-center"><?php echo $row["section"]; ?></td>
+          <td hidden class="text-center"><?php echo $row["section"]; ?></td>
+          <td hidden><?php echo $row["grade"]; ?></td>
+          <td hidden><?php echo $row["trackstrand"]; ?></td>
   
      <td class="text-center">
-      
-     <a href="update.php?id=<?php echo $Row['id'] ?>" class="btn btn-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
-
-                   <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+     <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+          <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
                    </b></a>
                    <a type="button" class="btn btn-transparent" data-bs-toggle="modal" 
-  data-bs-target="#deleteModal<?php echo $Row['id']; ?>"
+  data-bs-target="#deleteModal<?php echo $row['id']; ?>"
   style="border: none; background-color:transparent; outline: none;" title="Delete">
 
 		    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image"><b>
   </a>
-             
-             <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+       
+             <div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
-            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
             <p> <b></b>
              
-               <br> Are you sure you want to delete <br> <b> <?php echo $Row['lastname']; ?> Account?</b>
+               <br> Are you sure you want to delete <br> <b> <?php echo $row['lastname']; ?> Account?</b>
 
   </p>
    <form class="delete-form" action="delete.php" method="POST">
-  <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
+  <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
   <div class="mb-3">
     <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
     <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
