@@ -286,41 +286,39 @@ echo "0 results";
 						</tr>
 
 
-						<tr>
-							<td>
+            </tr>
+				
+        <tr>
+          <td>
+          <a href="admin.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
+Administrator :
+
+<b>
+
+<?php
+include "../php/db_conn.php";
+
+// Retrieve data from settings table
+$sql = "SELECT * FROM users where id=1";
+$result = mysqli_query($conn, $sql);
+
+// Display data using echo statement
+if (mysqli_num_rows($result) > 0) {
+// output data of each row
+while($row = mysqli_fetch_assoc($result)) {
+echo "" . $row["name"]. "";
+}
+} else {
+echo "0 results";
+}
+?>
+</b>
+
+</a>
+</td>		
+        </tr>
 
 
-
-
-
-							<div class="modal fade" id="admin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header text-white" style="
-      
-      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Admin Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <iframe src="settings.php" width="100%" height="280"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-<button disabled type="button" class="boton mb-3 " style="backgrp"data-bs-toggle="modal" data-bs-target="#admin" data-bs-dismiss="modal">
-Admin Profile
-</button>
-
-
-
-
-
-							</td>
-			
-						</tr>
-
-          
 
 					</tbody>
 				</table>

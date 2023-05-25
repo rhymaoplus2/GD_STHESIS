@@ -321,7 +321,7 @@ td a:hover {
     <option value="">ALL SECTIONS</option>
     <?php
     include "db_conn.php";
-    $query = "SELECT DISTINCT section FROM grade ORDER BY section";
+    $query = "SELECT DISTINCT section FROM grade ORDER BY section ";
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
@@ -334,7 +334,8 @@ td a:hover {
   <select id="year" onchange="filterTable()" class="fw-bold  form-select flex-grow-1">
     <option value="">ALL YEAR LEVEL</option>
     <?php
-    $query = "SELECT DISTINCT year FROM grade ORDER BY year";
+$query = "SELECT DISTINCT year FROM grade ORDER BY year ASC";
+
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {

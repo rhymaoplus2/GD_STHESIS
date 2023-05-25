@@ -133,7 +133,7 @@ function myFunction() {
 
         $sql = "UPDATE settings SET quarter='$quarter'";
         if (mysqli_query($conn, $sql)) {
-          echo "<p class='mt-3 alert text-white'  style='  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);'> <b>Updating</b> 
+          echo "<p class='mt-3 alert text-white '  style='  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);'> <b>Updating</b> 
     <span class='wave-text'>.</span>
     <span class='wave-text'>.</span>
     <span class='wave-text'>.</span> <br> Updating Quarter Would Take Some Time 
