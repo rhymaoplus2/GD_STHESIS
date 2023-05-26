@@ -354,7 +354,7 @@ function myFunction() {
 </div>
 -->
 <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;">Students Records Management Page </b>
+  <b class="fs-2" style="white-space: nowrap;">Adding Grades for Students</b>
   
 </div>
 <hr>
