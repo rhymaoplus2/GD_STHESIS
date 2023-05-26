@@ -35,20 +35,10 @@ if (isset($_GET['id'])) {
     $address = validate($_POST['address']);
     $parent = validate($_POST['parent']);
     $syear = validate($_POST['syear']);
-    $section = validate($_POST['section']);
-    $subject1 = validate($_POST['subject1']);
-    $subject2 = validate($_POST['subject2']);
-    $subject3 = validate($_POST['subject3']);
-    $subject4 = validate($_POST['subject4']);
-    $subject5 = validate($_POST['subject5']);
-    $subject6 = validate($_POST['subject6']);
-    $subject7 = validate($_POST['subject7']);
-    $subject8 = validate($_POST['subject8']);
-    $subject9 = validate($_POST['subject9']);
-    $subject10 = validate($_POST['subject10']);
+    $section = validate($_POST['section']); // Added section variable
 
     if (empty($id)) {
-        header("Location: update.php?id=$id&error=Name Required");
+        header("Location: update.php?id=$id&error=ID Required"); // Updated error message
         exit();
     } else {
         $sql = "UPDATE students SET firstname='$firstname',
@@ -64,26 +54,17 @@ if (isset($_GET['id'])) {
         address='$address',
         parent='$parent',
         syear='$syear',
-        section='$section',
-        subject1='$subject1',
-        subject2='$subject2',
-        subject3='$subject3',
-        subject4='$subject4',
-        subject5='$subject5',
-        subject6='$subject6',
-        subject7='$subject7',
-        subject8='$subject8',
-        subject9='$subject9',
-        subject10='$subject10'
+        section='$section'
+   
         WHERE id='$id'";
         
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            header("Location: index.php?success=successfully updated");
+            header("Location: index.php?success=Successfully updated"); // Updated success message
             exit();
         } else {
-            header("Location: index.php?error=unknown error occurred");
+            header("Location: index.php?error=Unknown error occurred"); // Updated error message
             exit();
         }
     }
@@ -91,3 +72,4 @@ if (isset($_GET['id'])) {
     header("Location: index.php");
     exit();
 }
+?>

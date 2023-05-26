@@ -17,17 +17,7 @@ $age =    $_POST['age']  ;
 $address =    $_POST['address']  ;
 $parent =    $_POST['parent']  ;
 $syear =    $_POST['syear']  ;
-$section =    $_POST['section']  ;
-$subject1 =    $_POST['subject1']  ;
-$subject2 =    $_POST['subject2']  ;
-$subject3 =    $_POST['subject3']  ;
-$subject4 =    $_POST['subject4']  ;
-$subject5 =    $_POST['subject5']  ;
-$subject6 =    $_POST['subject6']  ;
-$subject7 =    $_POST['subject7']  ;
-$subject8 =    $_POST['subject8']  ;
-$subject9 =    $_POST['subject9']  ;
-$subject10 =    $_POST['subject10']  ;
+;
 
 $query = "UPDATE students SET
              firstname = '$firstname',
@@ -43,17 +33,8 @@ $query = "UPDATE students SET
         address='$address',
         parent='$parent',
         syear='$syear',
-        section='$section',
-        subject1='$subject1',
-        subject2='$subject2',
-        subject3='$subject3',
-        subject4='$subject4',
-        subject5='$subject5',
-        subject6='$subject6',
-        subject7='$subject7',
-        subject8='$subject8',
-        subject9='$subject9',
-        subject10='$subject10'
+        section='$section'
+  
   WHERE id = $id";
 mysqli_query($conn, $query);
 

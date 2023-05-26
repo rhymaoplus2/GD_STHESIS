@@ -178,7 +178,7 @@ bottom: 0;
 z-index: -1;
   }
   .skrol {
-  height: 300px;
+  height: 250px;
   overflow-y: auto;
   padding-right: 20px; /* Add padding to the right side of the element */
 }
@@ -265,7 +265,7 @@ function myFunction() {
 <div class="fade-in mb-3">
 
 	<div class="container">
-		<form action="update_process.php" 
+		<form action="n-update.php" 
 		      method="post">
       
     <div class="text-center text-white p-2 mb-4" style="font-size:24px; 
@@ -311,11 +311,11 @@ function myFunction() {
 
 <hr>
  
-<div class="skrol"style="height: 350px; overflow-y: auto;">
+<div class="skrol"style="height: 250px; overflow-y: auto;">
        <div class="form-group mb-3">
-    <label for="" hidden class="form-label"><b>ID Number</b></label>
+    <label for="" class="form-label"><b>ID Number</b></label>
     <input 
-    hidden
+    
     value="<?=$row['id']?>"
 	  type="text"
     class="form-control"
@@ -335,16 +335,7 @@ function myFunction() {
 
 
     
-    <div class="form-group mb-3">
-    <label for=""class="form-label"><b>ID Number</b></label>
-    <input 
 
-    value="<?=$row['idnumber']?>"
-	  type="text"
-    class="form-control"
-    id="idnumber" 
-    name="idnumber">
-    </div>
 
 
 
@@ -512,337 +503,6 @@ function myFunction() {
     </div>
 
   
-   
-    <div class="form-group mb-3 text-start">
-    <div class="d-flex  text-start  ">
-  <label for="" class="form-label "><i><b>Subjects</b></i></label>
-</div>
-
-
-
-
-    <select name="subject1" id="subject1" class="form-control  mb-3">
-    <?php
-    // Add blank option if sub5 has no value
-    if(empty($row['subject1'])){
-        echo '<option value="" selected></option>';
-    }else{
-        echo '<option value="'.$row['subject1'].'" selected>'.$row['subject1'].'</option>';
-    }
-    ?>
-    <option value=""></option>
-    <?php 
-    $query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-            $option =$optionData['subjectname'];
-            ?>
-            <?php
-            //selected option
-            if(!empty($row['subject1']) && $row['subject1']== $option){
-                // selected option
-                ?>
-                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-                <?php 
-                continue;
-            }?>
-            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-            <?php
-        }
-    }
-    ?>
-</select>
-<select name="subject2" id="subject2" class="form-control  mb-3">
-<?php
-// Add blank option if subject2 has no value
-if(empty($row['subject2'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject2'].'" selected>'.$row['subject2'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject2']) && $row['subject2']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject3" id="subject3" class="form-control   mb-3">
-<?php
-// Add blank option if subject3 has no value
-if(empty($row['subject3'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject3'].'" selected>'.$row['subject3'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject3']) && $row['subject3']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject4" id="subject4" class="form-control   mb-3">
-<?php
-// Add blank option if subject4 has no value
-if(empty($row['subject4'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject4'].'" selected>'.$row['subject4'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject4']) && $row['subject4']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject5" id="subject5" class="form-control   mb-3">
-<?php
-// Add blank option if subject5 has no value
-if(empty($row['subject5'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject5'].'" selected>'.$row['subject5'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject5']) && $row['subject5']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject6" id="subject6" class="form-control   mb-3">
-<?php
-// Add blank option if subject6 has no value
-if(empty($row['subject6'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject6'].'" selected>'.$row['subject6'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject6']) && $row['subject6']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject7" id="subject7" class="form-control   mb-3">
-<?php
-// Add blank option if subject7 has no value
-if(empty($row['subject7'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject7'].'" selected>'.$row['subject7'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject7']) && $row['subject7']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject8" id="subject8" class="form-control   mb-3">
-<?php
-// Add blank option if subject8 has no value
-if(empty($row['subject8'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject8'].'" selected>'.$row['subject8'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject8']) && $row['subject8']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject9" id="subject9" class="form-control   mb-3">
-<?php
-// Add blank option if subject9 has no value
-if(empty($row['subject9'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject9'].'" selected>'.$row['subject9'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject9']) && $row['subject9']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject10" id="subject10" class="form-control   mb-3">
-<?php
-// Add blank option if subject10 has no value
-if(empty($row['subject10'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject10'].'" selected>'.$row['subject10'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER by subjectname ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject10']) && $row['subject10']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-
-
 
 </div>
        <br>

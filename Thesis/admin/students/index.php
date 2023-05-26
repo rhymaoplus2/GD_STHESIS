@@ -624,7 +624,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
                <br> Are you sure you want to delete <br> <b> <?php echo $row['lastname']; ?> Account?</b>
 
   </p>
-   <form class="delete-form" action="delete.php" method="POST">
+   <form class="delete-form" action="delete_student.php" method="POST">
   <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
   <div class="mb-3">
     <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
