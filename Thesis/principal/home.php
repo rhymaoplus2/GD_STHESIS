@@ -321,8 +321,10 @@ html, body {
 
 
 body {
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
-  background-repeat: no-repeat;
+  background: #E55D87;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #5FC3E4, #E55D87);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #5FC3E4, #E55D87); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .image-container {
@@ -438,7 +440,7 @@ if(isset($_POST['export_button'])) {
         <b>MSU-MSAT High School<br>Grade Reporting and Recording System</b>
       </div>
       <div class="modal-footer">
-        <i>User Logged in:</i> <b>Administrator</b>
+        <i>User Logged in:</i> <b>A\Principal</b>
       </div>
     </div>
   </div>

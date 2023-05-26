@@ -47,10 +47,10 @@ if (isset($_GET['id'])) {
                     WHERE id='$id'";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                header("Location: ../update.php?id=$id&success=successfully updated");
+                header("Location: ../index.php?id=$id&success=successfully updated");
                 
             } else {
-                header("Location: ../records.php?id=$id&error=unknown error occurred&$user_data");
+                header("Location: ../index.php?id=$id&error=unknown error occurred&$user_data");
             }
         }
     }

@@ -312,15 +312,24 @@ function myFunction() {
 <hr>
  
 <div class="skrol"style="height: 250px; overflow-y: auto;">
-       <div class="form-group mb-3">
-    <label for="" class="form-label"><b>ID Number</b></label>
-    <input 
-    
+<div class="form-group mb-3">
+    <label hidden for="" class="form-label"><b>ID No.</b></label>
+    <input hidden
     value="<?=$row['id']?>"
 	  type="text"
     class="form-control"
     id="id" 
     name="id">
+    </div>
+
+    <div class="form-group mb-3">
+    <label for="" class="form-label"><b>ID No.</b></label>
+    <input 
+    value="<?=$row['idnumber']?>"
+	  type="text"
+    class="form-control"
+    id="idnumber" 
+    name="idnumber">
     </div>
 
     <div class="form-group mb-3">

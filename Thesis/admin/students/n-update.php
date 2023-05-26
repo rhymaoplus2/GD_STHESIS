@@ -35,13 +35,15 @@ if (isset($_GET['id'])) {
     $address = validate($_POST['address']);
     $parent = validate($_POST['parent']);
     $syear = validate($_POST['syear']);
+    $grade = validate($_POST['grade']);
     $section = validate($_POST['section']); // Added section variable
-
+    $idnumber = validate($_POST['idnumber']);
     if (empty($id)) {
         header("Location: update.php?id=$id&error=ID Required"); // Updated error message
         exit();
     } else {
-        $sql = "UPDATE students SET firstname='$firstname',
+        $sql = "UPDATE students SET  id='$id', firstname='$firstname',
+      
         middlename='$middlename',
         lastname='$lastname',
         lrnnumber='$lrnnumber',
@@ -54,8 +56,9 @@ if (isset($_GET['id'])) {
         address='$address',
         parent='$parent',
         syear='$syear',
-        section='$section'
-   
+        section='$section',
+        grade='$grade',
+        idnumber='$idnumber'
         WHERE id='$id'";
         
         $result = mysqli_query($conn, $sql);

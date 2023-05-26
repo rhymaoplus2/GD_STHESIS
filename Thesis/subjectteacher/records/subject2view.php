@@ -582,7 +582,7 @@ function myFunction() {
                   <tr>
                   <th scope="col" class="w-50 text-start">MALE</th>
 <th hidden scope="col">Subject Name</th>
-<th scope="col">Grade</th>
+<th scope="col">Grade </th>
 
 
 <th colspan="2" scope="col" class="w-50">
@@ -606,7 +606,7 @@ $query = "SELECT b.id, b.studentname, b.subjectname, b.grade, b.teacher, b.secti
     AND REPLACE(LOWER(b.teacher), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
     AND REPLACE(LOWER(a.sub2), ' ', '') = REPLACE(LOWER('{$_SESSION['sub2']}'), ' ', '')
     AND REPLACE(LOWER(a.name), ' ', '') = REPLACE(LOWER('$name'), ' ', '')
-    AND b.gender = 'MALE' AND b.success='1'";
+    AND b.gender = 'MALE' AND b.success='1'  ORDER BY lastname";
 
   
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -662,16 +662,19 @@ $result = mysqli_query($conn, $query);
 
 
 <td class="text-start"><?php echo $rows["studentname"]; ?></td>
-<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
+<td class="text-center" style="width:30%;"> <b> <?php echo $rows["grade"]; ?> </b>
+
+</td>
 
 
+   
    
       <td hidden><?php echo $rows["subjectname"]; ?></td>
    
       <td class="text-center">
 
       <?php if ($rows['status'] != 1): ?>
-  <a href="update3.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <a href="update2.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
     <b>
       <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
     </b>
@@ -699,7 +702,7 @@ $result = mysqli_query($conn, $query);
           <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
        Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
-        <form class="delete" action="delete_grade1.php" method="POST">
+        <form class="delete" action="delete_grade2.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
@@ -744,7 +747,7 @@ $result = mysqli_query($conn, $query);
                   <tr>
                   <th scope="col" class="w-50 text-start">FEMALE</th>
 <th hidden scope="col">Subject Name</th>
-<th scope="col">Grade</th>
+<th scope="col">Grade </th>
 
 
 <th colspan="2" scope="col" class="w-50">
@@ -824,16 +827,17 @@ $result = mysqli_query($conn, $query);
     <tr>
 
 <td class="text-start"><?php echo $rows["studentname"]; ?></td>
-<td class="text-center" style="width:30%;"> <?php echo $rows["grade"]; ?></td>
+<td class="text-center" style="width:20%;"> <b> <?php echo $rows["grade"]; ?> </b> 
+</td>
 
 
    
-      <td hidden><?php echo $rows["subjectname"]; ?></td>
+      <td hidden><?php echo $rows["subjectname"]; ?> </td>
    
       <td class="text-center">
 
       <?php if ($rows['status'] != 1): ?>
-  <a href="update3.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <a href="update2.php?id=<?php echo $rows['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
     <b>
       <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
     </b>
@@ -861,7 +865,7 @@ $result = mysqli_query($conn, $query);
           <br> Are you sure you want to delete <br> <b> <?php echo $rows['studentname']; ?></b>
        Grade in    <b> <?php echo $rows['subjectname']; ?> </b> ?
         </p>
-        <form class="delete" action="delete_grade1.php" method="POST">
+        <form class="delete" action="delete_grade2.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $rows['id']; ?>">
           <div class="mb-3">
             <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>

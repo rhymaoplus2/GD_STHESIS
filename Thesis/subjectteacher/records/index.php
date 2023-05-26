@@ -1,771 +1,814 @@
-<?php 
+<?php
+session_start();
+include "../php/db_conn.php";
+include "../php/read.php";
 
-   session_start();
-   include "../php/db_conn.php";
-   include "./php/records.php";
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
+$name = $_SESSION["name"];
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
+    // Fetch section names from the section table
+    $query_sections = "SELECT name FROM section ORDER BY name";
+    $result_sections = mysqli_query($conn, $query_sections);
+
+    // Fetch subject names from the subject table
+    $query_subjects = "SELECT *
+  FROM users
+  JOIN subjects ON (users.sub1 = subjects.subjectname
+                     OR users.sub2 = subjects.subjectname
+                     OR users.sub3 = subjects.subjectname
+                     OR users.sub4 = subjects.subjectname
+                     OR users.sub5 = subjects.subjectname
+                     OR users.sub6 = subjects.subjectname
+                     OR users.sub7 = subjects.subjectname
+                     OR users.sub8 = subjects.subjectname
+                     OR users.sub9 = subjects.subjectname
+                     OR users.sub10 = subjects.subjectname)
+  WHERE users.name = '$name'
+  ORDER BY subjects.subjectname";
+
+    $result_subjects = mysqli_query($conn, $query_subjects);
+
+    // Fetch school years from the schoolyear table
+    $query_schoolyears = "SELECT sy FROM schoolyear";
+    $result_schoolyears = mysqli_query($conn, $query_schoolyears);
+
+    // Check for section, subject, gender, and year level filters
+    $selected_section = "";
+    $selected_subject = "";
+    $selected_gender = "";
+    $selected_schoolyear = "";
+    $selected_year = "";
+
+    if (isset($_POST['section'])) {
+        $selected_section = $_POST['section'];
+    }
+    if (isset($_POST['subject'])) {
+        $selected_subject = $_POST['subject'];
+    }
+    if (isset($_POST['gender'])) {
+        $selected_gender = $_POST['gender'];
+    }
+    if (isset($_POST['schoolyear'])) {
+        $selected_schoolyear = $_POST['schoolyear'];
+    }
+    if (isset($_POST['year'])) {
+        $selected_year = $_POST['year'];
+    }
+
+    // Check for section, subject, gender, year level, and search filters
+    $search_query = "";
+
+    if (isset($_POST['search'])) {
+        $search_query = $_POST['search'];
+    }
+
+    $query = "SELECT * FROM grade WHERE teacher = '$name'";
+
+    if (!empty($search_query)) {
+        $query .= " AND (lastname LIKE '%$search_query%' OR firstname LIKE '%$search_query%')";
+    }
+
+    if (!empty($selected_section)) {
+        $query .= " AND section = '$selected_section'";
+    }
+
+    if (!empty($selected_subject)) {
+        $query .= " AND subjectname = '$selected_subject'";
+    }
+
+    if (!empty($selected_gender)) {
+        $query .= " AND gender = '$selected_gender'";
+    }
+
+    if (!empty($selected_schoolyear)) {
+        $query .= " AND sy = '$selected_schoolyear'";
+    }
+
+    if (!empty($selected_year)) {
+        $query .= " AND year = '$selected_year'";
+    }
+
+    $selected_quarter = "";
+
+    if (isset($_POST['quarter'])) {
+        $selected_quarter = $_POST['quarter'];
+    }
+
+    if (!empty($selected_quarter)) {
+        $query .= " AND quarter = '$selected_quarter'";
+    }
+
+    $selected_semester = "";
+
+    if (isset($_POST['semester'])) {
+        $selected_semester = $_POST['semester'];
+    }
+
+    if (!empty($selected_semester)) {
+        $query .= " AND semester = '$selected_semester'";
+    }
+
+    $query .= " ORDER BY lastname";
+    $result = mysqli_query($conn, $query);
+
+    ?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>RECORDS</title>
-  <link  href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
-
-
+  <title>Records</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css.css" rel="stylesheet">
+  <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <style>
+
+html, body {
+    height:100%;
+  }
+  
+  
+  body {
+    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+    background-repeat: no-repeat;
+  }
+  
+  
+  
+    .container {
+    width: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+  }
+  
+  .formx {
+      width: auto;
+      padding: 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .box {
+      width: 900px;
     
-
-
-    .b::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
-}
-
-.b::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color of the scrollbar track */
-}
-
-.b::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);/* Color of the scrollbar thumb */
-  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
-}
-
-.b::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
-}
-
-    html, body {
-  height: 100%;
-  
-}
-body {
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-  background-repeat: no-repeat;
-
-}
-
-
-.fade-in {
-  animation: fadeIn 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
   }
-  100% {
-    opacity: 1;
-  }
-}
-
-
-.container {
-padding: 10px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-}
-
-.container form {
-	width: 600px;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .container table {
+      padding: 20px;
+      border-radius: 10px;
  
-}
-.box {
-	width: 700px;
-  
-}
-.container table {
-  padding: 20px;
-  border: 10px;
-  border-color: black;
-  border-radius: 100px;
-  background-color: white;
-  width: 50%;
-  float: right;
-}
-
-
-.border {
-	padding: 15px;
-  min-height: 450px;
-  background-color: white;
-border-radius: 20px;
-}
-.link-right {
-	display: flex;
-	justify-content: flex-end;
-}
-
-
-.link-center {
-	display: flex;
-	justify-content: flex-end;
-}
-
-
-
-
-
-
-.thead
-{
-font-size: 10px;;
-
-}
-
-
-
-
-
-  .subjectlist{
-  
-      margin-left: 5rem;
-      margin-top: 5rem;
-  }
-  
-  .studentlist{
-  
-  margin-left: 20rem;
-  margin-top: 5rem;
-  }
-  
-  
-  .button{
-  
-      margin-left: 5rem;
-      margin-top: 11rem;
-  }
-  
-  
-  .button1{
-  
-  margin-left: 5rem;
-  margin-top: 9.5rem;
-  }
-  
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
-  }
-  .text1
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
-  
-  .text2
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
-
-  a {
-  text-decoration: none;
-  font-size: 16px; /* Change this value to adjust the initial font size of your link */
-  transition: all 0.2s ease-in-out; /* This adds a smooth transition effect */
-}
-
-a:hover {
-font-weight: bold; /* Change this value to adjust the font size when hovering over the link */
-}
-
-.top-container {
-    background-color: #f1f1f1;
-    padding: 30px;
-    text-align: center;
-  }
-  
-  .header {
-   
-    background-color: white;
-    color: #f1f1f1;
-  }
-  
-  .content {
-    padding: 16px;
-  }
-  
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  .b{
-
-    border: black;
     border:10px;
+    background-color: white;
   }
-.b::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
-}
-
-.b::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color of the scrollbar track */
-}
-
-.b::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color of the scrollbar thumb */
-  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
-}
-
-.b::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
-}
-  .sticky + .content {
-    padding-top: 102px;
-  }
-  #myVideo {
-
-width: 100vw;
-height: 100vh;
-object-fit: cover;
-position: fixed;
-left: 0;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: -1;
-  }
-
-.carousel-item {
-  transition-duration: 0.5s;  
-}
-
-#carouselExampleIndicators {
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: all 0.90s ease;
-}
-
-#carouselExampleIndicators.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.logo img.zoom-image {
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  transform-origin: center center;
-}
-
-.logo img.zoom-image:hover {
-  -webkit-transform: scale(1.2) translate(-5%, -5%);
-  transform: scale(1.2) translate(-5%, -5%);
-  z-index: 999;
-}
-.logo img.rotating-image {
-  -webkit-transition: -webkit-transform 0.8s ease-in-out;
-  transition: transform 0.8s ease-in-out;
-}
-
-.logo img.rotating-image:hover {
-  -webkit-transform: rotate(360deg);
-  transform: rotate(360deg);
-}
-.sm{
-  font-size: 10px;
-  text-align: justify;
-}
-.slide-up {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  .border {
+      padding: 20px;
+ 
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border:10px;
+    border-radius: 10px;
+    background-color: white;
+    width: auto;
+  
   }
   
-  .slide-up.show {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .link-right {
+      display: flex;
+      justify-content: flex-end;
   }
-  thead {
+  
+  
+  .link-center {
+      display: flex;
+      justify-content: flex-end;
+  }
+  
+  
+  
+  
+  
+  
+  .thead
+  {
+  font-size: 10px;;
+  
+  }
+  
+  
+  .modal
+  {
+   border: 100px;
+   background-color: ;
+   
+  }
+  
+  
+  
+  
+  
+    .nav-item
+    {
+    
+        color:black;
+    
+    }
+    .subjectlist{
+    
+        margin-left: 5rem;
+        margin-top: 5rem;
+    }
+    
+    .studentlist{
+    
+    margin-left: 20rem;
+    margin-top: 5rem;
+    }
+    
+    
+    .button{
+    
+        margin-left: 5rem;
+        margin-top: 11rem;
+    }
+    
+    
+    .button1{
+    
+    margin-left: 5rem;
+    margin-top: 9.5rem;
+    }
+    
+    .title{
+        margin-left: 40rem;
+        margin-top: 1rem;
+        font-size: 3.5rem;
+    }
+    .text1
+    {
+        margin-left: 23rem;
+        margin-top: -20rem;
+        width: 45rem;
+        height: 10rem;
+    }
+    
+    .text2
+    {
+        margin-left: 23rem;
+        margin-top: -20rem;
+        width: 45rem;
+        height: 10rem;
+    }
+  
+  
+  
+  
+  .top-container {
+      background-color: #f1f1f1;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .header {
+     
+      background-color: white;
+      color: #f1f1f1;
+    }
+    
+    .content {
+      padding: 16px;
+    }
+    
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    
+    .sticky + .content {
+      padding-top: 102px;
+    }
+    .btn-transparent {
+      background-color: transparent;
+      border: none;
+    }
+  
+    .btn-transparent:hover {
+      background-color: transparent;
+      border: none;
+    }
+  
+    .btn-transparent:focus {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+    }
+  
+    .btn img {
+      width: 30px;
+      height: 30px;
+    }
+    #refresh-img {
+    transition: all 0.2s;
+  }
+  
+  a:hover {
+    transform: scale(1.2);
+  }
+  #search {
+    border-width: 2px;
+  }
+  .page-item a.page-link {
+    opacity: 0.5;
+  }
+  .page-item.active a.page-link {
+    font-weight: bold;
+    opacity: 1;
+  }
+  td a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .zoom-img {
+  transition: transform 0.3s;  /* Add smooth transition effect */
+}
+
+.zoom-img:hover {
+  transform: scale(1.2);  /* Zoom in the image on hover */
+}
+  
+.zoom-img {
+  transition: transform 0.3s;  /* Add smooth transition effect */
+}
+
+.zoom-img:hover {
+  transform: scale(1.2);  /* Zoom in the image on hover */
+}
+
+  td a:hover {
+    font-weight: bold;
+    color: black;
+  }
+  
+  .table-scrollable{
+    height: 250px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+ 
+  }
+  .table-scrollable::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+  }
+  
+  .table-scrollable::-webkit-scrollbar-track {
+    background: #f1f1f1; /* color of the track */
+  }
+  
+  .table-scrollable::-webkit-scrollbar-thumb {
+    background: #888; /* color of the thumb */
+    border-radius: 5px; /* roundness of the thumb */
+  }
+  
+  .table-scrollable::-webkit-scrollbar-thumb:hover {
+    background: #555; /* color of the thumb on hover */
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  a {
+    text-decoration: ;
+  }
+  .sticky-header {
   position: sticky;
   top: 0;
+  z-index: 1;
 }
-    </style>
+
+
+  </style>
 </head>
-<body>
+<body onload="updateSelectedOption()">
 
-<div class="header" id="myHeader">
-<?PHP include_once('header.php'); ?>
+
+
+ <!-- Logout Modal -->
+ <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="
+            
+            
+            background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+                <h5 class="modal-title text-white" id="logoutModalLabel">Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="../img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" onclick="openBackupWindow()">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="header" id="myHeader">
+    <?php include_once('header.php');?>
+  </div>
+  <?php
+if (isset($_GET['error'])) {
+    $errorMessage = $_GET['error'];
+    echo <<<HTML
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#errorModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="errorModalLabel">Already Submitted</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-danger" role="alert">
+              $errorMessage
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trigger the modal popup onload -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+      });
+    </script>
+HTML;
+}
+
+if (isset($_GET['success'])) {
+    $successMessage = $_GET['success'];
+    echo <<<HTML
+    <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+            <h5 class="modal-title" id="successModalLabel">Success!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>$successMessage</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+      });
+    </script>
+HTML;
+}
+}
+?>
+
+  <br>
+
+  <div class="container">
+    <div class="border">
+    <form method="post" class="formx text-center">
+    <div class="row">
+  <div class="col-md-1 mb-3">
+     
+  <?php
+function generateNotification()
+{
+    include "../php/db_conn.php";
+
+    // Assuming your database connection is stored in the $conn variable
+    $name = $_SESSION['name'];
+
+    // Prepare the SQL query
+    $sql = "SELECT session, COUNT(DISTINCT status) AS count
+            FROM grade";
+
+    $count = 0;
+
+    // Execute the query
+    $result = $conn->query($sql);
+
+    // Check if the query executed successfully
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            // Access the session and count values
+            $session = $row['session'];
+            $count += $row['count']; // Accumulate the counts instead of overwriting
+
+            // Output the count
+        }
+       
+    } else {
+
+    }
+
+    // Close the database connection
+    $conn->close();
+}
+
+    // Call the function to generate the notification
+    generateNotification();
+    ?>
+
+  
+    </div>
+    <div class="d-flex align-items-center">
+  <div class="input-group mb-3">
+  <a href="view.php" class="btn btn-transparent p-0" title="add grades">
+      <img src="img/grade.png" class="img-fluid rotate-on-hover" alt="submit">
+</a> &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" class="form-control" id="search" name="search" placeholder="Search" value="<?php echo $search_query; ?>">
+  
+  </div>
 </div>
 
 
-<div class="header" id="myHeader">
-<?PHP include_once('header.php'); ?>
+
+    </div>
+    <div class="row d-flex">
+  <div class="col">
+    <select class="form-select fw-bold" id="gender" name="gender" onchange="this.form.submit()">
+      <option value="" selected>Gender</option>
+      <option value="MALE" <?php if ($selected_gender == "MALE") {
+          echo "selected";
+      } ?>>MALE</option>
+      <option value="FEMALE" <?php if ($selected_gender == "FEMALE") {
+          echo "selected";
+      } ?>>FEMALE</option>
+    </select>
+  </div>
+
+  <div class="col">
+    <select class="form-select fw-bold" id="quarter" name="quarter" onchange="this.form.submit()">
+      <option value="" selected>Quarter</option>
+      <option value="FIRST" <?php if ($selected_quarter == "FIRST") {
+          echo "selected";
+      } ?>>FIRST</option>
+      <option value="SECOND" <?php if ($selected_quarter == "SECOND") {
+          echo "selected";
+      } ?>>SECOND</option>
+      <option value="THIRD" <?php if ($selected_quarter == "THIRD") {
+          echo "selected";
+      } ?>>THIRD</option>
+      <option value="FOURTH" <?php if ($selected_quarter == "FOURTH") {
+          echo "selected";
+      } ?>>FOURTH</option>
+    </select>
+  </div>
+
+  <div class="col">
+    <select class="form-select fw-bold" id="semester" name="semester" onchange="this.form.submit()">
+      <option value="" selected>Semester</option>
+      <option value="FIRST" <?php if ($selected_semester == "FIRST") {
+          echo "selected";
+      } ?>>FIRST</option>
+      <option value="SECOND" <?php if ($selected_semester == "SECOND") {
+          echo "selected";
+      } ?>>SECOND</option>
+    </select>
+  </div>
+
+  <div class="col">
+    <select class="form-select fw-bold" id="year" name="year" onchange="this.form.submit()">
+      <option class="text-center" value="" selected>Grade</option>
+      <option class="text-center" value="7" <?php if ($selected_year == "7") {
+          echo "selected";
+      } ?>>7</option>
+      <option class="text-center" value="8" <?php if ($selected_year == "8") {
+          echo "selected";
+      } ?>>8</option>
+      <option class="text-center" value="9" <?php if ($selected_year == "9") {
+          echo "selected";
+      } ?>>9</option>
+      <option class="text-center" value="10" <?php if ($selected_year == "10") {
+          echo "selected";
+      } ?>>10</option>
+      <option class="text-center" value="11" <?php if ($selected_year == "11") {
+          echo "selected";
+      } ?>>11</option>
+      <option class="text-center" value="12" <?php if ($selected_year == "12") {
+          echo "selected";
+      } ?>>12</option>
+    </select>
+  </div>
+
+  <div class="col">
+    <select class="form-select fw-bold" id="section" name="section" onchange="this.form.submit()">
+      <option value="" selected>Section</option>
+      <?php while ($row_sections = mysqli_fetch_assoc($result_sections)) { ?>
+        <option value="<?php echo $row_sections["name"]; ?>" <?php if ($selected_section == $row_sections["name"]) {
+            echo "selected";
+        } ?>><?php echo $row_sections["name"]; ?></option>
+      <?php } ?>
+    </select>
+  </div>
+
+<div class="col">
+  <select class="form-select fw-bold" id="subject" name="subject" onchange="this.form.submit()">
+    <option value="" selected>Subject</option>
+    <?php while ($row_subjects = mysqli_fetch_assoc($result_subjects)) { ?>
+      <option value="<?php echo $row_subjects["subjectname"]; ?>" <?php if ($selected_subject == $row_subjects["subjectname"]) {
+          echo "selected";
+      } ?>><?php echo $row_subjects["subjectname"]; ?></option>
+    <?php } ?>
+  </select>
+</div>
+<div class="col">
+  <select class="form-select fw-bold" id="schoolyear" name="schoolyear" onchange="this.form.submit()">
+    <option value="" selected>SY</option>
+    <?php
+      $startYear = 2017;
+    $endYear = 2030;
+    for ($year = $startYear; $year <= $endYear; $year++) {
+        $optionValue = $year . " - " . ($year + 1);
+        $optionText = $year . " - " . ($year + 1);
+
+        if ($selected_schoolyear == $optionValue) {
+            $selectedAttribute = "selected";
+        } else {
+            $selectedAttribute = "";
+        }
+
+        echo '<option value="' . $optionValue . '" ' . $selectedAttribute . '>' . $optionText . '</option>';
+    }
+    ?>
+  </select>
+  </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
+</form>
 
 
 <script>
-window.onscroll = function() {myFunction()};
+function updateSelectedOption() {
+  var selectedOptions = [];
 
-var header = document.getElementById("myHeader");
-var sticky = header.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
+  // Get the selected option from the gender select element
+  var genderSelect = document.getElementById("gender");
+  if (genderSelect.selectedIndex !== -1 && genderSelect.options[genderSelect.selectedIndex].value !== "") {
+    var selectedGender = 'Gender : <strong>' + genderSelect.options[genderSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedGender);
   }
+
+  // Get the selected option from the year select element
+  var yearSelect = document.getElementById("year");
+  if (yearSelect.selectedIndex !== -1 && yearSelect.options[yearSelect.selectedIndex].value !== "") {
+    var selectedYear = 'Year : <strong>' + yearSelect.options[yearSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedYear);
+  }
+
+  // Get the selected option from the section select element
+  var sectionSelect = document.getElementById("section");
+  if (sectionSelect.selectedIndex !== -1 && sectionSelect.options[sectionSelect.selectedIndex].value !== "") {
+    var selectedSection = 'Section : <strong>' + sectionSelect.options[sectionSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedSection);
+  }
+
+  // Get the selected option from the subject select element
+  var subjectSelect = document.getElementById("subject");
+  if (subjectSelect.selectedIndex !== -1 && subjectSelect.options[subjectSelect.selectedIndex].value !== "") {
+    var selectedSubject = 'Subject : <strong>' + subjectSelect.options[subjectSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedSubject);
+  }
+
+  // Get the selected option from the schoolyear select element
+  var schoolYearSelect = document.getElementById("schoolyear");
+  if (schoolYearSelect.selectedIndex !== -1 && schoolYearSelect.options[schoolYearSelect.selectedIndex].value !== "") {
+    var selectedSchoolYear = 'SY : <strong>' + schoolYearSelect.options[schoolYearSelect.selectedIndex].value + '</strong>';
+    selectedOptions.push(selectedSchoolYear);
+  }
+// Get the selected option from the semester select element
+var semesterSelect = document.getElementById("semester");
+if (semesterSelect.selectedIndex !== -1 && semesterSelect.options[semesterSelect.selectedIndex].value !== "") {
+  var selectedSemester = 'Semester: <strong>' + semesterSelect.options[semesterSelect.selectedIndex].value + '</strong>';
+  selectedOptions.push(selectedSemester);
+}
+// Get the selected option from the quarter select element
+var quarterSelect = document.getElementById("quarter");
+if (quarterSelect.selectedIndex !== -1 && quarterSelect.options[quarterSelect.selectedIndex].value !== "") {
+  var selectedQuarter = 'Quarter: <strong>' + quarterSelect.options[quarterSelect.selectedIndex].value + '</strong>';
+  selectedOptions.push(selectedQuarter);
+}
+
+
+  // Update the content of the selectedOption paragraph with the selected options
+  document.getElementById("selectedOption").innerHTML = " " + selectedOptions.join(" - ");
 }
 </script>
 
 
-<!-- TITLE HERE    -->
+<div class="mt-3 text-center">
+      <p id="selectedOption"></p>
+    </div>
 
+      <br>
 
-
-
-
-<div class="container">
-  <div class="row">
-
-    <div class="col-md-7">
-      
-      <div class="border fade-in">
-     
-      <!-- <div class=" logo text-center">
-  <img src="img/msu.png" class="d-block rotating-image" style="width:70px;">
-</div>
--->
-<div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-  <b class="fs-2" style="white-space: nowrap;">Students Records Management Page </b>
-  
-</div>
-<hr>
-        <div class="b " >
-        <div style="display: flex;">
-  <div style="flex: 1;" style="">
-
-  
-    <img src="img/pik.gif" alt="Description of the image" style="max-width: 240%;">
-  </div>
-  <div style="flex: 3;">
-  <div class="b tex" style="height: 300px; overflow-y: scroll; padding-right: 10px;" id="scrollable">
-    <table class="table table-bordered table-sm rounded-4" style="border-radius: 10px;">
-      <thead class="text-center text-white" style="background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-        <tr>
-          <th scope="col">My Handled Subjects</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-          require "./php/db_conn.php";
-          $name = $_SESSION['name'];
-          $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub1
-                    FROM users u
-                    WHERE u.name = '$name';";
-          $result = mysqli_query($conn, $query);
-          if (mysqli_num_rows($result) > 0) {
-            while ($Row = mysqli_fetch_assoc($result)) {
-        ?>
+      <div class="fade-in">
+        <div class="table-scrollable">
+          <table class="table table-bordered" style="height:300px">
+            <thead class="text-white sticky-header" style="
+            
+            
+            background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
               <tr>
-                <?php if (empty($Row["sub1"])) { ?>
-                  <td class="text-center"><b>-</b></td>
-                  <td hidden class="text-center"></td>
-                <?php } else { ?>
-                  <td class="text-center">
-                    <a href="subject1view.php" class=" text-dark" style="background-color: white; border: none;">
-                      <b><?php echo $Row["sub1"]; ?></b>
-                    </a>
-                  </td>
-                <?php } ?>
+                <th scope="col">Student Name</th>
+                <th class="text-center" scope="col">Grade</th>
+        
+                <th class="text-center" scope="col">Actions</th>
               </tr>
-        <?php
-            }
-          }
-        ?>
-      </tbody>
-
-
-
-            <?php
-              require "./php/db_conn.php";
-              $name = $_SESSION['name'];
-
-              $query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub2
-                        FROM users u
-                        WHERE u.name = '$name';";
-              $result = mysqli_query($conn, $query);
-              if (mysqli_num_rows($result) > 0) {
-            ?>
-              <tbody>
-                <?php
-                  while ($Row = mysqli_fetch_assoc($result)) {
-                ?>
-                    <tr>
-                      <?php if (empty($Row["sub2"])) { ?>
-                        <td class="text-center"><b>-</b></td>
-                        <td hidden  class="text-center"></td>
-                      <?php } else { ?>
-                        <td class="text-center">
-                          <a href="subject2view.php" style="background-color: white; border: none;" class="text-dark">
-                            <b><?php echo $Row["sub2"]; ?></b>
-                          </a>
-                        </td>
-                      <?php } ?>
-                    </tr>
-                <?php
-                  }
-                ?>
-              </tbody>
+            </thead>
+            <tbody>
               <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+              <tr style="background: #f2f2f2;">
+                <td><?php echo $row["studentname"]; ?></td>
+                <td class="text-center"><?php echo $row["grade"]; ?></td>
+             
+                <td class="text-center"> 
+                <?php
+if ($row['status'] == 1) {
+    echo "VALIDATED";
+} else {
+    echo '<a href="update.php?id=' . $row['id'] . '" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Grade">';
+    echo '<b><img style="width:30px;" src="img/up.png" class="img-fluid zoom-img" alt="Description of image"></b>';
+    echo '</a>';
 
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub3
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub3"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject3view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub3"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-  <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
+    echo '<a type="button" class="btn img-fluid zoom-img" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row['id'] . '"';
+    echo 'style="border: none; background-color:transparent; outline: none;" title="Delete">';
+    echo '<img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image">';
+    echo '</a>';
+}
+                    ?>
 
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub4
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub4"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject4view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub4"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-  <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
 
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub5
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub5"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject5view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub5"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-  <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
-
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub6
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub6"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject6view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub6"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-  <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
-
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub7
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub7"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject7view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub7"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-  <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
-
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub8
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub8"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject8view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub8"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-  <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
-
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub9
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub9"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject9view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub9"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-  <?php
-require "./php/db_conn.php";
-$name = $_SESSION['name'];
-
-$query = "SELECT u.name, u.sec1, u.sec2, u.sec3, u.sec4, u.sec5, u.sub10
-          FROM users u
-          WHERE u.name = '$name';";
-$result = mysqli_query($conn, $query);
-if (mysqli_num_rows($result) > 0) {
-?>
-  <tbody>
-    <?php
-      while ($Row = mysqli_fetch_assoc($result)) {
-    ?>
-        <tr>
-          <?php if (empty($Row["sub10"])) { ?>
-            <td class="text-center"><b>-</b></td>
-            <td hidden  class="text-center"></td>
-          <?php } else { ?>
-            <td class="text-center">
-              <a href="subject10view.php" style="background-color: white; border: none;" class="text-dark">
-                <b><?php echo $Row["sub10"]; ?></b>
-              </a>
-            </td>
-          <?php } ?>
-        </tr>
-    <?php
-      }
-    }
-    ?>
-  </tbody>
-
-              
-            <?php
-              }
-            }
-            ?>
-          </table>
-          
-        </div>
- 
-        </div>
+<div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+        <h5 class="modal-title" id="deleteModalLabel<?php echo $row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <!--
-      <button id="rotate-btn" type="submit" class="btn btn-transparent mt-3 mb-3">
-  <img src="img/eye.png" alt="Image" title="Add New Student" width="30" height="auto">
-  <b></b>
-</button>
-          -->
-          <span class="sm text-white">
-    <b>Please be advised : </b> All displays on this table have been assigned by the administrator. If you have any concerns about missing or inappropriate subjects being displayed, we kindly request that you <b>contact</b> the <b> Administrator </b> without delay.
-</span>
-    </div>
-    </div>
-    </div>
-    
-    <div class="col-md-5 rounded" style="overflow: hidden;">
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-
-    <div class="carousel-inner rounded mb-3">
-      <div class="carousel-item active">
-        <img src="img/pic1.gif" class="d-block w-100" alt="First slide">
-      </div>
-      <div class="carousel-item">
-        <img src="img/pic2.gif" class="d-block w-100" alt="Second slide">
-      </div>
-      <div class="carousel-item">
-        <img src="img/pic3.gif" class="d-block w-100" alt="Third slide">
-      </div>
-    </div>
-    
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-    
-  </div>
-  
-  <div class="slide-up">
-  <div>
-  <span class="text-white" style=" text-align: justify;">
-    <h6>
-      Grades are an important aspect of the educational process that allow teachers to evaluate and communicate their students' academic performance. They provide a means for teachers to track students' progress throughout the school year and identify areas in which they may need additional support. By setting clear expectations and providing feedback on performance, grades help students understand where they stand academically and what they need to do to improve. In addition, grades enable teachers to communicate with parents and guardians about their child's progress and identify areas for collaboration. Overall, grades play a critical role in helping students achieve academic success and helping teachers support their students effectively.    
-    </h6>
-  </span>
- 
-
-</div>
-
+      <div class="modal-body">
+        <p> <b></b>
+          <br> Are you sure you want to delete <br> <b> <?php echo $row['studentname']; ?></b>
+          <br>
+          GRADE in <b> <?php echo $row['subjectname']; ?>?</b>
+        </p>
+        <form class="delete" action="delete_grade1.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+          <div class="mb-3">
+            <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
+            <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
           </div>
-          <script>
-    window.onload = function() {
-      document.querySelector('.slide-up').classList.add('show');
-    }
-  </script>
-
-<script>
-window.addEventListener("load", function () {
-  document.getElementById("carouselExampleIndicators").classList.add("show");
-});
-</script>
-
+          <button type="submit" class="btn btn-danger" name="delete">
+       PROCEED
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+                </td>
+              </tr>
+              <?php
+                }
+    ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+
+</body>
 </html>

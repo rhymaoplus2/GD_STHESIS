@@ -403,7 +403,7 @@ $i = 0;
             
 
       <div class="border">
-        
+        <label class="mb-3"> <b> <?=$_SESSION['sub1']?> </b></label>
       <?php
         require "php/db_conn.php";
         $name = $_SESSION["name"];
@@ -427,11 +427,6 @@ $i = 0;
             ?>
    
  
-
-   <div class="banner  text-center text-white rounded-pill mb-3" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
-   <b><?=$_SESSION['sub1']?></b>       
-
-</div>
 
 <!-- TITLE HERE -->
 
@@ -742,7 +737,7 @@ require "php/db_conn.php";
                 echo "</select>";
                 echo "</td>";
 
-                echo "<td hidden><input value='" . $_SESSION['id'] . "' id='teacher' name='teacher[]'></td>";
+                echo "<td hidden ><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
                 echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
                 echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
                 echo "</tr>";
@@ -907,7 +902,7 @@ require "php/db_conn.php";
                 echo "</select>";
                 echo "</td>";
 
-                echo "<td hidden><input value='" . $_SESSION['id'] . "' id='teacher' name='teacher[]'></td>";
+                echo "<td hidden ><input value='" . $_SESSION['name'] . "' id='teacher' name='teacher[]'></td>";
                 echo "<td class='section' hidden><input hidden class='no' id='section' value='" . $Row['section'] . "'></td>";
                 echo "<td hidden><input hidden class='no' id='adviser' name='adviser[]' value='" . $Row['adviser_id'] . "'></td>";
                 echo "</tr>";
@@ -940,7 +935,7 @@ border: none; border-radius:100%; width:50px; height: 50px;">
  
 
           <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
-          onclick="location.href='subject1view.php'">
+          onclick="location.href='view.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
 

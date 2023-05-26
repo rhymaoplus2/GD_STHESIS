@@ -16,10 +16,10 @@
          $query = "DELETE FROM grade WHERE id='$id'";
          mysqli_query($conn, $query);
          
-         header("Location: subject1view.php?success=Grade deleted successfully");
+         header("Location:index.php?success=Grade deleted successfully");
          exit();
       } else {
-         header("Location: subject1view.php?error=Incorrect password");
+         header("Location:index.php?error=Incorrect password");
          exit();
       }
    }

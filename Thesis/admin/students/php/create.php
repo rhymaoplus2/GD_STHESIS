@@ -105,10 +105,6 @@ if (isset($_POST['create'])) {
                VALUES('$id','$idnumber','$lrnnumber','$adviser_id','$firstname', '$middlename','$lastname','$fullname',	'$gender','$suffix',
 			   '$birthplace','$birthday','$age',
 			   '$address','$parent','$syear','$grade','$section'
-			
-			
-
-			
 			   )";
        $result = mysqli_query($conn, $sql);
        if ($result) {

@@ -304,8 +304,11 @@ background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 <div class="skrol "style="height: 500px; overflow-y: auto;" >
 <div class="form-group ">
 
+<label hidden for="adviser_id" class="form-label warning text-left"><b>ID Number</b></label>
+<input hidden style="width:100%;" type="text" class="form-control mb-3" id="id" placeholder="ex: 12913937" name="id">
+
 <label for="adviser_id" class="form-label warning text-left"><b>ID Number</b></label>
-<input style="width:100%;" type="text" class="form-control mb-3" id="id" placeholder="ex: 12913937" name="id">
+<input style="width:100%;" type="text" class="form-control mb-3" id="idnumber" placeholder="ex: 12913937" name="idnumber">
 
 
 <br>
