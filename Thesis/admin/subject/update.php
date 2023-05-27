@@ -33,14 +33,31 @@
 html, body {
   height:100%;
 }
+header {
+            background-image: linear-gradient(to right, #16222A 0%, #3A6073  51%, #16222A  100%);
+            margin: 10px;
+     
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+          }
+
+          header:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
 
 body {
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
-
-
 .container {
 
   display: flex;
@@ -78,8 +95,6 @@ body {
 	display: flex;
 	justify-content: flex-end;
 }
-
-
 
 
 
@@ -187,6 +202,10 @@ font-size: 10px;;
   transform: scale(1.2);
   transition: transform 0.5s ease;
 }
+button:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
   </style>
 
 </head>
@@ -206,10 +225,11 @@ font-size: 10px;;
 		<form action="n-update.php" 
 		      method="post">
             
-          <header class="text-center text-white" style="font-size:30px; 
+          <header class="text-center text-white" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          font-size:30px; 
           
           
-          background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); width:auto; height:60px; line-height:60px; border-radius: 20px;">
+">
     <b>
         <?php if (isset($_GET['error'])) {
             echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
@@ -255,13 +275,10 @@ font-size: 10px;;
 		          name="id"
 		          value="<?=$row['id']?>"
 		          hidden >
-		
-<br>
-
 	
-<button type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
+<button title="update" type="submit" class="btn btn-primary" name="update" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
-<button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='index.php'">
+<button title="cancel"  type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='index.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
 

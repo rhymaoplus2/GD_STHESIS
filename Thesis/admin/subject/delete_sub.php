@@ -16,7 +16,7 @@
          $query = "DELETE FROM subjects WHERE id='$id'";
          mysqli_query($conn, $query);
          
-         header("Location: index.php?success=User deleted successfully");
+         header("Location: index.php?success=Subject was deleted successfully");
          exit();
       } else {
          header("Location:index.php?error=Incorrect password");

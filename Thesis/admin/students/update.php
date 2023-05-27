@@ -38,7 +38,7 @@ body {
 }
 
 .container form {
-   width: 1000px;
+  width: 100%;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -178,7 +178,7 @@ bottom: 0;
 z-index: -1;
   }
   .skrol {
-  height: 250px;
+
   overflow-y: auto;
   padding-right: 20px; /* Add padding to the right side of the element */
 }
@@ -241,38 +241,20 @@ z-index: -1;
 <?PHP include_once('header.php');?>
 </div>
 
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/students.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
 
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 <br>
 <br>
-<div class="fade-in mb-3">
+<div class="fade-in">
 
 	<div class="container">
 		<form action="n-update.php" 
 		      method="post">
       
     <div class="text-center text-white p-2 mb-4" style="font-size:24px; 
-    
+    	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); border-radius: 10px;">
     <label class="mb-0">
-  <?php echo isset($_GET['error']) ? 'RETRY' : 'UPDATE: ' . $row['fullname']; ?>
+  <?php echo isset($_GET['error']) ? 'RETRY' : ' UPDATE: <b>' . $row['fullname'].'</b>'?>
 </label>
 
 
@@ -312,6 +294,8 @@ function myFunction() {
 <hr>
  
 <div class="skrol"style="height: 250px; overflow-y: auto;">
+
+
 <div class="form-group mb-3">
     <label hidden for="" class="form-label"><b>ID No.</b></label>
     <input hidden
@@ -321,141 +305,128 @@ function myFunction() {
     id="id" 
     name="id">
     </div>
-
+    <div class="row">
+  <div class="col-md-6">
     <div class="form-group mb-3">
-    <label for="" class="form-label"><b>ID No.</b></label>
-    <input 
-    value="<?=$row['idnumber']?>"
-	  type="text"
-    class="form-control"
-    id="idnumber" 
-    name="idnumber">
+      <label for="idnumber" class="form-label"><b>ID No.</b></label>
+      <input 
+        value="<?=$row['idnumber']?>"
+        type="text"
+        class="form-control"
+        id="idnumber" 
+        name="idnumber"
+      >
     </div>
+  </div>
 
+  <div class="col-md-6">
     <div class="form-group mb-3">
-    <label for="" class="form-label"><b>LRN No.</b></label>
-    <input 
-    value="<?=$row['lrnnumber']?>"
-	  type="text"
-    class="form-control"
-    id="lrnnumber" 
-    name="lrnnumber">
+      <label for="lrnnumber" class="form-label"><b>LRN No.</b></label>
+      <input 
+        value="<?=$row['lrnnumber']?>"
+        type="text"
+        class="form-control"
+        id="lrnnumber" 
+        name="lrnnumber"
+      >
     </div>
+  </div>
+</div>
 
 
     
 
 
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="lastname" class="form-label"><b>Last Name</b></label>
+            <input value="<?=$row['lastname']?>" type="text" class="form-control" id="lastname" name="lastname" oninput="updateFullName()">
+        </div>
+    </div>
 
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="middlename" class="form-label"><b>Middle Name</b></label>
+            <input value="<?=$row['middlename']?>" type="text" class="form-control" id="middlename" name="middlename" oninput="updateFullName()">
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="firstname" class="form-label"><b>First Name</b></label>
+            <input value="<?=$row['firstname']?>" type="text" class="form-control" id="firstname" name="firstname" oninput="updateFullName()">
+        </div>
+    </div>
+</div>
 
 <div class="form-group mb-3">
-    <label for="" class="form-label"><b>First Name</b></label>
-    <input 
-    value="<?=$row['firstname']?>"
-	  type="text"
-    class="form-control"
-    id="firstname" 
-    name="firstname">
+    <label for="fullname" class="form-label"><b>Full Name</b></label>
+    <input value="<?=$row['fullname']?>" type="text" class="form-control" id="fullname" name="fullname" readonly>
+</div>
+
+<script>
+    function updateFullName() {
+        var lastName = document.getElementById('lastname').value;
+        var middleName = document.getElementById('middlename').value;
+        var firstName = document.getElementById('firstname').value;
+        var fullName = lastName + ', ' + middleName + ' ' + firstName;
+        document.getElementById('fullname').value = fullName.trim();
+    }
+</script>
+
+
+    <div class="row">
+    <div class="col-md-6">
+        <div class="form-group mb-3">
+            <label for="suffix" class="form-label"><b>Suffix</b></label>
+            <input value="<?=$row['suffix']?>" type="text" class="form-control" id="suffix" placeholder="Jr. / Sr. / Leave Blank" name="suffix">
+        </div>
     </div>
 
-
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Middle Name</b></label>
-    <input 
-    value="<?=$row['middlename']?>"
-	  type="text"
-    class="form-control"
-    id="middlename" 
-    name="middlename">
+    <div class="col-md-6">
+        <div class="form-group mb-3">
+            <label for="gender" class="form-label"><b>Gender</b></label>
+            <input value="<?=$row['gender']?>" type="text" class="form-control" id="gender" placeholder="Male" name="gender">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="birthplace" class="form-label"><b>Birth Place</b></label>
+            <input value="<?=$row['birthplace']?>" type="text" class="form-control" id="birthplace" name="birthplace">
+        </div>
     </div>
 
- 
-
-    
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Last Name</b></label>
-    <input 
-    value="<?=$row['lastname']?>"
-	  type="text"
-    class="form-control"
-    id="lastname" 
-    name="lastname">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="birthday" class="form-label"><b>Birth Date</b></label>
+            <input value="<?=$row['birthday']?>" type="date" class="form-control" id="birthday" name="birthday" onchange="calculateAge()">
+        </div>
     </div>
 
- 
-
-        
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Full Name</b></label>
-    <input 
-    value="<?=$row['fullname']?>"
-	  type="text"
-    class="form-control"
-    id="fullname" 
-    name="fullname">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="age" class="form-label"><b>Age</b></label>
+            <input value="<?=$row['age']?>" type="text" class="form-control" id="age" name="age" readonly>
+        </div>
     </div>
+</div>
 
-  
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Suffix</b></label>
-    <input 
-    value="<?=$row['suffix']?>"
-	  type="text"
-    class="form-control"
-    id="suffix" 
-    placeholder="Jr. / Sr. / Leave Blank"
-    name="suffix">
-    </div>
-
-
-      
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Gender</b></label>
-    <input 
-    value="<?=$row['gender']?>"
-	  type="text"
-    class="form-control"
-    id="gender" 
-    placeholder="Male"
-    name="gender">
-    </div>
-
-	        
-
-
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Birth Place</b></label>
-    <input 
-    value="<?=$row['birthplace']?>"
-	  type="text"
-    class="form-control"
-    id="birthplace" 
-    name="birthplace">
-    </div>
-
- 
-
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Birth Date</b></label>
-    <input 
-    value="<?=$row['birthday']?>"
-	  type="date"
-    class="form-control"
-    id="birthday" 
-    name="birthday">
-    </div>
-
-    
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Age</b></label>
-    <input 
-    value="<?=$row['age']?>"
-	  type="text"
-    class="form-control"
-    id="age" 
-    name="age">
-    </div>
-
+<script>
+    function calculateAge() {
+        var birthday = document.getElementById('birthday').value;
+        var today = new Date();
+        var birthDate = new Date(birthday);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById('age').value = age;
+    }
+</script>
 
     <div class="form-group mb-3">
     <label for="" class="form-label"><b>Address</b></label>
@@ -478,7 +449,7 @@ function myFunction() {
     </div>
 
 
-    <div class="form-group mb-3">
+    <div hidden class="form-group mb-3">
     <label for="" class="form-label"><b>School Year</b></label>
     <input 
     value="<?=$row['syear']?>"
@@ -487,6 +458,8 @@ function myFunction() {
     id="syear" 
     name="syear">
     </div>
+
+
 
     <div class="form-group mb-3">
     <label for="" class="form-label"><b>Year Level</b></label>
@@ -514,10 +487,13 @@ function myFunction() {
   
 
 </div>
-       <br>
+      
+       <span style="font-size:10.5px;"> "To ensure successful submission, take a moment to verify the accuracy of the details you've provided." </span>
+
+<br>
 
 
-          <button type="submit" class="btn btn-primary" 
+          <button title="submit" type="submit" class="btn btn-primary" 
 name="update" style="background-color: transparent; 
 border: none; border-radius:100%; width:50px; height: 50px;">
 <img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit">
@@ -525,7 +501,7 @@ border: none; border-radius:100%; width:50px; height: 50px;">
 
  
 
-          <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
+          <button title="cancel" type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
           onclick="location.href='index.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>

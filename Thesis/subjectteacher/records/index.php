@@ -9,21 +9,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
     $query_sections = "SELECT name FROM section ORDER BY name";
     $result_sections = mysqli_query($conn, $query_sections);
 
-    // Fetch subject names from the subject table
-    $query_subjects = "SELECT *
-  FROM users
-  JOIN subjects ON (users.sub1 = subjects.subjectname
-                     OR users.sub2 = subjects.subjectname
-                     OR users.sub3 = subjects.subjectname
-                     OR users.sub4 = subjects.subjectname
-                     OR users.sub5 = subjects.subjectname
-                     OR users.sub6 = subjects.subjectname
-                     OR users.sub7 = subjects.subjectname
-                     OR users.sub8 = subjects.subjectname
-                     OR users.sub9 = subjects.subjectname
-                     OR users.sub10 = subjects.subjectname)
-  WHERE users.name = '$name'
-  ORDER BY subjects.subjectname";
+// Fetch subject names from the subject table
+$query_subjects = "SELECT *
+                   FROM  grade  
+                   WHERE sy = (SELECT schoolyear FROM users LIMIT 1)  AND teacher = '$name' GROUP BY subjectname
+                   ORDER BY subjectname";
+
 
     $result_subjects = mysqli_query($conn, $query_subjects);
 
@@ -362,16 +353,16 @@ html, body {
   }
   
   .table-scrollable::-webkit-scrollbar-track {
-    background: #f1f1f1; /* color of the track */
+  background-color: white;/* color of the track */
   }
   
   .table-scrollable::-webkit-scrollbar-thumb {
-    background: #888; /* color of the thumb */
+    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);/* color of the thumb */
     border-radius: 5px; /* roundness of the thumb */
   }
   
   .table-scrollable::-webkit-scrollbar-thumb:hover {
-    background: #555; /* color of the thumb on hover */
+    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);/* color of the thumb on hover */
   }
   
   .fade-in {

@@ -559,11 +559,12 @@ foreach ($total_grades as $subjectname => $student_grades) {
 }
 $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
 $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+$average_overall = round(($full / $num));
 echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
-echo "<td class='text-center'>".round(($full / $num))."</td>";
+echo "<td class='text-center'>".$average_overall."</td>";
 
 $full=0;
-$average_overall = $average_per_subject / $num;
+
 if ($average_overall >= 90 && $average_overall <= 94) {
   $honor = 'With honors';
 } else if ($average_overall >= 95 && $average_overall <= 97) {
@@ -939,11 +940,12 @@ foreach ($total_grades as $subjectname => $student_grades) {
 }
 $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
 $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+$average_overall = round(($full / $num));
 echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
-echo "<td class='text-center'>".round(($full / $num))."</td>";
+echo "<td class='text-center'>".$average_overall."</td>";
 
 $full=0;
-$average_overall = $average_per_subject / $num;
+
 if ($average_overall >= 90 && $average_overall <= 94) {
   $honor = 'With honors';
 } else if ($average_overall >= 95 && $average_overall <= 97) {

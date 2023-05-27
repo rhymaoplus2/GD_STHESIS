@@ -67,6 +67,8 @@ body {
   border:10px;
   border-radius: 30px;
   background-color: white;
+  width: 1200px;
+  
 
 }
 
@@ -238,7 +240,7 @@ td a:hover {
 }
 
 .table-scrollable{
-  height: 220px;
+  height: 320px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -344,7 +346,7 @@ if(isset($_POST['submit'])) {
   $section = $_POST['section'];
   $grade = $_POST['grade'];
   $trackstrand = $_POST['trackstrand'];
-  $syear = $_POST['syear'];
+ 
   $comment = "Showing results for ";
   if(empty($section) && empty($grade) && empty($trackstrand) && empty($syear)) {
     $comment = "Showing results for All";
@@ -367,11 +369,7 @@ if(isset($_POST['submit'])) {
       $comment .= "Track/Strand $trackstrand";
       $where_clause .= " AND trackstrand = '$trackstrand'";
     }
-    if(!empty($syear)) {
-      $comment .= !empty($comment) ? " - " : "";
-      $comment .= "School Year $syear";
-      $where_clause .= " AND syear = '$syear'";
-    }
+  
     if(empty($comment)) {
       $comment .= "All";
     }
@@ -438,21 +436,6 @@ $result = mysqli_query($conn, $query);
       }
     ?>
   </select>
-  &nbsp;&nbsp;&nbsp;  
-  <label for="syear">School Years:</label>
-<select id="syear" name="syear">
-  <option value="">All</option>
-  <?php
-require "./php/db_conn.php";
-$query = "SELECT syear FROM year ORDER BY syear";
-$result = mysqli_query($conn, $query);
-
-while($row = mysqli_fetch_array($result)) {
-  echo "<option value='" . $row['syear'] . "'>" . $row['syear'] . "</option>";
-}
-
-  ?>
-</select>
 &nbsp;&nbsp;&nbsp;
   <button class="btn btn-transparent p-0 mb-3" type="submit" name="submit" title="Sort">
   <img id="refresh-img" src="img/eye2.gif" alt="Image" title="Add New Student" width="30" height="auto">
@@ -460,16 +443,6 @@ while($row = mysqli_fetch_array($result)) {
 
   </button>
 
-  <script>
-    var refreshImg = document.getElementById("refresh-img");
-
-    refreshImg.addEventListener("click", function() {
-      refreshImg.style.transform = "scale(1.2) rotate(360deg)";
-      setTimeout(function() {
-        refreshImg.style.transform = "";
-      }, 2000);
-    });
-  </script>
   &nbsp;&nbsp;&nbsp;
   <input type="text" name="search" placeholder="Search...">
   &nbsp;&nbsp;
@@ -484,36 +457,6 @@ while($row = mysqli_fetch_array($result)) {
 <div class="fade-in">
 <div class="table-scrollable">
 <table class="table table-bordered">
-<Script>
-  // get the table element and its height
-var table = document.querySelector('.table-scrollable table');
-var tableHeight = table.offsetHeight;
-
-// set the interval (in milliseconds) for scrolling
-var interval = 2000; // scroll every 2 seconds
-
-// start scrolling the table
-setInterval(function() {
-  // get the current scroll position
-  var scrollTop = table.parentElement.scrollTop;
-
-  // calculate the new scroll position
-  var newScrollTop = scrollTop + tableHeight;
-
-  // check if we've reached the end of the table
-  if (newScrollTop >= table.scrollHeight) {
-    // reset the scroll position to the top
-    newScrollTop = 0;
-  }
-
-  // set the new scroll position
-  table.parentElement.scrollTo({
-    top: newScrollTop,
-    behavior: 'smooth'
-  });
-}, interval);
-
-</script>
 
   <thead class="text-white"style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     <tr>
@@ -529,62 +472,31 @@ setInterval(function() {
   <?php
 require "./php/db_conn.php";
 
-// Set the number of resul
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
-  $section = isset($_POST['section']) ? $_POST['section'] : '';
-  $grade = isset($_POST['grade']) ? $_POST['grade'] : '';
-  $trackstrand = isset($_POST['trackstrand']) ? $_POST['trackstrand'] : '';
-  $search = isset($_POST['search']) ? $_POST['search'] : '';
-  $syear = isset($_POST['syear']) ? $_POST['syear'] : '';
-  
-  $where_clause = '';
-  if (!empty($section)) {
-    $where_clause .= "section = '$section'";
-  }
-  if (!empty($grade)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "grade = '$grade'";
-  }
-  
-  if (!empty($trackstrand)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "trackstrand = '$trackstrand'";
-  }
-
-  if (!empty($syear)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "syear = '$syear'";
-  }
-
-  if (!empty($search)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "(lastname LIKE '%$search%' OR firstname LIKE '%$search%' OR middlename LIKE '%$search%' OR section LIKE '%$search%' OR trackstrand LIKE '%$search%' OR lrnnumber LIKE '%$search%' OR id LIKE '%$search%')";
-  }
-
-  if (!empty($where_clause)) {
-    $where_clause = "WHERE $where_clause";
-  }
-
-  // Get the total number of results
-  $count_query = "SELECT COUNT(*) as count FROM students $where_clause";
-  $count_result = mysqli_query($conn, $count_query);
-  $count_row = mysqli_fetch_assoc($count_result);
-  $total_results = $count_row['count'];
 
 
-  // Get the results for the current page
-  $query = "SELECT * FROM students $where_clause ORDER BY lastname ";
-  $result = mysqli_query($conn, $query);
+$section = isset($_POST['section']) ? $_POST['section'] : '';
+$grade = isset($_POST['grade']) ? $_POST['grade'] : '';
+$trackstrand = isset($_POST['trackstrand']) ? $_POST['trackstrand'] : '';
+$sy;
+$query = "SELECT * FROM students WHERE  syear = (SELECT schoolyear FROM users LIMIT 1) ";
 
-  while ($row = mysqli_fetch_assoc($result)) {
+if (!empty($section)) {
+  $query .= " AND section = '$section'";
+}
+
+if (!empty($grade)) {
+  $query .= " AND grade = '$grade'";
+}
+
+if (!empty($trackstrand)) {
+  $query .= " AND trackstrand = '$trackstrand'";
+}
+
+$query .= " ORDER BY lastname";
+
+$result = mysqli_query($conn, $query);
+
+while ($row = mysqli_fetch_assoc($result)) {
 ?>
 
            <tr style="     background: #f2f2f2" >
@@ -664,7 +576,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 
 
 
-      }
 
 
 
@@ -688,6 +599,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 
 
 
+  <script>
+    var refreshImg = document.getElementById("refresh-img");
+
+    refreshImg.addEventListener("click", function() {
+      refreshImg.style.transform = "scale(1.2) rotate(360deg)";
+      setTimeout(function() {
+        refreshImg.style.transform = "";
+      }, 2000);
+    });
+  </script>
 
 
 

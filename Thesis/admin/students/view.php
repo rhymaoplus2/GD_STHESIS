@@ -1,13 +1,5 @@
 
 
-
-<?php include './php/admin_update.php'; ?>
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,28 +10,47 @@
 <style>
 
 
-.container {
-	min-height: 100vh;
+table{
+ margin: 1cm;
+}
+
+  .container {
+  width: 1000px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+
+
 }
 
-.container form {
-	width: 600px;
+.formx {
+	width: auto;
 	padding: 20px;
-	border-radius: 10px;
+	border-radius: 30px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .box {
-	width: 750px;
+	width: 900px;
+  
 }
-.container table {
+ table {
+	padding: 20px;
+	border-radius: 10px;
+	max-width: 80%;
+  border:10px;
+
+}
+.border {
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border:10px;
+  border-radius: 30px;
+  background-color: white;
+
 }
+
 
 .link-right {
 	display: flex;
@@ -64,8 +75,12 @@ font-size: 10px;;
 }
 
 
-
-
+.modal
+{
+ border: 100px;
+ background-color: ;
+ 
+}
 
 
 
@@ -152,242 +167,242 @@ font-size: 10px;;
   .sticky + .content {
     padding-top: 102px;
   }
+  .btn-transparent {
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-transparent:hover {
+    background-color: transparent;
+    border: none;
+  }
+
+  .btn-transparent:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .btn img {
+    width: 30px;
+    height: 30px;
+  }
+  #refresh-img {
+  transition: all 0.2s;
+}
+
+button:hover {
+  transform: scale(1.2);
+}
+#search {
+  border-width: 2px;
+}
+.page-item a.page-link {
+  opacity: 0.5;
+}
+.page-item.active a.page-link {
+  font-weight: bold;
+  opacity: 1;
+}
+td a {
+  text-decoration: none;
+  color: black;
+}
+
+
+td a:hover {
+  font-weight: bold;
+  color: black;
+}
+
+
+.table-scrollable::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+}
+
+.table-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 5px; /* roundness of the thumb */
+}
+
+.table-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+  .form-group p {
+  display: inline-block;
+  margin-right: 10px; /* optional spacing between the label and value */
+}
+.label-value {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+.label {
+  margin-right: 5px;
+}
+@media print {
+
+  .img-fluid{
+    display: none;
+  }
+}
+button{
+  border: none;
+  background-color: transparent;
+}
 
   </style>
 
 </head>
 <body>
 
-
-
-<div class="header" id="myHeader">
-<?PHP include_once('header.php');?>
-</div>
- <br>
- <br>
-
-
-
-
-<br>
-<br>
-	<div class="container">
-		<form action="php/view.php" 
-		      method="post">
-            
-		   <h4 class="display-10 text-center"> <?=$row['fullname'] ?> Information</h4><hr>
-       <br>
-		   <?php if (isset($_GET['error'])) { ?>
-		   <div class="alert alert-danger" role="alert">
-			  <?php echo $_GET['error']; ?>
-		    </div>
-		   <?php } ?>
-           
-
-
-       
-       <div class="form-group">
-
-<p class="fw-bold">ID No.</p>
-
-<?=$row['id'] ?>
-
-
-       </div>
-       <br>
-           <div class="form-group">
-
-    <p class="fw-bold">Lrn. No.</p>
- 
-	<?=$row['lrnnumber'] ?>
-  
-
-           </div>
-           
-<!--
-  <div class="form-group">
- 
-
-    <label for="" class="form-label">Adviser ID</label>
-    <input 
-	value="<?=$row['adviser_id'] ?>" 
-    type="text" 
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: 12913937"
-    name="adviser_id">
-  </div>
-       -->
-
-
-
-
-
-
-
-
- 
-       <div class="mb-3">
-    <input
-    type="hidden"
-    class="form-control" 
-    id="adviser_id" 
-    placeholder="ex: Science"
-    name="adviser_id"
-    value="<?php echo $_SESSION['id']?>"
-    >
-    
-  </div>
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="form-group">
-  <p class="fw-bold">First Name</p>
-	<?=$row['firstname'] ?>
-  </div>
-  <br>
-
-
-  <div class="mb-3">
-  <p class="fw-bold">Middle Name</p>
-   <?=$row['middlename'] ?>
-
-  </div>
-
-  
-  <div class="mb-3">
-  <p class="fw-bold">Last Name</p>
-    <?=$row['lastname'] ?>
-
-  </div>
-
-  
-  <div class="mb-3">
-  <p class="fw-bold">Suffix</p>
-    <?=$row['suffix'] ?>
-  </div>
-
-
-
-
-
-
-
-      
-  <div class="mb-3">
-  <p class="fw-bold">Gender</p>
-    <?=$row['gender'] ?>
-
-  </div>
-
-
-
-
-  <div class="mb-3">
-  <p class="fw-bold">Birth Place</p>
-    <?=$row['birthplace'] ?>
-  </div>
-  
-  <div class="mb-3">
-  <p class="fw-bold">Birth Date</p>
-    <?=$row['birthday'] ?>
-  </div>
-
-  <div class="mb-3">
-  <p class="fw-bold">Age</p>
-    <?=$row['age'] ?>
-  </div>
-
-
-  <div class="mb-3">
-  <p class="fw-bold">Address</p>
-    <?=$row['address'] ?>
-
-  </div>
-
-
-  
-  <div class="mb-3">
-  <p class="fw-bold">Parent/Guardian</p>
-   <?=$row['parent'] ?>
-  </div>
-
-  <div class="mb-3">
-  <p class="fw-bold">School Year</p>
-    <?=$row['syear'] ?>
-
-  </div>
-
-
-  
- 
-  <div class="mb-3">
-  <p class="fw-bold">Grade Level</p>
-    <?=$row['grade'] ?>
-
-  </div>
-
-
-  <div class="mb-3">
-  <p class="fw-bold">Section Name</p>
-    <?=$row['section'] ?>
-
-  </div>
-
-
-
-
-
-		   
-	
-
-
-		   
-		   <input type="text" 
-		          name="id"
-		          value="<?=$row['id']?>"
-		          hidden >
-				   <a class="link-primary" href="./" display-40>
-          <button type="button" class="btn btn-dark">
-
-     Back
-          </button>
-
-
-	
-	    </form>
-	</div>
-<br>
-<br>
-  <script>
-window.onscroll = function() {myFunction()};
-
-var header = document.getElementById("myHeader");
-var sticky = header.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-  }
-}
+<script>
+  const printButton = document.getElementById('print-button');
+  printButton.addEventListener('click', () => {
+    window.print();
+  });
 </script>
+
+  <?php
+if (isset($_GET['lrnnumber'])) {
+    include "db_conn.php";
+
+    function validate($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    $lrnnumber = validate($_GET['lrnnumber']);
+
+    $sql = "SELECT  * FROM students WHERE lrnnumber=$lrnnumber";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+      echo "<div class='' style='padding:0px; margin:1cm; font-size:13px;'>";
   
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo '<div class="row">';
+        echo '<div class="col-md-5">';
+        echo 'Student Name: <b>'.$row['fullname'].'</b>';
+        echo '</div>';
+        echo '<div class="col">';
+        echo 'LRN Number: <b>'.$row['lrnnumber'].'</b>';
+        echo '</div>';
+        echo '<div class="col text-end">';
+        echo 'ID Number: <b>'.$row['idnumber'].'</b>';
+        echo '</div>';
+        echo '</div>';
+        
+        
+        
+        
+
+        
+  
+          echo "<div>";
+          echo "Gender: <b>".$row['gender']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Birth Place: <b>".$row['birthplace']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Birth Date: <b>".$row['birthday']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Age: <b>".$row['age']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Address: <b>".$row['address']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Parent/Guardian: <b>".$row['parent']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "School Year: <b>".$row['syear']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Year Level: <b>".$row['grade']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Section: <b>".$row['section']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Adviser: <b>".$row['adviser_id']."</b>";
+          echo "</div>";
+  
+          echo "<div>";
+          echo "Subjects:";
+          echo "<br>";
+          echo "<b>".$row['subject1']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject2']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject3']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject4']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject5']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject6']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject7']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject8']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject9']."</b>";
+          echo "<br>";
+          echo "<b>".$row['subject10']."</b>";
+          echo "</div>";
+      }
+  
+      echo "</div>";
+  } else {
+      echo "No records found";
+  }
+  
+    mysqli_close($conn);
+}
+?>
+
+
+  </div>
+
+
+
+
+
+		   
+	
+
+
+	
   
 
 </body>

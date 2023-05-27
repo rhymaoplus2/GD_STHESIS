@@ -484,7 +484,7 @@ genderSelect.addEventListener('change', function() {
       require "./php/db_conn.php";
       $name = $_SESSION["name"];
       $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
-      $query = "SELECT * FROM students WHERE adviser_id = '$name' ORDER BY lastname";
+      $query = "SELECT * FROM students WHERE syear = (SELECT schoolyear FROM users LIMIT 1)  AND  adviser_id = '$name' ORDER BY lastname";
       if ($gender) {
         $query .= " AND gender = '$gender'";
       }

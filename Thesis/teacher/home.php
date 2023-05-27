@@ -447,7 +447,7 @@ User logged in:  <?=$_SESSION['name']?>
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           echo "Name<br><b> " . $row["name"] . "</b>";
-          echo "<br><hr> <br>Login Validity<br><b>  " . $row["xp"] . " </b> days(s)";
+          echo "<br><hr> <br>Account Created<br><b>  " . $row["xp"] . " </b>";
         }
       } else {
         echo "";
