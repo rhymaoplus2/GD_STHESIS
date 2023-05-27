@@ -565,7 +565,6 @@ mysqli_close($conn);
 
 
 
-
 <script>
   // Get all select elements with class "form-control"
 const selectElements = document.querySelectorAll('.form-control');

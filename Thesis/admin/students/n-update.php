@@ -36,6 +36,7 @@ if (isset($_GET['id'])) {
     $parent = validate($_POST['parent']);
     $syear = validate($_POST['syear']);
     $grade = validate($_POST['grade']);
+    $trackstrand = validate($_POST['trackstrand']);
     $section = validate($_POST['section']); // Added section variable
     $idnumber = validate($_POST['idnumber']);
     if (empty($id)) {
@@ -58,6 +59,7 @@ if (isset($_GET['id'])) {
         syear='$syear',
         section='$section',
         grade='$grade',
+        trackstrand='$trackstrand',
         idnumber='$idnumber'
         WHERE id='$id'";
         

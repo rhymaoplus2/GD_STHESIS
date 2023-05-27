@@ -385,11 +385,7 @@ $result = mysqli_query($conn, $query);
 
 
 <form method="post" class=" formx text-center" style="">
-  <?php
-    if(!empty($comment)) {
-      echo "<p><b>$comment</b>  </p>";
-    }
-  ?>
+
 <a href="teacher_create.php" class="btn btn-transparent p-0 mb-3">
   <b></b>
   <img src="img/add.gif" alt="Image" title="Add New Student" width="30" height="auto">
@@ -457,7 +453,11 @@ $result = mysqli_query($conn, $query);
 <div class="fade-in">
 <div class="table-scrollable">
 <table class="table table-bordered">
-
+<?php
+    if(!empty($comment)) {
+      echo "<p><b>$comment</b>  </p>";
+    }
+  ?>
   <thead class="text-white"style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     <tr>
       <th scope="col">Name</th>

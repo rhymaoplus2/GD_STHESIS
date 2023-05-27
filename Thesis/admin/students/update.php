@@ -461,33 +461,84 @@ z-index: -1;
 
 
 
+    <div class="row">
+
+  
+  
+  <div class="col">
     <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Year Level</b></label>
-    <input 
-    value="<?=$row['grade']?>"
-	  type="text"
-    class="form-control"
-    placeholder="12"
-    id="grade" 
-    name="grade">
+      <label for="" class="form-label"><b>Track/Strand</b></label>
+      (
+    <label for="section" class="form-label warning text-start">Current Track/Strand:
+      
+ </label>
+    <label for="section"style="font-size:10px;"  class="form-label warning text-start">
+     <b><i><?=$row['trackstrand']?></i></b></label>
+    
+    
+    )
+      <select class="form-select" id="trackstrand" name="trackstrand">
+        <option value="">Select Track/Strand</option>
+        <option value="STEM">STEM</option>
+        <option value="ABM">ABM</option>
+        <option value="TVL-IA-Automotive Technology">TVL - IA - Automotive Technology</option>
+        <option value="TVL-IA-SMAW">TVL - IA - SMAW</option>
+        <option value="TVL-HE-BPP/housekeeping/Cookery">TVL - HE - BPP/housekeeping/Cookery</option>
+        <option value="TVL-ICT-Computer Programming">TVL - ICT - Computer Programming</option>
+      </select>
     </div>
+  </div>
+</div><div class="row">
+  <div class="col">
+    <div class="form-group mb-3">
+      <label for="" class="form-label"><b>Year Level</b></label>
+      (
+      <label for="section" class="form-label warning text-start">Current Year Level: <b><i><?=$row['grade']?></i></b></label>
+      )
+      <select class="form-select" id="grade" name="grade">
+        <option value=""></option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="col">
+    <div class="form-group mb-3">
+      <label for="section" class="form-label warning text-start"><b>Section</b></label>
+      (
+      <label for="section" class="form-label warning text-start">Current Section: <b><i><?=$row['section']?></i></b></label>
+      )
+      <select class="form-select" id="section" name="section" style="height: 2rem;">
+        <option value=""> </option>
+        <?php
+        // Replace "your_database_name" and "your_table_name" with your actual database and table names
+        require "./php/db_conn.php";
+        $result = mysqli_query($conn, "SELECT DISTINCT name FROM section");
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+        }
+        ?>
+      </select>
+    </div>
+  </div>
+</div>
 
 
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Section</b></label>
-    <input 
-    value="<?=$row['section']?>"
-	  type="text"
-    class="form-control"
-    placeholder="Lilac"
-    id="section" 
-    name="section">
-    </div>
+
+
+
+</div>
+
+
 
   
 
-</div>
-      
+
        <span style="font-size:10.5px;"> "To ensure successful submission, take a moment to verify the accuracy of the details you've provided." </span>
 
 <br>
