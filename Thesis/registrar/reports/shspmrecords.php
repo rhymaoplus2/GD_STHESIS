@@ -31,6 +31,9 @@
   margin-left: 1cm;
   margin-right: 1cm;
 }
+table{
+  font-size: 12px;
+}
 .page1 {
     page-break-after: always;
   }
@@ -427,7 +430,7 @@ hr {
           <div class="modal-header text-white modal-light" style=" 
           
           
-          background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+         background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
             <h5 class="modal-title" id="exampleModalLabel">PRINTING PERMANENT RECORDS</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -484,8 +487,11 @@ function animateElement() {
 </script>
 <div class="page1">
 	<div class="border">
-  <div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="img/msuperma.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
+  <div class="d-flex mb-3 justify-content-center align-items-center position-relative">
+    <img src="img/perma.png" class=" p top-0 w-10 h-auto" style="max-height: 130px;" alt="Example Image">
+</div>
+<div class="d-flex mb-3 justify-content-center align-items-center position-relative">
+<b> SECONDARY STUDENT'S PERMANENT RECORD </b>
 </div>
     <div class="info" >
   <?php 
@@ -1137,30 +1143,28 @@ if (isset($_GET['id'])) {
     include "db_conn.php";
     $id = validate($_GET['id']);
 
-
     $sql = "SELECT * FROM students WHERE id='$id' AND grade = 12";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         // display student information
         $row = mysqli_fetch_assoc($result);
-        echo "SCHOOL: <strong>" . "MSU-MAIGO SCHOOL OF ARTS AND TRADES"."</strong>";
+        echo "SCHOOL: <strong>" . "MSU-MAIGO SCHOOL OF ARTS AND TRADES" . "</strong>";
         echo "<br>";
-        echo "SCHOOL YEAR: <strong>" . $row['syear']."</strong>";
+        echo "SCHOOL YEAR: <strong>" . ($row['syear'] ?: "N/A") . "</strong>";
         echo "<br>";
-        echo "GRADE & SECTION: <strong>" . $row['grade']."-". $row['section']."</strong>";
+        echo "GRADE & SECTION: <strong>" . $row['grade'] . "-" . $row['section'] . "</strong>";
         echo "<br>";
-        echo "TRACK/SECTION: <strong>" . $row['trackstrand']."</strong>";
+        echo "TRACK/SECTION: <strong>" . ($row['trackstrand'] ?: "N/A") . "</strong>";
         echo "<br>";
-        echo "Specialization: <strong>" . $row['parent']."</strong>";
+        echo "Specialization: <strong>" . ($row['parent'] ?: "N/A") . "</strong>";
         echo "<br>";
-        echo "SEMESTER: <strong>"."SECOND</strong>" ;
- 
-      
- 
-}
+        echo "SEMESTER: <strong>" . "SECOND</strong>";
+
+    }
 }
 ?>
+
     </div>
   </div>
 </div>

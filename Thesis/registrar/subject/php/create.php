@@ -22,7 +22,7 @@ if (isset($_POST['create'])) {
 
 	if (empty($subjectname))
 	 {
-		header ("Location:../index.php?error=Subject ID is required&$user_data");
+		header ("Location:../create.php?error=Subject Name is required&$user_data");
 	}
 
 
@@ -40,7 +40,7 @@ if (isset($_POST['create'])) {
        }
 	   
        else {
-          header("Location:../index.php?error=unkown error occured&$user_data");
+          header("Location:../create.php?error=Special Characters are not Applicable!&$user_data");
        }
 	   
 	

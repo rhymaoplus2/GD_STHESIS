@@ -29,8 +29,8 @@
 @page {
     margin-top: 50px;
     margin-bottom: 1cm!important;
-    margin-left:0;
-    margin-right: 0;
+    margin-left:1cm;
+    margin-right:1cm;
   }
    .print-hidden {
       display: none;
@@ -202,18 +202,9 @@ hr {
 }
 
 
-.container form {
-	width: 800px;
-	padding: 20px;
 
-
-}
-.box {
-	width: 750px;
-}
-
-.container table {
-	padding: 5px;
+table {
+ border: 1px;
   margin-top: 0;
   font-size: 11px;
 font-family: calibri;
@@ -348,11 +339,17 @@ font-size: 10px;;
 #my-element button:hover img {
   opacity: 0.8;
 }
+.flex-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 </style>
 </head>
 <body onload="displayDate()">
     <div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="msu.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
+    <img src="img/xxx.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
 </div>
 <div id="my-element" class="position-fixed bottom-0 w-100 text-center" style="z-index: 9999;">
   <button class="fixed-button" onclick="animateElement()">
@@ -372,19 +369,11 @@ function animateElement() {
   }, 3000);
 }
 </script>
-<div class="container " >
-<div style="text-align: center;">
-<form class="row text-center g-3 print-hidden" method="POST" action="" style=""> 
-  <div class="col-auto">
-  </div>
 
-</form>
-    </div>
-		<div class="box">
-    <div class="content">
 
 </script>
-            <table class="table table-bordered small table-sm" >
+
+            <table class="table small table-sm" >
             <?php
 function validate($data) {
     return htmlspecialchars(trim($data));
@@ -442,16 +431,15 @@ mysqli_close($conn);
 ?>
 
 
-<thead>
 <tr style="text-align:center;" >
-  <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
-  <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">FIRST<br>QUARTER</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
+  <td class="text-center" style="width:50px; vertical-align: middle;">NO</td>
+  <td class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</td>
+  <td class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</td>
+  <td class="text-center" style="width:50px; vertical-align: middle;">M.I</td>
+  <td class="text-center" style="width:90px; vertical-align: middle;">FIRST<br>QUARTER</td>
+  <td class="text-center" style="width:90px; vertical-align: middle;">REMARKS</td>
 </tr>
-</thed>  
+
 <thead>
 <th colspan="6" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></th>
 </thead>
@@ -540,118 +528,105 @@ while ($Row = mysqli_fetch_assoc($result)) {
   }
 </script>
 
-      <table style="font-size: 16px; width:720px;">
-  <thead>
-    <tr></tr>
-  </thead>
-  <tbody>
-    <?php
-      require "./php/db_conn.php";
-      $query = "SELECT pname, crname, name
-      FROM settings, cr, users
-      LIMIT 1";
+  <?php
+require "./php/db_conn.php";
+$query = "SELECT pname, crname, name FROM settings, cr, users LIMIT 1";
 $result = mysqli_query($conn, $query);
+
 if (mysqli_num_rows($result) > 0) {
-while ($row = mysqli_fetch_assoc($result)) {
-$pname = $row['pname'];
-$crname = $row['crname'];
-$show = $_SESSION['name'];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $pname = $row['pname'];
+    $crname = $row['crname'];
+    $show = $_SESSION['name'];
 
-$uppercaseshow = strtoupper($show);
-$uppercasePname = strtoupper($pname);
-$uppercasecrname = strtoupper($crname);
-          echo "<tr>";
-          echo "<td style='border: none;'>
-          Prepared by<br>
-          <div class='text-center'>
-            <b><u>". $uppercaseshow."</u></b><br>
-            Subject Teacher
-          </div>
-        </td>
-          <td style='border: none;'>
-           <br>
-           <div class='text-center'>
-            <b> <u> <span id='date'></span> </u></b><br>
-          
-            Date</u>
-            </div>
-        
-   
-          </td>
-          <td style='border: none;'>
-          Checked by<br>
-          <div class='text-center'> 
-            <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></b><br>
-            </div> <div class='text-center'> Subject Teacher
-          </div>
-        </td>
-        <td style='border: none;'>
-           <br>
-           <div class='text-center'> 
-           <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></b><br>
-           </div>
-           <div class='text-center'>
-         
-          
-            Date</u>
-            </div>
-        
-   
-          </td>
-          </tr>
-        <tr>
-     <td style='border: none;'>
-          Noted by<br>
-          <div class='text-center'>
-            <b><u>". $uppercasePname."</u></b><br>
-            Principal
-          </div>
-        </td>
-        <td style='border: none;'>
-        <br>
-        <div class='text-center'> 
-        <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></b><br>
-        </div>
-        <div class='text-center'>
-      
-       
-         Date</u>
-         </div>
-     
+    $uppercaseshow = strtoupper($show);
+    $uppercasePname = strtoupper($pname);
+    $uppercasecrname = strtoupper($crname);
 
-       </td>
-       <td style='border: none;'>
-      Approved by<br>
-       <div class='text-center'>
-         <b><u>". $uppercasecrname  ."</u></b><br>
-        Campus Registrar
-       </div>
-     </td>
-        <td style='border: none;'>
-           <br>
-           <div class='text-center'> 
-           <b><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></b><br>
-           </div>
-           <div class='text-center'>
-         
-          
-            Date</u>
+    echo "<div class='row'>
+            <div class='col flex-grow-large' '>
+              Prepared by<br>
+              <div class='text-center' style='width:px;'>
+                <b><u>". $uppercaseshow."</u></b><br>
+                Subject Teacher
+              </div>
             </div>
-        
-   
-          </td>
-          
-          </tr>";
-        }
-      } else {
-        echo "<tr><td colspan='4'>There are no grades available for printing.</td></tr>";
-      }
-      mysqli_close($conn);
-    ?>
-  </tbody>
-</table>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'>
+                <b> <u> <span id='date'></span> </u></b><br>
+                Date
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              Checked by<br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div> 
+              <div class='text-center'> 
+                Subject Teacher
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div>
+              <div class='text-center'>
+             
+                Date
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col flex-grow'>
+              Noted by<br>
+              <div class='text-center'>
+                <b><u>". $uppercasePname."</u></b><br>
+                Principal
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div>
+              <div class='text-center'>
+                Date
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              Approved by<br>
+              <div class='text-center'>
+                <b><u>". $uppercasecrname ."</u></b><br>
+                Campus Registrar
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div>
+              <div class='text-center'>
+                Date
+              </div>
+            </div>
+          </div>";
+  }
+} else {
+  echo "<div class='row'>
+          <div class='col'>
+            There are no grades available for printing.
+          </div>
+        </div>";
+}
 
-  
+mysqli_close($conn);
+?>
+
+
+ 
+    </div>
 <script>
   var wrappers = document.querySelectorAll('.wrapper');
   wrappers[wrappers.length - 1].classList.add('last-page');

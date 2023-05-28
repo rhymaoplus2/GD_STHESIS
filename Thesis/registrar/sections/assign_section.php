@@ -1,47 +1,61 @@
 <?php
 require "./php/db_conn.php";
 
-$section_name = $_GET['section_name'];
-$user_name = $_GET['user_name'];
+$section_id = $_GET['section_id'];
+$user_id = $_GET['user_id'];
 
 // Assign the section to the user
-$assigned = false;
-for ($i = 1; $i <= 10; $i++) {
-  $query = "SELECT t$i FROM section WHERE name='$section_name'";
-  $result = mysqli_query($conn, $query);
-  $Row = mysqli_fetch_assoc($result);
+$query = "SELECT * FROM section WHERE id='$section_id'";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
 
-  if ($Row["t$i"] == "") {
-    $query = "SELECT * FROM users WHERE name='$user_name' AND (sec$i='')";
-    $result = mysqli_query($conn, $query);
-    $Row2 = mysqli_fetch_assoc($result);
+if ($row) {
+  $assigned = false;
+  $first_slot_occupied = false; // Flag to track if the first slot is occupied
 
-    if($Row2) {
-      $query = "UPDATE section SET t$i='$user_name' WHERE name='$section_name'";
-      $result = mysqli_query($conn, $query);
-
-      // Store the section name to the user's column
+  for ($i = 1; $i <= 10; $i++) {
+    if ($row["t$i"] == "" || $row["t$i"] == $section_id) {
+      // Store the section ID in the user's column
       $sec_column_name = "sec$i";
-      $query = "UPDATE users SET $sec_column_name='$section_name' WHERE name='$user_name'";
+      $query = "UPDATE users SET `$sec_column_name`='$section_id' WHERE id='$user_id'";
       $result = mysqli_query($conn, $query);
 
       // Update the students table
-      $query = "UPDATE students SET subjectteacher$i='$user_name' WHERE section='$section_name'";
+      $query = "UPDATE students SET `subjectteacher$i`='$user_id' WHERE section='$section_id'";
       $result = mysqli_query($conn, $query);
 
       $assigned = true;
       break;
+    } elseif ($i == 1) {
+      $first_slot_occupied = true;
     }
   }
-}
+  if (!$assigned && $first_slot_occupied) {
+    // Update the first slot with the new section
+    $sec_column_name = "sec1";
+    $query = "UPDATE users SET `$sec_column_name`='$section_id' WHERE id='$user_id'";
+    $result = mysqli_query($conn, $query);
 
-if ($assigned) {
-  header("Location:index.php?id=$id&success=Section assigned to $user_name");
+    // Update the students table
+    $query = "UPDATE students SET `subjectteacher1`='$user_id' WHERE section='$section_id'";
+    $result = mysqli_query($conn, $query);
+
+    $assigned = true;
+  }
+  if ($assigned) {
+    $id = "some_id"; // Replace with the appropriate ID
+    header("Location: index.php?id=$id&success=Success!");
+    exit();
+  } else {
+    $id = "some_id"; // Replace with the appropriate ID
+    header("Location: index.php?id=$id&error=All slots are occupied or the user has already been assigned to a section in all tables.");
+    exit();
+  }
 } else {
-  header("Location:index.php?id=$id&error=All slots are occupied or user has already assigned to a section in all tables.");
+  $id = "some_id"; // Replace with the appropriate ID
+  header("Location: index.php?id=$id&error=Invalid section ID.");
+  exit();
 }
 
 mysqli_close($conn);
-
-
 ?>

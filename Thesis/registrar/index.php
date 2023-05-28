@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subject Teacher</title>
+    <title>Administrator</title>
     <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <style>
 html, body {
-  height: 100%;
+  height:100%;
 }
 
-
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -90,8 +90,9 @@ margin-top: -5rem;
       <img src="img/back.png" class="rounded mx-auto d-block text-center" alt="..." style="display: inline-block; width: 30px; height:30px; display: inline-block;"> 
     </b>
   </a>
- 
-  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as a&nbsp;<b>&nbsp;<br>Registrar's Staff</b></span>
+
+  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as a&nbsp;<b>&nbsp;
+    REGISTRAR STAFF</b></span>
  <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
   <br>*To maintain security, refrain from sharing your password with anyone </span>
 </div>
@@ -146,8 +147,8 @@ margin-top: -5rem;
 
 
   <button type="submit" class="btn btn-dark text-white text-center" style="width: 300px;  
-      
-      background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);"><b>Continue</b></button>
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
+"><b>Continue</b></button>
 
 </form>
 

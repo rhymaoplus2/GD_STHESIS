@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SEMESTER 1 GRADES</title>
+	<title>SEMESTERAL GRADES</title>
   
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -17,198 +17,339 @@
 <script src="path/bootstrap.js"></script>
 
 
-  <style>
-   @media print{
-
-    @page{
-      margin-top: 1cm;
-      margin-bottom: 1cm;
+<style>
+    
+    @media print {
+    
+      .btn-icon img {
+      width: 1.5rem;
+      height: 1.5rem;
     }
-    .img-fluid{
+    
+    @page {
+        margin-top: 50px;
+        margin-bottom: 1cm!important;
+        margin-left:1cm;
+        margin-right:1cm;
+      }
+       .print-hidden {
+          display: none;
+        }
+      /* Set the footer to be at the bottom of the page */
+      .print-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+      }
+    
+      /* Set the page break after two pages */
+      .page-break {
+        page-break-after: always;
+      }
+    
+      /* Hide the file name and other description */
+      .print-header,
+      .print-footer {
+        display: none;
+      }
+    h1{
       display: none;
     }
-   }
-td {
-  border: 1px solid black;
-}
-
-.failed {
-  color: red;
-  border-right-color: white; /* set border color to white */
-}
-
-.wrapper{
-  font-size: 11px;
-}
-.container {
-
-	display: flex;
-	justify-content: ;
-	align-items: center;
-	flex-direction: column;
-
-}
-hr {
-  border: none;
-  border: 1px solid;
-  width: 120%;
-  background-color: black;
-}
-
-
-.container form {
-	width: 800px;
-	padding: 20px;
-
-
-}
-.box {
-	width: 750px;
-}
-
-.container table {
-	padding: 5px;
-
-  font-size: 11px;
-font-family: calibri;
-  border: 10px;
-}
-.container text{
-}
-.border {
-	padding: 15px;
-}
-.link-right {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.link-center {
-	display: flex;
-	justify-content: flex-end;
-}
-.thead
-{
-font-size: 10px;;
-}
-  .nav-item
-  {
-      color:black;
-  }
-  .subjectlist{
-  
-      margin-left: 5rem;
-      margin-top: 5rem;
-  }
-  .studentlist{
-  margin-left: 20rem;
-  margin-top: 5rem;
-  }
-  .fixed-button {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
-}
-  .button{
-      margin-left: 5rem;
-      margin-top: 11rem;
-  }
-  .form-label, .form-select {
-      font-size: inherit;
+      /* Only display content in the last page */
+      .wrapper {
+        counter-increment: page;
+      }
+    
+      /* Add margin to the top of the second page */
+      .wrapper:nth-of-type(n+3) {
+        margin-top: 100px;
+      }
+    
+      /* Add page number to the last page */
+      .wrapper:after {
+        content: counter(page);
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        page-break-after: always;
+      }
+      .wrapper:last-of-type:after {
+        content: "";
+      }
+      .container-fluid.p-0 {
+      display: none;
     }
-  .button1{
-  
-  margin-left: 5rem;
-  margin-top: 9.5rem;
-  }
-  
-  .title{
-      margin-left: 40rem;
-      margin-top: 1rem;
-      font-size: 3.5rem;
-  }
-  .text{
-
-  }
-  .text2
-  {
-      margin-left: 23rem;
-      margin-top: -20rem;
-      width: 45rem;
-      height: 10rem;
-  }
-.top-container {
-    background-color: white;
-    padding: 30px;
-    text-align: center;
-  }
-  .header {
-    background-color: white;
-    color: #f1f1f1;
-  }
-  .content {
-    padding: 16px;
-  }
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  } 
-  .sticky + .content {
-    padding-top: 102px;
-  }
-  .addbutton
-  {
-    margin-left:80%;
-  }
-  .btn-bold {
-  font-weight: bold;
-}
-#left {
-  float: left;
-  width: 50%;
-  font-size: 13px
-}
-
-#right {
-  float: right;
-  width: 34%;
-  font-size: 13px
-}
-#left, #right {
-    display: inline-block;
-    vertical-align: top;
-  }
-  select#section {
-  font-weight: bold;
-}
-#my-element {
-  transform-origin: center;
-  transition: transform 5s, opacity 2s;
-}
-
-#my-element.zoom-rotate-fade {
-  transform: scale(6) rotate(180deg);
-  opacity: 3;
-}
-
-#my-element button {
-  background: none;
-  border: none;
-}
-
-#my-element button:hover img {
-  opacity: 0.8;
-}
-
-
+    .tooltip {
+      display: none !important;
+    }
+    
+    .btn {
+        display: none;
+      }
+    
+      /* Hide inputs */
+      input[type="button"],
+      input[type="submit"],
+      input[type="reset"],
+      input[type="checkbox"],
+      input[type="radio"],
+      select,
+      textarea {
+        display: none;
+      }
+      select option {
+        display: none;
+      }
+    
+    }
+    @media print {
+      /* Set the page size to A4 */
+      @page {
+      
+      }
+      .btn-icon img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    #my-element  {
+     display: none;
+    }
+       .print-hidden {
+          display: none;
+        }
+      /* Set the footer to be at the bottom of the page */
+      .print-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+      }
+    
+      /* Set the page break after two pages */
+      .page-break {
+        page-break-after: always;
+      }
+    
+      /* Hide the file name and other description */
+      .print-header,
+      .print-footer {
+        display: none;
+      }
+    
+      /* Only display content in the last page */
+      .wrapper {
+        counter-increment: page;
+      }
+    
+      /* Add margin to the top of the second page */
+      .wrapper:nth-of-type(n+3) {
+        margin-top: 100px;
+      }
+    
+      /* Add page number to the last page */
+      .wrapper:after {
+        content: counter(page);
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        page-break-after: always;
+      }
+      .wrapper:last-of-type:after {
+        content: "";
+      }
+      .container-fluid.p-0 {
+      display: none;
+    }
+    .tooltip {
+      display: none !important;
+    }
+    
+      
+    }
+    td {
+      border: 1px solid black;
+    }
+    
+    .failed {
+      color: red;
+      border-right-color: white; /* set border color to white */
+    }
+    
+    .wrapper{
+      font-size: 11px;
+    }
+    .container {
+    
+      display: flex;
+      justify-content: ;
+      align-items: center;
+      flex-direction: column;
+      margin-top:0;
+    
+    }
+    hr {
+      border: none;
+      border: 1px solid;
+      width: 120%;
+      background-color: black;
+    }
+    
+    
+    
+    table {
+     border: 1px;
+      margin-top: 0;
+      font-size: 11px;
+    font-family: calibri;
+      border: 10px;
+    }
+    .container text{
+    }
+    .border {
+      padding: 15px;
+    }
+    .link-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .link-center {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .thead
+    {
+    font-size: 10px;;
+    }
+      .nav-item
+      {
+          color:black;
+      }
+      .subjectlist{
+      
+          margin-left: 5rem;
+          margin-top: 5rem;
+      }
+      .studentlist{
+      margin-left: 20rem;
+      margin-top: 5rem;
+      }
+      .fixed-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+      .button{
+          margin-left: 5rem;
+          margin-top: 11rem;
+      }
+      .form-label, .form-select {
+          font-size: inherit;
+        }
+      .button1{
+      
+      margin-left: 5rem;
+      margin-top: 9.5rem;
+      }
+      
+      .title{
+          margin-left: 40rem;
+          margin-top: 1rem;
+          font-size: 3.5rem;
+      }
+      .text{
+    
+      }
+      .text2
+      {
+          margin-left: 23rem;
+          margin-top: -20rem;
+          width: 45rem;
+          height: 10rem;
+      }
+    .top-container {
+        background-color: white;
+        padding: 30px;
+        text-align: center;
+      }
+      .header {
+        background-color: white;
+        color: #f1f1f1;
+      }
+      .content {
+        padding: 16px;
+      }
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+      } 
+      .sticky + .content {
+        padding-top: 102px;
+      }
+      .addbutton
+      {
+        margin-left:80%;
+      }
+      .btn-bold {
+      font-weight: bold;
+    }
+    #left {
+      float: left;
+      width: 50%;
+      font-size: 13px
+    }
+    
+    #right {
+      float: right;
+      width: 34%;
+      font-size: 13px
+    }
+    #left, #right {
+        display: inline-block;
+        vertical-align: top;
+      }
+      select#section {
+      font-weight: bold;
+    }
+    #my-element {
+      transform-origin: center;
+      transition: transform 5s, opacity 2s;
+    }
+    
+    #my-element.zoom-rotate-fade {
+      transform: scale(6) rotate(180deg);
+      opacity: 3;
+    }
+    
+    #my-element button {
+      background: none;
+      border: none;
+    }
+    
+    #my-element button:hover img {
+      opacity: 0.8;
+    }
+    .flex-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
     </style>
 </head>
 <body>
-    <div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="msu.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
+<div class="d-flex justify-content-center align-items-center position-relative">
+    <img src="img/xxx.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
 </div>
 <div id="my-element" class="position-fixed bottom-0 w-100 text-center" style="z-index: 9999;">
   <button class="fixed-button" onclick="animateElement()">
@@ -230,12 +371,7 @@ function animateElement() {
 
 
 </script>
-<div class="container " >
-<div style="text-align: center;">
-<form class="row text-center g-3 print-hidden" method="POST" action="" style=""> 
- 
-<div class="text-start">
-        
+<table class="table small table-sm" >
             <?php
 require "./php/db_conn.php";
 
@@ -288,23 +424,23 @@ AND teacher = '$teacher'
     mysqli_close($conn);
     ?>
 </div>
-<table class="text-start table table-bordered small table-sm" >
-<thead>
-<tr style="text-align:center;">
-  <th class="text-center" style="width:50px; vertical-align: middle;">NO</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</th>
-  <th class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</th>
-  <th class="text-center" style="width:50px; vertical-align: middle;">M.I</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">1ST</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">2ND</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">FINAL</th>
-  <th class="text-center" style="width:90px; vertical-align: middle;">REMARKS</th>
-</tr>
-</thead>  
+<table class="text-start table small table-sm" >
 
-<thead>
-<th colspan="8" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></th>
-</thead>
+<tr style="text-align:center;">
+  <td class="text-center" style="width:50px; vertical-align: middle;">NO</td>
+  <td class="text-center" style="width:200px; vertical-align: middle;">LASTNAME</td>
+  <td class="text-center" style="width:200px; vertical-align: middle;">FIRSTNAME</td>
+  <td  class="text-center" style="width:50px; vertical-align: middle;">M.I</td>
+  <td  class="text-center" style="width:90px; vertical-align: middle;">1ST</td>
+  <td  class="text-center" style="width:90px; vertical-align: middle;">2ND</td>
+  <td  class="text-center" style="width:90px; vertical-align: middle;">FINAL</td>
+  <td  class="text-center" style="width:90px; vertical-align: middle;">REMARKS</td>
+</tr>
+
+
+<tr>
+<td colspan="8" class="text text-left"><b><div class="text text-primary"><b>MALE</b></div></b></td>
+</tr>
 <?php
 require "./php/db_conn.php";
 
@@ -351,9 +487,9 @@ $query = "SELECT firstname, lastname, middlename,
 
 ?>
 
-<thead>
-<th colspan="8" class="text text-left"><b><div class="text text-danger"><b>FEMALE</b></div></b></th>
-</thead>
+<tr>
+<td colspan="8" class="text text-left"><b><div class="text text-danger  "><b>FEMALE</b></div></b></td>
+</tr>
 <?php
 require "./php/db_conn.php";
 
@@ -401,201 +537,105 @@ ORDER BY lastname";
 ?>
 </table>
 </div>
-<table style="font-size: 16px; width:720px;">
-  <thead>
-    <tr>
-</tr>
-  </thead>
-  <tbody>
-    <?php
-      require "./php/db_conn.php";
-      $query = "SELECT pname, crname, name
-                FROM settings, cr, users
-               LIMIT 1";
-      $result = mysqli_query($conn, $query);
-      if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-          
-          $pname = $row['pname'];
-          $uppercasePname = strtoupper($pname);
-          echo "<tr>";
-          echo "<td style='border: none;'>";
-          echo "
-          Prepared by
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          Checked by
-          <br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          
-          <b><u>". strtoupper($row['name']). 
-          "</b></u>&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-       
-          <u><b>"
-          . date("Y-m-d") . 
-          "</u></b>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <u>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          </u>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;
-          <u>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </u>
-          </u>
-          <br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          &nbsp;
-          <i>Subject Teacher</i>
-          &nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <i>Date</i>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          <i>Subject Group Head</i>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;
-          <i>Date</i>
-          <br>
-          <br>
-          Noted by
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          Approved by
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <br>
-          <b>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <u>"
-          
-          . $uppercasePname."</b></u>
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;
-          <u>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-          </u>
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-          <u>
-          <b>
-          "
-          . $row['crname'] .
-          
-          "</b></u>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;
-          <u>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </u>
-          <br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;
-          <i>Principal</i>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          <i>Date</i>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          &nbsp;&nbsp; &nbsp; 
-          <i>Campus Registrar</i>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          &nbsp;&nbsp; &nbsp; 
-          <i>Date</i>
-          </td>";
-   
-          echo "</tr>";
-        }
-      } else {
-        echo "<tr><td colspan='4'>There are no grades available for printing.</td></tr>";
-      }
-      mysqli_close($conn);
-    ?>
-  </tbody>
-</table>
+<div class="" style="justify-content:center; margin-left:3cm;">
+
+  <?php
+require "./php/db_conn.php";
+$query = "SELECT pname, crname, name FROM settings, cr, users LIMIT 1";
+$result = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $pname = $row['pname'];
+    $crname = $row['crname'];
+    $show = $_SESSION['name'];
+
+    $uppercaseshow = strtoupper($show);
+    $uppercasePname = strtoupper($pname);
+    $uppercasecrname = strtoupper($crname);
+
+    echo "<div class='row'>
+            <div class='col flex-grow-large' '>
+              Prepared by<br>
+              <div class='text-center' style='width:px;'>
+                <b><u>". $uppercaseshow."</u></b><br>
+                Subject Teacher
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'>
+                <b> <u> <span id='date'></span> </u></b><br>
+                Date
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              Checked by<br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div> 
+              <div class='text-center'> 
+                Subject Teacher
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div>
+              <div class='text-center'>
+             
+                Date
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col flex-grow'>
+              Noted by<br>
+              <div class='text-center'>
+                <b><u>". $uppercasePname."</u></b><br>
+                Principal
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div>
+              <div class='text-center'>
+                Date
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              Approved by<br>
+              <div class='text-center'>
+                <b><u>". $uppercasecrname ."</u></b><br>
+                Campus Registrar
+              </div>
+            </div>
+            <div class='col flex-grow'>
+              <br>
+              <div class='text-center'> 
+                <b><u>                                                                        </u></b><br>
+              </div>
+              <div class='text-center'>
+                Date
+              </div>
+            </div>
+          </div>";
+  }
+} else {
+  echo "<div class='row'>
+          <div class='col'>
+            There are no grades available for printing.
+          </div>
+        </div>";
+}
+
+mysqli_close($conn);
+?>
+
+
 
   
 <script>

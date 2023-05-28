@@ -12,7 +12,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Students</title>
+	<title>HOME</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -316,7 +316,7 @@ a.btn:hover img {
 
   font-size: 30px;
   font-family: tahoma;
-  color: white;
+  color: dark;
 
 }
 html, body {
@@ -355,17 +355,20 @@ body {
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header text-white" style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+      <div class="modal-header text-white " style="   
+      
+      background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
         <h5 class="modal-title" id="exampleModalLabel">Welcome!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
       MSU-MSAT High School Grade Reporting and Recording System
+  
         
      
       </div>
       <div class="modal-footer">
-      <i>User Logged in:</i> <b>  <?=$_SESSION['name']?></b>
+      <i>User Logged in: <b><?=$_SESSION['name']?></b></i>
     
    
       </div>
@@ -385,10 +388,10 @@ body {
 <div class="container">
   <div class="row align-items-center">
     <div class="col-md-6 mb-3">
-      <span class="text mb-3">
-    <b>  MSU-MSAT High School Grade Reporting and Recording System </b>
-</b>  <div class="fs-4">
-User logged in:  <b> <?=$_SESSION['name']?> </b>
+      <span class="text text-white mb-3">
+       <b>MSU-MSAT High School Grade Reporting and Recording System
+</b>  <div>
+User logged in:  <?=$_SESSION['name']?>
     <p id="date-time">
   
 
@@ -398,33 +401,166 @@ User logged in:  <b> <?=$_SESSION['name']?> </b>
   </div>
 
   <script>
-    function updateDateTime() {
-      // Create a new Date object and get the current date and time
-      let now = new Date();
+  // Check if the modal has been displayed before
+  var modalDisplayed = sessionStorage.getItem('modalDisplayed');
 
-      // Format the date and time as a string
-      let dateTimeString = now.toLocaleString();
+  // If the modal has not been displayed, show it
+  if (!modalDisplayed) {
+    // Show the modal when the page loads
+    window.addEventListener('load', function() {
+      var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+        keyboard: false
+      });
+      myModal.show();
+    });
 
-      // Update the HTML element with the formatted date and time
-      document.getElementById("date-time").textContent = dateTimeString;
-    }
-
-    // Call the updateDateTime function every second to update the date and time in real-time
-    setInterval(updateDateTime, 1000);
-  </script>
+    // Set the flag in session storage to indicate that the modal has been displayed
+    sessionStorage.setItem('modalDisplayed', 'true');
+  }
+</script>
 
       </span>
     </div>
     <div class="col-md-6">
       <div class="row text-center">
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/new.gif" class="img-fluid" alt="Image 1" style="width:90%;">
+    <!-- Image -->
+<img id="image1" class="about" src="img/acc.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style=" 
+      
+      background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-left">
+      
+
+
+
+
+ 
+    <?php
+   include "./php/db_conn.php";
+   $name = $_SESSION['name'];
+
+      $sql = "SELECT * FROM users where name = '$name'";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+          echo "Name<br><b> " . $row["name"] . "</b>";
+          $expirationDate = strtotime($row["xp"] . ' +3 days');
+          $currentDate = time();
+          $timeLeft = $expirationDate - $currentDate;
+          
+          $hoursLeft = floor($timeLeft / 3600);
+          $secondsLeft = $timeLeft % 60;
+          
+          echo "<hr>Account Created<br><b>" . $row["xp"] . "</b>";
+          echo "<br>Account Expiring in:<br><b><span id='countdown'></span></b>";
+          
+          echo "<script>
+              function updateCountdown() {
+                  var expirationDate = new Date('" . date('Y-m-d H:i:s', $expirationDate) . "');
+                  var currentDate = new Date();
+                  var timeLeft = expirationDate.getTime() - currentDate.getTime();
+          
+                  var hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
+                  var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+          
+                  document.getElementById('countdown').textContent = hoursLeft + ' hours and ' + secondsLeft + ' seconds';
+          
+                  if (timeLeft <= 0) {
+                      clearInterval(countdownTimer);
+                      document.getElementById('countdown').textContent = 'Expired';
+                  }
+              }
+          
+              var countdownTimer = setInterval(updateCountdown, 1000);
+          </script>";
+          
+        }
+      } else {
+        echo "";
+      }
+    ?>
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+    
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/guide.gif" class="img-fluid" alt="Image 2" style="width:90%;">
+        <img id="image1" class="about" src="img/terms.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#guide">
+<!-- Bootstrap Modal -->
+<div class="modal fade " id="guide" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header" style="
+      
+       
+      background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title text-white" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start" >
+      <b>TERMS AND CONDITIONS FOR USING THE 
+        <br>MSU-MSAT HIGH SCHOOL GRADE REPORTING AND RECORDING SYSTEM</b>
+<br>
+<br>
+
+<span clas="text-center">
+By using the MSU-MSAT High School Grade Reporting and Recording System, you agree to be bound by the following terms and conditions:
+<br>
+<br>
+<b> 1.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is provided by MSU-MSAT for the sole purpose of recording and reporting grades for high school students.
+<br>
+<b> 2.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is protected by copyright and other intellectual property laws. You may not copy, reproduce, distribute, or modify any part of the system without the prior written consent of MSU-MSAT.
+<br>
+<b> 3.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is provided "as is" and without warranties of any kind, whether express or implied. MSU-MSAT does not guarantee that the system will be error-free or that it will meet your specific requirements.
+<br>
+<b> 4.&nbsp;&nbsp;</b> You are solely responsible for ensuring that your use of the MSU-MSAT High School Grade Reporting and Recording System complies with all applicable laws, rules, and regulations.
+<br>
+<b> 5.&nbsp;&nbsp;</b> MSU-MSAT reserves the right to modify, suspend, or discontinue the MSU-MSAT High School Grade Reporting and Recording System at any time, with or without notice to you.
+<br>
+<b> 6.&nbsp;&nbsp;</b> MSU-MSAT may terminate your access to the MSU-MSAT High School Grade Reporting and Recording System at any time if you violate these terms and conditions.
+<br>
+<b> 7.&nbsp;&nbsp;</b> MSU-MSAT will not be liable to you or any third party for any damages arising out of your use of or inability to use the MSU-MSAT High School Grade Reporting and Recording System.
+<br>
+<b> 8.&nbsp;&nbsp;</b> These terms and conditions constitute the entire agreement between you and MSU-MSAT with respect to your use of the MSU-MSAT High School Grade Reporting and Recording System and supersede all prior or contemporaneous communications and proposals, whether oral or written.
+<br>
+<b> 9.&nbsp;&nbsp;</b> These terms and conditions shall be governed by and construed in accordance with the laws of the jurisdiction in which MSU-MSAT is located, without giving effect to any principles of conflicts of law.
+<br>
+<b> 10.&nbsp;</b> By using the MSU-MSAT High School Grade Reporting and Recording System, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions. 
+
+
+
+<br>
+<br> If you do not agree to these terms and conditions, you may not use the MSU-MSAT High School Grade Reporting and Recording System.
+
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</div>
+  </div>
+</div>
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
+          <img class="about" src="img/guide.gif" class="img-fluid" alt="Image 3" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
           <img class="about" src="img/abt.gif" class="img-fluid" alt="Image 4" style="width:90%;">

@@ -28,8 +28,7 @@ html, body {
 
 
 body {
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
-  background-repeat: no-repeat;
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);  background-repeat: no-repeat;
 }
 
 
@@ -285,11 +284,12 @@ td a:hover {
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-                <h5 class="modal-title text-white" id="logoutModalLabel">Logout</h5>
+            <div class="modal-header" style="
+            
+            background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);      <h5 class="modal-title text-white" id="logoutModalLabel">Logout</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-dark">
                 <p>Are you sure you want to log out?</p>
             </div>
             <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
@@ -314,8 +314,10 @@ td a:hover {
   <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-white"  style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-          <h5 class="modal-title" id="successModalLabel">Success!</h5>
+        <div class="modal-header text-white"  style="
+        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+       
+       <h5 class="modal-title" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -342,44 +344,49 @@ require "./php/db_conn.php";
 $comment = "";
 $where_clause = "1";
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
   $section = $_POST['section'];
   $grade = $_POST['grade'];
   $trackstrand = $_POST['trackstrand'];
- 
+   // Add this line to assign the value of syear
+  
   $comment = "Showing results for ";
-  if(empty($section) && empty($grade) && empty($trackstrand) && empty($syear)) {
+
+  if (empty($section) && empty($grade) && empty($trackstrand) && empty($syear)) {
     $comment = "Showing results for All";
   }
-  if(!empty($section) && !empty($grade) && !empty($trackstrand) && !empty($syear)) {
-    $comment .= "Grade $grade - Section $section - Track/Strand $trackstrand - School Year $syear";
-    $where_clause = "section = '$section' AND grade = '$grade' AND trackstrand = '$trackstrand' AND syear = '$syear'";
+  
+  if (!empty($section) && !empty($grade) && !empty($trackstrand) && !empty($syear)) {
+    $comment .= "Grade $grade - Section $section - Track/Strand $trackstrand ";
+    $where_clause = "section = '$section' AND grade = '$grade' AND trackstrand = '$trackstrand' 
+    ";
   } else {
-    if(!empty($section)) {
+    if (!empty($section)) {
       $comment .= "Section $section";
       $where_clause .= " AND section = '$section'";
     }
-    if(!empty($grade)) {
+    
+    if (!empty($grade)) {
       $comment .= !empty($comment) ? " - " : "";
       $comment .= "Grade $grade";
       $where_clause .= " AND grade = '$grade'";
     }
-    if(!empty($trackstrand)) {
+    
+    if (!empty($trackstrand)) {
       $comment .= !empty($comment) ? " - " : "";
       $comment .= "Track/Strand $trackstrand";
       $where_clause .= " AND trackstrand = '$trackstrand'";
     }
   
-    if(empty($comment)) {
+    if (empty($comment)) {
       $comment .= "All";
     }
-
   }
 }
 
-
 $query = "SELECT * FROM students WHERE $where_clause";
 $result = mysqli_query($conn, $query);
+
 ?>
 
 
@@ -458,7 +465,9 @@ $result = mysqli_query($conn, $query);
       echo "<p><b>$comment</b>  </p>";
     }
   ?>
-  <thead class="text-white"style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+  <thead class="text-white"style="
+  
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
     <tr>
       <th scope="col">Name</th>
   
@@ -477,8 +486,9 @@ require "./php/db_conn.php";
 $section = isset($_POST['section']) ? $_POST['section'] : '';
 $grade = isset($_POST['grade']) ? $_POST['grade'] : '';
 $trackstrand = isset($_POST['trackstrand']) ? $_POST['trackstrand'] : '';
-$sy;
-$query = "SELECT * FROM students WHERE  syear = (SELECT schoolyear FROM users LIMIT 1) ";
+$sy;$searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
+
+$query = "SELECT * FROM students WHERE syear = (SELECT schoolyear FROM users LIMIT 1) ";
 
 if (!empty($section)) {
   $query .= " AND section = '$section'";
@@ -492,6 +502,10 @@ if (!empty($trackstrand)) {
   $query .= " AND trackstrand = '$trackstrand'";
 }
 
+if (!empty($searchTerm)) {
+  $query .= " AND (firstname LIKE '%$searchTerm%' OR lastname LIKE '%$searchTerm%')";
+}
+
 $query .= " ORDER BY lastname";
 
 $result = mysqli_query($conn, $query);
@@ -503,9 +517,29 @@ while ($row = mysqli_fetch_assoc($result)) {
            <td hidden><?php echo $row["id"]; ?></td>
        
                 
-           <td style="width:50%;">    <a href="view.php?id=<?=$row['id']?>" 
-			      	     class=" "><?php echo $row["lastname"].', '.$row["firstname"].' '.substr($row["middlename"], 0, 1).'.'; ?>
-                   </a></td>
+           <td style="width:50%; ">
+         <a type="button" class="  mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal<?= $row['lrnnumber'] ?>">
+  <b><?= $row["lastname"] ?>, <?= $row["firstname"] ?> <?= substr($row["middlename"], 0, 1) ?>.</b>
+        </a>
+
+<div class="modal fade" id="subject1Modal<?= $row['lrnnumber'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style=" 
+      
+      background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
+        <h5 class="modal-title" id="exampleModalLabel"><?= $row['fullname'] ?> - Personal Information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="view.php?lrnnumber=<?= $row['lrnnumber'] ?>" width="100%" height="500" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </td>
         
           <td class="text-center"><?php echo $row["section"]; ?></td>
           <td hidden class="text-center"><?php echo $row["section"]; ?></td>
@@ -516,13 +550,7 @@ while ($row = mysqli_fetch_assoc($result)) {
      <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
           <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
                    </b></a>
-                   <a type="button" class="btn btn-transparent" data-bs-toggle="modal" 
-  data-bs-target="#deleteModal<?php echo $row['id']; ?>"
-  style="border: none; background-color:transparent; outline: none;" title="Delete">
-
-		    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image"><b>
-  </a>
-       
+                 
              <div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">

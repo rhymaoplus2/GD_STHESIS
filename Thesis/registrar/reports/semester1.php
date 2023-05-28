@@ -27,7 +27,7 @@
   
 }
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
   background-repeat: no-repeat;
 
 }
@@ -290,12 +290,12 @@ td a:hover {
 }
 
 .table-scrollable::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);/* color of the thumb */
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );/* color of the thumb */
   border-radius: 5px; /* roundness of the thumb */
 }
 
 .table-scrollable::-webkit-scrollbar-thumb:hover {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%); /* color of the thumb on hover */
+  background: #555; /* color of the thumb on hover */
 }
 .sticky {
     position: sticky;
@@ -318,7 +318,8 @@ td a:hover {
 <div>
     <div  style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
      border-radius:20px;
-     background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);" class="mb-3 text-white text-center"><h4>SHS FIRST SEMESTER PRINTABLE GRADES </h4></div>
+     
+     background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );" class="mb-3 text-white text-center"><h4>SHS FIRST SEMESTER PRINTABLE GRADES </h4></div>
 </div>  
 <div class="filter-options d-flex justify-content-center mb-3">
   
@@ -382,7 +383,7 @@ td a:hover {
 <div class="table-scrollable">
 <table class="table table-bordered" style="width: 1200px;">
     <thead class="text-white sticky" style="
-  background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);">
+   background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
         <tr>
             <th class="text-center">Subject</th>
             <th class="text-center">Year</th>

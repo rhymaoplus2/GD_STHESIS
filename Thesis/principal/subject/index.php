@@ -20,6 +20,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
     top: 0;
     width: 100%;
   }
+  thead{
+            background-image: linear-gradient(to right, #16222A 0%, #3A6073  51%, #16222A  100%);
+ 
+     
+            text-align: center;
+
+            transition: 0.5s;
+            background-size: 200% auto;
+                 
+            box-shadow: 0 0 20px #eee;
+        
+          }
+
+       thead:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
   
     .fade-in {
   animation: fadeIn 1s ease-in-out;
@@ -59,29 +77,41 @@ body {
 }
 
 .table-scrollable::-webkit-scrollbar-thumb {
-  background: #888; /* color of the thumb */
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); /* color of the thumb */
   border-radius: 5px; /* roundness of the thumb */
 }
 
 .table-scrollable::-webkit-scrollbar-thumb:hover {
-  background: #555; /* color of the thumb on hover */
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);/* color of the thumb on hover */
 }
 
 .container {
-  width:400px;
+  width:auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* other styles */
+ margin-top: 1cm;
 }
 
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .container form {
-	width: 800px;
+
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
   background-color: white;
   
 }
@@ -202,6 +232,15 @@ body {
   transform: scale(1.2);
   transition: transform 0.5s ease;
 }
+button:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+
+.img-fluid:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
 .btn-danger:hover {
   transform: scale(1.2);
   transition: transform 0.5s ease;
@@ -217,11 +256,10 @@ body {
 .zoom-on-hover:hover {
   transform: scale(1.2); /* Increase the scale value for more zoom */
 }
-
 </style>
 </head>
 <body>
-    <!-- Logout Modal -->
+
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -260,17 +298,15 @@ body {
     }
   </script>
 
-  <br>
-  <br>
   
   <div class="container">
-    <form>
+
       <?php if (mysqli_num_rows($result)) { ?>
         <form class="" method="get">
 
   <div  class="input-group mb-3">
-  <a type="button" class="btn" href="create.php">
-  <img src="img/user.png" alt="Image Description" class="zoom-on-hover">
+  <a href="create.php" title="add new subject">
+  <img src="img/user.png" alt="Image Description" class="img-fluid">
 </a>
 
  &nbsp;&nbsp;<input type="text" class="form-control " placeholder="Search subjects" aria-label="Search subjects" aria-describedby="search-btn" name="search">
@@ -295,8 +331,10 @@ body {
               ?>
     <div class="table-responsive">
       <div class="table-scrollable">
-        <table class="table table-bordered">
-          <thead class="tetxt-white sticky" style="color:white; background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+        <table class="table table-bordered" style="width:900px;">
+          <thead class="tetxt-white sticky" style="color:white;
+          
+">
             <tr>
               <th hidden scope="col">Subject ID</th>
               <th scope="col">Subject Name</th>
@@ -304,7 +342,7 @@ body {
               <th class="text-center" scope="col" colspan="2"></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="fade-in">
             <?php
                         while ($Row = mysqli_fetch_assoc($result)) {
                             ?>
@@ -313,10 +351,18 @@ body {
                 <td><?php echo $Row["subjectname"]; ?></td>
                 <td hidden><?php echo $Row["teacherid"]; ?></td>
                 <td class="text-center">
-                  <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+                  <a href="update.php?id=<?php echo $Row['id']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Subject Name">
                     <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
                   </a>
             
+
+
+
+
+
+
+
+                  
             <a type="button" class="btn" data-bs-toggle="modal" 
   data-bs-target="#deleteModal<?php echo $Row['id']; ?>"
   style="border: none; background-color:transparent; outline: none;" title="Delete">
@@ -326,7 +372,10 @@ body {
              <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $Rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
-         <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+         <div class="modal-header " style=" 
+         
+         
+         background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
             <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
@@ -336,7 +385,7 @@ body {
                <br> Are you sure you want to delete <br> <b> <?php echo $Row['subjectname']; ?> Subject?</b>
 
             </p>
-            <form class="delete" action="delete_user.php" method="POST">
+            <form class="delete" action="delete_sub.php" method="POST">
                <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
                <div class="mb-3">
                   <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
@@ -364,14 +413,64 @@ body {
     </div>
   <?php
           } else {
-              echo "<p>No subjects found</p>";
-          }
+            echo "<td> <img style='width:900px;' src='img/noresult.png' alt='No Results'></td>";
+        }
+        
       }
 }
   ?>
 </form>
 
   </div>
+  
+  <?php if (isset($_GET['success'])) { ?>
+  <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-white"  style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+          <h5 class="modal-title" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><?php echo $_GET['success']; ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'), {
+      keyboard: false
+    });
+    successModal.show();
+  </script>
+<?php
+}
+?>
+
+<?php if (isset($_GET['error'])) { ?>
+  <div class="modal" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-white" style="
+        
+        
+        background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+          <h5 class="modal-title" id="errorModalLabel">Oops!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><?php echo $_GET['error']; ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var errorModal = new bootstrap.Modal(document.getElementById('errorModal'), {
+      keyboard: false
+    });
+    errorModal.show();
+  </script>
+<?php } ?>
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

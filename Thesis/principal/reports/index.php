@@ -49,7 +49,7 @@ body {
 }
 
 .container form {
-	width: 600px;
+
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -74,7 +74,8 @@ body {
 	padding: 15px;
   min-height: 190px;
   background-color: white;
-border-radius: 20px;
+  border-radius: 20px;
+  width: 900px;
 }
 .link-right {
 	display: flex;
@@ -155,9 +156,7 @@ font-size: 10px;;
   transition: all 0.2s ease-in-out; /* This adds a smooth transition effect */
 }
 
-a:hover {
-font-weight: bold; /* Change this value to adjust the font size when hovering over the link */
-}
+
 
 .top-container {
     background-color: #f1f1f1;

@@ -525,10 +525,12 @@ foreach ($grades as $studentname => $subjects) {
   foreach ($unique_subjects as $subject) {
       if (isset($subjects[$subject])) {
           echo "<td class='text-center'>".$subjects[$subject]["1st"]."</td><td class='text-center'>".$subjects[$subject]["2nd"]."</td>";
-          $FIRST = intval($subjects[$subject]["1st"]);
-          $SECOND = intval($subjects[$subject]["2nd"]);
-          $average = ($FIRST + $SECOND) / 2;
-          $full +=$average;
+      $FIRST = intval($subjects[$subject]["1st"]);
+$SECOND = intval($subjects[$subject]["2nd"]);
+$average = ($FIRST + $SECOND) / 2;
+$average = round($average); // Round the average to the nearest integer
+$full += $average;
+
           
           echo "
                 <td class='text-center'>".$average."</td>";
@@ -559,11 +561,12 @@ foreach ($total_grades as $subjectname => $student_grades) {
 }
 $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
 $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+$average_overall = round(($full / $num));
 echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
-echo "<td class='text-center'>".round(($full / $num))."</td>";
+echo "<td class='text-center'>".$average_overall."</td>";
 
 $full=0;
-$average_overall = $average_per_subject / $num;
+
 if ($average_overall >= 90 && $average_overall <= 94) {
   $honor = 'With honors';
 } else if ($average_overall >= 95 && $average_overall <= 97) {
@@ -939,11 +942,12 @@ foreach ($total_grades as $subjectname => $student_grades) {
 }
 $average = ($num_subjects > 0) ? round($total_grade / $num_subjects, 2) : "";
 $average_per_subject = ($num_subjects > 0) ? round($total_grade / count($unique_subjects), 2) : "";
+$average_overall = round(($full / $num));
 echo "<td class='text-center'>" . number_format($full / $num, 3). "</td>";
-echo "<td class='text-center'>".round(($full / $num))."</td>";
+echo "<td class='text-center'>".$average_overall."</td>";
 
 $full=0;
-$average_overall = $average_per_subject / $num;
+
 if ($average_overall >= 90 && $average_overall <= 94) {
   $honor = 'With honors';
 } else if ($average_overall >= 95 && $average_overall <= 97) {

@@ -19,7 +19,7 @@ html, body {
 }
 
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -198,7 +198,7 @@ font-size: 10px;;
   }
   
   .sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
   }
@@ -388,6 +388,25 @@ input[type="text"]:hover {
     </style>
 </head>
 <body>
+ <!-- Logout Modal -->
+ <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+                <h5 class="modal-title text-white" id="logoutModalLabel">Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="../img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" onclick="openBackupWindow()">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="header sticky-top" id="myHeader">
 <?PHP include_once('header.php');?>
@@ -459,13 +478,15 @@ $count_result = mysqli_query($conn, $count_query);
 $count_row = mysqli_fetch_row($count_result);
 $total_results = $count_row[0];
 
-// Query to retrieve the results for the current page with custom sorting by "status" field
-$query = "SELECT * FROM users $where_clause ORDER BY CASE 
-                                          WHEN status = 1 THEN 0 
-                                          WHEN status = 0 THEN 1 
-                                          WHEN status = 2 THEN 2 
-                                          ELSE 3 
-                                        END, name ASC";
+$query = "SELECT * FROM users WHERE (role != 'admin' OR role2 != 'admin' OR role3 != 'admin') AND id 
+!= '1' ORDER BY 
+          CASE 
+            WHEN status = 1 THEN 0 
+            WHEN status = 0 THEN 1 
+            WHEN status = 2 THEN 2 
+            ELSE 3 
+          END, name ASC";
+
 
 $result = mysqli_query($conn, $query);
 ?>
@@ -476,10 +497,7 @@ $result = mysqli_query($conn, $query);
   <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header" style=" 
-        
-        
-        background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+        <div class="modal-header" style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
           <h5 class="modal-title text-white" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="--bs-icon-color: white;"></button>
         </div>
@@ -624,10 +642,8 @@ setInterval(function() {
 </script>
 <table class="table table-bordered mb-25">
   
-  <thead >
-  <tr class="  text-white" style=" background-image: linear-gradient(to right, #f9d423 0%, #f83600 100%);
-
-">
+  <thead class="sticky">
+  <tr class="  text-white" style="   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
 
 
       <th hidden>Username</th>
@@ -741,7 +757,7 @@ function updateStatusOfAllUsers(status) {
         <div class="modal-header text-white"  style="
         
         
-        background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+        background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
           <h5 class="modal-title" id="exampleModalLabel"><b><?=$row['name']?></b></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -769,7 +785,8 @@ function updateStatusOfAllUsers(status) {
 
 
   
-  <a href="update.php?id=<?php echo $row['id'] ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+  <a href="update.php?id=<?php echo $row['id']; ?>&name=<?php echo $row['name']; ?>" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+
   <b>
     <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
   </b>

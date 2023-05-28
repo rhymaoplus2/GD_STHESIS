@@ -22,14 +22,13 @@
 </header>
 
 <style>
-
 html, body {
-  height: 100%;
+  height: auto;
 }
 
 
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
   background-repeat: no-repeat;
 }
 
@@ -236,7 +235,7 @@ td a:hover {
 }
 
 .table-scrollable{
-  height: 320px;
+  height: 400px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -249,12 +248,12 @@ td a:hover {
 }
 
 .table-scrollable::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);/* color of the thumb */
+  background: #888; /* color of the thumb */
   border-radius: 5px; /* roundness of the thumb */
 }
 
 .table-scrollable::-webkit-scrollbar-thumb:hover {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);/* color of the thumb on hover */
+  background: #555; /* color of the thumb on hover */
 }
 
 .fade-in {
@@ -333,7 +332,7 @@ td a:hover {
   <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-white"  style="    background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+        <div class="modal-header text-white"  style="  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
           <h5 class="modal-title" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -528,8 +527,8 @@ setInterval(function() {
 
 </script>
 
-  <thead class="text-white sticky"style="
-  background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);">
+  <thead class="sticky text-white"style="
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
     <tr>
       <th scope="col">Name</th>
   

@@ -13,6 +13,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = test_input($_POST['username']);
     $password = test_input($_POST['password']);
 
+    // get today's date
     $today = date('Y-m-d');
 
     if (empty($username)) {

@@ -22,10 +22,33 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+button:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+         
+header {
+            background-image: linear-gradient(to right, #16222A 0%, #3A6073  51%, #16222A  100%);
+            margin: 10px;
+     
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+          }
 
-
+          header:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+         
   .container {
-	min-height: 100vh;
+  margin-top: 1cm;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -132,7 +155,19 @@ font-size: 10px;;
   }
 
 
+  
+  .fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .top-container {
     background-color: #f1f1f1;
@@ -168,39 +203,41 @@ font-size: 10px;;
 </div>
 
 
-
+<div class="fade-in">
 <div class="container">
 <form action="./php/create.php"
       method="post">
-  <h4 class="display-10 text-center" >Add New Subject</h4>
-
-
- <?php if (isset($_GET['error'])) { 
-  include "./php/db_conn.php";
-  ?>
+      <header class="mb-3 text-center text-white" style="  
+      
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          font-size:30px; 
+          
+">
+    <b>
   
+     ADD NEW SUBJECT
+      
+    </b>
+</header>
 
-  <div class="alert alert-danger" role="alert">
-  <?php echo $_GET['error']; ?>
-</div>
-<?php } ?>
+
 
 
 
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Subject Name</label>
+
     <input 
     type="middlename" 
     class="form-control" 
     id="subjectname" 
-    placeholder="ex: Science"
+    placeholder="Input the subjectname here (Speacial Characters are not applicable)"
     name="subjectname">
 
   </div>
 
-          <button type="submit" class="btn btn-primary" name="create" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
+          <button title="submit" type="submit" class="btn btn-primary" name="create" style="background-color: transparent; border: none; border-radius:100%; width:50px; height: 50px;"><img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit"></button>
 
-<button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='index.php'">
+<button title="cancel"  type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" onclick="location.href='index.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>
 
@@ -215,11 +252,33 @@ font-size: 10px;;
 
 
 
+<?php if (isset($_GET['error'])) { ?>
+  <div class="modal" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-white" style="
+        
+        
+        background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
+          <h5 class="modal-title" id="errorModalLabel">Oops!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><?php echo $_GET['error']; ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var errorModal = new bootstrap.Modal(document.getElementById('errorModal'), {
+      keyboard: false
+    });
+    errorModal.show();
+  </script>
+<?php }
+} ?>
 
-
+</div>
 
 </body>
 </html>
-<?php }else{
-	header("Location:create.php");
-} ?>

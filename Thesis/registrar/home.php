@@ -325,8 +325,7 @@ html, body {
 
 
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
-  background-repeat: no-repeat;
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
 }
 
 .image-container {
@@ -345,10 +344,38 @@ body {
 </head>
 
 <body>
+<style>
+  #logoutModal2 {
+    z-index: 9999;
+  }
+</style>
 
+<div class="modal fade" id="logoutModal2" tabindex="-1" aria-labelledby="logoutModal2Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="
+      
+      background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
+        <h5 class="modal-title" id="logoutModal2Label">Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+ 
+      <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" >
+                </a>
+            </div>
+  </div>
+</div>
+
+</div>
 <div class="header sticky-top">
   <?PHP include_once('header.php'); ?>
 </div>
+
 
 <?php
 // Check if the button is clicked
@@ -408,38 +435,37 @@ if(isset($_POST['export_button'])) {
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog text-center">
     <div class="modal-content text-center">
-      <div class="modal-header text-white text-center" style="  
-      
-     
-      background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+      <div class="modal-header text-white text-center" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
         <h5 class="modal-title text-center" id="exampleModalLabel text-center">Welcome!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
- <b> MSU-MSAT High School 
-  <br>Grade Reporting and Recording System</b>
-  
-        
-     
+        <b>MSU-MSAT High School<br>Grade Reporting and Recording System</b>
       </div>
       <div class="modal-footer">
-       
-    
-   
+        <i>User Logged in:</i> <b>Administrator</b>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // Show the modal when the page loads
-  window.addEventListener('load', function() {
+  // Check if the modal has been shown before
+  var modalShown = localStorage.getItem('modalShown');
+
+  if (!modalShown) {
+    // Show the modal
     var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
       keyboard: false
     });
     myModal.show();
-  });
+
+    // Store a flag indicating that the modal has been shown
+    localStorage.setItem('modalShown', true);
+  }
 </script>
+
+
 <div class="container">
   <div class="row align-items-center">
     <div class="col-md-6 mb-3">
@@ -474,26 +500,29 @@ if(isset($_POST['export_button'])) {
     </div>
     <div class="col-md-6">
       <div class="row text-center">
-        <div class="col-md-6 mb-3">
-        <img class="about" src="img/bako.gif" class="img-fluid" alt="Image 1" style="width:90%;" onclick="openBackupWindow()">
+      <div class="col-md-6 mb-3">
+  <img class="about" src="img/bako.gif" class="img-fluid" alt="Image 1" style="width:90%;" onclick="openBackupWindow()">
+</div>
 
 <script>
 function openBackupWindow() {
-  window.open("./backup/");
+  window.location.href = "./backup/";
 }
 </script>
 
-
-        </div>
         <div class="col-md-6 mb-3">
         <a href="guide.php" target="_blank">
   <img class="about" src="img/gay.gif" class="img-fluid" alt="Image 2" style="width:90%;">
 </a>
 
         </div>
+
         <div class="col-md-6 mb-3">
+        <a href="terms.php" target="_blank">
           <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
+          </a>
         </div>
+    
         <div class="col-md-6 mb-3">
           <img class="about" src="img/ab.gif" class="img-fluid" alt="Image 4" style="width:90%;">
         </div>

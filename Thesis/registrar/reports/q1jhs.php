@@ -753,9 +753,6 @@ echo "</table>";
 <td><br><br><br><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>Date</td>
 
     </tr>
-   
-  </tbody>
-</table>
 <script>
   // Check if values are stored in sessionStorage
   if (sessionStorage.getItem("checked-by-stem")) {

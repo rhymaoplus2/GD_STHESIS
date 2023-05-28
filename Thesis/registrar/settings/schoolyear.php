@@ -17,12 +17,15 @@
 
 
   <style>
+    html, body {
+  height: 100%;
+  
+}
 body {
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   background-repeat: no-repeat;
 
 }
-
 
 .wave-text {
     display: inline-block;
@@ -52,9 +55,9 @@ body {
     </style>
 </head>
 <body>
-<!--
+
 <div class="header sticky-top" id="myHeader">
-<?PHP include_once('header.php');?>
+<?php include_once('header.php');?>
 </div>
 
 <script>
@@ -73,7 +76,6 @@ function myFunction() {
 </script>
 
 
--->
 
 <div class="container my-5">
     <div class="row">
@@ -104,62 +106,64 @@ function myFunction() {
                     </style>
 
 <?php
-
-
 include "../php/db_conn.php";
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            $schoolyear = mysqli_real_escape_string($conn, $_POST["schoolyear"]);
-                            // check if input value is in the format of "YYYY-YYYY"
-                            if (!preg_match('/^\d{4}-\d{4}$/', $schoolyear)) {
-                                echo "<p class='
-mt-3 alert alert-danger'>Invalid school year format. Please enter the school year in the format of 'YYYY-YYYY'.</p>";
-} else {
-  $sql = "UPDATE users SET schoolyear='$schoolyear'";
 
-if (mysqli_query($conn, $sql)) {
-echo "<div class='modal fade' id='successModal' tabindex='-1' aria-labelledby='successModalLabel' aria-hidden='true'>
-<div class='modal-dialog modal-dialog-centered'>
-<div class='modal-content'>
-<div class='modal-header text-white' style='  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);'>
-<h5 class='modal-title' id='successModalLabel'>Success!</h5>
-<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-</div>
-<div class='modal-body'>
-<p class='mt-3'>Academic year updating <span class='wave-text'>.</span><span class='wave-text'>.</span><span class='wave-text'>.</span><br> Updating Academic Year Would Take Some Time <br> Just logout and login back, thanks : )</p>
-</div>
-</div>
-</div>
-</div>
-<script>
-$(document).ready(function() {
-$('#successModal').modal('show');
-});
-</script>";
-} else {
-echo "<div class='modal fade' id='errorModal' tabindex='-1' aria-labelledby='errorModalLabel' aria-hidden='true'>
-<div class='modal-dialog modal-dialog-centered'>
-<div class='modal-content'>
-<div class='modal-header'>
-<h5 class='modal-title' id='errorModalLabel'>Error</h5>
-<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-</div>
-<div class='modal-body'>
-<p class='mt-3'>Error updating school year: " . mysqli_error($conn) . "</p>
-</div>
-</div>
-</div>
-</div>
-<script>
-$(document).ready(function() {
-$('#errorModal').modal('show');
-});
-</script>";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $schoolyear = mysqli_real_escape_string($conn, $_POST["schoolyear"]);
+
+        // check if input value is in the format of "YYYY-YYYY"
+        if (!preg_match('/^\d{4}-\d{4}$/', $schoolyear)) {
+            echo "<p class='mt-3 alert alert-danger'>Invalid school year format. Please enter the school year in the format of 'YYYY-YYYY'.</p>";
+        } else {
+            $sql = "UPDATE users SET schoolyear='$schoolyear'";
+
+            if (mysqli_query($conn, $sql)) {
+                echo "<div class='modal fade' id='successModal' tabindex='-1' aria-labelledby='successModalLabel' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered'>
+                    <div class='modal-content'>
+                        <div class='modal-header text-white' style=''>
+                       </div>
+                        <div class='modal-body text-white' style='background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);'>
+                            <p class='mt-3'>Academic year updating <span class='wave-text'><b>.</b></span>
+                            <span class='wave-text'>.</span><span class='wave-text'>.</span><br> Updating Academic Year Would Take Some Time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $('#successModal').modal('show');
+                    setTimeout(redirectToIndex, 5000); // Redirect after 5 seconds
+                });
+                
+                function redirectToIndex() {
+                    window.location.href = 'index.php';
+                }
+            </script>";
+            } else {
+                echo "<div class='modal fade' id='errorModal' tabindex='-1' aria-labelledby='errorModalLabel' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h5 class='modal-title' id='errorModalLabel'>Error</h5>
+                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        </div>
+                        <div class='modal-body'>
+                            <p class='mt-3'>Error updating school year: " . mysqli_error($conn) . "</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $('#errorModal').modal('show');
+                });
+            </script>";
+            }
+        }
+    }
 }
-}
-}
-   }
 ?>
-
 
   </body>
 </html>

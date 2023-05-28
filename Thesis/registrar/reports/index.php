@@ -18,14 +18,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {  } ?>
 
     html, body {
   height: 100%;
+  
 }
-
-
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
   background-repeat: no-repeat;
-}
 
+}
 
 .fade-in {
   animation: fadeIn 2s ease-in-out;
@@ -50,7 +49,7 @@ body {
 }
 
 .container form {
-	width: 600px;
+
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -75,7 +74,8 @@ body {
 	padding: 15px;
   min-height: 190px;
   background-color: white;
-border-radius: 20px;
+  border-radius: 20px;
+  width: 900px;
 }
 .link-right {
 	display: flex;
@@ -156,9 +156,7 @@ font-size: 10px;;
   transition: all 0.2s ease-in-out; /* This adds a smooth transition effect */
 }
 
-a:hover {
-font-weight: bold; /* Change this value to adjust the font size when hovering over the link */
-}
+
 
 .top-container {
     background-color: #f1f1f1;
@@ -285,6 +283,27 @@ z-index: -1;
     </style>
 </head>
 <body>
+ <!-- Logout Modal -->
+ <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="
+            
+            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
+                <h5 class="modal-title text-white" id="logoutModalLabel">Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="../img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" onclick="openBackupWindow()">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="header" id="myHeader">
 <?PHP include_once('header.php'); ?>
@@ -342,7 +361,7 @@ function myFunction() {
 <div class="mx-auto text-center text-wrap mb-3 text-white rounded-pill shadow" style=" 
 
 
-background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
   <b class="fs-2" style="white-space: nowrap;">Student Printable Data</b>
   
 </div>
@@ -358,10 +377,9 @@ background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
   
     <table class="table table-bordered table-sm rounded-4" style="border-radius: 10px;">
       <thead class="text-center text-white" style="
-   background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);    
-      ">
+   background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );  ">
         <tr>
-          <th scope="col">Select</th>
+          <th scope="col">Select Data</th>
         </tr>
       </thead>
       <tbody>
@@ -392,7 +410,7 @@ background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
 <div class="modal fade" id="modalGradeSheets" tabindex="-1" aria-labelledby="modalGradeSheetsLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header text-white" style="  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+      <div class="modal-header">
         <h5 class="modal-title" id="modalGradeSheetsLabel">Grade Sheets</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

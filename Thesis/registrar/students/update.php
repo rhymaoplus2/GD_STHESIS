@@ -22,7 +22,7 @@ html, body {
 }
 
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -38,14 +38,14 @@ body {
 }
 
 .container form {
-	width: 600px;
+  width: 100%;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
 }
 .box {
-	width: 750px;
+	width: 100%;
 }
 .container table {
 	padding: 20px;
@@ -178,7 +178,7 @@ bottom: 0;
 z-index: -1;
   }
   .skrol {
-  height: 300px;
+
   overflow-y: auto;
   padding-right: 20px; /* Add padding to the right side of the element */
 }
@@ -241,38 +241,20 @@ z-index: -1;
 <?PHP include_once('header.php');?>
 </div>
 
-<video autoplay muted loop id="myVideo">
-  <source src="../bg/students.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
 
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 <br>
 <br>
-<div class="fade-in mb-3">
+<div class="fade-in">
 
 	<div class="container">
 		<form action="n-update.php" 
 		      method="post">
       
     <div class="text-center text-white p-2 mb-4" style="font-size:24px; 
-    
-    background-image: linear-gradient(to right, #f83600 0%, #f83600 100%); border-radius: 10px;">
+    	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% ); border-radius: 10px;">
     <label class="mb-0">
-  <?php echo isset($_GET['error']) ? 'RETRY' : 'UPDATE: ' . $row['fullname']; ?>
+  <?php echo isset($_GET['error']) ? 'RETRY' : ' UPDATE: <b>' . $row['fullname'].'</b>'?>
 </label>
 
 
@@ -287,7 +269,7 @@ function myFunction() {
   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-modal="true">
     <div class="modal-dialog">
       <div class="modal-content" style="
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+   background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
         <div class="modal-header">
           <h5 class="modal-title text-white" id="errorModalLabel">Oops!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -311,151 +293,140 @@ function myFunction() {
 
 <hr>
  
-       <div class="skrol"style="height: 100px; overflow-y: auto;">
-       <div class="form-group mb-3">
-    <label for="" hidden class="form-label"><b>ID Number</b></label>
-    <input 
-    hidden
+<div class="skrol"style="height: 250px; overflow-y: auto;">
+
+
+<div class="form-group mb-3">
+    <label hidden for="" class="form-label"><b>ID No.</b></label>
+    <input hidden
     value="<?=$row['id']?>"
 	  type="text"
     class="form-control"
     id="id" 
     name="id">
     </div>
-
+    <div class="row">
+  <div class="col-md-6">
     <div class="form-group mb-3">
-    <label for="" class="form-label"><b>LRN No.</b></label>
-    <input 
-    value="<?=$row['lrnnumber']?>"
-	  type="text"
-    class="form-control"
-    id="lrnnumber" 
-    name="lrnnumber">
+      <label for="idnumber" class="form-label"><b>ID No.</b></label>
+      <input 
+        value="<?=$row['idnumber']?>"
+        type="text"
+        class="form-control"
+        id="idnumber" 
+        name="idnumber"
+      >
     </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group mb-3">
+      <label for="lrnnumber" class="form-label"><b>LRN No.</b></label>
+      <input 
+        value="<?=$row['lrnnumber']?>"
+        type="text"
+        class="form-control"
+        id="lrnnumber" 
+        name="lrnnumber"
+      >
+    </div>
+  </div>
+</div>
 
 
     
-    <div class="form-group mb-3">
-    <label for=""class="form-label"><b>ID Number</b></label>
-    <input 
 
-    value="<?=$row['idnumber']?>"
-	  type="text"
-    class="form-control"
-    id="idnumber" 
-    name="idnumber">
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="lastname" class="form-label"><b>Last Name</b></label>
+            <input value="<?=$row['lastname']?>" type="text" class="form-control" id="lastname" name="lastname" oninput="updateFullName()">
+        </div>
     </div>
 
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="middlename" class="form-label"><b>Middle Name</b></label>
+            <input value="<?=$row['middlename']?>" type="text" class="form-control" id="middlename" name="middlename" oninput="updateFullName()">
+        </div>
+    </div>
 
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="firstname" class="form-label"><b>First Name</b></label>
+            <input value="<?=$row['firstname']?>" type="text" class="form-control" id="firstname" name="firstname" oninput="updateFullName()">
+        </div>
+    </div>
+</div>
 
 <div class="form-group mb-3">
-    <label for="" class="form-label"><b>First Name</b></label>
-    <input 
-    value="<?=$row['firstname']?>"
-	  type="text"
-    class="form-control"
-    id="firstname" 
-    name="firstname">
+    <label for="fullname" class="form-label"><b>Full Name</b></label>
+    <input value="<?=$row['fullname']?>" type="text" class="form-control" id="fullname" name="fullname" readonly>
+</div>
+
+<script>
+    function updateFullName() {
+        var lastName = document.getElementById('lastname').value;
+        var middleName = document.getElementById('middlename').value;
+        var firstName = document.getElementById('firstname').value;
+        var fullName = lastName + ', ' + middleName + ' ' + firstName;
+        document.getElementById('fullname').value = fullName.trim();
+    }
+</script>
+
+
+    <div class="row">
+    <div class="col-md-6">
+        <div class="form-group mb-3">
+            <label for="suffix" class="form-label"><b>Suffix</b></label>
+            <input value="<?=$row['suffix']?>" type="text" class="form-control" id="suffix" placeholder="Jr. / Sr. / Leave Blank" name="suffix">
+        </div>
     </div>
 
-
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Middle Name</b></label>
-    <input 
-    value="<?=$row['middlename']?>"
-	  type="text"
-    class="form-control"
-    id="middlename" 
-    name="middlename">
+    <div class="col-md-6">
+        <div class="form-group mb-3">
+            <label for="gender" class="form-label"><b>Gender</b></label>
+            <input value="<?=$row['gender']?>" type="text" class="form-control" id="gender" placeholder="Male" name="gender">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="birthplace" class="form-label"><b>Birth Place</b></label>
+            <input value="<?=$row['birthplace']?>" type="text" class="form-control" id="birthplace" name="birthplace">
+        </div>
     </div>
 
- 
-
-    
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Last Name</b></label>
-    <input 
-    value="<?=$row['lastname']?>"
-	  type="text"
-    class="form-control"
-    id="lastname" 
-    name="lastname">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="birthday" class="form-label"><b>Birth Date</b></label>
+            <input value="<?=$row['birthday']?>" type="date" class="form-control" id="birthday" name="birthday" onchange="calculateAge()">
+        </div>
     </div>
 
- 
-
-        
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Full Name</b></label>
-    <input 
-    value="<?=$row['fullname']?>"
-	  type="text"
-    class="form-control"
-    id="fullname" 
-    name="fullname">
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="age" class="form-label"><b>Age</b></label>
+            <input value="<?=$row['age']?>" type="text" class="form-control" id="age" name="age" readonly>
+        </div>
     </div>
+</div>
 
-  
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Suffix</b></label>
-    <input 
-    value="<?=$row['suffix']?>"
-	  type="text"
-    class="form-control"
-    id="suffix" 
-    placeholder="Jr. / Sr. / Leave Blank"
-    name="suffix">
-    </div>
-
-
-      
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Gender</b></label>
-    <input 
-    value="<?=$row['gender']?>"
-	  type="text"
-    class="form-control"
-    id="gender" 
-    placeholder="Male"
-    name="gender">
-    </div>
-
-	        
-
-
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Birth Place</b></label>
-    <input 
-    value="<?=$row['birthplace']?>"
-	  type="text"
-    class="form-control"
-    id="birthplace" 
-    name="birthplace">
-    </div>
-
- 
-
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Birth Date</b></label>
-    <input 
-    value="<?=$row['birthday']?>"
-	  type="date"
-    class="form-control"
-    id="birthday" 
-    name="birthday">
-    </div>
-
-    
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Age</b></label>
-    <input 
-    value="<?=$row['age']?>"
-	  type="text"
-    class="form-control"
-    id="age" 
-    name="age">
-    </div>
-
+<script>
+    function calculateAge() {
+        var birthday = document.getElementById('birthday').value;
+        var today = new Date();
+        var birthDate = new Date(birthday);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById('age').value = age;
+    }
+</script>
 
     <div class="form-group mb-3">
     <label for="" class="form-label"><b>Address</b></label>
@@ -478,7 +449,7 @@ function myFunction() {
     </div>
 
 
-    <div class="form-group mb-3">
+    <div hidden class="form-group mb-3">
     <label for="" class="form-label"><b>School Year</b></label>
     <input 
     value="<?=$row['syear']?>"
@@ -488,369 +459,92 @@ function myFunction() {
     name="syear">
     </div>
 
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Year Level</b></label>
-    <input 
-    value="<?=$row['grade']?>"
-	  type="text"
-    class="form-control"
-    placeholder="12"
-    id="grade" 
-    name="grade">
-    </div>
 
 
-    <div class="form-group mb-3">
-    <label for="" class="form-label"><b>Section</b></label>
-    <input 
-    value="<?=$row['section']?>"
-	  type="text"
-    class="form-control"
-    placeholder="Lilac"
-    id="section" 
-    name="section">
-    </div>
+    <div class="row">
 
   
-    </div>
-    <br>
-    <hr>
+  
+  <div class="col">
     <div class="form-group mb-3">
-    <div class="d-flex justify-content-center">
-  <label for="" class="form-label text-center"><i><b>Subjects</b></i></label>
-</div>
-
-
-
-    <div class="skrol"style="height: 100px; overflow-y: auto;">
-    <select name="subject1" id="subject1" class="form-control text-center mb-3">
-    <?php
-    // Add blank option if sub5 has no value
-    if(empty($row['subject1'])){
-        echo '<option value="" selected></option>';
-    }else{
-        echo '<option value="'.$row['subject1'].'" selected>'.$row['subject1'].'</option>';
-    }
-    ?>
-    <option value=""></option>
-    <?php 
-    $query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-    $result = $conn->query($query);
-    if($result->num_rows> 0){
-        while($optionData=$result->fetch_assoc()){
-            $option =$optionData['subjectname'];
-            ?>
-            <?php
-            //selected option
-            if(!empty($row['subject1']) && $row['subject1']== $option){
-                // selected option
-                ?>
-                <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-                <?php 
-                continue;
-            }?>
-            <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-            <?php
+      <label for="" class="form-label"><b>Track/Strand</b></label>
+      (
+    <label for="section" class="form-label warning text-start">Current Track/Strand:
+      
+ </label>
+    <label for="section"style="font-size:10px;"  class="form-label warning text-start">
+     <b><i><?=$row['trackstrand']?></i></b></label>
+    
+    
+    )
+      <select class="form-select" id="trackstrand" name="trackstrand">
+        <option value="">Select Track/Strand</option>
+        <option value="STEM">STEM</option>
+        <option value="ABM">ABM</option>
+        <option value="TVL-IA-Automotive Technology">TVL - IA - Automotive Technology</option>
+        <option value="TVL-IA-SMAW">TVL - IA - SMAW</option>
+        <option value="TVL-HE-BPP/housekeeping/Cookery">TVL - HE - BPP/housekeeping/Cookery</option>
+        <option value="TVL-ICT-Computer Programming">TVL - ICT - Computer Programming</option>
+      </select>
+    </div>
+  </div>
+</div><div class="row">
+  <div class="col">
+    <div class="form-group mb-3">
+      <label for="" class="form-label"><b>Year Level</b></label>
+      (
+      <label for="section" class="form-label warning text-start">Current Year Level: <b><i><?=$row['grade']?></i></b></label>
+      )
+      <select class="form-select" id="grade" name="grade">
+        <option value=""></option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="col">
+    <div class="form-group mb-3">
+      <label for="section" class="form-label warning text-start"><b>Section</b></label>
+      (
+      <label for="section" class="form-label warning text-start">Current Section: <b><i><?=$row['section']?></i></b></label>
+      )
+      <select class="form-select" id="section" name="section" style="height: 2rem;">
+        <option value=""> </option>
+        <?php
+        // Replace "your_database_name" and "your_table_name" with your actual database and table names
+        require "./php/db_conn.php";
+        $result = mysqli_query($conn, "SELECT DISTINCT name FROM section");
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
         }
-    }
-    ?>
-</select>
-<select name="subject2" id="subject2" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject2 has no value
-if(empty($row['subject2'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject2'].'" selected>'.$row['subject2'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
         ?>
-        <?php
-        //selected option
-        if(!empty($row['subject2']) && $row['subject2']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject3" id="subject3" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject3 has no value
-if(empty($row['subject3'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject3'].'" selected>'.$row['subject3'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject3']) && $row['subject3']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject4" id="subject4" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject4 has no value
-if(empty($row['subject4'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject4'].'" selected>'.$row['subject4'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject4']) && $row['subject4']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject5" id="subject5" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject5 has no value
-if(empty($row['subject5'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject5'].'" selected>'.$row['subject5'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject5']) && $row['subject5']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject6" id="subject6" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject6 has no value
-if(empty($row['subject6'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject6'].'" selected>'.$row['subject6'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject6']) && $row['subject6']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject7" id="subject7" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject7 has no value
-if(empty($row['subject7'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject7'].'" selected>'.$row['subject7'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject7']) && $row['subject7']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject8" id="subject8" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject8 has no value
-if(empty($row['subject8'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject8'].'" selected>'.$row['subject8'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject8']) && $row['subject8']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject9" id="subject9" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject9 has no value
-if(empty($row['subject9'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject9'].'" selected>'.$row['subject9'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject9']) && $row['subject9']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
-<select name="subject10" id="subject10" class="form-control text-center mb-3">
-<?php
-// Add blank option if subject10 has no value
-if(empty($row['subject10'])){
-    echo '<option value="" selected></option>';
-}else{
-    echo '<option value="'.$row['subject10'].'" selected>'.$row['subject10'].'</option>';
-}
-?>
-<option value=""></option>
-<?php 
-$query ="SELECT subjectname FROM subjects ORDER BY id ASC";
-$result = $conn->query($query);
-if($result->num_rows> 0){
-    while($optionData=$result->fetch_assoc()){
-        $option =$optionData['subjectname'];
-        ?>
-        <?php
-        //selected option
-        if(!empty($row['subject10']) && $row['subject10']== $option){
-            // selected option
-            ?>
-            <option value="<?php echo $option; ?>" selected><?php echo $option; ?> </option>
-            <?php 
-            continue;
-        }?>
-        <option value="<?php echo $option; ?>" ><?php echo $option; ?> </option>
-        <?php
-    }
-}
-?>
-</select>
+      </select>
+    </div>
+  </div>
+</div>
+
+
 
 
 
 </div>
-       <br>
 
 
-          <button type="submit" class="btn btn-primary" 
+
+  
+
+
+       <span style="font-size:10.5px;"> "To ensure successful submission, take a moment to verify the accuracy of the details you've provided." </span>
+
+<br>
+
+
+          <button title="submit" type="submit" class="btn btn-primary" 
 name="update" style="background-color: transparent; 
 border: none; border-radius:100%; width:50px; height: 50px;">
 <img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit">
@@ -858,7 +552,7 @@ border: none; border-radius:100%; width:50px; height: 50px;">
 
  
 
-          <button type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
+          <button title="cancel" type="button" class="btn btn-danger" style="background-color: transparent; border: none; border-radius: 100%; width: 50px; height: 50px;" 
           onclick="location.href='index.php'">
 <img style="width: 30px;" src="img/cancel.png" class="img-fluid rotate-on-hover" alt="submit">
 </button>

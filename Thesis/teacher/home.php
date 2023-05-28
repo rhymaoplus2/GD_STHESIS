@@ -12,7 +12,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Students</title>
+	<title>HOME</title>
   <link  href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -399,20 +399,23 @@ User logged in:  <?=$_SESSION['name']?>
   </div>
 
   <script>
-    function updateDateTime() {
-      // Create a new Date object and get the current date and time
-      let now = new Date();
+  // Check if the modal has been displayed before
+  var modalDisplayed = sessionStorage.getItem('modalDisplayed');
 
-      // Format the date and time as a string
-      let dateTimeString = now.toLocaleString();
+  // If the modal has not been displayed, show it
+  if (!modalDisplayed) {
+    // Show the modal when the page loads
+    window.addEventListener('load', function() {
+      var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+        keyboard: false
+      });
+      myModal.show();
+    });
 
-      // Update the HTML element with the formatted date and time
-      document.getElementById("date-time").textContent = dateTimeString;
-    }
-
-    // Call the updateDateTime function every second to update the date and time in real-time
-    setInterval(updateDateTime, 1000);
-  </script>
+    // Set the flag in session storage to indicate that the modal has been displayed
+    sessionStorage.setItem('modalDisplayed', 'true');
+  }
+</script>
 
       </span>
     </div>
@@ -447,7 +450,36 @@ User logged in:  <?=$_SESSION['name']?>
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           echo "Name<br><b> " . $row["name"] . "</b>";
-          echo "<br><hr> <br>Account Created<br><b>  " . $row["xp"] . " </b>";
+          $expirationDate = strtotime($row["xp"] . ' +3 days');
+          $currentDate = time();
+          $timeLeft = $expirationDate - $currentDate;
+          
+          $hoursLeft = floor($timeLeft / 3600);
+          $secondsLeft = $timeLeft % 60;
+          
+          echo "<hr>Account Created<br><b>" . $row["xp"] . "</b>";
+          echo "<br>Account Expiring in:<br><b><span id='countdown'></span></b>";
+          
+          echo "<script>
+              function updateCountdown() {
+                  var expirationDate = new Date('" . date('Y-m-d H:i:s', $expirationDate) . "');
+                  var currentDate = new Date();
+                  var timeLeft = expirationDate.getTime() - currentDate.getTime();
+          
+                  var hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
+                  var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+          
+                  document.getElementById('countdown').textContent = hoursLeft + ' hours and ' + secondsLeft + ' seconds';
+          
+                  if (timeLeft <= 0) {
+                      clearInterval(countdownTimer);
+                      document.getElementById('countdown').textContent = 'Expired';
+                  }
+              }
+          
+              var countdownTimer = setInterval(updateCountdown, 1000);
+          </script>";
+          
         }
       } else {
         echo "";
@@ -468,18 +500,19 @@ User logged in:  <?=$_SESSION['name']?>
 
         </div>
         <div class="col-md-6 mb-3">
-        <img id="image1" class="about" src="img/guide.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#guide">
+        <img id="image1" class="about" src="img/terms.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#guide">
 <!-- Bootstrap Modal -->
 <div class="modal fade " id="guide" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" >
       <div class="modal-header" style="background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
-        <h5 class="modal-title" id="exampleModalLabel">Guide</h5>
+        <h5 class="modal-title text-white" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-start" >
       <b>TERMS AND CONDITIONS FOR USING THE 
         <br>MSU-MSAT HIGH SCHOOL GRADE REPORTING AND RECORDING SYSTEM</b>
+<br>
 <br>
 
 <span clas="text-center">
@@ -520,7 +553,7 @@ By using the MSU-MSAT High School Grade Reporting and Recording System, you agre
 </div>
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
+          <img class="about" src="img/guide.gif" class="img-fluid" alt="Image 3" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
           <img class="about" src="img/abt.gif" class="img-fluid" alt="Image 4" style="width:90%;">

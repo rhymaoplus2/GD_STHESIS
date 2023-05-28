@@ -227,7 +227,7 @@ font-size: 10px;;
 
   }
   
-a:hover {
+.img-fluid:hover {
   transform: scale(1.2);
 }
 #search {

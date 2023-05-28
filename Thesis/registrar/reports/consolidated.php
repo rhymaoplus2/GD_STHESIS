@@ -27,7 +27,7 @@
   
 }
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
   background-repeat: no-repeat;
 
 }
@@ -290,7 +290,7 @@ td a:hover {
 }
 
 .table-scrollable::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);/* color of the thumb */
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );/* color of the thumb */
   border-radius: 5px; /* roundness of the thumb */
 }
 
@@ -312,9 +312,7 @@ td a:hover {
 <div class="container">
     <div class="border">
 <div>
-    <div style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    
-    border-radius:20px;   background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);" class="text-white text-center"><h4>CONSOLIDATED GRADES</h4></div>
+    <div style="	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );" class="text-white text-center"><h4>CONSOLIDATED GRADES</h4></div>
 </div>
 
     <div class="filter-options d-flex justify-content-between mb-3">
@@ -323,7 +321,7 @@ td a:hover {
     <option value="">ALL SECTIONS</option>
     <?php
     include "db_conn.php";
-    $query = "SELECT DISTINCT section FROM grade ORDER BY section";
+    $query = "SELECT DISTINCT section FROM grade ORDER BY section ";
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
@@ -336,7 +334,8 @@ td a:hover {
   <select id="year" onchange="filterTable()" class="fw-bold  form-select flex-grow-1">
     <option value="">ALL YEAR LEVEL</option>
     <?php
-    $query = "SELECT DISTINCT year FROM grade ORDER BY year";
+$query = "SELECT DISTINCT year FROM grade ORDER BY year ASC";
+
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
@@ -381,9 +380,7 @@ setInterval(function() {
 </script>
             <thead>
                 <tr>
-                    <th style="  
-                    
-                    background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);"class="text-white text-center">SELECT ONE</th>
+                    <th style=" background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% ); "class="text-white text-center">SELECT ONE</th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -424,9 +421,7 @@ setInterval(function() {
         <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header text-white" style="
-                    
-                    background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);">
+                    <div class="modal-header text-white" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
                         <h5 class="modal-title" id="exampleModalLabel">CHOOSE DATA</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

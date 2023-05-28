@@ -1,7 +1,7 @@
-<?php 
+<?php
 include "db_conn.php";
 
-function validate($data){
+function validate($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -19,17 +19,17 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        header("Location:users.php");
+        header("Location: users.php");
         exit();
     }
 
     $stmt->close();
-} else if(isset($_POST['update'])){
+} else if (isset($_POST['update'])) {
     $id = validate($_POST['id']);
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
 
-    $today = date("j") + 2; // get today's day number plus 2
+    $today = date("Y-m-d");
 
     if (empty($username)) {
         header("Location: generate.php?id=$id&error=Username is required");
@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
         exit();
     } else {
         $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, xp = ? WHERE id = ?");
-        $stmt->bind_param("ssii", $username, $password, $today, $id);
+        $stmt->bind_param("sssi", $username, $password, $today, $id);
         $result = $stmt->execute();
 
         if ($result) {
@@ -53,3 +53,4 @@ if (isset($_GET['id'])) {
         $stmt->close();
     }
 }
+?>

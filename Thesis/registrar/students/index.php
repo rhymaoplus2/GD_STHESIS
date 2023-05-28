@@ -28,7 +28,7 @@ html, body {
 
 
 body {
-  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+ background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );
   background-repeat: no-repeat;
 }
 
@@ -67,6 +67,8 @@ body {
   border:10px;
   border-radius: 30px;
   background-color: white;
+  width: 1200px;
+  
 
 }
 
@@ -238,7 +240,7 @@ td a:hover {
 }
 
 .table-scrollable{
-  height: 220px;
+  height: 320px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -280,6 +282,26 @@ td a:hover {
 </head>
 
 <body>
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="
+            
+            background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
+                <h5 class="modal-title text-white" id="logoutModalLabel">Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="../img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" onclick="openBackupWindow()">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div class="header" id="myHeader">
@@ -294,8 +316,13 @@ td a:hover {
   <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header text-white"  style="  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-          <h5 class="modal-title" id="successModalLabel">Success!</h5>
+        <div class="modal-header text-white"  style="
+        
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
+       
+       
+       
+       <h5 class="modal-title" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -322,58 +349,55 @@ require "./php/db_conn.php";
 $comment = "";
 $where_clause = "1";
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
   $section = $_POST['section'];
   $grade = $_POST['grade'];
   $trackstrand = $_POST['trackstrand'];
-  $syear = $_POST['syear'];
+   // Add this line to assign the value of syear
+  
   $comment = "Showing results for ";
-  if(empty($section) && empty($grade) && empty($trackstrand) && empty($syear)) {
+
+  if (empty($section) && empty($grade) && empty($trackstrand) && empty($syear)) {
     $comment = "Showing results for All";
   }
-  if(!empty($section) && !empty($grade) && !empty($trackstrand) && !empty($syear)) {
-    $comment .= "Grade $grade - Section $section - Track/Strand $trackstrand - School Year $syear";
-    $where_clause = "section = '$section' AND grade = '$grade' AND trackstrand = '$trackstrand' AND syear = '$syear'";
+  
+  if (!empty($section) && !empty($grade) && !empty($trackstrand) && !empty($syear)) {
+    $comment .= "Grade $grade - Section $section - Track/Strand $trackstrand ";
+    $where_clause = "section = '$section' AND grade = '$grade' AND trackstrand = '$trackstrand' 
+    ";
   } else {
-    if(!empty($section)) {
+    if (!empty($section)) {
       $comment .= "Section $section";
       $where_clause .= " AND section = '$section'";
     }
-    if(!empty($grade)) {
+    
+    if (!empty($grade)) {
       $comment .= !empty($comment) ? " - " : "";
       $comment .= "Grade $grade";
       $where_clause .= " AND grade = '$grade'";
     }
-    if(!empty($trackstrand)) {
+    
+    if (!empty($trackstrand)) {
       $comment .= !empty($comment) ? " - " : "";
       $comment .= "Track/Strand $trackstrand";
       $where_clause .= " AND trackstrand = '$trackstrand'";
     }
-    if(!empty($syear)) {
-      $comment .= !empty($comment) ? " - " : "";
-      $comment .= "School Year $syear";
-      $where_clause .= " AND syear = '$syear'";
-    }
-    if(empty($comment)) {
+  
+    if (empty($comment)) {
       $comment .= "All";
     }
-
   }
 }
 
-
 $query = "SELECT * FROM students WHERE $where_clause";
 $result = mysqli_query($conn, $query);
+
 ?>
 
 
 
 <form method="post" class=" formx text-center" style="">
-  <?php
-    if(!empty($comment)) {
-      echo "<p><b>$comment</b>  </p>";
-    }
-  ?>
+
 <a href="teacher_create.php" class="btn btn-transparent p-0 mb-3">
   <b></b>
   <img src="img/add.gif" alt="Image" title="Add New Student" width="30" height="auto">
@@ -386,11 +410,11 @@ $result = mysqli_query($conn, $query);
     <option value="">All</option>
     <?php
       require "./php/db_conn.php";
-      $query = "SELECT DISTINCT name FROM section";
+      $query = "SELECT DISTINCT section FROM students";
       $result = mysqli_query($conn, $query);
 
       while($row = mysqli_fetch_array($result)) {
-        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+        echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
       }
     ?>
   </select>
@@ -420,21 +444,6 @@ $result = mysqli_query($conn, $query);
       }
     ?>
   </select>
-  &nbsp;&nbsp;&nbsp;  
-  <label for="syear">School Years:</label>
-<select id="syear" name="syear">
-  <option value="">All</option>
-  <?php
-require "./php/db_conn.php";
-$query = "SELECT syear FROM year ORDER BY syear";
-$result = mysqli_query($conn, $query);
-
-while($row = mysqli_fetch_array($result)) {
-  echo "<option value='" . $row['syear'] . "'>" . $row['syear'] . "</option>";
-}
-
-  ?>
-</select>
 &nbsp;&nbsp;&nbsp;
   <button class="btn btn-transparent p-0 mb-3" type="submit" name="submit" title="Sort">
   <img id="refresh-img" src="img/eye2.gif" alt="Image" title="Add New Student" width="30" height="auto">
@@ -442,16 +451,6 @@ while($row = mysqli_fetch_array($result)) {
 
   </button>
 
-  <script>
-    var refreshImg = document.getElementById("refresh-img");
-
-    refreshImg.addEventListener("click", function() {
-      refreshImg.style.transform = "scale(1.2) rotate(360deg)";
-      setTimeout(function() {
-        refreshImg.style.transform = "";
-      }, 2000);
-    });
-  </script>
   &nbsp;&nbsp;&nbsp;
   <input type="text" name="search" placeholder="Search...">
   &nbsp;&nbsp;
@@ -466,38 +465,12 @@ while($row = mysqli_fetch_array($result)) {
 <div class="fade-in">
 <div class="table-scrollable">
 <table class="table table-bordered">
-<Script>
-  // get the table element and its height
-var table = document.querySelector('.table-scrollable table');
-var tableHeight = table.offsetHeight;
-
-// set the interval (in milliseconds) for scrolling
-var interval = 2000; // scroll every 2 seconds
-
-// start scrolling the table
-setInterval(function() {
-  // get the current scroll position
-  var scrollTop = table.parentElement.scrollTop;
-
-  // calculate the new scroll position
-  var newScrollTop = scrollTop + tableHeight;
-
-  // check if we've reached the end of the table
-  if (newScrollTop >= table.scrollHeight) {
-    // reset the scroll position to the top
-    newScrollTop = 0;
-  }
-
-  // set the new scroll position
-  table.parentElement.scrollTo({
-    top: newScrollTop,
-    behavior: 'smooth'
-  });
-}, interval);
-
-</script>
-
-  <thead class="text-white"style=" background-image: linear-gradient(to right, #f83600 0%, #f83600 100%);">
+<?php
+    if(!empty($comment)) {
+      echo "<p><b>$comment</b>  </p>";
+    }
+  ?>
+  <thead class="text-white"style=" background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
     <tr>
       <th scope="col">Name</th>
   
@@ -511,105 +484,91 @@ setInterval(function() {
   <?php
 require "./php/db_conn.php";
 
-// Set the number of resul
-if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
-  $section = isset($_POST['section']) ? $_POST['section'] : '';
-  $grade = isset($_POST['grade']) ? $_POST['grade'] : '';
-  $trackstrand = isset($_POST['trackstrand']) ? $_POST['trackstrand'] : '';
-  $search = isset($_POST['search']) ? $_POST['search'] : '';
-  $syear = isset($_POST['syear']) ? $_POST['syear'] : '';
-  
-  $where_clause = '';
-  if (!empty($section)) {
-    $where_clause .= "section = '$section'";
-  }
-  if (!empty($grade)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "grade = '$grade'";
-  }
-  
-  if (!empty($trackstrand)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "trackstrand = '$trackstrand'";
-  }
-
-  if (!empty($syear)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "syear = '$syear'";
-  }
-
-  if (!empty($search)) {
-    if (!empty($where_clause)) {
-      $where_clause .= ' AND ';
-    }
-    $where_clause .= "(lastname LIKE '%$search%' OR firstname LIKE '%$search%' OR middlename LIKE '%$search%' OR section LIKE '%$search%' OR trackstrand LIKE '%$search%' OR lrnnumber LIKE '%$search%' OR id LIKE '%$search%')";
-  }
-
-  if (!empty($where_clause)) {
-    $where_clause = "WHERE $where_clause";
-  }
-
-  // Get the total number of results
-  $count_query = "SELECT COUNT(*) as count FROM students $where_clause";
-  $count_result = mysqli_query($conn, $count_query);
-  $count_row = mysqli_fetch_assoc($count_result);
-  $total_results = $count_row['count'];
 
 
-  // Get the results for the current page
-  $query = "SELECT * FROM students $where_clause ORDER BY lastname ";
-  $result = mysqli_query($conn, $query);
+$section = isset($_POST['section']) ? $_POST['section'] : '';
+$grade = isset($_POST['grade']) ? $_POST['grade'] : '';
+$trackstrand = isset($_POST['trackstrand']) ? $_POST['trackstrand'] : '';
+$sy;$searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
 
-  while ($Row = mysqli_fetch_assoc($result)) {
+$query = "SELECT * FROM students WHERE syear = (SELECT schoolyear FROM users LIMIT 1) ";
+
+if (!empty($section)) {
+  $query .= " AND section = '$section'";
+}
+
+if (!empty($grade)) {
+  $query .= " AND grade = '$grade'";
+}
+
+if (!empty($trackstrand)) {
+  $query .= " AND trackstrand = '$trackstrand'";
+}
+
+if (!empty($searchTerm)) {
+  $query .= " AND (firstname LIKE '%$searchTerm%' OR lastname LIKE '%$searchTerm%')";
+}
+
+$query .= " ORDER BY lastname";
+
+$result = mysqli_query($conn, $query);
+
+while ($row = mysqli_fetch_assoc($result)) {
 ?>
 
            <tr style="     background: #f2f2f2" >
-           <td hidden><?php echo $Row["id"]; ?></td>
+           <td hidden><?php echo $row["id"]; ?></td>
        
                 
-           <td style="width:50%;">    <a href="view.php?id=<?=$Row['id']?>" 
-			      	     class=" "><?php echo $Row["lastname"].', '.$Row["firstname"].' '.substr($Row["middlename"], 0, 1).'.'; ?>
-                   </a></td>
+           <td style="width:50%; ">
+         <a type="button" class="  mb-3" data-bs-toggle="modal" data-bs-target="#subject1Modal<?= $row['lrnnumber'] ?>">
+  <b><?= $row["lastname"] ?>, <?= $row["firstname"] ?> <?= substr($row["middlename"], 0, 1) ?>.</b>
+        </a>
+
+<div class="modal fade" id="subject1Modal<?= $row['lrnnumber'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style=" 
+      
+      background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
+        <h5 class="modal-title" id="exampleModalLabel"><?= $row['fullname'] ?> - Personal Information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="view.php?lrnnumber=<?= $row['lrnnumber'] ?>" width="100%" height="500" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </td>
         
-          <td class="text-center"><?php echo $Row["section"]; ?></td>
-          <td hidden class="text-center"><?php echo $Row["section"]; ?></td>
-          <td hidden><?php echo $Row["grade"]; ?></td>
-          <td hidden><?php echo $Row["trackstrand"]; ?></td>
+          <td class="text-center"><?php echo $row["section"]; ?></td>
+          <td hidden class="text-center"><?php echo $row["section"]; ?></td>
+          <td hidden><?php echo $row["grade"]; ?></td>
+          <td hidden><?php echo $row["trackstrand"]; ?></td>
   
      <td class="text-center">
-      
-     <a href="update.php?id=<?php echo $Row['id'] ?>" class="btn btn-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
-
-                   <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
+     <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
+          <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
                    </b></a>
-                   <a hidden  type="button" class="btn btn-transparent" data-bs-toggle="modal" 
-  data-bs-target="#deleteModal<?php echo $Row['id']; ?>"
-  style="border: none; background-color:transparent; outline: none;" title="Delete">
-
-		    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image"><b>
-  </a>
-             
-             <div class="modal fade" id="deleteModal<?php echo $Row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
+                 
+             <div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header " style=" background: linear-gradient(to right, #ff9900 0%, #ff0066 100%);">
-            <h5 class="modal-title" id="deleteModalLabel<?php echo $Row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
+            <h5 class="modal-title" id="deleteModalLabel<?php echo $row['id']; ?>"><div class="text text-center text-white">WARNING! Actions cannot be undone! </div></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
             <p> <b></b>
              
-               <br> Are you sure you want to delete <br> <b> <?php echo $Row['lastname']; ?> Account?</b>
+               <br> Are you sure you want to delete <br> <b> <?php echo $row['lastname']; ?> Account?</b>
 
   </p>
-   <form class="delete-form" action="delete.php" method="POST">
-  <input type="hidden" name="id" value="<?php echo $Row['id']; ?>">
+   <form class="delete-form" action="delete_student.php" method="POST">
+  <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
   <div class="mb-3">
     <label for="password" class="form-label "><div class="text text-danger"><b>Password Required!</b></div></label>
     <input type="password" class="form-control" placeholder="input password" id="password" name="password" required>
@@ -648,7 +607,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 
 
 
-      }
 
 
 
@@ -672,6 +630,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {
 
 
 
+  <script>
+    var refreshImg = document.getElementById("refresh-img");
+
+    refreshImg.addEventListener("click", function() {
+      refreshImg.style.transform = "scale(1.2) rotate(360deg)";
+      setTimeout(function() {
+        refreshImg.style.transform = "";
+      }, 2000);
+    });
+  </script>
 
 
 
