@@ -316,7 +316,7 @@ a.btn:hover img {
 
   font-size: 30px;
   font-family: tahoma;
-  color: white;
+  color: dark;
 
 }
 html, body {
@@ -345,18 +345,12 @@ body {
 </head>
 
 <body>
-<style>
-  #logoutModal2 {
-    z-index: 9999;
-  }
-</style>
 
 <div class="modal fade" id="logoutModal2" tabindex="-1" aria-labelledby="logoutModal2Label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white" style="
-      
-      background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);">
+ background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);">
         <h5 class="modal-title" id="logoutModal2Label">Logout</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -370,109 +364,57 @@ body {
                 </a>
             </div>
   </div>
-</div>
 
-</div>
+  </div> </div> 
+  </div>
+
+
+
 <div class="header sticky-top">
-  <?PHP include_once('header.php'); ?>
+  <?php include_once('header.php'); ?>
 </div>
-
-
-<?php
-// Check if the button is clicked
-if(isset($_POST['export_button'])) {
-    // Connect to the database
-    $conn = mysqli_connect('localhost', 'username', 'password', 'my_db');
-
-    // Retrieve all table names
-    $result = mysqli_query($conn, "SHOW TABLES");
-    $tables = array();
-    while ($row = mysqli_fetch_row($result)) {
-        $tables[] = $row[0];
-    }
-
-    // Loop through the tables and retrieve data
-    $sql = "";
-    foreach ($tables as $table) {
-        $result = mysqli_query($conn, "SELECT * FROM $table");
-        $num_fields = mysqli_num_fields($result);
-
-        $sql .= "DROP TABLE IF EXISTS $table;";
-        $create_table_query = mysqli_query($conn, "SHOW CREATE TABLE $table");
-        $create_table_row = mysqli_fetch_row($create_table_query);
-        $sql .= "\n\n" . $create_table_row[1] . ";\n\n";
-
-        for ($i = 0; $i < $num_fields; $i++) {
-            while ($row = mysqli_fetch_row($result)) {
-                $sql .= "INSERT INTO $table VALUES(";
-                for ($j = 0; $j < $num_fields; $j++) {
-                    $row[$j] = addslashes($row[$j]);
-                    if (isset($row[$j])) {
-                        $sql .= '"' . $row[$j] . '"';
-                    } else {
-                        $sql .= '""';
-                    }
-                    if ($j < ($num_fields - 1)) {
-                        $sql .= ',';
-                    }
-                }
-                $sql .= ");\n";
-            }
-        }
-        $sql .= "\n\n\n";
-    }
-
-    // Save the SQL file
-    $filename = 'my_db_backup_' . date('Y-m-d_H-i-s') . '.sql';
-    header('Content-Type: application/octet-stream');
-    header("Content-Transfer-Encoding: Binary");
-    header("Content-disposition: attachment; filename=\"" . $filename . "\"");
-    echo $sql;
-    exit;
-}
-?>
 
 
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog text-center">
-    <div class="modal-content text-center">
-      <div class="modal-header text-white text-center" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
-        <h5 class="modal-title text-center" id="exampleModalLabel text-center">Welcome!</h5>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white " style="   
+      
+      background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Welcome!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-center">
-        <b>MSU-MSAT High School<br>Grade Reporting and Recording System</b>
+      <div class="modal-body ">
+      MSU-MSAT High School Grade Reporting and Recording System
+  
+        
+     
       </div>
       <div class="modal-footer">
-        <i>User Logged in:</i> <b>Administrator</b>
+      <i>User Logged in: <b>Principal</b></i>
+    
+   
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // Check if the modal has been shown before
-  var modalShown = localStorage.getItem('modalShown');
-
-  if (!modalShown) {
-    // Show the modal
+  // Show the modal when the page loads
+  window.addEventListener('load', function() {
     var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
       keyboard: false
     });
     myModal.show();
-
-    // Store a flag indicating that the modal has been shown
-    localStorage.setItem('modalShown', true);
-  }
+  });
 </script>
-
-
 <div class="container">
   <div class="row align-items-center">
     <div class="col-md-6 mb-3">
-      <span class="text mb-3">
+      <span class="text text-white mb-3">
        <b>MSU-MSAT High School Grade Reporting and Recording System
 </b>  <div>
+User logged in:  PRINCIPAL
     <p id="date-time">
   
 
@@ -482,45 +424,123 @@ if(isset($_POST['export_button'])) {
   </div>
 
   <script>
-    function updateDateTime() {
-      // Create a new Date object and get the current date and time
-      let now = new Date();
+  // Check if the modal has been displayed before
+  var modalDisplayed = sessionStorage.getItem('modalDisplayed');
 
-      // Format the date and time as a string
-      let dateTimeString = now.toLocaleString();
+  // If the modal has not been displayed, show it
+  if (!modalDisplayed) {
+    // Show the modal when the page loads
+    window.addEventListener('load', function() {
+      var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+        keyboard: false
+      });
+      myModal.show();
+    });
 
-      // Update the HTML element with the formatted date and time
-      document.getElementById("date-time").textContent = dateTimeString;
-    }
-
-    // Call the updateDateTime function every second to update the date and time in real-time
-    setInterval(updateDateTime, 1000);
-  </script>
+    // Set the flag in session storage to indicate that the modal has been displayed
+    sessionStorage.setItem('modalDisplayed', 'true');
+  }
+</script>
 
       </span>
     </div>
     <div class="col-md-6">
       <div class="row text-center">
-      <div class="col-md-6 mb-3">
-  <img class="about" src="img/account.gif" class="img-fluid" alt="Image 1" style="width:90%;" onclick="openBackupWindow()">
+        <div class="col-md-6 mb-3">
+    <!-- Image -->
+<img id="image1" class="about" src="img/axx.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style=" 
+  background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);">
+        <h5 class="modal-title" id="exampleModalLabel">Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+      
+
+
+
+<b> VIEWER ONLY</b>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+    
+      </div>
+    </div>
+  </div>
 </div>
 
-
-        <div class="col-md-6 mb-3">
-        <a href="guide.php" target="_blank">
-  <img class="about" src="img/gay.gif" class="img-fluid" alt="Image 2" style="width:90%;">
-</a>
-
         </div>
+        <div class="col-md-6 mb-3">
+        <img id="image1" class="about" src="img/terms.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#guide">
+<!-- Bootstrap Modal -->
+<div class="modal fade " id="guide" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header" style="
+      
+       
+      background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);">
+        <h5 class="modal-title text-white" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start" >
+      <b>TERMS AND CONDITIONS FOR USING THE 
+        <br>MSU-MSAT HIGH SCHOOL GRADE REPORTING AND RECORDING SYSTEM</b>
+<br>
+<br>
 
-        <div class="col-md-6 mb-3">
-        <a href="terms.php" target="_blank">
-          <img class="about" src="img/terms.gif" class="img-fluid" alt="Image 3" style="width:90%;">
-          </a>
+<span clas="text-center">
+By using the MSU-MSAT High School Grade Reporting and Recording System, you agree to be bound by the following terms and conditions:
+<br>
+<br>
+<b> 1.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is provided by MSU-MSAT for the sole purpose of recording and reporting grades for high school students.
+<br>
+<b> 2.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is protected by copyright and other intellectual property laws. You may not copy, reproduce, distribute, or modify any part of the system without the prior written consent of MSU-MSAT.
+<br>
+<b> 3.&nbsp;&nbsp;</b> The MSU-MSAT High School Grade Reporting and Recording System is provided "as is" and without warranties of any kind, whether express or implied. MSU-MSAT does not guarantee that the system will be error-free or that it will meet your specific requirements.
+<br>
+<b> 4.&nbsp;&nbsp;</b> You are solely responsible for ensuring that your use of the MSU-MSAT High School Grade Reporting and Recording System complies with all applicable laws, rules, and regulations.
+<br>
+<b> 5.&nbsp;&nbsp;</b> MSU-MSAT reserves the right to modify, suspend, or discontinue the MSU-MSAT High School Grade Reporting and Recording System at any time, with or without notice to you.
+<br>
+<b> 6.&nbsp;&nbsp;</b> MSU-MSAT may terminate your access to the MSU-MSAT High School Grade Reporting and Recording System at any time if you violate these terms and conditions.
+<br>
+<b> 7.&nbsp;&nbsp;</b> MSU-MSAT will not be liable to you or any third party for any damages arising out of your use of or inability to use the MSU-MSAT High School Grade Reporting and Recording System.
+<br>
+<b> 8.&nbsp;&nbsp;</b> These terms and conditions constitute the entire agreement between you and MSU-MSAT with respect to your use of the MSU-MSAT High School Grade Reporting and Recording System and supersede all prior or contemporaneous communications and proposals, whether oral or written.
+<br>
+<b> 9.&nbsp;&nbsp;</b> These terms and conditions shall be governed by and construed in accordance with the laws of the jurisdiction in which MSU-MSAT is located, without giving effect to any principles of conflicts of law.
+<br>
+<b> 10.&nbsp;</b> By using the MSU-MSAT High School Grade Reporting and Recording System, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions. 
+
+
+
+<br>
+<br> If you do not agree to these terms and conditions, you may not use the MSU-MSAT High School Grade Reporting and Recording System.
+
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</div>
+  </div>
+</div>
         </div>
-    
         <div class="col-md-6 mb-3">
+          <img class="about" src="img/guider.gif" class="img-fluid" alt="Image 3" style="width:90%;">
+        </div>
+        <div class="col-md-6 mb-3">
+        <a href="about.php" target="_blank">
           <img class="about" src="img/ab.gif" class="img-fluid" alt="Image 4" style="width:90%;">
+    </a>
         </div>
       </div>
     </div>
@@ -532,6 +552,6 @@ if(isset($_POST['export_button'])) {
 </html>
 <?php
 
-}
+}?>
 
 

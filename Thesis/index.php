@@ -142,7 +142,7 @@ text-align: center;
   <br>
   <br>
   <button class="btn  btn-transparent text-left" onclick="window.location.href='principal/index.php'" style="text-decoration: none;">
-    <img src="img/principal.png" alt="Adviser Icon" style="float: left; width: 30px;">
+    <img src="img/medal.png" alt="Adviser Icon" style="float: left; width: 30px;">
     <b>Principal</b>
   </button>
 </div>
