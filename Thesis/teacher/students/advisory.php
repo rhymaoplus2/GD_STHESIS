@@ -205,48 +205,30 @@ table {
   border-bottom: none !important;
 }
 /* Define the styles for the page */
-
 @media print {
-  /* Set the page size to A4 */
-  @page {
-    margin-top: 0;
-    margin-bottom: 0;
-    size: auto;  /* Use the default page size */
-       /* Reset the page margin to zero */
-  }
-  .img-fluid{
+   /* Existing CSS table styles */
+
+   table {
+      width: 100%;
+      border-collapse: collapse;
+   }
+@page{
+  margin: 0;
+  margin-left: 1cm;
+  margin-right: 1cm;
+  margin-top: 1cm;
+  margin-bottom: 2cm;
+}
+   td,
+   th {
+      border: 1px solid black;
+      padding: 8px;
+      word-break: break-all;
+   }
+   .img-fluid{
 
     display: none;
-  }
-
-  .my-element
-  {
-    display: none;
-  }
-  /* Define the styles for the printable elements */
-  .printable {
-    visibility: visible;
-  }
-  /* Define the styles for page 1 */
-  .page1 {
-    page-break-after: always;
-  }
-  /* Define the styles for page 2 */
-  .page2 {
-    page-break-before: always;
-  }
-  .form-control 
-{
-border:none;
-text-align: center;
-}
-.table-borderless {
-text-align: center;
-  
-}
-label {
-  text-align: center;
-  }
+   }
 }
 
 .footer input {
@@ -344,14 +326,7 @@ font-size: 12px;
 <body>
 
 
-<!--
-    <div class="d-flex justify-content-center align-items-center position-relative">
 
-    <img src="msu.png" class=" p top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
-
-
-</div>
--->
 <div id="my-element" class="position-fixed bottom-0 w-100 text-center" style="z-index: 9999;">
   <button class="fixed-button" onclick="animateElement()">
     <img src="img/iprint.png" alt="Print" class="img-fluid" style="width: 50px;">
@@ -372,176 +347,124 @@ function animateElement() {
 </script>
 
 
-<div class="container " >
-<div style="text-align: center;">
-
-    </div>
-		<div class="box">
-    <div class="content">
 
 
 
       
-<div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="img/headergen.png" class="  top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
-</div>
-            <?php
-require "./php/db_conn.php";
-$name = $_SESSION["name"];
-
-$teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
-$filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
-$query = "SELECT * FROM students WHERE adviser_id = '$name' ORDER by lastname";
 
 
-$result = mysqli_query($conn, $query);
-if ($Row = mysqli_fetch_assoc($result)) {
-  $output_left = "<div id=''>";
-  $output_left .= "<p>";
-
-  $output_left .= "Adviser :&nbsp;:&nbsp;<b>".$Row['adviser_id']."</b> <br>" ; 
-
-  $output_left .= "Section:&nbsp;:&nbsp;<b>". $Row['section']."</b> <br>" ; 
-  $output_left .= "Track & Strands&nbsp;:&nbsp;<b>". (!empty($Row['trackstrand']) ? $Row['trackstrand'] : "N/A") ."</b> <br>";
-
-  $output_left .= "S.Y.&nbsp;:&nbsp;<b>". $Row['syear']."</b>" ;
-
-
-  $output_left .= "<br>Gender: <b>Male</b></p>";
-  $output_left .= "</div>";
-
-  
-  
-  echo $output_left;
-;
-} else {
-  echo "<strong><h1>No Results, Select Section First</h1></strong>
-    ";
-    
-}
-
-mysqli_close($conn);
-
-?>
-
+ 
 
 
 <div class="page1">    
-
+     
+<div style="margin-bottom:1.5cm;  "class="d-flex justify-content-center align-items-center position-relative">
+    <img src="img/XXX.png" class="  top-0 w-10 h-auto" style="max-width: 100%;" alt="Example Image">
+</div>
 <?php
 require "./php/db_conn.php";
 $name = $_SESSION["name"];
-$teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
-
-$query = "SELECT * FROM students WHERE adviser_id = '$name'  and gender='male'  ORDER by lastname";
-
-$result = mysqli_query($conn, $query);
-$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-$row_count = count($rows);
-$half_row_count = ceil($row_count / 2);
-$rowNum1 = 1;
-$rowNum2 = $half_row_count + 1;
-
-echo '<div class="column-wrapper">';
-for ($i = 0; $i < $half_row_count; $i++) {
-    echo '<div class="column">';
-    echo $rowNum1++ . ". " . $rows[$i]["lastname"] . " ". $rows[$i]["firstname"]  . " ". $rows[$i]["middlename"] ."<br>";
-    echo "</div>";
-    
-    if ($rowNum2 <= $row_count) {
-        echo '<div class="column">';
-        echo $rowNum2++ . ". " . $rows[$half_row_count + $i]["fullname"] . "<br>";
-        echo "</div>";
-    }
-} 
-   
-echo "</div>";
-?>
-
-
-
-</div> 
-
-
-
-
-
-<div class="page2">    
-     
-<div class="d-flex justify-content-center align-items-center position-relative">
-    <img src="img/headergen.png" class="  top-0 w-10 h-auto" style="max-height: 350px;" alt="Example Image">
-</div>
-            <?php
-require "./php/db_conn.php";
-$name = $_SESSION["name"];
 
 $teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
-$filter = isset($_POST['section']) ? "AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('{$_POST['section']}'), ' ', '')" : "";
-$query = "SELECT * FROM students WHERE adviser_id = '$name' ORDER by lastname";
-
+$filter = isset($_POST['section']) ? " AND REPLACE(LOWER(b.section), ' ', '') = REPLACE(LOWER('" . mysqli_real_escape_string($conn, $_POST['section']) . "'), ' ', '')" : "";
+$query = "SELECT * FROM students WHERE syear = (SELECT schoolyear FROM users LIMIT 1) AND adviser_id = '$teacher' ORDER BY lastname";
 
 $result = mysqli_query($conn, $query);
 if ($Row = mysqli_fetch_assoc($result)) {
-  $output_left = "<div id=''>";
-  $output_left .= "<p>";
+    $output_left = "<div id=''>";
+    $output_left .= "<p>";
+    $output_left .= '<div class="row">';
+    $output_left .= '<div class="col">';
+    $output_left .= 'Year Level: <b>' . $Row['grade'] . '</b><br>';
+    $output_left .= '</div>';
+    $output_left .= '<div class="col">';
+    $output_left .= 'Section: <b>' . $Row['section'] . '</b><br>';
+    $output_left .= '</div>';
+    $output_left .= '<div class="col">';
+    $output_left .= 'School Year: <b>' . $Row['syear'] . '</b><br>';
+    $output_left .= '</div>';
+    $output_left .= '</div>';
+    $output_left .= "Track & Strands: <b>" . (!empty($Row['trackstrand']) ? $Row['trackstrand'] : "N/A") . "</b><br>";
+    $output_left .= "Adviser: <b>" . $Row['adviser_id'] . "</b><br>";
 
-  $output_left .= "Adviser :&nbsp;:&nbsp;<b>".$Row['adviser_id']."</b> <br>" ; 
-
-  $output_left .= "Section:&nbsp;:&nbsp;<b>". $Row['section']."</b> <br>" ; 
-  $output_left .= "Track & Strands&nbsp;:&nbsp;<b>". (!empty($Row['trackstrand']) ? $Row['trackstrand'] : "N/A") ."</b> <br>";
-
-  $output_left .= "S.Y.&nbsp;:&nbsp;<b>". $Row['syear']."</b>" ;
-
-  $output_left .= "<br>Gender: <b>Female</b></p>";
-  $output_left .= "</div>";
-
-  
-  
-  echo $output_left;
-;
-} else {
-  echo "<strong><h1>No Results, Select Section First</h1></strong>
-    ";
     
+  
+
+
+    $output_left .= "</div>";
+
+    echo $output_left;
+} else {
+    echo "<strong><h1>No Advisory for this School Year</h1></strong>";
 }
 
 mysqli_close($conn);
-
 ?>
+   <br>
 <?php
-require "./php/db_conn.php";
-$name = $_SESSION["name"];
-$teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
+    require "./php/db_conn.php";
+    $name = $_SESSION["name"];
+    $teacher = mysqli_real_escape_string($conn, $_SESSION['name']);
 
-$query = "SELECT * FROM students WHERE adviser_id = '$name' and gender='female'  ORDER by lastname";
+    // Query for male students
+    $query_male = "SELECT * FROM students WHERE syear = (SELECT schoolyear FROM users LIMIT 1)  AND adviser_id = '$name' AND gender = 'male' ORDER BY lastname";
+    $result_male = mysqli_query($conn, $query_male);
+    $rows_male = mysqli_fetch_all($result_male, MYSQLI_ASSOC);
 
-$result = mysqli_query($conn, $query);
-$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-$row_count = count($rows);
-$half_row_count = ceil($row_count / 2);
-$rowNum1 = 1;
-$rowNum2 = $half_row_count + 1;
+    // Query for female students
+    $query_female = "SELECT * FROM students WHERE syear = (SELECT schoolyear FROM users LIMIT 1)  AND adviser_id = '$name' AND gender = 'female' ORDER BY lastname";
+    $result_female = mysqli_query($conn, $query_female);
+    $rows_female = mysqli_fetch_all($result_female, MYSQLI_ASSOC);
 
-echo '<div class="column-wrapper">';
-for ($i = 0; $i < $half_row_count; $i++) {
-    echo '<div class="column">';
-    echo $rowNum1++ . ". " . $rows[$i]["lastname"] . " ". $rows[$i]["firstname"]  . " ". $rows[$i]["middlename"] ."<br>";
-    echo "</div>";
+
+    echo '<table style="font-size:10px;">';
+   
+    echo '<tr>
+    <th class="text-center">LASTNAME</th>
+    <th class="text-center">FIRSTNAME</th>
+    <th class="text-center">MI.</th>
     
-    if ($rowNum2 <= $row_count) {
-        echo '<div class="column">';
-        echo $rowNum2++ . ". " . $rows[$half_row_count + $i]["fullname"] . "<br>";
-        echo "</div>";
-    }
-} 
-   }
-echo "</div>";
-?>
+    
+    <th class="text-center">ID Number</th></tr>'; // Add table header
+    echo '<tr>
+    <th colspan="4"class="text-primary">MALE</th>
+   </tr>'; 
+    echo '<tbody>';
+    foreach ($rows_male as $row) {
+        echo '<tr>';
+        echo '<td>' . $row['lastname'] . '</td>';
+        echo '<td>' . $row['firstname'] . '</td>';
+        echo '<td class="text-center">' . substr($row['middlename'], 0, 1) . '.</td>';
 
+        echo '<td class="text-center">' . $row['idnumber'] . '</td>';
+        echo '</tr>';
+    }
+    echo '</tbody><tbody>';
+    echo '<tr>
+    <th colspan="4"class="text-danger">FE MALE</th>
+   </tr>'; 
+    echo '<tbody>';
+// Add table header
+
+    foreach ($rows_female as $row) {
+        echo '<tr>';
+        echo '<td>' . $row['lastname'] . '</td>';
+        echo '<td>' . $row['firstname'] . '</td>';
+        echo '<td class="text-center">' . substr($row['middlename'], 0, 1) . '.</td>';
+        echo '<td class="text-center">' . $row['idnumber'] . '</td>';
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+}
+?>
 
 
 </div> 
 
+</div> 
+
+</div> 
 
 
       

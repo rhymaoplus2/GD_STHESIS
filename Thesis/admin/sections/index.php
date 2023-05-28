@@ -60,7 +60,7 @@ width:600px;
 	width:100px;
 }
 .container table {
-  width: 100%;
+  width: 1900px;
 	border-radius: 10px;
   border:10px;
   background-color: white;
@@ -342,7 +342,7 @@ a:hover {
 
 
 <br>
-        <div class="f text-start">
+        <div class=" text-start">
 
 <div class="text-start mb-3">
 <a class="link-primary me-2 zoom-link" data-bs-toggle="modal" data-bs-target="#sectionModal">

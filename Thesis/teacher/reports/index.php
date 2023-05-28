@@ -363,6 +363,8 @@ label{
 
     font-size: 25px;
 }
+
+
     </style>
 </head>
 <body>
@@ -415,7 +417,8 @@ function myFunction() {
       <table class="table">
         <thead style="  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
           <tr>
-            <th class="text-dark text-center" colspan="4">Junior High Format</th>
+            <th style="    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius:20px; "class="text-dark text-center" colspan="4">Combined Genders: This format combines male and female categories into a single table.</th>
           </tr>
         </thead>
         <tbody>
@@ -444,7 +447,8 @@ function myFunction() {
 
       <thead style="  background-image: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);">
           <tr>
-            <th class="text-dark text-center" colspan="4">Senior High Format</th>
+          <th style="    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius:20px; "class="text-dark text-center" colspan="4">Separated Genders: This format uses separate tables for male and female categories.</th>
           </tr>
         </thead>
         <tbody>

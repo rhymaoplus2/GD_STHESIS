@@ -524,26 +524,26 @@ foreach ($unique_subjects as $subject) {
 
 echo "<th></th><th></th><th></th></tr></thead><tbody>";
 
-// Loop through the grades array and display the grades for each student and subject
 foreach ($grades as $studentname => $subjects) {
-    echo "<tr><td>".$studentname."</td>";
-    foreach ($unique_subjects as $subject) {
-        if (isset($subjects[$subject])) {
-            echo "<td hidden class='text-center'>".$subjects[$subject]["1st"]."</td><td hidden class='text-center'>".$subjects[$subject]["2nd"]."</td><td  hidden class='text-center'>".$subjects[$subject]["3rd"]."</td><td  hidden class='text-center'>".$subjects[$subject]["4th"]."</td>";
-            $FIRST = intval($subjects[$subject]["1st"]);
-            $SECOND = intval($subjects[$subject]["2nd"]);
-            $THIRD = intval($subjects[$subject]["3rd"]);
-            $FOURTH = intval($subjects[$subject]["4th"]);
-            $average = round(($FIRST + $SECOND + $THIRD + $FOURTH) / 4, 3);
-            $full += $average;
-            echo "<td class='text-center'><b>".number_format($average, 3)."</b></td>";
-        } else {
-            echo "<td></td><td></td><td></td><td></td>";
-        }
-    }
+  echo "<tr><td>".$studentname."</td>";
+  foreach ($unique_subjects as $subject) {
+      if (isset($subjects[$subject])) {
+          echo "<td hidden class='text-center'>".$subjects[$subject]["1st"]."</td><td hidden class='text-center'>".
+          $subjects[$subject]["2nd"]."</td><td  hidden class='text-center'>".$subjects[$subject]["3rd"]."</td><td hidden class='text-center'>".$subjects[$subject]["4th"]."</td>";
+          $FIRST = intval($subjects[$subject]["1st"]);
+          $SECOND = intval($subjects[$subject]["2nd"]);
+          $THIRD = intval($subjects[$subject]["3rd"]);
+          $FOURTH = intval($subjects[$subject]["4th"]);
+          $average = round(($FIRST + $SECOND + $THIRD + $FOURTH) / 2);
+          $full += $average;
+          echo "<td class='text-center'>".number_format($average)."</td>";
+      } else {
+          echo "<td></td>";
+      }
+  }
 
-  
-    // Calculate and display the average for the student
+
+
     $total_grade = 0;
     $num_subjects = 0;
     foreach ($total_grades as $subjectname => $student_grades) {
@@ -568,6 +568,8 @@ foreach ($grades as $studentname => $subjects) {
         $honor = '&nbsp;&nbsp;&nbsp;';
     }
     echo "<td class='text-center'>". " $honor</td></tr>";
+
+
 }
 echo "</tbody></table>";
 ?>
