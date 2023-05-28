@@ -193,7 +193,7 @@ if (mysqli_num_rows($result) > 0) {
 							<td>
 
               <a href="principal.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
- Principal :
+ Principal Name :
 
 <b>
 
@@ -221,6 +221,13 @@ if (mysqli_num_rows($result) > 0) {
 </a>
 							</td>
 </tr>
+</tr>
+            <td>
+  <a href="acc.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
+  <b>Principal Account </a>
+</a>
+</td>
+        <tr>
 <tr>
               <td>
 <a href="semester.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
@@ -284,11 +291,10 @@ echo "0 results";
 </a>
 </td>		
 						</tr>
+<tr>
 
 
-            </tr>
-				
-        <tr>
+    
           <td>
           <a href="admin.php" type="button" class="boton mb-3" style="background-color: YOUR_COLOR;" >
 Administrator :

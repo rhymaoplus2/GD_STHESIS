@@ -84,7 +84,18 @@ function myFunction() {
 <div class="card-body">
   <form method="POST" action="">
     <div class="form-group mb-3">
-      <label for="quarter" class="mb-3 text-center"><b> Quarter : </b> </label>
+    <header class="text-center mb-3 text-white" style="font-size:30px;
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height:60px; line-height:60px; border-radius: 20px;">
+    <b>
+        <?php if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        } else {
+            echo 'New Quarter';
+        } ?>
+    </b>
+</header>
       <select class="form-select" name="quarter" id="quarter" required>
   <option value="" selected disabled>Select</option>
   <option value="FIRST"<?php if(isset($_SESSION['quarter']) && $_SESSION['quarter'] == 'FIRST') {

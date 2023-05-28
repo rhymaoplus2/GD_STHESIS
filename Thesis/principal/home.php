@@ -325,7 +325,7 @@ html, body {
 
 
 body {
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);
   background-repeat: no-repeat;
 }
 
@@ -354,7 +354,9 @@ body {
 <div class="modal fade" id="logoutModal2" tabindex="-1" aria-labelledby="logoutModal2Label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header text-white" style="background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);">
+      <div class="modal-header text-white" style="
+      
+      background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);">
         <h5 class="modal-title" id="logoutModal2Label">Logout</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -500,14 +502,9 @@ if(isset($_POST['export_button'])) {
     <div class="col-md-6">
       <div class="row text-center">
       <div class="col-md-6 mb-3">
-  <img class="about" src="img/bako.gif" class="img-fluid" alt="Image 1" style="width:90%;" onclick="openBackupWindow()">
+  <img class="about" src="img/account.gif" class="img-fluid" alt="Image 1" style="width:90%;" onclick="openBackupWindow()">
 </div>
 
-<script>
-function openBackupWindow() {
-  window.location.href = "./backup/";
-}
-</script>
 
         <div class="col-md-6 mb-3">
         <a href="guide.php" target="_blank">

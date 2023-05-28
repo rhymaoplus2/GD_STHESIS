@@ -12,26 +12,15 @@
           <li class="nav-item">
             <a class="nav-link" href="students">Student List</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link " href="subject">Subject List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="sections">Section List</a>
-          </li>
+      
+         
           <li class="nav-item">
             <a class="nav-link " href="records">Records</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link "  href="reports">Reports</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="users">Users</a>
-          </li>
+         
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="settings">Settings</a>
-          </li>
+         
           <li class="nav-item">
             <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal2">Logout</a>
           </li>

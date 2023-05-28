@@ -90,8 +90,20 @@ function myFunction() {
 --><div class="card-body">
   <form method="POST" action="">
     <div class="form-group mb-3">
-      <label for="pname" class="mb-3 text-center"><b> Principal Name : </b> </label>
-      <input type="text" class="form-control" name="pname" value="<?php echo isset($_SESSION['pname']) ? $_SESSION['pname'] : ''; ?>" id="pname" required>
+    <header class="text-center mb-3 
+     text-white" style="font-size:30px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  
+  height:60px; line-height:60px; border-radius: 20px;">
+    <b>
+        <?php if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        } else {
+            echo 'New Principal Name';
+        } ?>
+    </b>
+</header>
+        <input type="text" class="form-control" name="pname" value="<?php echo isset($_SESSION['pname']) ? $_SESSION['pname'] : ''; ?>" id="pname" required>
 
       <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -124,7 +136,7 @@ include "../php/db_conn.php";
         $pname = mysqli_real_escape_string($conn, $_POST["pname"]);
 
         $sql = "UPDATE settings SET pname='$pname'";
-
+        
         if (mysqli_query($conn, $sql)) {
         
             echo "<script>

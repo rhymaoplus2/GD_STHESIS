@@ -15,7 +15,7 @@ html, body {
   
   
   body {
-    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+    background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);
     background-repeat: no-repeat;
   }
   
@@ -411,7 +411,9 @@ a{
 
 
     <tbody>
-    <thead class="text-white"style="    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);  position: sticky;
+    <thead class="text-white"style="  
+    
+    background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%); position: sticky;
     top: 0;
    /* adjust the background color as needed */
     z-index: 1;">
@@ -427,7 +429,9 @@ a{
                 <td class="text-center"><?php echo $row["grade"]; ?></td>
             </tr>
         <?php endforeach; ?>
-        <thead class="text-white"style="    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);  position: sticky;
+        <thead class="text-white"style="   
+        
+        background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%); position: sticky;
     top: 0;
    /* adjust the background color as needed */
     z-index: 1;">
@@ -475,70 +479,6 @@ a{
 ?>
 
 <!-- HTML code for table rendering -->
-<br>
-      <div class="text-center">   
-        
-        <?php foreach ($grades as $row): ?>
-          
-            <button type="button" class="btn btn-dark " data-bs-toggle="modal" data-bs-target="#myModal">
-    <b> VALIDATE  </b>
-  </button>
-        </div>
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Are you sure you want to proceed?
-        </div>
-        <div class="modal-footer">
-        <?php
-if ($row["status"] != 1) {
-    echo '<a href="go.php?session=' . $row["session"] . '" class="btn btn-dark">VALIDATE</a>';
-} else {
-    echo '<a href="nos.php?session=' . $row["session"] . '" class="btn btn-success">Undo Validation</a>';
-}
-?>
-
-        </div>
-      </div>
-    </div>
-  </div><!-- Success Modal -->
-<div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="statusModalLabel">Success</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Status updated successfully!</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Error Modal -->
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="errorModalLabel">Error</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Error updating status: <?php echo htmlspecialchars($_GET['error']); ?></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-          
-        <?php endforeach; ?>
 
   </div>
   </div>

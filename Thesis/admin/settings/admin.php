@@ -112,7 +112,11 @@ $userData = mysqli_fetch_assoc($userResult);
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name" value="<?php echo $userData['name']; ?>">
             </div>
-            <button type="submit" class="btn btn-dark">Update</button>
+            <button type="submit" class="btn btn-primary" 
+    name="update" style="background-color: transparent; 
+    border: none; border-radius:100%; width:50px; height: 50px;">
+      <img style="width:30px;" src="img/ok.png" class="img-fluid rotate-on-hover" alt="submit">
+    </button>
         </form>
     </div>
     </div>

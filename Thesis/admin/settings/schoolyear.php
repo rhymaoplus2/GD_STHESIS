@@ -84,8 +84,20 @@ function myFunction() {
                 <div class="card-body">
                     <form method="POST" action="">
                         <div class="form-group mb-3">
-                            <label for="schoolyear" class="mb-3 text-center"><b> Academic Year : </b> </label>
-                            <input type="text" class="form-control" name="schoolyear" value="<?php echo isset($_SESSION['schoolyear']) ? $_SESSION['schoolyear'] : ''; ?>" id="schoolyear" required>
+                        <header class="mb-3 text-center text-white" style="font-size:30px;
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  height:60px; line-height:60px; border-radius: 20px;">
+    <b>
+        <?php if (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';
+        } else {
+            echo 'New School Year';
+        } ?>
+    </b>
+</header>     <input type="text" class="form-control" name="schoolyear" value="<?php echo isset($_SESSION['schoolyear']) ? $_SESSION['schoolyear'] : ''; ?>" id="schoolyear" required>
                             <script>
                                 document.addEventListener("DOMContentLoaded", function() {
                                     var schoolyearInput = document.getElementById('schoolyear');

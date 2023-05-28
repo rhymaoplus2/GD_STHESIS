@@ -15,7 +15,7 @@ html, body {
 }
 
 body {
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -91,7 +91,7 @@ margin-top: -5rem;
     </b>
   </a>
 
-  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as an&nbsp;<b>&nbsp;ADMIN</b></span>
+  <span style="display: inline-block; font-size: 20px; font-family: Tahoma;">Logging in as a&nbsp;<b>&nbsp;PRINCIPAL</b></span>
  <div class="text-center"> <span class="text-center"style="display: inline-block; font-size: 12px; font-family: Tahoma;">
   <br>*To maintain security, refrain from sharing your password with anyone </span>
 </div>
@@ -147,7 +147,8 @@ margin-top: -5rem;
 
   <button type="submit" class="btn btn-dark text-white text-center" style="width: 300px;  
       
-      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);"><b>Continue</b></button>
+      background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);
+"><b>Continue</b></button>
 
 </form>
 
