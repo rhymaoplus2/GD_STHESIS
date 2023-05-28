@@ -381,7 +381,7 @@ function printIframe() {
 
 
   <div class="text-center">
-  <a class="zoom" href="#" id="modalLink"><img style="width:60px; margin-right: 10px;" src="img/msu.png" class="img-fluid" alt="Description of image"></a>
+  <a class="zoom" href="#" ><img style="width:60px; margin-right: 10px;" src="img/msu.png" class="img-fluid" alt="Description of image"></a>
   <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

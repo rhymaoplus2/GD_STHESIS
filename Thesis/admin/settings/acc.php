@@ -92,7 +92,9 @@ function myFunction() {
 <form action="update-settings.php" method="POST">
       <div class="mb-3">
       <header class="text-center text-white" style="font-size:30px;
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); height:60px; line-height:60px; border-radius: 20px;">
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  
+  height:60px; line-height:60px; border-radius: 20px;">
     <b>
         <?php if (isset($_GET['error'])) {
             echo '<div class="alert alert-danger" role="alert">' . $_GET['error'] . '</div>';

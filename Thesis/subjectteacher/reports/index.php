@@ -361,6 +361,27 @@ body {
 
 <body>
 
+<div class="modal fade" id="logoutModal2" tabindex="-1" aria-labelledby="logoutModal2Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="logoutModal2Label">Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+ 
+      <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" >
+                </a>
+            </div>
+  </div>
+
+  </div> </div> 
+  </div>
 <div class="header sticky-top">
   <?PHP include_once('header.php'); ?>
 </div>

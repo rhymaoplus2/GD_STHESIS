@@ -346,10 +346,33 @@ body {
 
 <body>
 
-<div class="header sticky-top">
-  <?PHP include_once('header.php'); ?>
-</div>
+<div class="modal fade" id="logoutModal2" tabindex="-1" aria-labelledby="logoutModal2Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);">
+        <h5 class="modal-title" id="logoutModal2Label">Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+ 
+      <div class="modal-body">
+                <p>Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-end"> <!-- Updated class -->
+                <a class="ms-auto" href="logout.php"> <!-- Added ms-auto class -->
+                    <img src="img/logout.png" class="img-fluid" alt="Image 1" style="width: 30%;" >
+                </a>
+            </div>
+  </div>
 
+  </div> </div> 
+  </div>
+
+
+
+<div class="header sticky-top">
+  <?php include_once('header.php'); ?>
+</div>
 
 
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -425,7 +448,7 @@ User logged in:  <?=$_SESSION['name']?>
       <div class="row text-center">
         <div class="col-md-6 mb-3">
     <!-- Image -->
-<img id="image1" class="about" src="img/acc.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<img id="image1" class="about" src="img/axx.gif" class="img-fluid" alt="Image 1" style="width:90%; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -446,25 +469,25 @@ User logged in:  <?=$_SESSION['name']?>
  
     <?php
    include "./php/db_conn.php";
-   $name = $_SESSION['name'];
+    $name = $_SESSION['name'];
 
-      $sql = "SELECT * FROM users where name = '$name'";
-      $result = $conn->query($sql);
+    $sql = "SELECT * FROM users where name = '$name'";
+    $result = $conn->query($sql);
 
-      if ($result->num_rows > 0) {
+    if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          echo "Name<br><b> " . $row["name"] . "</b>";
-          $expirationDate = strtotime($row["xp"] . ' +3 days');
-          $currentDate = time();
-          $timeLeft = $expirationDate - $currentDate;
-          
-          $hoursLeft = floor($timeLeft / 3600);
-          $secondsLeft = $timeLeft % 60;
-          
-          echo "<hr>Account Created<br><b>" . $row["xp"] . "</b>";
-          echo "<br>Account Expiring in:<br><b><span id='countdown'></span></b>";
-          
-          echo "<script>
+            echo "Name<br><b> " . $row["name"] . "</b>";
+            $expirationDate = strtotime($row["xp"] . ' +3 days');
+            $currentDate = time();
+            $timeLeft = $expirationDate - $currentDate;
+
+            $hoursLeft = floor($timeLeft / 3600);
+            $secondsLeft = $timeLeft % 60;
+
+            echo "<hr>Account Created<br><b>" . $row["xp"] . "</b>";
+            echo "<br>Account Expiring in:<br><b><span id='countdown'></span></b>";
+
+            echo "<script>
               function updateCountdown() {
                   var expirationDate = new Date('" . date('Y-m-d H:i:s', $expirationDate) . "');
                   var currentDate = new Date();
@@ -483,11 +506,11 @@ User logged in:  <?=$_SESSION['name']?>
           
               var countdownTimer = setInterval(updateCountdown, 1000);
           </script>";
-          
+
         }
-      } else {
+    } else {
         echo "";
-      }
+    }
     ?>
 
 
@@ -563,7 +586,9 @@ By using the MSU-MSAT High School Grade Reporting and Recording System, you agre
           <img class="about" src="img/guide.gif" class="img-fluid" alt="Image 3" style="width:90%;">
         </div>
         <div class="col-md-6 mb-3">
-          <img class="about" src="img/abt.gif" class="img-fluid" alt="Image 4" style="width:90%;">
+        <a href="about.php" target="_blank">
+          <img class="about" src="img/ab.gif" class="img-fluid" alt="Image 4" style="width:90%;">
+    </a>
         </div>
       </div>
     </div>
@@ -575,6 +600,6 @@ By using the MSU-MSAT High School Grade Reporting and Recording System, you agre
 </html>
 <?php
 
-}
+}?>
 
 
