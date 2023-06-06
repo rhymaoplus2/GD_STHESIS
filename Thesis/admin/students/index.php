@@ -527,7 +527,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <div class="modal-content">
       <div class="modal-header text-white" style=" 
       
-      background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
+      background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);   rgba(237,3,32,0.87) 20.8%, rgba(242,121,1,0.84) 74.4% );">
         <h5 class="modal-title" id="exampleModalLabel"><?= $row['fullname'] ?> - Personal Information</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -550,7 +550,12 @@ while ($row = mysqli_fetch_assoc($result)) {
      <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Update Data">
           <img style="width:30px;" src="img/up.png" class="img-fluid" alt="Description of image">
                    </b></a>
-                 
+                   <a type="button" class="btn btn-transparent" data-bs-toggle="modal" 
+  data-bs-target="#deleteModal<?php echo $row['id']; ?>"
+  style="border: none; background-color:transparent; outline: none;" title="Delete">
+
+		    <img style="width:30px;" src="img/del.png" class="img-fluid" alt="Description of image"><b>
+  </a>
              <div class="modal fade" id="deleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?php echo $rows['id']; ?>" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">

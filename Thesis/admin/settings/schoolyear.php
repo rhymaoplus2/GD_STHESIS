@@ -97,8 +97,21 @@ function myFunction() {
             echo 'New School Year';
         } ?>
     </b>
-</header>     <input type="text" class="form-control" name="schoolyear" value="<?php echo isset($_SESSION['schoolyear']) ? $_SESSION['schoolyear'] : ''; ?>" id="schoolyear" required>
-                            <script>
+</header>   
+
+
+<select class="form-select" name="schoolyear" id="schoolyear" required>
+  <?php
+    $selectedYear = isset($_SESSION['schoolyear']) ? $_SESSION['schoolyear'] : '';
+    for ($year = 2005; $year <= 2040; $year++) {
+      $nextYear = $year + 1;
+      $academicYear = "$year-$nextYear";
+      $selected = $selectedYear == $academicYear ? 'selected' : '';
+      echo "<option value=\"$academicYear\" $selected>$academicYear</option>";
+    }
+  ?>
+</select>
+                          <script>
                                 document.addEventListener("DOMContentLoaded", function() {
                                     var schoolyearInput = document.getElementById('schoolyear');
                                     if(localStorage.getItem('schoolyear')){

@@ -595,14 +595,21 @@ foreach ($total_grade_sum as $studentname => $total_grade) {
 
 $no++;
     // Loop through the subjects and display the grades for each subject
+    $get = 0; // Initialize $get variable outside the loop
+
     foreach ($unique_subjects as $subject) {
         if (isset($grades[$studentname][$subject]["1st"])) {
-            echo "<td class='text-center'>" . $grades[$studentname][$subject]["1st"] . "</td>";
-        
+            $grade = $grades[$studentname][$subject]["1st"];
+            echo "<td class='text-center'>" . $grade . "</td>";
+            
+            if ($grade <= 79) {
+                $get++; // Increment $get if grade is 79 or below
+            }
         } else {
             echo "<td class='text-center'>-</td>";
         }
     }
+    
     echo "<td class='text-center'>" . $total_grade  . "</td>";
     echo "<td class='text-center'>" . number_format($total_grade / $num, 3) . "</td>";
     echo "<td class='text-center'> " . ROUND($total_grade / $num). "</td>";
@@ -625,11 +632,18 @@ $no++;
     }
     
 
-    echo "<td class='text-center'>". " $honor</td></tr></tbody>";
+   
+    if ($get == 0) {
+        echo "<td class='text-center'>$honor</td></tr></tbody>";
+    }
+     else {
+      echo "<td class='text-center'></td></tr></tbody>";
 
- 
+     }
+    
 
     $ranking++;
+    $get=0;
 }
 
 
@@ -676,7 +690,7 @@ echo "</table>";
   <tbody>
     <tr>
 <td>Prepared by:<br><br><br><u>  
-<input disabled  type="text" class="form-control" value="<?php 
+<input disabled  type="text" class="form-control text-center" value="<?php 
       
       include "php/db_conn.php";
             // select the crname from the table where the id matches a certain value
@@ -709,7 +723,7 @@ echo "</table>";
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noted by:<br><br><br><u>
   
   
-<input disabled  type="text" class="form-control" value="<?php 
+<input disabled  type="text" class="form-control text-center" value="<?php 
       
       include "php/db_conn.php";
             // select the crname from the table where the id matches a certain value

@@ -419,7 +419,7 @@ echo '
 $grades = array();
 $full = 0;
 $num = 0;
-
+$f =0;
 // Create an array to store the unique subject names
 $unique_subjects = array();
 
@@ -492,6 +492,9 @@ $honor = '';
 // Create a table to display the grades for each student and subject
 echo "
     ";
+
+
+
 echo "<table >
 <thead>
 
@@ -518,7 +521,7 @@ foreach ($unique_subjects as $subject) {
 }
 
 echo "<th></th><th></th><th></th></tr></thead><tbody>";
-
+$get=0;
 // Loop through the grades array and display the grades for each student and subject
 foreach ($grades as $studentname => $subjects) {
     echo "<tr><td>".$studentname."</td>";
@@ -528,6 +531,11 @@ foreach ($grades as $studentname => $subjects) {
             $FIRST = intval($subjects[$subject]["1st"]);
             $average = $FIRST;
             $full += $average;
+                
+            if ($FIRST <= 79) {
+              $get++; 
+          }
+
         } else {
             echo "<td></td><td></td><td></td>";
         }
@@ -547,18 +555,34 @@ foreach ($grades as $studentname => $subjects) {
 
     echo "<td class='text-center'>" . number_format($full / $num, 3) . "</td>";
     echo "<td class='text-center'>" . ROUND($full / $num) . "</td>";
-
+    $f =  ROUND($full / $num) ;
     $full = 0;
-    if ($average_per_subject >= 90 && $average_per_subject <= 94) {
+
+
+
+
+
+
+    if ($f >= 98 && $f<= 100) {
         $honor = 'With honors';
-    } else if ($average_per_subject >= 95 && $average_per_subject <= 97) {
+    } else if ($f >= 95 && $f <= 97) {
         $honor = 'With high honors';
-    } else if ($average_per_subject >= 98 && $average_per_subject <= 100) {
+    } else if ($f>= 90 && $f <= 94) {
         $honor = 'With highest honors';
     } else {
         $honor = '&nbsp;&nbsp;&nbsp;';
     }
-    echo "<td class='text-center'>". $honor ."</td></tr></tbody>";
+
+
+      
+    if ($get == 0) {
+      echo "<td class='text-center'>$honor</td></tr></tbody>";
+  }
+   else {
+    echo "<td class='text-center'></td></tr></tbody>";
+
+   }
+
 }
 
 // Close the row
@@ -829,6 +853,8 @@ $honor = '';
 // Create a table to display the grades for each student and subject
 echo "
     ";
+
+    
 echo "<table >
 <thead>
 
@@ -895,7 +921,7 @@ echo "<td class='text-center'>" . number_format($full / $num, 3) . "</td>";
 echo "<td class='text-center'>" . ROUND($full / $num) . "</td>";
 
 $full=0;
-if ($average_per_subject >= 90 && $average_per_subject <= 94) {
+if ($average_per_subject >= 89.5 && $average_per_subject <= 94) {
   $honor = 'With honors';
 } else if ($average_per_subject >= 95 && $average_per_subject <= 97) {
   $honor = 'With high honors';

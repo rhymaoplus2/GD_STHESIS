@@ -594,15 +594,26 @@ foreach ($total_grade_sum as $studentname => $total_grade) {
     echo "<td class='text-center'>" . $no. " </td><td>" . "" . $grades[$studentname]['lastname'] . " </td><td>" . $grades[$studentname]['firstname'] . "</td><td class='text-center'> " .$grades[$studentname]['middlename'][0]. ".</td>";
 
 $no++;
+$get = 0; // Initialize $get variable outside the loop
+
+
+$no++;
     // Loop through the subjects and display the grades for each subject
+    $get = 0; // Initialize $get variable outside the loop
+
     foreach ($unique_subjects as $subject) {
         if (isset($grades[$studentname][$subject]["1st"])) {
-            echo "<td class='text-center'>" . $grades[$studentname][$subject]["1st"] . "</td>";
-        
+            $grade = $grades[$studentname][$subject]["1st"];
+            echo "<td class='text-center'>" . $grade . "</td>";
+            
+            if ($grade <= 79) {
+                $get++; 
+            }
         } else {
             echo "<td class='text-center'>-</td>";
         }
     }
+    
     echo "<td class='text-center'>" . $total_grade  . "</td>";
     echo "<td class='text-center'>" . number_format($total_grade / $num, 3) . "</td>";
     echo "<td class='text-center'> " . ROUND($total_grade / $num). "</td>";
@@ -624,12 +635,17 @@ $no++;
         $honor = '';
     }
     
+  
+    if ($get == 0) {
+      echo "<td class='text-center'>$honor</td></tr></tbody>";
+  }
+   else {
+    echo "<td class='text-center'></td></tr></tbody>";
 
-    echo "<td class='text-center'>". " $honor</td></tr></tbody>";
-
- 
+   }
 
     $ranking++;
+    $get=0;
 }
 
 

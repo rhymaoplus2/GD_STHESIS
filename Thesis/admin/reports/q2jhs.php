@@ -595,10 +595,16 @@ foreach ($total_grade_sum as $studentname => $total_grade) {
 
 $no++;
     // Loop through the subjects and display the grades for each subject
+    $get = 0; // Initialize $get variable outside the loop
+
     foreach ($unique_subjects as $subject) {
         if (isset($grades[$studentname][$subject]["1st"])) {
-            echo "<td class='text-center'>" . $grades[$studentname][$subject]["1st"] . "</td>";
-        
+            $grade = $grades[$studentname][$subject]["1st"];
+            echo "<td class='text-center'>" . $grade . "</td>";
+            
+            if ($grade <= 79) {
+                $get++; // Increment $get if grade is 79 or below
+            }
         } else {
             echo "<td class='text-center'>-</td>";
         }
@@ -625,11 +631,17 @@ $no++;
     }
     
 
-    echo "<td class='text-center'>". " $honor</td></tr></tbody>";
+   
+    if ($get == 0) {
+      echo "<td class='text-center'>$honor</td></tr></tbody>";
+  }
+   else {
+    echo "<td class='text-center'></td></tr></tbody>";
 
- 
+   }
 
     $ranking++;
+    $get=0;
 }
 
 

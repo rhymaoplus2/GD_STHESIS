@@ -676,9 +676,7 @@ require "php/db_conn.php";
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
             OR students.subjectteacher10 = '".$_SESSION["name"]."') 
         " . $whereClause . " 
-        GROUP BY students.fullname, students.adviser_id, users.sub1,
-        students.section, students.firstname, students.middlename,
-        students.trackstrand, students.lastname, students.gender,
+        GROUP BY students.fullname,
         students.syear, students.grade, students.id
         ORDER BY students.lastname ASC";
 
@@ -823,6 +821,7 @@ require "php/db_conn.php";
 
         // Rest of the code...
 
+      
         $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub1,
         students.section, students.firstname, students.middlename,
         students.trackstrand, students.lastname, students.gender,
@@ -845,9 +844,7 @@ require "php/db_conn.php";
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
             OR students.subjectteacher10 = '".$_SESSION["name"]."') 
         " . $whereClause . " 
-        GROUP BY students.fullname, students.adviser_id, users.sub1,
-        students.section, students.firstname, students.middlename,
-        students.trackstrand, students.lastname, students.gender,
+        GROUP BY students.fullname,
         students.syear, students.grade, students.id
         ORDER BY students.lastname ASC";
 

@@ -403,11 +403,11 @@ $i = 0;
             
 
       <div class="border">
-        <label class="mb-3"> <b> <?=$_SESSION['sub2']?> </b></label>
+        <label class="mb-3"> <b> <?=$_SESSION['sub10']?> </b></label>
       <?php
         require "php/db_conn.php";
         $name = $_SESSION["name"];
-        $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub2,
+        $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub10,
         students.section, students.firstname, students.middlename,
         students.trackstrand, students.lastname, students.gender,
         students.syear, students.grade, students.id
@@ -417,11 +417,11 @@ $i = 0;
             OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
             OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
             OR users.sec10 = students.section)
-        WHERE students.syear = (SELECT schoolyear FROM users LIMIT 1)  AND gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
-            OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
-            OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
-            OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
-            OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
+        WHERE students.syear = (SELECT schoolyear FROM users LIMIT 1)  AND gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub10"]."' OR students.subject2 = '".$_SESSION["sub10"]."' 
+            OR students.subject3 = '".$_SESSION["sub10"]."' OR students.subject4 = '".$_SESSION["sub10"]."' 
+            OR students.subject5 = '".$_SESSION["sub10"]."' OR students.subject6 = '".$_SESSION["sub10"]."' 
+            OR students.subject7 = '".$_SESSION["sub10"]."' OR students.subject8 = '".$_SESSION["sub10"]."' 
+            OR students.subject9 = '".$_SESSION["sub10"]."' OR students.subject10 = '".$_SESSION["sub10"]."')
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
             students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
             OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
@@ -429,7 +429,7 @@ $i = 0;
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
             OR students.subjectteacher10 = '".$_SESSION["name"]."') 
      
-        GROUP BY students.fullname, students.adviser_id, users.sub2,
+        GROUP BY students.fullname, students.adviser_id, users.sub10,
         students.section, students.firstname, students.middlename,
         students.trackstrand, students.lastname, students.gender,
         students.syear, students.grade, students.id
@@ -654,7 +654,7 @@ require "php/db_conn.php";
         }
 
 
-        $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub2,
+        $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub10,
         students.section, students.firstname, students.middlename,
         students.trackstrand, students.lastname, students.gender,
         students.syear, students.grade, students.id
@@ -664,11 +664,11 @@ require "php/db_conn.php";
             OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
             OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
             OR users.sec10 = students.section)
-        WHERE students.syear = (SELECT schoolyear FROM users LIMIT 1)  AND gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
-            OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
-            OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
-            OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
-            OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
+        WHERE students.syear = (SELECT schoolyear FROM users LIMIT 1)  AND gender = 'MALE' AND (students.subject1 = '".$_SESSION["sub10"]."' OR students.subject2 = '".$_SESSION["sub10"]."' 
+            OR students.subject3 = '".$_SESSION["sub10"]."' OR students.subject4 = '".$_SESSION["sub10"]."' 
+            OR students.subject5 = '".$_SESSION["sub10"]."' OR students.subject6 = '".$_SESSION["sub10"]."' 
+            OR students.subject7 = '".$_SESSION["sub10"]."' OR students.subject8 = '".$_SESSION["sub10"]."' 
+            OR students.subject9 = '".$_SESSION["sub10"]."' OR students.subject10 = '".$_SESSION["sub10"]."')
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
             students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
             OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
@@ -676,9 +676,7 @@ require "php/db_conn.php";
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
             OR students.subjectteacher10 = '".$_SESSION["name"]."') 
         " . $whereClause . " 
-        GROUP BY students.fullname, students.adviser_id, users.sub2,
-        students.section, students.firstname, students.middlename,
-        students.trackstrand, students.lastname, students.gender,
+        GROUP BY students.fullname,
         students.syear, students.grade, students.id
         ORDER BY students.lastname ASC";
 
@@ -744,7 +742,7 @@ require "php/db_conn.php";
                 echo "</td>";
 
                 echo "<td hidden>";
-                echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub2'] . "'>";
+                echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub10'] . "'>";
                 echo "</td>";
 
                 echo "<td style='width:30%;'>";
@@ -823,7 +821,8 @@ require "php/db_conn.php";
 
         // Rest of the code...
 
-        $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub2,
+      
+        $query = "SELECT DISTINCT students.fullname, students.adviser_id, users.sub10,
         students.section, students.firstname, students.middlename,
         students.trackstrand, students.lastname, students.gender,
         students.syear, students.grade, students.id
@@ -833,11 +832,11 @@ require "php/db_conn.php";
             OR users.sec4 = students.section OR users.sec5 = students.section OR users.sec6 = students.section 
             OR users.sec7 = students.section OR users.sec8 = students.section OR users.sec9 = students.section 
             OR users.sec10 = students.section)
-        WHERE students.syear = (SELECT schoolyear FROM users LIMIT 1)  AND gender = 'FEMALE' AND (students.subject1 = '".$_SESSION["sub2"]."' OR students.subject2 = '".$_SESSION["sub2"]."' 
-            OR students.subject3 = '".$_SESSION["sub2"]."' OR students.subject4 = '".$_SESSION["sub2"]."' 
-            OR students.subject5 = '".$_SESSION["sub2"]."' OR students.subject6 = '".$_SESSION["sub2"]."' 
-            OR students.subject7 = '".$_SESSION["sub2"]."' OR students.subject8 = '".$_SESSION["sub2"]."' 
-            OR students.subject9 = '".$_SESSION["sub2"]."' OR students.subject10 = '".$_SESSION["sub2"]."')
+        WHERE students.syear = (SELECT schoolyear FROM users LIMIT 1)  AND gender = 'FEMALE' AND (students.subject1 = '".$_SESSION["sub10"]."' OR students.subject2 = '".$_SESSION["sub10"]."' 
+            OR students.subject3 = '".$_SESSION["sub10"]."' OR students.subject4 = '".$_SESSION["sub10"]."' 
+            OR students.subject5 = '".$_SESSION["sub10"]."' OR students.subject6 = '".$_SESSION["sub10"]."' 
+            OR students.subject7 = '".$_SESSION["sub10"]."' OR students.subject8 = '".$_SESSION["sub10"]."' 
+            OR students.subject9 = '".$_SESSION["sub10"]."' OR students.subject10 = '".$_SESSION["sub10"]."')
             AND (students.subjectteacher1 = '".$_SESSION["name"]."' OR 
             students.subjectteacher2 = '".$_SESSION["name"]."' OR students.subjectteacher3 = '".$_SESSION["name"]."' 
             OR students.subjectteacher4 = '".$_SESSION["name"]."' OR students.subjectteacher5 = '".$_SESSION["name"]."' 
@@ -845,9 +844,7 @@ require "php/db_conn.php";
             OR students.subjectteacher8 = '".$_SESSION["name"]."' OR students.subjectteacher9 = '".$_SESSION["name"]."' 
             OR students.subjectteacher10 = '".$_SESSION["name"]."') 
         " . $whereClause . " 
-        GROUP BY students.fullname, students.adviser_id, users.sub2,
-        students.section, students.firstname, students.middlename,
-        students.trackstrand, students.lastname, students.gender,
+        GROUP BY students.fullname,
         students.syear, students.grade, students.id
         ORDER BY students.lastname ASC";
 
@@ -912,7 +909,7 @@ require "php/db_conn.php";
                 echo "</td>";
 
                 echo "<td hidden>";
-                echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub2'] . "'>";
+                echo "<input hidden class='no' id='subjectname' name='subjectname[]' value='" . $_SESSION['sub10'] . "'>";
                 echo "</td>";
 
                 echo "<td style='width:30%;'>";
